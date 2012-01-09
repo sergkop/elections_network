@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>YAML | Example &quot;3col_1-3-2&quot;</title>
+<!-- (en) Add your meta data here -->
+<!-- (de) Fuegen Sie hier ihre Meta-Daten ein -->
+<link href="css/main_layout.css" rel="stylesheet" type="text/css"/>
+<link href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
+<!--[if lte IE 7]>
+<link href="css/patches/patch_main_layout.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<script type="text/javascript" src="js/jquery-dev.js"></script>
+<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+<!-- skip link navigation -->
+<div class="page_margins">
+  <div class="page">
+
+    <!-- begin: main navigation #nav -->
+    <div id="nav" role="navigation">
+      <div class="hlist">
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="#" id="find_my_ui_link">Выбрать свой регион/область/участок</a></li>
+          <li><a href="#" id="register">Зарегистрироваться</a></li>
+          <li><a href="#" id="login">Войти</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- end: main navigation -->
+
+    <!-- begin: main content area #main -->
+    <div id="main">
+      <!-- begin: #col1 - first float column -->
+      <div id="col1" role="complementary">
+        <div id="col1_content" class="clearfix">
+        <h3>Участники</h3>
+         <div id="col1_content_nabludateli" class="clearfix content_block">
+	          <b>Наблюдатели</b>
+	          <ul id='candidates_ul'><li>Ирина</li><li>Виктор</li></ul>
+          </div>
+          <div id="col1_content_pending_observers" class="clearfix content_block">
+	          <b>Кандидаты в наблюдатели</b>
+	          <ul id='candidates_ul'><li>Андрей</li><li>Борис</li></ul>
+	          <button id="become_observer" class="ui-button"><span class="ui-button-text">Стать наблюдателем</span></button>
+          </div>
+          <div id="col1_content_voters" class="clearfix content_block">
+          	<b>Избиратели</b>
+          	<ul id='candidates_ul'><li>Анна</li><li>Виталий</li></ul>
+          	<button id="become_voter">Записаться избирателем</button>
+          </div>
+        </div>
+         
+      </div>
+      <!-- end: #col1 -->
+
+      <!-- begin: #col2 second float column -->
+      <div id="col2" role="complementary">
+        <div id="col2_content" class="clearfix">
+          <h3>Инструменты</h3>
+          <div class="clearfix content_block" id="col2_content_links">
+          <b>Ссылки</b>
+          <ul>
+          <li><a href="#">Как стать наблюдателем</a></li>
+          <li><a href="#">Инструкция наблюдателя</a></li>
+          <li><a href="#">Карта нарушений</a></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <!-- end: #col2 -->
+
+      <!-- begin: #col3 static column -->
+      <div id="col3" role="main">
+        <div id="col3_content" class="clearfix">
+          <h2>Бодро пожаловать на сайт координации наблюдателей!</h2>
+          <button id="find_my_uik">Найти свой регион/избирательный участок</button>
+        </div>
+        <!-- IE Column Clearing -->
+        <div id="ie_clearing">&nbsp;</div>
+      </div>
+      <!-- end: #col3 -->
+    </div>
+    <!-- end: #main -->
+
+</div>
+<div id="login_dialog" title="Авторизация"><b>Вход в систему через внешние сервисы авторизации</b></div>
+<div id="uik_search_dialog" title="Поиск Региона/Участка">
+<div><label for="uik_search_box">Поиск по имени:</label><input type="text" id="uik_search_box"/><button id="find_uik_button">Найти</button></div>
+<label for="select_region">Выбрать регион:</label><select id="select_region" name="eregion"><option value="Алтайский край">Алтайский край</option>
+<option value="Амурская область">Амурская область</option>
+<option value="Архангельская область">Архангельская область</option>
+<option value="Астраханская область">Астраханская область</option>
+<option value="Белгородская область">Белгородская область</option>
+<option value="Брянская область">Брянская область</option>
+<option value="Владимирская область">Владимирская область</option>
+<option value="Волгоградская область">Волгоградская область</option>
+<option value="Вологодская область">Вологодская область</option>
+<option value="Воронежская область">Воронежская область</option>
+<option value="город Москва">город Москва</option>
+<option value="город Санкт-Петербург">город Санкт-Петербург</option>
+<option value="Еврейская автономная область">Еврейская автономная область</option>
+<option value="Забайкальский край">Забайкальский край</option>
+<option value="Ивановская область">Ивановская область</option>
+<option value="Иные территории">Иные территории</option>
+<option value="Иркутская область">Иркутская область</option>
+<option value="Кабардино-Балкарская Республика">Кабардино-Балкарская Республика</option>
+<option value="Калининградская область">Калининградская область</option>
+<option value="Калужская область">Калужская область</option>
+<option value="Камчатский край">Камчатский край</option>
+<option value="Карачаево-Черкесская Республика">Карачаево-Черкесская Республика</option>
+<option value="Кемеровская область">Кемеровская область</option>
+<option value="Кировская область">Кировская область</option>
+<option value="Костромская область">Костромская область</option>
+<option value="Краснодарский край">Краснодарский край</option>
+<option value="Красноярский край">Красноярский край</option>
+<option value="Курганская область">Курганская область</option>
+<option value="Курская область">Курская область</option>
+<option value="Ленинградская область">Ленинградская область</option>
+<option value="Липецкая область">Липецкая область</option>
+<option value="Магаданская область">Магаданская область</option>
+<option value="Московская область">Московская область</option>
+<option value="Мурманская область">Мурманская область</option>
+<option value="Ненецкий автономный округ">Ненецкий автономный округ</option>
+<option value="Нижегородская область">Нижегородская область</option>
+<option value="Новгородская область">Новгородская область</option>
+<option value="Новосибирская область">Новосибирская область</option>
+<option value="Омская область">Омская область</option>
+<option value="Оренбургская область">Оренбургская область</option>
+<option value="Орловская область">Орловская область</option>
+<option value="Пензенская область">Пензенская область</option>
+<option value="Пермский край">Пермский край</option>
+<option value="Приморский край">Приморский край</option>
+<option value="Псковская область">Псковская область</option>
+<option value="Республика Адыгея (Адыгея)">Республика Адыгея (Адыгея)</option>
+<option value="Республика Алтай">Республика Алтай</option>
+<option value="Республика Башкортостан">Республика Башкортостан</option>
+<option value="Республика Бурятия">Республика Бурятия</option>
+<option value="Республика Дагестан">Республика Дагестан</option>
+<option value="Республика Ингушетия">Республика Ингушетия</option>
+<option value="Республика Калмыкия">Республика Калмыкия</option>
+<option value="Республика Карелия">Республика Карелия</option>
+<option value="Республика Коми">Республика Коми</option>
+<option value="Республика Марий Эл">Республика Марий Эл</option>
+<option value="Республика Мордовия">Республика Мордовия</option>
+<option value="Республика Саха (Якутия)">Республика Саха (Якутия)</option>
+<option value="Республика Северная Осетия-Алания">Республика Северная Осетия-Алания</option>
+<option value="Республика Татарстан (Татарстан)">Республика Татарстан (Татарстан)</option>
+<option value="Республика Тыва">Республика Тыва</option>
+<option value="Республика Хакасия">Республика Хакасия</option>
+<option value="Ростовская область">Ростовская область</option>
+<option value="Рязанская область">Рязанская область</option>
+<option value="Самарская область">Самарская область</option>
+<option value="Саратовская область">Саратовская область</option>
+<option value="Сахалинская область">Сахалинская область</option>
+<option value="Свердловская область">Свердловская область</option>
+<option value="Смоленская область">Смоленская область</option>
+<option value="Ставропольский край">Ставропольский край</option>
+<option value="Тамбовская область">Тамбовская область</option>
+<option value="Тверская область">Тверская область</option>
+<option value="Томская область">Томская область</option>
+<option value="Тульская область">Тульская область</option>
+<option value="Тюменская область">Тюменская область</option>
+<option value="Удмуртская Республика">Удмуртская Республика</option>
+<option value="Ульяновская область">Ульяновская область</option>
+<option value="Хабаровский край">Хабаровский край</option>
+<option value="Ханты-Мансийский автономный округ">Ханты-Мансийский автономный округ</option>
+<option value="Челябинская область">Челябинская область</option>
+<option value="Чеченская Республика">Чеченская Республика</option>
+<option value="Читинская область">Читинская область</option>
+<option value="Чувашская Республика - Чувашия">Чувашская Республика - Чувашия</option>
+<option value="Чукотский автономный округ">Чукотский автономный округ</option>
+<option value="Ямало-Ненецкий автономный округ">Ямало-Ненецкий автономный округ</option>
+<option value="Ярославская область">Ярославская область</option></select>
+<label for="region_uik">УИК</label><select name="region_uik"><option value="">Участок 1</option><option value="">Участок 2</option></select>
+<button id="goto_region">Перейти</button>
+</div>
+</body>
+</html>

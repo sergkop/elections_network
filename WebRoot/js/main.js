@@ -3,9 +3,9 @@ $(document).ready(function() {
 	$("#become_observer").button();
 	$("#become_voter").button();
 	$("#find_my_uik").button();
-	$("#login_dialog").dialog({width:300,height:150});
+    $("#login_dialog").dialog({width:300,height:150, modal: true});
 	$("#login_dialog").dialog("close");
-	$("#uik_search_dialog").dialog({width:650, height:250});
+    $("#uik_search_dialog").dialog({width:650, height:250, modal: true});
 	$("#uik_search_dialog").dialog("close");
 	$("#login").click(function() {
 		//show login dialog

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+Добро пожаловать!
+
+<ul>
+    {% for location in locations %}
+    <li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

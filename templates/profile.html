@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ user.username }}
+
+<h1>{{ user.first_name }} {{ user.last_name }} ({{ user.username }})</h1>
+
+{% if participations %}
+<ul>
+    {% for participation in participations %}
+    <li><a href="{{ participation.location.get_absolute_url }}">{{ participation.location }}</a> - {{ participation.type_name }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 {% endblock %}

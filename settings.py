@@ -27,6 +27,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, "static"),
 )
 
 # List of finder classes that know how to find static files in
@@ -42,6 +43,15 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.media',
+    "django.core.context_processors.static",
+    'django.contrib.messages.context_processors.messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -69,9 +79,12 @@ INSTALLED_APPS = (
 
     'geography',
     'users',
+    'links',
 )
 
-AUTH_PROFILE_MODULE = 'users.ProfileModel'
+#AUTH_PROFILE_MODULE = 'users.ProfileModel'
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/users/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

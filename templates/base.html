@@ -5,18 +5,30 @@
     <link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" />
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
-    <link href="{{ STATIC_URL }}css/base.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+    <link href="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <!--link href="{{ STATIC_URL }}css/base.css" type="text/css" rel="stylesheet" /-->
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     {% block head %}{% endblock %}
 </head>
 
 <body>
 
+<div style="float: right;">
+    {% if user.is_authenticated %}
+        <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
+        <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
+    {% else %}
+        <a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>
+    {% endif %}
+</div>
+
 <table>
     <tr>
-        <td><a href="/">Home</a></td>
-        <td><a href="">ede</a></td>
-        <td><a href="">refre</a></td>
+        <td><a href="/">Главная</a></td>
+        <td><a href=""></a></td>
+        <td><a href=""></a></td>
         {% block menu %}{% endblock %}
     </tr>
 </table>

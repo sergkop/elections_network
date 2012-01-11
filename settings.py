@@ -73,13 +73,19 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'loginza',
     'geography',
     'users',
     'links',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'loginza.authentication.LoginzaBackend',
 )
 
 #AUTH_PROFILE_MODULE = 'users.ProfileModel'
@@ -108,3 +114,5 @@ LOGGING = {
         },
     }
 }
+
+LOGINZA_AMNESIA_PATHS = ('/users/complete_registration/',)

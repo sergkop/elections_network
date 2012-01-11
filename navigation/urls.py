@@ -6,3 +6,7 @@ urlpatterns = patterns('navigation.views',
     url(r'^logout$', 'logout', name='logout'),
     url(r'^register$', 'register', name='register'),
 )
+
+urlpatterns += patterns('',
+    url(r'^complete_registration$', 'users.views.complete_registration', name='complete_registration'),
+)

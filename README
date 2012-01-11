@@ -1,1 +1,14 @@
-123
+Installation (for Ubuntu):
+    * sudo aptitude install python python-setuptools git
+    * sudo easy_install pip
+    
+    * virtualenv --no-site-packages VIRTUAL_ENV_DIR
+    * source VIRTUAL_ENV_DIR/bin/activate
+    * git clone git://github.com/sergkop/nabludatel.git CODE_DIR
+    * pip install -r CODE_DIR/requirements.txt
+
+    * python manage.py syncdb
+    * python manage.py init_db
+
+    * Log in into admin interface (/admin/) and set proper domain name in the entry of Sites model
+    (for loginza to work)

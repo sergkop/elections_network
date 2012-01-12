@@ -1,2 +1,6 @@
 * password save by browser (check)
 * Favicon
+* Forgot password button
+* login using username or email
+* autogenerate username from first and last name
+* make buttons - + and !

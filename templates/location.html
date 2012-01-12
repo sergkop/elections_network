@@ -25,6 +25,7 @@
                     <li><a href="{{ izbr.get_absolute_url }}">{{ izbr.get_full_name }}</a></li>
                     {% endfor %}
                 </ul>
+                <button id="register_as_izbr" class="ui-button"><span class="ui-button-text">Записаться в избиратели</span></button>
             </div>
         </td>
 
@@ -64,4 +65,24 @@
     </form>
     <button id="add_link_submit" class="ui-button"><span class="ui-button-text">Добавить</span></button>
 </div>
+
+<div id="register_as_izbr_dialog">
+    Добавить ссылку
+    <form id="add_link_form" method="post" action="{% url add_link %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Название</td>
+                <td><input id="link_name_input" name="name" value="" /></td>
+            </tr>
+            <tr>
+                <td>URL</td>
+                <td><input id="link_url_input" name="url" value="" /></td>
+            </tr>
+        </table>
+        <input type="hidden" name="location" value="{{ location.id }}" />
+    </form>
+    <button id="add_link_submit" class="ui-button"><span class="ui-button-text">Добавить</span></button>
+</div>
+
 {% endblock %}

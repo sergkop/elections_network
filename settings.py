@@ -115,4 +115,4 @@ LOGGING = {
     }
 }
 
-LOGINZA_AMNESIA_PATHS = ('/users/complete_registration/',)
+LOGINZA_AMNESIA_PATHS = ('/complete_registration',)

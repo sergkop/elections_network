@@ -2,14 +2,27 @@
 
 {% block content %}
 
-<h1>{{ user.first_name }} {{ user.last_name }} ({{ user.username }})</h1>
+<h1>{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h1>
 
-{% if participations %}
+<h4>Участие в выборах</h4>
 <ul>
     {% for participation in participations %}
     <li><a href="{{ participation.location.get_absolute_url }}">{{ participation.location }}</a> - {{ participation.type_name }}</li>
+    {% empty %}
+    <li>Еще не записан. <a href="/">Записаться.</a></li>
     {% endfor %}
 </ul>
-{% endif %}
+
+<h4>Ссылки</h4>
+<ul>
+    {% for link in links %}
+    <li>
+        <a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>:
+        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+    </li>
+    {% empty %}
+    <li>Ссылки еще не добавлены.</li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

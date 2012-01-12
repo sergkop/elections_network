@@ -7,16 +7,13 @@ Please log in
 <p>Логин и пароль введены неверно. Попробуйте снова.</p>
 {% endif %}
 
-<form method="post" action="{% url register %}">
+<form method="post" action="{% url complete_registration %}">
 {% csrf_token %}
 <table>
 {{ form.as_table }}
 </table>
 
 <input type="submit" value="Зарегистрироваться" />
-<input type="hidden" name="next" value="{{ next }}" />
-
-<input type="hidden" name="next" {% if next %} value="{{ next }}" {% else %} value="{{ request.get_full_path }}" {% endif %} />
 
 </form>
 

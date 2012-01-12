@@ -25,6 +25,7 @@ def logout(request):
     next_page = reverse('main') if 'next' in request.REQUEST else None
     return auth_views.logout(request, next_page)
 
+# TODO: add captcha
 def register(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('current_profile'))

@@ -1,51 +1,52 @@
 {% extends "base.html" %}
 
+{% block left_column %}
+<h3>Участники</h3>
+<div id="col1_content_nabludateli" class="clearfix content_block">
+    <b>Наблюдатели</b>
+    <ul>
+        {% for nabl in participants.nabl %}
+        <li><a href="{{ nabl.get_absolute_url }}">{{ nabl.get_full_name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="col1_content_voters" class="clearfix content_block">
+    <b>Избиратели</b>
+    <ul>
+        {% for voter in participants.izbr %}
+        <li><a href="{{ voter.get_absolute_url }}">{{ voter.get_full_name }}</a></li>
+        {% endfor %}
+    </ul>
+    <button id="become_voter">Записаться в избиратели</button>
+</div>
+{% endblock %}
+
+{% block right_column %}
+<h3>Инструменты</h3>
+<div class="clearfix content_block" id="col2_content_links">
+    <b>Ссылки</b>
+    <ul id="links_list">
+        {% for link in links %}
+        <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <button id="add_link">Добавить ссылку</button>
+</div>
+{% endblock %}
+
 {% block content %}
 
-<h1>{{ location }}</h1>
+<h2>{{ location }}</h2>
 
-<table style="width: 100%;">
-    <tr>
-        <td style="border-right: 1px solid; width: 30%; text-align: center;" valign="top">
+<script type="text/javascript">
+    VK.init({apiId: 2749623, onlyWidgets: true});
+</script>
 
-            <div style="border: 1px solid; margin:10px;">
-                <h3>Наблюдатели</h3>
-                <ul>
-                    {% for nabl in participants.nabl %}
-                    <li><a href="{{ nabl.get_absolute_url }}">{{ nabl.get_full_name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+<div id="vk_comments"></div>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
+</script>
 
-            <br/>
-            <div style="border: 1px solid; margin:10px;">
-                <h3>Избиратели</h3>
-                <ul>
-                    {% for izbr in participants.izbr %}
-                    <li><a href="{{ izbr.get_absolute_url }}">{{ izbr.get_full_name }}</a></li>
-                    {% endfor %}
-                </ul>
-                <button id="register_as_izbr" class="ui-button"><span class="ui-button-text">Записаться в избиратели</span></button>
-            </div>
-        </td>
-
-        <td style="border-right: 1px solid; text-align: center;" valign="top">
-            Стена комментариев
-        </td>
-
-        <td style=" width: 30%; text-align: center;" valign="top">
-            <div style="border: 1px solid; margin:10px;">
-                <h3>Ссылки</h3>
-                <ul id="links_list">
-                    {% for link in links %}
-                    <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <button id="add_link" class="ui-button"><span class="ui-button-text">Добавить ссылку</span></button>
-        </td>
-    </tr>
-</table>
 
 <div id="add_link_dialog">
     Добавить ссылку
@@ -63,12 +64,12 @@
         </table>
         <input type="hidden" name="location" value="{{ location.id }}" />
     </form>
-    <button id="add_link_submit" class="ui-button"><span class="ui-button-text">Добавить</span></button>
+    <button id="add_link_submit">Добавить</button>
 </div>
 
-<div id="register_as_izbr_dialog">
+<div id="become_voter_dialog">
     Добавить ссылку
-    <form id="add_link_form" method="post" action="{% url add_link %}">
+    <form id="become_voter_form" method="post" action="{% url add_link %}">
         {% csrf_token %}
         <table>
             <tr>
@@ -82,7 +83,7 @@
         </table>
         <input type="hidden" name="location" value="{{ location.id }}" />
     </form>
-    <button id="add_link_submit" class="ui-button"><span class="ui-button-text">Добавить</span></button>
+    <button id="become_voter_submit">Добавить</button>
 </div>
 
 {% endblock %}

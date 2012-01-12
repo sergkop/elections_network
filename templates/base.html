@@ -1,41 +1,93 @@
 {% load loginza_widget %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" />
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
+    <link href="{{ STATIC_URL }}css/layout.css" rel="stylesheet" type="text/css"/>
     <link href="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <!--link href="{{ STATIC_URL }}css/base.css" type="text/css" rel="stylesheet" /-->
+    <!--[if lte IE 7]>
+    <link href="css/patches/patch_layout.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
+    <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
+
     {% block head %}{% endblock %}
 </head>
-
 <body>
+<div class="page_margins">
+    <div class="page">
 
-<div style="float: right;">
-    {% if user.is_authenticated %}
-        <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
-        <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
-    {% else %}
-        {% loginza_button providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" %}
-        <a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>
-    {% endif %}
+        <!-- begin: main navigation #nav -->
+        <div id="nav" role="navigation">
+            <div class="hlist">
+                <ul>
+                    <li><a href="{% url main %}">Главная</a></li>
+                    <li><a href="{% url register %}">Зарегистрироваться</a></li>
+                    <li><a href="{% url login %}" id="login">Войти</a></li>
+                    {% block menu %}{% endblock %}
+                </ul>
+            </div>
+        </div>
+        <!-- end: main navigation -->
+
+        <!-- begin: main content area #main -->
+        <div id="main">
+            <!-- begin: #col1 - first float column -->
+            <div id="col1" role="complementary">
+                <div id="col1_content" class="clearfix">
+                    {% block left_column %}{% endblock %}
+                </div>
+            </div>
+            <!-- end: #col1 -->
+
+            <!-- begin: #col2 second float column -->
+            <div id="col2" role="complementary">
+                <div id="col2_content" class="clearfix">
+                    {% block right_column %}{% endblock %}
+                </div>
+                <!-- IE Column Clearing -->
+                <div id="ie_clearing">&nbsp;</div>
+            </div>
+            <!-- end: #col2 -->
+
+            <!-- begin: #col3 static column -->
+            <div id="col3" role="main">
+                <div id="col3_content" class="clearfix">
+                    <div style="float: right;">
+                        {% if user.is_authenticated %}
+                            <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
+                            <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
+                        {% else %}
+                            {% loginza_button providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" %}
+                            <a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>
+                        {% endif %}
+                    </div>
+
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+            <!-- end: #col3 -->
+        </div>
+        <!-- end: #main -->
+    </div>
+
+    <div id="login_dialog" title="Авторизация">
+        <b>Вход в систему через внешние сервисы авторизации</b>
+    </div>
+
+    <!-- begin: #footer -->
+    <div id="footer" role="contentinfo">
+        Интернет площадка для контроля за выборами
+    </div>
+    <!-- end: #footer -->
 </div>
-
-<table>
-    <tr>
-        <td><a href="/">Главная</a></td>
-        <td><a href=""></a></td>
-        <td><a href=""></a></td>
-        {% block menu %}{% endblock %}
-    </tr>
-</table>
-
-{% block content %}{% endblock %}
 
 </body>
 </html>

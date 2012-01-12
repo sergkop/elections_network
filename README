@@ -1,14 +1,20 @@
-Installation (for Ubuntu):
+Installation (for Ubuntu and Mac OS):
     * sudo aptitude install python python-setuptools git
     * sudo easy_install pip
     
+    -------- Optionally creare virtualenv -------
+    * sudo pip install virtualenv
     * virtualenv --no-site-packages VIRTUAL_ENV_DIR
-    * source VIRTUAL_ENV_DIR/bin/activate
+    * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server)
+    ---------------------------------------------
+    
     * git clone git://github.com/sergkop/nabludatel.git CODE_DIR
     * pip install -r CODE_DIR/requirements.txt
 
-    * python manage.py syncdb
+    * python manage.py syncdb (agree to create superuser)
     * python manage.py init_db
+
+    * 'python manage.py runserver' to run server
 
     * Log in into admin interface (/admin/) and set proper domain name in the entry of Sites model
     (for loginza to work)

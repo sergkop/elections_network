@@ -5,9 +5,27 @@
 Добро пожаловать!
 
 <ul>
-    {% for location in locations %}
-    <li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
-    {% endfor %}
+    
 </ul>
+
+
+
+<p>Чтобы получить полный доступ к системе <button id="login2">Зарегистрируйтесь/Войдите</button></p>
+<p>Чтобы просмотреть информацию анонимно выберите избирательный участок:
+    <select id="select_region" name="eregion">
+        <option value="">Выбрать регион</option>
+        {% for location in locations %}
+            <option value="{{ location.get_absolute_url }}">{{ location }}</option>
+        {% endfor %}
+    </select>
+    <br/>
+    <select name="region_uik">
+        <option value="">Выбрать участок</option>
+        <option value="">Участок 2</option>
+    </select>
+    <br/>
+    <button id="goto_region">Перейти</button>
+</p>
+
 
 {% endblock %}

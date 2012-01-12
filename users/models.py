@@ -17,5 +17,8 @@ class ParticipationModel(models.Model):
     location = models.ForeignKey(LocationModel)
     type = models.CharField(max_length=10)
 
+    class Meta:
+        unique_together = ('user', 'location', 'type')
+
     def type_name(self):
         return PARTICIPATION_TYPES[self.type]

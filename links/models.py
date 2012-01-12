@@ -8,3 +8,6 @@ class LinkModel(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=200)
     url = models.URLField()
+
+    class Meta:
+        unique_together = ('url', 'location')

@@ -10,13 +10,39 @@ $(document).ready(function() {
     $("#add_link_submit").click(function(){
         $.post($("#add_link_form").attr("action"), $("#add_link_form").serialize(), function(data){
             if (data=="ok")
-                $("#links_list").append($("<li/>").append(
+                $("#links_ul").append($("<li/>").append(
                     $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val()).text($("#link_name_input").val())
                 ));
             $("#add_link_dialog").dialog("destroy");
         });
     });
 
+    // TODO: dialogs don't open the second time
+    // Report link dialog
+    $("#report_link").button();
+    $("#report_link_dialog").dialog({width:650, height:250, modal: true});
+    $("#report_link_dialog").dialog("close");
+    $("#report_link").click(function(){
+        $("#report_link_dialog").dialog("open");
+        $("#report_link_ul li").remove();
+        console.log($("#links_ul"));
+        $("#links_ul li").each(function(index){
+            var url = $(this).children("a").attr("href");
+            var text = $(this).text();
+            var a_copy = $("<a/>").attr("href", url).text(text);
+            var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
+            $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
+        });
+    });
+    $("#report_link_submit").click(function(){
+        $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
+            console.log(data);
+            $("#report_link_dialog").dialog("destroy");
+            alert("Ваша жалоба будет рассмотрена в ближайшее время");
+        });
+    });
+    
+    
     // Register as a voter dialog
     $("#become_voter_dialog").dialog({width:650, height:250, modal: true});
     $("#become_voter_dialog").dialog("close");

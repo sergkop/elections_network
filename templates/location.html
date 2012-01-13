@@ -12,7 +12,7 @@
 </div>
 <div id="col1_content_voters" class="clearfix content_block">
     <b>Избиратели</b>
-    <ul>
+    <ul id="voters_ul">
         {% for voter in participants.izbr %}
         <li><a href="{{ voter.get_absolute_url }}">{{ voter.get_full_name }}</a></li>
         {% endfor %}
@@ -25,12 +25,13 @@
 <h3>Инструменты</h3>
 <div class="clearfix content_block" id="col2_content_links">
     <b>Ссылки</b>
-    <ul id="links_list">
+    <ul id="links_ul">
         {% for link in links %}
         <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
         {% endfor %}
     </ul>
     <button id="add_link">Добавить ссылку</button>
+    <button id="report_link">Пожаловаться на ссылку</button>
 </div>
 {% endblock %}
 
@@ -65,6 +66,16 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
         <input type="hidden" name="location" value="{{ location.id }}" />
     </form>
     <button id="add_link_submit">Добавить</button>
+</div>
+
+<div id="report_link_dialog">
+    Пожаловаться на ссылку
+    <form id="report_link_form" method="post" action="{% url report_link %}">
+        {% csrf_token %}
+        <ul id="report_link_ul"></ul>
+        <input type="hidden" name="location" value="{{ location.id }}" />
+    </form>
+    <button id="report_link_submit">Пожаловаться</button>
 </div>
 
 <div id="become_voter_dialog">

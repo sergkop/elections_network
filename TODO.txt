@@ -4,3 +4,6 @@
 * login using username or email
 * autogenerate username from first and last name
 * make buttons - + and !
+* write documentation on how to run django
+* выкачивание данных об уиках
+  http://www.vybory.izbirkom.ru/region/izbirkom?action=show&root_a=1000087&vrn=100100028713299&region=0&global=true&type=0&sub_region=0&prver=0&pronetvd=null

@@ -41,14 +41,19 @@ $(document).ready(function() {
             alert("Ваша жалоба будет рассмотрена в ближайшее время");
         });
     });
-    
-    
+
     // Register as a voter dialog
     $("#become_voter_dialog").dialog({width:650, height:250, modal: true});
     $("#become_voter_dialog").dialog("close");
     $("#become_voter").button();
     $("#become_voter").click(function(){
         $("#become_voter_dialog").dialog("open");
+    });
+    $("#select_region_1").val(current_location);
+    $("#become_voter_submit").click(function(){
+        $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+            $("#become_voter_dialog").dialog("destroy");
+        });
     });
 
     //assign button actions
@@ -70,12 +75,19 @@ $(document).ready(function() {
         //show login dialog
         $("#login_dialog").dialog("open");
     });
+
+    //-----------Main page code-----------------
     $("#goto_region").button();
-    $("#goto_region2").button();
+    //$("#goto_region2").button();
     $("#goto_region").click(function() {
-        location.href=$("#select_region").val();
+        location.href="/location/"+$("#select_region_1").val();
     });
-    $("#goto_region2").click(function() {
+    /*$("#goto_region2").click(function() {
         location.href="location_uik.html";
-    });
+    });*/
+
+    //------------Profile page-----------------
+    $("#send_message").button();
+    $("#add_to_contacts").button();
+    $("#report_user").button();
 });

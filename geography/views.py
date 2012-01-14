@@ -20,8 +20,10 @@ def location(request, loc_id):
         participants.setdefault(participation.type, []).append(participation.user)
 
     context = {
-        'location': location,
+        'current_location': location,
         'participants': participants,
         'links': list(LinkModel.objects.filter(location=location)),
+        'locations': list(LocationModel.objects.filter(parent_1=None)),
+        'is_voter_here': request.user.is_authenticated() and any(request.user==voter for voter in participants.get('voter', [])),
     }
     return render_to_response('location.html', context_instance=RequestContext(request, context))

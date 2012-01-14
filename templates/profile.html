@@ -25,4 +25,22 @@
     {% endfor %}
 </ul>
 
+{% if profile_user != user %}
+<table>
+    <tr>
+        <td><button id="send_message">Отправить сообщение</button></td>
+        {% if not is_friend %}<td><button id="add_to_contacts">Добавить в контакты</button></td>{% endif %}
+        <td><button id="report_user">Пожаловаться</button></td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    $("#add_to_contacts").click(function(){
+        $.post("{% url add_friend %}", {user: "{{ profile_user.username }}"}, function(data){
+            console.log(data);
+        });
+    });
+</script>
+{% endif %}
+
 {% endblock %}

@@ -2,22 +2,22 @@
 
 {% block left_column %}
 <h3>Участники</h3>
-<div id="col1_content_nabludateli" class="clearfix content_block">
+<div id="col1_content_observers" class="clearfix content_block">
     <b>Наблюдатели</b>
     <ul>
-        {% for nabl in participants.nabl %}
-        <li><a href="{{ nabl.get_absolute_url }}">{{ nabl.get_full_name }}</a></li>
+        {% for observer in participants.observer %}
+        <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
         {% endfor %}
     </ul>
 </div>
 <div id="col1_content_voters" class="clearfix content_block">
     <b>Избиратели</b>
     <ul id="voters_ul">
-        {% for voter in participants.izbr %}
-        <li><a href="{{ voter.get_absolute_url }}">{{ voter.get_full_name }}</a></li>
+        {% for voter in participants.voter %}
+        <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
         {% endfor %}
     </ul>
-    <button id="become_voter">Записаться в избиратели</button>
+    <button id="become_voter">{% if is_voter_here %}Голосовать в другом месте{% else %}Записаться в избиратели{% endif %}</button>
 </div>
 {% endblock %}
 
@@ -79,20 +79,10 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 </div>
 
 <div id="become_voter_dialog">
-    Добавить ссылку
-    <form id="become_voter_form" method="post" action="{% url add_link %}">
+    Записаться в голосующие
+    <form id="become_voter_form" method="post" action="{% url become_voter %}">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><input id="link_name_input" name="name" value="" /></td>
-            </tr>
-            <tr>
-                <td>URL</td>
-                <td><input id="link_url_input" name="url" value="" /></td>
-            </tr>
-        </table>
-        <input type="hidden" name="location" value="{{ location.id }}" />
+        {% include "region_choice.html" %}
     </form>
     <button id="become_voter_submit">Добавить</button>
 </div>

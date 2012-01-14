@@ -4,7 +4,8 @@ import json
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.db import IntegrityError
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 
@@ -13,7 +14,7 @@ from loginza.templatetags.loginza_widget import _return_path
 
 from links.models import LinkModel
 from users.forms import CompleteRegistrationForm
-from users.models import ParticipationModel
+from users.models import FriendsModel, ParticipationModel
 import users.signals
 
 def current_profile(request):
@@ -27,12 +28,44 @@ def profile(request, username):
 
     user = get_object_or_404(User, username=username)
 
+    if not current_user:
+        is_friend = FriendsModel.objects.filter(user1=request.user, user2=user).count()>0
+    else:
+        is_friend = False
+
     context = {
         'profile_user': user,
         'participations': list(ParticipationModel.objects.filter(user=user).select_related()),
         'links': list(LinkModel.objects.filter(user=user).select_related()),
+        'is_friend': is_friend,
     }
     return render_to_response('profile.html', context_instance=RequestContext(request, context))
+
+def become_voter(request):
+    if request.method=='POST' and request.user.is_authenticated():
+        try:
+            location_id = int(request.POST.get('region_1', ''))
+        except ValueError:
+            return HttpResponse('fail')
+
+        try:
+            participation, created = ParticipationModel.objects.get_or_create(
+                    type='voter', user=request.user, defaults={'location_id': location_id})
+        except IntegrityError:
+            return HttpResponse('fail')
+
+        if not created:
+            participation.location_id = location_id
+            participation.save()
+
+        return HttpResponse('ok')
+
+    return HttpResponse('fail')
+
+def add_friend(request):
+    if request.method=='POST' and request.user.is_authenticated():
+        pass
+    return HttpResponse('fail')
 
 # TODO: if username and email match an existing account - suggest to link them
 def complete_registration(request):

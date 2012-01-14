@@ -1,0 +1,11 @@
+<select id="select_region_1" name="region_1">
+    <option value="">Выбрать регион</option>
+    {% for location in locations %}
+        <option value="{{ location.id }}">{{ location }}</option>
+    {% endfor %}
+</select>
+<!--<br/>
+<select name="region_uik">
+    <option value="">Выбрать участок</option>
+    <option value="">Участок 2</option>
+</select>-->

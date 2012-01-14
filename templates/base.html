@@ -18,6 +18,10 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
 
+    <script type="text/javascript">
+        var current_location = "{{ current_location.id }}";
+        var current_user = "{{ user.username }}";
+    </script>
     {% block head %}{% endblock %}
 </head>
 <body>

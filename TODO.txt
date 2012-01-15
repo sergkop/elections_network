@@ -2,10 +2,10 @@
 * Sign up for observing
 * Виджет навигации
 * Login at intermediate steps (auto-open modal windows)
-* Friends
 * Send messages
 * выкачивание данных об уиках
   http://www.vybory.izbirkom.ru/region/izbirkom?action=show&root_a=1000087&vrn=100100028713299&region=0&global=true&type=0&sub_region=0&prver=0&pronetvd=null
+* Delete user from contacts
 
 * password save by browser (check)
 * Favicon

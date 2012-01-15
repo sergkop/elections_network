@@ -37,7 +37,7 @@
 
 {% block content %}
 
-<h2>{{ location }}</h2>
+<h2>{{ current_location }}</h2>
 
 <script type="text/javascript">
     VK.init({apiId: 2749623, onlyWidgets: true});
@@ -63,9 +63,8 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
                 <td><input id="link_url_input" name="url" value="" /></td>
             </tr>
         </table>
-        <input type="hidden" name="location" value="{{ location.id }}" />
+        <input type="hidden" name="location" value="{{ current_location.id }}" />
     </form>
-    <button id="add_link_submit">Добавить</button>
 </div>
 
 <div id="report_link_dialog">
@@ -73,9 +72,8 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
     <form id="report_link_form" method="post" action="{% url report_link %}">
         {% csrf_token %}
         <ul id="report_link_ul"></ul>
-        <input type="hidden" name="location" value="{{ location.id }}" />
+        <input type="hidden" name="location" value="{{ current_location.id }}" />
     </form>
-    <button id="report_link_submit">Пожаловаться</button>
 </div>
 
 <div id="become_voter_dialog">
@@ -84,7 +82,67 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
         {% csrf_token %}
         {% include "region_choice.html" %}
     </form>
-    <button id="become_voter_submit">Добавить</button>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Add links dialog
+        $("#add_link_dialog").dialog({width:650, height:250, modal: true, buttons: {
+            "Добавить": function(){
+                $.post($("#add_link_form").attr("action"), $("#add_link_form").serialize(), function(data){
+                    if (data=="ok")
+                        $("#links_ul").append($("<li/>").append(
+                            $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val()).text($("#link_name_input").val())
+                        ));
+                    $("#add_link_dialog").dialog("close");
+                });
+            },
+            "Отмена": function(){$("#add_link_dialog").dialog("close");},
+        }}).dialog("close");
+
+        $("#add_link").button().click(function(){
+            $("#link_name_input").val("");
+            $("#link_url_input").val("");
+            $("#add_link_dialog").dialog("open");
+        });
+
+        // Report link dialog
+        $("#report_link_dialog").dialog({width:650, height:250, modal: true, buttons: {
+            "Пожаловаться": function(){
+                $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
+                    $("#report_link_dialog").dialog("close");
+                    alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                });
+            },
+            "Отмена": function(){$("#report_link_dialog").dialog("close");},
+        }}).dialog("close");
+
+        $("#report_link").button().click(function(){
+            $("#report_link_dialog").dialog("open");
+            $("#report_link_ul li").remove();
+            $("#links_ul li").each(function(index){
+                var url = $(this).children("a").attr("href");
+                var text = $(this).text();
+                var a_copy = $("<a/>").attr("href", url).text(text);
+                var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
+                $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
+            });
+        });
+
+        // Register as a voter dialog
+        $("#become_voter_dialog").dialog({width:650, height:250, modal: true, buttons: {
+            "Записаться": function(){
+                $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                    $("#become_voter_dialog").dialog("close");
+                });
+            },
+            "Отмена": function(){$("#become_voter_dialog").dialog("close");},
+        }}).dialog("close");
+
+        $("#become_voter").button().click(function(){
+            $("#select_region_1").val(current_location);
+            $("#become_voter_dialog").dialog("open");
+        });
+    });
+</script>
 {% endblock %}

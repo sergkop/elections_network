@@ -7,6 +7,7 @@ from geography.models import LocationModel
 from links.models import LinkModel
 from users.models import ParticipationModel
 
+# TODO: mark links previously reported by user
 def location(request, loc_id):
     try:
         id = int(loc_id)

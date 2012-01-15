@@ -4,6 +4,9 @@
 
 <h1>{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h1>
 
+<div id="in_contacts" {% if not in_contacts %}class="hidden"{% endif %}><i>Добавлен в контакты</i></div>
+<div id="is_reported" {% if not is_reported %}class="hidden"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
+
 <h4>Участие в выборах</h4>
 <ul>
     {% for participation in participations %}
@@ -25,21 +28,130 @@
     {% endfor %}
 </ul>
 
+<table>
+    <tr style="vertical-align: top;">
+        <td>
+            <h4>Контакты</h4>
+            <ul id="contacts_ul">
+                {% for contact in contacts %}
+                <li><a href="{{ contact.contact.get_absolute_url }}">{{ contact.contact.username }}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <h4>Добавлен в контакты</h4>
+            <ul id="have_in_contacts_ul">
+                {% for contact in have_in_contacts %}
+                <li><a href="{{ contact.user.get_absolute_url }}">{{ contact.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>
+
 {% if profile_user != user %}
 <table>
     <tr>
         <td><button id="send_message">Отправить сообщение</button></td>
-        {% if not is_friend %}<td><button id="add_to_contacts">Добавить в контакты</button></td>{% endif %}
-        <td><button id="report_user">Пожаловаться</button></td>
+        <td {% if in_contacts %}class="hidden"{% endif %}><button id="add_to_contacts">Добавить в контакты</button></td>
+        <td {% if is_reported %}class="hidden"{% endif %}><button id="report_user">Пожаловаться</button></td>
     </tr>
 </table>
 
+<div id="send_message_dialog">
+    Отправить сообщение пользователю <a href="{{ profile_user.get_absolute_url }}">{{ profile_user.username }}</a>
+
+    <form id="send_message_form" method="post" action="{% url send_message %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><input type="text" name="title" name="message_title" value="" /></td>
+            </tr>
+            <tr>
+                <td><textarea name="message_body"></textarea></td>
+            </tr>
+        </table>
+        <input type="hidden" name="username" value="{{ profile_user.username }}" />
+    </form>
+</div>
+
+<div id="add_to_contacts_dialog">
+    Добавить пользователя <a href="{{ profile_user.get_absolute_url }}">{{ profile_user.username }}</a> в список контактов?
+
+    <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
+        {% csrf_token %}
+        <input type="hidden" name="username" value="{{ profile_user.username }}" />
+    </form>
+</div>
+
+<div id="report_user_dialog">
+    Пожаловаться на пользователя <a href="{{ profile_user.get_absolute_url }}">{{ profile_user.username }}</a>?
+
+    <form id="report_user_form" method="post" action="{% url report_user %}">
+        {% csrf_token %}
+        <input type="hidden" name="username" id="report_user_hidden_username" />
+    </form>
+</div>
+
+
 <script type="text/javascript">
-    $("#add_to_contacts").click(function(){
-        $.post("{% url add_friend %}", {user: "{{ profile_user.username }}"}, function(data){
-            console.log(data);
+    $(document).ready(function(){
+        // Send message
+        // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click)
+        $("#send_message_dialog").dialog({width:650, height:250, modal: true, buttons: {
+            "Отправить": function(){
+                $.post("{% url send_message %}", $("#send_message_form").serialize(), function(data){
+                    $("#send_message_dialog").dialog("close");
+                    if (data=="ok")
+                        alert("Сообщение успешно отправлено");
+                    else
+                        alert("Не удалось отправить сообщение");
+                });
+            },
+            "Отмена": function(){$("#send_message_dialog").dialog("close");},
+        }}).dialog("close");
+
+        $("#send_message").button().click(function(){
+            $("#send_message_dialog").dialog("open");
+        });
+
+        // Add to contacts dialog
+        $("#add_to_contacts_dialog").dialog({width:650, height:250, modal: true, buttons: {
+            "Добавить": function(){
+                $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
+                    $("#in_contacts").removeClass("hidden");
+                    $("#add_to_contacts").parent().addClass("hidden");
+                    $("#add_to_contacts_dialog").dialog("destroy");
+
+                    var user_link = $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}");
+                    $("#have_in_contacts_ul").append($("<li/>").append(user_link));
+                });
+            },
+            "Отмена": function(){$("#add_to_contacts_dialog").dialog("close");},
+        }}).dialog("close");
+
+        $("#add_to_contacts").button().click(function(){
+            $("#add_to_contacts_dialog").dialog("open");
+        });
+
+        // Report user dialog
+        $("#report_user_dialog").dialog({width:650, height:250, modal: true, buttons: {
+            "Пожаловаться": function(){
+                $.post("{% url report_user %}", $("#report_user_form").serialize(), function(data){
+                    $("#is_reported").removeClass("hidden");
+                    $("#report_user").parent().addClass("hidden");
+                    $("#report_user_dialog").dialog("close");
+                });
+            },
+            "Отмена": function(){$("#report_user_dialog").dialog("close");},
+        }}).dialog("close");
+
+        $("#report_user").button().click(function(){
+            $("#report_user_hidden_username").val("{{ profile_user.username }}");
+            $("#report_user_dialog").dialog("open");
         });
     });
+
 </script>
 {% endif %}
 

@@ -3,6 +3,7 @@ import json
 
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
@@ -14,7 +15,7 @@ from loginza.templatetags.loginza_widget import _return_path
 
 from links.models import LinkModel
 from users.forms import CompleteRegistrationForm
-from users.models import FriendsModel, ParticipationModel
+from users.models import ContactModel, ParticipationModel, ReportUserModel
 import users.signals
 
 def current_profile(request):
@@ -29,15 +30,20 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
 
     if not current_user:
-        is_friend = FriendsModel.objects.filter(user1=request.user, user2=user).count()>0
+        in_contacts = ContactModel.objects.filter(user=request.user, contact=user).count()>0
+        is_reported = ReportUserModel.objects.filter(user=user, reporter=request.user).count()>0
     else:
-        is_friend = False
+        in_contacts = False
+        is_reported = False
 
     context = {
         'profile_user': user,
         'participations': list(ParticipationModel.objects.filter(user=user).select_related()),
         'links': list(LinkModel.objects.filter(user=user).select_related()),
-        'is_friend': is_friend,
+        'in_contacts': in_contacts,
+        'is_reported': is_reported,
+        'contacts': list(ContactModel.objects.filter(user=user)),
+        'have_in_contacts': list(ContactModel.objects.filter(contact=user)),
     }
     return render_to_response('profile.html', context_instance=RequestContext(request, context))
 
@@ -46,13 +52,13 @@ def become_voter(request):
         try:
             location_id = int(request.POST.get('region_1', ''))
         except ValueError:
-            return HttpResponse('fail')
+            return HttpResponse('fail1')
 
         try:
             participation, created = ParticipationModel.objects.get_or_create(
                     type='voter', user=request.user, defaults={'location_id': location_id})
         except IntegrityError:
-            return HttpResponse('fail')
+            return HttpResponse('fail2')
 
         if not created:
             participation.location_id = location_id
@@ -60,12 +66,58 @@ def become_voter(request):
 
         return HttpResponse('ok')
 
-    return HttpResponse('fail')
+    return HttpResponse('fail3')
 
-def add_friend(request):
+def add_to_contacts(request):
     if request.method=='POST' and request.user.is_authenticated():
-        pass
-    return HttpResponse('fail')
+        try:
+            contact = User.objects.get(username=request.POST.get('username', ''))
+        except User.DoesNotExist:
+            return HttpResponse('fail1')
+
+        try:
+            contact, created = ContactModel.objects.get_or_create(
+                    user=request.user, contact=contact, defaults={})
+        except IntegrityError:
+            return HttpResponse('fail2')
+
+        return HttpResponse('ok')
+
+    return HttpResponse('fail3')
+
+def report_user(request):
+    if request.method=='POST' and request.user.is_authenticated():
+        try:
+            user = User.objects.get(username=request.POST.get('username', ''))
+        except User.DoesNotExist:
+            return HttpResponse('fail1')
+
+        try:
+            report, created = ReportUserModel.objects.get_or_create(
+                    user=user, reporter=request.user, defaults={})
+        except IntegrityError:
+            return HttpResponse('fail2')
+
+        return HttpResponse('ok')
+
+    return HttpResponse('fail3')
+
+def send_message(request):
+    if request.method=='POST' and request.user.is_authenticated():
+        try:
+            user = User.objects.get(username=request.POST.get('username', ''))
+        except User.DoesNotExist:
+            return HttpResponse('fail1')
+
+        try:
+            send_mail(request.POST.get('message_title', ''), request.POST.get('message_body', ''),
+                    request.user.email, [user.email], fail_silently=False)
+        except: # TODO: explicit exception here
+            return HttpResponse('fail2')
+
+        return HttpResponse('ok')
+
+    return HttpResponse('fail3')
 
 # TODO: if username and email match an existing account - suggest to link them
 def complete_registration(request):

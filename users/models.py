@@ -23,10 +23,16 @@ class ParticipationModel(models.Model):
     def type_name(self):
         return PARTICIPATION_TYPES[self.type]
 
-# Friendship is a two-side non-commutable property
-class FriendsModel(models.Model):
-    user1 = models.ForeignKey(User, related_name='user1')
-    user2 = models.ForeignKey(User, related_name='user2')
+class ContactModel(models.Model):
+    user = models.ForeignKey(User, related_name='users')
+    contact = models.ForeignKey(User, related_name='contacts')
 
     class Meta:
-        unique_together = ('user1', 'user2')
+        unique_together = ('user', 'contact')
+
+class ReportUserModel(models.Model):
+    user = models.ForeignKey(User, related_name='reported_users')
+    reporter = models.ForeignKey(User, related_name='reporters')
+
+    class Meta:
+        unique_together = ('user', 'reporter')

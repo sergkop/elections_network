@@ -10,5 +10,7 @@ urlpatterns = patterns('navigation.views',
 urlpatterns += patterns('',
     url(r'^complete_registration$', 'users.views.complete_registration', name='complete_registration'),
     url(r'^become_voter$', 'users.views.become_voter', name='become_voter'),
-    url(r'^add_friend$', 'users.views.add_friend', name='add_friend'),
+    url(r'^add_to_contacts$', 'users.views.add_to_contacts', name='add_to_contacts'),
+    url(r'^report_user$', 'users.views.report_user', name='report_user'),
+    url(r'^send_message$', 'users.views.send_message', name='send_message'),
 )

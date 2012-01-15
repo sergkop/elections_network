@@ -1,16 +1,22 @@
 from django.contrib import admin
 
-from users.models import FriendsModel, ParticipationModel
+from users.models import ContactModel, ParticipationModel, ReportUserModel
 
 class ParticipationModelAdmin(admin.ModelAdmin):
     list_display = ('user', 'location', 'type')
     ordering = ('user__username',)
     search_fields = ('user__username',)
 
-class FriendsModelAdmin(admin.ModelAdmin):
-    list_display = ('user1', 'user2')
-    ordering = ('user1__username',)
-    search_fields = ('user1__username', 'user2__username')
+class ContactModelAdmin(admin.ModelAdmin):
+    list_display = ('user', 'contact')
+    ordering = ('user__username',)
+    search_fields = ('user__username', 'contact__username')
+
+class ReportUserModelAdmin(admin.ModelAdmin):
+    list_display = ('user', 'reporter')
+    ordering = ('user__username',)
+    search_fields = ('user__username', 'reporter__username')
 
 admin.site.register(ParticipationModel, ParticipationModelAdmin)
-admin.site.register(FriendsModel, FriendsModelAdmin)
+admin.site.register(ContactModel, ContactModelAdmin)
+admin.site.register(ReportUserModel, ReportUserModelAdmin)

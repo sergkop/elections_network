@@ -1,219 +1,479 @@
 @media all
 {
- /**
-  * Fonts
-  *
-  * (en) global settings of font-families and font-sizes
-  *
-  * @section content-global-settings
-  */
+/**
+* Fonts
+*
+* (en) global settings of font-families and font-sizes
+*
+* @section content-global-settings
+*/
 
-  /* (en) reset font size for all elements to standard (16 Pixel) */
-  html * { font-size:100.01%; }
+/* (en) reset font size for all elements to standard (16 Pixel) */
+html * {
+	font-size: 100.01%;
+}
 
- /**
-  * reset monospaced elements to font size 16px in all browsers
-  * @see: http://webkit.org/blog/67/strange-medium/
-  */
+/**
+* reset monospaced elements to font size 16px in all browsers
+* @see: http://webkit.org/blog/67/strange-medium/
+*/
 
-  textarea, pre, code, kbd, samp, var, tt {
-    font-family:Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
-  }
+textarea, pre, code, kbd, samp, var, tt {
+    font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
+}
 
-  /* (en) base layout gets standard font size 12px */
-  body {
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:75.00%;
-    color:#444;
+/* (en) base layout gets standard font size 12px */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 75.00%;
+    color: #444;
     background: #e3e3e3;
-  }
+}
 
-  /*--- Headings  ------------------------------------------------------------------------*/
+/*--- Headings  ------------------------------------------------------------------------*/
 
-  h1,h2,h3,h4,h5,h6 {
-    font-family:Arial, Helvetica, sans-serif;
-    font-weight:normal;
-    color:#222;
-    margin:0 0 0.25em 0;
-  }
+h1,h2,h3,h4,h5,h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    color: #222;
+    margin: 0 0 0.25em 0;
+}
 
-  h1 { font-size:250%; }                       /* 30px */
-  h2 { font-size:200%; }                       /* 24px */
-  h3 { font-size:150%; }                       /* 18px */
-  h4 { font-size:133.33%; }                    /* 16px */
-  h5 { font-size:116.67%; }                    /* 14px */
-  h6 { font-size:116.67%; }                    /* 14px */
+h1 {
+	font-size: 250%;
+}
+                       /* 30px */
+h2 {
+	font-size: 200%;
+}
+                       /* 24px */
+h3 {
+	font-size: 150%;
+}
+                       /* 18px */
+h4 {
+	font-size: 133.33%;
+}
+                    /* 16px */
+h5 {
+	font-size: 116.67%;
+}
+                    /* 14px */
+h6 {
+	font-size: 116.67%;
+}
+                    /* 14px */
 
-  /* --- Lists | Listen  -------------------------------------------------------------------------------- */
+/* --- Lists | Listen  -------------------------------------------------------------------------------- */
 
-  ul, ol, dl { line-height:1.5em; margin:0 0 1em 1em; }
-  ul { list-style-type:disc; }
-  ul ul { list-style-type:circle; margin-bottom:0; }
+ul, ol, dl {
+	line-height: 1.5em;
+	margin: 0 0 1em 1em;
+}
 
-  ol { list-style-type:decimal; }
-  ol ol { list-style-type:lower-latin; margin-bottom:0; }
+ul {
+	list-style-type: disc;
+}
 
-  li { margin-left:0.8em; line-height:1.5em; }
+ul ul {
+	list-style-type: circle;
+	margin-bottom: 0;
+}
 
-  dt { font-weight:bold; }
-  dd { margin:0 0 1em 0.8em; }
+ol {
+	list-style-type: decimal;
+}
 
-  /* --- general text formatting | Allgemeine Textauszeichnung ------------------------------------------ */
+ol ol {
+	list-style-type: lower-latin;
+	margin-bottom: 0;
+}
 
-  p { line-height:1.5em; margin:0 0 1em 0; }
+li {
+	margin-left: 0.8em;
+	line-height: 1.5em;
+}
 
-  blockquote, cite, q {
-    font-family:Georgia, "Times New Roman", Times, serif;
-    font-style:italic;
-  }
-  blockquote { margin:0 0 1em 1.6em; color:#666; }
+dt {
+	font-weight: bold;
+}
 
-  strong,b { font-weight:bold; }
-  em,i { font-style:italic; }
+dd {
+	margin: 0 0 1em 0.8em;
+}
 
-  big { font-size:116.667%; }
-  small { font-size:91.667%; }
- 
-  pre { line-height:1.5em; margin:0 0 1em 0; }
-  pre, code, kbd, tt, samp, var { font-size:100%; }
-  pre, code { color:#800; }
-  kbd, samp, var, tt { color:#666; font-weight:bold; }
-  var, dfn { font-style:italic; }
+/* --- general text formatting | Allgemeine Textauszeichnung ------------------------------------------ */
 
-  acronym, abbr {
-    border-bottom:1px #aaa dotted;
-    font-variant:small-caps;
-    letter-spacing:.07em;
-    cursor:help;
-  }
-  
-  sub { vertical-align: sub; font-size: smaller; }
-  sup { vertical-align: super; font-size: smaller; }
+p {
+	line-height: 1.5em;
+	margin: 0 0 1em 0;
+}
 
-  hr {
-    color:#fff;
-    background:transparent;
-    margin:0 0 0.5em 0;
-    padding:0 0 0.5em 0;
-    border:0;
-    border-bottom:1px #eee solid;
-  }
+blockquote, cite, q {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+}
 
-  /*--- Links ----------------------------------------------------------------------------------------- */
+blockquote {
+	margin: 0 0 1em 1.6em;
+	color: #666;
+}
 
-  a { color:#4D87C7; background:transparent; text-decoration:none; }
-  a:visited  { color:#036; }
+strong,b {
+	font-weight: bold;
+}
 
-  /* (en) maximum constrast for tab focus - change with great care */
-  a:focus { text-decoration:underline; color:#000; background: #fff; outline: 3px #f93 solid; }
-  a:hover,
-  a:active { color:#182E7A; text-decoration:underline; outline: 0 none; }
+em,i {
+	font-style: italic;
+}
 
-  /* --- images (with optional captions) | Bilder (mit optionaler Bildunterschrift) ------------------ */
+big {
+	font-size: 116.667%;
+}
 
-  p.icaption_left { float:left; display:inline; margin:0 1em 0.15em 0; }
-  p.icaption_right { float:right; display:inline; margin:0 0 0.15em 1em; }
+small {
+	font-size: 91.667%;
+}
 
-  p.icaption_left img,
-  p.icaption_right img { padding:0; border:1px #888 solid; }
+pre {
+	line-height: 1.5em;
+	margin: 0 0 1em 0;
+}
 
-  p.icaption_left strong,
-  p.icaption_right strong { display:block; overflow:hidden; margin-top:2px; padding:0.3em 0.5em; background:#eee;
-      font-weight:normal; font-size:91.667%; }
+pre, code, kbd, tt, samp, var {
+	font-size: 100%;
+}
 
- /**
-  * ------------------------------------------------------------------------------------------------- #
-  *
-  * Generic Content Classes
-  *
-  * (en) standard classes for positioning and highlighting
-  *
-  * @section content-generic-classes
-  */
+pre, code {
+	color: #800;
+}
 
-  .highlight { color:#c30; }
-  .dimmed { color:#888; }
+kbd, samp, var, tt {
+	color: #666;
+	font-weight: bold;
+}
 
-  .info { background:#f8f8f8; color:#666; padding:10px; margin-bottom:0.5em; font-size:91.7%; }
+var, dfn {
+	font-style: italic;
+}
 
-  .note { background:#efe; color:#040; border:2px #484 solid; padding:10px; margin-bottom:1em; }
-  .important { background:#ffe; color:#440; border:2px #884 solid; padding:10px; margin-bottom:1em; }
-  .warning { background:#fee; color:#400; border:2px #844 solid; padding:10px; margin-bottom:1em; }
+acronym, abbr {
+    border-bottom: 1px #aaa dotted;
+    font-variant: small-caps;
+    letter-spacing: .07em;
+    cursor: help;
+}
 
-  .float_left { float:left; display:inline; margin-right:1em; margin-bottom:0.15em; }
-  .float_right { float:right; display:inline; margin-left:1em; margin-bottom:0.15em; }
-  .center { display:block; text-align:center; margin:0.5em auto; }
+sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
 
- /**
-  * ------------------------------------------------------------------------------------------------- #
-  *
-  * Tables | Tabellen
-  *
-  * (en) Generic classes for table-width and design definition
-  *
-  * @section content-tables
-  */
+sup {
+	vertical-align: super;
+	font-size: smaller;
+}
 
-  table { width:auto; border-collapse:collapse; margin-bottom:0.5em; border-top:2px #888 solid;
-      border-bottom:2px #888 solid; }
-  table caption { font-variant:small-caps; }
-  table.full { width:100%; }
-  table.fixed { table-layout:fixed; }
+hr {
+    color: #fff;
+    background: transparent;
+    margin: 0 0 0.5em 0;
+    padding: 0 0 0.5em 0;
+    border: 0;
+    border-bottom: 1px #eee solid;
+}
 
-  th,td { padding:0.5em; }
-  thead th { color:#000; border-bottom:2px #800 solid; }
-  tbody th { background:#e0e0e0; color:#333; }
-  tbody th[scope="row"], tbody th.sub { background:#f0f0f0; }
+/*--- Links ----------------------------------------------------------------------------------------- */
 
-  tbody th { border-bottom:1px solid #fff; text-align:left; }
-  tbody td { border-bottom:1px solid #eee; }
+a {
+	color: #4D87C7;
+	background: transparent;
+	text-decoration: none;
+}
 
-  tbody tr:hover th[scope="row"],
-  tbody tr:hover tbody th.sub { background:#f0e8e8; }
-  tbody tr:hover td { background:#fff8f8; }
+a:visited  {
+	color: #036;
+}
 
- /**
-  * Dialogs
-  */
-  #login_dialog {background:#898bc7}
-  #uik_search_dialog {background:#898bc7}
+/* (en) maximum constrast for tab focus - change with great care */
+a:focus {
+	text-decoration: underline;
+	color: #000;
+	background: #fff;
+	outline: 3px #f93 solid;
+}
 
- /**
-  * Info blocks
-  **/
-  .page_margins {
+a:hover,
+a:active {
+	color: #182E7A;
+	text-decoration: underline;
+	outline: 0 none;
+}
+
+/* --- images (with optional captions) | Bilder (mit optionaler Bildunterschrift) ------------------ */
+
+p.icaption_left {
+	float: left;
+	display: inline;
+	margin: 0 1em 0.15em 0;
+}
+
+p.icaption_right {
+	float: right;
+	display: inline;
+	margin: 0 0 0.15em 1em;
+}
+
+p.icaption_left img,
+p.icaption_right img {
+	padding: 0;
+	border: 1px #888 solid;
+}
+
+p.icaption_left strong,
+p.icaption_right strong {
+	display: block;
+	overflow: hidden;
+	margin-top: 2px;
+	padding: 0.3em 0.5em;
+	background: #eee;
+    font-weight: normal;
+	font-size: 91.667%;
+}
+
+/**
+* ------------------------------------------------------------------------------------------------- #
+*
+* Generic Content Classes
+*
+* (en) standard classes for positioning and highlighting
+*
+* @section content-generic-classes
+*/
+
+.highlight {
+	color: #c30;
+}
+
+.dimmed {
+	color: #888;
+}
+
+.info {
+	background: #f8f8f8;
+	color: #666;
+	padding: 10px;
+	margin-bottom: 0.5em;
+	font-size: 91.7%;
+}
+
+.note {
+	background: #efe;
+	color: #040;
+	border: 2px #484 solid;
+	padding: 10px;
+	margin-bottom: 1em;
+}
+
+.important {
+	background: #ffe;
+	color: #440;
+	border: 2px #884 solid;
+	padding: 10px;
+	margin-bottom: 1em;
+}
+
+.warning {
+	background: #fee;
+	color: #400;
+	border: 2px #844 solid;
+	padding: 10px;
+	margin-bottom: 1em;
+}
+
+.float_left {
+	float: left;
+	display: inline;
+	margin-right: 1em;
+	margin-bottom: 0.15em;
+}
+
+.float_right {
+	float: right;
+	display: inline;
+	margin-left: 1em;
+	margin-bottom: 0.15em;
+}
+
+.center {
+	display: block;
+	text-align: center;
+	margin: 0.5em auto;
+}
+
+/**
+* ------------------------------------------------------------------------------------------------- #
+*
+* Tables | Tabellen
+*
+* (en) Generic classes for table-width and design definition
+*
+* @section content-tables
+*/
+
+table {
+	width: auto;
+	border-collapse: collapse;
+	margin-bottom: 0.5em;
+	border-top: 2px #888 solid;
+  border-bottom: 2px #888 solid;
+}
+
+table caption {
+	font-variant: small-caps;
+}
+
+table.full {
+	width: 100%;
+}
+
+table.fixed {
+	table-layout: fixed;
+}
+
+th,td {
+	padding: 0.5em;
+}
+
+thead th {
+	color: #000;
+	border-bottom: 2px #800 solid;
+}
+
+tbody th {
+	background: #e0e0e0;
+	color: #333;
+}
+
+tbody th[scope="row"], tbody th.sub {
+	background: #f0f0f0;
+}
+
+tbody th {
+	border-bottom: 1px solid #fff;
+	text-align: left;
+}
+
+tbody td {
+	border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover th[scope="row"],
+tbody tr:hover tbody th.sub {
+	background: #f0e8e8;
+}
+
+tbody tr:hover td {
+	background: #fff8f8;
+}
+
+/**
+* Dialogs
+*/
+#login_dialog {background: #898bc7}
+
+#uik_search_dialog {background: #898bc7}
+
+/**
+* Info blocks
+**/
+.page_margins {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-
     -webkit-box-shadow: 0 8px 6px -6px #888;
     -moz-box-shadow: 0 8px 6px -6px #888;
-    box-shadow: 0 8px 6px -6px #888;    
-  }
-
-  .content_block { margin:  10px; padding: 0 }
-  .page { padding: 5px }
-  #col1_content { margin:  0 ; padding: 5px }
-  #col2_content { margin:  0 ; padding: 5px }
-  #col3_content { margin:  0 ; padding: 5px }
-
- /**
-  * Color scheme
-  **/
-  #col1 { background: #f9f9f9 }
-  #col1_content { }
-  #col2 { background: #f9f9f9 }
-  #col2_content { }
-  #col3 { }
-  #col3_content { }
-  #main {background: #fff }
-  #col1_content_observers { background: #d4cf92 }
-  #col1_content_voters { background: #898bc7 }
-  #col1_content_pending_observers { background: #cf8f97 }
-  #col2_content_links  { background: #d4c292 }
-
-  .flag_user { color: red; text-decoration: none }
-  #report_link_ul {list-style-type: none;}
-
-  .hidden {display: none;}
+    box-shadow: 0 8px 6px -6px #888;
 }
+
+.content_block {
+	margin:  10px;
+	padding: 0;
+}
+
+.page {
+	padding: 5px;
+}
+
+#col1_content {
+	margin:  0 ;
+	padding: 5px;
+}
+
+#col2_content {
+	margin:  0 ;
+	padding: 5px;
+}
+
+#col3_content {
+	margin:  0 ;
+	padding: 5px;
+}
+
+/**
+* Color scheme
+**/
+#col1 {
+	background: #f9f9f9;
+}
+
+#col1_content { }
+
+#col2 {
+	background: #f9f9f9;
+}
+
+#col2_content { }
+
+#col3 { }
+
+#col3_content { }
+
+#main {background: #fff;
+}
+
+#col1_content_observers {
+	background: #d4cf92;
+}
+
+#col1_content_voters {
+	background: #898bc7;
+}
+
+#col1_content_pending_observers {
+	background: #cf8f97;
+}
+
+#col2_content_links  {
+	background: #d4c292;
+}
+
+.flag_user {
+	color: red;
+	text-decoration: none;
+}
+
+#report_link_ul {
+    list-style-type: none;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+}
+

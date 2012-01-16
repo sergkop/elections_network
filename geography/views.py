@@ -34,6 +34,6 @@ def location(request, loc_id):
 
 def get_sub_regions(request):
     if request.is_ajax():
-        request.GET('location')
+        request.GET.get('location', '')
 
     return HttpResponse('fail3')

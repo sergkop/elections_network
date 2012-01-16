@@ -158,8 +158,10 @@
 
     {% else %} {# User is not authenticated #}
 
-    <div id="login_dialog">
-        {% loginza_icons providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" lang="ru" %}
+    <div>
+        <div id="login_dialog">
+            {% loginza_icons providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" lang="ru" %}
+        </div>
     </div>
 
     {% endif %}

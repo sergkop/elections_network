@@ -25,16 +25,35 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+
 <div class="page_margins">
+    <!-- begin: main header #header -->
+    <div role="banner" id="header">
+        <h1>
+            <a id="title_link" href="/">Интренет площадка для контроля над выборами</a>
+        </h1>
+    </div>
+    <!-- end: main header #header -->
+
     <div class="page">
 
         <!-- begin: main navigation #nav -->
-        <div id="nav" role="navigation">
+        <div id="nav" class="bread_crumbs" role="navigation">
             <div class="hlist">
                 <ul>
+                    <li>&rarr;</li>
                     <li><a href="{% url main %}">Главная</a></li>
                     {% block menu %}{% endblock %}
                 </ul>
+                <div class="login_logout">
+                    {% if user.is_authenticated %}
+                        <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
+                        <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
+                    {% else %}
+                        {% loginza_button providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" %}
+                        <a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <!-- end: main navigation -->
@@ -62,16 +81,6 @@
             <!-- begin: #col3 static column -->
             <div id="col3" role="main">
                 <div id="col3_content" class="clearfix">
-                    <div style="float: right;">
-                        {% if user.is_authenticated %}
-                            <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
-                            <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
-                        {% else %}
-                            {% loginza_button providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" %}
-                            <a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>
-                        {% endif %}
-                    </div>
-
                     {% block content %}{% endblock %}
                 </div>
             </div>

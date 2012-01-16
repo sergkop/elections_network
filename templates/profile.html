@@ -9,56 +9,12 @@
 <div id="in_contacts" {% if not in_contacts %}class="hidden"{% endif %}><i>Добавлен в контакты</i></div>
 <div id="is_reported" {% if not is_reported %}class="hidden"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
 
-<h4>Участие в выборах</h4>
-<ul>
-    {% for participation in participations %}
-    <li><a href="{{ participation.location.get_absolute_url }}">{{ participation.location }}</a> - {{ participation.type_name }}</li>
-    {% empty %}
-    <li>Еще не записан. <a href="/">Записаться.</a></li>
-    {% endfor %}
-</ul>
-
-<h4>Ссылки</h4>
-<ul>
-    {% for link in links %}
-    <li>
-        <a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>:
-        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
-    </li>
-    {% empty %}
-    <li>Ссылки еще не добавлены.</li>
-    {% endfor %}
-</ul>
-
-<table>
-    <tr style="vertical-align: top;">
-        <td>
-            <h4>Контакты</h4>
-            <ul id="contacts_ul">
-                {% for contact in contacts %}
-                <li><a href="{{ contact.contact.get_absolute_url }}">{{ contact.contact.username }}</a></li>
-                {% endfor %}
-            </ul>
-        </td>
-        <td>
-            <h4>Добавлен в контакты</h4>
-            <ul id="have_in_contacts_ul">
-                {% for contact in have_in_contacts %}
-                <li><a href="{{ contact.user.get_absolute_url }}">{{ contact.user.username }}</a></li>
-                {% endfor %}
-            </ul>
-        </td>
-    </tr>
-</table>
-
 {% if profile_user != user %}
-<table>
-    <tr>
-        <td><button id="send_message">Отправить сообщение</button></td>
-        <td {% if in_contacts %}class="hidden"{% endif %}><button id="add_to_contacts">Добавить в контакты</button></td>
-        <td {% if is_reported %}class="hidden"{% endif %}><button id="report_user">Пожаловаться</button></td>
-    </tr>
-</table>
+    <div class="user_actions">
+        <button id="send_message">Отправить сообщение</button></td>
+        <button {% if in_contacts %}class="hidden"{% endif %} id="add_to_contacts">Добавить в контакты</button>
+        <button {% if is_reported %}class="hidden"{% endif %} id="report_user">Пожаловаться</button>
+    </div>
 
     {% if user.is_authenticated %}
     <div id="send_message_dialog">
@@ -167,5 +123,47 @@
     {% endif %}
 
 {% endif %}
+
+<h4>Участие в выборах</h4>
+<ul>
+    {% for participation in participations %}
+    <li><a href="{{ participation.location.get_absolute_url }}">{{ participation.location }}</a> - {{ participation.type_name }}</li>
+    {% empty %}
+    <li>Еще не записан. <a href="/">Записаться.</a></li>
+    {% endfor %}
+</ul>
+
+<h4>Ссылки</h4>
+<ul>
+    {% for link in links %}
+    <li>
+        <a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>:
+        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+    </li>
+    {% empty %}
+    <li>Ссылки еще не добавлены.</li>
+    {% endfor %}
+</ul>
+
+<table>
+    <tr style="vertical-align: top;">
+        <td>
+            <h4>Контакты</h4>
+            <ul id="contacts_ul">
+                {% for contact in contacts %}
+                <li><a href="{{ contact.contact.get_absolute_url }}">{{ contact.contact.username }}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <h4>Добавлен в контакты</h4>
+            <ul id="have_in_contacts_ul">
+                {% for contact in have_in_contacts %}
+                <li><a href="{{ contact.user.get_absolute_url }}">{{ contact.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>
 
 {% endblock %}

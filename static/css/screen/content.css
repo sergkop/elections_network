@@ -10,7 +10,7 @@
 
 /* (en) reset font size for all elements to standard (16 Pixel) */
 html * {
-	font-size: 100.01%;
+    font-size: 100.01%;
 }
 
 /**
@@ -40,73 +40,73 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 {
-	font-size: 250%;
+    font-size: 250%;
 }
                        /* 30px */
 h2 {
-	font-size: 200%;
+    font-size: 200%;
 }
                        /* 24px */
 h3 {
-	font-size: 150%;
+    font-size: 150%;
 }
                        /* 18px */
 h4 {
-	font-size: 133.33%;
+    font-size: 133.33%;
 }
                     /* 16px */
 h5 {
-	font-size: 116.67%;
+    font-size: 116.67%;
 }
                     /* 14px */
 h6 {
-	font-size: 116.67%;
+    font-size: 116.67%;
 }
                     /* 14px */
 
 /* --- Lists | Listen  -------------------------------------------------------------------------------- */
 
 ul, ol, dl {
-	line-height: 1.5em;
-	margin: 0 0 1em 1em;
+    line-height: 1.5em;
+    margin: 0 0 1em 1em;
 }
 
 ul {
-	list-style-type: disc;
+    list-style-type: disc;
 }
 
 ul ul {
-	list-style-type: circle;
-	margin-bottom: 0;
+    list-style-type: circle;
+    margin-bottom: 0;
 }
 
 ol {
-	list-style-type: decimal;
+    list-style-type: decimal;
 }
 
 ol ol {
-	list-style-type: lower-latin;
-	margin-bottom: 0;
+    list-style-type: lower-latin;
+    margin-bottom: 0;
 }
 
 li {
-	margin-left: 0.8em;
-	line-height: 1.5em;
+    margin-left: 0.8em;
+    line-height: 1.5em;
 }
 
 dt {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 dd {
-	margin: 0 0 1em 0.8em;
+    margin: 0 0 1em 0.8em;
 }
 
 /* --- general text formatting | Allgemeine Textauszeichnung ------------------------------------------ */
 
 p {
-	line-height: 1.5em;
-	margin: 0 0 1em 0;
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
 }
 
 blockquote, cite, q {
@@ -115,46 +115,46 @@ blockquote, cite, q {
 }
 
 blockquote {
-	margin: 0 0 1em 1.6em;
-	color: #666;
+    margin: 0 0 1em 1.6em;
+    color: #666;
 }
 
 strong,b {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 em,i {
-	font-style: italic;
+    font-style: italic;
 }
 
 big {
-	font-size: 116.667%;
+    font-size: 116.667%;
 }
 
 small {
-	font-size: 91.667%;
+    font-size: 91.667%;
 }
 
 pre {
-	line-height: 1.5em;
-	margin: 0 0 1em 0;
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
 }
 
 pre, code, kbd, tt, samp, var {
-	font-size: 100%;
+    font-size: 100%;
 }
 
 pre, code {
-	color: #800;
+    color: #800;
 }
 
 kbd, samp, var, tt {
-	color: #666;
-	font-weight: bold;
+    color: #666;
+    font-weight: bold;
 }
 
 var, dfn {
-	font-style: italic;
+    font-style: italic;
 }
 
 acronym, abbr {
@@ -165,13 +165,13 @@ acronym, abbr {
 }
 
 sub {
-	vertical-align: sub;
-	font-size: smaller;
+    vertical-align: sub;
+    font-size: smaller;
 }
 
 sup {
-	vertical-align: super;
-	font-size: smaller;
+    vertical-align: super;
+    font-size: smaller;
 }
 
 hr {
@@ -186,59 +186,59 @@ hr {
 /*--- Links ----------------------------------------------------------------------------------------- */
 
 a {
-	color: #4D87C7;
-	background: transparent;
-	text-decoration: none;
+    color: #4D87C7;
+    background: transparent;
+    text-decoration: none;
 }
 
 a:visited  {
-	color: #036;
+    color: #036;
 }
 
 /* (en) maximum constrast for tab focus - change with great care */
 a:focus {
-	text-decoration: underline;
-	color: #000;
-	background: #fff;
-	outline: 3px #f93 solid;
+    text-decoration: underline;
+    color: #000;
+    background: #fff;
+    outline: 3px #f93 solid;
 }
 
 a:hover,
 a:active {
-	color: #182E7A;
-	text-decoration: underline;
-	outline: 0 none;
+    color: #182E7A;
+    text-decoration: underline;
+    outline: 0 none;
 }
 
 /* --- images (with optional captions) | Bilder (mit optionaler Bildunterschrift) ------------------ */
 
 p.icaption_left {
-	float: left;
-	display: inline;
-	margin: 0 1em 0.15em 0;
+    float: left;
+    display: inline;
+    margin: 0 1em 0.15em 0;
 }
 
 p.icaption_right {
-	float: right;
-	display: inline;
-	margin: 0 0 0.15em 1em;
+    float: right;
+    display: inline;
+    margin: 0 0 0.15em 1em;
 }
 
 p.icaption_left img,
 p.icaption_right img {
-	padding: 0;
-	border: 1px #888 solid;
+    padding: 0;
+    border: 1px #888 solid;
 }
 
 p.icaption_left strong,
 p.icaption_right strong {
-	display: block;
-	overflow: hidden;
-	margin-top: 2px;
-	padding: 0.3em 0.5em;
-	background: #eee;
+    display: block;
+    overflow: hidden;
+    margin-top: 2px;
+    padding: 0.3em 0.5em;
+    background: #eee;
     font-weight: normal;
-	font-size: 91.667%;
+    font-size: 91.667%;
 }
 
 /**
@@ -252,63 +252,63 @@ p.icaption_right strong {
 */
 
 .highlight {
-	color: #c30;
+    color: #c30;
 }
 
 .dimmed {
-	color: #888;
+    color: #888;
 }
 
 .info {
-	background: #f8f8f8;
-	color: #666;
-	padding: 10px;
-	margin-bottom: 0.5em;
-	font-size: 91.7%;
+    background: #f8f8f8;
+    color: #666;
+    padding: 10px;
+    margin-bottom: 0.5em;
+    font-size: 91.7%;
 }
 
 .note {
-	background: #efe;
-	color: #040;
-	border: 2px #484 solid;
-	padding: 10px;
-	margin-bottom: 1em;
+    background: #efe;
+    color: #040;
+    border: 2px #484 solid;
+    padding: 10px;
+    margin-bottom: 1em;
 }
 
 .important {
-	background: #ffe;
-	color: #440;
-	border: 2px #884 solid;
-	padding: 10px;
-	margin-bottom: 1em;
+    background: #ffe;
+    color: #440;
+    border: 2px #884 solid;
+    padding: 10px;
+    margin-bottom: 1em;
 }
 
 .warning {
-	background: #fee;
-	color: #400;
-	border: 2px #844 solid;
-	padding: 10px;
-	margin-bottom: 1em;
+    background: #fee;
+    color: #400;
+    border: 2px #844 solid;
+    padding: 10px;
+    margin-bottom: 1em;
 }
 
 .float_left {
-	float: left;
-	display: inline;
-	margin-right: 1em;
-	margin-bottom: 0.15em;
+    float: left;
+    display: inline;
+    margin-right: 1em;
+    margin-bottom: 0.15em;
 }
 
 .float_right {
-	float: right;
-	display: inline;
-	margin-left: 1em;
-	margin-bottom: 0.15em;
+    float: right;
+    display: inline;
+    margin-left: 1em;
+    margin-bottom: 0.15em;
 }
 
 .center {
-	display: block;
-	text-align: center;
-	margin: 0.5em auto;
+    display: block;
+    text-align: center;
+    margin: 0.5em auto;
 }
 
 /**
@@ -322,59 +322,59 @@ p.icaption_right strong {
 */
 
 table {
-	width: auto;
-	border-collapse: collapse;
-	margin-bottom: 0.5em;
-	border-top: 2px #888 solid;
+    width: auto;
+    border-collapse: collapse;
+    margin-bottom: 0.5em;
+    border-top: 2px #888 solid;
   border-bottom: 2px #888 solid;
 }
 
 table caption {
-	font-variant: small-caps;
+    font-variant: small-caps;
 }
 
 table.full {
-	width: 100%;
+    width: 100%;
 }
 
 table.fixed {
-	table-layout: fixed;
+    table-layout: fixed;
 }
 
 th,td {
-	padding: 0.5em;
+    padding: 0.5em;
 }
 
 thead th {
-	color: #000;
-	border-bottom: 2px #800 solid;
+    color: #000;
+    border-bottom: 2px #800 solid;
 }
 
 tbody th {
-	background: #e0e0e0;
-	color: #333;
+    background: #e0e0e0;
+    color: #333;
 }
 
 tbody th[scope="row"], tbody th.sub {
-	background: #f0f0f0;
+    background: #f0f0f0;
 }
 
 tbody th {
-	border-bottom: 1px solid #fff;
-	text-align: left;
+    border-bottom: 1px solid #fff;
+    text-align: left;
 }
 
 tbody td {
-	border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 tbody tr:hover th[scope="row"],
 tbody tr:hover tbody th.sub {
-	background: #f0e8e8;
+    background: #f0e8e8;
 }
 
 tbody tr:hover td {
-	background: #fff8f8;
+    background: #fff8f8;
 }
 
 /**
@@ -397,40 +397,40 @@ tbody tr:hover td {
 }
 
 .content_block {
-	margin:  10px;
-	padding: 0;
+    margin:  10px;
+    padding: 0;
 }
 
 .page {
-	padding: 5px;
+    padding: 5px;
 }
 
 #col1_content {
-	margin:  0 ;
-	padding: 5px;
+    margin:  0 ;
+    padding: 5px;
 }
 
 #col2_content {
-	margin:  0 ;
-	padding: 5px;
+    margin:  0 ;
+    padding: 5px;
 }
 
 #col3_content {
-	margin:  0 ;
-	padding: 5px;
+    margin:  0 ;
+    padding: 5px;
 }
 
 /**
 * Color scheme
 **/
 #col1 {
-	background: #f9f9f9;
+    background: #f9f9f9;
 }
 
 #col1_content { }
 
 #col2 {
-	background: #f9f9f9;
+    background: #f9f9f9;
 }
 
 #col2_content { }
@@ -443,24 +443,24 @@ tbody tr:hover td {
 }
 
 #col1_content_observers {
-	background: #d4cf92;
+    background: #d4cf92;
 }
 
 #col1_content_voters {
-	background: #898bc7;
+    background: #898bc7;
 }
 
 #col1_content_pending_observers {
-	background: #cf8f97;
+    background: #cf8f97;
 }
 
 #col2_content_links  {
-	background: #d4c292;
+    background: #d4c292;
 }
 
 .flag_user {
-	color: red;
-	text-decoration: none;
+    color: red;
+    text-decoration: none;
 }
 
 #report_link_ul {

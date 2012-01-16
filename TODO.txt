@@ -11,3 +11,4 @@
 * login using username or email
 * autogenerate username from first and last name
 * write documentation on how to run django
+* readme -> readme.rst

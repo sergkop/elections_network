@@ -4,8 +4,22 @@
         <option value="{{ location.id }}">{{ location }}</option>
     {% endfor %}
 </select>
-<!--<br/>
-<select name="region_uik">
-    <option value="">Выбрать участок</option>
-    <option value="">Участок 2</option>
-</select>-->
+<br/>
+<select id="select_region_2" name="region_2">
+    <option value="">Выбрать регион</option>
+</select>
+<br/>
+<select id="select_region_3" name="region_3">
+    <option value="">Выбрать район</option>
+</select>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#select_region_1 option").click(function(){
+            if ($(this).val()!=""){
+                
+            }
+        });
+        
+    });
+</script>

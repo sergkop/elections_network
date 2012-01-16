@@ -114,4 +114,6 @@ LOGGING = {
     }
 }
 
+# Loginza settings
 LOGINZA_AMNESIA_PATHS = ('/complete_registration',)
+LOGINZA_DEFAULT_EMAIL = ""

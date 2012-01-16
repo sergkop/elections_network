@@ -1,13 +1,13 @@
 Installation (for Ubuntu and Mac OS):
     * sudo aptitude install python python-setuptools git
     * sudo easy_install pip
-    
+
     -------- Optionally creare virtualenv -------
     * sudo pip install virtualenv
     * virtualenv --no-site-packages VIRTUAL_ENV_DIR
     * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server)
     ---------------------------------------------
-    
+
     * git clone git://github.com/sergkop/nabludatel.git CODE_DIR
     * pip install -r CODE_DIR/requirements.txt
 

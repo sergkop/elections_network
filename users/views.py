@@ -25,11 +25,9 @@ def current_profile(request):
     return profile(request, request.user.username)
 
 def profile(request, username):
-    current_user = (request.user.username==username)
-
     user = get_object_or_404(User, username=username)
 
-    if not current_user:
+    if request.user.is_authenticated() and request.user.username!=username:
         in_contacts = ContactModel.objects.filter(user=request.user, contact=user).count()>0
         is_reported = ReportUserModel.objects.filter(user=user, reporter=request.user).count()>0
     else:
@@ -48,7 +46,7 @@ def profile(request, username):
     return render_to_response('profile.html', context_instance=RequestContext(request, context))
 
 def become_voter(request):
-    if request.method=='POST' and request.user.is_authenticated():
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
             location_id = int(request.POST.get('region_1', ''))
         except ValueError:
@@ -69,7 +67,7 @@ def become_voter(request):
     return HttpResponse('fail3')
 
 def add_to_contacts(request):
-    if request.method=='POST' and request.user.is_authenticated():
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
             contact = User.objects.get(username=request.POST.get('username', ''))
         except User.DoesNotExist:
@@ -86,7 +84,7 @@ def add_to_contacts(request):
     return HttpResponse('fail3')
 
 def report_user(request):
-    if request.method=='POST' and request.user.is_authenticated():
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
             user = User.objects.get(username=request.POST.get('username', ''))
         except User.DoesNotExist:
@@ -103,7 +101,7 @@ def report_user(request):
     return HttpResponse('fail3')
 
 def send_message(request):
-    if request.method=='POST' and request.user.is_authenticated():
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
             user = User.objects.get(username=request.POST.get('username', ''))
         except User.DoesNotExist:
@@ -137,6 +135,7 @@ def complete_registration(request):
             user_map.user.email = form.cleaned_data['email']
             user_map.user.first_name = form.cleaned_data['first_name']
             user_map.user.last_name = form.cleaned_data['last_name']
+            user_map.user.set_password(form.cleaned_data["password1"])
             user_map.user.save()
 
             user_map.verified = True

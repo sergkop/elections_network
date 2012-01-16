@@ -3,7 +3,9 @@ from django.db import models
 class LocationModel(models.Model):
     """ The number of non-null values of parent specifies the level of location """
     name = models.CharField(max_length=150)
-    parent_1 = models.ForeignKey('self', null=True, blank=True) # key to the parent of the level 1 (if present)
+     # keys to the parents of the corresponding level (if present)
+    parent_1 = models.ForeignKey('self', null=True, blank=True, related_name='parents_1')
+    parent_2 = models.ForeignKey('self', null=True, blank=True, related_name='parents_2')
 
     def level(self):
         if self.parent_1:

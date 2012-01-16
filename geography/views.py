@@ -14,7 +14,10 @@ def location(request, loc_id):
     except ValueError:
         raise Http404
 
-    location = get_object_or_404(LocationModel, id=id)
+    try:
+        location = LocationModel.objects.select_related().get(id=id)
+    except LocationModel.DoesNotExist:
+        raise Http404
 
     participants = {} # {participation_type: [users]}
     for participation in ParticipationModel.objects.filter(location=location).select_related():
@@ -28,3 +31,9 @@ def location(request, loc_id):
         'is_voter_here': request.user.is_authenticated() and any(request.user==voter for voter in participants.get('voter', [])),
     }
     return render_to_response('location.html', context_instance=RequestContext(request, context))
+
+def get_sub_regions(request):
+    if request.is_ajax():
+        request.GET('location')
+
+    return HttpResponse('fail3')

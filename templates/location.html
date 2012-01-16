@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{% block menu %}
+{% if current_location.parent_1 %}
+<li><a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1.name }}</a></li>
+{% endif %}
+{% if current_location.parent_2 %}
+<li><a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2.name }}</a></li>
+{% endif %}
+<li><a href="{{ current_location.get_absolute_url }}">{{ current_location.name }}</a></li>
+
+{% endblock %}
+
 {% block left_column %}
 <h3>Участники</h3>
 <div id="col1_content_observers" class="clearfix content_block">

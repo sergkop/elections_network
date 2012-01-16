@@ -2,11 +2,7 @@
 
 {% block content %}
 
-Please log in
-{% if form.errors %}
-<p>Логин и пароль введены неверно. Попробуйте снова.</p>
-{% endif %}
-
+Пожалуйста, установите свой пароль
 <form method="post" action="{% url complete_registration %}">
 {% csrf_token %}
 <table>

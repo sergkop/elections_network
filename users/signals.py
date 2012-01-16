@@ -16,7 +16,6 @@ def loginza_auth_handler(sender, user, identity, **kwargs):
         auth.login(sender, user)
     except models.UserMap.DoesNotExist:
         sender.session['users_complete_reg_id'] = identity.id
-        print "redirect"
         return redirect(reverse('complete_registration'))
 
 signals.authenticated.connect(loginza_auth_handler)

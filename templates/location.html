@@ -2,11 +2,14 @@
 
 {% block menu %}
 {% if current_location.parent_1 %}
+<li>&rarr;</li>
 <li><a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1.name }}</a></li>
 {% endif %}
 {% if current_location.parent_2 %}
+<li>&rarr;</li>
 <li><a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2.name }}</a></li>
 {% endif %}
+<li>&rarr;</li>
 <li><a href="{{ current_location.get_absolute_url }}">{{ current_location.name }}</a></li>
 
 {% endblock %}

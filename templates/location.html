@@ -17,7 +17,7 @@
 {% block left_column %}
 <h3>Участники</h3>
 <div id="col1_content_observers" class="clearfix content_block">
-    <b>Наблюдатели</b>
+    <h4>Наблюдатели</h4>
     <ul>
         {% for observer in participants.observer %}
         <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
@@ -25,7 +25,7 @@
     </ul>
 </div>
 <div id="col1_content_voters" class="clearfix content_block">
-    <b>Избиратели</b>
+    <h4>Избиратели</h4>
     <ul id="voters_ul">
         {% for voter in participants.voter %}
         <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
@@ -38,7 +38,7 @@
 {% block right_column %}
 <h3>Инструменты</h3>
 <div class="clearfix content_block" id="col2_content_links">
-    <b>Ссылки</b>
+    <h4>Ссылки</h4>
     <ul id="links_ul">
         {% for link in links %}
         <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
@@ -64,25 +64,25 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 
 
 <div id="add_link_dialog">
-    Добавить ссылку
-    <form id="add_link_form" method="post" action="{% url add_link %}">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><input id="link_name_input" name="name" value="" /></td>
-            </tr>
-            <tr>
-                <td>URL</td>
-                <td><input id="link_url_input" name="url" value="" /></td>
-            </tr>
-        </table>
-        <input type="hidden" name="location" value="{{ current_location.id }}" />
-    </form>
+    <center>
+        <form id="add_link_form" class="dialog_form" method="post" action="{% url add_link %}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Название</td>
+                    <td><input id="link_name_input" name="name" value="" /></td>
+                </tr>
+                <tr>
+                    <td>URL</td>
+                    <td><input id="link_url_input" name="url" value="" /></td>
+                </tr>
+            </table>
+            <input type="hidden" name="location" value="{{ current_location.id }}" />
+        </form>
+    </center>
 </div>
 
 <div id="report_link_dialog">
-    Пожаловаться на ссылку
     <form id="report_link_form" method="post" action="{% url report_link %}">
         {% csrf_token %}
         <ul id="report_link_ul"></ul>
@@ -91,7 +91,6 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 </div>
 
 <div id="become_voter_dialog">
-    Записаться в голосующие
     <form id="become_voter_form" method="post" action="{% url become_voter %}">
         {% csrf_token %}
         {% include "region_choice.html" %}
@@ -101,8 +100,8 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 <script type="text/javascript">
     $(document).ready(function(){
         // Add links dialog
-        $("#add_link_dialog").dialog({width:650, height:250, modal: true, buttons: {
-            "Добавить": function(){
+        $("#add_link_dialog").dialog({width:650, height:250, modal: true, title: "Добавить ссылку",
+            buttons: { "Добавить": function(){
                 $.post($("#add_link_form").attr("action"), $("#add_link_form").serialize(), function(data){
                     if (data=="ok")
                         $("#links_ul").append($("<li/>").append(
@@ -125,8 +124,8 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
         });
 
         // Report link dialog
-        $("#report_link_dialog").dialog({width:650, height:250, modal: true, buttons: {
-            "Пожаловаться": function(){
+        $("#report_link_dialog").dialog({width:650, height:250, modal: true, title: "Пожаловаться на ссылку",
+            buttons: { "Пожаловаться": function(){
                 $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
                     $("#report_link_dialog").dialog("close");
                     alert("Ваша жалоба будет рассмотрена в ближайшее время");
@@ -152,8 +151,8 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
         });
 
         // Register as a voter dialog
-        $("#become_voter_dialog").dialog({width:650, height:250, modal: true, buttons: {
-            "Записаться": function(){
+        $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в голосующие",
+            buttons: { "Записаться": function(){
                 $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
                     $("#become_voter_dialog").dialog("close");
                 });

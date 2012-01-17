@@ -52,6 +52,7 @@ h3 {
     color: #fff;
     font-size: 150%;
     padding: 3px 10px;
+    text-align: center;
 }
                        /* 18px */
 h4 {
@@ -488,7 +489,16 @@ a#title_link {
     padding: 0 0 20px;
 }
 
+.hlist ul li, .hlist ul li a, .hlist ul li strong {
+    font-size: 1.2em;
+}
 
+/**
+* Inputs
+*/
+select {
+  width: 23em;
+}
 
 
 }

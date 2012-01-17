@@ -4,11 +4,13 @@ from django.contrib.auth import forms as auth_forms
 from django.contrib.auth.models import User
 
 class RegistrationForm(auth_forms.UserCreationForm):
+    username = forms.RegexField(label="Имя пользователя", max_length=30,
+            min_length=4, required=True, regex=r'^[\w.@+-]+$')
     email = forms.EmailField()
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
-    first_name = forms.CharField()
-    last_name = forms.CharField()
+    password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput)
+    first_name = forms.CharField(label="Имя")
+    last_name = forms.CharField(label="Фамилия")
 
     def clean_username(self):
         if self.cleaned_data['username']:

@@ -6,20 +6,30 @@
 </select>
 <br/>
 <select id="select_region_2" name="region_2">
-    <option value="">Выбрать регион</option>
+    <option value="">Все районы</option>
 </select>
 <br/>
 <select id="select_region_3" name="region_3">
-    <option value="">Выбрать район</option>
+    <option value="">Все УИКи</option>
+    <option value="1245">1245</option>
 </select>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#select_region_1 option").click(function(){
-            if ($(this).val()!=""){
-                
+    $(document).ready(function() {
+        $("#select_region_2, #select_region_3").hide();
+        $("#select_region_1").change(function() {
+            $("#select_region_2, #select_region_3").hide();
+            if ($(this).val() != "") {
+            //TODO: Load options and select default.
+            $("#select_region_2").show();
             }
         });
-        
+        $("#select_region_2").change(function() {
+            $("#select_region_3").hide();
+            if ($(this).val() != "") {
+            //TODO: Load options and select default.
+            $("#select_region_3").show();
+            }
+        });
     });
 </script>

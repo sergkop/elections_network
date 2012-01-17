@@ -3,3 +3,5 @@
 database.sqlite
 *.bak
 *.kate-swp
+static/admin
+templates/admin

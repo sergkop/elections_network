@@ -18,7 +18,7 @@
 
     {% if user.is_authenticated %}
     <div id="send_message_dialog">
-        Отправить сообщение пользователю <a href="{{ profile_user.get_absolute_url }}">{{ profile_user.username }}</a>
+        Отправить сообщение пользователю {{ profile_user.username }}
 
         <form id="send_message_form" method="post" action="{% url send_message %}">
             {% csrf_token %}
@@ -35,7 +35,7 @@
     </div>
 
     <div id="add_to_contacts_dialog">
-        Добавить пользователя <a href="{{ profile_user.get_absolute_url }}">{{ profile_user.username }}</a> в список контактов?
+        Добавить пользователя {{ profile_user.username }} в список контактов?
 
         <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
             {% csrf_token %}
@@ -44,7 +44,7 @@
     </div>
 
     <div id="report_user_dialog">
-        Пожаловаться на пользователя <a href="{{ profile_user.get_absolute_url }}">{{ profile_user.username }}</a>?
+        Пожаловаться на пользователя {{ profile_user.username }}?
 
         <form id="report_user_form" method="post" action="{% url report_user %}">
             {% csrf_token %}

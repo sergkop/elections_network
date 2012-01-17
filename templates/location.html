@@ -45,7 +45,7 @@
         {% endfor %}
     </ul>
     <button id="add_link">Добавить ссылку</button>
-    <button id="report_link">Пожаловаться на ссылку</button>
+    <button id="report_link">Пожаловаться</button>
 </div>
 {% endblock %}
 
@@ -91,7 +91,7 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 </div>
 
 <div id="become_voter_dialog">
-    Записаться в голосующие
+    Записаться в избиратели на избирательном округе
     <form id="become_voter_form" method="post" action="{% url become_voter %}">
         {% csrf_token %}
         {% include "region_choice.html" %}
@@ -114,7 +114,11 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
             "Отмена": function(){$("#add_link_dialog").dialog("close");},
         }}).dialog("close");
 
-        $("#add_link").button().click(function(){
+        $("#add_link").button({
+            icons: {
+              primary: 'ui-icon-circle-plus'
+            }
+        }).click(function(){
             $("#link_name_input").val("");
             $("#link_url_input").val("");
             $("#add_link_dialog").dialog("open");
@@ -131,7 +135,11 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
             "Отмена": function(){$("#report_link_dialog").dialog("close");},
         }}).dialog("close");
 
-        $("#report_link").button().click(function(){
+        $("#report_link").button({
+            icons: {
+              primary: 'ui-icon-alert'
+            }
+        }).click(function(){
             $("#report_link_dialog").dialog("open");
             $("#report_link_ul li").remove();
             $("#links_ul li").each(function(index){

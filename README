@@ -8,8 +8,8 @@ Installation (for Ubuntu and Mac OS):
     * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server)
     ---------------------------------------------
 
-    * git clone git://github.com/sergkop/nabludatel.git CODE_DIR
-    * pip install -r CODE_DIR/requirements.txt
+    * git clone git://github.com/sergkop/elections_network.git CODE_DIR
+    * sudo pip install -r CODE_DIR/requirements.txt
 
     * python manage.py syncdb (agree to create superuser)
     * python manage.py init_db

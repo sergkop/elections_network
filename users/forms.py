@@ -3,7 +3,8 @@ from django import forms
 from django.contrib.auth.models import User
 
 class CompleteRegistrationForm(forms.Form):
-    username = forms.RegexField(max_length=30, min_length=4, required=True, regex=r'^[\w.@+-]+$')
+    username = forms.RegexField(label="Имя пользователя", max_length=30,
+            min_length=4, required=True, regex=r'^[\w.@+-]+$')
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput, required=False)
     password2 = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, required=False)

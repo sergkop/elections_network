@@ -6,10 +6,16 @@
 
 <p>Чтобы получить полный доступ к системе <a href="{% url login %}">Зарегистрируйтесь/Войдите</a></p>
 <p>Чтобы просмотреть информацию анонимно выберите избирательный участок:
-    {% include "region_choice.html" %}
-    <br/>
-    <button id="goto_region">Перейти</button>
+    <div id="choose_regions">
+        <form action="{% url goto_location %}" method="get">
+        {% include "elements/region_choice.html" %}
+        <input id="goto_location" type="submit" value="Перейти"/>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $("#goto_location").button();
+        set_select_location("choose_regions");
+    </script>
 </p>
-
 
 {% endblock %}

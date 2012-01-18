@@ -13,6 +13,7 @@ from django.template import RequestContext
 from loginza.models import Identity, UserMap
 from loginza.templatetags.loginza_widget import _return_path
 
+from geography.models import LocationModel
 from links.models import LinkModel
 from users.forms import CompleteRegistrationForm
 from users.models import ContactModel, ParticipationModel, ReportUserModel
@@ -34,9 +35,14 @@ def profile(request, username):
         in_contacts = False
         is_reported = False
 
+    activities = {}
+    for participation in ParticipationModel.objects.filter(user=user).select_related():
+        activities[participation.type] = {'user': participation.user, 'location': participation.location}
+
     context = {
         'profile_user': user,
-        'participations': list(ParticipationModel.objects.filter(user=user).select_related()),
+        'activities': activities,
+        'locations': list(LocationModel.objects.filter(parent_1=None).order_by('name')),
         'links': list(LinkModel.objects.filter(user=user).select_related()),
         'in_contacts': in_contacts,
         'is_reported': is_reported,
@@ -47,24 +53,27 @@ def profile(request, username):
 
 def become_voter(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        try:
-            location_id = int(request.POST.get('region_1', ''))
-        except ValueError:
-            return HttpResponse('fail1')
+        for name in ('region_3', 'region_2', 'region_1'):
+            try:
+                location_id = int(request.POST.get(name, ''))
+            except ValueError:
+                continue
 
-        try:
-            participation, created = ParticipationModel.objects.get_or_create(
-                    type='voter', user=request.user, defaults={'location_id': location_id})
-        except IntegrityError:
-            return HttpResponse('fail2')
+            try:
+                participation, created = ParticipationModel.objects.get_or_create(
+                        type='voter', user=request.user, defaults={'location_id': location_id})
+            except IntegrityError:
+                return HttpResponse('fail1')
 
-        if not created:
-            participation.location_id = location_id
-            participation.save()
+            if created:
+                return HttpResponse('ok')
+            else:
+                participation.location_id = location_id
+                participation.save()
 
-        return HttpResponse('ok')
+            return HttpResponse('ok')
 
-    return HttpResponse('fail3')
+    return HttpResponse('fail2')
 
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():

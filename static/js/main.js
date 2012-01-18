@@ -11,9 +11,4 @@ $(document).ready(function() {
     $("#register").click(function() {
         $("#login_dialog").dialog("open");
     });
-
-    //-----------Main page code-----------------
-    $("#goto_region").button().click(function() {
-        location.href="/location/"+$("#select_region_1").val();
-    });
 });

@@ -1,0 +1,23 @@
+<div id="become_voter_dialog">
+    <center>
+        Записаться в избиратели на избирательном округе
+        <form id="become_voter_form" method="post" action="{% url become_voter %}">
+            {% csrf_token %}
+            {% include "elements/region_choice.html" %}
+        </form>
+    </center>
+</div>
+
+<script type="text/javascript">
+    // Register as a voter dialog
+    $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
+        buttons: {
+            "Записаться": function(){
+                $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                    $("#become_voter_dialog").dialog("close");
+                });
+            },
+            "Отмена": function(){$("#become_voter_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

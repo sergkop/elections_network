@@ -1,0 +1,7 @@
+{% if location.parent_1 %}
+    <a href="{{ location.parent_1.get_absolute_url }}">{{ location.parent_1 }}</a> &rarr;
+{% endif %}
+{% if location.parent_2 %}
+    <a href="{{ location.parent_2.get_absolute_url }}">{{ location.parent_2 }}</a> &rarr;
+{% endif %}
+<a href="{{ location.get_absolute_url }}">{{ location }}</a>

@@ -2,8 +2,6 @@
 * Sign up for observing
 * Виджет навигации
 * Login at intermediate steps (auto-open modal windows)
-* выкачивание данных об уиках
-* Delete user from contacts
 
 * password save by browser (check)
 * Favicon

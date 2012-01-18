@@ -1,14 +1,6 @@
 @media all
 {
-/**
-* Fonts
-*
-* (en) global settings of font-families and font-sizes
-*
-* @section content-global-settings
-*/
-
-/* (en) reset font size for all elements to standard (16 Pixel) */
+/* reset font size for all elements to standard (16 Pixel) */
 html * {
     font-size: 100.01%;
 }
@@ -22,7 +14,7 @@ textarea, pre, code, kbd, samp, var, tt {
     font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
 }
 
-/* (en) base layout gets standard font size 12px */
+/* base layout gets standard font size 12px */
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 75.00%;
@@ -52,6 +44,7 @@ h3 {
     color: #fff;
     font-size: 150%;
     padding: 3px 10px;
+    text-align: center;
 }
                        /* 18px */
 h4 {
@@ -67,7 +60,7 @@ h6 {
 }
                     /* 14px */
 
-/* --- Lists | Listen  -------------------------------------------------------------------------------- */
+/* --- Lists  -------------------------------------------------------------------------------- */
 
 ul, ol, dl {
     line-height: 1.5em;
@@ -105,7 +98,7 @@ dd {
     margin: 0 0 1em 0.8em;
 }
 
-/* --- general text formatting | Allgemeine Textauszeichnung ------------------------------------------ */
+/* --- general text formatting ------------------------------------------ */
 
 p {
     line-height: 1.5em;
@@ -197,21 +190,11 @@ a:visited  {
     color: #003366;
 }
 
-/* (en) maximum constrast for tab focus - change with great care */
-a:focus {
-    text-decoration: none;
-    color: #000;
-    background: #fff;
-    outline: 3px #f93 solid;
-}
-
-a:hover,
-a:active {
+a:hover, a:active {
     color: #c77405;
-    outline: 0 none;
 }
 
-/* --- images (with optional captions) | Bilder (mit optionaler Bildunterschrift) ------------------ */
+/* --- images (with optional captions) ------------------ */
 
 p.icaption_left {
     float: left;
@@ -247,9 +230,7 @@ p.icaption_right strong {
 *
 * Generic Content Classes
 *
-* (en) standard classes for positioning and highlighting
-*
-* @section content-generic-classes
+* standard classes for positioning and highlighting
 */
 
 .highlight {
@@ -315,11 +296,9 @@ p.icaption_right strong {
 /**
 * ------------------------------------------------------------------------------------------------- #
 *
-* Tables | Tabellen
+* Tables
 *
-* (en) Generic classes for table-width and design definition
-*
-* @section content-tables
+* Generic classes for table-width and design definition
 */
 
 table {
@@ -371,9 +350,6 @@ tbody td {
 /**
 * Dialogs
 */
-/*#login_dialog {background: #898bc7}
-
-#uik_search_dialog {background: #898bc7}*/
 
 /**
 * Info blocks
@@ -438,24 +414,6 @@ tbody td {
     background: #fff;
 }
 
-/*
-#col1_content_observers {
-    background: #d4cf92;
-}
-
-#col1_content_voters {
-    background: #898bc7;
-}
-
-#col1_content_pending_observers {
-    background: #cf8f97;
-}
-
-#col2_content_links  {
-    background: #d4c292;
-}
-*/
-
 .flag_user {
     color: red;
     text-decoration: none;
@@ -472,11 +430,15 @@ tbody td {
 
 /* additional styles */
 
-a#title_link {
+#title_link {
     color: #fff;
     font-weight: normal;
     letter-spacing: 2px;
     text-decoration: none;
+}
+
+#title_link:visited  {
+    color: #fff;
 }
 
 .login_logout {
@@ -488,8 +450,15 @@ a#title_link {
     padding: 0 0 20px;
 }
 
-
-
-
+.hlist ul li, .hlist ul li a, .hlist ul li strong {
+    font-size: 1.2em;
 }
 
+/**
+* Inputs
+*/
+select {
+  width: 23em;
+}
+
+} /* closing @media all */

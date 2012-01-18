@@ -1,0 +1,19 @@
+<div id="become_observer_dialog">
+    <center>
+        Чтобы записаться в наблюдатели, запишитесь в
+        <a href="http://www.nabludatel.org/nab-mos" target="_blank">форме</a>
+        на сайте организации Гражданин Наблюдатель.
+    </center>
+</div>
+
+<script type="text/javascript">
+    // Register as an observer dialog
+    $("#become_observer_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в наблюдатели",
+        buttons: {
+            "Записаться": function(){
+                location.href = "http://www.nabludatel.org/nab-mos";
+            },
+            "Отмена": function(){$("#become_observer_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

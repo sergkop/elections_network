@@ -13,4 +13,6 @@ urlpatterns += patterns('',
     url(r'^add_to_contacts$', 'users.views.add_to_contacts', name='add_to_contacts'),
     url(r'^report_user$', 'users.views.report_user', name='report_user'),
     url(r'^send_message$', 'users.views.send_message', name='send_message'),
+    url(r'^get_sub_regions$', 'geography.views.get_sub_regions', name='get_sub_regions'),
+    url(r'^goto_location$', 'geography.views.goto_location', name='goto_location'),
 )

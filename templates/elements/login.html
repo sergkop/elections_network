@@ -1,0 +1,23 @@
+{% load loginza_widget %}
+
+пожалуйста, войдите в систему
+
+<form method="post" action="{% url login %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ login_form.username.label_tag }}</td>
+    <td>{{ login_form.username }}</td>
+</tr>
+<tr>
+    <td>{{ login_form.password.label_tag }}</td>
+    <td>{{ login_form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" {% if next %}value="{{ next }}"{% else %}value="{{ request.get_full_path }}"{% endif %} />
+
+</form>
+
+{% loginza_icons providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" lang="ru" %}

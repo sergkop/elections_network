@@ -4,8 +4,9 @@ from django.db import models
 
 from geography.models import LocationModel
 
-#class ProfileModel(models.Model):
-#    user = models.OneToOneField(User)
+class Profile(models.Model):
+    user = models.OneToOneField(User)
+    about = models.TextField()
 
 PARTICIPATION_TYPES = {
     'observer': u'Наблюдатель',
@@ -36,3 +37,11 @@ class ReportUserModel(models.Model):
 
     class Meta:
         unique_together = ('user', 'reporter')
+
+def create_profile(sender, **kwargs):
+    if kwargs.get('created', False):
+        profile = Profile()
+        profile.user = kwargs['instance']
+        profile.save()
+
+models.signals.post_save.connect(create_profile, sender=User)

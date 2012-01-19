@@ -21,7 +21,7 @@
         var select_2 = $('#'+div_id+' [name="region_2"]');
         var select_3 = $('#'+div_id+' [name="region_3"]');
 
-        select_1.change(function(){
+        select_1.unbind().change(function(){
             select_3.hide();
 
             if (select_1.val()==""){
@@ -42,11 +42,10 @@
                 });
         });
 
-        select_2.change(function(){
+        select_2.unbind().change(function(){
             if (select_2.val()=="")
                 select_3.hide();
             else {
-                console.log("get2");
                 $.getJSON("{% url get_sub_regions %}", {location: select_2.val()}, function(data){
                     if (data.length>0){
                         select_3.show();
@@ -64,5 +63,21 @@
         select_2.val(id2==undefined ? "" : id2).change();
 
         select_3.val(id3==undefined ? "" : id3);
+    }
+
+    function form_location_id(div_id){
+        // This is a helper method to extract location id from selector block
+        var select_1 = $('#'+div_id+' [name="region_1"]');
+        var select_2 = $('#'+div_id+' [name="region_2"]');
+        var select_3 = $('#'+div_id+' [name="region_3"]');
+
+        if (select_3.val()!="")
+            return select_3.val();
+        if (select_2.val()!="")
+            return select_2.val();
+        if (select_1.val()!="")
+            return select_1.val();
+
+        return "";
     }
 </script>

@@ -1,40 +1,54 @@
 {% extends "base.html" %}
 
-{% load loginza_widget %}
-
 {% block left_column %}
-    <div class="clearfix content_block">
-        <h4>Контакты</h4>
-        <ul id="contacts_ul">
-            {% for contact in contacts %}
-            <li><a href="{{ contact.contact.get_absolute_url }}">{{ contact.contact.username }}</a></li>
-            {% endfor %}
-        </ul>
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Контакты</h4>
+        </div>
+        <div class="content_block">
+            <ul id="contacts_ul" class="side_list">
+                {% for contact in contacts %}
+                <li>
+                    <a href="{{ contact.contact.get_absolute_url }}">{{ contact.contact.username }}</a>
+                    <span class="side_list_btn ui-icon ui-icon-notice" ></span>
+                    <span class="side_list_btn ui-icon ui-icon-close"></span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
-    <div class="clearfix content_block">
-        <h4>Добавлен в контакты</h4>
-        <ul id="have_in_contacts_ul">
-            {% for contact in have_in_contacts %}
-            <li><a href="{{ contact.user.get_absolute_url }}">{{ contact.user.username }}</a></li>
-            {% endfor %}
-        </ul>
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Добавлен в контакты</h4>
+        </div>
+        <div class="content_block">
+            <ul id="have_in_contacts_ul" class="side_list">
+                {% for contact in have_in_contacts %}
+                <li><a href="{{ contact.user.get_absolute_url }}">{{ contact.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}
 
 {% block right_column %}
-    <div class="clearfix content_block">
-        <h4>Ссылки</h4>
-        <ul>
-            {% for link in links %}
-            <li>
-                <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
-                (<a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>)
-            </li>
-            {% empty %}
-            <li>Ссылки еще не добавлены.</li>
-            {% endfor %}
-        </ul>
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Ссылки</h4>
+        </div>
+        <div class="content_block">
+            <ul class="side_list">
+                {% for link in links %}
+                <li>
+                    <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+                    (<a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>)
+                </li>
+                {% empty %}
+                <li>Ссылки еще не добавлены.</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}
 
@@ -42,57 +56,60 @@
 
 <h1>{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h1>
 
-<div id="in_contacts" {% if not in_contacts %}class="hidden"{% endif %}><i>Добавлен в контакты</i></div>
-<div id="is_reported" {% if not is_reported %}class="hidden"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
+<div>{{ profile_user.profile.about }}</div>
+
+<div id="in_contacts" {% if not in_contacts %}style="display:none;"{% endif %}><i>Добавлен в контакты</i></div>
+<div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
 
 {% if profile_user != user %}
     <div class="user_actions">
         <button id="send_message">Отправить сообщение</button></td>
-        <button {% if in_contacts %}class="hidden"{% endif %} id="add_to_contacts">Добавить в контакты</button>
-        <button {% if is_reported %}class="hidden"{% endif %} id="report_user">Пожаловаться</button>
+        <button id="add_to_contacts">
+            <span {% if in_contacts %}style="display:none;"{% endif %}>Добавить в контакты</span>
+            <span {% if not in_contacts %}style="display:none;"{% endif %}>Удалить из контактов</span>
+        </button>
+        <button {% if is_reported %}style="display:none;"{% endif %} id="report_user">Пожаловаться</button>
     </div>
 
-    {% if user.is_authenticated %}
     <div id="send_message_dialog">
-        Отправить сообщение пользователю {{ profile_user.username }}
+        {% if user.is_authenticated %}
+            <center>
+                Отправить сообщение пользователю <span class="dialog_user_span">{{ profile_user.username }}</span>
+            </center>
 
-        <form id="send_message_form" method="post" action="{% url send_message %}">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <td><input type="text" name="title" name="message_title" value="" /></td>
-                </tr>
-                <tr>
-                    <td><textarea name="message_body"></textarea></td>
-                </tr>
-            </table>
-            <input type="hidden" name="username" value="{{ profile_user.username }}" />
-        </form>
-    </div>
-
-    <div id="add_to_contacts_dialog">
-        Добавить пользователя {{ profile_user.username }} в список контактов?
-
-        <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
-            {% csrf_token %}
-            <input type="hidden" name="username" value="{{ profile_user.username }}" />
-        </form>
-    </div>
-
-    <div id="report_user_dialog">
-        Пожаловаться на пользователя {{ profile_user.username }}?
-
-        <form id="report_user_form" method="post" action="{% url report_user %}">
-            {% csrf_token %}
-            <input type="hidden" name="username" id="report_user_hidden_username" />
-        </form>
+            <form id="send_message_form" method="post" action="{% url send_message %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label for="message_title">Тема:</label></td>
+                        <td><input type="text" name="title" name="message_title" value="" size="60" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="message_body">Сообщение:</label></td>
+                        <td><textarea name="message_body" rows="4" cols="60"></textarea></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="username" value="{{ profile_user.username }}" />
+            </form>
+        {% else %}
+            Чтобы отправить сообщение,
+            {% include "elements/login.html" %}
+        {% endif %}
     </div>
 
     <script type="text/javascript">
         // Send message
         // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click)
-        $("#send_message_dialog").dialog({width:650, height:250, modal: true, title: "Отправить сообщение",
-            buttons: {
+        $("#send_message_dialog").dialog({
+            width:650, height:250, modal: true, title: "Отправить сообщение"
+        }).dialog("close");
+
+        $("#send_message").button({icons: {primary: 'ui-icon-mail-closed'}}).click(function(){
+            $("#send_message_dialog").dialog("open");
+        });
+
+        {% if user.is_authenticated %}
+            $("#send_message_dialog").dialog("option", "buttons", {
                 "Отправить": function(){
                     $.post("{% url send_message %}", $("#send_message_form").serialize(), function(data){
                         $("#send_message_dialog").dialog("close");
@@ -103,37 +120,88 @@
                     });
                 },
                 "Отмена": function(){$("#send_message_dialog").dialog("close");}
-            }
+            });
+        {% else %}
+            login_dialog_buttons("send_message_dialog", "{% url login %}");
+        {% endif %}
+    </script>
+
+    <div id="add_to_contacts_dialog">
+        {% if user.is_authenticated %}
+            <center>
+                Добавить пользователя <span class="dialog_user_span">{{ profile_user.username }}</span> в список контактов?
+            </center>
+
+            <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ profile_user.username }}" />
+            </form>
+        {% else %}
+            Чтобы отправить сообщение
+            {% include "elements/login.html" %}
+        {% endif %}
+    </div>
+
+    <script type="text/javascript">
+        // Add to contacts dialog
+        // TODO: добавить в контакты/удалить из контактов
+        $("#add_to_contacts_dialog").dialog({
+            width:650, height:250, modal:true, title:"Добавить в контакты"
         }).dialog("close");
 
-        $("#send_message").button().click(function(){
-            $("#send_message_dialog").dialog("open");
+        $("#add_to_contacts").button({icons: {
+            primary: {% if in_contacts %}"ui-icon-circle-minus"{% else %}"ui-icon-circle-plus"{% endif %}
+        }}).click(function(){
+            $("#add_to_contacts_dialog").dialog("open");
         });
 
-        // Add to contacts dialog
-        $("#add_to_contacts_dialog").dialog({width:650, height:250, modal: true, title: "Добавить в контакты",
-            buttons: {
+        {% if user.is_authenticated %}
+            $("#add_to_contacts_dialog").dialog("option", "buttons", {
                 "Добавить": function(){
                     $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
                         $("#in_contacts").removeClass("hidden");
                         $("#add_to_contacts").parent().addClass("hidden");
-                        $("#add_to_contacts_dialog").dialog("destroy");
+                        $("#add_to_contacts_dialog").dialog("close");
 
                         var user_link = $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}");
                         $("#have_in_contacts_ul").append($("<li/>").append(user_link));
                     });
                 },
                 "Отмена": function(){$("#add_to_contacts_dialog").dialog("close");}
-            }
-        }).dialog("close");
+            });
+        {% else %}
+            login_dialog_buttons("add_to_contacts_dialog", "{% url login %}");
+        {% endif %}
+    </script>
 
-        $("#add_to_contacts").button().click(function(){
-            $("#add_to_contacts_dialog").dialog("open");
+    <div id="report_user_dialog">
+        {% if user.is_authenticated %}
+            <center>
+                Пожаловаться на пользователя <span class="dialog_user_span">{{ profile_user.username }}</span>?
+            </center>
+
+            <form id="report_user_form" method="post" action="{% url report_user %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" id="report_user_hidden_username" />
+            </form>
+        {% else %}
+            Чтобы пожаловаться на пользователя
+            {% include "elements/login.html" %}
+        {% endif %}
+    </div>
+
+    <script type="text/javascript">
+        // Report user dialog
+        $("#report_user_dialog").dialog({
+            width:650, height:250, modal: true, title: "Пожаловаться на пользователя"
+        }).dialog("close");
+        $("#report_user").button({icons: {primary: "ui-icon-alert"}}).click(function(){
+            $("#report_user_hidden_username").val("{{ profile_user.username }}");
+            $("#report_user_dialog").dialog("open");
         });
 
-        // Report user dialog
-        $("#report_user_dialog").dialog({width:650, height:250, modal: true, title: "Пожаловаться на пользователя",
-            buttons: {
+        {% if user.is_authenticated %}
+            $("#report_user_dialog").dialog("option", "buttons", {
                 "Пожаловаться": function(){
                     $.post("{% url report_user %}", $("#report_user_form").serialize(), function(data){
                         $("#is_reported").removeClass("hidden");
@@ -142,37 +210,25 @@
                     });
                 },
                 "Отмена": function(){$("#report_user_dialog").dialog("close");}
-            }
-        }).dialog("close");
-
-        $("#report_user").button().click(function(){
-            $("#report_user_hidden_username").val("{{ profile_user.username }}");
-            $("#report_user_dialog").dialog("open");
-        });
+            });
+        {% else %}
+            login_dialog_buttons("report_user_dialog", "{% url login %}");
+        {% endif %}
 
     </script>
-
-{% else %} {# User is not authenticated #}
-
-    <div>
-        <div id="login_dialog">
-            {% loginza_icons providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" lang="ru" %}
-        </div>
-    </div>
-
-    {% endif %}
 
 {% endif %}
 
 <h4>Участие в выборах</h4>
 <ul>
+    {% if user.is_authenticated and profile_user == user %}
     <li>
-        {% if profile_user == user and user.is_authenticated %}
-            <button id="become_observer">Записаться в наблюдатели</button>
-        {% endif %}
+        <button id="become_observer">Записаться в наблюдатели</button>
     </li>
+    {% endif %}
 
     <li>
+        <span id="voter_path_span">
         {% if activities.voter %}
             {% with location=activities.voter.location %}
             {% include "elements/location_path.html" %}
@@ -180,28 +236,45 @@
         {% else %}
             Еще не записан на голосование.
         {% endif %}
+        </span>
 
         {% if profile_user == user %}
-            <button id="become_voter">{% if activities.voter %}Сменить участок{% else %}Записаться в избиратели{% endif %}</button>
+            <button id="become_voter">
+                {% if activities.voter %}Сменить участок{% else %}Записаться в избиратели{% endif %}
+            </button>
         {% endif %}
     </li>
 </ul>
+
+{% include "elements/delete_from_contacts.html" %}
 
 {% include "elements/become_observer.html" %}
 
 {% include "elements/become_voter.html" %}
 
 <script type="text/javascript">
-    $("#become_observer").button().click(function(){
+    $("#become_observer").button({
+        icons: {
+            primary: "ui-icon-check"
+        }
+    }).click(function(){
         $("#become_observer_dialog").dialog("open");
     });
-    $("#become_voter").button().click(function(){
-        set_select_location("become_voter_form"
-            {% if activities.voter.location.parent_1 %}, {{activities.voter.location.parent_1.id }}{% endif %}
-            {% if activities.voter.location.parent_2 %}, {{activities.voter.location.parent_2.id }}{% endif %}
-            , {{activities.voter.location.id }}
-        );
+
+    // Become voter dialog
+    $("#become_voter").button({
+        icons: {
+            primary: "ui-icon-check"
+        }
+    }).click(function(){
+        var path = get_path("voter_path_span");
+        path.unshift("become_voter_form");
+        set_select_location.apply(this, path);
+
         $("#become_voter_dialog").dialog("open");
+    });
+    $("#become_voter_dialog").on("become_voter", function(event, location_id){
+        update_path("voter_path_span", "become_voter_form");
     });
 </script>
 

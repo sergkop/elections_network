@@ -41,6 +41,7 @@ def profile(request, username):
 
     context = {
         'profile_user': user,
+        'profile': user.get_profile(),
         'activities': activities,
         'locations': list(LocationModel.objects.filter(parent_1=None).order_by('name')),
         'links': list(LinkModel.objects.filter(user=user).select_related()),
@@ -91,6 +92,18 @@ def add_to_contacts(request):
         return HttpResponse('ok')
 
     return HttpResponse('fail3')
+
+def remove_from_contacts(request):
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        try:
+            contact = User.objects.get(username=request.POST.get('username', ''))
+        except User.DoesNotExist:
+            return HttpResponse('fail1')
+
+        ContactModel.objects.delete(user=request.user, contact=contact)
+        return HttpResponse('ok')
+
+    return HttpResponse('fail2')
 
 def report_user(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():

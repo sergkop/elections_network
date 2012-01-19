@@ -87,7 +87,7 @@ AUTHENTICATION_BACKENDS = (
     'loginza.authentication.LoginzaBackend',
 )
 
-#AUTH_PROFILE_MODULE = 'users.ProfileModel'
+AUTH_PROFILE_MODULE = 'users.Profile'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/users/'
 

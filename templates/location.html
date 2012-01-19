@@ -1,47 +1,76 @@
 {% extends "base.html" %}
 
 {% block after_menu %}
-<span style="font-weight: bold; font-size: 1.2em;">
+<span style="font-weight: bold; font-size: 1.2em; vertical-align: top;">
 &rarr;
 {% with location=current_location %}
 {% include "elements/location_path.html" %}
 {% endwith %}
+
+{% if sub_regions %}
+&rarr;
+<form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
+    <select id="goto_subregion" name="region_1">
+        <option value="" selected="selected">Перейти на нижестоящий регион</option>
+        {% for sub_region in sub_regions %}
+        <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+{% endif %}
+
 </span>
+
 {% endblock %}
 
 {% block left_column %}
 <h3>Участники</h3>
-<div class="clearfix content_block">
-    <h4>Наблюдатели</h4>
-    <ul>
-        {% for observer in participants.observer %}
-        <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
-        {% endfor %}
-    </ul>
-    <button id="become_observer">Записаться в наблюдатели</button>
+<div class="clearfix">
+    <div class="side_block_header">
+        <h4>Наблюдатели</h4>
+    </div>
+    <div class="content_block">
+        <ul class="side_list">
+            {% for observer in participants.observer %}
+            <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
+            {% endfor %}
+        </ul>
+        <button id="become_observer">Записаться</button>
+    </div>
 </div>
-<div class="clearfix content_block">
-    <h4>Избиратели</h4>
-    <ul id="voters_ul">
-        {% for voter in participants.voter %}
-        <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
-        {% endfor %}
-    </ul>
-    <button id="become_voter">{% if is_voter_here %}Голосовать в другом месте{% else %}Записаться в избиратели{% endif %}</button>
+<div class="clearfix">
+    <div class="side_block_header">
+        <h4>Избиратели</h4>
+    </div>
+    <div class="content_block">
+        <ul id="voters_ul" class="side_list">
+            {% for voter in participants.voter %}
+            <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
+            {% endfor %}
+        </ul>
+        <button id="become_voter">
+            <span id="become_voter_text_new" {% if is_voter_here %}style="display:none"{% endif %}>Записаться</span>
+            <span id="become_voter_text_change" {% if not is_voter_here %}style="display:none"{% endif %}>Сменить округ</span>
+        </button>
+    </div>
 </div>
 {% endblock %}
 
 {% block right_column %}
 <h3>Инструменты</h3>
-<div class="clearfix content_block">
-    <h4>Ссылки</h4>
-    <ul id="links_ul">
-        {% for link in links %}
-        <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
-        {% endfor %}
-    </ul>
-    <button id="add_link">Добавить ссылку</button>
-    <button id="report_link">Пожаловаться</button>
+<div class="clearfix">
+    <div class="side_block_header">
+        <h4>Ссылки</h4>
+    </div>
+    <div class="content_block">
+        <ul id="links_ul" class="side_list">
+            {% for link in links %}
+            <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <button id="add_link">Добавить</button>
+        <button id="report_link">Пожаловаться</button>
+    </div>
 </div>
 {% endblock %}
 
@@ -95,6 +124,10 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 {% include "elements/become_observer.html" %}
 
 <script type="text/javascript">
+    $("#goto_subregion").change(function(){
+        $("#goto_subregion_form").submit();
+    });
+
     // Add links dialog
     $("#add_link_dialog").dialog({width:650, height:250, modal: true, title: "Добавить ссылку",
         buttons: {
@@ -102,7 +135,8 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
                 $.post($("#add_link_form").attr("action"), $("#add_link_form").serialize(), function(data){
                     if (data=="ok")
                         $("#links_ul").append($("<li/>").append(
-                            $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val()).text($("#link_name_input").val())
+                            $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val())
+                                .text($("#link_name_input").val())
                         ));
                     $("#add_link_dialog").dialog("close");
                 });
@@ -110,6 +144,13 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
             "Отмена": function(){$("#add_link_dialog").dialog("close");}
         }
     }).dialog("close");
+
+    // Add link on pressing Enter
+    $("#add_link_form input").keypress(function(e){
+        if(e.which == 13){
+            $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
+        }
+    });
 
     $("#add_link").button({
         icons: {
@@ -150,17 +191,40 @@ VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
         });
     });
 
-    $("#become_observer").button().click(function(){
+    $("#become_observer").button({
+        icons: {
+            primary: "ui-icon-check"
+        }
+    }).click(function(){
         $("#become_observer_dialog").dialog("open");
     });
 
-    $("#become_voter").button().click(function(){
+    $("#become_voter").button({
+        icons: {
+            primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
+        }
+    }).click(function(){
         set_select_location("become_voter_form", 
             {% if current_location.parent_1 %}{{current_location.parent_1.id }},{% endif %}
             {% if current_location.parent_2 %}{{current_location.parent_2.id }},{% endif %}
             {{current_location.id }}
         );
         $("#become_voter_dialog").dialog("open");
+    });
+    $("#become_voter_dialog").on("become_voter", function(event, location_id){
+        var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
+        if (location_id=={{ current_location.id }}){
+            $("#become_voter_text_new").hide();
+            $("#become_voter_text_change").show();
+            if (user_voter_li.length==0)
+                $("#voters_ul").append($("<li/>").append(
+                    $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}")
+                ));
+        } else {
+            $("#become_voter_text_new").show();
+            $("#become_voter_text_change").hide();
+            user_voter_li.remove();
+        }
     });
 </script>
 {% endblock %}

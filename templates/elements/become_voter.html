@@ -12,8 +12,13 @@
     // Register as a voter dialog
     $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
         buttons: {
+            "Перейти": function(){
+                $("#become_voter_form").attr("action", "{% url goto_location %}")
+                        .attr("method", "get").submit();;
+            },
             "Записаться": function(){
                 $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                    $("#become_voter_dialog").trigger("become_voter", [form_location_id("become_voter_form")]);
                     $("#become_voter_dialog").dialog("close");
                 });
             },

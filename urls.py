@@ -8,7 +8,6 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT}),
     url(r'^admin/', include(admin.site.urls)),
 
-    # url(r'^$', 'elections_network.views.home', name='home'),
     url(r'^links/', include('links.urls')),
     url(r'^location/', include('geography.urls')),
     url(r'^', include('navigation.urls')),

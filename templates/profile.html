@@ -176,7 +176,7 @@
                 $("#report_user_dialog").dialog("open");
             });
         {% else %}
-            var message = {
+            var messages = {
                 "send_message": "Чтобы отправить сообщение, пожалуйста, войдите в систему",
                 "add_to_contacts": "Чтобы добавить пользователя в контакты, пожалуйста, войдите в систему",
                 "report_user": "Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему",
@@ -184,7 +184,7 @@
 
             $("#send_message, #add_to_contacts, #report_user").click(function(){
                 $("#login_dialog").dialog("open");
-                login_dialog_buttons("login_dialog", "{% url login %}", message[$(this).attr("id")]);
+                login_dialog_buttons("login_dialog", "{% url login %}", messages[$(this).attr("id")]);
             });
         {% endif %}
 

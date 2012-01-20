@@ -489,4 +489,13 @@ select {
     font-weight: bold;
 }
 
+.clickable {
+    color: blue;
+    cursor: pointer;
+    text-decoration: none;
+}
+.clickable:hover {
+    text-decoration: underline;
+}
+
 } /* closing @media all */

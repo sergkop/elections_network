@@ -4,28 +4,34 @@
 
 <table>
     <tr>
-        <td>
-
+        <td style="vertical-align:middle;">
             <form method="post" action="{% url login %}?next={{ request.get_full_path }}">
-            {% csrf_token %}
-            <table>
-            <tr>
-                <td><label for="">Логин:</label></td>
-                <td><input type="text" name="login" /></td>
-            </tr>
-            <tr>
-                <td><label for="">Пароль:</label></td>
-                <td><input type="password" name="password" /></td>
-            </tr>
-            </table>
+                {% csrf_token %}
+                Войдите в систему
+                <table>
+                <tr>
+                    <td><label for="">Логин:</label></td>
+                    <td><input type="text" name="username" /></td>
+                </tr>
+                <tr>
+                    <td><label for="">Пароль:</label></td>
+                    <td><input type="password" name="password" /></td>
+                </tr>
+                </table>
 
-            <input type="submit" value="login" />
-            <!--input type="hidden" name="next" {% if next %}value="{{ next }}"{% else %}value="{{ request.get_full_path }}"{% endif %} /-->
+                <input type="submit" value="Войти" />
+                <!--input type="hidden" name="next" {% if next %}value="{{ next }}"{% else %}value="{{ request.get_full_path }}"{% endif %} /-->
 
             </form>
+
+            <br/>
+
+            или <a href="{% url register %}">зарегистрируйтесь</a>
         </td>
-        <td>
-            {% loginza_iframe providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" lang="ru" %}s
+        <td style="vertical-align:top; border-left: 1px solid #AAA;">
+            <iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url=http%3A%2F%2F127.0.0.1%3A8000%2Floginza%2Freturn_callback%2F"
+            style="width:359px;height:170px;" scrolling="no" frameborder="no"></iframe>
+            <!--{% loginza_iframe providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" lang="ru" %}-->
         </td>
     </tr>
 </table>

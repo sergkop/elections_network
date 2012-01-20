@@ -4,14 +4,24 @@
 * Опрос на survey monkey о юзабилити
 * yandex метрика
 * добавить в контакты/удалить из контактов
-* http://loginza.ru/js/widget.js is loaded 4 extra times, many icons of social services (logged out regime)
 * closing dialogs by escape on profile page fails because of loginza
+* Add entering location in registration form
+
+* urllib.quote(settings.URL_PREFIX+reverse('loginza.views.return_callback'), '') -> iframe url in elements/login.html
+* Add context processor for unauthenticated users
+    # save current path, so if user will be logged with loginza
+    # he will be redirected back to the page he for login
+    path = context['request'].path
+    if path is not None and path not in settings.AMNESIA_PATHS:
+        context['request'].session['loginza_return_path'] = path
+* Monkey-patch django-loginza not to use Site,  but settings.URL_PREFIX
+
 
 * Use pagespeed to optimize load time
 * Start using django south
 * Страница для редактирования текста о себе, установки паролей, показ аккаунтов соц сетей, блогов
 * Ввести время в модели
-* password save by browser (check)
+* password save by browser (check) 
 * Favicon
 * Forgot password button
 * login using username or email
@@ -21,3 +31,10 @@
 * notifications about new users
 * https://www.google.com/webmasters/
 * posts to lenta.ru forum
+* limit user's ability to add links (daily?)
+* if user's links are often reported on - look at user
+* ability to block users
+* add tips to buttons and ? signs to get help on features of the system
+
+Tasks:
+    * interface for managing reports on users and links

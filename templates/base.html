@@ -16,7 +16,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
-    <!--<script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>-->
+    <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
 
     <script type="text/javascript">
         var current_location = "{{ current_location.id }}";
@@ -48,7 +48,7 @@
                         <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
                     {% else %}
                         <!--<a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>-->
-                        <span id="login_btn">Войти</span>
+                        <span id="login_btn" class="clickable">Войти</span>
                     {% endif %}
                 </div>
             </div>
@@ -92,9 +92,11 @@
         {% include "elements/login.html" %}
     </div>
     <script type="text/javascript">
-        $("#login_dialog").dialog({width: 650, height: 250, modal: true, title: "Войти в систему"}).dialog("close");
-        $("#")
-        
+        $("#login_dialog").dialog({width: 650, height: 300, modal: true, title: "Войти в систему"}).dialog("close");
+        $("#login_btn").click(function(){
+            $("#login_dialog").dialog("open");
+            login_dialog_buttons("login_dialog", "{% url login %}", "");
+        });
     </script>
 {% endif %}
 

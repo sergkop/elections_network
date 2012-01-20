@@ -87,144 +87,151 @@
 VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*"});
 </script>
 
+{% if user.is_authenticated %}
+    <div id="add_link_dialog">
+        <center>
+            Добавить ссылку
+            <form id="add_link_form" class="dialog_form" method="post" action="{% url add_link %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Название</td>
+                        <td><input id="link_name_input" name="name" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>URL</td>
+                        <td><input id="link_url_input" name="url" value="" /></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="location" value="{{ current_location.id }}" />
+            </form>
+        </center>
+    </div>
 
-<div id="add_link_dialog">
-    <center>
-        Добавить ссылку
-        <form id="add_link_form" class="dialog_form" method="post" action="{% url add_link %}">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <td>Название</td>
-                    <td><input id="link_name_input" name="name" value="" /></td>
-                </tr>
-                <tr>
-                    <td>URL</td>
-                    <td><input id="link_url_input" name="url" value="" /></td>
-                </tr>
-            </table>
-            <input type="hidden" name="location" value="{{ current_location.id }}" />
-        </form>
-    </center>
-</div>
+    <div id="report_link_dialog">
+        <center>
+            Пожаловаться на ссылку
+            <form id="report_link_form" method="post" action="{% url report_link %}">
+                {% csrf_token %}
+                <ul id="report_link_ul"></ul>
+                <input type="hidden" name="location" value="{{ current_location.id }}" />
+            </form>
+        </center>
+    </div>
 
-<div id="report_link_dialog">
-    <center>
-        Пожаловаться на ссылку
-        <form id="report_link_form" method="post" action="{% url report_link %}">
-            {% csrf_token %}
-            <ul id="report_link_ul"></ul>
-            <input type="hidden" name="location" value="{{ current_location.id }}" />
-        </form>
-    </center>
-</div>
+    {% include "elements/become_voter.html" %}
 
-{% include "elements/become_voter.html" %}
-
-{% include "elements/become_observer.html" %}
+    {% include "elements/become_observer.html" %}
+{% endif %}
 
 <script type="text/javascript">
+    // Create buttons
+    $("#add_link").button({icons: {primary: 'ui-icon-circle-plus'}});
+    $("#report_link").button({icons: {primary: 'ui-icon-alert'}});
+    $("#become_observer").button({icons: {primary: "ui-icon-check"}});
+    $("#become_voter").button({icons: {
+        primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
+    }});
+
     $("#goto_subregion").change(function(){
         $("#goto_subregion_form").submit();
     });
 
-    // Add links dialog
-    $("#add_link_dialog").dialog({width:650, height:250, modal: true, title: "Добавить ссылку",
-        buttons: {
-            "Добавить": function(){
-                $.post($("#add_link_form").attr("action"), $("#add_link_form").serialize(), function(data){
-                    if (data=="ok")
-                        $("#links_ul").append($("<li/>").append(
-                            $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val())
-                                .text($("#link_name_input").val())
-                        ));
-                    $("#add_link_dialog").dialog("close");
-                });
-            },
-            "Отмена": function(){$("#add_link_dialog").dialog("close");}
-        }
-    }).dialog("close");
+    {% if user.is_authenticated %}
+        // Add links dialog
+        $("#add_link_dialog").dialog({width:650, height:250, modal: true, title: "Добавить ссылку",
+            buttons: {
+                "Добавить": function(){
+                    $.post($("#add_link_form").attr("action"), $("#add_link_form").serialize(), function(data){
+                        if (data=="ok")
+                            $("#links_ul").append($("<li/>").append(
+                                $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val())
+                                    .text($("#link_name_input").val())
+                            ));
+                        $("#add_link_dialog").dialog("close");
+                    });
+                },
+                "Отмена": function(){$("#add_link_dialog").dialog("close");}
+            }
+        }).dialog("close");
 
-    // Add link on pressing Enter
-    $("#add_link_form input").keypress(function(e){
-        if(e.which == 13){
-            $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
-        }
-    });
-
-    $("#add_link").button({
-        icons: {
-            primary: 'ui-icon-circle-plus'
-        }
-    }).click(function(){
-        $("#link_name_input").val("");
-        $("#link_url_input").val("");
-        $("#add_link_dialog").dialog("open");
-    });
-
-    // Report link dialog
-    $("#report_link_dialog").dialog({width:650, height:250, modal: true, title: "Пожаловаться на ссылку",
-        buttons: {
-            "Пожаловаться": function(){
-                $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
-                    $("#report_link_dialog").dialog("close");
-                    alert("Ваша жалоба будет рассмотрена в ближайшее время");
-                });
-            },
-            "Отмена": function(){$("#report_link_dialog").dialog("close");}
-        }
-    }).dialog("close");
-
-    $("#report_link").button({
-        icons: {
-            primary: 'ui-icon-alert'
-        }
-    }).click(function(){
-        $("#report_link_dialog").dialog("open");
-        $("#report_link_ul li").remove();
-        $("#links_ul li").each(function(index){
-            var url = $(this).children("a").attr("href");
-            var text = $(this).text();
-            var a_copy = $("<a/>").attr("href", url).text(text);
-            var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
-            $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
+        // Add link on pressing Enter
+        $("#add_link_form input").keypress(function(e){
+            if(e.which == 13){
+                $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
+            }
         });
-    });
 
-    $("#become_observer").button({
-        icons: {
-            primary: "ui-icon-check"
-        }
-    }).click(function(){
-        $("#become_observer_dialog").dialog("open");
-    });
+        $("#add_link").click(function(){
+            $("#link_name_input").val("");
+            $("#link_url_input").val("");
+            $("#add_link_dialog").dialog("open");
+        });
 
-    $("#become_voter").button({
-        icons: {
-            primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
-        }
-    }).click(function(){
-        set_select_location("become_voter_form", 
-            {% if current_location.parent_1 %}{{current_location.parent_1.id }},{% endif %}
-            {% if current_location.parent_2 %}{{current_location.parent_2.id }},{% endif %}
-            {{current_location.id }}
-        );
-        $("#become_voter_dialog").dialog("open");
-    });
-    $("#become_voter_dialog").on("become_voter", function(event, location_id){
-        var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
-        if (location_id=={{ current_location.id }}){
-            $("#become_voter_text_new").hide();
-            $("#become_voter_text_change").show();
-            if (user_voter_li.length==0)
-                $("#voters_ul").append($("<li/>").append(
-                    $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}")
-                ));
-        } else {
-            $("#become_voter_text_new").show();
-            $("#become_voter_text_change").hide();
-            user_voter_li.remove();
-        }
-    });
+        // Report link dialog
+        $("#report_link_dialog").dialog({width:650, height:250, modal: true, title: "Пожаловаться на ссылку",
+            buttons: {
+                "Пожаловаться": function(){
+                    $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
+                        $("#report_link_dialog").dialog("close");
+                        alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                    });
+                },
+                "Отмена": function(){$("#report_link_dialog").dialog("close");}
+            }
+        }).dialog("close");
+
+        $("#report_link").click(function(){
+            $("#report_link_dialog").dialog("open");
+            $("#report_link_ul li").remove();
+            $("#links_ul li").each(function(index){
+                var url = $(this).children("a").attr("href");
+                var text = $(this).text();
+                var a_copy = $("<a/>").attr("href", url).text(text);
+                var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
+                $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
+            });
+        });
+
+        $("#become_observer").click(function(){
+            $("#become_observer_dialog").dialog("open");
+        });
+
+        $("#become_voter").click(function(){
+            set_select_location("become_voter_form", 
+                {% if current_location.parent_1 %}{{current_location.parent_1.id }},{% endif %}
+                {% if current_location.parent_2 %}{{current_location.parent_2.id }},{% endif %}
+                {{current_location.id }}
+            );
+            $("#become_voter_dialog").dialog("open");
+        });
+        $("#become_voter_dialog").on("become_voter", function(event, location_id){
+            var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
+            if (location_id=={{ current_location.id }}){
+                $("#become_voter_text_new").hide();
+                $("#become_voter_text_change").show();
+                if (user_voter_li.length==0)
+                    $("#voters_ul").append($("<li/>").append(
+                        $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}")
+                    ));
+            } else {
+                $("#become_voter_text_new").show();
+                $("#become_voter_text_change").hide();
+                user_voter_li.remove();
+            }
+        });
+    {% else %}
+        var messages = {
+            "add_link": "Чтобы добавить ссылку, пожалуйста, войдите в систему",
+            "report_link": "Чтобы пожаловаться на ссылку, пожалуйста, войдите в систему",
+            "become_observer": "Чтобы записаться в наблюдатели, пожалуйста, войдите в систему",
+            "become_voter": "Чтобы записаться в избиратели, пожалуйста, войдите в систему",
+        };
+
+        $("#add_link, #report_link, #become_observer, #become_voter").click(function(){
+            $("#login_dialog").dialog("open");
+            login_dialog_buttons("login_dialog", "{% url login %}", messages[$(this).attr("id")]);
+        });
+    {% endif %}
 </script>
 {% endblock %}

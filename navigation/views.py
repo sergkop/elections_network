@@ -16,6 +16,7 @@ def main(request):
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 
+# TODO: what happens on /login page? login.html is a duplicate for elements/login.html
 def login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('current_profile'))

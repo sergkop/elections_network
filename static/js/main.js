@@ -36,7 +36,7 @@ function update_path(span_id, select_div_id){
 
 function login_dialog_buttons(dialog_id, login_url, intro_text){
     $("#"+dialog_id).dialog("option", "buttons", {
-        "Войти": function(){window.location.href=login_url+"?next="+window.location.href;},
+        //"Войти": function(){window.location.href=login_url+"?next="+window.location.href;},
         "Отмена": function(){$("#"+dialog_id).dialog("close");}
     });
     $("#login_intro_span").text(intro_text);

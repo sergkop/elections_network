@@ -34,9 +34,10 @@ function update_path(span_id, select_div_id){
         span.append("&rarr;").append($("<a/>").attr("href", location_url+select_3.val()).text(text3));
 }
 
-function login_dialog_buttons(dialog_id, login_url){
+function login_dialog_buttons(dialog_id, login_url, intro_text){
     $("#"+dialog_id).dialog("option", "buttons", {
-        "Войти": function(){window.location.href=login_url;},
+        "Войти": function(){window.location.href=login_url+"?next="+window.location.href;},
         "Отмена": function(){$("#"+dialog_id).dialog("close");}
     });
+    $("#login_intro_span").text(intro_text);
 }

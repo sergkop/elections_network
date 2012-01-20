@@ -2,14 +2,10 @@ Installation (for Ubuntu and Mac OS):
     * sudo aptitude install python python-setuptools git
     * sudo easy_install pip
 
-    -------- Optionally creare virtualenv -------
-    * sudo pip install virtualenv
-    * virtualenv --no-site-packages VIRTUAL_ENV_DIR
-    * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server)
-    ---------------------------------------------
-
     * git clone git://github.com/sergkop/elections_network.git CODE_DIR
     * sudo pip install -r CODE_DIR/requirements.txt
+
+    * rename site_settings.py.example to site_settings.py and configure
 
     * python manage.py syncdb (agree to create superuser)
     * python manage.py init_db
@@ -18,3 +14,53 @@ Installation (for Ubuntu and Mac OS):
 
     * Log in into admin interface (/admin/) and set proper domain name in the entry of Sites model
     (for loginza to work)
+
+Common problems:
+    * Django admin media files are not loaded - make sure /static/admin/* url points to .../django/contrib/admin/media/ folder
+      in django code directory
+
+
+Installation (for Windows):
+    * setup Python 2.7, git и Django 1.3.1
+    * install setuptools and pip (http://pypi.python.org/pypi/pip)
+
+    * git clone git://github.com/sergkop/elections_network.git CODE_DIR
+    * pip install -r CODE_DIR/requirements.txt
+
+    * rename site_settings.py.example to site_settings.py and configure
+
+    * python manage.py syncdb (agree to create superuser)
+    * python manage.py init_db
+    * 'python manage.py runserver' to run server
+
+    * Log in into admin interface (/admin/) and set proper domain name in the entry of Sites model
+    (for loginza to work)
+
+Common problems:
+    * If syncdb step fails with the error in Windows 7
+
+            django.db.utils.DatabaseError: You must not use 8-bit bytestrings unless you use
+            a text_factory that can interpret 8-bit bytestrings (like text_factory = str).
+            It is highly recommended that you instead just switch your application to Unicode strings.
+
+      it is caused by the presence of non-latin symbols in the name of windows user. This is a known
+      problem with Python2.7 and the only known workaround is to user another account with English letters-only usernames.
+
+    * When you login into admin interface (http://127.0.0.1:8000/admin/) it can happen, that
+      media files haven't loaded (interface looks ugly). Try accessing http://127.0.0.1:8000/static/css/screen/content.css),
+      if it shows an error
+
+            UnicodeDecodeError: 'ascii' codec can't decode byte 0xe0 in position 0: ordinal not in range(128)
+
+       In this case you need to run regedit, find "HKEY_CLASSES_ROOT\MIME\Database\Content Type" entry
+       and remove all MIMETYPES with non-latin symbols in the name (it must be only "аудио/..." and "видео/...")
+
+General advice:
+    * Database is stored in database.sqlite, which you can always delete it and re-run 
+      'python manage.py syncdb', 'python manage.py init_db' if something goes wrong.
+
+Deployment:
+     -------- Optionally create virtualenv -------
+    * sudo pip install virtualenv
+    * virtualenv --no-site-packages VIRTUAL_ENV_DIR
+    * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server or set VIRTUALENV in site_settings.py)

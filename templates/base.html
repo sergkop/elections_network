@@ -1,4 +1,3 @@
-{% load loginza_widget %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -17,7 +16,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
-    <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
+    <!--<script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>-->
 
     <script type="text/javascript">
         var current_location = "{{ current_location.id }}";
@@ -28,17 +27,14 @@
 <body>
 
 <div class="page_margins">
-    <!-- begin: main header #header -->
     <div role="banner" id="header">
         <h1>
             <a id="title_link" href="/">Интернет-площадка для контроля за выборами</a>
         </h1>
     </div>
-    <!-- end: main header #header -->
 
     <div class="page">
 
-        <!-- begin: main navigation #nav -->
         <div id="nav" class="bread_crumbs" role="navigation">
             <div class="hlist">
                 <ul>
@@ -51,25 +47,21 @@
                         <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
                         <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
                     {% else %}
-                        {% loginza_button providers_set="google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki" %}
-                        <a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>
+                        <!--<a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>-->
+                        <span id="login_btn">Войти</span>
                     {% endif %}
                 </div>
             </div>
         </div>
-        <!-- end: main navigation -->
 
-        <!-- begin: main content area #main -->
         <div id="main">
-            <!-- begin: #col1 - first float column -->
+
             <div id="col1" role="complementary">
                 <div id="col1_content" class="clearfix">
                     {% block left_column %}{% endblock %}
                 </div>
             </div>
-            <!-- end: #col1 -->
 
-            <!-- begin: #col2 second float column -->
             <div id="col2" role="complementary">
                 <div id="col2_content" class="clearfix">
                     {% block right_column %}{% endblock %}
@@ -77,26 +69,34 @@
                 <!-- IE Column Clearing -->
                 <div id="ie_clearing">&nbsp;</div>
             </div>
-            <!-- end: #col2 -->
 
-            <!-- begin: #col3 static column -->
             <div id="col3" role="main">
                 <div id="col3_content" class="clearfix">
                     {% block content %}{% endblock %}
                 </div>
             </div>
-            <!-- end: #col3 -->
+
         </div>
-        <!-- end: #main -->
+
     </div>
 
-    <!-- begin: #footer -->
     <div id="footer" role="contentinfo">
         &copy;2012. <a href="https://sites.google.com/site/electionsnetwork/">
             Интернет площадка для контроля за выборами.</a> Все ходы записаны.
     </div>
-    <!-- end: #footer -->
+
 </div>
+
+{% if not user.is_authenticated %}
+    <div id="login_dialog">
+        {% include "elements/login.html" %}
+    </div>
+    <script type="text/javascript">
+        $("#login_dialog").dialog({width: 650, height: 250, modal: true, title: "Войти в систему"}).dialog("close");
+        $("#")
+        
+    </script>
+{% endif %}
 
 </body>
 </html>

@@ -25,4 +25,12 @@ DATABASES = {
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'uu$m8_^m%69-z&$s=2q#&s9b%6y0_4$v)zk!h1v&q6d6@3+4g6'
+SECRET_KEY = ''
+
+VIRTUALENV = ".../env/lib/python2.7/site-packages"
+
+# force removal of mysite.fcgi from URL:
+# http://docs.djangoproject.com/en/dev/howto/deployment/fastcgi/#forcing-the-url-prefix-to-a-particular-value
+FORCE_SCRIPT_NAME = ''
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

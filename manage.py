@@ -1,5 +1,8 @@
-#!/usr/bin/env python
-from django.core.management import execute_manager
+import os.path
+import site
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import imp
 try:
     imp.find_module('settings') # Assumed to be in the same directory.
@@ -10,5 +13,10 @@ except ImportError:
 
 import settings
 
+# load virtualenv if set
+if settings.VIRTUALENV:
+    site.addsitedir(settings.VIRTUALENV)
+
 if __name__ == "__main__":
+    from django.core.management import execute_manager
     execute_manager(settings)

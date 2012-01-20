@@ -71,8 +71,8 @@
         <button {% if is_reported %}style="display:none;"{% endif %} id="report_user">Пожаловаться</button>
     </div>
 
-    <div id="send_message_dialog">
-        {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
+        <div id="send_message_dialog">
             <center>
                 Отправить сообщение пользователю <span class="dialog_user_span">{{ profile_user.username }}</span>
             </center>
@@ -91,25 +91,44 @@
                 </table>
                 <input type="hidden" name="username" value="{{ profile_user.username }}" />
             </form>
-        {% else %}
-            Чтобы отправить сообщение,
-            {% include "elements/login.html" %}
-        {% endif %}
-    </div>
+        </div>
+
+        <div id="add_to_contacts_dialog">
+            <center>
+                Добавить пользователя <span class="dialog_user_span">{{ profile_user.username }}</span> в список контактов?
+            </center>
+
+            <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ profile_user.username }}" />
+            </form>
+        </div>
+
+        <div id="report_user_dialog">
+            <center>
+                Пожаловаться на пользователя <span class="dialog_user_span">{{ profile_user.username }}</span>?
+            </center>
+
+            <form id="report_user_form" method="post" action="{% url report_user %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" id="report_user_hidden_username" />
+            </form>
+        </div>
+    {% endif %}
 
     <script type="text/javascript">
-        // Send message
-        // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click)
-        $("#send_message_dialog").dialog({
-            width:650, height:250, modal: true, title: "Отправить сообщение"
-        }).dialog("close");
+        // Create buttons
+        $("#send_message").button({icons: {primary: 'ui-icon-mail-closed'}});
+        $("#add_to_contacts").button({icons: {
+            primary: {% if in_contacts %}"ui-icon-circle-minus"{% else %}"ui-icon-circle-plus"{% endif %}
+        }});
+        $("#report_user").button({icons: {primary: "ui-icon-alert"}});
 
-        $("#send_message").button({icons: {primary: 'ui-icon-mail-closed'}}).click(function(){
-            $("#send_message_dialog").dialog("open");
-        });
-
+        // Create dialogs
         {% if user.is_authenticated %}
-            $("#send_message_dialog").dialog("option", "buttons", {
+            // Send message dialog
+            // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click)
+            $("#send_message_dialog").dialog({width: 650, height: 250, modal: true, title: "Отправить сообщение", buttons: {
                 "Отправить": function(){
                     $.post("{% url send_message %}", $("#send_message_form").serialize(), function(data){
                         $("#send_message_dialog").dialog("close");
@@ -120,47 +139,16 @@
                     });
                 },
                 "Отмена": function(){$("#send_message_dialog").dialog("close");}
-            });
-        {% else %}
-            login_dialog_buttons("send_message_dialog", "{% url login %}");
-        {% endif %}
-    </script>
+            }}).dialog("close");
+            $("#send_message").click(function(){$("#send_message_dialog").dialog("open");});
 
-    <div id="add_to_contacts_dialog">
-        {% if user.is_authenticated %}
-            <center>
-                Добавить пользователя <span class="dialog_user_span">{{ profile_user.username }}</span> в список контактов?
-            </center>
-
-            <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
-                {% csrf_token %}
-                <input type="hidden" name="username" value="{{ profile_user.username }}" />
-            </form>
-        {% else %}
-            Чтобы отправить сообщение
-            {% include "elements/login.html" %}
-        {% endif %}
-    </div>
-
-    <script type="text/javascript">
-        // Add to contacts dialog
-        // TODO: добавить в контакты/удалить из контактов
-        $("#add_to_contacts_dialog").dialog({
-            width:650, height:250, modal:true, title:"Добавить в контакты"
-        }).dialog("close");
-
-        $("#add_to_contacts").button({icons: {
-            primary: {% if in_contacts %}"ui-icon-circle-minus"{% else %}"ui-icon-circle-plus"{% endif %}
-        }}).click(function(){
-            $("#add_to_contacts_dialog").dialog("open");
-        });
-
-        {% if user.is_authenticated %}
-            $("#add_to_contacts_dialog").dialog("option", "buttons", {
+            // TODO: добавить в контакты/удалить из контактов
+            // Add to contacts dialog
+            $("#add_to_contacts_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить в контакты", buttons: {
                 "Добавить": function(){
                     $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
-                        $("#in_contacts").removeClass("hidden");
-                        $("#add_to_contacts").parent().addClass("hidden");
+                        $("#in_contacts").show();
+                        $("#add_to_contacts").parent().hide();
                         $("#add_to_contacts_dialog").dialog("close");
 
                         var user_link = $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}");
@@ -168,51 +156,36 @@
                     });
                 },
                 "Отмена": function(){$("#add_to_contacts_dialog").dialog("close");}
-            });
-        {% else %}
-            login_dialog_buttons("add_to_contacts_dialog", "{% url login %}");
-        {% endif %}
-    </script>
+            }}).dialog("close");
+            $("#add_to_contacts").click(function(){$("#add_to_contacts_dialog").dialog("open");});
 
-    <div id="report_user_dialog">
-        {% if user.is_authenticated %}
-            <center>
-                Пожаловаться на пользователя <span class="dialog_user_span">{{ profile_user.username }}</span>?
-            </center>
-
-            <form id="report_user_form" method="post" action="{% url report_user %}">
-                {% csrf_token %}
-                <input type="hidden" name="username" id="report_user_hidden_username" />
-            </form>
-        {% else %}
-            Чтобы пожаловаться на пользователя
-            {% include "elements/login.html" %}
-        {% endif %}
-    </div>
-
-    <script type="text/javascript">
-        // Report user dialog
-        $("#report_user_dialog").dialog({
-            width:650, height:250, modal: true, title: "Пожаловаться на пользователя"
-        }).dialog("close");
-        $("#report_user").button({icons: {primary: "ui-icon-alert"}}).click(function(){
-            $("#report_user_hidden_username").val("{{ profile_user.username }}");
-            $("#report_user_dialog").dialog("open");
-        });
-
-        {% if user.is_authenticated %}
-            $("#report_user_dialog").dialog("option", "buttons", {
+            // Report user dialog
+            $("#report_user_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на пользователя", buttons: {
                 "Пожаловаться": function(){
                     $.post("{% url report_user %}", $("#report_user_form").serialize(), function(data){
-                        $("#is_reported").removeClass("hidden");
-                        $("#report_user").parent().addClass("hidden");
+                        $("#is_reported").show();
+                        $("#report_user").parent().hide();
                         $("#report_user_dialog").dialog("close");
                     });
                 },
                 "Отмена": function(){$("#report_user_dialog").dialog("close");}
+            }}).dialog("close");
+
+            $("#report_user").click(function(){
+                $("#report_user_hidden_username").val("{{ profile_user.username }}");
+                $("#report_user_dialog").dialog("open");
             });
         {% else %}
-            login_dialog_buttons("report_user_dialog", "{% url login %}");
+            var message = {
+                "send_message": "Чтобы отправить сообщение, пожалуйста, войдите в систему",
+                "add_to_contacts": "Чтобы добавить пользователя в контакты, пожалуйста, войдите в систему",
+                "report_user": "Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему",
+            };
+
+            $("#send_message, #add_to_contacts, #report_user").click(function(){
+                $("#login_dialog").dialog("open");
+                login_dialog_buttons("login_dialog", "{% url login %}", message[$(this).attr("id")]);
+            });
         {% endif %}
 
     </script>

@@ -5,8 +5,10 @@
 * yandex метрика
 * добавить в контакты/удалить из контактов
 * http://loginza.ru/js/widget.js is loaded 4 extra times, many icons of social services (logged out regime)
+* closing dialogs by escape on profile page fails because of loginza
 
 * Use pagespeed to optimize load time
+* Start using django south
 * Страница для редактирования текста о себе, установки паролей, показ аккаунтов соц сетей, блогов
 * Ввести время в модели
 * password save by browser (check)
@@ -17,3 +19,5 @@
 * write documentation on how to run django
 * readme -> readme.rst
 * notifications about new users
+* https://www.google.com/webmasters/
+* posts to lenta.ru forum

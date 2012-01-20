@@ -5,3 +5,4 @@ database.sqlite
 *.kate-swp
 static/admin
 templates/admin
+site_settings.py

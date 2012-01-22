@@ -107,6 +107,12 @@ body {
     min-width: 212px;
     max-width: 250px;
 }
+
+.single_col #col1,
+.single_col #col2 {
+    display: none;
+}
+
 #col2_content {
     padding: 10px 20px 10px 10px;
 }
@@ -114,6 +120,15 @@ body {
 #col3 {
     margin: 0 25%;
 }
+
+.single_col #col3 {
+    margin: 0 auto;
+    width: 95%;
+    min-width: 500px;
+    max-width: 800px;
+
+}
+
 #col3_content {
     padding: 10px;
 }

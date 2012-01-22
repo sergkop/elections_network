@@ -192,6 +192,10 @@ a:visited  {
     color: #003366;
 }
 
+a.ui-button:visited  {
+    color: #1c94c4;
+}
+
 a:hover, a:active {
     color: #c77405;
 }
@@ -493,12 +497,38 @@ select {
 }
 
 .clickable {
-    color: blue;
+    color: #1C94C4;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: underline;
 }
 .clickable:hover {
-    text-decoration: underline;
+    color: #c77405;
+}
+/**
+* End of inputs
+*/
+
+.main_login {
+    border-right: 1px dashed #000;
+    float: left;
+    padding-bottom: 50px;
+    width: 50%;
+}
+
+.main_login .btn_block {
+    padding-top: 5px;
+}
+
+.text_between_btns {
+    padding-right: 1em;
+}
+
+.main_region {
+    float: right;
+}
+
+.welcome_message {
+    padding: 0 0 30px 0;
 }
 
 } /* closing @media all */

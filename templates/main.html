@@ -1,30 +1,41 @@
 {% extends "base.html" %}
 
+{% block page_attrs %}
+id="page_main"
+class="single_col"
+{% endblock %}
+
 {% block content %}
 
 <h1>Добро пожаловать!</h1>
+<div class="welcome_message">
+    An election is a formal decision-making process by which a population chooses an individual to hold public office.[1] Elections have been the usual mechanism by which modern representative democracy has operated since the 17th century.[1] Elections may fill offices in the legislature, sometimes in the executive and judiciary, and for regional and local government. This process is also used in many other private and business organisations, from clubs to voluntary associations and corporations.<br/><br/>
+    The universal use of elections as a tool for selecting representatives in modern democracies is in contrast with the practice in the democratic archetype, ancient Athens. As the Elections were considered an oligarchic institution and most political offices were filled using sortition, also known as allotment, by which officeholders were chosen by lot.<br/><br/>
+    Electoral reform describes the process of introducing fair electoral systems where they are not in place, or improving the fairness or effectiveness of existing systems. Psephology is the study of results and other statistics relating to elections (especially with a view to predicting future results).<br/><br/>
+    To elect means "to choose or make a decision"[2] and so sometimes other forms of ballot such as referendums are referred to as elections, especially in the United States.
+</div>
 
-<table>
-    <tr>
-        <td style="vertical-align:top;">
-            {% if not user.is_authenticated %}
-                Чтобы получить полный доступ к системе <a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a> или
-                <span id="login_btn2" class="clickable">Войдите</span>
-            {% else %}
-                <a href="{{ user.get_absoule_url }}">{{ user.username }}</a>
-            {% endif %}
-        </td>
-        <td style="border-left: 2px dashed #AAA; vertical-align:top;">
-            Или выберите избирательный участок:
-            <div id="choose_regions">
-                <form action="{% url goto_location %}" method="get">
-                {% include "elements/region_choice.html" %}
-                <input id="goto_location" type="submit" value="Перейти"/>
-                </form>
-            </div>
-        </td>
-    </tr>
-</table>
+<div class="main_login">
+    {% if not user.is_authenticated %}
+        Чтобы получить полный доступ к системе
+        <div class="btn_block">
+            <a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
+            <span class="text_between_btns">или</span>
+            <span id="login_btn2" class="clickable">Войдите</span>
+        </div>
+    {% else %}
+        <a href="{{ user.get_absoule_url }}">{{ user.username }}</a>
+    {% endif %}
+</div>
+<div class="main_region">
+    Или выберите избирательный участок:
+    <div id="choose_regions">
+        <form action="{% url goto_location %}" method="get">
+        {% include "elements/region_choice.html" %}
+        <input id="goto_location" type="submit" value="Перейти"/>
+        </form>
+    </div>
+</div>
 
 <script type="text/javascript">
     $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}}); // TODO: icon doesn't appear

@@ -33,7 +33,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     {% block head %}{% endblock %}
 </head>
-<body>
+<body {% block page_attrs %}{% endblock %}>
 
 <div class="page_margins">
     <div role="banner" id="header">

@@ -58,3 +58,5 @@ Deployment:
     * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server or set VIRTUALENV in site_settings.py)
 
     * install postfix (smtp client)
+
+    * remove {autoPublish: 0} option of vkontakte comments in templates/location.html

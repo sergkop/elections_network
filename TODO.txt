@@ -53,6 +53,7 @@
 * if Back button of browser is used, javascript icon-buttons are not update
 * Ability to edit texts on pages (like in cms)
 * Become observer button should open new window
+* кнопка для bookmark page
 
 Tasks:
     * interface for managing reports on users and links

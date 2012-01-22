@@ -8,11 +8,9 @@
 
 {% block menu %}
     <li>&rarr;</li>
-    <li>
-        {% with location=current_location %}
-            {% include "elements/location_path.html" %}
-        {% endwith %}
-    </li>
+    {% with location=current_location %}
+        {% include "elements/location_path.html" %}
+    {% endwith %}
 
     {% if sub_regions %}
         <li>&rarr;</li>

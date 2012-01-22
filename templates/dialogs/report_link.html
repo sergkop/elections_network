@@ -1,0 +1,31 @@
+<div id="report_link_dialog">
+    <center>
+        Пожаловаться на ссылку
+        <form id="report_link_form" method="post" action="{% url report_link %}">
+            {% csrf_token %}
+            <ul id="report_link_ul"></ul>
+            <input type="hidden" name="location" value="{{ current_location.id }}" />
+        </form>
+    </center>
+</div>
+
+<script type="text/javascript">
+    // Report link dialog
+    $("#report_link_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на ссылку",
+        buttons: {
+            "Пожаловаться": function(){
+                $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
+                    $("#report_link_dialog").dialog("close");
+                    alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                });
+            },
+            "Отмена": function(){$("#report_link_dialog").dialog("close");}
+        }
+    }).dialog("close");
+
+    // TODO: it should work for reporting one link or choosing several (?)
+    function report_link_dialog_init(){
+        $("#report_link_ul li").remove();
+        $("#report_link_dialog").dialog("open");
+    }
+</script>

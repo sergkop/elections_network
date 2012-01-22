@@ -195,7 +195,16 @@
 
             $("#become_voter_dialog").on("become_voter", function(event, location_id){
                 update_path("voter_path_span", "become_voter_form");
+
+                if (form_location_id("become_voter_form")!=""){
+                    $("#become_voter_sign_up_btn").hide();
+                    $("#become_voter_change_region_btn").show();
+                } else {
+                    $("#become_voter_sign_up_btn").show();
+                    $("#become_voter_change_region_btn").hide();
+                }
             });
+            
             // TODO: activate become_voter_change_region_btn, become_voter_sign_up_btn when needed
         </script>
     {% endif %}

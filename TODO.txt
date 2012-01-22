@@ -39,6 +39,7 @@
 * Add entering location in registration form
 * Collect evidence on reports (users, links), add text field for writing complaints
 * speed up init_db
+* In become voter dialog the same ajax request is repeated twice
 
 Tasks:
     * interface for managing reports on users and links

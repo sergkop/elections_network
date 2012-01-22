@@ -513,6 +513,7 @@ select {
     float: left;
     padding-bottom: 50px;
     width: 50%;
+    font-size: 115%;
 }
 
 .main_login .btn_block {
@@ -525,10 +526,12 @@ select {
 
 .main_region {
     float: right;
+    font-size: 115%;
 }
 
 .welcome_message {
     padding: 0 0 30px 0;
+    font-size: 115%;
 }
 
 } /* closing @media all */

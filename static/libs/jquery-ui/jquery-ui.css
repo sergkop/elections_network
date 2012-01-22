@@ -66,23 +66,9 @@
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #d4d4d4; 
-
-    background: #fff;
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
-    background: -moz-linear-gradient(top, #fff, #ddd);
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-
-font-weight: bold; color: #1c94c4; }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #d4d4d4; background: #fff; background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd)); background: -moz-linear-gradient(top, #fff, #ddd); border-radius: 5px; -moz-border-radius: 5px; font-weight: bold; color: #1c94c4; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #1c94c4; text-decoration: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #d4d4d4; 
-
-    background: #fff;
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
-    background: -moz-linear-gradient(top, #fff, #eee);
-
-font-weight: bold; color: #c77405; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #d4d4d4; background: #fff; background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee)); background: -moz-linear-gradient(top, #fff, #eee); font-weight: bold; color: #c77405; }
 .ui-state-hover a, .ui-state-hover a:hover { color: #c77405; text-decoration: none; }
 /*.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #fbd850; background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #eb8f00; }*/
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #eb8f00; text-decoration: none; }

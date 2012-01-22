@@ -45,8 +45,8 @@
     /* (en|de) Bugfix:IE - Doubled Float Margin Bug */
     display:inline;
     float:left; /* LTR */
-    font-size:1.0em;
-    line-height:1em;
+    font-size:1.4em;
+    line-height:1.4em;
     list-style-type:none;
     margin:0;
     padding:0 .8em 0 0;
@@ -56,11 +56,15 @@
   .hlist ul li strong {
     background:transparent;
     display:block;
-    font-size:1em;
     font-weight:bold;
     margin:0;
     /*padding:0.5em 0.8em 0.5em 0.8em;*/
     width:auto;
+  }
+
+  .hlist ul li select {
+    margin:0;
+    padding:0;
   }
 
   .hlist ul li.active strong,

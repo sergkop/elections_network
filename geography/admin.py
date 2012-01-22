@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from geography.models import LocationModel
+from geography.models import Location
 
-class LocationModelAdmin(admin.ModelAdmin):
+class LocationAdmin(admin.ModelAdmin):
     list_display = ('name', 'parent_1', 'parent_2')
     ordering = ('name',)
     search_fields = ('name',)
 
-admin.site.register(LocationModel, LocationModelAdmin)
+admin.site.register(Location, LocationAdmin)

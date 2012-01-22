@@ -1,0 +1,15 @@
+==== UI =====
+* Creating buttons:
+    $("#btn_id").button({icons: {primary: 'icon_name'}});
+  where icon_name is chosen from the list of jQuery icons - http://www.petefreitag.com/cheatsheets/jqueryui-icons/
+
+
+==== Back-end ====
+* Security
+    * You must accurately process GET and POST data of requests, explicitly considering
+      all possible scenarios
+    * All forms must include CSRF protection
+
+* You must catch all exceptions in your code
+* You must write unit tests for your code
+* check is_ajax() for ajax requests

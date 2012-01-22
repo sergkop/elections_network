@@ -1,6 +1,6 @@
 from django.db import models
 
-class LocationModel(models.Model):
+class Location(models.Model):
     """ The number of non-null values of parent specifies the level of location """
     name = models.CharField(max_length=150)
      # keys to the parents of the corresponding level (if present)

@@ -9,7 +9,7 @@
 </div>
 
 <script type="text/javascript">
-    // Register as a voter dialog
+    // Become voter dialog
     $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
         buttons: {
             "Перейти": function(){
@@ -25,4 +25,9 @@
             "Отмена": function(){$("#become_voter_dialog").dialog("close");}
         }
     }).dialog("close");
+
+    function become_voter_dialog_init(path){
+        set_select_location("become_voter_form", path);
+        $("#become_voter_dialog").dialog("open");
+    }
 </script>

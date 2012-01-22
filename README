@@ -1,24 +1,9 @@
-Installation (for Ubuntu and Mac OS):
+Installation of required software (for Ubuntu and Mac OS):
     * sudo aptitude install python python-setuptools git
     * sudo easy_install pip
 
     * git clone git://github.com/sergkop/elections_network.git CODE_DIR
     * sudo pip install -r CODE_DIR/requirements.txt
-
-    * rename site_settings.py.example to site_settings.py and configure
-
-    * python manage.py syncdb (agree to create superuser)
-    * python manage.py init_db
-
-    * 'python manage.py runserver' to run server
-
-    * Log in into admin interface (/admin/) and set proper domain name in the entry of Sites model
-    (for loginza to work)
-
-Common problems:
-    * Django admin media files are not loaded - make sure /static/admin/* url points to .../django/contrib/admin/media/ folder
-      in django code directory
-
 
 Installation (for Windows):
     * setup Python 2.7, git и Django 1.3.1
@@ -27,16 +12,20 @@ Installation (for Windows):
     * git clone git://github.com/sergkop/elections_network.git CODE_DIR
     * pip install -r CODE_DIR/requirements.txt
 
-    * rename site_settings.py.example to site_settings.py and configure
+Running development server:
+    * rename site_settings.py.example to site_settings.py and set proper settings values
 
     * python manage.py syncdb (agree to create superuser)
     * python manage.py init_db
+
     * 'python manage.py runserver' to run server
+    * project is accessible at http://127.0.0.1:8000, admin interface - http://127.0.0.1:8000/admin/
 
-    * Log in into admin interface (/admin/) and set proper domain name in the entry of Sites model
-    (for loginza to work)
+Common problems (Linux/Mac OS):
+    * Django admin media files are not loaded - make sure /static/admin/* url points to .../django/contrib/admin/media/ folder
+      in django code directory
 
-Common problems:
+Common problems (Windows):
     * If syncdb step fails with the error in Windows 7
 
             django.db.utils.DatabaseError: You must not use 8-bit bytestrings unless you use
@@ -64,3 +53,5 @@ Deployment:
     * sudo pip install virtualenv
     * virtualenv --no-site-packages VIRTUAL_ENV_DIR
     * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server or set VIRTUALENV in site_settings.py)
+
+    * install postfix (smtp client)

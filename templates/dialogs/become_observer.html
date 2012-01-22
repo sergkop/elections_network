@@ -7,7 +7,7 @@
 </div>
 
 <script type="text/javascript">
-    // Register as an observer dialog
+    // Become observer dialog
     $("#become_observer_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в наблюдатели",
         buttons: {
             "Записаться": function(){
@@ -16,4 +16,8 @@
             "Отмена": function(){$("#become_observer_dialog").dialog("close");}
         }
     }).dialog("close");
+
+    function become_observer_dialog_init(){
+        $("#become_observer_dialog").dialog("open");
+    }
 </script>

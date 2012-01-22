@@ -1,0 +1,32 @@
+<div id="remove_from_contacts_dialog">
+    <center>
+        Удалить пользователя <span id="remove_from_contacts_user" class="dialog_user_span"></span> из контактов?
+        <form id="remove_from_contacts_form" method="post" action="{% url remove_from_contacts %}">
+            {% csrf_token %}
+            <input type="hidden" name="username" value="" />
+        </form>
+    </center>
+</div>
+
+<script type="text/javascript">
+    // Remove user from contacts dialog
+    $("#remove_from_contacts_dialog").dialog({width:650, height:250, modal: true, title: "Удалить из контактов",
+        buttons: {
+            "Удалить": function(){
+                $.post($("#remove_from_contacts_form").attr("action"),
+                    $("#remove_from_contacts_form").serialize(), function(data){
+                        $("#remove_from_contacts_dialog").trigger("remove_from_contacts_event", []);
+                        $("#remove_from_contacts_dialog").dialog("close");
+                    }
+                );
+            },
+            "Отмена": function(){$("#remove_from_contacts_dialog").dialog("close");}
+        }
+    }).dialog("close");
+
+    function remove_from_contacts_init(username){
+        $("#remove_from_contacts_user").text(username);
+        $('#remove_from_contacts_form input[name="username"]').val(username);
+        $("#remove_from_contacts_dialog").dialog("open");
+    }
+</script>

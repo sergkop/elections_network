@@ -6,9 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-from geography.models import LocationModel
-from links.models import LinkModel
-from users.models import ParticipationModel
+from geography.models import Location
+from links.models import Link
+from users.models import Participation
 
 def goto_location(request):
     for name in ('region_3', 'region_2', 'region_1'):
@@ -29,8 +29,8 @@ def location(request, loc_id):
         raise Http404
 
     try:
-        location = LocationModel.objects.select_related().get(id=id)
-    except LocationModel.DoesNotExist:
+        location = Location.objects.select_related().get(id=id)
+    except Location.DoesNotExist:
         raise Http404
 
     # Get the list of participants
@@ -40,22 +40,22 @@ def location(request, loc_id):
     if not location.parent_2:
         query |= Q(location__parent_2=location) if location.parent_1 else Q(location__parent_1=location)
 
-    for participation in ParticipationModel.objects.filter(query).select_related():
+    for participation in Participation.objects.filter(query).select_related():
         participants.setdefault(participation.type, []).append(participation.user)
 
     # Get sub-regions
     if location.parent_2:
         sub_regions = []
     elif location.parent_1:
-        sub_regions = list(LocationModel.objects.filter(parent_2=location))
+        sub_regions = list(Location.objects.filter(parent_2=location))
     else:
-        sub_regions = list(LocationModel.objects.filter(parent_1=location, parent_2=None))
+        sub_regions = list(Location.objects.filter(parent_1=location, parent_2=None))
 
     context = {
         'current_location': location,
         'participants': participants,
-        'links': list(LinkModel.objects.filter(location=location)),
-        'locations': list(LocationModel.objects.filter(parent_1=None).order_by('name')),
+        'links': list(Link.objects.filter(location=location)),
+        'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
         'is_voter_here': request.user.is_authenticated() and any(request.user==voter for voter in participants.get('voter', [])),
         'sub_regions': sub_regions,
     }
@@ -69,20 +69,20 @@ def get_sub_regions(request):
             return HttpResponse('[]')
 
         try:
-            location = LocationModel.objects.select_related().get(id=location_id)
-        except LocationModel.DoesNotExist:
+            location = Location.objects.select_related().get(id=location_id)
+        except Location.DoesNotExist:
             return HttpResponse('[]')
 
         if location.parent_2: # 3rd level location
             return HttpResponse('[]') # 3rd level locations have no children
         elif location.parent_1: # 2nd level location
             res = []
-            for loc in LocationModel.objects.filter(parent_2=location).order_by('name'):
+            for loc in Location.objects.filter(parent_2=location).order_by('name'):
                 res.append({'name': loc.name, 'id': loc.id})
             return HttpResponse(json.dumps(res))
         else: # 1st level location
             res = []
-            for loc in LocationModel.objects.filter(parent_1=location, parent_2=None).order_by('name'):
+            for loc in Location.objects.filter(parent_1=location, parent_2=None).order_by('name'):
                 res.append({'name': loc.name, 'id': loc.id})
             return HttpResponse(json.dumps(res))
 

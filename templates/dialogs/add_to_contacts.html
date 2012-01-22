@@ -1,0 +1,30 @@
+<div id="add_to_contacts_dialog">
+    <center>
+        Добавить пользователя <span id="add_to_contacts_dialog_user" class="dialog_user_span"></span>
+        в список контактов?
+    </center>
+
+    <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
+        {% csrf_token %}
+        <input type="hidden" name="username" value="" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    // Add to contacts dialog
+    $("#add_to_contacts_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить в контакты", buttons: {
+        "Добавить": function(){
+            $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
+                $("#add_to_contacts_dialog").trigger("add_to_contacts_event", []);
+                $("#add_to_contacts_dialog").dialog("close");
+            });
+        },
+        "Отмена": function(){$("#add_to_contacts_dialog").dialog("close");}
+    }}).dialog("close");
+
+    function add_to_contacts_dialog_init(username){
+        $("#add_to_contacts_dialog_user").text(username);
+        $('#add_to_contacts_form input[name="username"]').val(username);
+        $("#add_to_contacts_dialog").dialog("open");
+    }
+</script>

@@ -8,20 +8,29 @@
 
     <link href="{{ STATIC_URL }}css/layout.css" rel="stylesheet" type="text/css"/>
     <link href="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/tipsy/tipsy.css" type="text/css" />
     <!--[if lte IE 7]>
     <link href="css/patches/patch_layout.css" rel="stylesheet" type="text/css" />
     <![endif]-->
 
+    <script type="text/javascript">
+        //var current_location = "{{ current_location.id }}";
+        var IS_USER_PROFILE = {% if user == profile_user %}true{% else %}false{% endif %};
+        var USERNAME = "{{ user.username }}";
+        var CONTACTS = {{ CONTACTS|safe }};
+        var LOGIN_URL = "{% url login %}";
+        var GET_SUB_REGIONS_URL = "{% url get_sub_regions %}";
+    </script>
+
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
+    <script type='text/javascript' src='{{ STATIC_URL }}libs/tipsy/jquery.tipsy.js'></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/underscore.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/backbone.js"></script>
     <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
     <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
 
-    <script type="text/javascript">
-        var current_location = "{{ current_location.id }}";
-        var current_user = "{{ user.username }}";
-    </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -47,7 +56,6 @@
                         <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
                         <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
                     {% else %}
-                        <!--<a href="{% url login %}?next={{ request.get_full_path }}">Войти</a>-->
                         <span id="login_btn" class="clickable">Войти</span>
                     {% endif %}
                 </div>
@@ -88,17 +96,32 @@
 </div>
 
 {% if not user.is_authenticated %}
-    <div id="login_dialog">
-        {% include "elements/login.html" %}
-    </div>
+    <!-- TODO: move it to the top -->
+    {% include "dialogs/login.html" %}
     <script type="text/javascript">
-        $("#login_dialog").dialog({width: 650, height: 300, modal: true, title: "Войти в систему"}).dialog("close");
-        $("#login_btn").click(function(){
-            $("#login_dialog").dialog("open");
-            login_dialog_buttons("login_dialog", "{% url login %}", "");
-        });
+        $("#login_btn").click(function(){login_dialog_init("");});
     </script>
 {% endif %}
+
+<script type="text/javascript">
+    var reformalOptions = {
+        project_id: 53657,
+        project_host: "electionsnetwork.reformal.ru",
+        force_new_window: false,
+        tab_alignment: "left",
+        tab_top: "300",
+        tab_bg_color: "#248c39",
+        tab_image_url: "http://tab.reformal.ru/0J7RgdGC0LDQstC40YLRjCDQvtGC0LfRi9Cy/FFFFFF/f5dab822e975a4eb45fcae69ce487412"
+    };
+
+    (function() {
+        if ('https:' == document.location.protocol) return;
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'http://media.reformal.ru/widgets/v1/reformal.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    })();
+</script>
 
 </body>
 </html>

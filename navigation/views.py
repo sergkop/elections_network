@@ -7,12 +7,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from geography.models import LocationModel
+from geography.models import Location
 from navigation.forms import RegistrationForm
 
 def main(request):
     context = {
-        'locations': list(LocationModel.objects.filter(parent_1=None).order_by('name')),
+        'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 

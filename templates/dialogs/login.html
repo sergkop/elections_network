@@ -1,0 +1,51 @@
+<div id="login_dialog">
+    <span id="login_intro_span"></span>
+
+    <table>
+        <tr>
+            <td style="vertical-align:middle;">
+                <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
+                    {% csrf_token %}
+                    Войдите в систему
+                    <table>
+                    <tr>
+                        <td><label for="">Логин:</label></td>
+                        <td><input type="text" name="username" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="">Пароль:</label></td>
+                        <td><input type="password" name="password" /></td>
+                    </tr>
+                    </table>
+
+                    <input id="login_form_submit" type="submit" value="Войти" />
+                    <!--input type="hidden" name="next" {% if next %}value="{{ next }}"{% else %}value="{{ request.get_full_path }}"{% endif %} /-->
+
+                </form>
+
+                <br/>
+
+                или <a href="{% url register %}">зарегистрируйтесь</a>
+            </td>
+            <td style="vertical-align:top; border-left: 1px solid #AAA;">
+                <iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url={{ LOGINZA_IFRAME_URL }}"
+                style="width:359px;height:170px;" scrolling="no" frameborder="no"></iframe>
+            </td>
+        </tr>
+    </table>
+
+<script type="text/javascript">
+    // Login dialog
+    // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click) (?)
+    $("#login_dialog").dialog({width: 650, height: 300, modal: true, title: "Войти в систему", buttons: {
+        //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
+        "Отмена": function(){$("#login_dialog").dialog("close");}
+    }}).dialog("close");
+
+    // TODO: implement logging in without page reload
+    function login_dialog_init(message){
+        $("#login_intro_span").text(message);
+        $("#login_form_submit").button();
+        $("#login_dialog").dialog("open");
+    }
+</script>

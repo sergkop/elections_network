@@ -1,0 +1,42 @@
+<div id="send_message_dialog">
+    <center>
+        Отправить сообщение пользователю <span id="send_message_dialog_user" class="dialog_user_span"></span>
+    </center>
+
+    <form id="send_message_form" method="post" action="{% url send_message %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label for="message_title">Тема:</label></td>
+                <td><input type="text" name="title" name="message_title" value="" size="60" /></td>
+            </tr>
+            <tr>
+                <td><label for="message_body">Сообщение:</label></td>
+                <td><textarea name="message_body" rows="4" cols="60"></textarea></td>
+            </tr>
+        </table>
+        <input type="hidden" name="username" value="" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    // Send message dialog
+    $("#send_message_dialog").dialog({width: 650, height: 250, modal: true, title: "Отправить сообщение", buttons: {
+        "Отправить": function(){
+            $.post("{% url send_message %}", $("#send_message_form").serialize(), function(data){
+                $("#send_message_dialog").dialog("close");
+                if (data=="ok")
+                    alert("Сообщение успешно отправлено");
+                else
+                    alert("Не удалось отправить сообщение");
+            });
+        },
+        "Отмена": function(){$("#send_message_dialog").dialog("close");}
+    }}).dialog("close");
+
+    function send_message_dialog_init(username){
+        $("#send_message_dialog_user").text(username);
+        $('#send_message_form input[name="username"]').val(username);
+        $("#send_message_dialog").dialog("open");
+    }
+</script>

@@ -1,4 +1,4 @@
-{# Put this block a div element and call set_select_location(div, id1, id2, id3) #}
+{# Put this block a div element and call set_select_location(div_id, path) #}
 <select name="region_1">
     <option value="">Выбрать область</option>
     {% for location in locations %}
@@ -8,76 +8,8 @@
 <br/>
 <select name="region_2">
     <option value="">Выбрать город</option>
-    <option value="22">Все</option>
 </select>
 <br/>
 <select name="region_3">
     <option value="">Выбрать район</option>
 </select>
-
-<script type="text/javascript">
-    function set_select_location(div_id, id1, id2, id3){
-        var select_1 = $('#'+div_id+' [name="region_1"]');
-        var select_2 = $('#'+div_id+' [name="region_2"]');
-        var select_3 = $('#'+div_id+' [name="region_3"]');
-
-        select_1.unbind().change(function(){
-            select_3.hide();
-
-            if (select_1.val()==""){
-                select_2.hide();
-                select_2.val("").change();
-            }
-            else
-                $.getJSON("{% url get_sub_regions %}", {location: select_1.val()}, function(data){
-                    if (data.length>0){
-                        select_2.show();
-                        select_2.children('[value!=""]').remove();
-                        $.each(data, function(index, value){
-                            select_2.append($("<option/>").val(value["id"]).text(value["name"]));
-                        });
-                        select_2.val(id2==undefined ? "" : id2).change();
-                    } else
-                        select_2.hide();
-                });
-        });
-
-        select_2.unbind().change(function(){
-            if (select_2.val()=="")
-                select_3.hide();
-            else {
-                $.getJSON("{% url get_sub_regions %}", {location: select_2.val()}, function(data){
-                    if (data.length>0){
-                        select_3.show();
-                        select_3.children('[value!=""]').remove();
-                        $.each(data, function(index, value){
-                            select_3.append($("<option/>").val(value["id"]).text(value["name"]));
-                        });
-                        select_3.val(id3==undefined ? "" : id3);
-                    } else
-                        select_3.hide();
-                });
-            }
-        });
-        select_1.val(id1==undefined ? "" : id1).change();
-        select_2.val(id2==undefined ? "" : id2).change();
-
-        select_3.val(id3==undefined ? "" : id3);
-    }
-
-    function form_location_id(div_id){
-        // This is a helper method to extract location id from selector block
-        var select_1 = $('#'+div_id+' [name="region_1"]');
-        var select_2 = $('#'+div_id+' [name="region_2"]');
-        var select_3 = $('#'+div_id+' [name="region_3"]');
-
-        if (select_3.val()!="")
-            return select_3.val();
-        if (select_2.val()!="")
-            return select_2.val();
-        if (select_1.val()!="")
-            return select_1.val();
-
-        return "";
-    }
-</script>

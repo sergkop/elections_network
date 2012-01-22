@@ -13,10 +13,10 @@ from django.template import RequestContext
 from loginza.models import Identity, UserMap
 from loginza.templatetags.loginza_widget import _return_path
 
-from geography.models import LocationModel
-from links.models import LinkModel
+from geography.models import Location
+from links.models import Link
 from users.forms import CompleteRegistrationForm
-from users.models import ContactModel, ParticipationModel, ReportUserModel
+from users.models import Contact, Participation, ReportUser
 import users.signals
 
 def current_profile(request):
@@ -29,26 +29,26 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
 
     if request.user.is_authenticated() and request.user.username!=username:
-        in_contacts = ContactModel.objects.filter(user=request.user, contact=user).count()>0
-        is_reported = ReportUserModel.objects.filter(user=user, reporter=request.user).count()>0
+        in_contacts = Contact.objects.filter(user=request.user, contact=user).count()>0
+        is_reported = ReportUser.objects.filter(user=user, reporter=request.user).count()>0
     else:
         in_contacts = False
         is_reported = False
 
     activities = {}
-    for participation in ParticipationModel.objects.filter(user=user).select_related():
+    for participation in Participation.objects.filter(user=user).select_related():
         activities[participation.type] = {'user': participation.user, 'location': participation.location}
 
     context = {
         'profile_user': user,
         'profile': user.get_profile(),
         'activities': activities,
-        'locations': list(LocationModel.objects.filter(parent_1=None).order_by('name')),
-        'links': list(LinkModel.objects.filter(user=user).select_related()),
+        'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
+        'links': list(Link.objects.filter(user=user).select_related()),
         'in_contacts': in_contacts,
         'is_reported': is_reported,
-        'contacts': list(ContactModel.objects.filter(user=user)),
-        'have_in_contacts': list(ContactModel.objects.filter(contact=user)),
+        'contacts': list(Contact.objects.filter(user=user)),
+        'have_in_contacts': list(Contact.objects.filter(contact=user)),
     }
     return render_to_response('profile.html', context_instance=RequestContext(request, context))
 
@@ -61,7 +61,7 @@ def become_voter(request):
                 continue
 
             try:
-                participation, created = ParticipationModel.objects.get_or_create(
+                participation, created = Participation.objects.get_or_create(
                         type='voter', user=request.user, defaults={'location_id': location_id})
             except IntegrityError:
                 return HttpResponse('fail1')
@@ -84,7 +84,7 @@ def add_to_contacts(request):
             return HttpResponse('fail1')
 
         try:
-            contact, created = ContactModel.objects.get_or_create(
+            contact, created = Contact.objects.get_or_create(
                     user=request.user, contact=contact, defaults={})
         except IntegrityError:
             return HttpResponse('fail2')
@@ -100,7 +100,7 @@ def remove_from_contacts(request):
         except User.DoesNotExist:
             return HttpResponse('fail1')
 
-        ContactModel.objects.delete(user=request.user, contact=contact)
+        Contact.objects.filter(user=request.user, contact=contact).delete()
         return HttpResponse('ok')
 
     return HttpResponse('fail2')
@@ -113,7 +113,7 @@ def report_user(request):
             return HttpResponse('fail1')
 
         try:
-            report, created = ReportUserModel.objects.get_or_create(
+            report, created = ReportUser.objects.get_or_create(
                     user=user, reporter=request.user, defaults={})
         except IntegrityError:
             return HttpResponse('fail2')

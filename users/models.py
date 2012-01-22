@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from geography.models import LocationModel
+from geography.models import Location
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
@@ -13,9 +13,9 @@ PARTICIPATION_TYPES = {
     'voter': u'Избиратель',
 }
 
-class ParticipationModel(models.Model):
+class Participation(models.Model):
     user = models.ForeignKey(User)
-    location = models.ForeignKey(LocationModel)
+    location = models.ForeignKey(Location)
     type = models.CharField(max_length=10)
 
     class Meta:
@@ -24,14 +24,14 @@ class ParticipationModel(models.Model):
     def type_name(self):
         return PARTICIPATION_TYPES[self.type]
 
-class ContactModel(models.Model):
+class Contact(models.Model):
     user = models.ForeignKey(User, related_name='users')
     contact = models.ForeignKey(User, related_name='contacts')
 
     class Meta:
         unique_together = ('user', 'contact')
 
-class ReportUserModel(models.Model):
+class ReportUser(models.Model):
     user = models.ForeignKey(User, related_name='reported_users')
     reporter = models.ForeignKey(User, related_name='reporters')
 

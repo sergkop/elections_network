@@ -51,6 +51,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     "django.core.context_processors.static",
     'django.contrib.messages.context_processors.messages',
+
+    'users.context_processors.user_data',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +79,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'loginza',
+
     'geography',
+    'maintenance',
     'users',
     'links',
 )

@@ -216,7 +216,12 @@
 
     <script type="text/javascript">
         $("#voters_ul li").each(function(index){
-            var list_item = new UserListItem($(this), false);
+            new UserListItem($(this), false);
+        });
+
+        $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
+            // TODO: explicit use of url (use global variable instead) - everywhere
+            $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
         });
     </script>
 

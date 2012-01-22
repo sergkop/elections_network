@@ -66,6 +66,43 @@
         {% include "dialogs/remove_from_contacts.html" %}
 
         {% include "dialogs/report_user.html" %}
+
+        <script type="text/javascript">
+            $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
+                if (IS_USER_PROFILE){
+                    $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
+                    CONTACTS.push(username);
+                    new UserListItem($("<li/>").appendTo("#contacts_ul"), true, username);
+                } else {
+                    $('#contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
+                    $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
+                }
+
+                if (username=="{{ profile_user.username }}"){
+                    $("#in_contacts").show();
+                    $("#add_to_contacts").hide();
+                    $("#remove_from_contacts").show();
+                    new UserListItem($("<li/>").appendTo("#have_in_contacts_ul"), false, USERNAME);
+                }
+            });
+
+            $("#remove_from_contacts_dialog").on("remove_from_contacts_event", function(event, username){
+                console.log($('#contacts_ul li a[href="'+username+'"]'), IS_USER_PROFILE);
+                if (IS_USER_PROFILE){
+                    $('#contacts_ul li a[href="/users/'+username+'/"]').parent().remove();
+                    var index = $.inArray(username, CONTACTS);
+                    if (index != -1)
+                        CONTACTS.splice(index, 1); // TODO: check if it works
+                }
+
+                if (username=="{{ profile_user.username }}"){
+                    $("#in_contacts").hide();
+                    $("#remove_from_contacts").hide();
+                    $("#add_to_contacts").show()
+                    $('#have_in_contacts_ul li a[href="{{ user.get_absolute_url }}"]').parent().remove();
+                }
+            });
+        </script>
     {% endif %}
 
     {% if profile_user != user %}
@@ -99,25 +136,9 @@
                     add_to_contacts_dialog_init("{{ profile_user.username }}");
                 });
 
-                $("#add_to_contacts_dialog").on("add_to_contacts_event", function(){
-                    $("#in_contacts").show();
-                    $("#add_to_contacts").hide();
-                    $("#remove_from_contacts").show();
-                    var user_link = $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}");
-                    $("#have_in_contacts_ul").append($("<li/>").append(user_link));
-                });
-
                 // Remove from contacts
                 $("#remove_from_contacts").click(function(){
                     remove_from_contacts_init("{{ profile_user.username }}");
-                });
-
-                $("#remove_from_contacts_dialog").on("remove_from_contacts_event", function(){
-                    $("#in_contacts").hide();
-                    $("#remove_from_contacts").hide();
-                    $("#add_to_contacts").show()
-
-                    $('#have_in_contacts_ul li a[href="{{ user.get_absolute_url }}"]').parent().remove();
                 });
 
                 // Report user
@@ -126,6 +147,7 @@
                 });
 
                 $("#report_user_dialog").on("report_user_dialog_event", function(){
+                    // TODO: check that this is profile user
                     $("#is_reported").show();
                     $("#report_user").hide();
                 });

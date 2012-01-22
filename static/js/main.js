@@ -46,54 +46,54 @@ function update_path(span_id, select_div_id){
 
 /* ---- Methods for manipulations with location selectors ---- */
 // path is a list of region ids (top to bottom level) with length from 0 to 3
-    function set_select_location(div_id, path){
-        var select_1 = $('#'+div_id+' [name="region_1"]');
-        var select_2 = $('#'+div_id+' [name="region_2"]');
-        var select_3 = $('#'+div_id+' [name="region_3"]');
+function set_select_location(div_id, path){
+    var select_1 = $('#'+div_id+' [name="region_1"]');
+    var select_2 = $('#'+div_id+' [name="region_2"]');
+    var select_3 = $('#'+div_id+' [name="region_3"]');
 
-        select_1.unbind().change(function(){
+    select_1.unbind().change(function(){
+        select_3.hide();
+
+        if (select_1.val()==""){
+            select_2.hide();
+            select_2.val("").change();
+        }
+        else
+            $.getJSON(GET_SUB_REGIONS_URL, {location: select_1.val()}, function(data){
+                if (data.length>0){
+                    select_2.show();
+                    select_2.children('[value!=""]').remove();
+                    $.each(data, function(index, value){
+                        select_2.append($("<option/>").val(value["id"]).text(value["name"]));
+                    });
+                    select_2.val(path.length>1 ? path[1] : "").change();
+                } else
+                    select_2.hide();
+            });
+    });
+
+    select_2.unbind().change(function(){
+        if (select_2.val()=="")
             select_3.hide();
+        else {
+            $.getJSON(GET_SUB_REGIONS_URL, {location: select_2.val()}, function(data){
+                if (data.length>0){
+                    select_3.show();
+                    select_3.children('[value!=""]').remove();
+                    $.each(data, function(index, value){
+                        select_3.append($("<option/>").val(value["id"]).text(value["name"]));
+                    });
+                    select_3.val(path.length>2 ? path[2] : "");
+                } else
+                    select_3.hide();
+            });
+        }
+    });
 
-            if (select_1.val()==""){
-                select_2.hide();
-                select_2.val("").change();
-            }
-            else
-                $.getJSON(GET_SUB_REGIONS_URL, {location: select_1.val()}, function(data){
-                    if (data.length>0){
-                        select_2.show();
-                        select_2.children('[value!=""]').remove();
-                        $.each(data, function(index, value){
-                            select_2.append($("<option/>").val(value["id"]).text(value["name"]));
-                        });
-                        select_2.val(path.length>1 ? path[1] : "").change();
-                    } else
-                        select_2.hide();
-                });
-        });
-
-        select_2.unbind().change(function(){
-            if (select_2.val()=="")
-                select_3.hide();
-            else {
-                $.getJSON(GET_SUB_REGIONS_URL, {location: select_2.val()}, function(data){
-                    if (data.length>0){
-                        select_3.show();
-                        select_3.children('[value!=""]').remove();
-                        $.each(data, function(index, value){
-                            select_3.append($("<option/>").val(value["id"]).text(value["name"]));
-                        });
-                        select_3.val(path.length>2 ? path[2] : "");
-                    } else
-                        select_3.hide();
-                });
-            }
-        });
-
-        select_1.val(path.length>0 ? path[0] : "").change();
-        select_2.val(path.length>1 ? path[1] : "").change();
-        select_3.val(path.length>2 ? path[2] : "");
-    }
+    select_1.val(path.length>0 ? path[0] : "").change();
+    select_2.val(path.length>1 ? path[1] : "").change();
+    select_3.val(path.length>2 ? path[2] : "");
+}
 
 function form_location_id(div_id){
     // This is a helper method to extract location id from selector block
@@ -119,9 +119,7 @@ var UserListItem = Backbone.View.extend({
     //className: "document-row",
 
     events: {
-        //"click .icon":          "open",
-        //"click .button.edit":   "openEditDialog",
-        //"click .button.delete": "destroy"
+        //"click .icon":          "open"
     },
 
     // show_remove_btn is boolean showing if remove button should be added
@@ -136,7 +134,12 @@ var UserListItem = Backbone.View.extend({
     attach_buttons: function(){
         var username = this.username;
 
-        if (this.show_remove_btn && USERNAME!=""){
+        if ($(this.el).children("a").length==0)
+            // TODO: explicit use of url (use global variable instead) - everywhere
+            $("<a/>").attr("href", "/users/"+this.username+"/")
+                    .text(this.username).appendTo($(this.el));
+
+        if (this.show_remove_btn && USERNAME!="")
             var remove_btn = $("<span/>")
                     .attr("title", "Удалить из контактов")
                     .addClass("side_list_btn ui-icon ui-icon-close")
@@ -145,8 +148,6 @@ var UserListItem = Backbone.View.extend({
                         remove_from_contacts_init(username);
                     })
                     .appendTo($(this.el));
-            $(this.el).append(remove_btn);
-        }
 
         if (username!=USERNAME)
             var report_btn = $("<span/>")
@@ -161,7 +162,7 @@ var UserListItem = Backbone.View.extend({
                     })
                     .appendTo($(this.el));
 
-        if (username!=USERNAME && $.inArray(username, CONTACTS)==-1){
+        if (username!=USERNAME && $.inArray(username, CONTACTS)==-1)
             var add_btn = $("<span/>")
                     .attr("title", "Добавить в контакты")
                     .addClass("side_list_btn ui-icon ui-icon-plus")
@@ -173,16 +174,12 @@ var UserListItem = Backbone.View.extend({
                             add_to_contacts_dialog_init(username);
                     })
                     .appendTo($(this.el));
-        }
     },
 
     render: function(){
         $(this.el).html("");
 
-        // TODO: explicit use of url (use global variable instead)
-        var link = $("<a/>").attr("href", "/users/"+this.username).text(this.username);
-        $(this.el).append(link);
-
+        
         this.attach_buttons();
         return this;
     }

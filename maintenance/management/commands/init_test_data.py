@@ -162,3 +162,14 @@ class Command(BaseCommand):
                         Contact.objects.create(user=users_db[i], contact=contact)
                     except IntegrityError:
                         continue
+
+        # Add superuser as a contact to a few users
+        for superuser in User.objects.filter(is_superuser=True):
+            for i in range(3):
+                try:
+                    Contact.objects.create(user=choice(users_db), contact=superuser)
+                except IntegrityError:
+                    pass
+
+            if not superuser.first_name and not superuser.last_name:
+                superuser.first_name = superuser.username

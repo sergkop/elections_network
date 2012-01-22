@@ -15,7 +15,8 @@
     $("#add_to_contacts_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить в контакты", buttons: {
         "Добавить": function(){
             $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
-                $("#add_to_contacts_dialog").trigger("add_to_contacts_event", []);
+                var username = $('#add_to_contacts_form input[name="username"]').val();
+                $("#add_to_contacts_dialog").trigger("add_to_contacts_event", [username]);
                 $("#add_to_contacts_dialog").dialog("close");
             });
         },

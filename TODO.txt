@@ -6,6 +6,7 @@
 
 ===============================
 
+* create backbone js view for user and link lists
 * Report and delete icon-buttons for links (in the lists)
 * add tips to buttons and ? signs to get help on features of the system
 * Подписать какие символы может содержать username + оформление формы регистрации
@@ -41,6 +42,7 @@
 * In become voter dialog the same ajax request is repeated twice
 * Messages inserted into login dialogs are repeated (main.js, profile, location)
 * Add captcha to registration form if loginza is not used
+* Tabs with comments, statistics, maps
 
 Tasks:
     * interface for managing reports on users and links

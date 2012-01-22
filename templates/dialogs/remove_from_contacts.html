@@ -15,7 +15,8 @@
             "Удалить": function(){
                 $.post($("#remove_from_contacts_form").attr("action"),
                     $("#remove_from_contacts_form").serialize(), function(data){
-                        $("#remove_from_contacts_dialog").trigger("remove_from_contacts_event", []);
+                        var username = $('#remove_from_contacts_form input[name="username"]').val();
+                        $("#remove_from_contacts_dialog").trigger("remove_from_contacts_event", [username]);
                         $("#remove_from_contacts_dialog").dialog("close");
                     }
                 );

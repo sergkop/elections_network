@@ -58,6 +58,16 @@
 
     <div>{{ profile_user.profile.about }}</div>
 
+    {% if user.is_authenticated %}
+        {% include "dialogs/send_message.html" %}
+
+        {% include "dialogs/add_to_contacts.html" %}
+
+        {% include "dialogs/remove_from_contacts.html" %}
+
+        {% include "dialogs/report_user.html" %}
+    {% endif %}
+
     {% if profile_user != user %}
         <div id="in_contacts" {% if not in_contacts %}style="display:none;"{% endif %}><i>Добавлен в контакты</i></div>
         <div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
@@ -78,14 +88,6 @@
         </script>
 
         {% if user.is_authenticated %}
-            {% include "dialogs/send_message.html" %}
-
-            {% include "dialogs/add_to_contacts.html" %}
-
-            {% include "dialogs/remove_from_contacts.html" %}
-
-            {% include "dialogs/report_user.html" %}
-
             <script type="text/javascript">
                 // Send message
                 $("#send_message").click(function(){
@@ -114,7 +116,6 @@
                     $("#in_contacts").hide();
                     $("#remove_from_contacts").hide();
                     $("#add_to_contacts").show()
-                    $("#remove_from_contacts_dialog").dialog("close");
 
                     $('#have_in_contacts_ul li a[href="{{ user.get_absolute_url }}"]').parent().remove();
                 });
@@ -204,9 +205,17 @@
                     $("#become_voter_change_region_btn").hide();
                 }
             });
-            
-            // TODO: activate become_voter_change_region_btn, become_voter_sign_up_btn when needed
         </script>
     {% endif %}
+
+    <script type="text/javascript">
+        $("#contacts_ul li").each(function(index){
+            var list_item = new UserListItem($(this), {% if profile_user == user %}true{% else %}false{% endif %});
+        });
+
+        $("#have_in_contacts_ul li").each(function(index){
+            var list_item = new UserListItem($(this), false);
+        });
+    </script>
 
 {% endblock %}

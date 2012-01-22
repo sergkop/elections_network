@@ -48,6 +48,9 @@ General advice:
     * Database is stored in database.sqlite, which you can always delete it and re-run 
       'python manage.py syncdb', 'python manage.py init_db' if something goes wrong.
 
+Testing:
+    * Run 'python manage.py init_test_data' to load database with users, links and contacts created for test purposes
+
 Deployment:
      -------- Optionally create virtualenv -------
     * sudo pip install virtualenv

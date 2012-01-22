@@ -1,15 +1,15 @@
 * Update yaml, reference to them in footer, remove unnecessary yaml files, change page layout (100% width)
-* Add to contacts in all the lists except list of concepts on user's profile page
-* add tips to buttons and ? signs to get help on features of the system
-* Подписать какие символы может содержать username
 * Data generation for testing - users, links, contacts
-* start using backbone js
 
 * Настроить стену вконтакте
 * yandex метрика
 
 ===============================
 
+* Report and delete icon-buttons for links (in the lists)
+* add tips to buttons and ? signs to get help on features of the system
+* Подписать какие символы может содержать username + оформление формы регистрации
+* In in dialogs title is usually similar to the text inside the window - what to do?
 * if no region is selected for voting, path on profile page is not displayed properly
 * highlight buttons on hover, especially small icons
 * страница для всей россии
@@ -24,7 +24,6 @@
 * autogenerate username from first and last name
 * notifications about new users in the region
 * https://www.google.com/webmasters/
-* posts to lenta.ru forum
 * limit user's ability to add links (daily limit?)
 * if user's links are often reported on - look at user
 * ability to block users
@@ -38,8 +37,10 @@
 * loginza produces js errors on closing dialogs by Esc
 * Add entering location in registration form
 * Collect evidence on reports (users, links), add text field for writing complaints
-* speed up init_db
+* speed up init_db and init_test_data
 * In become voter dialog the same ajax request is repeated twice
+* Messages inserted into login dialogs are repeated (main.js, profile, location)
+* Add captcha to registration form if loginza is not used
 
 Tasks:
     * interface for managing reports on users and links

@@ -1,15 +1,7 @@
 {% if location.parent_1 %}
-    <li>
-        <a href="{{ location.parent_1.get_absolute_url }}">{{ location.parent_1 }}</a> 
-    </li>
-    <li>&rarr;</li>
+    <a href="{{ location.parent_1.get_absolute_url }}">{{ location.parent_1 }}</a> &rarr;
 {% endif %}
 {% if location.parent_2 %}
-    <li>
-        <a href="{{ location.parent_2.get_absolute_url }}">{{ location.parent_2 }}</a>
-    </li>
-    <li>&rarr;</li>
+    <a href="{{ location.parent_2.get_absolute_url }}">{{ location.parent_2 }}</a> &rarr;
 {% endif %}
-<li>
-    <a href="{{ location.get_absolute_url }}">{{ location }}</a>
-</li>
+<a href="{{ location.get_absolute_url }}">{{ location }}</a>

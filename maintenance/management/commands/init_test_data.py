@@ -1,7 +1,9 @@
 # coding=utf8
 from random import choice
+import sys
 
 from django.core.management.base import BaseCommand
+from django.db.utils import IntegrityError
 
 # [(name, username)]
 male_names = (
@@ -90,17 +92,30 @@ links = [
     (u'Электронная демократия', 'http://www.facebook.com/groups/ns.fred/'),
 ]
 
+def print_progress(i, count):
+    """ Show progress message updating in-place """
+    if i < count-1:
+        sys.stdout.write("\r%(percent)2.1f%%" % {'percent': 100*float(i)/count})
+        sys.stdout.flush()
+    else:
+        sys.stdout.write("\r")
+        sys.stdout.flush()
+
 class Command(BaseCommand):
     help = "Loads data for testing - users, links, participations, etc."
 
     def handle(self, *args, **options):
-        #from geography.models import Location
+        from geography.models import Location
         from django.contrib.auth.models import User
-        from links.models import 
-        #from users.models import *
+        from links.models import Link
+        from users.models import Contact, Participation
 
+        users_db = []
+        USER_COUNT = 300
+        print "creating users"
         # Create users
-        for i in xrange(300):
+        for i in xrange(USER_COUNT):
+            print_progress(i, USER_COUNT)
             is_male = choice([True, False])
             if is_male:
                 first_name, username = choice(male_names)
@@ -115,16 +130,35 @@ class Command(BaseCommand):
 
                 try:
                     user = User.objects.create(username=username+postfix, first_name=first_name, last_name=last_name)
-                except:
+                except IntegrityError:
                     continue
                 else:
+                    users_db.append(user)
                     profile = user.get_profile()
                     profile.about = u"Этот пользователь создан в тестовых целях и не является настоящим человеком"
                     profile.save()
                     break
 
+        print "creating links"
+        locations_db = list(Location.objects.all())
+        for i in range(len(locations_db)):
+            print_progress(i, len(locations_db))
+            for j in range(choice([1, 2, 3, 4, 5])):
+                user = choice(users_db)
+                link_data = choice(links)
+                try:
+                    Link.objects.create(location=locations_db[i], user=user, name=link_data[0], url=link_data[1])
+                except IntegrityError:
+                    continue
 
-            # Creare links
-            links
-                
-
+        print "creating contacts"
+        for i in range(USER_COUNT):
+            print_progress(i, USER_COUNT)
+            Participation.objects.create(location=choice(locations_db), user=users_db[i], type='voter')
+            for i in range(choice([1, 2, 3, 4, 5])):
+                contact = choice(users_db)
+                if contact != user:
+                    try:
+                        Contact.objects.create(user=users_db[i], contact=contact)
+                    except IntegrityError:
+                        continue

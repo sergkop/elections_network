@@ -8,9 +8,22 @@
 
 {% block menu %}
     <li>&rarr;</li>
-    {% with location=current_location %}
-        {% include "elements/location_path.html" %}
-    {% endwith %}
+
+    {% if current_location.parent_1 %}
+        <li>
+            <a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1 }}</a> 
+        </li>
+        <li>&rarr;</li>
+    {% endif %}
+    {% if current_location.parent_2 %}
+        <li>
+            <a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2 }}</a>
+        </li>
+        <li>&rarr;</li>
+    {% endif %}
+    <li>
+        <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a>
+    </li>
 
     {% if sub_regions %}
         <li>&rarr;</li>
@@ -116,6 +129,10 @@
 
         {% include "dialogs/become_observer.html" %}
 
+        {% include "dialogs/add_to_contacts.html" %}
+
+        {% include "dialogs/report_user.html" %}
+
         {% include "dialogs/add_link.html" %}
 
         {% include "dialogs/report_link.html" %}
@@ -196,5 +213,11 @@
             });
         </script>
     {% endif %}
+
+    <script type="text/javascript">
+        $("#voters_ul li").each(function(index){
+            var list_item = new UserListItem($(this), false);
+        });
+    </script>
 
 {% endblock %}

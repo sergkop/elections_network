@@ -125,71 +125,66 @@ var UserListItem = Backbone.View.extend({
     },
 
     // show_remove_btn is boolean showing if remove button should be added
-    initialize: function(username, show_remove_btn){
-        // TODO: explicit use of url (use global variable instead)
-        $(this.el).html("");
+    initialize: function(li, show_remove_btn, username){
+        this.el = li;
+        this.show_remove_btn = show_remove_btn;
+        this.username = (username!=undefined) ? username : $(this.el).children("a").text();
 
-        var link = $("<a/>").attr("href", "/users/"+username).text(username);
-        $(this.el).append(link);
+        this.attach_buttons();
+    },
 
-        if (show_remove_btn){
-            var remove_btn = $("<span/>").attr("title", "Удалить из контактов")
-                    .addClass("side_list_btn ui-icon ui-icon-close").tipsy({gravity: 'n'});
+    attach_buttons: function(){
+        var username = this.username;
+
+        if (this.show_remove_btn && USERNAME!=""){
+            var remove_btn = $("<span/>")
+                    .attr("title", "Удалить из контактов")
+                    .addClass("side_list_btn ui-icon ui-icon-close")
+                    .tipsy({gravity: 'n'})
+                    .click(function(){
+                        remove_from_contacts_init(username);
+                    })
+                    .appendTo($(this.el));
             $(this.el).append(remove_btn);
         }
 
-        var report_btn = $("<span/>")
-                .attr("title", "Пожаловаться на пользователя")
-                .addClass("side_list_btn ui-icon ui-icon-notice")
-                .tipsy({gravity: 'n'})
-                .click(function(){
-                    if (USERNAME=="")
-                        login_dialog_buttons("report_user_dialog", LOGIN_URL,
-                                "Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему");
-                    else
-                        $("#report_user_hidden_username").val(username);
-                    $("#report_user_dialog").dialog("open");
-                })
-                .appendTo($(this.el));
+        if (username!=USERNAME)
+            var report_btn = $("<span/>")
+                    .attr("title", "Пожаловаться на пользователя")
+                    .addClass("side_list_btn ui-icon ui-icon-notice")
+                    .tipsy({gravity: 'n'})
+                    .click(function(){
+                        if (USERNAME=="")
+                            login_dialog_init("Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему");
+                        else
+                            report_user_dialog_init(username);
+                    })
+                    .appendTo($(this.el));
 
-        if (username!=USERNAME && !(username in CONTACTS)){
+        if (username!=USERNAME && $.inArray(username, CONTACTS)==-1){
             var add_btn = $("<span/>")
                     .attr("title", "Добавить в контакты")
                     .addClass("side_list_btn ui-icon ui-icon-plus")
                     .tipsy({gravity: 'n'})
                     .click(function(){
                         if (USERNAME=="")
-                            login_dialog_buttons("report_user_dialog", LOGIN_URL,
-                                    "Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему");
+                            login_dialog_init("Чтобы добавить пользователя в контакты, пожалуйста, войдите в систему");
                         else
-                            $("#report_user_hidden_username").val(username);
-                        $("#report_user_dialog").dialog("open");
+                            add_to_contacts_dialog_init(username);
                     })
                     .appendTo($(this.el));
         }
     },
 
-    render: function() {}
-});
+    render: function(){
+        $(this.el).html("");
 
+        // TODO: explicit use of url (use global variable instead)
+        var link = $("<a/>").attr("href", "/users/"+this.username).text(this.username);
+        $(this.el).append(link);
 
-
-function add_user_list_buttons(li){
-    var username = li.children("a").text();
-
-    
-    user_li_report_btn.click(function(){
-        alert("report");
-    });
-    user_li_remove_btn.click(function(){
-        alert("report");
-    });
-    
-    $(this).append(user_li_report_btn).append(user_li_remove_btn);
-    
-    if (USERNAME==""){
-        
-    } else {
-        
+        this.attach_buttons();
+        return this;
     }
-}
+
+});

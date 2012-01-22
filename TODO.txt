@@ -1,11 +1,18 @@
 * Update yaml, reference to them in footer, remove unnecessary yaml files, change page layout (100% width)
-* Data generation for testing - users, links, contacts
 
 * Настроить стену вконтакте
 * yandex метрика
 
 ===============================
 
+* выбрать субъект - первый уровень
+* сворачивающиеся блоки
+* dynamic check and indicate the type of allowed links, write that it should start http:// or https://
+* on link report page align list to the left
+* on changing voter's region on profile page - "избиратель" can disappear
+* in become voter dialog indicate if user has signed up somewhere else
+* Remove browser cache on updating media files
+* on entering wrong password user is redirected to login page
 * create backbone js view for user and link lists
 * Report and delete icon-buttons for links (in the lists)
 * add tips to buttons and ? signs to get help on features of the system
@@ -43,6 +50,9 @@
 * Messages inserted into login dialogs are repeated (main.js, profile, location)
 * Add captcha to registration form if loginza is not used
 * Tabs with comments, statistics, maps
+* if Back button of browser is used, javascript icon-buttons are not update
+* Ability to edit texts on pages (like in cms)
+* Become observer button should open new window
 
 Tasks:
     * interface for managing reports on users and links

@@ -35,7 +35,7 @@ class Command(BaseCommand):
 
         db_entries = {}
 
-        print "loading the regions heirarchy"
+        print "loading the regions hierarchy"
         data = json.loads(open(os.path.join(settings.PROJECT_PATH, 'regions.json')).read())
         i = 0
         for location in iterate_struct(data, []):

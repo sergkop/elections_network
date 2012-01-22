@@ -7,30 +7,51 @@ class="single_col"
 
 {% block content %}
 
-<h1>Добро пожаловать!</h1>
 <div class="welcome_message">
-    An election is a formal decision-making process by which a population chooses an individual to hold public office.[1] Elections have been the usual mechanism by which modern representative democracy has operated since the 17th century.[1] Elections may fill offices in the legislature, sometimes in the executive and judiciary, and for regional and local government. This process is also used in many other private and business organisations, from clubs to voluntary associations and corporations.<br/><br/>
-    The universal use of elections as a tool for selecting representatives in modern democracies is in contrast with the practice in the democratic archetype, ancient Athens. As the Elections were considered an oligarchic institution and most political offices were filled using sortition, also known as allotment, by which officeholders were chosen by lot.<br/><br/>
+    <p>Интернет-площадка для общественного контроля за выборами позволяет гражданам, желающим помочь
+    провести в нашей стране <b>прозрачные</b> и <b>честные выборы</b>,</p>
+    <ul>
+        <li>находить единомышленников</li>
+        <li>совместно осуществлять контроль за выборами</li>
+        <li>проводить освещение хода выборов, параллельное официальному.</li>
+    </ul>
+
+    <p>
+        <span style="color: red;"><b>ВНИМАНИЕ</b>:</span> это <b>прототип интернет-площадки</b>, предназначенный для <b>внутреннего использования</b>
+        командой разработчиков и тестировщиков. Подробная информация о проекте доступна на
+        <a href="http://bit.ly/elections_site" target="_blank">сайте проекта</a>.
+        <b>Домен</b>, на котором вы сейчас находитесь, - <b>временный</b> и будет сменен в ближайшее время.
+    </p>
+
+    <p>Вы можете просматривать всю информацию на сайте анонимно. Для выкладывания новой информации
+    о ходе выборов и общения с другими участниками, необходимо пройти короткую регистрацию.</p>
 </div>
 
 <div class="main_login">
     {% if not user.is_authenticated %}
-        Чтобы получить полный доступ к системе
+        Чтобы получить полный доступ к системе, необходимо
         <div class="btn_block">
-            <a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
-            <span class="text_between_btns">или</span>
-            <span id="login_btn2" class="clickable">Войдите</span>
+            <!--<a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
+            <span class="text_between_btns">или</span>-->
+            <center><span id="login_btn2" class="clickable">Войти в систему</span></center>
         </div>
     {% else %}
-        <a href="{{ user.get_absoule_url }}">{{ user.username }}</a>
+        <h4>
+            Вы вошли в систему как
+            <a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
+        </h4>
+        <br/>
+        <a id="profile_btn" href="{{ user.get_absolute_url }}">Перейти на свою страницу</a>
     {% endif %}
 </div>
 <div class="main_region">
-    Или выберите избирательный участок:
+    Выберите свой регион
     <div id="choose_regions">
         <form action="{% url goto_location %}" method="get">
         {% include "elements/region_choice.html" %}
-        <input id="goto_location" type="submit" value="Перейти"/>
+        <div>
+            <input id="goto_location" type="submit" value="Перейти"/>
+        </div>
         </form>
     </div>
 </div>
@@ -39,10 +60,11 @@ class="single_col"
     $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}}); // TODO: icon doesn't appear
     set_select_location("choose_regions", []);
 
+    $("#profile_btn").button();
     $("#reg_btn").button();
     $("#login_btn2").button().click(function(){
         $("#login_dialog").dialog("open");
-        login_dialog_buttons("login_dialog", "{% url login %}", "");
+        //login_dialog_buttons("login_dialog", "{% url login %}", "");
     });
 </script>
 

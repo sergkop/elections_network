@@ -19,13 +19,10 @@
                     </table>
 
                     <input id="login_form_submit" type="submit" value="Войти" />
+                    <a id="login_dialog_register" href="{% url register %}">Регистрация</a>
                     <!--input type="hidden" name="next" {% if next %}value="{{ next }}"{% else %}value="{{ request.get_full_path }}"{% endif %} /-->
 
                 </form>
-
-                <br/>
-
-                или <a href="{% url register %}">зарегистрируйтесь</a>
             </td>
             <td style="vertical-align:top; border-left: 1px solid #AAA;">
                 <iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url={{ LOGINZA_IFRAME_URL }}"
@@ -41,6 +38,9 @@
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
     }}).dialog("close");
+
+    $("#login_form_submit").button();
+    $("#login_dialog_register").button();
 
     // TODO: implement logging in without page reload
     function login_dialog_init(message){

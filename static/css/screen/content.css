@@ -41,9 +41,11 @@ h2 {
                        /* 24px */
 h3 {
     background: #666;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
     color: #fff;
     font-size: 150%;
-    padding: 3px 10px;
+    padding: 5px 10px;
     text-align: center;
 }
                        /* 18px */
@@ -440,30 +442,31 @@ tbody td {
     padding: 0 0 20px;
 }
 
-.hlist ul li, .hlist ul li a, .hlist ul li strong {
-    font-size: 1.2em;
-}
-
 /* Lists in side panels */
 .content_block {
     background: #f5f5f5;
     border: 1px solid #eee;
+    border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;
     margin: 0 0 10px;
-    padding: 3px 10px;
+    padding: 10px;
     -webkit-box-shadow: 0 8px 6px -6px #888;
     -moz-box-shadow: 0 8px 6px -6px #888;
     box-shadow: 0 8px 6px -6px #888;
 }
 .side_block_header {
-    width: 100%;
     background-color: #C9C9C9;
+    border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
     text-align: center;
+    width: 100%;
 }
 .side_block_header h4 {
     margin: 0.3em 0 0 0;
+    padding: 5px 0;
 }
 .side_list {
-    width: 100%;
+    padding: 0 10px 0 0;
 }
 .side_list_btn {
     text-decoration: none;

@@ -6,15 +6,17 @@
     </script>
 {% endblock %}
 
-{% block after_menu %}
-    <span style="font-weight: bold; font-size: 1.2em; vertical-align: top;">
-        &rarr;
+{% block menu %}
+    <li>&rarr;</li>
+    <li>
         {% with location=current_location %}
             {% include "elements/location_path.html" %}
         {% endwith %}
+    </li>
 
-        {% if sub_regions %}
-            &rarr;
+    {% if sub_regions %}
+        <li>&rarr;</li>
+        <li>
             <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                 <select id="goto_subregion" name="region_1">
                     <option value="" selected="selected">Перейти на нижестоящий регион</option>
@@ -23,8 +25,8 @@
                     {% endfor %}
                 </select>
             </form>
-        {% endif %}
-    </span>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block left_column %}

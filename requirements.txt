@@ -1,3 +1,6 @@
-django==1.3.1
-django-loginza
-flup
+Django==1.3.1
+South==0.7.3
+django-loginza==0.3.5
+## FIXME: could not find svn URL in dependency_links for this package:
+flup==1.0.3.dev-20110405
+wsgiref==0.1.2

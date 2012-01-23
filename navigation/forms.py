@@ -15,7 +15,7 @@ class RegistrationForm(auth_forms.UserCreationForm):
     def clean_username(self):
         if self.cleaned_data['username']:
             try: 
-                u = User.objects.exclude(id=self.user_id).get(username=self.cleaned_data['username'])
+                u = User.objects.get(username=self.cleaned_data['username'])
             # if username is unique - it's ok
             except User.DoesNotExist: 
                 u = None
@@ -27,7 +27,7 @@ class RegistrationForm(auth_forms.UserCreationForm):
     def clean_email(self):
         if self.cleaned_data['email']:
             try: 
-                u = User.objects.exclude(id=self.user_id).get(email=self.cleaned_data['email'])
+                u = User.objects.get(email=self.cleaned_data['email'])
             # if email is unique - it's ok
             except User.DoesNotExist: 
                 u = None

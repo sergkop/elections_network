@@ -77,6 +77,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'loginza',
+    'south',
+
     'geography',
     'users',
     'links',

@@ -2,6 +2,9 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from users import models
+
+
 class CompleteRegistrationForm(forms.Form):
     username = forms.RegexField(label="Имя пользователя", max_length=30,
             min_length=4, required=True, regex=r'^[\w.@+-]+$')
@@ -46,3 +49,9 @@ class CompleteRegistrationForm(forms.Form):
                 print self.user_id, u
                 raise forms.ValidationError(u'Пользователь с этим email уже зарегистрирован')
         return self.cleaned_data['email']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.Profile
+        exclude = ('user')
+    

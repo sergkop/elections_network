@@ -9,14 +9,16 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
+from django.views import generic as cbv
 
 from loginza.models import Identity, UserMap
 from loginza.templatetags.loginza_widget import _return_path
 
 from geography.models import LocationModel
 from links.models import LinkModel
-from users.forms import CompleteRegistrationForm
+from users.forms import CompleteRegistrationForm, ProfileForm
 from users.models import ContactModel, ParticipationModel, ReportUserModel
+from users.models import Profile
 import users.signals
 
 def current_profile(request):
@@ -182,3 +184,19 @@ def complete_registration(request):
 
     return render_to_response('complete_registration.html', {'form': form},
             context_instance=RequestContext(request))
+
+
+class ProfileUpdateView(cbv.UpdateView):
+    '''
+    View for updating info about user
+    '''
+    model = Profile
+    form_class = ProfileForm
+
+    def get_object(self):
+        return self.request.user.get_profile()
+    
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()
+
+

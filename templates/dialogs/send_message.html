@@ -21,12 +21,12 @@
 
 <script type="text/javascript">
     // Send message dialog
-    $("#send_message_dialog").dialog({width: 650, height: 250, modal: true, title: "Отправить сообщение", buttons: {
+    $("#send_message_dialog").dialog({width: 650, height: 270, modal: true, title: "Отправить сообщение", buttons: {
         "Отправить": function(){
             $.post("{% url send_message %}", $("#send_message_form").serialize(), function(data){
                 $("#send_message_dialog").dialog("close");
                 if (data=="ok")
-                    alert("Сообщение успешно отправлено");
+                    alert("Сообщение успешно отправлено на email пользователя");
                 else
                     alert("Не удалось отправить сообщение");
             });

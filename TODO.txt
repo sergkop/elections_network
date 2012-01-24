@@ -1,62 +1,59 @@
-* Update yaml, reference to them in footer, remove unnecessary yaml files, change page layout (100% width)
-
-* Настроить стену вконтакте
-* yandex метрика
-
-===============================
-
-* В User admin добавить поля со временем регистрации
-* Блок перехода на ниже стоящий уровень в breadcrumbs сдвинут вниз
-* Блок комментов прыгает вниз когда ширина экрана слишком мала
-* Обязательный ввод имени
-* выбрать субъект - первый уровень
-* сворачивающиеся блоки
-* dynamic check and indicate the type of allowed links, write that it should start http:// or https://
-* on link report page align list to the left
+* (!) В User admin добавить поля со временем регистрации
+* Put nginx.conf into repo
 * on changing voter's region on profile page - "избиратель" can disappear
-* in become voter dialog indicate if user has signed up somewhere else
-* Remove browser cache on updating media files
-* on entering wrong password user is redirected to login page
-* create backbone js view for user and link lists
-* Report and delete icon-buttons for links (in the lists)
+* (!) Report and delete icon-buttons for links (in the lists)
 * add tips to buttons and ? signs to get help on features of the system
-* Подписать какие символы может содержать username + оформление формы регистрации
-* In in dialogs title is usually similar to the text inside the window - what to do?
+* (!) Подписать какие символы может содержать username + оформление формы регистрации
 * if no region is selected for voting, path on profile page is not displayed properly
-* highlight buttons on hover, especially small icons
-* страница для всей россии
 * Кнопка помощь/спрятать помощь, которая показывает все подсказки к кнопкам
 * Use pagespeed to optimize load time
+* https://www.google.com/webmasters/
+* count how often people click on buttons in side bars (can we pass it to google analytics or yandex metrika?)
+  (at least look at post requests)
+* Гражданин наблюдатель - первая ссылка (?)
 * Start using django south
+
+====== Base version ===================
+* dynamic check and indicate the type of allowed links, write that it should start http:// or https://
+* in become voter dialog indicate if user has signed up somewhere else
+* on entering wrong password user is redirected to login page
+* create backbone js view for user and link lists
+* In dialogs title is usually similar to the text inside the window - what to do?
 * Ввести время в модели
 * password save by browser (check)
+* Use files compression
+* 'Add user' button with search (name, profession, location) (?)
+* loginza produces js errors on closing dialogs by Esc
+* Add entering location in registration form
+* In become voter dialog the same ajax request is repeated twice
+* Messages inserted into login dialogs are repeated (main.js, profile, location)
+* Add captcha to registration form if loginza is not used (use email confirmation instead)
+* Tabs with comments, statistics, maps
+* email confirmation of registration
+* show population of the regions and statistics from previous elections
+* возможность показывать ссылки с верхнего уровня (со 2го на 3й)
+* Извлечь информацию о тиках (с адресом) и показывать
+  http://www.zabkray.vybory.izbirkom.ru/region/zabkray?action=show_komissia&region=92&sub_region=92&type=100&sortMode=vidIk&vrnorg=2752000260059&vrnkomis=2752000260063
+  на карте
+* Зарубежные территории
+
+====== Later ===========
 * Favicon
 * Forgot password button
 * login using username or email
 * autogenerate username from first and last name
 * notifications about new users in the region
-* https://www.google.com/webmasters/
 * limit user's ability to add links (daily limit?)
 * if user's links are often reported on - look at user
 * ability to block users
-* Use files compression
 * 'Add link' button on profile page
-* 'Add user' button with search (name, profession, location) (?)
-* Require that password is not simple
 * Prevent attemps to hack account by matching password
 * Set traffic filter for IPs producing too many requests
 * Опрос на survey monkey о юзабилити
-* loginza produces js errors on closing dialogs by Esc
-* Add entering location in registration form
 * Collect evidence on reports (users, links), add text field for writing complaints
 * speed up init_db and init_test_data
-* In become voter dialog the same ajax request is repeated twice
-* Messages inserted into login dialogs are repeated (main.js, profile, location)
-* Add captcha to registration form if loginza is not used
-* Tabs with comments, statistics, maps
 * if Back button of browser is used, javascript icon-buttons are not update
 * Ability to edit texts on pages (like in cms)
-* Become observer button should open new window
 * кнопка для bookmark page
 
 Tasks:
@@ -65,6 +62,3 @@ Tasks:
         https://github.com/dragoon/django-selenium-testapp,
         https://github.com/weluse/django-nose-selenium)
     * readme -> readme.rst
-    * Страница для редактирования текста о себе, установки паролей, показ аккаунтов соц сетей (после подтверждения), блогов
-    * write documentation on how to run django
-    * email confirmation of registration

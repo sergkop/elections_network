@@ -10,6 +10,7 @@ from geography.models import Location
 from links.models import Link
 from users.models import Participation
 
+# TODO: restructure it and take only one parameter
 def goto_location(request):
     for name in ('region_3', 'region_2', 'region_1'):
         try:

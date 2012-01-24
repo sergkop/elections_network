@@ -51,12 +51,17 @@ General advice:
 Testing:
     * Run 'python manage.py init_test_data' to load database with users, links and contacts created for test purposes
 
+-------- Optionally create virtualenv -------
+* sudo pip install virtualenv
+* virtualenv --no-site-packages VIRTUAL_ENV_DIR
+* 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server or set VIRTUALENV in site_settings.py)
+
 Deployment:
-     -------- Optionally create virtualenv -------
-    * sudo pip install virtualenv
-    * virtualenv --no-site-packages VIRTUAL_ENV_DIR
-    * 'source VIRTUAL_ENV_DIR/bin/activate' (if installed must be run every time before running django server or set VIRTUALENV in site_settings.py)
 
     * install postfix (smtp client)
 
-    * remove {autoPublish: 0} option of vkontakte comments in templates/location.html
+    * Configure vkontakte comments, remove {autoPublish: 0} option of vkontakte comments in templates/location.html in production
+    * configure yandex.metrika
+    * configure Google Analytics
+    * set debug=False in site_settings.py on production
+    * configure django logging

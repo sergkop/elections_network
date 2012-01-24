@@ -6,7 +6,6 @@
             <td style="vertical-align:middle;">
                 <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
                     {% csrf_token %}
-                    Войдите в систему
                     <table>
                     <tr>
                         <td><label for="">Логин:</label></td>
@@ -34,7 +33,7 @@
 <script type="text/javascript">
     // Login dialog
     // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click) (?)
-    $("#login_dialog").dialog({width: 650, height: 340, modal: true, title: "Войти в систему", buttons: {
+    $("#login_dialog").dialog({width: 650, height: 340, modal: true, title: "Войдите в систему", buttons: {
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
     }}).dialog("close");

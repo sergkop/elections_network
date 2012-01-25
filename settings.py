@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'loginza',
+    'tinymce',
 
     'geography',
     'maintenance',

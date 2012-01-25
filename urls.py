@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^', include('navigation.urls')),
     url(r'^users/', include('users.urls')),
     url(r'^loginza/', include('loginza.urls')),
+    (r'^tinymce/', include('tinymce.urls')),
 )

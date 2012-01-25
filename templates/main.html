@@ -1,15 +1,96 @@
-{% extends "base.html" %}
+{% extends "location.html" %}
 
-{% block page_attrs %}
-id="page_main"
-class="single_col"
+{% block breadcrumbs %}{% endblock %}
+
+{% block left_column %}
+    <h3 class="column_header">Участники</h3>
+
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Наблюдатели</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                <li><a href="#">Ресурсы для наблюдателей</a></li>
+            </ul>
+            <button id="become_observer">Записаться</button>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Избиратели</h4>
+        </div>
+
+        <div class="content_block">
+            Записались {{ voter_count }} избирател{{ ending }}
+            <button id="become_voter">
+                <span id="become_voter_sign_up_btn">
+                    Записаться
+                </span>
+            </button>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% include "dialogs/become_voter.html" %}
+
+        {% include "dialogs/become_observer.html" %}
+
+        <script type="text/javascript">
+            // Become observer
+            $("#become_observer").click(function(){
+                become_observer_dialog_init();
+            });
+
+            // Become voter
+            $("#become_voter").click(function(){
+                become_voter_dialog_init([]);
+            });
+        </script>
+    {% else %}
+        <script type="text/javascript">
+            $("#become_observer").click(function(){
+                login_dialog_init("Чтобы записаться в наблюдатели, пожалуйста, войдите в систему");
+            });
+
+            $("#become_voter").click(function(){
+                login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
+            });
+        </script>
+    {% endif %}
+
+    <script type="text/javascript">
+        // Create buttons
+        $("#become_observer").button({icons: {primary: "ui-icon-check"}});
+        $("#become_voter").button({icons: {primary: "ui-icon-check"}});
+    </script>
+{% endblock %}
+
+{% block right_column %}
+    <h3 class="column_header">Инструменты</h3>
+
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Полезные ресурсы</h4>
+        </div>
+
+        <div class="content_block">
+            <ul id="links_ul" class="side_list">
+                <li><a href="http://nabludatel.org" target="_blank">Гражданин Наблюдатель</a></li>
+            </ul>
+        </div>
+    </div>
+
+
 {% endblock %}
 
 {% block content %}
 
-<div class="welcome_message">
+<div>
     <p>Интернет-площадка для общественного контроля за выборами позволяет гражданам, желающим помочь
-    провести в нашей стране <b>прозрачные</b> и <b>честные выборы</b>,</p>
+    провести в нашей стране <b>прозрачные</b> и <b>честные выборы</b>:</p>
     <ul>
         <li>находить единомышленников</li>
         <li>совместно осуществлять контроль за выборами</li>
@@ -25,17 +106,34 @@ class="single_col"
         на левой стороне экрана. Вы также можете написать нам на sergkop at gmail.com и mikpanko at gmail.com.
     </p>
 
-    <p>Вы можете просматривать всю информацию на сайте анонимно. Для выкладывания новой информации
-    о ходе выборов и общения с другими участниками, необходимо пройти короткую регистрацию.</p>
 </div>
 
-<div class="main_login">
+
+<div>
+    <center><h4>Найдите свой избирательный округ</h4></center>
+    <div id="choose_regions">
+        <form action="{% url goto_location %}" method="get">
+            <input id="goto_location" type="submit" value="Перейти" style="float: right;"/>
+            {% include "elements/region_choice.html" %}
+        </form>
+    </div>
+    <center>или</center>
+    <center>
+        <a href="/map">
+            <button id="map_location">
+                Найти на карте
+            </button>
+        </a>
+    </center>
+</div>
+
+<div>
     {% if not user.is_authenticated %}
         Чтобы получить полный доступ к системе, необходимо
-        <div class="btn_block">
+        <div>
             <!--<a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
             <span class="text_between_btns">или</span>-->
-            <center><span id="login_btn2" class="clickable">Войти в систему</span></center>
+            <center><span id="login_btn2" class="clickable">Войти</span></center>
         </div>
     {% else %}
         <h4>
@@ -43,29 +141,23 @@ class="single_col"
             <a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
         </h4>
         <br/>
-        <a id="profile_btn" href="{{ user.get_absolute_url }}">Перейти на свою страницу</a>
+        <button id="profile_btn">
+            <a href="{{ user.get_absolute_url }}">Перейти на свою страницу</a>
+        </button>
     {% endif %}
-</div>
-<div class="main_region">
-    Выберите свой регион
-    <div id="choose_regions">
-        <form action="{% url goto_location %}" method="get">
-        {% include "elements/region_choice.html" %}
-        <div>
-            <input id="goto_location" type="submit" value="Перейти"/>
-        </div>
-        </form>
-    </div>
 </div>
 
 <script type="text/javascript">
-    $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}}); // TODO: icon doesn't appear
+    // TODO: icon doesn't appear, button element is needed
+    $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}});
     set_select_location("choose_regions", []);
+
+    $("#map_location").button({icons: {primary: "ui-icon-search"}});
 
     $("#profile_btn").button();
     $("#reg_btn").button();
     $("#login_btn2").button().click(function(){
-        $("#login_dialog").dialog("open");
+        login_dialog_init();
         //login_dialog_buttons("login_dialog", "{% url login %}", "");
     });
 </script>

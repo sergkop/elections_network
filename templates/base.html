@@ -3,15 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" />
+    <!--link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" /-->
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
-    <link href="{{ STATIC_URL }}css/layout.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}libs/tipsy/tipsy.css" type="text/css" />
+    <link href="{{ STATIC_URL }}libs/yaml/base.css" rel="stylesheet" type="text/css"/>
     <!--[if lte IE 7]>
-    <link href="css/patches/patch_layout.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}libs/yaml/iehacks.css" rel="stylesheet" type="text/css"/>
     <![endif]-->
+    <link href="{{ STATIC_URL }}css/hlist.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}libs/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+    <link href="{{ STATIC_URL }}css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}css/typography.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/tipsy/tipsy.css" type="text/css" />
 
     <script type="text/javascript">
         //var current_location = "{{ current_location.id }}";
@@ -33,23 +38,36 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     {% block head %}{% endblock %}
 </head>
-<body {% block page_attrs %}{% endblock %}>
+<body>
 
-<div class="page_margins">
-    <div role="banner" id="header">
-        <h1>
-            <a id="title_link" href="/">Интернет-площадка для общественного контроля за выборами</a>
-        </h1>
-    </div>
+    <header>
+        <div class="ym-wrapper">
+            <div class="ym-wbox">
+                <a id="title_link" href="{% url main %}">
+                    <span class="title_letter">Г</span>ра<span class="title_letter">К</span>он
+                </a>
+                <span id="slogan">Гражданский контроль за выборами</span>
+            </div>
+        </div>
+    </header>
 
-    <div class="page">
-
-        <div id="nav" class="bread_crumbs" role="navigation">
-            <div class="hlist">
+    <nav>
+        <div class="ym-wrapper">
+            <div class="ym-hlist">
                 <ul>
                     <li><a href="{% url main %}">Главная</a></li>
-                    {% block menu %}{% endblock %}
+                    <li><a href="#">О проекте</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">Партнеры</a></li>
+                    <li><a href="#">Как помочь</a></li>
+                    <li><a href="#">Контакты</a></li>
                 </ul>
+
+                <!--form class="ym-searchform">
+                    <input class="ym-searchfield" type="search" placeholder="Search..." />
+                    <input class="ym-searchbutton" type="submit" value="Search" />
+                </form-->
+
                 <div class="login_logout">
                     {% if user.is_authenticated %}
                         <a href="{{ user.get_absolute_url }}">{{ user.get_full_name }}</a> |
@@ -60,39 +78,46 @@
                 </div>
             </div>
         </div>
+    </nav>
 
-        <div id="main">
+    {% block breadcrumbs %}{% endblock %}
 
-            <div id="col1" role="complementary">
-                <div id="col1_content" class="clearfix">
-                    {% block left_column %}{% endblock %}
+    <div id="main">
+
+        <div class="ym-wrapper">
+            <div class="ym-wbox">
+
+                <div class="ym-column">
+                    <div class="ym-col1">
+                        <div class="ym-cbox">
+                            {% block left_column %}{% endblock %}
+                        </div>
+                    </div>
+                    <div class="ym-col2">
+                        <div class="ym-cbox">
+                            {% block right_column %}{% endblock %}
+                        </div>
+                    </div>
+                    <div class="ym-col3">
+                        <div class="ym-cbox">
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div id="col2" role="complementary">
-                <div id="col2_content" class="clearfix">
-                    {% block right_column %}{% endblock %}
-                </div>
-                <!-- IE Column Clearing -->
-                <div id="ie_clearing">&nbsp;</div>
-            </div>
-
-            <div id="col3" role="main">
-                <div id="col3_content" class="clearfix">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
-
         </div>
-
     </div>
 
-    <div id="footer" role="contentinfo">
-        &copy;2012. <a href="https://sites.google.com/site/electionsnetwork/">
-            Интернет площадка для контроля за выборами.</a> Все ходы записаны.
-    </div>
-
-</div>
+    <footer>
+        <div class="ym-wrapper">
+            <div class="ym-wbox">
+                <p>
+                    &copy;2012. <a href="https://sites.google.com/site/electionsnetwork/">
+                    Интернет площадка для контроля за выборами.</a> Все ходы записаны.
+                    &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a></p>
+            </div>
+        </div>
+    </footer>
 
 {% if not user.is_authenticated %}
     <!-- TODO: move it to the top -->

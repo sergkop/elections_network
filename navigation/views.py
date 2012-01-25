@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User
@@ -9,9 +10,20 @@ from django.template import RequestContext
 
 from geography.models import Location
 from navigation.forms import RegistrationForm
+from users.models import Participation
 
 def main(request):
+    voter_count = Participation.objects.filter(type='voter').count()
+    if voter_count%10 == 1:
+        ending = u'ь'
+    elif voter_count%10 in (2, 3, 4):
+        ending = u'я'
+    else:
+        ending = u'ей'
+
     context = {
+        'voter_count': voter_count,
+        'ending': ending,
         'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))

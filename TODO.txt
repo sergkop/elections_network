@@ -1,25 +1,28 @@
 * (!) В User admin добавить поля со временем регистрации
-* Put nginx.conf into repo
+* Report and delete icon-buttons for links (in the lists)
 * on changing voter's region on profile page - "избиратель" can disappear
-* (!) Report and delete icon-buttons for links (in the lists)
-* add tips to buttons and ? signs to get help on features of the system
+
 * (!) Подписать какие символы может содержать username + оформление формы регистрации
+* add tips to buttons and ? signs to get help on features of the system
 * if no region is selected for voting, path on profile page is not displayed properly
-* Кнопка помощь/спрятать помощь, которая показывает все подсказки к кнопкам
-* Use pagespeed to optimize load time
-* https://www.google.com/webmasters/
-* count how often people click on buttons in side bars (can we pass it to google analytics or yandex metrika?)
-  (at least look at post requests)
+
 * Гражданин наблюдатель - первая ссылка (?)
 * Start using django south
+* Ввести время в модели
+* поиск по положению юзера - карта
+
+* Put nginx.conf into repo
+* Use pagespeed to optimize load time
+* https://www.google.com/webmasters/
 
 ====== Base version ===================
+* count how often people click on buttons in side bars (can we pass it to google analytics or yandex metrika?)
+  (at least look at post requests)
 * dynamic check and indicate the type of allowed links, write that it should start http:// or https://
 * in become voter dialog indicate if user has signed up somewhere else
 * on entering wrong password user is redirected to login page
 * create backbone js view for user and link lists
 * In dialogs title is usually similar to the text inside the window - what to do?
-* Ввести время в модели
 * password save by browser (check)
 * Use files compression
 * 'Add user' button with search (name, profession, location) (?)
@@ -36,6 +39,8 @@
   http://www.zabkray.vybory.izbirkom.ru/region/zabkray?action=show_komissia&region=92&sub_region=92&type=100&sortMode=vidIk&vrnorg=2752000260059&vrnkomis=2752000260063
   на карте
 * Зарубежные территории
+* rss feeds for project news, regional news
+* поиск по сайту
 
 ====== Later ===========
 * Favicon

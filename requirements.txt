@@ -1,3 +1,3 @@
 django==1.3.1
 django-loginza
-flup
+django-tinymce

@@ -1,0 +1,205 @@
+@media all {
+
+	.ym-hlist {
+		/* (en) containing floats in IE */
+		width:100%;
+		overflow:hidden;
+		/* (en|de) Bugfix:IE - collapsing horizontal margins */
+		position:relative;
+		/* (en) Repeat the main color from the image */
+		line-height:1em;
+		background: #ccc;
+	}
+
+	.ym-hlist ul {
+		margin:0;
+		padding: 0.5em 1.5em;
+		/* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+		display:inline;
+		float:left; /* LTR */
+	}
+
+	.ym-hlist ul li {
+		/* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+		display:inline;
+		float:left; /* LTR */
+		font-size:1.0em;
+		line-height:1em;
+		list-style-type:none;
+		margin: 0 .25em 0 0;
+		padding:0;
+	}
+
+	.ym-hlist ul li a,
+	.ym-hlist ul li strong {
+        background-color: #332FBA;
+		color:#fff;
+		display:block;
+		font-size:1em;
+		line-height: 2em;
+		padding: 0 0.5em;
+		font-weight:normal;
+		text-decoration:none;
+		text-shadow: 0 1px 1px rgba(0,0,0,.5);
+		width:auto;
+        -webkit-border-radius: 0.2em;
+        -moz-border-radius: 0.2em;
+	}
+
+	.ym-hlist ul li a:focus,
+	.ym-hlist ul li a:hover,
+	.ym-hlist ul li a:active  {
+		color: #ccc;
+		background:#666;
+		-webkit-border-radius: 0.2em;
+		-moz-border-radius: 0.2em;
+		border-radius: 0.2em;
+		text-decoration:none;
+		outline: 0 none;
+        color: #eee;
+	}
+
+	.ym-hlist ul li.active {
+		/* (en) Repeat the main color from the image */
+		/* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
+		background:#666;
+		background: rgba(255,255,255,.3);
+		-webkit-border-radius: 0.2em;
+		-moz-border-radius: 0.2em;
+		border-radius: 0.2em;
+		color: #fff;
+	}
+
+	.ym-hlist ul li.active strong,
+	.ym-hlist ul li.active a:focus,
+	.ym-hlist ul li.active a:hover,
+	.ym-hlist ul li.active a:active {
+		background:transparent;
+		color:#fff;
+		text-decoration:none;
+	}
+
+
+    /* ------ Breadcrumbs ----------------*/
+    
+    .breadcrumbs {
+        /* (en) containing floats in IE */
+        width:100%;
+        overflow:hidden;
+        /* (en|de) Bugfix:IE - collapsing horizontal margins */
+        position:relative;
+        /* (en) Repeat the main color from the image */
+        line-height:1em;
+        background: #fff;
+    }
+
+    .breadcrumbs ul {
+        margin:0;
+        padding: 0.5em 1.5em;
+        /* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+        display:inline;
+        float:left; /* LTR */
+    }
+
+    .breadcrumbs ul li {
+        /* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+        display:inline;
+        float:left; /* LTR */
+        font-size:1.0em;
+        line-height:1em;
+        list-style-type:none;
+        margin: 0 .25em 0 0;
+        padding:0;
+    }
+
+    .breadcrumbs ul li a,
+    .breadcrumbs ul li strong {
+        background-color: #DEE3FF;
+        color:#661330;
+        display:block;
+        font-size:1em;
+        line-height: 2em;
+        padding: 0 0.5em;
+        font-weight:normal;
+        text-decoration:none;
+        text-shadow: 0 1px 1px rgba(0,0,0,.5);
+        width:auto;
+        -webkit-border-radius: 0.2em;
+        -moz-border-radius: 0.2em;
+    }
+
+    .breadcrumbs ul li a:focus,
+    .breadcrumbs ul li a:hover,
+    .breadcrumbs ul li a:active  {
+        color: #ccc;
+        background:#666;
+        -webkit-border-radius: 0.2em;
+        -moz-border-radius: 0.2em;
+        border-radius: 0.2em;
+        text-decoration:none;
+        outline: 0 none;
+        color: #eee;
+    }
+
+    .breadcrumbs ul li.active {
+        /* (en) Repeat the main color from the image */
+        /* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
+        background:#666;
+        background: rgba(255,255,255,.3);
+        -webkit-border-radius: 0.2em;
+        -moz-border-radius: 0.2em;
+        border-radius: 0.2em;
+        color: #fff;
+    }
+
+    .breadcrumbs ul li.active strong,
+    .breadcrumbs ul li.active a:focus,
+    .breadcrumbs ul li.active a:hover,
+    .breadcrumbs ul li.active a:active {
+        background:transparent;
+        color:#fff;
+        text-decoration:none;
+    }
+
+
+
+	/* search form -------------------------------------- */
+	.ym-searchform {
+		float:right;
+		display: inline;
+		line-height: 2em;
+		padding: 0.5em 1.5em;
+	}
+
+	.ym-searchform .ym-searchfield {
+		background: #fff;
+		line-height: 1em;
+		padding: 0.25em;
+		width: 12em;
+		border: solid 1px #888;
+		border: solid 1px rgba(255,255,255,.1);
+		outline: none;
+
+		-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+		-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+		box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+	}
+
+	.ym-searchform .ym-searchbutton {
+		color: #fff;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1em;
+		line-height: 1.3571em;
+		padding: 0.25em;
+		border: solid 1px transparent;
+		text-shadow: 0 1px 1px rgba(0,0,0,.5);
+
+		-webkit-border-radius: .2em;
+		-moz-border-radius: .2em;
+		border-radius: .2em;
+
+		background: #5f5f5f;
+		background: rgba(255,255,255,.2);
+	}
+}

@@ -6,42 +6,50 @@
     </script>
 {% endblock %}
 
-{% block menu %}
-    <li>&rarr;</li>
+{% block breadcrumbs %}
+    <div class="ym-wrapper">
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="{% url main %}">Россия</a></li>
 
-    {% if current_location.parent_1 %}
-        <li>
-            <a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1 }}</a> 
-        </li>
-        <li>&rarr;</li>
-    {% endif %}
-    {% if current_location.parent_2 %}
-        <li>
-            <a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2 }}</a>
-        </li>
-        <li>&rarr;</li>
-    {% endif %}
-    <li>
-        <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a>
-    </li>
+                <li>&rarr;</li>
 
-    {% if sub_regions %}
-        <li>&rarr;</li>
-        <li>
-            <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
-                <select id="goto_subregion" name="region_1">
-                    <option value="" selected="selected">Перейти на нижестоящий регион</option>
-                    {% for sub_region in sub_regions %}
-                    <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>
-                    {% endfor %}
-                </select>
-            </form>
-        </li>
-    {% endif %}
+                {% if current_location.parent_1 %}
+                    <li>
+                        <a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1 }}</a> 
+                    </li>
+                    <li>&rarr;</li>
+                {% endif %}
+                {% if current_location.parent_2 %}
+                    <li>
+                        <a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2 }}</a>
+                    </li>
+                    <li>&rarr;</li>
+                {% endif %}
+                <li>
+                    <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a>
+                </li>
+
+                {% if sub_regions %}
+                    <li>&rarr;</li>
+                    <li>
+                        <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
+                            <select id="goto_subregion" name="region_1">
+                                <option value="" selected="selected">Перейти на нижестоящий регион</option>
+                                {% for sub_region in sub_regions %}
+                                <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
 
 {% block left_column %}
-    <h3>Участники</h3>
+    <h3 class="column_header">Участники</h3>
 
     <div class="clearfix">
         <div class="side_block_header">
@@ -51,7 +59,7 @@
         <div class="content_block">
             <ul class="side_list">
                 {% for observer in participants.observer %}
-                <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
+                    <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
                 {% endfor %}
             </ul>
             <button id="become_observer">Записаться</button>
@@ -66,7 +74,7 @@
         <div class="content_block">
             <ul id="voters_ul" class="side_list">
                 {% for voter in participants.voter %}
-                <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
+                    <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
                 {% endfor %}
             </ul>
             <button id="become_voter">
@@ -79,50 +87,6 @@
             </button>
         </div>
     </div>
-{% endblock %}
-
-{% block right_column %}
-    <h3>Инструменты</h3>
-
-    <div class="clearfix">
-        <div class="side_block_header">
-            <h4>Ссылки</h4>
-        </div>
-
-        <div class="content_block">
-            <ul id="links_ul" class="side_list">
-                {% for link in links %}
-                <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
-                {% endfor %}
-            </ul>
-            <button id="add_link" title="Добавить ссылку">Добавить</button>
-            <button id="report_link" title="Пожаловаться на ссылку">Пожаловаться</button>
-        </div>
-    </div>
-{% endblock %}
-
-{% block content %}
-
-    <h2>{{ current_location }}</h2>
-
-    <div id="vk_comments"></div>
-    <script type="text/javascript">
-        VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});
-    </script>
-
-    <script type="text/javascript">
-        // Create buttons
-        $("#become_observer").button({icons: {primary: "ui-icon-check"}});
-        $("#become_voter").button({icons: {
-            primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
-        }});
-        $("#add_link").button({icons: {primary: 'ui-icon-circle-plus'}}).tipsy({gravity: 'w'});
-        $("#report_link").button({icons: {primary: 'ui-icon-alert'}}).tipsy({gravity: 'w'});
-
-        $("#goto_subregion").change(function(){
-            $("#goto_subregion_form").submit();
-        });
-    </script>
 
     {% if user.is_authenticated %}
         {% include "dialogs/become_voter.html" %}
@@ -133,40 +97,10 @@
 
         {% include "dialogs/report_user.html" %}
 
-        {% include "dialogs/add_link.html" %}
-
-        {% include "dialogs/report_link.html" %}
-
         <script type="text/javascript">
-            // Add link
-            $("#add_link_dialog").on("add_link_event", function(){
-                $("#links_ul").append($("<li/>").append(
-                    $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val())
-                        .text($("#link_name_input").val())
-                ));
-            });
-
-            $("#add_link").click(function(){
-                add_link_dialog_init("{{ current_location.id }}");
-            });
-
-            // Report link
-            $("#report_link").click(function(){
-                report_link_dialog_init();
-
-                // TODO: move it inside report_link_dialog_init
-                $("#links_ul li").each(function(index){
-                    var url = $(this).children("a").attr("href");
-                    var text = $(this).text();
-                    var a_copy = $("<a/>").attr("href", url).text(text);
-                    var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
-                    $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
-                });
-            });
-
             // Become observer
             $("#become_observer").click(function(){
-                $("#become_observer_dialog").dialog("open");
+                become_observer_dialog_init();
             });
 
             // Become voter
@@ -203,7 +137,80 @@
             $("#become_voter").click(function(){
                 login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
             });
+        </script>
+    {% endif %}
 
+    <script type="text/javascript">
+        // Create buttons
+        $("#become_observer").button({icons: {primary: "ui-icon-check"}});
+        $("#become_voter").button({icons: {
+            primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
+        }});
+
+        $("#voters_ul li").each(function(index){
+            new UserListItem($(this), false);
+        });
+
+        $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
+            // TODO: explicit use of url (use global variable instead) - everywhere
+            $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
+        });
+    </script>
+{% endblock %}
+
+{% block right_column %}
+    <h3 class="column_header">Инструменты</h3>
+
+    <div class="clearfix">
+        <div class="side_block_header">
+            <h4>Полезные ресурсы</h4>
+        </div>
+
+        <div class="content_block">
+            <ul id="links_ul" class="side_list">
+                {% for link in links %}
+                <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <button id="add_link" title="Добавить ссылку">Добавить</button>
+            <button id="report_link" title="Пожаловаться на ссылку">Пожаловаться</button>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% include "dialogs/add_link.html" %}
+
+        {% include "dialogs/report_link.html" %}
+
+        <script type="text/javascript">
+            // Add link
+            $("#add_link_dialog").on("add_link_event", function(){
+                $("#links_ul").append($("<li/>").append(
+                    $("<a/>").attr("target", "_blank").attr("href", $("#link_url_input").val())
+                        .text($("#link_name_input").val())
+                ));
+            });
+
+            $("#add_link").click(function(){
+                add_link_dialog_init("{{ current_location.id }}");
+            });
+
+            // Report link
+            $("#report_link").click(function(){
+                report_link_dialog_init();
+
+                // TODO: move it inside report_link_dialog_init
+                $("#links_ul li").each(function(index){
+                    var url = $(this).children("a").attr("href");
+                    var text = $(this).text();
+                    var a_copy = $("<a/>").attr("href", url).text(text);
+                    var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
+                    $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
+                });
+            });
+        </script>
+    {% else %}
+        <script type="text/javascript">
             $("#add_link").click(function(){
                 login_dialog_init("Чтобы добавить ссылку, пожалуйста, войдите в систему");
             });
@@ -215,14 +222,23 @@
     {% endif %}
 
     <script type="text/javascript">
-        $("#voters_ul li").each(function(index){
-            new UserListItem($(this), false);
-        });
+        // Create buttons
+        $("#add_link").button({icons: {primary: 'ui-icon-circle-plus'}}).tipsy({gravity: 'w'});
+        $("#report_link").button({icons: {primary: 'ui-icon-alert'}}).tipsy({gravity: 'w'});
+    </script>
+{% endblock %}
 
-        $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
-            // TODO: explicit use of url (use global variable instead) - everywhere
-            $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
-        });
+{% block content %}
+    <h2>{{ current_location }}</h2>
+
+    <div id="vk_comments"></div>
+    <script type="text/javascript">
+        VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});
     </script>
 
+    <script type="text/javascript">
+        $("#goto_subregion").change(function(){
+            $("#goto_subregion_form").submit();
+        });
+    </script>
 {% endblock %}

@@ -7,6 +7,10 @@ class Location(models.Model):
     parent_1 = models.ForeignKey('self', null=True, blank=True, related_name='parents_1')
     parent_2 = models.ForeignKey('self', null=True, blank=True, related_name='parents_2')
 
+    # TODO: make name unique?
+    class Meta:
+        unique_together = ('name', 'parent_1', 'parent_2')
+
     def level(self):
         if self.parent_1:
             return 2

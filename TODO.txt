@@ -15,7 +15,12 @@
 * Use pagespeed to optimize load time
 * https://www.google.com/webmasters/
 
+* Настройка nginx - медиа файлы - есть ли доступ к templates?
+* рыжие иконки в темные
+* When window width is small, side blocks look ugly
+
 ====== Base version ===================
+* при нажатии регистрация в логин диалоге, показвать форму регистрации внутри диалога
 * count how often people click on buttons in side bars (can we pass it to google analytics or yandex metrika?)
   (at least look at post requests)
 * dynamic check and indicate the type of allowed links, write that it should start http:// or https://

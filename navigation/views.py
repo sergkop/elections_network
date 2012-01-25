@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from geography.models import Location
 from navigation.forms import RegistrationForm
+from navigation.models import Page
 from users.models import Participation
 
 def main(request):
@@ -27,6 +28,13 @@ def main(request):
         'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
+
+def static_page(request, name, template):
+    page = get_object_or_404(Page, name=name)
+    context = {
+        'content': page.content,
+    }
+    return render_to_response(template, context_instance=RequestContext(request, context))
 
 # TODO: what happens on /login page? login.html is a duplicate for elements/login.html
 def login(request):

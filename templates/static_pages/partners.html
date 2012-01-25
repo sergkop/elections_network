@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block left_column %}
+    <div class="ym-clearfix">
+        <div class="partner_block">
+            <a href="http://nabludatel.org">
+                <img src="{{ STATIC_URL }}images/partners/gn.jpg" width="200px" class="side_block_image" />
+            </a>
+            Подготовка наблюдателей и верификация официальных результатов выборов
+        </div>
+    </div>
+
+    <div class="ym-clearfix">
+        <div class="partner_block">
+            <a href="http://kuda-komu.net/">
+                <img src="{{ STATIC_URL }}images/partners/komukuda.gif" width="200px" class="side_block_image" />
+            </a>
+            Сервис по составлению жалоб и заявлений
+        </div>
+    </div>
+
+    <div class="ym-clearfix">
+        <div class="partner_block">
+            <a href="http://idemocracy.ru/">
+                <img src="{{ STATIC_URL }}images/partners/idemocracy.png" width="200px" class="side_block_image" />
+            </a>
+            Развитие электронной демократии в России
+        </div>
+    </div>
+{% endblock %}
+
+{% block right_column %}
+    <div class="ym-clearfix">
+        <div class="partner_block">
+            <a href="http://sidorinlab.ru/">
+                <img src="{{ STATIC_URL }}images/partners/sidorinlab.png" width="200px" class="side_block_image" />
+            </a>
+            Поисковое продвижение сайтов
+        </div>
+    </div>
+
+    <div class="ym-clearfix">
+        <div class="partner_block">
+            <a href="http://www.kartanarusheniy.ru/">
+                <img src="{{ STATIC_URL }}images/partners/kartanarusheniy.gif" width="200px" class="side_block_image" />
+            </a>
+            Карта нарушений на выборах
+        </div>
+    </div>
+
+    <div class="ym-clearfix">
+        <div class="partner_block">
+            <a href="https://lokolo.ru">
+                <img src="{{ STATIC_URL }}images/partners/lokolo.jpg" width="200px" class="side_block_image" />
+            </a>
+            Карта нарушений на выборах
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    {{ content|safe }}
+
+    <a href="mailto:mikpanko@gmail.com">
+        <button id="become_partner">Стать партнером</button>
+    </a>
+
+    <script type="text/javascript">
+        $("#become_partner").button({icons: {primary: "ui-icon-check"}});
+    </script>
+{% endblock %}

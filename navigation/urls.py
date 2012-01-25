@@ -5,6 +5,10 @@ urlpatterns = patterns('navigation.views',
     url(r'^login$', 'login', name='login'),
     url(r'^logout$', 'logout', name='logout'),
     url(r'^register$', 'register', name='register'),
+
+    # Static pages
+    url(r'^about$', 'static_page', {'name': 'about', 'template': 'static_pages/about.html'}, name='about'),
+    url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),
 )
 
 urlpatterns += patterns('',

@@ -83,6 +83,7 @@ INSTALLED_APPS = (
 
     'geography',
     'maintenance',
+    'navigation',
     'users',
     'links',
 )
@@ -122,3 +123,15 @@ LOGGING = {
 # Loginza settings
 LOGINZA_AMNESIA_PATHS = ('/complete_registration',)
 LOGINZA_DEFAULT_EMAIL = ""
+
+TINYMCE_JS_URL = STATIC_URL + 'libs/tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'libs', 'tiny_mce')
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'relative_urls': False,
+    'width': 900,
+    'height': 500,
+    'theme_advanced_buttons3': ",fontselect,fontsizeselect,forecolor,backcolor,|,sub,sup,|,charmap,",
+    'extended_valid_elements': "script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],",
+}
+TINYMCE_COMPRESSOR = False # TODO: compression doesn't work at the moment

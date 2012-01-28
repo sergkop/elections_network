@@ -8,3 +8,6 @@ class Page(models.Model):
 
     class Meta:
         unique_together = ('name',)
+
+    def __unicode__(self):
+        return self.name

@@ -16,10 +16,7 @@
 	}
 
 	/* fallback for media queries */
-	header,
-	nav,
-	#main,
-	footer {
+	header, nav, #main, footer {
 		min-width: 760px;
 	}
 
@@ -59,8 +56,7 @@
 		margin: 0;
 	}
 
-	header .ym-wbox,
-	footer .ym-wbox {
+	header .ym-wbox, footer .ym-wbox {
 		padding: 1.5em;
 	}
 
@@ -102,127 +98,13 @@
 		text-align: center;
 		text-decoration:none;
 	}
-
-    
-    /* additional styles */
-
-    .login_logout {
-        float: right;
-        padding-right: 5px;
-        margin-top: 0.5em;
-    }
-
-    .user_actions {
-        padding: 0 0 20px;
-    }
-
-    /* Lists in side panels */
-    .column_header {
-        background: none repeat scroll 0 0 #666666;
-        border-radius: 3px 3px 3px 3px;
-        color: #FFFFFF;
-        font-size: 150%;
-        padding: 5px 10px;
-        text-align: center;
-    }
-
-    .content_block {
-        background: #f5f5f5;
-        border: 1px solid #727DC2; /* #eee*/
-        border-top: none;
-        border-radius: 0 0 3px 3px;
-        -moz-border-radius: 0 0 3px 3px;
-        margin: 0 0 10px;
-        padding: 10px;
-        -webkit-box-shadow: 0 8px 6px -6px #888;
-        -moz-box-shadow: 0 8px 6px -6px #888;
-        box-shadow: 0 8px 6px -6px #888;
-    }
-    .side_block_header {
-        background-color: #C9C9C9;
-        border-radius: 3px 3px 0 0;
-        -moz-border-radius: 3px 3px 0 0;
-        text-align: center;
-        width: 100%;
-    }
-    .side_block_header h4 {
-        border: 1px solid #727DC2;
-        border-radius: 3px 3px 0 0;
-        border-bottom: none;
-        margin: 0.3em 0 0 0;
-        padding: 5px 0;
-    }
-    .side_list {
-        padding: 0 10px 0 0;
-        margin: 0 0 0 1em;
-    }
-    .side_list_btn {
-        text-decoration: none;
-        cursor: normal;
-        float: right;
-        margin-right: 10px;
-        color: grey;
-    }
-    .side_list_btn:hover {
-        cursor: pointer;
-        text-decoration: underline;
-        color: red;
-    }
-    .side_block_image {
-        border: 1px solid #777;
-    }
-
-    .partner_block {
-        background: #f5f5f5;
-        border: 1px solid #727DC2; /* #eee*/
-        border-radius: 3px;
-        -moz-border-radius: 3px;
-        margin: 0 0 10px;
-        padding: 10px;
-        -webkit-box-shadow: 0 8px 6px -6px #888;
-        -moz-box-shadow: 0 8px 6px -6px #888;
-        box-shadow: 0 8px 6px -6px #888;
-        text-align: center;
-    }
-
-    select {
-        width: 23em;
-    }
-
-    .dialog_user_span {
-        font-weight: bold;
-    }
-
-    .clickable {
-        color: #1C94C4;
-        cursor: pointer;
-        text-decoration: underline;
-    }
-    .clickable:hover {
-        color: #c77405;
-    }
-
-    .text_between_btns {
-        padding-right: 1em;
-    }
-
-    .welcome_message {
-        padding: 0 0 30px 0;
-        font-size: 115%;
-    }
-
 }
 
 /* reset fallback values in modern browsers */
 @media screen and ( min-width: 0px ) {
-
-	header,
-	nav,
-	#main,
-	footer {
+	header, nav, #main, footer {
 		min-width: 0;
 	}
-
 }
 
 @media screen and ( max-width: 760px ) {

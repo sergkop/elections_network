@@ -54,7 +54,7 @@
 
 {% block content %}
 
-    <h1>{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h1>
+    <h2>{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h2>
 
     <div>{{ profile_user.profile.about }}</div>
 
@@ -71,8 +71,7 @@
             $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
                 if (IS_USER_PROFILE){
                     $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
-                    CONTACTS.push(username);
-                    new UserListItem($("<li/>").appendTo("#contacts_ul"), true, username);
+                    new UserListItem($("<li/>").appendTo("#contacts_ul"), username);
                 } else {
                     $('#contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
                     $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
@@ -82,18 +81,13 @@
                     $("#in_contacts").show();
                     $("#add_to_contacts").hide();
                     $("#remove_from_contacts").show();
-                    new UserListItem($("<li/>").appendTo("#have_in_contacts_ul"), false, USERNAME);
+                    new UserListItem($("<li/>").appendTo("#have_in_contacts_ul"), USERNAME);
                 }
             });
 
             $("#remove_from_contacts_dialog").on("remove_from_contacts_event", function(event, username){
-                console.log($('#contacts_ul li a[href="'+username+'"]'), IS_USER_PROFILE);
-                if (IS_USER_PROFILE){
+                if (IS_USER_PROFILE)
                     $('#contacts_ul li a[href="/users/'+username+'/"]').parent().remove();
-                    var index = $.inArray(username, CONTACTS);
-                    if (index != -1)
-                        CONTACTS.splice(index, 1); // TODO: check if it works
-                }
 
                 if (username=="{{ profile_user.username }}"){
                     $("#in_contacts").hide();
@@ -102,17 +96,22 @@
                     $('#have_in_contacts_ul li a[href="{{ user.get_absolute_url }}"]').parent().remove();
                 }
             });
+
+            $("#report_user_dialog").on("report_user_dialog_event", function(event, username){
+                $('#contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
+                $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
+            });
         </script>
     {% endif %}
 
     {% if profile_user != user %}
-        <div id="in_contacts" {% if not in_contacts %}style="display:none;"{% endif %}><i>Добавлен в контакты</i></div>
+        <div id="in_contacts"><i>Добавлен в контакты</i></div>
         <div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
 
         <div class="user_actions">
             <button id="send_message">Отправить сообщение</button></td>
-            <button id="add_to_contacts" {% if in_contacts %}style="display:none;"{% endif %}>Добавить в контакты</button>
-            <button id="remove_from_contacts" {% if not in_contacts %}style="display:none;"{% endif %}>Удалить из контактов</button>
+            <button id="add_to_contacts">Добавить в контакты</button>
+            <button id="remove_from_contacts">Удалить из контактов</button>
             <button {% if is_reported %}style="display:none;"{% endif %} id="report_user">Пожаловаться</button>
         </div>
 
@@ -122,6 +121,13 @@
             $("#add_to_contacts").button({icons: {primary: "ui-icon-circle-plus"}});
             $("#remove_from_contacts").button({icons: {primary: "ui-icon-circle-minus"}});
             $("#report_user").button({icons: {primary: "ui-icon-alert"}});
+
+            if (!in_contacts("{{ profile_user.username }}")){
+                $("#in_contacts").hide();
+                $("#remove_from_contacts").hide();
+            } else
+                $("#add_to_contacts").hide();
+            
         </script>
 
         {% if user.is_authenticated %}
@@ -232,11 +238,11 @@
 
     <script type="text/javascript">
         $("#contacts_ul li").each(function(index){
-            var list_item = new UserListItem($(this), {% if profile_user == user %}true{% else %}false{% endif %});
+            var list_item = new UserListItem($(this));
         });
 
         $("#have_in_contacts_ul li").each(function(index){
-            var list_item = new UserListItem($(this), false);
+            var list_item = new UserListItem($(this));
         });
     </script>
 

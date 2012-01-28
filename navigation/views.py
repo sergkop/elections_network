@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# coding=utf8
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.contrib.auth.models import User

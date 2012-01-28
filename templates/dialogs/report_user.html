@@ -5,25 +5,54 @@
 
     <form id="report_user_form" method="post" action="{% url report_user %}">
         {% csrf_token %}
+        <div>
+            Причина жалобы:
+            <select id="report_user_reason" name="reason">
+                {% for value, name  in USER_REPORT_CHOICES %}
+                    <option value="{{ value }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <div id="report_user_reason_explained">
+                <br/>
+                Подробности: <input type="text" name="reason_explained" size="40" value="" />
+            </div>
+        </div>
         <input type="hidden" name="username" value="" />
     </form>
 </div>
 
 <script type="text/javascript">
     // Report user dialog
-    $("#report_user_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на пользователя", buttons: {
-        "Пожаловаться": function(){
-            $.post("{% url report_user %}", $("#report_user_form").serialize(), function(data){
-                $("#report_user_dialog").trigger("report_user_dialog_event", []);
-                $("#report_user_dialog").dialog("close");
-            });
-        },
-        "Отмена": function(){$("#report_user_dialog").dialog("close");}
-    }}).dialog("close");
+    $("#report_user_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на пользователя",
+        buttons: {
+            "Пожаловаться": function(){
+                $.post("{% url report_user %}", $("#report_user_form").serialize(), function(data){
+                    if (data=="ok"){
+                        var username = $('#report_user_form input[name="username"]').val();
+                        $("#report_user_dialog").trigger("report_user_dialog_event", [username]);
+                        $("#report_user_dialog").dialog("close");
+                        alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                    } else
+                        alert(data);
+                });
+            },
+            "Отмена": function(){$("#report_user_dialog").dialog("close");}
+        }
+    }).dialog("close");
+
+    function sync_user_reason_input(){
+        if ($("#report_user_reason").val()=="other")
+            $("#report_user_reason_explained").show();
+        else
+            $("#report_user_reason_explained").hide();
+    }
+
+    $("#report_user_reason").change(sync_user_reason_input);
 
     function report_user_dialog_init(username){
         $("#report_user_dialog_user").text(username);
         $('#report_user_form input[name="username"]').val(username);
         $("#report_user_dialog").dialog("open");
+        sync_user_reason_input();
     }
 </script>

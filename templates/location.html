@@ -27,7 +27,8 @@
                     <li>&rarr;</li>
                 {% endif %}
                 <li>
-                    <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a>
+                    <strong>{{ current_location }}</strong>
+                    <!--a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a-->
                 </li>
 
                 {% if sub_regions %}
@@ -148,12 +149,16 @@
         }});
 
         $("#voters_ul li").each(function(index){
-            new UserListItem($(this), false);
+            new UserListItem($(this));
         });
 
         $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
             // TODO: explicit use of url (use global variable instead) - everywhere
-            $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").remove();
+            $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").css("visibility", "hidden");
+        });
+
+        $("#report_user_dialog").on("report_user_dialog_event", function(event, username){
+            $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
         });
     </script>
 {% endblock %}
@@ -229,7 +234,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{{ current_location }}</h2>
+    <h2 class="location_header">{{ current_location }}</h2>
 
     <div id="vk_comments"></div>
     <script type="text/javascript">

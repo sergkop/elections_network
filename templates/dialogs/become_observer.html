@@ -1,7 +1,7 @@
 <div id="become_observer_dialog">
     <center>
         Чтобы записаться в наблюдатели, заполните
-        <a href="http://www.nabludatel.org/nab-mos" target="_blank">форму</a>
+        <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">форму</a>
         на сайте организации Гражданин Наблюдатель.
     </center>
 </div>
@@ -11,7 +11,7 @@
     $("#become_observer_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в наблюдатели",
         buttons: {
             "Записаться": function(){
-                window.location.href = "http://www.nabludatel.org/nab-mos";
+                window.open("http://www.nabludatel.org/stat-nablyudatelem/");
             },
             "Отмена": function(){$("#become_observer_dialog").dialog("close");}
         }

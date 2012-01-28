@@ -1,9 +1,9 @@
 <div id="login_dialog">
     <span id="login_intro_span"></span>
 
-    <table>
+    <table class="login_dialog_table">
         <tr>
-            <td style="vertical-align:middle;">
+            <td>
                 <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
                     {% csrf_token %}
                     <table>
@@ -23,7 +23,7 @@
 
                 </form>
             </td>
-            <td style="vertical-align:top; border-left: 1px solid #AAA;">
+            <td style="border-left: 1px solid #AAA;">
                 <iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url={{ LOGINZA_IFRAME_URL }}"
                 style="width:359px;height:170px;" scrolling="no" frameborder="no"></iframe>
             </td>
@@ -33,7 +33,7 @@
 <script type="text/javascript">
     // Login dialog
     // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click) (?)
-    $("#login_dialog").dialog({width: 650, height: 340, modal: true, title: "Войдите в систему", buttons: {
+    $("#login_dialog").dialog({width: 670, height: 380, modal: true, title: "Войдите в систему", buttons: {
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
     }}).dialog("close");

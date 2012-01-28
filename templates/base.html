@@ -15,6 +15,7 @@
 
     <link href="{{ STATIC_URL }}css/layout.css" rel="stylesheet" type="text/css"/>
     <link href="{{ STATIC_URL }}css/typography.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="{{ STATIC_URL }}libs/tipsy/tipsy.css" type="text/css" />
 
@@ -23,6 +24,7 @@
         var IS_USER_PROFILE = {% if user == profile_user %}true{% else %}false{% endif %};
         var USERNAME = "{{ user.username }}";
         var CONTACTS = {{ CONTACTS|safe }};
+        var REPORTED_USERS = {{ REPORTED_USERS|safe }};
         var LOGIN_URL = "{% url login %}";
         var GET_SUB_REGIONS_URL = "{% url get_sub_regions %}";
     </script>
@@ -59,8 +61,8 @@
                     <li><a href="{% url about %}">О проекте</a></li>
                     <li><a href="#">Новости</a></li>
                     <li><a href="{% url partners %}">Партнеры</a></li>
-                    <li><a href="#">Как помочь</a></li>
-                    <li><a href="#">Контакты</a></li>
+                    <li><a href="{% url help %}">Как помочь</a></li>
+                    <li><a href="{% url contacts %}">Контакты</a></li>
                 </ul>
 
                 <!--form class="ym-searchform">
@@ -111,10 +113,18 @@
     <footer>
         <div class="ym-wrapper">
             <div class="ym-wbox">
-                <p>
-                    &copy;2012. <a href="https://sites.google.com/site/electionsnetwork/">
-                    Интернет площадка для контроля за выборами.</a> Все ходы записаны.
-                    &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a></p>
+                <center>
+                    <div class="footer_menu">
+                        <a href="{% url about %}">О проекте</a>
+                        <a href="">Блог</a>
+                        <a href="">Политика конфиденциальности</a>
+                        <a href="{% url contacts %}">Контакты</a>
+                    </div>
+                    <div>
+                        <a href="https://sites.google.com/site/electionsnetwork/">Гракон</a> &copy;2012.
+                        &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a>
+                    </div>
+                </center>
             </div>
         </div>
     </footer>
@@ -123,7 +133,9 @@
     <!-- TODO: move it to the top -->
     {% include "dialogs/login.html" %}
     <script type="text/javascript">
-        $("#login_btn").click(function(){login_dialog_init("");});
+        $("#login_btn").click(function(){
+            login_dialog_init("Войдите в систему используя логин/пароль или свой аккаунт на других сервисах");
+        });
     </script>
 {% endif %}
 

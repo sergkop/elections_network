@@ -4,12 +4,15 @@
             {% csrf_token %}
             <table>
                 <tr>
-                    <td>Название</td>
-                    <td><input id="link_name_input" name="name" value="" /></td>
+                    <th>Название</th>
+                    <td><input id="link_name_input" name="name" value="" size="40" /></td>
                 </tr>
                 <tr>
-                    <td>URL</td>
-                    <td><input id="link_url_input" name="url" value="" /></td>
+                    <th>URL</th>
+                    <td>
+                        <input id="link_url_input" name="url" value="" size="40" />
+                        <div>Ссылка должна начинаться с http:// или https://</div>
+                    </td>
                 </tr>
             </table>
             <input type="hidden" name="location" value="" />
@@ -19,16 +22,15 @@
 
 <script type="text/javascript">
     // Add link dialog
-    $("#add_link_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить ссылку",
+    $("#add_link_dialog").dialog({width: 650, height: 300, modal: true, title: "Добавить ссылку",
         buttons: {
             "Добавить": function(){
                 $.post("{% url add_link %}", $("#add_link_form").serialize(), function(data){
-                    if (data=="ok")
+                    if (data=="ok"){
+                        $("#add_link_dialog").dialog("close");
                         $("#add_link_dialog").trigger("add_link_event", []);
-                    else
-                        alert("Ссылка не была добавлена"); // TODO: show why
-
-                    $("#add_link_dialog").dialog("close");
+                    } else
+                        alert(data);
                 });
             },
             "Отмена": function(){$("#add_link_dialog").dialog("close");}

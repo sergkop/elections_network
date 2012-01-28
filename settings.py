@@ -86,6 +86,7 @@ INSTALLED_APPS = (
     'navigation',
     'users',
     'links',
+    'south',
 )
 
 AUTHENTICATION_BACKENDS = (

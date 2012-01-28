@@ -122,10 +122,75 @@ var UserListItem = Backbone.View.extend({
         //"click .icon":          "open"
     },
 
-    // show_remove_btn is boolean showing if remove button should be added
-    initialize: function(li, show_remove_btn, username){
+    initialize: function(li, username){
         this.el = li;
-        this.show_remove_btn = show_remove_btn;
+        this.username = (username!=undefined) ? username : $(this.el).children("a").text();
+
+        this.attach_buttons();
+    },
+
+    attach_buttons: function(){
+        var username = this.username;
+
+        if ($(this.el).children("a").length==0)
+            // TODO: explicit use of url (use global variable instead) - everywhere
+            $("<a/>").attr("href", "/users/"+this.username+"/")
+                    .text(this.username).appendTo($(this.el));
+
+        if ($.inArray(username, CONTACTS)!=-1) //(USERNAME!="")
+            var remove_btn = $("<span/>")
+                    .attr("title", "Удалить из контактов")
+                    .addClass("side_list_btn ui-icon ui-icon-close")
+                    .tipsy({gravity: 'n'})
+                    .click(function(){
+                        remove_from_contacts_init(username);
+                    })
+                    .appendTo($(this.el));
+
+        var report_btn = $("<span/>")
+                .addClass("side_list_btn ui-icon ui-icon-notice")
+                .appendTo($(this.el));
+        if (username!=USERNAME && $.inArray(username, REPORTED_USERS)==-1)
+            report_btn.attr("title", "Пожаловаться на пользователя")
+                    .tipsy({gravity: 'n'})
+                    .click(function(){
+                        if (USERNAME=="")
+                            login_dialog_init("Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему");
+                        else
+                            report_user_dialog_init(username);
+                    });
+        else
+            report_btn.css("visibility", "hidden");
+
+        if (username!=USERNAME && $.inArray(username, CONTACTS)==-1)
+            var add_btn = $("<span/>")
+                    .attr("title", "Добавить в контакты")
+                    .addClass("side_list_btn ui-icon ui-icon-plus")
+                    .tipsy({gravity: 'n'})
+                    .click(function(){
+                        if (USERNAME=="")
+                            login_dialog_init("Чтобы добавить пользователя в контакты, пожалуйста, войдите в систему");
+                        else
+                            add_to_contacts_dialog_init(username);
+                    })
+                    .appendTo($(this.el));
+    },
+
+    render: function(){
+        $(this.el).html("");
+
+        this.attach_buttons();
+        return this;
+    }
+
+});
+
+
+var LinkListItem = Backbone.View.extend({
+    tagName: "li",
+
+    initialize: function(li, username){
+        this.el = li;
         this.username = (username!=undefined) ? username : $(this.el).children("a").text();
 
         this.attach_buttons();
@@ -179,9 +244,14 @@ var UserListItem = Backbone.View.extend({
     render: function(){
         $(this.el).html("");
 
-        
         this.attach_buttons();
         return this;
     }
 
 });
+
+// Return if a given user is in contacts of the current user
+function in_contacts(username){
+    var index = $.inArray(username, CONTACTS);
+    return index!=-1;
+}

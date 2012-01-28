@@ -48,25 +48,18 @@
 	}
 
 	/* (en) base layout gets standard font size 14px */
-	/* (de) Basis-Layout erhält Standardschriftgröße von 14 Pixeln */
 	body {
 		font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
 		font-size:87.50%; /* base: 14px */
 		color:#444;
 
 		/* (en) Prevent auto-scaling of text in mobile webkit browsers */
-		/* (en) Automatische Schriftvergrößerung in mobilen Webkit-Browsern vermeiden */
 		-webkit-text-size-adjust:100%;
 	}
 
-	/*--- Headings | Überschriften ------------------------------------------------------------------------*/
+	/*--- Headings ------------------------------------------------------------------------*/
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	h1, h2, h3, h4, h5, h6 {
 		font-family: "Droid Sans", Arial, Helvetica, sans-serif;
 		font-weight: 400;
 		color:#161e21;
@@ -74,21 +67,21 @@
 	}
 
 	h1 {
-		font-size:350%;
+		font-size:300%;
 		line-height: 0.8571em;
 		margin: 0.4286em 0 0;
 	}
 
 	h2 {
-		font-size:250%;
+		font-size:200%;
 		line-height: 1.2em;
 		margin: 0.6em 0 0 0;
 	}
 
 	h3 {
-		font-size:175%;
+		font-size:150%;
 		line-height: 0.8571em;
-		margin:0.8571em 0 0 0;
+		margin:0.3em 0 0 0;
 	}
 
 	h4 {
@@ -110,11 +103,9 @@
 		margin: 1.5em 0 0 0;
 	}
 
-	/* --- Lists | Listen  -------------------------------------------------------------------------------- */
+	/* --- Lists  -------------------------------------------------------------------------------- */
 
-	ul,
-	ol,
-	dl {
+	ul, ol, dl {
 		font-size:1em;
 		line-height:1.5em;
 		margin: 1.5em 0 0 1em;
@@ -183,12 +174,7 @@
 		font-size:85.71%;
 	}
 
-	pre,
-	code,
-	kbd,
-	tt,
-	samp,
-	var {
+	pre, code, kbd, tt, samp, var {
 		font-size:100%;
 	}
 
@@ -215,8 +201,7 @@
 		cursor:help;
 	}
 
-	sub,
-	sup {
+	sub, sup {
 		font-size: 75%;
 		line-height: 0;
 		position: relative;
@@ -257,17 +242,15 @@
 
 	a:active { outline: none; }
 
-	/* (en) maximum constrast for tab focus - change with great care */
-	a:hover,
-	a:focus {
+	/* maximum constrast for tab focus - change with great care */
+	a:hover, a:focus {
 		color:#7E17A3;
 		text-decoration:none;
 	}
 
 	/* --- images ------------------ */
 
-	img,
-	figure {
+	img, figure {
 		margin: 0;
 	}
 
@@ -289,16 +272,7 @@
 		box-shadow: 0 0 3px rgba(0,0,0,.25);
 	}
 
-	/**
-	* ----------------------------------------------------------------------- #
-	*
-	* Generic Content Classes
-	*
-	* (en) standard classes for positioning and highlighting
-	* (de) Standardklassen zur Positionierung und Hervorhebung
-	*
-	* @section content-generic-classes
-	*/
+	/* standard classes for positioning and highlighting */
 	.highlight {
 		color:#c30;
 	}
@@ -376,16 +350,7 @@
 		margin: 1.5em auto 0 auto;
 	}
 
-	/**
-	* ------------------------------------------------------------------------------------------------- #
-	*
-	* Tables | Tabellen
-	*
-	* (en) Generic classes for table-width and design definition
-	* (de) Generische Klassen für die Tabellenbreite und Gestaltungsvorschriften für Tabellen
-	*
-	* @section content-tables
-	*/
+	/* Generic classes for table-width and design definition */
 
 	table {
 		width:100%;
@@ -420,13 +385,11 @@
 		padding: 0.7143em 0.5em;
 	}
 
-	th *:first-child,
-	td *:first-child {
+	th *:first-child, td *:first-child {
 		margin-top: 0;
 	}
 
-	th.nowrap,
-	td.nowrap {
+	th.nowrap, td.nowrap {
 		white-space: nowrap;
 	}
 
@@ -466,39 +429,8 @@
 	}
 
 	/* highlight row on mouse over */
-	tbody tr:hover th,
+	/*tbody tr:hover th,
 	tbody tr:hover td {
 		background:#f8f8f8;
-	}
-
-    /* --------------------------------------- */
-
-    /* Header */
-    #title_link {
-        color: #fff;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-decoration: none;
-        font-size: 350%;
-        line-height: 0.8571em;
-        margin: 0.4286em 0 0;
-    }
-
-    #title_link:visited  {
-        color: #fff;
-    }
-    .title_letter {
-        color: red;
-    }
-
-    #slogan {
-        text-align: left;
-        color: #fff;
-        margin-left: 6em;
-        font-size: 150%;
-    }
-
-	#report_link_ul {
-        list-style-type: none;
-    }
+	}*/
 }

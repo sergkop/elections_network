@@ -1,12 +1,12 @@
 @media all {
 
 	.ym-hlist {
-		/* (en) containing floats in IE */
+		/* containing floats in IE */
 		width:100%;
 		overflow:hidden;
-		/* (en|de) Bugfix:IE - collapsing horizontal margins */
+		/* Bugfix:IE - collapsing horizontal margins */
 		position:relative;
-		/* (en) Repeat the main color from the image */
+		/* Repeat the main color from the image */
 		line-height:1em;
 		background: #ccc;
 	}
@@ -14,13 +14,13 @@
 	.ym-hlist ul {
 		margin:0;
 		padding: 0.5em 1.5em;
-		/* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+		/* Bugfix:IE - Doubled Float Margin Bug */
 		display:inline;
 		float:left; /* LTR */
 	}
 
 	.ym-hlist ul li {
-		/* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+		/* Bugfix:IE - Doubled Float Margin Bug */
 		display:inline;
 		float:left; /* LTR */
 		font-size:1.0em;
@@ -60,8 +60,7 @@
 	}
 
 	.ym-hlist ul li.active {
-		/* (en) Repeat the main color from the image */
-		/* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
+		/* Repeat the main color from the image */
 		background:#666;
 		background: rgba(255,255,255,.3);
 		-webkit-border-radius: 0.2em;
@@ -81,14 +80,13 @@
 
 
     /* ------ Breadcrumbs ----------------*/
-    
     .breadcrumbs {
-        /* (en) containing floats in IE */
+        /* containing floats in IE */
         width:100%;
         overflow:hidden;
-        /* (en|de) Bugfix:IE - collapsing horizontal margins */
+        /* Bugfix:IE - collapsing horizontal margins */
         position:relative;
-        /* (en) Repeat the main color from the image */
+        /* Repeat the main color from the image */
         line-height:1em;
         background: #fff;
     }
@@ -96,13 +94,13 @@
     .breadcrumbs ul {
         margin:0;
         padding: 0.5em 1.5em;
-        /* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+        /* Bugfix:IE - Doubled Float Margin Bug */
         display:inline;
         float:left; /* LTR */
     }
 
     .breadcrumbs ul li {
-        /* (en|de) Bugfix:IE - Doubled Float Margin Bug */
+        /* Bugfix:IE - Doubled Float Margin Bug */
         display:inline;
         float:left; /* LTR */
         font-size:1.0em;
@@ -114,8 +112,6 @@
 
     .breadcrumbs ul li a,
     .breadcrumbs ul li strong {
-        background-color: #DEE3FF;
-        color:#661330;
         display:block;
         font-size:1em;
         line-height: 2em;
@@ -128,9 +124,19 @@
         -moz-border-radius: 0.2em;
     }
 
+    .breadcrumbs ul li a {
+        background-color: #F2F2F2;
+        color: #661330;
+    }
+
+    .breadcrumbs ul li strong {
+        background-color: #9580E0;
+        color: #E7E4F2;
+    }
+
+
     .breadcrumbs ul li a:focus,
-    .breadcrumbs ul li a:hover,
-    .breadcrumbs ul li a:active  {
+    .breadcrumbs ul li a:hover {
         color: #ccc;
         background:#666;
         -webkit-border-radius: 0.2em;
@@ -141,29 +147,15 @@
         color: #eee;
     }
 
-    .breadcrumbs ul li.active {
-        /* (en) Repeat the main color from the image */
-        /* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
-        background:#666;
-        background: rgba(255,255,255,.3);
-        -webkit-border-radius: 0.2em;
-        -moz-border-radius: 0.2em;
-        border-radius: 0.2em;
-        color: #fff;
-    }
-
     .breadcrumbs ul li.active strong,
     .breadcrumbs ul li.active a:focus,
-    .breadcrumbs ul li.active a:hover,
-    .breadcrumbs ul li.active a:active {
+    .breadcrumbs ul li.active a:hover {
         background:transparent;
         color:#fff;
         text-decoration:none;
     }
 
-
-
-	/* search form -------------------------------------- */
+	/* -------- search form -------------------------------------- */
 	.ym-searchform {
 		float:right;
 		display: inline;

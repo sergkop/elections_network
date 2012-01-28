@@ -32,6 +32,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         from geography.models import Location
+        from navigation.models import Page
 
         db_entries = {}
 
@@ -49,3 +50,9 @@ class Command(BaseCommand):
                 Location.objects.create(name=location[2], parent_1=db_entries[location[0]]['entry'],
                         parent_2=db_entries[location[0]]['sub'][location[1]])
             i += 1
+
+        print "initializing static pages"
+        pages_data = open(os.path.join(settings.PROJECT_PATH, 'navigation', 'pages_data.json')).read()
+        data = json.loads(pages_data)
+        for name, html in data.iteritems():
+            Page.objects.create(name=name, content=html)

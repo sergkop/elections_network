@@ -18,8 +18,13 @@
             //},
             "Записаться": function(){
                 $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
-                    $("#become_voter_dialog").trigger("become_voter", [form_location_id("become_voter_form")]);
-                    $("#become_voter_dialog").dialog("close");
+                    if (data=="ok"){
+                        $("#become_voter_dialog").trigger("become_voter", [form_location_id("become_voter_form")]);
+                        $("#become_voter_dialog").dialog("close");
+                        $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                .attr("method", "get").submit();
+                    } else
+                        alert(data);
                 });
             },
             "Отмена": function(){$("#become_voter_dialog").dialog("close");}

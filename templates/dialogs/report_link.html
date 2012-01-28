@@ -1,30 +1,53 @@
 <div id="report_link_dialog">
-    <center>
-        <form id="report_link_form" method="post" action="{% url report_link %}">
-            {% csrf_token %}
-            <ul id="report_link_ul"></ul>
-            <input type="hidden" name="location" value="{{ current_location.id }}" />
-        </form>
-    </center>
+    <form id="report_link_form" method="post" action="{% url report_link %}">
+        {% csrf_token %}
+        <ul id="report_link_ul"></ul>
+        <div>
+            Причина жалобы:
+            <select id="report_link_reason" name="reason">
+                {% for value, name  in LINK_REPORT_CHOICES %}
+                    <option value="{{ value }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <div id="report_link_reason_explained">
+                <br/>
+                Подробности: <input type="text" name="reason_explained" size="40" value="" />
+            </div>
+        </div>
+        <input type="hidden" name="location" value="{{ current_location.id }}" />
+    </form>
 </div>
 
 <script type="text/javascript">
     // Report link dialog
-    $("#report_link_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на ссылку",
+    $("#report_link_dialog").dialog({width: 650, height: 350, modal: true, title: "Пожаловаться на ссылку",
         buttons: {
             "Пожаловаться": function(){
                 $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
-                    $("#report_link_dialog").dialog("close");
-                    alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                    if (data.substring(0, 4)!="fail"){
+                        alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                        $("#report_link_dialog").dialog("close");
+                    } else
+                        alert("Вы неверно ввели данные");
                 });
             },
             "Отмена": function(){$("#report_link_dialog").dialog("close");}
         }
     }).dialog("close");
 
+    function sync_link_reason_input(){
+        if ($("#report_link_reason").val()=="other")
+            $("#report_link_reason_explained").show();
+        else
+            $("#report_link_reason_explained").hide();
+    }
+
+    $("#report_link_reason").change(sync_link_reason_input);
+
     // TODO: it should work for reporting one link or choosing several (?)
     function report_link_dialog_init(){
         $("#report_link_ul li").remove();
         $("#report_link_dialog").dialog("open");
+        sync_link_reason_input();
     }
 </script>

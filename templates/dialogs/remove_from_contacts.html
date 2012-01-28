@@ -15,9 +15,17 @@
             "Удалить": function(){
                 $.post($("#remove_from_contacts_form").attr("action"),
                     $("#remove_from_contacts_form").serialize(), function(data){
-                        var username = $('#remove_from_contacts_form input[name="username"]').val();
-                        $("#remove_from_contacts_dialog").trigger("remove_from_contacts_event", [username]);
                         $("#remove_from_contacts_dialog").dialog("close");
+                        if (data=="ok"){
+                            var username = $('#remove_from_contacts_form input[name="username"]').val();
+                            var index = $.inArray(username, CONTACTS);
+                            if (index != -1)
+                                CONTACTS.splice(index, 1); // TODO: check if it works
+
+                            $("#remove_from_contacts_dialog").trigger("remove_from_contacts_event", [username]);
+                            alert("Пользователь "+username+" удален из списка ваших контактов");
+                        } else
+                            alert(data);
                     }
                 );
             },

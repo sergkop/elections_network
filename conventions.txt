@@ -13,3 +13,6 @@
 * You must catch all exceptions in your code
 * You must write unit tests for your code
 * check is_ajax() for ajax requests
+
+===== Standard buttons (open a dialog) =========
+* submit_complaint_btn

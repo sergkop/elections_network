@@ -1,0 +1,63 @@
+#: forms.py:38
+msgid "username"
+msgstr "имя пользователя"
+
+#: forms.py:41
+msgid "email address"
+msgstr "адрес электронной почты"
+
+#: forms.py:43
+msgid "password"
+msgstr "пароль"
+
+#: forms.py:45
+msgid "password (again)"
+msgstr "пароль (верификация)"
+
+#: forms.py:54
+msgid "Usernames can only contain letters, numbers and underscores"
+msgstr "Имя пользователя может содержать только буквы, цифры и подчеркивания"
+
+#: forms.py:59
+msgid "This username is already taken. Please choose another."
+msgstr "Такое имя пользователя уже есть. Пожалуйста, выберите другое."
+
+#: forms.py:68
+msgid "You must type the same password each time"
+msgstr "Вы должны вводить один и тот же пароль каждый раз"
+
+#: forms.py:96
+msgid "I have read and agree to the Terms of Service"
+msgstr "Я прочитал и согласен с Правилами Использования"
+
+#: forms.py:105
+msgid "You must agree to the terms to register"
+msgstr "Вы должны согласиться с Правилами для регистрации"
+
+#: forms.py:124
+msgid ""
+"This email address is already in use. Please supply a different email "
+"address."
+msgstr "Этот адрес электронной почты уже используется. Пожалуйста, введите другой адрес."
+
+#: forms.py:149
+msgid ""
+"Registration using free email addresses is prohibited. Please supply a "
+"different email address."
+msgstr "Регистрация с использованием свободных почтовых серверов запрещена. Пожалуйста, введите другой адрес электронной почты."
+
+#: models.py:188
+msgid "user"
+msgstr "пользователь"
+
+#: models.py:189
+msgid "activation key"
+msgstr "ключ активации"
+
+#: models.py:194
+msgid "registration profile"
+msgstr "профиль регистрации"
+
+#: models.py:195
+msgid "registration profiles"
+msgstr "профили регистрации"

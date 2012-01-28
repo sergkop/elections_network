@@ -32,7 +32,6 @@
 
 <script type="text/javascript">
     // Login dialog
-    // TODO: write shortcut function with params (dialog_div_id, btn_name, on_click) (?)
     $("#login_dialog").dialog({width: 670, height: 380, modal: true, title: "Войдите в систему", buttons: {
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
@@ -41,7 +40,7 @@
     $("#login_form_submit").button();
     $("#login_dialog_register").button();
 
-    // TODO: implement logging in without page reload
+    // TODO: implement logging in without page reload (?)
     function login_dialog_init(message){
         $("#login_intro_span").text(message);
         $("#login_form_submit").button();

@@ -12,7 +12,9 @@
             <ul class="side_list">
                 <li><a href="#">Ресурсы для наблюдателей</a></li>
             </ul>
-            <button id="become_observer">Записаться</button>
+            <center>
+                <button id="become_observer">Записаться</button>
+            </center>
         </div>
     </div>
 
@@ -23,25 +25,22 @@
 
         <div class="content_block">
             Записались {{ voter_count }} избирател{{ ending }}
-            <button id="become_voter">
-                <span id="become_voter_sign_up_btn">
-                    Записаться
-                </span>
-            </button>
+            <center>
+                <button id="become_voter">
+                    <span id="become_voter_sign_up_btn">
+                        Записаться
+                    </span>
+                </button>
+            </center>
         </div>
     </div>
+
+    {% include "dialogs/become_observer.html" %}
 
     {% if user.is_authenticated %}
         {% include "dialogs/become_voter.html" %}
 
-        {% include "dialogs/become_observer.html" %}
-
         <script type="text/javascript">
-            // Become observer
-            $("#become_observer").click(function(){
-                become_observer_dialog_init();
-            });
-
             // Become voter
             $("#become_voter").click(function(){
                 become_voter_dialog_init([]);
@@ -49,10 +48,6 @@
         </script>
     {% else %}
         <script type="text/javascript">
-            $("#become_observer").click(function(){
-                login_dialog_init("Чтобы записаться в наблюдатели, пожалуйста, войдите в систему");
-            });
-
             $("#become_voter").click(function(){
                 login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
             });
@@ -60,8 +55,6 @@
     {% endif %}
 
     <script type="text/javascript">
-        // Create buttons
-        $("#become_observer").button({icons: {primary: "ui-icon-check"}});
         $("#become_voter").button({icons: {primary: "ui-icon-check"}});
     </script>
 {% endblock %}
@@ -81,6 +74,19 @@
         </div>
     </div>
 
+    <div class="ym-clearfix">
+        <div class="side_block_header">
+            <h4>Зафиксировать нарушение</h4>
+        </div>
+
+        <div class="content_block">
+            <center>
+                <button id="submit_complaint_btn" title="Зафиксировать нарушение">Зафиксировать</button>
+            </center>
+        </div>
+    </div>
+
+    {% include "dialogs/submit_complaint.html" %}
 
 {% endblock %}
 

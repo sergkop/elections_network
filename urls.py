@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^users/', include('users.urls')),
     url(r'^loginza/', include('loginza.urls')),
     (r'^tinymce/', include('tinymce.urls')),
+    #(r'^accounts/', include('registration.backends.default.urls')),
 )

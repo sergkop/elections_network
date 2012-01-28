@@ -1,53 +1,67 @@
-<div id="add_link_dialog">
-    <center>
-        <form id="add_link_form" class="dialog_form" method="post" action="{% url add_link %}">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <th>Название</th>
-                    <td><input id="link_name_input" name="name" value="" size="40" /></td>
-                </tr>
-                <tr>
-                    <th>URL</th>
-                    <td>
-                        <input id="link_url_input" name="url" value="" size="40" />
-                        <div>Ссылка должна начинаться с http:// или https://</div>
-                    </td>
-                </tr>
-            </table>
-            <input type="hidden" name="location" value="" />
-        </form>
-    </center>
-</div>
+{% if user.is_authenticated %}
+    <div id="add_link_dialog">
+        <center>
+            <form id="add_link_form" class="dialog_form" method="post" action="{% url add_link %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <th>Название</th>
+                        <td><input id="link_name_input" name="name" value="" size="40" /></td>
+                    </tr>
+                    <tr>
+                        <th>URL</th>
+                        <td>
+                            <input id="link_url_input" name="url" value="" size="40" />
+                            <div>Ссылка должна начинаться с http:// или https://</div>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="location" value="" />
+            </form>
+        </center>
+    </div>
+{% endif %}
 
 <script type="text/javascript">
     // Add link dialog
-    $("#add_link_dialog").dialog({width: 650, height: 300, modal: true, title: "Добавить ссылку",
-        buttons: {
-            "Добавить": function(){
-                $.post("{% url add_link %}", $("#add_link_form").serialize(), function(data){
-                    if (data=="ok"){
-                        $("#add_link_dialog").dialog("close");
-                        $("#add_link_dialog").trigger("add_link_event", []);
-                    } else
-                        alert(data);
-                });
-            },
-            "Отмена": function(){$("#add_link_dialog").dialog("close");}
-        }
-    }).dialog("close");
+    $("#add_link").button({icons: {primary: 'ui-icon-circle-plus'}}).tipsy({gravity: 'w'});
 
-    // Add link on pressing Enter
-    $("#add_link_form input").keypress(function(e){
-        if(e.which == 13){
-            $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
-        }
-    });
+    {% if user.is_authenticated %}
+        $("#add_link_dialog").dialog({width: 650, height: 300, modal: true, title: "Добавить ссылку",
+            buttons: {
+                "Добавить": function(){
+                    $.post("{% url add_link %}", $("#add_link_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#add_link_dialog").dialog("close");
+                            $("#add_link_dialog").trigger("add_link_event", []);
+                        } else
+                            alert(data);
+                    });
+                },
+                "Отмена": function(){$("#add_link_dialog").dialog("close");}
+            }
+        }).dialog("close");
 
-    function add_link_dialog_init(location_id){
-        $("#link_name_input").val("");
-        $("#link_url_input").val("");
-        $('#add_link_form input[name="location"]').val(location_id);
-        $("#add_link_dialog").dialog("open");
-    }
+        // Add link on pressing Enter
+        $("#add_link_form input").keypress(function(e){
+            if(e.which == 13){
+                $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
+            }
+        });
+
+        function add_link_dialog_init(location_id){
+            $("#link_name_input").val("");
+            $("#link_url_input").val("");
+            $('#add_link_form input[name="location"]').val(location_id);
+            $("#add_link_dialog").dialog("open");
+        }
+ 
+        $("#add_link").click(function(){
+            add_link_dialog_init("{{ current_location.id }}");
+        });
+    {% else %}
+        $("#add_link").click(function(){
+            login_dialog_init("Чтобы добавить ссылку, пожалуйста, войдите в систему");
+        });
+    {% endif %}
 </script>

@@ -63,7 +63,9 @@
                     <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
                 {% endfor %}
             </ul>
-            <button id="become_observer">Записаться</button>
+            <center>
+                <button id="become_observer">Записаться</button>
+            </center>
         </div>
     </div>
 
@@ -78,42 +80,31 @@
                     <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
                 {% endfor %}
             </ul>
-            <button id="become_voter">
-                <span id="become_voter_sign_up_btn" {% if is_voter_here %}style="display:none"{% endif %}>
-                    Записаться
-                </span>
-                <span id="become_voter_change_region_btn" {% if not is_voter_here %}style="display:none"{% endif %}>
-                    Сменить округ
-                </span>
-            </button>
+            <center>
+                <button id="become_voter">
+                    <span id="become_voter_sign_up_btn" {% if is_voter_here %}style="display:none"{% endif %}>
+                        Записаться
+                    </span>
+                    <span id="become_voter_change_region_btn" {% if not is_voter_here %}style="display:none"{% endif %}>
+                        Сменить округ
+                    </span>
+                </button>
+            </center>
         </div>
     </div>
 
+    {% include "dialogs/become_observer.html" %}
+
+    {% include "dialogs/become_voter.html" %}
+
     {% if user.is_authenticated %}
-        {% include "dialogs/become_voter.html" %}
-
-        {% include "dialogs/become_observer.html" %}
-
         {% include "dialogs/add_to_contacts.html" %}
 
         {% include "dialogs/report_user.html" %}
 
         <script type="text/javascript">
-            // Become observer
-            $("#become_observer").click(function(){
-                become_observer_dialog_init();
-            });
-
             // Become voter
-            $("#become_voter").click(function(){
-                become_voter_dialog_init([
-                    {% if current_location.parent_1 %}{{current_location.parent_1.id }},{% endif %}
-                    {% if current_location.parent_2 %}{{current_location.parent_2.id }},{% endif %}
-                    {{ current_location.id }}
-                ]);
-            });
-
-            $("#become_voter_dialog").on("become_voter", function(event, location_id){
+            $("#become_voter_dialog").on("become_voter_event", function(event, location_id){
                 var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
                 if (location_id=={{ current_location.id }}){
                     $("#become_voter_sign_up_btn").hide();
@@ -129,21 +120,10 @@
                 }
             });
         </script>
-    {% else %}
-        <script type="text/javascript">
-            $("#become_observer").click(function(){
-                login_dialog_init("Чтобы записаться в наблюдатели, пожалуйста, войдите в систему");
-            });
-
-            $("#become_voter").click(function(){
-                login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
-            });
-        </script>
     {% endif %}
 
     <script type="text/javascript">
-        // Create buttons
-        $("#become_observer").button({icons: {primary: "ui-icon-check"}});
+        // TODO: move it inside become_voter.html
         $("#become_voter").button({icons: {
             primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
         }});
@@ -177,13 +157,34 @@
                 <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
                 {% endfor %}
             </ul>
-            <button id="add_link" title="Добавить ссылку">Добавить</button>
-            <button id="report_link" title="Пожаловаться на ссылку">Пожаловаться</button>
+            <center>
+                <button id="add_link" title="Добавить ссылку">Добавить</button>
+                <button id="report_link" title="Пожаловаться на ссылку">Пожаловаться</button>
+            </center>
         </div>
     </div>
 
+    <div class="ym-clearfix">
+        <div class="side_block_header">
+            <h4>Зафиксировать нарушение</h4>
+        </div>
+
+        <div class="content_block">
+            <center>
+                <button id="submit_complaint_btn" title="Зафиксировать нарушение">Зафиксировать</button>
+            </center>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none"
+            data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,lj,moikrug"></div> 
+
+    {% include "dialogs/add_link.html" %}
+
+    {% include "dialogs/submit_complaint.html" %}
+
     {% if user.is_authenticated %}
-        {% include "dialogs/add_link.html" %}
 
         {% include "dialogs/report_link.html" %}
 
@@ -196,15 +197,11 @@
                 ));
             });
 
-            $("#add_link").click(function(){
-                add_link_dialog_init("{{ current_location.id }}");
-            });
-
             // Report link
             $("#report_link").click(function(){
                 report_link_dialog_init();
 
-                // TODO: move it inside report_link_dialog_init
+                // TODO: depricate it
                 $("#links_ul li").each(function(index){
                     var url = $(this).children("a").attr("href");
                     var text = $(this).text();
@@ -216,10 +213,6 @@
         </script>
     {% else %}
         <script type="text/javascript">
-            $("#add_link").click(function(){
-                login_dialog_init("Чтобы добавить ссылку, пожалуйста, войдите в систему");
-            });
-
             $("#report_link").click(function(){
                 login_dialog_init("Чтобы пожаловаться на ссылку, пожалуйста, войдите в систему");
             });
@@ -227,8 +220,6 @@
     {% endif %}
 
     <script type="text/javascript">
-        // Create buttons
-        $("#add_link").button({icons: {primary: 'ui-icon-circle-plus'}}).tipsy({gravity: 'w'});
         $("#report_link").button({icons: {primary: 'ui-icon-alert'}}).tipsy({gravity: 'w'});
     </script>
 {% endblock %}

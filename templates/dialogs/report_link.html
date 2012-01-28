@@ -24,11 +24,11 @@
         buttons: {
             "Пожаловаться": function(){
                 $.post($("#report_link_form").attr("action"), $("#report_link_form").serialize(), function(data){
-                    if (data.substring(0, 4)!="fail"){
+                    $("#report_link_dialog").dialog("close");
+                    if (data=="ok"){
                         alert("Ваша жалоба будет рассмотрена в ближайшее время");
-                        $("#report_link_dialog").dialog("close");
                     } else
-                        alert("Вы неверно ввели данные");
+                        alert(data);
                 });
             },
             "Отмена": function(){$("#report_link_dialog").dialog("close");}

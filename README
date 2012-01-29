@@ -51,6 +51,9 @@ General advice:
 Testing:
     * Run 'python manage.py init_test_data' to load database with users, links and contacts created for test purposes
 
+Build a graph of database structure (requires graphviz and pygraphviz):
+    * python manage.py graph_models -g geography links navigation users loginza auth -o db_structure.png
+
 -------- Optionally create virtualenv -------
 * sudo pip install virtualenv
 * virtualenv --no-site-packages VIRTUAL_ENV_DIR

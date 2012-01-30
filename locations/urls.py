@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('geography.views',
+urlpatterns = patterns('locations.views',
     url(r'^(\d+)$', 'location', name='location'),
 )

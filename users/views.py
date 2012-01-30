@@ -9,9 +9,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 
-from geography.models import Location
+from locations.models import Location
 from links.models import Link
-from users.models import Contact, Participation, ReportUser, USER_REPORT_TYPES
+from users.models import Contact, Participation
 
 def current_profile(request):
     """ Show profile of the currently logged in user """
@@ -83,34 +83,6 @@ def remove_from_contacts(request):
             return HttpResponse(u'Пользователь не существует')
 
         Contact.objects.filter(user=request.user, contact=contact).delete()
-        return HttpResponse('ok')
-
-    return HttpResponse(u'Ошибка')
-
-def report_user(request):
-    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        try:
-            user = User.objects.get(username=request.POST.get('username', ''))
-        except User.DoesNotExist:
-            return HttpResponse(u'Пользователь не существует')
-
-        reason = request.POST.get('reason')
-        if reason not in USER_REPORT_TYPES:
-            return HttpResponse(u'Неправильно выбрана причина жалобы')
-
-        if reason == 'other':
-            reason_explained = request.POST.get('reason_explained', '')
-            if reason_explained == '':
-                return HttpResponse(u'Укажите причину жалобы')
-        else:
-            reason_explained = ''
-
-        try:
-            report = ReportUser.objects.create(user=user, reporter=request.user,
-                    reason=reason, reason_explained=reason_explained)
-        except IntegrityError:
-            return HttpResponse(u'Вы уже пожаловались на этого пользователя')
-
         return HttpResponse('ok')
 
     return HttpResponse(u'Ошибка')

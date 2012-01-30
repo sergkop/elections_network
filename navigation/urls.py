@@ -11,6 +11,6 @@ urlpatterns = patterns('navigation.views',
 )
 
 urlpatterns += patterns('',
-    url(r'^get_sub_regions$', 'geography.views.get_sub_regions', name='get_sub_regions'),
-    url(r'^goto_location$', 'geography.views.goto_location', name='goto_location'),
+    url(r'^get_sub_regions$', 'locations.views.get_sub_regions', name='get_sub_regions'),
+    url(r'^goto_location$', 'locations.views.goto_location', name='goto_location'),
 )

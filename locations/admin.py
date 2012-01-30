@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from geography.models import Location
+from locations.models import Location
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('name', 'parent_1', 'parent_2')

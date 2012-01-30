@@ -4,8 +4,8 @@ from urllib import quote
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from links.models import Link, LINK_REPORT_CHOICES
-from users.models import Contact, ReportUser, USER_REPORT_CHOICES
+from users.models import Contact
+from reports.models import LINK_REPORT_CHOICES, ReportUser, USER_REPORT_CHOICES
 
 def user_data(request):
     context = {

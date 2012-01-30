@@ -81,9 +81,10 @@ INSTALLED_APPS = (
     'loginza',
     'tinymce',
 
-    'geography',
+    'locations',
     'maintenance',
     'navigation',
+    'reports',
     'users',
     'links',
     'south',

@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from geography.models import Location
+from locations.models import Location
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
@@ -31,23 +31,6 @@ class Contact(models.Model):
 
     class Meta:
         unique_together = ('user', 'contact')
-
-USER_REPORT_CHOICES = (
-    ('insult', u'Оскорбительное поведение'),
-    ('spam', u'Спам'),
-    ('other', u'Другое'),
-)
-USER_REPORT_TYPES = dict(USER_REPORT_CHOICES)
-
-class ReportUser(models.Model):
-    user = models.ForeignKey(User, related_name='reported_users')
-    reporter = models.ForeignKey(User, related_name='reporters')
-    reason = models.CharField(max_length=15, choices=USER_REPORT_CHOICES)
-    reason_explained = models.TextField()
-    time = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        unique_together = ('user', 'reporter')
 
 def create_profile(sender, **kwargs):
     if kwargs.get('created', False):

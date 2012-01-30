@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-from geography.models import Location
+from locations.models import Location
 from links.models import Link
 from users.models import Participation
 

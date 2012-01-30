@@ -105,9 +105,9 @@ class Command(BaseCommand):
     help = "Loads data for testing - users, links, participations, etc."
 
     def handle(self, *args, **options):
-        from geography.models import Location
         from django.contrib.auth.models import User
         from links.models import Link
+        from locations.models import Location
         from users.models import Contact, Participation
 
         users_db = []

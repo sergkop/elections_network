@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import Contact, Participation, Profile, ReportUser
+from users.models import Contact, Participation, Profile
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
@@ -17,12 +17,7 @@ class ContactAdmin(admin.ModelAdmin):
     ordering = ('user__username',)
     search_fields = ('user__username', 'contact__username')
 
-class ReportUserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'reporter')
-    ordering = ('user__username',)
-    search_fields = ('user__username', 'reporter__username')
-
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Participation, ParticipationAdmin)
 admin.site.register(Contact, ContactAdmin)
-admin.site.register(ReportUser, ReportUserAdmin)
+

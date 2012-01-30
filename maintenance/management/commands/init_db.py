@@ -28,16 +28,16 @@ def print_progress(i, count):
         sys.stdout.flush()
 
 class Command(BaseCommand):
-    help = "Loads geography data after first syncdb."
+    help = "Loads locations data after first syncdb."
 
     def handle(self, *args, **options):
-        from geography.models import Location
+        from locations.models import Location
         from navigation.models import Page
 
         db_entries = {}
 
         print "loading the regions hierarchy"
-        data = json.loads(open(os.path.join(settings.PROJECT_PATH, 'data', 'regions.json')).read())
+        data = json.loads(open(os.path.join(settings.PROJECT_PATH, 'data', 'regions-gosduma.json')).read())
         i = 0
         for location in iterate_struct(data, []):
             print_progress(i, 2923)

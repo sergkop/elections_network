@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.contrib.sites.models import RequestSite
-from django.contrib.sites.models import Site
 
 from registration.models import RegistrationProfile
 
@@ -17,19 +15,6 @@ class RegistrationAdmin(admin.ModelAdmin):
     activate_users.short_description = "Activate users"
 
     def resend_activation_email(self, request, queryset):
-        """
-        Re-sends activation emails for the selected users.
-
-        Note that this will *only* send activation emails for users
-        who are eligible to activate; emails will not be sent to users
-        whose activation keys have expired or who have already
-        activated.
-        """
-        if Site._meta.installed:
-            site = Site.objects.get_current()
-        else:
-            site = RequestSite(request)
-
         for profile in queryset:
             if not profile.activation_key_expired():
                 profile.send_activation_email(site)

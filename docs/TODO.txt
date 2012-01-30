@@ -1,0 +1,81 @@
+* Merge Report models using GenericForeignKey
+* Add fields to Location - address, geo coordinates, telephone, email
+* Data from TIKs
+* Bookmarks on the page
+* Registration, change password, etc.
+
+
+* (!) В User admin добавить поля со временем регистрации
+* Report and delete icon-buttons for links (in the lists)
+* on changing voter's region on profile page - "избиратель" can disappear
+
+* (!) Подписать какие символы может содержать username + оформление формы регистрации
+* add tips to buttons and ? signs to get help on features of the system
+* if no region is selected for voting, path on profile page is not displayed properly
+
+* Гражданин наблюдатель - первая ссылка (?)
+* Ввести время в модели
+* поиск по положению юзера - карта
+
+* Put nginx.conf into repo
+* Use pagespeed to optimize load time
+* https://www.google.com/webmasters/
+* merge and compress static files using django staticfiles
+
+* Настройка nginx - медиа файлы - есть ли доступ к templates?
+* рыжие иконки в темные
+* When window width is small, side blocks look ugly
+
+* in become voter dialog indicate if user has signed up somewhere else
+* Add entering location in registration form
+* Add captcha to registration form if loginza is not used (use email confirmation instead)
+* Tabs with comments, statistics, maps
+* email confirmation of registration
+* Извлечь информацию о тиках (с адресом) и показывать
+  http://www.zabkray.vybory.izbirkom.ru/region/zabkray?action=show_komissia&region=92&sub_region=92&type=100&sortMode=vidIk&vrnorg=2752000260059&vrnkomis=2752000260063
+  на карте
+* кэшировать страницы для незалогиненных юзеров и показывать их с помощью nginx (без django) - пока с django
+
+====== Base version ===================
+* при нажатии регистрация в логин диалоге, показывать форму регистрации внутри диалога
+* count how often people click on buttons in side bars (can we pass it to google analytics or yandex metrika?)
+  (at least look at post requests)
+* on entering wrong password user is redirected to login page
+* create backbone js view for user and link lists
+* In dialogs title is usually similar to the text inside the window - what to do?
+* password save by browser (check)
+* 'Add user' button with search (name, profession, location) (?)
+* loginza produces js errors on closing dialogs by Esc
+* In become voter dialog the same ajax request is repeated twice
+* Messages inserted into login dialogs are repeated (main.js, profile, location) (?)
+* show population of the regions and statistics from previous elections
+* возможность показывать ссылки с верхнего уровня (со 2го на 3й)
+* Зарубежные территории
+* rss feeds for project news, regional news
+* поиск по сайту
+* Table for members of location comission and ability to fill them for verified users
+
+====== Later ===========
+* Favicon
+* Forgot password button
+* login using username or email
+* autogenerate username from first and last name
+* notifications about new users in the region
+* limit user's ability to add links (daily limit?)
+* if user's links are often reported on - look at user
+* ability to block users
+* 'Add link' button on profile page
+* Prevent attemps to hack account by matching password
+* Set traffic filter for IPs producing too many requests
+* Опрос на survey monkey о юзабилити
+* Collect evidence on reports (users, links), add text field for writing complaints
+* speed up init_db and init_test_data
+* if Back button of browser is used, javascript icon-buttons are not update
+* кнопка для bookmark page
+
+Tasks:
+    * interface for managing reports on users and links
+    * Adopt selenium testing (see https://github.com/dragoon/django-selenium,
+        https://github.com/dragoon/django-selenium-testapp,
+        https://github.com/weluse/django-nose-selenium)
+    * readme -> readme.rst

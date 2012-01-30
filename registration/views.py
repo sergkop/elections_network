@@ -1,188 +1,112 @@
+# coding=utf8
+import json
+
+from django.contrib import messages, auth
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 
-from registration.backends import get_backend
+from loginza.models import Identity, UserMap
+from loginza.templatetags.loginza_widget import _return_path
 
-def activate(request, backend, template_name='registration/activate.html',
-        success_url=None, extra_context=None, **kwargs):
-    """
-    Activate a user's account.
+from registration.forms import CompleteRegistrationForm, RegistrationForm
+from registration.models import RegistrationProfile
+import registration.signals
 
-    The actual activation of the account will be delegated to the
-    backend specified by the ``backend`` keyword argument (see below);
-    the backend's ``activate()`` method will be called, passing any
-    keyword arguments captured from the URL, and will be assumed to
-    return a ``User`` if activation was successful, or a value which
-    evaluates to ``False`` in boolean context if not.
+# TODO: what happens on /login page? login.html is a duplicate for elements/login.html
+def login(request):
+    if request.user.is_authenticated():
+        return redirect('current_profile')
+    return auth_views.login(request, template_name='users/login.html')
 
-    Upon successful activation, the backend's
-    ``post_activation_redirect()`` method will be called, passing the
-    ``HttpRequest`` and the activated ``User`` to determine the URL to
-    redirect the user to. To override this, pass the argument
-    ``success_url`` (see below).
+def logout(request):
+    next_page = reverse('main') if 'next' in request.REQUEST else None
+    return auth_views.logout(request, next_page)
 
-    On unsuccessful activation, will render the template
-    ``registration/activate.html`` to display an error message; to
-    override thise, pass the argument ``template_name`` (see below).
-
-    **Arguments**
-
-    ``backend``
-        The dotted Python import path to the backend class to
-        use. Required.
-
-    ``extra_context``
-        A dictionary of variables to add to the template context. Any
-        callable object in this dictionary will be called to produce
-        the end result which appears in the context. Optional.
-
-    ``success_url``
-        The name of a URL pattern to redirect to on successful
-        acivation. This is optional; if not specified, this will be
-        obtained by calling the backend's
-        ``post_activation_redirect()`` method.
-    
-    ``template_name``
-        A custom template to use. This is optional; if not specified,
-        this will default to ``registration/activate.html``.
-
-    ``\*\*kwargs``
-        Any keyword arguments captured from the URL, such as an
-        activation key, which will be passed to the backend's
-        ``activate()`` method.
-    
-    **Context:**
-    
-    The context will be populated from the keyword arguments captured
-    in the URL, and any extra variables supplied in the
-    ``extra_context`` argument (see above).
-    
-    **Template:**
-    
-    registration/activate.html or ``template_name`` keyword argument.
-    """
-    backend = get_backend(backend)
-    account = backend.activate(request, **kwargs)
-
-    if account:
-        if success_url is None:
-            to, args, kwargs = backend.post_activation_redirect(request, account)
-            return redirect(to, *args, **kwargs)
-        else:
-            return redirect(success_url)
-
-    if extra_context is None:
-        extra_context = {}
-    context = RequestContext(request)
-    for key, value in extra_context.items():
-        context[key] = callable(value) and value() or value
-
-    return render_to_response(template_name, kwargs, context_instance=context)
-
-def register(request, backend, success_url=None, form_class=None,
-        disallowed_url='registration_disallowed',
-        template_name='registration/registration_form.html',
-        extra_context=None):
-    """
-    Allow a new user to register an account.
-
-    The actual registration of the account will be delegated to the
-    backend specified by the ``backend`` keyword argument (see below);
-    it will be used as follows:
-
-    1. The backend's ``registration_allowed()`` method will be called,
-       passing the ``HttpRequest``, to determine whether registration
-       of an account is to be allowed; if not, a redirect is issued to
-       the view corresponding to the named URL pattern
-       ``registration_disallowed``. To override this, see the list of
-       optional arguments for this view (below).
-
-    2. The form to use for account registration will be obtained by
-       calling the backend's ``get_form_class()`` method, passing the
-       ``HttpRequest``. To override this, see the list of optional
-       arguments for this view (below).
-
-    3. If valid, the form's ``cleaned_data`` will be passed (as
-       keyword arguments, and along with the ``HttpRequest``) to the
-       backend's ``register()`` method, which should return the new
-       ``User`` object.
-
-    4. Upon successful registration, the backend's
-       ``post_registration_redirect()`` method will be called, passing
-       the ``HttpRequest`` and the new ``User``, to determine the URL
-       to redirect the user to. To override this, see the list of
-       optional arguments for this view (below).
-    
-    **Required arguments**
-    
-    None.
-    
-    **Optional arguments**
-
-    ``backend``
-        The dotted Python import path to the backend class to use.
-
-    ``disallowed_url``
-        URL to redirect to if registration is not permitted for the
-        current ``HttpRequest``. Must be a value which can legally be
-        passed to ``django.shortcuts.redirect``. If not supplied, this
-        will be whatever URL corresponds to the named URL pattern
-        ``registration_disallowed``.
-    
-    ``form_class``
-        The form class to use for registration. If not supplied, this
-        will be retrieved from the registration backend.
-    
-    ``extra_context``
-        A dictionary of variables to add to the template context. Any
-        callable object in this dictionary will be called to produce
-        the end result which appears in the context.
-
-    ``success_url``
-        URL to redirect to after successful registration. Must be a
-        value which can legally be passed to
-        ``django.shortcuts.redirect``. If not supplied, this will be
-        retrieved from the registration backend.
-    
-    ``template_name``
-        A custom template to use. If not supplied, this will default
-        to ``registration/registration_form.html``.
-    
-    **Context:**
-    
-    ``form``
-        The registration form.
-    
-    Any extra variables supplied in the ``extra_context`` argument
-    (see above).
-    
-    **Template:**
-
-    registration/registration_form.html or ``template_name`` keyword
-    argument.
-    """
-    backend = get_backend(backend)
-    if not backend.registration_allowed(request):
-        return redirect(disallowed_url)
-    if form_class is None:
-        form_class = backend.get_form_class(request)
+# TODO: add captcha (?)
+def register(request):
+    if request.user.is_authenticated():
+        return redirect('current_profile')
 
     if request.method == 'POST':
-        form = form_class(data=request.POST, files=request.FILES)
-        if form.is_valid():
-            new_user = backend.register(request, **form.cleaned_data)
-            if success_url is None:
-                to, args, kwargs = backend.post_registration_redirect(request, new_user)
-                return redirect(to, *args, **kwargs)
-            else:
-                return redirect(success_url)
-    else:
-        form = form_class()
-    
-    if extra_context is None:
-        extra_context = {}
-    context = RequestContext(request)
-    for key, value in extra_context.items():
-        context[key] = callable(value) and value() or value
+        form = RegistrationForm(request.POST)
 
-    return render_to_response(template_name, {'form': form}, context_instance=context)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+
+            #new_user = RegistrationProfile.objects.create_inactive_user(username, email, password)
+            #return redirect('registration_complete')
+
+            user = User.objects.create_user(username, form.cleaned_data['email'], password)
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.save()
+
+            user = auth.authenticate(username=username, password=password)
+
+            assert user and user.is_authenticated()
+            auth.login(request, user)
+
+            # TODO: redirect to a message with confirmation
+            return redirect(user.get_absolute_url())
+
+    else:
+        form = RegistrationForm()
+
+    return render_to_response('users/register.html',
+            context_instance=RequestContext(request, {'form': form}))
+
+def activate(request, activation_key):
+    account = RegistrationProfile.objects.activate_user(activation_key)
+    if account:
+        return redirect('registration_activation_complete')
+
+    return render_to_response('users/activate.html', context_instance=RequestContext(request, kwargs))
+
+# TODO: if username and email match an existing account - suggest to link them
+def loginza_register(request):
+    if request.user.is_authenticated():
+        return redirect('current_profile')
+
+    try:
+        identity_id = request.session.get('users_complete_reg_id', None)
+        user_map = UserMap.objects.select_related().get(identity__id=identity_id)
+    except UserMap.DoesNotExist:
+        return redirect('main')
+
+    if request.method == 'POST':
+        form = CompleteRegistrationForm(user_map.user.id, request.POST)
+        if form.is_valid():
+            user_map.user.username = form.cleaned_data['username']
+            user_map.user.email = form.cleaned_data['email']
+            user_map.user.first_name = form.cleaned_data['first_name']
+            user_map.user.last_name = form.cleaned_data['last_name']
+            user_map.user.set_password(form.cleaned_data["password1"])
+            user_map.user.save()
+
+            user_map.verified = True
+            user_map.save()
+
+            user = auth.authenticate(user_map=user_map)
+            auth.login(request, user)
+
+            messages.info(request, u'Добро пожаловать!')
+            del request.session['users_complete_reg_id']
+            return redirect(_return_path(request))
+    else:
+        form = CompleteRegistrationForm(user_map.user.id, initial={
+                'username': user_map.user.username,
+                'email': user_map.user.email,
+        })
+
+    user_map = UserMap.objects.get(user=user_map.user) # TODO: what if there are several user maps?
+    data = json.loads(user_map.identity.data)
+    form.initial['first_name'] = data['name']['first_name']
+    form.initial['last_name'] = data['name']['last_name']
+
+    return render_to_response('users/loginza_register.html', {'form': form},
+            context_instance=RequestContext(request))

@@ -3,7 +3,7 @@
 {% block content %}
 
 Пожалуйста, установите свой пароль
-<form method="post" action="{% url complete_registration %}">
+<form method="post" action="{% url loginza_register %}">
 {% csrf_token %}
 <table>
 {{ form.as_table }}

@@ -1,0 +1,11 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+    <ul>
+        {% for name, title, num in REGIONS %}
+            <li><a href="{% url region name %}">{{ title }}</a> ({{ num }})</li>
+        {% endfor %}
+    </ul>
+</body>

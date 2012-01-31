@@ -58,14 +58,14 @@
 
     <div>{{ profile_user.profile.about }}</div>
 
+    {% include "dialogs/report.html" %}
+
     {% if user.is_authenticated %}
         {% include "dialogs/send_message.html" %}
 
         {% include "dialogs/add_to_contacts.html" %}
 
         {% include "dialogs/remove_from_contacts.html" %}
-
-        {% include "dialogs/report_user.html" %}
 
         <script type="text/javascript">
             $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
@@ -97,7 +97,7 @@
                 }
             });
 
-            $("#report_user_dialog").on("report_user_dialog_event", function(event, username){
+            $("#report_user_dialog").on("report_dialog_event", function(event, username){
                 $('#contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
                 $('#have_in_contacts_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
             });
@@ -120,14 +120,16 @@
             $("#send_message").button({icons: {primary: "ui-icon-mail-closed"}});
             $("#add_to_contacts").button({icons: {primary: "ui-icon-circle-plus"}});
             $("#remove_from_contacts").button({icons: {primary: "ui-icon-circle-minus"}});
-            $("#report_user").button({icons: {primary: "ui-icon-alert"}});
+
+            $("#report_user").button({icons: {primary: "ui-icon-alert"}}).click(function(){
+                report_dialog_init("user", {username: "{{ profile_user.username }}"});
+            });
 
             if (!in_contacts("{{ profile_user.username }}")){
                 $("#in_contacts").hide();
                 $("#remove_from_contacts").hide();
             } else
                 $("#add_to_contacts").hide();
-            
         </script>
 
         {% if user.is_authenticated %}
@@ -147,12 +149,7 @@
                     remove_from_contacts_init("{{ profile_user.username }}");
                 });
 
-                // Report user
-                $("#report_user").click(function(){
-                    report_user_dialog_init("{{ profile_user.username }}");
-                });
-
-                $("#report_user_dialog").on("report_user_dialog_event", function(){
+                $("#report_dialog").on("report_dialog_event", function(){
                     // TODO: check that this is profile user
                     $("#is_reported").show();
                     $("#report_user").hide();

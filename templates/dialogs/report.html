@@ -1,0 +1,77 @@
+{% if user.is_authenticated %}
+    <div id="report_dialog">
+        <center>
+            Пожаловаться на пользователя <span id="report_dialog_user" class="dialog_user_span"></span>?
+            Пожаловаться на ссылку <a id="report_dialog_link" href=""></a>?
+        </center>
+
+        <form id="report_form" method="post" action="{% url report %}">
+            {% csrf_token %}
+            <div>
+                Причина жалобы:
+                <select id="report_reason" name="reason">
+                    {% for value, name in REPORT_REASONS.user %}
+                        <option value="{{ value }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+                <div id="report_reason_explained">
+                    <br/>
+                    Подробности: <input type="text" name="reason_explained" size="40" value="" />
+                </div>
+            </div>
+            <input type="hidden" name="username" value="" />
+            <input type="hidden" name="location" value="{{ current_location.id }}" />
+        </form>
+    </div>
+{% endif %}
+
+<script type="text/javascript">
+    // Report dialog
+    {% if user.is_authenticated %}
+        // TODO: choose proper title
+        $("#report_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на пользователя",
+            buttons: {
+                "Пожаловаться": function(){
+                    $.post("{% url report %}", $("#report_form").serialize(), function(data){
+                        if (data=="ok"){
+                            //var username = $('#report_user_form input[name="username"]').val();
+                            $("#report_dialog").trigger("report_dialog_event", [username]);
+                            $("#report_dialog").dialog("close");
+                            alert("Ваша жалоба будет рассмотрена в ближайшее время");
+                        } else
+                            alert(data);
+                    });
+                },
+                "Отмена": function(){$("#report_dialog").dialog("close");}
+            }
+        }).dialog("close");
+
+        function sync_reason_input(){
+            if ($("#report_reason").val()=="other")
+                $("#report_reason_explained").show();
+            else
+                $("#report_reason_explained").hide();
+        }
+
+        $("#report_reason").change(sync_reason_input);
+
+        function report_dialog_init(type, params){
+            $("#report_reason option").remove();
+            $.each(REPORT_REASONS[type], function(index, data){
+                var name, reason = data;
+                console.log(data);
+                $("#report_reason").append($("<option/>").attr("value", name).text(reason));
+            });
+
+            //$("#report_dialog_user").text(username);
+            //$('#report_form input[name="username"]').val(username);
+            // TODO: set options for reason
+            $("#report_dialog").dialog("open");
+            sync_reason_input();
+        }
+    {% else %}
+        function report_dialog_init(type, params){
+            login_dialog_init("Чтобы отправить жалобу, пожалуйста, войдите в систему");
+        }
+    {% endif %}
+</script>

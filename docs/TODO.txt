@@ -1,12 +1,9 @@
-* Merge Report models using GenericForeignKey
 * Add fields to Location - address, geo coordinates, telephone, email
 * Data from TIKs
 * Bookmarks on the page
 * Registration, change password, etc.
 
-
 * (!) В User admin добавить поля со временем регистрации
-* Report and delete icon-buttons for links (in the lists)
 * on changing voter's region on profile page - "избиратель" can disappear
 
 * (!) Подписать какие символы может содержать username + оформление формы регистрации

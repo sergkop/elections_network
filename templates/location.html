@@ -2,7 +2,7 @@
 
 {% block head %}
     <script type="text/javascript">
-        VK.init({apiId: 2767938, onlyWidgets: true});
+        VK.init({apiId: {{ VK_APP_ID }}, onlyWidgets: true});
     </script>
 {% endblock %}
 
@@ -97,10 +97,10 @@
 
     {% include "dialogs/become_voter.html" %}
 
+    {% include "dialogs/report.html" %}
+
     {% if user.is_authenticated %}
         {% include "dialogs/add_to_contacts.html" %}
-
-        {% include "dialogs/report_user.html" %}
 
         <script type="text/javascript">
             // Become voter
@@ -137,7 +137,7 @@
             $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").css("visibility", "hidden");
         });
 
-        $("#report_user_dialog").on("report_user_dialog_event", function(event, username){
+        $("#report_dialog").on("report_dialog_event", function(event, username){
             $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
         });
     </script>
@@ -159,7 +159,6 @@
             </ul>
             <center>
                 <button id="add_link" title="Добавить ссылку">Добавить</button>
-                <button id="report_link" title="Пожаловаться на ссылку">Пожаловаться</button>
             </center>
         </div>
     </div>
@@ -185,9 +184,6 @@
     {% include "dialogs/submit_complaint.html" %}
 
     {% if user.is_authenticated %}
-
-        {% include "dialogs/report_link.html" %}
-
         <script type="text/javascript">
             // Add link
             $("#add_link_dialog").on("add_link_event", function(){
@@ -197,10 +193,7 @@
                 ));
             });
 
-            // Report link
-            $("#report_link").click(function(){
-                report_link_dialog_init();
-
+            /*$("#report_link").click(function(){
                 // TODO: depricate it
                 $("#links_ul li").each(function(index){
                     var url = $(this).children("a").attr("href");
@@ -209,19 +202,9 @@
                     var radio_btn = $("<input/>").attr("type", "radio").attr("name", "report_link_radio").attr("value", url);
                     $("#report_link_ul").append($("<li/>").append(radio_btn).append(a_copy));
                 });
-            });
-        </script>
-    {% else %}
-        <script type="text/javascript">
-            $("#report_link").click(function(){
-                login_dialog_init("Чтобы пожаловаться на ссылку, пожалуйста, войдите в систему");
-            });
+            });*/
         </script>
     {% endif %}
-
-    <script type="text/javascript">
-        $("#report_link").button({icons: {primary: 'ui-icon-alert'}}).tipsy({gravity: 'w'});
-    </script>
 {% endblock %}
 
 {% block content %}

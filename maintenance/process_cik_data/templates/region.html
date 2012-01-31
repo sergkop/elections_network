@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="/media/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('input[name="info_tik"]').change(function(){
+                var name = $.trim($(this).next().text());
+                $('input[name="new_name"]').val(name);
+                $("#postcode").val($(this).next().attr("postcode"));
+                $("#address").val($(this).next().attr("title"));
+
+                $('#result_panel label').css("background-color", "#fff");
+                $('#result_panel label:contains("'+name.substr(0, 5)+'")').css("background-color", "f4f");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <a style="text-align: left; display: inline;" href="/">Главная</a>
+        <h2 style="text-align:center; display: inline;">{{ title }}</h2>
+    </div>
+
+    <form action="" method="post">
+        
+        <div>
+            Почтовый индекс: <input id="postcode" type="text" name="postcode" size="10" value=""/>
+        </div>
+        
+        <div>
+            Адрес: <input id="address" type="text" name="address" size="80" value=""/>
+        </div>
+
+        <div>
+            Название округа:
+            <input type="text" name="new_name" size="40" value=""/>
+        </div>
+        <input type="submit" value="Склеить"/>
+
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td style="border: 1px solid black;" id="result_panel">
+                    <h3>Иерархия участков</h3>
+                    <ul style="list-style-type: none;">
+                        {% for tik in result_tiks %}
+                            <li>
+                                <input type="radio" name="result_tik" value="{{ tik.tvd }}_{{ tik.root }}" id="{{ tik.tvd }}_{{ tik.root }}"/>
+                                <label for="{{ tik.tvd }}_{{ tik.root }}">{{ tik.name }}</label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+
+                <td style="border: 1px solid black;">
+                    <h3>Информация о ТИКах</h3>
+                    <ul style="list-style-type: none;">
+                        {% for tik in info_tiks %}
+                            <li>
+                                <input type="radio" name="info_tik" value="{{ tik.vrnorg }}_{{ tik.vrnkomis }}" id="{{ tik.vrnorg }}_{{ tik.vrnkomis }}"/>
+                                <label for="{{ tik.vrnorg }}_{{ tik.vrnkomis }}" postcode="{{ tik.postcode }}" title="{{ tik.address }}">{{ tik.name }}</label>
+                                (<a href="http://www.{{ name }}.vybory.izbirkom.ru/region/{{ name }}?action=show_komissia&region={{ region_id }}&sub_region={{ region_id }}&type=100&vrnorg={{ tik.vrnorg }}&vrnkomis={{ tik.vrnkomis }}" target="_blank">сайт</a>)
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+
+                <td style="border: 1px solid black;">
+                    <h3>Обработанные</h3>
+                    <ul>
+                        {% for tik in merged_tiks %}
+                            <li>{{ tik.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+
+            </tr>
+        </table>
+    </form>
+
+</body>

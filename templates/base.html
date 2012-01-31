@@ -28,9 +28,10 @@
         var IS_USER_PROFILE = {% if user == profile_user %}true{% else %}false{% endif %};
         var USERNAME = "{{ user.username }}";
         var CONTACTS = {{ CONTACTS|safe }};
-        var REPORTED_USERS = {{ REPORTED_USERS|safe }};
+        var REPORTS = {{ REPORTS|safe }};
         var LOGIN_URL = "{% url login %}";
         var GET_SUB_REGIONS_URL = "{% url get_sub_regions %}";
+        var REPORT_REASONS = {{ REPORT_REASONS|safe }};
     </script>
 
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.js"></script>
@@ -167,14 +168,14 @@
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
-            w.yaCounter12024115 = new Ya.Metrika({id:12024115, enableAll: true, webvisor:true});
+            w.yaCounter{{ YA_METRIKA_ID }} = new Ya.Metrika({id:{{ YA_METRIKA_ID }}, enableAll: true, webvisor:true});
         }
         catch(e) { }
     });
 })(window, "yandex_metrika_callbacks");
 </script></div>
 <script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
-<noscript><div><img src="//mc.yandex.ru/watch/12024115" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="//mc.yandex.ru/watch/{{ YA_METRIKA_ID }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
 </body>

@@ -81,7 +81,7 @@ def download_structure():
             struct = []
             build_structure(url, struct)
             with open(struct_path, 'w') as region_file:
-                region_file.write(json.dumps(struct, indent=4))
+                region_file.write(json.dumps(struct, indent=4, ensure_ascii=False).encode('utf8'))
 
         info_path = os.path.join(data_path, 'regions', name+'-info.json')
         if not os.path.exists(info_path):
@@ -118,7 +118,7 @@ def download_structure():
                 info.append(data)
 
             with open(info_path, 'w') as info_file:
-                info_file.write(json.dumps(info, indent=4))
+                info_file.write(json.dumps(info, indent=4, ensure_ascii=False).encode('windows-1251'))
 
 if __name__ == '__main__':
     download_structure()

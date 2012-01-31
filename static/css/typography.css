@@ -1,20 +1,3 @@
-/**
- * "Yet Another Multicolumn Layout" - YAML CSS Framework
- *
- * (en) Uniform design of standard content elements
- * (de) Einheitliche Standardformatierungen für die wichtigten Inhalts-Elemente
- *
- * @copyright       Copyright 2005-2012, Dirk Jesse
- * @license         CC-BY 2.0 (http://creativecommons.org/licenses/by/2.0/),
- *                  YAML-CDL (http://www.yaml.de/license.html)
- * @link            http://www.yaml.de
- * @package         yaml
- * @version         4.0
- * @revision        $Revision: 687 $
- * @lastmodified    $Date: 2012-01-22 13:27:22 +0100 (So, 22 Jan 2012) $
- * @appdef yaml
- */
-
 @media all {
 
 	/**
@@ -27,12 +10,10 @@
 	*/
 
 	/* (en) reset font size for all elements to standard (16 Pixel) */
-	/* (de) Alle Schriftgrößen auf Standardgröße (16 Pixel) zurücksetzen */
 	html * { font-size:100%; }
 
 	/**
 	* (en) reset monospaced elements to font size 16px in all browsers
-	* (de) Schriftgröße von monospaced Elemente in allen Browsern auf 16 Pixel setzen
 	*
 	* @see: http://webkit.org/blog/67/strange-medium/
 	*/
@@ -47,7 +28,7 @@
 		font-family:Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
 	}
 
-	/* (en) base layout gets standard font size 14px */
+	/* base layout gets standard font size 14px */
 	body {
 		font-family: "Droid Serif", Georgia, "Times New Roman", Times, serif;
 		font-size:87.50%; /* base: 14px */

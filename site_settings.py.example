@@ -1,11 +1,11 @@
-import os
+import os.path
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 # Settings in this file must be edited before deployment
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -24,15 +24,13 @@ DATABASES = {
     }
 }
 
-URL_PREFIX = 'http://127.0.0.1:8000'
+URL_PREFIX = 'http://127.0.0.1:8000' # put an appropriate domain name here
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
 
 VIRTUALENV = "" # set to ".../env/lib/python2.7/site-packages" if you are using virtualenv
 
-# force removal of mysite.fcgi from URL:
-# http://docs.djangoproject.com/en/dev/howto/deployment/fastcgi/#forcing-the-url-prefix-to-a-particular-value
-FORCE_SCRIPT_NAME = ''
+VK_APP_ID = 1 # set proper VKontakte app id for comments wall
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+YA_METRIKA_ID = 1 # Yandex Metrika id

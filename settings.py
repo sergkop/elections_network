@@ -122,6 +122,8 @@ LOGGING = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 # Loginza settings
 LOGINZA_AMNESIA_PATHS = ('/complete_registration',)
 LOGINZA_DEFAULT_EMAIL = ""
@@ -137,3 +139,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'extended_valid_elements': "script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],",
 }
 TINYMCE_COMPRESSOR = False # TODO: compression doesn't work at the moment
+
+# force removal of mysite.fcgi from URL:
+# http://docs.djangoproject.com/en/dev/howto/deployment/fastcgi/#forcing-the-url-prefix-to-a-particular-value
+FORCE_SCRIPT_NAME = ''

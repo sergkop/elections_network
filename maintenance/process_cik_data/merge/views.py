@@ -41,7 +41,8 @@ def region(request, name):
             x_coord, y_coord = float(request.POST['x_coord']), float(request.POST['y_coord'])
         else:
             x_coord, y_coord = None, None
-        merge_data(name, tvd, root, vrnorg, vrnkomis, request.POST['new_name'], x_coord, y_coord)
+        merge_data(name, tvd, root, vrnorg, vrnkomis, request.POST['new_name'], x_coord, y_coord,
+                int(request.POST['postcode']), request.POST['address'])
 
         return redirect('region', name)
 

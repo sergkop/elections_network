@@ -20,7 +20,7 @@ def get_regions_data(name, merged):
 
     return sorted(regions, key=lambda region: region['name'])
 
-def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord):
+def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord, postcode, address):
     results_data_path = os.path.join(DATA_PATH, 'regions', name+'.json')
     results_data = json.loads(open(results_data_path).read().decode('utf8'))
 
@@ -44,6 +44,8 @@ def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord):
     # merge info
     region.update(info_tik)
     region['name'] = new_name.strip()
+    region['postcode'] = postcode
+    region['address'] = address
 
     if x_coord and y_coord:
         region['x_coord'], region['y_coord'] = x_coord, y_coord

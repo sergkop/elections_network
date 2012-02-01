@@ -2,25 +2,32 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="/media/jquery.js"></script>
+    <script src="http://api-maps.yandex.ru/1.1/index.xml?key=AOBEJU8BAAAAtOQqFQIAxdngM6C9Z6RDsPYeR_3yky-x0kQAAAAAAAAAAACy_1ilxxVL6EOWNkqU8r6ibjyvwA==&modules=pmap" type="text/javascript"></script>
+    <script type="text/javascript" src="/media/addressCheckMap.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('input[name="info_tik"]').change(function(){
                 var name = $.trim($(this).next().text());
                 $('input[name="new_name"]').val(name);
                 $("#postcode").val($(this).next().attr("postcode"));
-                $("#address").val($(this).next().attr("title"));
+                $("#address").val($(this).next().attr("address"));
+                $("#map_address").val($(this).next().attr("map_address"));
 
                 $('#result_panel label').css("background-color", "#fff");
-                $('#result_panel label:contains("'+name.substr(0, 5)+'")').css("background-color", "f4f");
+                var search_name = name.replace("города ", "").substr(0, 4);
+                $('#result_panel label:contains("'+search_name+'")').css("background-color", "f4f");
             });
+
+            $("#get_coordinates").click(AddressCheckMap.showCoordinates);
         });
     </script>
 </head>
-<body>
+<body onload="AddressCheckMap.init();">
     <div>
-        <a style="text-align: left; display: inline;" href="/">Главная</a>
-        <h2 style="text-align:center; display: inline;">{{ title }}</h2>
+        <a style="float: right; display: inline;" href="/">Главная</a>
     </div>
+
+    <h2 id="region" style="text-align:center; display: inline;">{{ title }}</h2>
 
     <form action="" method="post">
         <div>
@@ -28,14 +35,30 @@
         </div>
 
         <div>
-            Адрес: <input id="address" type="text" name="address" size="80" value=""/>
+            Адрес: <input id="address" type="text" name="address" size="65" value=""/>
         </div>
 
         <div>
             Название округа:
             <input type="text" name="new_name" size="40" value=""/>
         </div>
+        <input type="checkbox" name="add_geo" id="add_geo"/><label for="add_geo">Включить координаты с карты</label>
         <input type="submit" value="Склеить"/>
+
+        <br/>
+
+        <input type="text" id="map_address" value="" size="75" />
+        <button id="get_coordinates" >Получить координаты</button>
+
+        <div>
+            X: <input type="text" name="x_coord" id="x_coord" value="" />
+            Y: <input type="text" name="y_coord" id="y_coord" value="" />
+        </div>
+
+        <div>
+            <div id="message" style="font-size: 20pt; margin-top: 25px;"></div>
+            <div id="error" style="color: red; font-size: 20pt; margin-top: 25px;"></div>
+        </div>
 
         {% csrf_token %}
         <table>
@@ -58,24 +81,37 @@
                         {% for tik in info_tiks %}
                             <li>
                                 <input type="radio" name="info_tik" value="{{ tik.vrnorg }}_{{ tik.vrnkomis }}" id="{{ tik.vrnorg }}_{{ tik.vrnkomis }}"/>
-                                <label for="{{ tik.vrnorg }}_{{ tik.vrnkomis }}" postcode="{{ tik.postcode }}" title="{{ tik.address }}">{{ tik.name }}</label>
+                                <label for="{{ tik.vrnorg }}_{{ tik.vrnkomis }}" postcode="{{ tik.postcode }}" address="{{ tik.address }}" map_address="{{ tik.map_address }}">{{ tik.name }}</label>
                                 (<a href="http://www.{{ name }}.vybory.izbirkom.ru/region/{{ name }}?action=show_komissia&region={{ region_id }}&sub_region={{ region_id }}&type=100&vrnorg={{ tik.vrnorg }}&vrnkomis={{ tik.vrnkomis }}" target="_blank">сайт</a>)
                             </li>
                         {% endfor %}
                     </ul>
                 </td>
 
-                <td style="border: 1px solid black;">
-                    <h3>Обработанные</h3>
-                    <ul>
-                        {% for tik in merged_tiks %}
-                            <li>{{ tik.name }}</li>
-                        {% endfor %}
-                    </ul>
+                <td valign="top">
+                    <h3>Карта</h3>
+
+                    <div>
+                        <input type="radio" name="type" id="all" value="all" checked="checked" /><label for="all">всё</label>
+                        <input type="radio" name="type" id="house" value="house" /><label for="house">дом</label>
+                        <input type="radio" name="type" id="street" value="street" /><label for="street">улица</label>
+                        <input type="radio" name="type" id="district" value="district" /><label for="district">район</label>
+                        <input type="radio" name="type" id="locality" value="locality" /><label for="locality">населённый пункт</label>
+                        <br/>
+                        <input type="radio" name="type" id="province" value="province" /><label for="province">область</label>
+                    </div>
+
+                    <div id="map" style="height:350px; width: 500px; margin-top: 20px;"></div>
                 </td>
 
             </tr>
         </table>
     </form>
 
+    <h3>Обработанные</h3>
+    <ul>
+        {% for tik in merged_tiks %}
+            <li>{{ tik.name }}</li>
+        {% endfor %}
+    </ul>
 </body>

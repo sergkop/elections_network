@@ -10,24 +10,21 @@
     <div class="ym-wrapper">
         <div class="breadcrumbs">
             <ul>
-                <li><a href="{% url main %}">Россия</a></li>
-
-                <li>&rarr;</li>
+                <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
 
                 {% if current_location.parent_1 %}
                     <li>
-                        <a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1 }}</a> 
+                        <a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1 }}<i></i><b></b></a> 
                     </li>
-                    <li>&rarr;</li>
                 {% endif %}
                 {% if current_location.parent_2 %}
                     <li>
-                        <a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2 }}</a>
+                        <a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2 }}<i></i><b></b></a>
                     </li>
-                    <li>&rarr;</li>
                 {% endif %}
+
                 <li>
-                    <strong>{{ current_location }}</strong>
+                    <strong>{{ current_location }}<i></i><b></b></strong>
                     <!--a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a-->
                 </li>
 
@@ -36,11 +33,12 @@
                     <li>
                         <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                             <select id="goto_subregion" name="region_1">
-                                <option value="" selected="selected">Перейти на нижестоящий регион</option>
+                                <option value="" selected="selected">Перейти ниже</option>
                                 {% for sub_region in sub_regions %}
                                 <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>
                                 {% endfor %}
                             </select>
+                            <i></i><b></b>
                         </form>
                     </li>
                 {% endif %}
@@ -59,12 +57,20 @@
 
         <div class="content_block">
             <ul class="side_list">
-                {% for observer in participants.observer %}
+                {% for observer in roles.observer %}
                     <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
                 {% endfor %}
             </ul>
             <center>
                 <button id="become_observer">Записаться</button>
+
+                <button id="become_observer1" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+                    <span class="ui-button-text">
+                        <span class="ui-button-icon-primary ui-icon ui-icon-check"></span>
+                        <span class="ui-button-text">Записаться</span>
+                    </span>
+                </button>
+
             </center>
         </div>
     </div>
@@ -207,9 +213,11 @@
     {% endif %}
 {% endblock %}
 
-{% block content %}
-    <h2 class="location_header">{{ current_location }}</h2>
+{% block content_header %}
+<h2 class="location_header">{{ current_location }}</h2>
+{% endblock %}
 
+{% block content %}
     <div id="vk_comments"></div>
     <script type="text/javascript">
         VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});

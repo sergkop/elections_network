@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from users.models import Contact, Participation, Profile
+from users.models import Contact, Profile, Role
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
     ordering = ('user__username',)
     search_fields = ('user__username',)
 
-class ParticipationAdmin(admin.ModelAdmin):
+class RoleAdmin(admin.ModelAdmin):
     list_display = ('user', 'location', 'type')
     ordering = ('user__username',)
     search_fields = ('user__username',)
@@ -18,6 +18,6 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'contact__username')
 
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(Participation, ParticipationAdmin)
+admin.site.register(Role, RoleAdmin)
 admin.site.register(Contact, ContactAdmin)
 

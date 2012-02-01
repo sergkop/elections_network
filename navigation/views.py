@@ -4,10 +4,10 @@ from django.template import RequestContext
 
 from locations.models import Location
 from navigation.models import Page
-from users.models import Participation
+from users.models import Role
 
 def main(request):
-    voter_count = Participation.objects.filter(type='voter').count()
+    voter_count = Role.objects.filter(type='voter').count()
     if voter_count%10 == 1:
         ending = u'ь'
     elif voter_count%10 in (2, 3, 4):

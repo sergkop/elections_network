@@ -4,6 +4,7 @@ import os.path
 import re
 
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 
@@ -31,9 +32,16 @@ def region(request, name):
         return None
 
     if request.method == 'POST':
+        if 'result_tik' not in request.POST:
+            return HttpResponse(u'Выбирите округ в левой таблице')
         tvd, root = request.POST['result_tik'].split('_')
         vrnorg, vrnkomis = request.POST['info_tik'].split('_')
-        merge_data(name, tvd, root, vrnorg, vrnkomis, request.POST['new_name'])
+
+        if 'add_geo' in request.POST:
+            x_coord, y_coord = float(request.POST['x_coord']), float(request.POST['y_coord'])
+        else:
+            x_coord, y_coord = None, None
+        merge_data(name, tvd, root, vrnorg, vrnkomis, request.POST['new_name'], x_coord, y_coord)
 
         return redirect('region', name)
 

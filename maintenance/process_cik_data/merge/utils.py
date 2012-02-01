@@ -20,7 +20,7 @@ def get_regions_data(name, merged):
 
     return sorted(regions, key=lambda region: region['name'])
 
-def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name):
+def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord):
     results_data_path = os.path.join(DATA_PATH, 'regions', name+'.json')
     results_data = json.loads(open(results_data_path).read().decode('utf8'))
 
@@ -43,7 +43,11 @@ def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name):
 
     # merge info
     region.update(info_tik)
-    region['name'] = new_name
+    region['name'] = new_name.strip()
+
+    if x_coord and y_coord:
+        region['x_coord'], region['y_coord'] = x_coord, y_coord
+
     with open(results_data_path, 'w') as f:
         f.write(json.dumps(results_data, indent=4, ensure_ascii=False).encode('utf8'))
 
@@ -64,7 +68,37 @@ def parse_address(address):
         res['postcode'] = parts[0]
         parts.pop(0)
 
-    parts = filter(lambda part: u'область' not in part and part!='.', parts)
-    res['address'] = ', '.join(parts)
+    parts = filter(lambda part: u'область' not in part and part!='.' and part!='', parts)
+    address = ', '.join(parts)
+
+    map_parts = list(parts)
+
+    # Address displayed to users
+    res['address'] = address.replace(u'муниципальный', '').strip()
+
+    """
+    1) В адресе для яндекс карт перед номером дома не должно быть запятой
+    2) Всяческие префиксы (п., г., итп) препятствуют распознаванию адреса
+    3) В глубинке номера домов, а иногда и улицы, не нанесены на карту. В этом случае
+       помечать населенный пункт
+    """
+
+    # Address used for Yandex maps
+    map_address = res['address']
+
+    map_address = ', '.join(filter(lambda part: u'район' not in part and \
+            u'комн.' not in part and u'кабинет' not in part, map_address.split(',')))
+
+    map_address = map_address.replace(u'ул.', '').replace(u'с.', '').replace(u'п.', '') \
+            .replace(u'г.', '').replace(u'город ', '').replace(u'прос ', '').replace(u'пл.', '') \
+            .replace(u'д.', '').replace(u'дом', '').replace(u'городской', '').replace(u'округ', '') \
+            .replace(u'улица', '')
+
+    m = re.match(r'(.+), (\s+\d+)', map_address)
+    if m:
+        map_address = m.group(1) + ' ' + m.group(2)
+
+    # TODO: remove , in front of house number
+    res['map_address'] = map_address
 
     return res

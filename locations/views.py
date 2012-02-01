@@ -8,7 +8,7 @@ from django.template import RequestContext
 
 from locations.models import Location
 from links.models import Link
-from users.models import Participation
+from users.models import Role
 
 # TODO: restructure it and take only one parameter
 def goto_location(request):
@@ -34,15 +34,15 @@ def location(request, loc_id):
     except Location.DoesNotExist:
         raise Http404
 
-    # Get the list of participants
-    participants = {} # {participation_type: [users]}
+    # Get the list of role
+    participants = {} # {role_type: [users]}
     query = Q(location=location)
 
     if not location.parent_2:
         query |= Q(location__parent_2=location) if location.parent_1 else Q(location__parent_1=location)
 
-    for participation in Participation.objects.filter(query).select_related():
-        participants.setdefault(participation.type, []).append(participation.user)
+    for role in Role.objects.filter(query).select_related():
+        participants.setdefault(role.type, []).append(role.user)
 
     # Get sub-regions
     if location.parent_2:

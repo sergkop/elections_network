@@ -4,7 +4,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 # Settings in this file must be edited before deployment
 
-DEBUG = True
+DEBUG = True # MUST be False in production
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -33,4 +33,6 @@ VIRTUALENV = "" # set to ".../env/lib/python2.7/site-packages" if you are using 
 
 VK_APP_ID = 1 # set proper VKontakte app id for comments wall
 
-YA_METRIKA_ID = 1 # Yandex Metrika id
+YA_METRIKA_ID = 12237667 # Yandex Metrika id
+
+ADMIN_PREFIX = 'admin' # prefix to access django admin interface (change for security reasons)

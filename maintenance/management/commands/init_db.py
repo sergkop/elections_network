@@ -27,6 +27,9 @@ def print_progress(i, count):
         sys.stdout.write("\r")
         sys.stdout.flush()
 
+default_location_fields = {'postcode': 0, 'tvd': 0, 'root': 0, 'vrnorg': 0, 'vrnkomis': 0,
+        'x_coord': 0, 'y_coord': 0}
+
 class Command(BaseCommand):
     help = "Loads locations data after first syncdb."
 
@@ -42,13 +45,13 @@ class Command(BaseCommand):
         for location in iterate_struct(data, []):
             print_progress(i, 2923)
             if len(location) == 1:
-                db_entries[location[0]] = {'entry': Location.objects.create(name=location[0]), 'sub': {}}
+                db_entries[location[0]] = {'entry': Location.objects.create(name=location[0], **default_location_fields), 'sub': {}}
             elif len(location) == 2:
                 db_entries[location[0]]['sub'][location[1]] = \
-                        Location.objects.create(name=location[1], parent_1=db_entries[location[0]]['entry'])
+                        Location.objects.create(name=location[1], parent_1=db_entries[location[0]]['entry'], **default_location_fields)
             elif len(location) == 3:
                 Location.objects.create(name=location[2], parent_1=db_entries[location[0]]['entry'],
-                        parent_2=db_entries[location[0]]['sub'][location[1]])
+                        parent_2=db_entries[location[0]]['sub'][location[1]], **default_location_fields)
             i += 1
 
         print "initializing static pages"

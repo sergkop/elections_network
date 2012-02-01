@@ -2,28 +2,31 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from tinymce.models import HTMLField
+
 from locations.models import Location
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    about = models.TextField()
+    middle_name = models.CharField(max_length=30)
+    about = HTMLField()
 
-PARTICIPATION_CHOICES = (
+ROLE_CHOICES = (
     ('observer', u'Наблюдатель'),
     ('voter', u'Избиратель'),
 )
-PARTICIPATION_TYPES = dict(PARTICIPATION_CHOICES)
+ROLE_TYPES = dict(ROLE_CHOICES)
 
-class Participation(models.Model):
+class Role(models.Model):
     user = models.ForeignKey(User)
     location = models.ForeignKey(Location)
-    type = models.CharField(max_length=10, choices=PARTICIPATION_CHOICES)
+    type = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
     class Meta:
         unique_together = ('user', 'location', 'type')
 
     def type_name(self):
-        return PARTICIPATION_TYPES[self.type]
+        return ROLE_TYPES[self.type]
 
 class Contact(models.Model):
     user = models.ForeignKey(User, related_name='users')

@@ -18,6 +18,7 @@
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="{{ STATIC_URL }}libs/tipsy/tipsy.css" type="text/css" />
+    <link href="{{ STATIC_URL }}css/julia_style.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript">
         var CURRENT_LOCATION = [
@@ -105,6 +106,7 @@
                         </div>
                     </div>
                     <div class="ym-col3">
+                        {% block content_header %}{% endblock %}
                         <div class="ym-cbox">
                             {% block content %}{% endblock %}
                         </div>
@@ -164,11 +166,15 @@
 </script>
 
 <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+var yaParams = {};
+</script>
+
 <div style="display:none;"><script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
-            w.yaCounter{{ YA_METRIKA_ID }} = new Ya.Metrika({id:{{ YA_METRIKA_ID }}, enableAll: true, webvisor:true});
+            w.yaCounter{{ YA_METRIKA_ID }} = new Ya.Metrika({id:{{ YA_METRIKA_ID }}, enableAll: true, trackHash:true, webvisor:true,params:window.yaParams||{ }});
         }
         catch(e) { }
     });

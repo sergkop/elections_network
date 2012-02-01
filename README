@@ -16,6 +16,7 @@ Running development server:
     * rename site_settings.py.example to site_settings.py and set proper settings values
 
     * python manage.py syncdb (agree to create superuser)
+    * python manage.py migrate
     * python manage.py init_db
 
     * 'python manage.py runserver' to run server

@@ -11,7 +11,7 @@ from django.template import RequestContext
 
 from locations.models import Location
 from links.models import Link
-from users.models import Contact, Participation
+from users.models import Contact, Role
 
 def current_profile(request):
     """ Show profile of the currently logged in user """
@@ -23,8 +23,8 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
 
     activities = {}
-    for participation in Participation.objects.filter(user=user).select_related():
-        activities[participation.type] = {'user': participation.user, 'location': participation.location}
+    for role in Role.objects.filter(user=user).select_related():
+        activities[role.type] = {'user': role.user, 'location': role.location}
 
     context = {
         'profile_user': user,
@@ -46,14 +46,14 @@ def become_voter(request):
                 continue
 
             try:
-                participation, created = Participation.objects.get_or_create(
+                role, created = Role.objects.get_or_create(
                         type='voter', user=request.user, defaults={'location_id': location_id})
             except IntegrityError:
                 return HttpResponse(u'Ошибка базы данных')
 
             if not created:
-                participation.location_id = location_id
-                participation.save()
+                role.location_id = location_id
+                role.save()
 
             return HttpResponse('ok')
 

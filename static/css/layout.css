@@ -24,10 +24,10 @@
     /* Header */
     header {
         color: #000;
-        background: -webkit-gradient(linear, left top, left bottom, from(#1C94C4), to(#003366));
-        background: -moz-linear-gradient(top, #1C94C4, #003366);
-        -webkit-box-shadow: 0 0 10px #333;
-        box-shadow: 0 0 10px #333;
+        background: -webkit-gradient(linear, left top, left bottom, from(#40AAE3), to(#003366));
+        background: -moz-linear-gradient(top, #40AAE3, #003366);
+        /*-webkit-box-shadow: 0 0 10px #333;
+        box-shadow: 0 0 10px #333;*/
     }
 
     header h1 {
@@ -37,7 +37,9 @@
     }
 
 	nav {
-		background: #ccc;
+        background: -webkit-gradient(linear, left top, left bottom, from(#003366), to(#003457));
+        background: -moz-linear-gradient(top, #003366, #003457);
+		/*background: #ccc;*/
 	}
 
 	#main .info {

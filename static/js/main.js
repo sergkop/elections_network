@@ -150,7 +150,7 @@ var UserListItem = Backbone.View.extend({
         var report_btn = $("<span/>")
                 .addClass("side_list_btn ui-icon ui-icon-notice")
                 .appendTo($(this.el));
-        if (username!=USERNAME && $.inArray(username, REPORTED_USERS)==-1)
+        if (username!=USERNAME && $.inArray(username, REPORTS["user"])==-1)
             report_btn.attr("title", "Пожаловаться на пользователя")
                     .tipsy({gravity: 'n'})
                     .click(function(){

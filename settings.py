@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'locations',
     'maintenance',
     'navigation',
+    'registration',
     'reports',
     'users',
     'links',

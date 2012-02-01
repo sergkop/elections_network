@@ -102,13 +102,13 @@ def print_progress(i, count):
         sys.stdout.flush()
 
 class Command(BaseCommand):
-    help = "Loads data for testing - users, links, participations, etc."
+    help = "Loads data for testing - users, links, roles, etc."
 
     def handle(self, *args, **options):
         from django.contrib.auth.models import User
         from links.models import Link
         from locations.models import Location
-        from users.models import Contact, Participation
+        from users.models import Contact, Role
 
         users_db = []
         USER_COUNT = 300
@@ -154,7 +154,7 @@ class Command(BaseCommand):
         print "creating contacts"
         for i in range(USER_COUNT):
             print_progress(i, USER_COUNT)
-            Participation.objects.create(location=choice(locations_db), user=users_db[i], type='voter')
+            Role.objects.create(location=choice(locations_db), user=users_db[i], type='voter')
             for i in range(choice([1, 2, 3, 4, 5])):
                 contact = choice(users_db)
                 if contact != user:

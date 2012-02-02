@@ -129,7 +129,7 @@ var PublicElectionsMap = {
 			// Создание стиля для значка пользователя
 			var s = new YMaps.Style();
 			s.iconStyle = new YMaps.IconStyle();
-			s.iconStyle.href = "user.png";
+			s.iconStyle.href = "/static/images/user.png";
 			s.iconStyle.size = new YMaps.Point(32, 32);
 			s.iconStyle.offset = new YMaps.Point(-16, -16);
 			// Создание метки и добавление пользователя на карту
@@ -214,7 +214,7 @@ var PublicElectionsMap = {
 				var placemark = new YMaps.Placemark(this.get(0).getCoordPoint());
 				placemark.name = commission.title;
 				placemark.description = PublicElectionsMap.buildAddressString(commission.city, commission.address) +
-                        ' <a href="#" onclick="PublicElectionsMap.showAddress(\''+addressString+'\', true); return false;"><img src="target.png" alt="Цель" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
+                        ' <a href="#" onclick="PublicElectionsMap.showAddress(\''+addressString+'\', true); return false;"><img src="/static/images/target.png" alt="Цель" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
                         ((commission.level != null && commission.level > 0) ?"<p>Уровень: "+commission.level+"</p>":"") +
                         ((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
                         ((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +

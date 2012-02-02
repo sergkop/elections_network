@@ -54,6 +54,9 @@ def region(request, name):
     for info_tik in info_tiks:
         info_tik.update(parse_address(info_tik['address']))
 
+        info_tik['name'] = info_tik['name'].replace(u'ная районная', u'ный район') \
+                .replace(u'кая районная', u'кий район')
+
     context = {
         'name': region[0],
         'title': region[1],

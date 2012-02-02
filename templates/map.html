@@ -12,11 +12,10 @@
 
     <script type="text/javascript">
         var electionCommissions = new Array(
-            new ElectionCommission(1, 1, "Адыгея", "ЦИК Республики Адыгея", "ул. Пионерская 199", "Майкоп", "http://www.adygei.izbirkom.ru/", 500, 5, 10),
-            new ElectionCommission(2, 2, "Алтай", "ЦИК Республики Алтай", "ул. Эркемена Палкина, 1", "Горно-Алтайск", "http://www.altai_rep.izbirkom.ru/", 1000, 10, 20),
-            new ElectionCommission(3, 2, "Башкирия", "ЦИК Республики Башкортостан", "ул. Заки Валиди, 46", "Уфа", null, 1500, 15, 30),
-            new ElectionCommission(4, 3, "Бурятия", "ЦИК Республики Бурятия", "ул. Ленина, 54", "Улан-Удэ", "http://www.buriat.izbirkom.ru/", 1000, 10, 20),
-            new ElectionCommission(5, 3, "Дагестан", "ЦИК Республики Дагестан", "площадь им.В.И Ленина", "Махачкала", "http://www.dagestan.izbirkom.ru/", 500, 5, 10)
+            new ElectionCommission(1, 1, "Адыгея", "ЦИК Республики Адыгея", "Майкоп, ул. Пионерская 199", 55.923047, 54.892929, {numVoters: 500, numObservers: 5} )
+            //new ElectionCommission(2, 2, "Алтай", "ЦИК Республики Алтай", "Горно-Алтайск, ул. Эркемена Палкина, 1", "http://www.altai_rep.izbirkom.ru/", 1000, 10, 20, 47.233018, 47.416304),
+            //new ElectionCommission(3, 2, "Башкирия", "ЦИК Республики Башкортостан", "Уфа, ул. Заки Валиди, 46", null, 1500, 15, 30, 47.233018, 47.416304),
+            //new ElectionCommission(4, 3, "Бурятия", "ЦИК Республики Бурятия", "Улан-Удэ, ул. Ленина, 54", "http://www.buriat.izbirkom.ru/", 1000, 10, 20, 47.98226, 46.335971)
         );
     </script>
 
@@ -31,7 +30,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            PublicElectionsMap.init();
+            ElectionMap.init();
         });
     </script>
 {% endblock %}

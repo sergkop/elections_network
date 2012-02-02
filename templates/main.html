@@ -115,20 +115,32 @@
 
 <div>
     <center><h4>Найдите свой избирательный округ</h4></center>
-    <div id="choose_regions">
-        <form action="{% url goto_location %}" method="get">
-            <input id="goto_location" type="submit" value="Перейти" style="float: right;"/>
-            {% include "elements/region_choice.html" %}
-        </form>
-    </div>
-    <center>или</center>
-    <center>
-        <a href="{% url map_search %}">
-            <button id="map_location">
-                Найти на карте
-            </button>
-        </a>
-    </center>
+    <table style="width: 100%;">
+        <tr>
+            <td style="width:50%;">
+                <div id="choose_regions">
+                    <form action="{% url goto_location %}" method="get" style="display:inline;">
+                        {% include "elements/region_choice.html" %}
+                        <center>
+                            <input id="goto_location" type="submit" value="Перейти"/>
+                        </center>
+                    </form>
+                </div>
+            </td>
+            <td style="width:10%;vertical-align:middle;">
+                <b>или</b>
+            </td>
+            <td style="vertical-align:middle;">
+                <center>
+                    <a href="{% url map_search %}">
+                        <button id="map_location">
+                            Найти на карте
+                        </button>
+                    </a>
+                </center>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <!--div>

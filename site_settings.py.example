@@ -31,8 +31,12 @@ SECRET_KEY = ''
 
 VIRTUALENV = "" # set to ".../env/lib/python2.7/site-packages" if you are using virtualenv
 
-VK_APP_ID = 1 # set proper VKontakte app id for comments wall
+#VK_APP_ID = 1 # set proper VKontakte app id for comments wall
 
 YA_METRIKA_ID = 12237667 # Yandex Metrika id
 
 ADMIN_PREFIX = 'admin' # prefix to access django admin interface (change for security reasons)
+
+DISQUS_SHORTNAME = 'grakon'
+
+YANDEX_MAPS_KEY = 'ADSyKU8BAAAAD-VBCwIA5ak5VGynqt5xp2tzedBMfAmF8-kAAAAAAAAAAAD_nM6wtAPq97uJHRvkF_aJL3gRVQ=='

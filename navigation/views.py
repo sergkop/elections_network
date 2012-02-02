@@ -28,3 +28,9 @@ def static_page(request, name, template):
         'content': page.content,
     }
     return render_to_response(template, context_instance=RequestContext(request, context))
+
+def map_search(request):
+    context = {
+        
+    }
+    return render_to_response('map.html', context_instance=RequestContext(request, context))

@@ -334,7 +334,7 @@
 	/* Generic classes for table-width and design definition */
 
 	table {
-		width:100%;
+		/*width:100%;*/
 		border-collapse:collapse;
 		margin: 1.3571em 0 0 0;
 		color:#333;

@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('navigation.views',
     url(r'^$', 'main', name='main'),
+    url(r'^map_search$', 'map_search', name='map_search'),
 
     # Static pages
     url(r'^about$', 'static_page', {'name': 'about', 'template': 'static_pages/about.html'}, name='about'),

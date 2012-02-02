@@ -18,7 +18,6 @@
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="{{ STATIC_URL }}libs/tipsy/tipsy.css" type="text/css" />
-    <link href="{{ STATIC_URL }}css/julia_style.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript">
         var CURRENT_LOCATION = [
@@ -40,11 +39,12 @@
     <script type='text/javascript' src='{{ STATIC_URL }}libs/tipsy/jquery.tipsy.js'></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/underscore.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/backbone.js"></script>
-    <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
+    <!--script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script-->
     <script type="text/javascript" src="http://loginza.ru/js/widget.js"></script>
 
     <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
     {% block head %}{% endblock %}
+    <link href="{{ STATIC_URL }}css/julia_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -170,7 +170,8 @@
 var yaParams = {};
 </script>
 
-<div style="display:none;"><script type="text/javascript">
+<div style="display:none;">
+<script type="text/javascript">
 (function(w, c) {
     (w[c] = w[c] || []).push(function() {
         try {

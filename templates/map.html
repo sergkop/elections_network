@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <style type="text/css">
+        .ym-col1 {width: 0px;}
+        .ym-col2 {width: 0px;}
+        .ym-col3 {margin-left: 20px; width: 100%;}
+    </style>
+
+    <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/map.js"></script>
+
+    <script type="text/javascript">
+        var electionCommissions = new Array(
+            new ElectionCommission(1, 1, "Адыгея", "ЦИК Республики Адыгея", "ул. Пионерская 199", "Майкоп", "http://www.adygei.izbirkom.ru/", 500, 5, 10),
+            new ElectionCommission(2, 2, "Алтай", "ЦИК Республики Алтай", "ул. Эркемена Палкина, 1", "Горно-Алтайск", "http://www.altai_rep.izbirkom.ru/", 1000, 10, 20),
+            new ElectionCommission(3, 2, "Башкирия", "ЦИК Республики Башкортостан", "ул. Заки Валиди, 46", "Уфа", null, 1500, 15, 30),
+            new ElectionCommission(4, 3, "Бурятия", "ЦИК Республики Бурятия", "ул. Ленина, 54", "Улан-Удэ", "http://www.buriat.izbirkom.ru/", 1000, 10, 20),
+            new ElectionCommission(5, 3, "Дагестан", "ЦИК Республики Дагестан", "площадь им.В.И Ленина", "Махачкала", "http://www.dagestan.izbirkom.ru/", 500, 5, 10)
+        );
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <h2>Найти свой избирательный округ</h2>
+    <div id="publicElectionsMap" style="height:600px; width: 800px"></div>
+    <button onclick="PublicElectionsMap.writeElectionCommissionCoords()">Получить координаты избирательных комиссий</button>
+    <div id="message" style="font-size: 10pt; margin-top: 25px;"></div>
+    <div id="error" style="color: red; font-size: 10pt; margin-top: 25px;"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            PublicElectionsMap.init();
+        });
+    </script>
+{% endblock %}

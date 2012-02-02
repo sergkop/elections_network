@@ -25,13 +25,14 @@ class Location(models.Model):
     # Coordinates used in Yandex maps
     x_coord = models.FloatField()
     y_coord = models.FloatField()
-    # TODO: location level (UIK, TIK, IKS)
+    # TODO: location level 
 
     # TODO: make name unique?
     class Meta:
         unique_together = ('name', 'parent_1', 'parent_2', 'parent_3')
 
     #def level(self):
+    #    # TODO: UIK, TIK or IKS
     #    if self.parent_1:
     #        return 2
     #    else:

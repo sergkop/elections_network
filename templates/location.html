@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
+{% block title %}
+{% if current_location.parent_1 %}{{ current_location.parent_1 }} - {% endif %}
+{% if current_location.parent_2 %}{{ current_location.parent_2 }} - {% endif %}
+{{ current_location }} - Гражданский контроль за выборами
+{% endblock %}
+
 {% block head %}
-    <script type="text/javascript">
+    <!--script type="text/javascript">
         VK.init({apiId: {{ VK_APP_ID }}, onlyWidgets: true});
-    </script>
+    </script-->
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -25,11 +31,9 @@
 
                 <li>
                     <strong>{{ current_location }}<i></i><b></b></strong>
-                    <!--a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a-->
                 </li>
 
                 {% if sub_regions %}
-                    <li>&rarr;</li>
                     <li>
                         <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                             <select id="goto_subregion" name="region_1">
@@ -45,6 +49,12 @@
             </ul>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $("#goto_subregion").change(function(){
+            $("#goto_subregion_form").submit();
+        });
+    </script>
 {% endblock %}
 
 {% block left_column %}
@@ -63,19 +73,9 @@
             </ul>
             <center>
                 <button id="become_observer">Записаться</button>
-
-                <button id="become_observer1" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
-                    <span class="ui-button-text">
-                        <span class="ui-button-icon-primary ui-icon ui-icon-check"></span>
-                        <span class="ui-button-text">Записаться</span>
-                    </span>
-                </button>
-
             </center>
         </div>
-    </div>
 
-    <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Избиратели</h4>
         </div>
@@ -167,9 +167,7 @@
                 <button id="add_link" title="Добавить ссылку">Добавить</button>
             </center>
         </div>
-    </div>
 
-    <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Зафиксировать нарушение</h4>
         </div>
@@ -214,18 +212,103 @@
 {% endblock %}
 
 {% block content_header %}
-<h2 class="location_header">{{ current_location }}</h2>
-{% endblock %}
+    <h2 class="location_header">{{ current_location }}</h2>
 
-{% block content %}
-    <div id="vk_comments"></div>
-    <script type="text/javascript">
-        VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});
+    <div>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tab-info">Информация<i></i></a></li>
+                <li><a href="#tab-wall">Стена<i></i></a></li>
+                <li><a href="#tab-map">Карта<i></i></a></li>
+                <li><a href="#tab-help">Помощь<i></i></a></li>
+            </ul>
+
+            <div id="tab-info">
+                <p>
+                    Адрес ТИКа:
+                </p>
+            </div>
+
+            <div id="tab-wall">
+                <!--div id="vk_comments"></div>
+                <script type="text/javascript">
+                    VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});
+                </script-->
+
+                <a href="{{ request.path }}#disqus_thread" data-disqus-identifier="location/{{ current_location.id }}">First article</a>
+
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
+                    var disqus_identifier = "location/{{ current_location.id }}";
+                    var disqus_developer = 1;
+
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Пожалуйста, активируйте JavaScript, чтобы просматривать <a href="http://disqus.com/?ref_noscript">комментарии</a>.</noscript>
+            </div>
+
+            <div id="tab-map">
+                <p>3</p>
+            </div>
+
+            <div id="tab-help">
+                <p>
+                    Здесь будет выложен небольшой текст с со стрелками, объясняющий как пользоваться страницей
+                    избирательного округа:
+                    <ul>
+                        <li>
+                            <b>слева</b>: список пользователей площадки, зарегистрированных на странице текущего
+                            избирательного округа. Участники разбиты на группы согласно тому,
+                            какую роль в выборном процессе они играют. По нажатию на имя/ник пользователя открывается
+                            его личная страница. На ней у залогиненных пользователей будет возможность писать
+                            участникам сообщения, добавлять в контакты и жаловаться на них.
+                        </li>
+                        <li>
+                            <b>справа</b>: список инструментов для участников площадки. С их помощью можно
+                            эффективно контролировать проведение выборов на избирательном округе выбранной страницы.
+                        </li>
+                        <li>
+                            <b>сверху</b>:
+                            <ul>
+                                <li>
+                                    <b>меню</b>: подробная информация о проекте, способы помочь проекту, карта для нахождения
+                                    страницы избирательного округа по адресу
+                                </li>
+                                <li>
+                                    <b>путь</b>: легкий способ ориентироваться в иерархии страниц избирательных округов
+                                    <b>вкладки</b>: различная информация об избирательном участке
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>внизу</b>: кнопки соцсетей
+                        </li>
+                        <li>
+                            <b>на границе экрана слева</b>: кнопка для оставления комментариев и отзывов о работе площадки,
+                            сообщение о найденных багах сайта
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#tabs").tabs();
     </script>
 
     <script type="text/javascript">
-        $("#goto_subregion").change(function(){
-            $("#goto_subregion_form").submit();
-        });
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
     </script>
+
 {% endblock %}

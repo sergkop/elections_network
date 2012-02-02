@@ -10,8 +10,10 @@ from reports.models import Report, REPORT_REASONS
 def user_data(request):
     context = {
         'REPORT_REASONS': json.dumps(REPORT_REASONS, ensure_ascii=False),
-        'VK_APP_ID': settings.VK_APP_ID,
+        #'VK_APP_ID': settings.VK_APP_ID,
         'YA_METRIKA_ID': settings.YA_METRIKA_ID,
+        'DISQUS_SHORTNAME': settings.DISQUS_SHORTNAME,
+        'YANDEX_MAPS_KEY': settings.YANDEX_MAPS_KEY,
     }
     if request.user.is_authenticated():
         context['CONTACTS'] = json.dumps(

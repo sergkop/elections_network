@@ -5,7 +5,7 @@
 <body>
     <ul>
         {% for name, title, num in REGIONS %}
-            <li><a href="{% url region name %}">{{ title }}</a> ({{ num }})</li>
+            <li><a href="{% url region name %}">{{ title }}</a> ({{ num|floatformat }}%)</li>
         {% endfor %}
     </ul>
 </body>

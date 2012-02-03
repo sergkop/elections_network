@@ -5,36 +5,22 @@ import re
 
 DATA_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..', '..', 'data')
 
-def get_regions_data(name, merged):
+def get_regions_data(name):
     results_data_path = os.path.join(DATA_PATH, 'regions', name+'.json')
     results_data = json.loads(open(results_data_path).read().decode('utf8'))
+    return sorted(results_data, key=lambda region: region['name'])
 
-    regions = []
-    for node in results_data:
-        if merged==('vrnorg' in node):
-            regions.append(node)
-        if len(node['sub'])>0 and not node['sub'][0]['name'].startswith(u'УИК'):
-            for sub_node in node['sub']:
-                if merged==('vrnorg' in sub_node):
-                    regions.append(sub_node)
-
-    return sorted(regions, key=lambda region: region['name'])
+def get_merge_data(name):
+    merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
+    try:
+        return json.loads(open(merge_data_path).read().decode('utf8'))
+    except IOError:
+        return []
 
 def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord, postcode, address):
     results_data_path = os.path.join(DATA_PATH, 'regions', name+'.json')
     results_data = json.loads(open(results_data_path).read().decode('utf8'))
-
-    # find region in results data
-    region = None
-    for node in results_data:
-        if 'vrnorg' not in node and node['tvd']==tvd and node['root']==root:
-            region = node
-            break
-        if len(node['sub'])>0 and not node['sub'][0]['name'].startswith(u'УИК'):
-            for sub_node in node['sub']:
-                if 'vrnorg' not in sub_node and sub_node['tvd']==tvd and sub_node['root']==root:
-                    region = sub_node
-                    break
+    result_tik = filter(lambda node: node['tvd']==tvd and node['root']==root, results_data)[0]
 
     # find region in info data
     info_data_path = os.path.join(DATA_PATH, 'regions', name+'-info.json')
@@ -42,22 +28,20 @@ def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord, po
     info_tik = filter(lambda tik: tik['vrnorg']==vrnorg and tik['vrnkomis']==vrnkomis, info_tiks)[0]
 
     # merge info
-    region.update(info_tik)
-    region['name'] = new_name.strip()
-    region['postcode'] = postcode
-    region['address'] = address
+    result_tik['old_name'] = result_tik['name']
+    result_tik.update(info_tik)
+    result_tik['tik_name'] = info_tik['name']
+    result_tik['name'] = new_name.strip()
+    result_tik['postcode'] = postcode
+    result_tik['address'] = address
 
     if x_coord and y_coord:
-        region['x_coord'], region['y_coord'] = x_coord, y_coord
+        result_tik['x_coord'], result_tik['y_coord'] = x_coord, y_coord
+
+    merge_data = get_merge_data(name)
+    merge_data.append(result_tik)
 
     merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
-    try:
-        merge_data = json.loads(open(merge_data_path).read().decode('utf8'))
-    except IOError:
-        merge_data = []
-
-    merge_data.append(region)
-
     with open(merge_data_path, 'w') as f:
         f.write(json.dumps(merge_data, indent=4, ensure_ascii=False).encode('utf8'))
 

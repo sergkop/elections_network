@@ -73,7 +73,7 @@ def parse_address(address):
     """
 
     # Address used for Yandex maps
-    res['map_address'] = res['address']
+    res['map_address'] = res['address'].replace(u'Республика Татарстан (Татарстан),', '')
 
     """
     map_address = ', '.join(filter(lambda part: u'район' not in part and \

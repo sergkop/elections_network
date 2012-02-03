@@ -94,7 +94,9 @@ def parse_address(address):
     map_address = map_address.replace(u'ул.', '').replace(u'с.', '').replace(u'п.', '') \
             .replace(u'г.', '').replace(u'город ', '').replace(u'прос ', '').replace(u'пл.', '') \
             .replace(u'д.', '').replace(u'дом', '').replace(u'городской', '').replace(u'округ', '') \
-            .replace(u'улица', '')
+            .replace(u'улица', '').replace(u'ст.', '').replace(u'ст-ца', '') \
+            .replace(u'пгт', '').replace(u'поселок городского типа', '') \
+            .replace(u'ЗАО', '').replace(u'ЮАО', '')
 
     m = re.match(r'(.+), (\s+\d+)', map_address)
     if m:

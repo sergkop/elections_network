@@ -137,7 +137,7 @@
     getCoordinates: function(addressString) {
         // Запускает асинхронный поиск адреса
         var geocoder = new YMaps.Geocoder(addressString, {geocodeProvider: "yandex#map", boundedBy: AddressCheckMap.map.getBounds(), strictBounds: true});
-        
+
         // Объявляем callback-функцию для поиска адреса
         YMaps.Events.observe(geocoder, geocoder.Events.Load, function (geocoder) {
             var addressParts = addressString.split(" ");

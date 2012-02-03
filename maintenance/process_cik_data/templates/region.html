@@ -27,56 +27,78 @@
         <a style="float: right; display: inline;" href="/">Главная</a>
     </div>
 
-    <h2 id="region" style="text-align:center; display: inline;">{{ title }}</h2>
+    <h2 id="region" style="text-align:center; display: inline;">{{ title }} 
+        (<a style="color: red; font-size: bold;" href="/media/FAQ.html">прочитать FAQ</a>)
+    </h2>
 
     <form action="" method="post">
-        <div>
-            Почтовый индекс: <input id="postcode" type="text" name="postcode" size="10" value=""/>
+        <div style="background-color:#D0F0F2; margin:1em; padding: 1em;">
+            Адрес ТИКа: <input id="address" type="text" name="address" size="85" value=""/>
         </div>
 
-        <div>
-            Адрес: <input id="address" type="text" name="address" size="85" value=""/>
+        <div style="background-color:#D0F0F2; margin:1em; padding: 1em;">
+            <span style="color:red;font-weight: bold;">I шаг</span>
+            выбрать пункт из списка "информация о ТИКах" внизу
+            <br/>
+            <span style="color:red;font-weight: bold;">II шаг</span>
+            выбрать соответствующий ему вариант из списка "иерархия участков" внизу
         </div>
 
-        <div>
-            Название округа:
-            <input type="text" name="new_name" size="55" value=""/>
+        <div style="display: none;">
+                Почтовый индекс: <input id="postcode" type="text" name="postcode" size="10" value=""/>
+            </div>
+
+        <div style="background-color:#A6FFCB; margin:1em; padding: 1em;">
+            <span style="color:red;font-weight: bold;">III шаг</span>
+            Здесь должно быть <b>название района или города/населенного пункта</b>, не название комиссии.
+            Не путайте районы и населенные пункты (ТИК может охватывать район или населенный пункт, например,
+            Тамбов и Тамбовский район - это разные ТИКи)!
+            <div>
+                Название избирательного округа:
+                <input type="text" name="new_name" size="55" value=""/>
+            </div>
+            <b>Примеры</b>: Красноярск, Солнечный, Шушенский район, Барнаул (Октябрьский район)
         </div>
-        <input type="checkbox" name="add_geo" id="add_geo"/><label for="add_geo">Включить координаты с карты</label>
-        <input type="submit" value="Склеить"/>
 
-        <br/>
+        <div style="background-color:#A6FFCB; margin:1em; padding: 1em;">
+            <span style="color:red;font-weight: bold;">IV шаг</span>
+            подобрать формат адреса для поиска координат на карте:
+            <br/>
+            <input type="text" id="map_address" value="" size="75" />
+            <br/>
+            (правильный формат: "[название населенного пункта], [название улицы] [номер дома]")
+            <br/>
+            Это поле требуется только для поиска координат на Яндекс карте. Оно никуда не сохраняется.
+            <br/>
+            <br/>
 
-        <input type="text" id="map_address" value="" size="85" />
-        <button id="get_coordinates" >Получить координаты</button>
+            <span style="color:red; font-weight: bold;">V шаг</span> нажать кнопку
+            <button id="get_coordinates" >Получить координаты</button>
 
-        <div>
-            X: <input type="text" name="x_coord" id="x_coord" value="" />
-            Y: <input type="text" name="y_coord" id="y_coord" value="" />
+            <div>
+                X: <input type="text" name="x_coord" id="x_coord" value="" />
+                Y: <input type="text" name="y_coord" id="y_coord" value="" />
+            </div>
+
         </div>
 
-        <div>
-            <div id="message" style="font-size: 20pt; margin-top: 25px;"></div>
-            <div id="error" style="color: red; font-size: 20pt; margin-top: 25px;"></div>
+        <div style="background-color:#A6FFCB; margin:1em; padding: 1em;">
+            <span style="color:red; font-weight: bold;">VI шаг</span>
+            <input type="checkbox" name="add_geo" id="add_geo"/>
+            <label for="add_geo">если удалось правильно подобрать координаты (см карту), то поставить галочку
+            Включить координаты с карты (если найдены правильно)</label>
+            <br/>
+            <br/>
+            <span style="color:red; font-weight: bold;">VII шаг</span>
+            нажать кнопку
+            <input type="submit" value="Склеить записи"/>
         </div>
 
         {% csrf_token %}
         <table>
             <tr>
-                <td style="border: 1px solid black;" id="result_panel">
-                    <h3>Иерархия участков</h3>
-                    <ul style="list-style-type: none;">
-                        {% for tik in result_tiks %}
-                            <li>
-                                <input type="radio" name="result_tik" value="{{ tik.tvd }}_{{ tik.root }}" id="{{ tik.tvd }}_{{ tik.root }}"/>
-                                <label for="{{ tik.tvd }}_{{ tik.root }}">{{ tik.name }}</label>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </td>
-
-                <td style="border: 1px solid black;">
-                    <h3>Информация о ТИКах</h3>
+                <td style="border: 1px solid black;" valign="top">
+                    <h3>Информация о ТИКах (<span style="color:red;">I шаг</span>)</h3>
                     <ul style="list-style-type: none;">
                         {% for tik in info_tiks %}
                             <li>
@@ -88,17 +110,29 @@
                     </ul>
                 </td>
 
+                <td style="border: 1px solid black;" id="result_panel" valign="top">
+                    <h3>Иерархия участков (<span style="color:red;">II шаг</span>)</h3>
+                    <ul style="list-style-type: none;">
+                        {% for tik in result_tiks %}
+                            <li>
+                                <input type="radio" name="result_tik" value="{{ tik.tvd }}_{{ tik.root }}" id="{{ tik.tvd }}_{{ tik.root }}"/>
+                                <label for="{{ tik.tvd }}_{{ tik.root }}">{{ tik.name }}</label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+
                 <td valign="top">
                     <h3>Карта</h3>
 
                     <div>
+                        Искать по: 
                         <input type="radio" name="type" id="all" value="all" checked="checked" /><label for="all">всё</label>
                         <input type="radio" name="type" id="house" value="house" /><label for="house">дом</label>
                         <input type="radio" name="type" id="street" value="street" /><label for="street">улица</label>
-                        <input type="radio" name="type" id="district" value="district" /><label for="district">район</label>
+                        <!--<input type="radio" name="type" id="district" value="district" /><label for="district">район</label>
                         <input type="radio" name="type" id="locality" value="locality" /><label for="locality">населённый пункт</label>
-                        <br/>
-                        <input type="radio" name="type" id="province" value="province" /><label for="province">область</label>
+                        <input type="radio" name="type" id="province" value="province" /><label for="province">область</label>-->
                     </div>
 
                     <div id="map" style="height:350px; width: 500px; margin-top: 20px;"></div>

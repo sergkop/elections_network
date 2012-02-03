@@ -50,16 +50,19 @@ def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord, po
     if x_coord and y_coord:
         region['x_coord'], region['y_coord'] = x_coord, y_coord
 
-    with open(results_data_path, 'w') as f:
-        f.write(json.dumps(results_data, indent=4, ensure_ascii=False).encode('utf8'))
+    merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
+    try:
+        merge_data = json.loads(open(merge_data_path).read().decode('utf8'))
+    except IOError:
+        merge_data = []
 
-    # remove merged info
-    info_tiks.remove(info_tik)
-    with open(info_data_path, 'w') as f:
-        f.write(json.dumps(info_tiks, indent=4, ensure_ascii=False).encode('windows-1251'))
+    merge_data.append(region)
+
+    with open(merge_data_path, 'w') as f:
+        f.write(json.dumps(merge_data, indent=4, ensure_ascii=False).encode('utf8'))
 
 def parse_address(address):
-    address = address.replace(u'мунициальный', '')
+    address = address.replace(u'мунициальный ', '')
     parts = [part.strip() for part in address.split(',')]
 
     res = {}

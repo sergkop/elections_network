@@ -22,7 +22,9 @@ def main(request):
     left = []
     for name, title, region_id in REGIONS:
         info_data_path = os.path.join(DATA_PATH, 'regions', name+'-info.json')
-        left.append((name, title, len(json.loads(open(info_data_path).read().decode('windows-1251')))))
+        info_entries = json.loads(open(info_data_path).read().decode('windows-1251'))
+        
+        left.append((name, title, len(info_entries)))
 
     return render_to_response('main.html', {'REGIONS': left})
 
@@ -38,13 +40,30 @@ def region(request, name):
         vrnorg, vrnkomis = request.POST['info_tik'].split('_')
 
         if 'add_geo' in request.POST:
-            x_coord, y_coord = float(request.POST['x_coord']), float(request.POST['y_coord'])
+            try:
+                x_coord, y_coord = float(request.POST['x_coord']), float(request.POST['y_coord'])
+            except ValueError:
+                return HttpResponse(u'Вы забыли найти координаты ТИКа')
         else:
             x_coord, y_coord = None, None
+
+        try:
+            int(request.POST['postcode'])
+        except ValueError:
+            return HttpResponse(u'Не введен почтовый код (не обрабатывайте этот ТИК)')
+
         merge_data(name, tvd, root, vrnorg, vrnkomis, request.POST['new_name'], x_coord, y_coord,
                 int(request.POST['postcode']), request.POST['address'])
 
         return redirect('region', name)
+
+    merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
+    try:
+        merge_data = json.loads(open(merge_data_path).read().decode('utf8'))
+    except IOError:
+        merge_data = []
+
+    merged_vrnorgs = []
 
     results_lst = get_regions_data(name, False)
 
@@ -64,7 +83,7 @@ def region(request, name):
         info_tik['name'] = info_tik['name'] \
                 .replace(u'ная районная', u'ный район').replace(u'кая районная', u'кий район') \
                 .replace(u'кого района', u'кий район').replace(u'ного района', u'ный район') \
-                .replace(u'г.', '')
+                .replace(u'г.', '').replace(u'города', '')
 
     context = {
         'name': region[0],

@@ -83,7 +83,7 @@ def parse_address(address):
             .replace(u'д.', '').replace(u'дом', '').replace(u'городской', '').replace(u'округ', '') \
             .replace(u'улица', '').replace(u'ст.', '').replace(u'ст-ца', '') \
             .replace(u'пгт', '').replace(u'поселок городского типа', '') \
-            .replace(u'ЗАО', '').replace(u'ЮАО', '').replace(u'рабочий поселок') \
+            .replace(u'ЗАО', '').replace(u'ЮАО', '').replace(u'рабочий поселок', '') \
             .replace(u'муниципальный район', '')
 
     m = re.match(r'(.+), (\s+\d+)', map_address)

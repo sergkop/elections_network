@@ -102,18 +102,9 @@
         var region = $("#region").text();
         var addressString = document.getElementById('map_address').value;
         AddressCheckMap.type = null;
-        
-        if (!document.getElementById('all').checked)
-            AddressCheckMap.type = document.getElementById('house').checked ? "house" :
-                    document.getElementById('street').checked ? "street" :
-                    document.getElementById('district').checked ? "district" :
-                    document.getElementById('locality').checked ? "locality" :
-                    document.getElementById('province').checked ? "province" : null;
 
         AddressCheckMap.map.removeOverlay( AddressCheckMap.geoResult );
-        $("#message").html("");
-        $("#error").html("");
-        
+
         if (region.length > 0) {
             var geocoder = new YMaps.Geocoder(region, {geocodeProvider: "yandex#map"});
             YMaps.Events.observe(geocoder, geocoder.Events.Load, function () {
@@ -166,7 +157,6 @@
         
         YMaps.Events.observe(geocoder, geocoder.Events.Fault, function (geocoder) {
             AddressCheckMap.map.setZoom(3);
-            $("#error").text("Адрес на найден!");
         });
     }
 };

@@ -54,17 +54,17 @@ def region(request, name):
     for info_tik in info_tiks:
         info_tik.update(parse_address(info_tik['address']))
 
-        info_tik['name'] = info_tik['name'] \
-                .replace(u'ная районная', u'ный район').replace(u'кая районная', u'кий район') \
-                .replace(u'кого района', u'кий район').replace(u'ного района', u'ный район') \
-                .replace(u'г.', '')
-
         for ending in (u'ого района', u'ого округа'):
             index = info_tik['name'].find(ending)
             if index != -1:
                 suffix = info_tik['name'][index+len(ending):]
                 if any(word in suffix for word in (u'края', u'области', u'города')):
-                    info_tik['name'] = info_tik['name'][index+len(ending):]
+                    info_tik['name'] = info_tik['name'][:index+len(ending)]
+
+        info_tik['name'] = info_tik['name'] \
+                .replace(u'ная районная', u'ный район').replace(u'кая районная', u'кий район') \
+                .replace(u'кого района', u'кий район').replace(u'ного района', u'ный район') \
+                .replace(u'г.', '')
 
     context = {
         'name': region[0],

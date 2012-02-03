@@ -86,6 +86,7 @@ def region(request, name):
                     info_tik['name'] = info_tik['name'][:index+len(ending)]
 
         info_tik['name'] = info_tik['name'] \
+                .replace(u'муниципального ', '') \
                 .replace(u'ная районная', u'ный район').replace(u'кая районная', u'кий район') \
                 .replace(u'кого района', u'кий район').replace(u'ного района', u'ный район') \
                 .replace(u'г.', '').replace(u'города', '')

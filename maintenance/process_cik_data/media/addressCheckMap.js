@@ -12,7 +12,7 @@
      */
     init: function(place) {
         AddressCheckMap.map = new YMaps.Map( document.getElementById("map") );
-        AddressCheckMap.map.setType(YMaps.MapType.PHYBRID);
+        AddressCheckMap.map.setType(YMaps.MapType.HYBRID);
         AddressCheckMap.map.enableScrollZoom();
     
         // Переименовываем типы карт, чтобы их можно было различать. Народные карты имеют индекс 1, обычные - индекс 2.
@@ -23,7 +23,8 @@
         AddressCheckMap.map.addControl(new YMaps.TypeControl([YMaps.MapType.PMAP, YMaps.MapType.MAP, YMaps.MapType.SATELLITE, YMaps.MapType.PHYBRID, YMaps.MapType.HYBRID,], [0,1,2,3,4])); // объявляем доступные типы карт
         AddressCheckMap.map.addControl(new YMaps.Zoom());
         AddressCheckMap.map.addControl( new YMaps.SearchControl({geocodeOptions: {geocodeProvider: "yandex#map"}, width: 295}) );
-        AddressCheckMap.map.addControl( new YMaps.SearchControl({geocodeOptions: {geocodeProvider: "yandex#pmap"}, width: 295}), new YMaps.ControlPosition(YMaps.ControlPosition.TOP_LEFT, new YMaps.Point(5, 5)) );
+        AddressCheckMap.map.addControl( new YMaps.SearchControl({geocodeOptions: {geocodeProvider: "yandex#pmap"}, width: 295}),
+                                        new YMaps.ControlPosition(YMaps.ControlPosition.TOP_LEFT, new YMaps.Point(5, 5)) );
         
         YMaps.Events.observe(AddressCheckMap.map, AddressCheckMap.map.Events.Click, function (map, clickEvent) {
             map.removeOverlay( AddressCheckMap.geoResult );

@@ -153,7 +153,12 @@
             if (AddressCheckMap.geoResult != null) {
                 AddressCheckMap.map.setBounds( AddressCheckMap.geoResult.getBounds() );
                 AddressCheckMap.setPlacemark( AddressCheckMap.geoResult.getGeoPoint(), addressString );
+            } else {
+                $("#x_coord").val("");
+                $("#y_coord").val("");
+                $("#add_geo").removeAttr("checked", "");
             }
+            
         });
         
         YMaps.Events.observe(geocoder, geocoder.Events.Fault, function (geocoder) {

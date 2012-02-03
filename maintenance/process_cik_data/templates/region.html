@@ -16,6 +16,8 @@
                 $('#result_panel label').css("background-color", "#fff");
                 var search_name = name.replace("города ", "").substr(0, 4);
                 $('#result_panel label:contains("'+search_name+'")').css("background-color", "f4f");
+                
+                AddressCheckMap.showCoordinates();
             });
 
             $("#get_coordinates").click(AddressCheckMap.showCoordinates);
@@ -91,15 +93,14 @@
                 Y: <input type="text" name="y_coord" id="y_coord" value="" />
             </div>
 
-        </div>
-
-        <div style="background-color:#A6FFCB; margin:1em; padding: 1em;">
+            <br/>
             <span style="color:red; font-weight: bold;">VI шаг</span>
             <input type="checkbox" name="add_geo" id="add_geo"/>
             <label for="add_geo">использовать координаты с карты
             (ставить галочку только если удалось подобрать правильные координаты)</label>
-            <br/>
-            <br/>
+        </div>
+
+        <div style="background-color:#A6FFCB; margin:1em; padding: 1em;">
             <span style="color:red; font-weight: bold;">VII шаг</span>
             нажать кнопку
             <input type="submit" value="Склеить записи"/>
@@ -136,15 +137,15 @@
                 <td valign="top">
                     <h3>Карта</h3>
 
-                    <div>
+                    <!--div>
                         Искать по: 
                         <input type="radio" name="type" id="all" value="all" checked="checked" /><label for="all">всё</label>
                         <input type="radio" name="type" id="house" value="house" /><label for="house">дом</label>
                         <input type="radio" name="type" id="street" value="street" /><label for="street">улица</label>
-                        <!--<input type="radio" name="type" id="district" value="district" /><label for="district">район</label>
+                        <<input type="radio" name="type" id="district" value="district" /><label for="district">район</label>
                         <input type="radio" name="type" id="locality" value="locality" /><label for="locality">населённый пункт</label>
-                        <input type="radio" name="type" id="province" value="province" /><label for="province">область</label>-->
-                    </div>
+                        <input type="radio" name="type" id="province" value="province" /><label for="province">область</label>
+                    </div-->
 
                     <div id="map" style="height:350px; width: 500px; margin-top: 20px;"></div>
                 </td>

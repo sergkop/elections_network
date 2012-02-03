@@ -73,18 +73,19 @@ def parse_address(address):
     """
 
     # Address used for Yandex maps
-    map_address = res['address']
+    res['map_address'] = res['address']
 
+    """
     map_address = ', '.join(filter(lambda part: u'район' not in part and \
             u'комн.' not in part and u'кабинет' not in part, map_address.split(',')))
 
     map_address = map_address.replace(u'ул.', '').replace(u'с.', '').replace(u'п.', '') \
             .replace(u'г.', '').replace(u'город ', '').replace(u'прос ', '').replace(u'пл.', '') \
-            .replace(u'д.', '').replace(u'дом', '').replace(u'городской', '').replace(u'округ', '') \
+            .replace(u'д.', '').replace(u'дом ', '').replace(u'городской ', '').replace(u'округ ', '') \
             .replace(u'улица', '').replace(u'ст.', '').replace(u'ст-ца', '') \
             .replace(u'пгт', '').replace(u'поселок городского типа', '') \
             .replace(u'ЗАО', '').replace(u'ЮАО', '').replace(u'рабочий поселок', '') \
-            .replace(u'муниципальный район', '').replace(u'село', '')
+            .replace(u'муниципальный район', '').replace(u'село ', '').replace(u'поселок ', '')
 
     m = re.match(r'(.+), (\s+\d+)', map_address)
     if m:
@@ -92,5 +93,6 @@ def parse_address(address):
 
     # TODO: remove , in front of house number
     res['map_address'] = map_address
+    """
 
     return res

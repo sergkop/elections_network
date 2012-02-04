@@ -24,11 +24,6 @@ STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, "static"),
-)
-
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -65,10 +60,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'urls'
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates'),
-)
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,10 +68,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'loginza',
     'tinymce',
+    'south',
 
+    'grakon',
     'locations',
     'maintenance',
     'navigation',
@@ -88,7 +80,7 @@ INSTALLED_APPS = (
     'reports',
     'users',
     'links',
-    'south',
+    
 )
 
 AUTHENTICATION_BACKENDS = (

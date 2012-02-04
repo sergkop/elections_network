@@ -1,25 +1,23 @@
 {% if user.is_authenticated %}
     <div id="submit_complaint_dialog">
         <div>
-            Вы можете пройти процедуру составления официальной жалобы на сайте
-            <a href="http://kuda-komu.net/voting" target="_blank">Куда? Кому?</a>.
-        </div>
-
-        <div>
-            Также вы можете оставить сообщение о нарушении на сайте
+            Вы можете оставить сообщение о нарушении на сайте
             <a href="http://www.kartanarusheniy.ru/" target="_blank">Карты нарушений</a>,
             где имеется <a href="http://www.kartanarusheniy.ru/pages/claim" target="_blank">детальная информация</a>
             о процедуре составления и подачи жалоб.
         </div>
+
+        <!--div>
+            Вы также можете пройти процедуру составления официальной жалобы на сайте
+            <a href="http://kuda-komu.net/voting" target="_blank">Куда? Кому?</a>.
+        </div-->
     </div>
 {% endif %}
 
 <script type="text/javascript">
-    // put <button id="submit_complaint_btn"/> on the page to use this dialog
+    // put button with id="submit_complaint_btn" on the page to use this dialog
 
     // Submit complaint dialog
-    $("#submit_complaint_btn").button({icons: {primary: 'ui-icon-pencil'}}).tipsy({gravity: 'w'});
-
     {% if user.is_authenticated %}
         $("#submit_complaint_dialog").dialog({width:650, height:250, modal: true, title: "Зафиксировать нарушение",
             buttons: {
@@ -43,6 +41,3 @@
         });
     {% endif %}
 </script>
-
-
-

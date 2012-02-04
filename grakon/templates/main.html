@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load button %}
+
 {% block left_column %}
     <h3 class="column_header">Участники</h3>
 
@@ -12,15 +14,9 @@
             <ul class="side_list">
                 <li><a href="#">Ресурсы для наблюдателей</a></li>
             </ul>
-            <center>
-                <button id="become_observer">
-                    Записаться в наблюдатели
-                </button>
-            </center>
+            {% button "check" "Записаться в наблюдатели" "become_observer" %}
         </div>
-    </div>
 
-    <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Избиратели</h4>
         </div>
@@ -28,11 +24,7 @@
         <div class="content_block">
             Записались {{ voter_count }} избирател{{ ending }}
             <center>
-                <button id="become_voter">
-                    <span id="become_voter_sign_up_btn">
-                        Записаться
-                    </span>
-                </button>
+                {% button "check" "Записаться в избиратели" "become_voter" %}
             </center>
         </div>
     </div>
@@ -56,9 +48,6 @@
         </script>
     {% endif %}
 
-    <script type="text/javascript">
-        $("#become_voter").button({icons: {primary: "ui-icon-check"}});
-    </script>
 {% endblock %}
 
 {% block right_column %}
@@ -74,16 +63,14 @@
                 <li><a href="http://nabludatel.org" target="_blank">Гражданин Наблюдатель</a></li>
             </ul>
         </div>
-    </div>
 
-    <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Зафиксировать нарушение</h4>
         </div>
 
         <div class="content_block">
             <center>
-                <button id="submit_complaint_btn" title="Зафиксировать нарушение">Зафиксировать</button>
+                {% button "pencil" "Зафиксировать нарушение" "submit_complaint_btn" %}
             </center>
         </div>
     </div>
@@ -131,13 +118,7 @@
                 <b>или</b>
             </td>
             <td style="vertical-align:middle;">
-                <center>
-                    <a href="{% url map_search %}">
-                        <button id="map_location">
-                            Найти на карте
-                        </button>
-                    </a>
-                </center>
+                {% button "search" "Найти на карте" "map_location" "map_search" %}
             </td>
         </tr>
     </table>
@@ -168,13 +149,10 @@
     $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}});
     set_select_location("choose_regions", []);
 
-    $("#map_location").button({icons: {primary: "ui-icon-search"}});
+    //$("#map_location").button({icons: {primary: "ui-icon-search"}});
 
-    $("#profile_btn").button();
-    $("#reg_btn").button();
-    $("#login_btn2").button().click(function(){
+    $("#login_btn2").click(function(){
         login_dialog_init();
-        //login_dialog_buttons("login_dialog", "{% url login %}", "");
     });
 </script>
 

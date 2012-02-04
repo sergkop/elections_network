@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load button %}
+
 {% block left_column %}
     <div class="ym-clearfix">
         <div class="side_block_header">
@@ -109,19 +111,17 @@
         <div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
 
         <div class="user_actions">
-            <button id="send_message">Отправить сообщение</button></td>
-            <button id="add_to_contacts">Добавить в контакты</button>
-            <button id="remove_from_contacts">Удалить из контактов</button>
-            <button {% if is_reported %}style="display:none;"{% endif %} id="report_user">Пожаловаться</button>
+            <center>
+                {% button "mail-closed" "Отправить сообщение" "send_message" "" "" %}
+                {% button "circle-plus" "Добавить в контакты" "add_to_contacts" "" "" %}
+                {% button "circle-minus" "Удалить из контактов" "remove_from_contacts" "" "" %}
+                {% button "alert" "Пожаловаться" "report_user" "" "" %}
+            </center>
         </div>
 
         <script type="text/javascript">
             // Create buttons
-            $("#send_message").button({icons: {primary: "ui-icon-mail-closed"}});
-            $("#add_to_contacts").button({icons: {primary: "ui-icon-circle-plus"}});
-            $("#remove_from_contacts").button({icons: {primary: "ui-icon-circle-minus"}});
-
-            $("#report_user").button({icons: {primary: "ui-icon-alert"}}).click(function(){
+            $("#report_user").click(function(){
                 report_dialog_init("user", {username: "{{ profile_user.username }}"});
             });
 
@@ -177,7 +177,7 @@
     <ul>
         {% if profile_user == user %}
         <li>
-            <button id="become_observer">Записаться в наблюдатели</button>
+            {% button "check" "Записаться в наблюдатели" "become_observer" "" "" %}
         </li>
         {% endif %}
 
@@ -193,14 +193,11 @@
             </span>
 
             {% if profile_user == user %}
-                <button id="become_voter">
-                    <span id="become_voter_sign_up_btn" {% if activities.voter %}style="display:none;"{% endif %}>
-                        Записаться в избиратели
-                    </span>
-                    <span id="become_voter_change_region_btn" {% if not activities.voter %}style="display:none;"{% endif %}>
-                        Сменить участок
-                    </span>
-                </button>
+                {% if activities.voter %}
+                    {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" "" "" %}
+                {% else %}
+                    {% button "check" "Записаться в избиратели" "become_voter" "" "" %}
+                {% endif %}
             {% endif %}
         </li>
     </ul>
@@ -212,23 +209,19 @@
 
         <script type="text/javascript">
             // Become observer
-            $("#become_observer").button({icons: {primary: "ui-icon-check"}})
-                    .click(function(){become_observer_dialog_init();});
+            $("#become_observer").click(function(){become_observer_dialog_init();});
 
             // Become voter dialog
-            $("#become_voter").button({icons: {primary: "ui-icon-check"}})
-                    .click(function(){become_voter_dialog_init(get_path("voter_path_span"));});
+            $("#become_voter").click(function(){become_voter_dialog_init(get_path("voter_path_span"));});
 
             $("#become_voter_dialog").on("become_voter", function(event, location_id){
                 update_path("voter_path_span", "become_voter_form");
 
-                if (form_location_id("become_voter_form")!=""){
-                    $("#become_voter_sign_up_btn").hide();
-                    $("#become_voter_change_region_btn").show();
-                } else {
-                    $("#become_voter_sign_up_btn").show();
-                    $("#become_voter_change_region_btn").hide();
-                }
+                $("#become_voter .ui-icon").toggleClass("ui-icon-check").toggleClass("ui-icon-arrowreturnthick-1-e");
+                if (form_location_id("become_voter_form")!="")
+                    $("#become_voter .ui-button-text").text("Сменить избирательный округ");
+                else
+                    $("#become_voter .ui-button-text").text("Записаться в избиратели");
             });
         </script>
     {% endif %}

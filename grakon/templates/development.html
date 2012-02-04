@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load button %}
+
+{% block left_column %}
+    <div class="ym-clearfix">
+        <div class="side_block_header">
+            <h4>Этапы</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+            </ul>
+        </div>
+
+        <div class="side_block_header">
+            <h4>Участники</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                <li></li>
+            </ul>
+            {% button "check" "Помочь проекту" "join" "help" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block right_column %}
+    <div class="ym-clearfix">
+        <div class="side_block_header">
+            <h4>Ресурсы</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                <li><a href="https://www.pivotaltracker.com/projects/448657" target="_blank">Процесс разработки</a></li>
+                <li><a href="https://github.com/sergkop/elections_network" target="_blank">Исходный код</a></li>
+                <li><a href="http://bit.ly/wZkGCA" target="_blank">Тех. задание для web-разработчиков</a></li>
+                <li><a href="http://bit.ly/AbySK3" target="_blank">Тех. задание для frontend-разработчиков</a></li>
+                <li>
+                    <a href="https://docs.google.com/document/d/1anuORR4EQ_6hJ8GhSWjlVcpebk6RaqIWwzY3sflw_wc/edit" target="_blank">
+                    Как стать разработчиком проекта</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Новости проекта</h2>
+{% endblock %}
+
+{% block content %}
+    
+{% endblock %}

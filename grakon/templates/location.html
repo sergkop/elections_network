@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load button %}
+
 {% block title %}
 {% if current_location.parent_1 %}{{ current_location.parent_1 }} - {% endif %}
 {% if current_location.parent_2 %}{{ current_location.parent_2 }} - {% endif %}
@@ -42,7 +44,6 @@
                                 <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>
                                 {% endfor %}
                             </select>
-                            <!--<i></i><b></b>-->
                         </form>
                     </li>
                 {% endif %}
@@ -71,9 +72,7 @@
                     <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
                 {% endfor %}
             </ul>
-            <center>
-                <button id="become_observer">Записаться</button>
-            </center>
+            {% button "check" "Записаться в наблюдатели" "become_observer" %}
         </div>
 
         <div class="side_block_header">
@@ -86,16 +85,11 @@
                     <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
                 {% endfor %}
             </ul>
-            <center>
-                <button id="become_voter">
-                    <span id="become_voter_sign_up_btn" {% if is_voter_here %}style="display:none"{% endif %}>
-                        Записаться
-                    </span>
-                    <span id="become_voter_change_region_btn" {% if not is_voter_here %}style="display:none"{% endif %}>
-                        Сменить округ
-                    </span>
-                </button>
-            </center>
+            {% if is_voter_here %}
+                {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" %}
+            {% else %}
+                {% button "check" "Записаться в избиратели" "become_voter" %}
+            {% endif %}
         </div>
     </div>
 
@@ -110,30 +104,24 @@
 
         <script type="text/javascript">
             // Become voter
-            $("#become_voter_dialog").on("become_voter_event", function(event, location_id){
+            /*$("#become_voter_dialog").on("become_voter_event", function(event, location_id){
                 var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
                 if (location_id=={{ current_location.id }}){
-                    $("#become_voter_sign_up_btn").hide();
-                    $("#become_voter_change_region_btn").show();
+                    $("#become_voter .ui-button-text").text("Сменить избирательный округ");
                     if (user_voter_li.length==0)
                         $("#voters_ul").append($("<li/>").append(
                             $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}")
                         ));
                 } else {
-                    $("#become_voter_sign_up_btn").show();
-                    $("#become_voter_change_region_btn").hide();
+                    $("#become_voter .ui-button-text").text("Записаться в избиратели");
                     user_voter_li.remove();
                 }
-            });
+            });*/
         </script>
     {% endif %}
 
     <script type="text/javascript">
         // TODO: move it inside become_voter.html
-        $("#become_voter").button({icons: {
-            primary: {% if is_voter_here %}"ui-icon-arrowreturnthick-1-e"{% else %}"ui-icon-check"{% endif %}
-        }});
-
         $("#voters_ul li").each(function(index){
             new UserListItem($(this));
         });
@@ -163,9 +151,7 @@
                 <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
                 {% endfor %}
             </ul>
-            <center>
-                <button id="add_link" title="Добавить ссылку">Добавить</button>
-            </center>
+            {% button "circle-plus" "Добавить ссылку" "add_link" %}
         </div>
 
         <div class="side_block_header">
@@ -173,9 +159,7 @@
         </div>
 
         <div class="content_block">
-            <center>
-                <button id="submit_complaint_btn" title="Зафиксировать нарушение">Зафиксировать</button>
-            </center>
+            {% button "pencil" "Зафиксировать нарушение" "submit_complaint_btn" %}
         </div>
     </div>
 

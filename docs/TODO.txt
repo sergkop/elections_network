@@ -26,11 +26,7 @@
 * in become voter dialog indicate if user has signed up somewhere else
 * Add entering location in registration form
 * Add captcha to registration form if loginza is not used (use email confirmation instead)
-* Tabs with comments, statistics, maps
 * email confirmation of registration
-* Извлечь информацию о тиках (с адресом) и показывать
-  http://www.zabkray.vybory.izbirkom.ru/region/zabkray?action=show_komissia&region=92&sub_region=92&type=100&sortMode=vidIk&vrnorg=2752000260059&vrnkomis=2752000260063
-  на карте
 * кэшировать страницы для незалогиненных юзеров и показывать их с помощью nginx (без django) - пока с django
 
 ====== Base version ===================
@@ -69,7 +65,7 @@
 * speed up init_db and init_test_data
 * if Back button of browser is used, javascript icon-buttons are not update
 * кнопка для bookmark page
-* Start using Fabric
+* run Fabric script to automate deployment completely
 
 Tasks:
     * interface for managing reports on users and links

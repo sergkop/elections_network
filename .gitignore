@@ -1,4 +1,7 @@
 *~
+*.project*
+*.pydevproject*
+*.settings*
 *.pyc
 database.sqlite
 *.bak

@@ -58,9 +58,7 @@
         function report_dialog_init(type, params){
             $("#report_reason option").remove();
             $.each(REPORT_REASONS[type], function(index, data){
-                var name, reason = data;
-                console.log(data);
-                $("#report_reason").append($("<option/>").attr("value", name).text(reason));
+                $("#report_reason").append($("<option/>").attr("value", data[0]).html(data[1]));
             });
 
             //$("#report_dialog_user").text(username);

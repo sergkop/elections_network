@@ -10,8 +10,6 @@
 
 <script type="text/javascript">
     // Become observer dialog
-    $("#become_observer").button({icons: {primary: "ui-icon-check"}});
-
     {% if user.is_authenticated %}
         $("#become_observer_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в наблюдатели",
             buttons: {

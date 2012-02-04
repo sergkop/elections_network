@@ -1,29 +1,30 @@
 {% extends "base.html" %}
 
+{% load button %}
+
 {% block left_column %}
     <div class="ym-clearfix">
         <div class="partner_block">
             <a href="http://nabludatel.org">
                 <img src="{{ STATIC_URL }}images/partners/gn.jpg" width="200px" class="side_block_image" />
             </a>
+            <br/>
             Подготовка наблюдателей и верификация официальных результатов выборов
         </div>
-    </div>
 
-    <div class="ym-clearfix">
         <div class="partner_block">
             <a href="http://kuda-komu.net/">
                 <img src="{{ STATIC_URL }}images/partners/komukuda.gif" width="200px" class="side_block_image" />
             </a>
+            <br/>
             Сервис по составлению жалоб и заявлений
         </div>
-    </div>
 
-    <div class="ym-clearfix">
         <div class="partner_block">
             <a href="http://idemocracy.ru/">
                 <img src="{{ STATIC_URL }}images/partners/idemocracy.png" width="200px" class="side_block_image" />
             </a>
+            <br/>
             Развитие электронной демократии в России
         </div>
     </div>
@@ -35,6 +36,7 @@
             <a href="http://sidorinlab.ru/">
                 <img src="{{ STATIC_URL }}images/partners/sidorinlab.png" width="200px" class="side_block_image" />
             </a>
+            <br/>
             Поисковое продвижение сайтов
         </div>
     </div>
@@ -44,6 +46,7 @@
             <a href="http://www.kartanarusheniy.ru/">
                 <img src="{{ STATIC_URL }}images/partners/kartanarusheniy.gif" width="200px" class="side_block_image" />
             </a>
+            <br/>
             Карта нарушений на выборах
         </div>
     </div>
@@ -53,20 +56,18 @@
             <a href="https://lokolo.ru">
                 <img src="{{ STATIC_URL }}images/partners/lokolo.jpg" width="200px" class="side_block_image" />
             </a>
-            Карта нарушений на выборах
+            <br/>
+            Общение с соседями в Санкт-Петербурге
         </div>
     </div>
 
 {% endblock %}
 
+{% block content_header %}
+    <h2 class="location_header">Наши партнеры</h2>
+{% endblock %}
+
 {% block content %}
     {{ content|safe }}
-
-    <a href="mailto:mikpanko@gmail.com">
-        <button id="become_partner">Стать партнером</button>
-    </a>
-
-    <script type="text/javascript">
-        $("#become_partner").button({icons: {primary: "ui-icon-check"}});
-    </script>
+    {% button "check" "Стать партнером" "become_partner" "mailto:admin@grakon.org" %}
 {% endblock %}

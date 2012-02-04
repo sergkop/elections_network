@@ -24,8 +24,6 @@
 
 <script type="text/javascript">
     // Add link dialog
-    $("#add_link").button({icons: {primary: 'ui-icon-circle-plus'}}).tipsy({gravity: 'w'});
-
     {% if user.is_authenticated %}
         $("#add_link_dialog").dialog({width: 650, height: 300, modal: true, title: "Добавить ссылку",
             buttons: {

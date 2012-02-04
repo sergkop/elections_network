@@ -69,10 +69,10 @@
 * speed up init_db and init_test_data
 * if Back button of browser is used, javascript icon-buttons are not update
 * кнопка для bookmark page
+* Start using Fabric
 
 Tasks:
     * interface for managing reports on users and links
     * Adopt selenium testing (see https://github.com/dragoon/django-selenium,
         https://github.com/dragoon/django-selenium-testapp,
         https://github.com/weluse/django-nose-selenium)
-    * readme -> readme.rst

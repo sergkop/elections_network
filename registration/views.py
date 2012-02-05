@@ -2,10 +2,7 @@
 import json
 
 from django.contrib import messages, auth
-from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 
@@ -15,16 +12,6 @@ from loginza.templatetags.loginza_widget import _return_path
 from registration.forms import CompleteRegistrationForm, RegistrationForm
 from registration.models import RegistrationProfile
 import registration.signals
-
-# TODO: what happens on /login page? login.html is a duplicate for elements/login.html
-def login(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
-    return auth_views.login(request, template_name='users/login.html')
-
-def logout(request):
-    next_page = reverse('main') if 'next' in request.REQUEST else None
-    return auth_views.logout(request, next_page)
 
 # TODO: add captcha (?)
 def register(request):

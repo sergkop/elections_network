@@ -1,6 +1,7 @@
-<div>{{ profile_user.profile.about|safe }}</div>
-
 {% load elements %}
+
+{% if profile_user.profile.about %}<h4>О себе</h4>{% endif %}
+<div>{{ profile_user.profile.about|safe }}</div>
 
 {% if profile_user != user %}
     <div id="in_contacts"><i>Добавлен в контакты</i></div>

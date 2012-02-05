@@ -16,9 +16,6 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
-
-    <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Добавлен в контакты</h4>
         </div>
@@ -43,7 +40,8 @@
                 {% for link in links %}
                     <li>
                         <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
-                        (<a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>)
+                        <br/>
+                        <a href="{{ link.location.get_absolute_url }}">{{ link.location }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -57,7 +55,13 @@
 {% block content_header %}
     <h2 class="location_header">{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h2>
 
-    {% tabs "tabs" profile_view "Профиль" "my_profile" "users/profile_view.html" "Редактировать" "edit_profile" "users/profile_edit.html" %}
+    {% if profile_user == user %}
+        {% tabs "tabs" profile_view "Профиль" "my_profile" "users/profile_view.html" "Редактировать" "edit_profile" "users/profile_edit.html" %}
+    {% else %}
+        <div class="ym-cbox">
+            {% include "users/profile_view.html" %}
+        </div>
+    {% endif %}
 
     <script type="text/javascript">
         $("#contacts_ul li").each(function(index){
@@ -71,13 +75,13 @@
 
     {% include "dialogs/report.html" %}
 
+    {% include "dialogs/send_message.html" %}
+
+    {% include "dialogs/add_to_contacts.html" %}
+
+    {% include "dialogs/remove_from_contacts.html" %}
+
     {% if user.is_authenticated %}
-        {% include "dialogs/send_message.html" %}
-
-        {% include "dialogs/add_to_contacts.html" %}
-
-        {% include "dialogs/remove_from_contacts.html" %}
-
         <script type="text/javascript">
             $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
                 if (IS_USER_PROFILE){

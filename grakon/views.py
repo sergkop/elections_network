@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
 
@@ -66,3 +67,13 @@ class EditProfile(BaseProfile, UpdateView):
         return reverse('my_profile')
 
 edit_profile = login_required(EditProfile.as_view())
+
+# TODO: fix it
+def password_change(request, **kwargs):
+    if request.user.get_profile().is_loginza_user():
+        return redirect('password_change_forbidden')
+    return auth_views.password_change(request, **kwargs)
+
+def logout(request):
+    next_page = reverse('main') if 'next' in request.REQUEST else None
+    return auth_views.logout(request, next_page)

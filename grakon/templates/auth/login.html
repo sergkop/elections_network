@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load uni_form_tags %}
+
+{% block content %}
+    {% uni_form form form.helper %}
+
+    <a href="{% url password_reset %}">Забыли пароль?</a>
+    
+    <a href="{% url register %}">Или зарегистрируйтесь</a>
+{% endblock %}

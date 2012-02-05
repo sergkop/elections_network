@@ -12,11 +12,11 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
+USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
-USE_L10N = False
+USE_L10N = True
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
 MEDIA_URL = "/media/"
@@ -25,7 +25,6 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -88,7 +87,7 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_PROFILE_MODULE = 'grakon.Profile'
 LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/users/'
+LOGIN_REDIRECT_URL = '/profile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -13,11 +13,11 @@ male_names = (
     (u'Влад', 'vlad'),
     (u'Геннадий', 'gennady'),
     (u'Георгий', 'georgiy'),
-    (u'Михаил', 'mikhail'),
-    (u'Александр', 'alexandr'),
-    (u'Павел', 'pavel'),
-    (u'Николай', 'nikolay'),
-    (u'Владимир', 'vladimir'),
+    #(u'Михаил', 'mikhail'),
+    #(u'Александр', 'alexandr'),
+    #(u'Павел', 'pavel'),
+    #(u'Николай', 'nikolay'),
+    #(u'Владимир', 'vladimir'),
 )
 
 male_surnames = (
@@ -28,12 +28,12 @@ male_surnames = (
     u'Сидоров',
     u'Козлов',
     u'Смирнов',
-    u'Кузнецов',
-    u'Попов',
-    u'Соколов',
-    u'Лебедев',
-    u'Новиков',
-    u'Морозов',
+    #u'Кузнецов',
+    #u'Попов',
+    #u'Соколов',
+    #u'Лебедев',
+    #u'Новиков',
+    #u'Морозов',
 )
 
 # [(name, username)]
@@ -43,13 +43,13 @@ female_names = (
     (u'Ольга', 'olga'),
     (u'Екатерина', 'katya'),
     (u'Мария', 'masha'),
-    (u'Карина', 'karina'),
-    (u'Вера', 'vera'),
-    (u'Надежда', 'nadezhda'),
-    (u'Любовь', 'lubov'),
-    (u'Татьяна', 'tatyana'),
-    (u'Наталья', 'natasha'),
-    (u'Елена', 'lena'),
+    #(u'Карина', 'karina'),
+    #(u'Вера', 'vera'),
+    #(u'Надежда', 'nadezhda'),
+    #(u'Любовь', 'lubov'),
+    #(u'Татьяна', 'tatyana'),
+    #(u'Наталья', 'natasha'),
+    #(u'Елена', 'lena'),
 )
 
 female_surnames = (
@@ -59,13 +59,13 @@ female_surnames = (
     u'Соловьева',
     u'Васильева',
     u'Зайцева',
-    u'Павлова',
-    u'Голубева',
-    u'Виноградова',
-    u'Богданова',
-    u'Воробьева',
-    u'Федорова',
-    u'Беляева',
+    #u'Павлова',
+    #u'Голубева',
+    #u'Виноградова',
+    #u'Богданова',
+    #u'Воробьева',
+    #u'Федорова',
+    #u'Беляева',
 )
 
 # [(name, url)]
@@ -106,12 +106,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         from django.contrib.auth.models import User
+        from grakon.models import Profile
         from links.models import Link
         from locations.models import Location
         from users.models import Contact, Role
 
-        users_db = []
-        USER_COUNT = 300
+        profiles_db = []
+        USER_COUNT = 40
         print "creating users"
         # Create users
         for i in xrange(USER_COUNT):
@@ -133,18 +134,18 @@ class Command(BaseCommand):
                 except IntegrityError:
                     continue
                 else:
-                    users_db.append(user)
                     profile = user.get_profile()
                     profile.about = u"Этот пользователь создан в тестовых целях и не является настоящим человеком"
                     profile.save()
+                    profiles_db.append(profile)
                     break
 
         print "creating links"
         locations_db = list(Location.objects.all())
         for i in range(len(locations_db)):
             print_progress(i, len(locations_db))
-            for j in range(choice([1, 2, 3, 4, 5])):
-                user = choice(users_db)
+            for j in range(choice([1, 2])):
+                user = choice(profiles_db)
                 link_data = choice(links)
                 try:
                     Link.objects.create(location=locations_db[i], user=user, name=link_data[0], url=link_data[1])
@@ -154,22 +155,22 @@ class Command(BaseCommand):
         print "creating contacts"
         for i in range(USER_COUNT):
             print_progress(i, USER_COUNT)
-            Role.objects.create(location=choice(locations_db), user=users_db[i], type='voter')
-            for i in range(choice([1, 2, 3, 4, 5])):
-                contact = choice(users_db)
+            Role.objects.create(location=choice(locations_db), user=profiles_db[i], type='voter')
+            for i in range(choice([1, 2, 3])):
+                contact = choice(profiles_db)
                 if contact != user:
                     try:
-                        Contact.objects.create(user=users_db[i], contact=contact)
+                        Contact.objects.create(user=profiles_db[i], contact=contact)
                     except IntegrityError:
                         continue
 
         # Add superuser as a contact to a few users
-        for superuser in User.objects.filter(is_superuser=True):
-            for i in range(3):
+        for profile in Profile.objects.filter(user__is_superuser=True):
+            for i in range(4):
                 try:
-                    Contact.objects.create(user=choice(users_db), contact=superuser)
+                    Contact.objects.create(user=choice(profiles_db), contact=profile)
                 except IntegrityError:
                     pass
 
-            if not superuser.first_name and not superuser.last_name:
-                superuser.first_name = superuser.username
+                if not profile.first_name and not profile.last_name:
+                    profile.first_name = profile.username

@@ -39,11 +39,17 @@ class Command(BaseCommand):
 
         db_entries = {}
 
+        print "initializing static pages"
+        pages_data = open(os.path.join(settings.PROJECT_PATH, 'data', 'pages_data.json')).read()
+        data = json.loads(pages_data)
+        for name, html in data.iteritems():
+            Page.objects.create(name=name, content=html)
+
         print "loading the regions hierarchy"
         data = json.loads(open(os.path.join(settings.PROJECT_PATH, 'data', 'regions-gosduma.json')).read())
         i = 0
         for location in iterate_struct(data, []):
-            print_progress(i, 2923)
+            print_progress(i, 100)
             if len(location) == 1:
                 db_entries[location[0]] = {'entry': Location.objects.create(name=location[0], **default_location_fields), 'sub': {}}
             elif len(location) == 2:
@@ -53,9 +59,7 @@ class Command(BaseCommand):
                 Location.objects.create(name=location[2], parent_1=db_entries[location[0]]['entry'],
                         parent_2=db_entries[location[0]]['sub'][location[1]], **default_location_fields)
             i += 1
+            
+            if i > 100:
+                break # artificial break to speed up data loading
 
-        print "initializing static pages"
-        pages_data = open(os.path.join(settings.PROJECT_PATH, 'data', 'pages_data.json')).read()
-        data = json.loads(pages_data)
-        for name, html in data.iteritems():
-            Page.objects.create(name=name, content=html)

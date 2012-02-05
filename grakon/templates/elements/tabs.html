@@ -1,0 +1,15 @@
+<div id="{{ id }}" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+        {% for tab in tabs %}
+            <li class="ui-state-default ui-corner-top{% if tab.active %} ui-tabs-selected ui-state-active{% endif %}">
+                <a href="{{ tab.url }}">{{ tab.title }}<i></i></a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% for tab_content in tabs_content %}
+        <div id="{{ tab_content.id }}" class="ui-tabs-panel ui-widget-content ui-corner-bottom{% if not tab_content.active %} ui-tabs-hide{% endif %}">
+            {% include tab_content.path %}
+        </div>
+    {% endfor %}
+</div>

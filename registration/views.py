@@ -19,7 +19,7 @@ import registration.signals
 # TODO: what happens on /login page? login.html is a duplicate for elements/login.html
 def login(request):
     if request.user.is_authenticated():
-        return redirect('current_profile')
+        return redirect('my_profile')
     return auth_views.login(request, template_name='users/login.html')
 
 def logout(request):
@@ -29,7 +29,7 @@ def logout(request):
 # TODO: add captcha (?)
 def register(request):
     if request.user.is_authenticated():
-        return redirect('current_profile')
+        return redirect('my_profile')
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -70,7 +70,7 @@ def activate(request, activation_key):
 # TODO: if username and email match an existing account - suggest to link them
 def loginza_register(request):
     if request.user.is_authenticated():
-        return redirect('current_profile')
+        return redirect('my_profile')
 
     try:
         identity_id = request.session.get('users_complete_reg_id', None)

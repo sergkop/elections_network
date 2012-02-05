@@ -157,7 +157,7 @@ var UserListItem = Backbone.View.extend({
                         if (USERNAME=="")
                             login_dialog_init("Чтобы пожаловаться на пользователя, пожалуйста, войдите в систему");
                         else
-                            report_user_dialog_init(username);
+                            report_dialog_init("user", username);
                     });
         else
             report_btn.css("visibility", "hidden");

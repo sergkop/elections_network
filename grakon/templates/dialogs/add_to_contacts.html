@@ -1,36 +1,44 @@
-<div id="add_to_contacts_dialog">
-    <center>
-        Добавить пользователя <span id="add_to_contacts_dialog_user" class="dialog_user_span"></span>
-        в список контактов?
-    </center>
+{% if user.is_authenticated %}
+    <div id="add_to_contacts_dialog">
+        <center>
+            Добавить пользователя <span id="add_to_contacts_dialog_user" class="dialog_user_span"></span>
+            в список контактов?
+        </center>
 
-    <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
-        {% csrf_token %}
-        <input type="hidden" name="username" value="" />
-    </form>
-</div>
+        <form id="add_to_contacts_form" method="post" action="{% url add_to_contacts %}">
+            {% csrf_token %}
+            <input type="hidden" name="username" value="" />
+        </form>
+    </div>
+{% endif %}
 
 <script type="text/javascript">
     // Add to contacts dialog
-    $("#add_to_contacts_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить в контакты", buttons: {
-        "Добавить": function(){
-            $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
-                $("#add_to_contacts_dialog").dialog("close");
-                if (data=="ok"){
-                    var username = $('#add_to_contacts_form input[name="username"]').val();
-                    CONTACTS.push(username);
-                    $("#add_to_contacts_dialog").trigger("add_to_contacts_event", [username]);
-                    alert("Пользователь "+username+" добавлен в список ваших контактов");
-                } else
-                    alert(data);
-            });
-        },
-        "Отмена": function(){$("#add_to_contacts_dialog").dialog("close");}
-    }}).dialog("close");
+    {% if user.is_authenticated %}
+        $("#add_to_contacts_dialog").dialog({width: 650, height: 250, modal: true, title: "Добавить в контакты", buttons: {
+            "Добавить": function(){
+                $.post("{% url add_to_contacts %}", $("#add_to_contacts_form").serialize(), function(data){
+                    $("#add_to_contacts_dialog").dialog("close");
+                    if (data=="ok"){
+                        var username = $('#add_to_contacts_form input[name="username"]').val();
+                        CONTACTS.push(username);
+                        $("#add_to_contacts_dialog").trigger("add_to_contacts_event", [username]);
+                        alert("Пользователь "+username+" добавлен в список ваших контактов");
+                    } else
+                        alert(data);
+                });
+            },
+            "Отмена": function(){$("#add_to_contacts_dialog").dialog("close");}
+        }}).dialog("close");
 
-    function add_to_contacts_dialog_init(username){
-        $("#add_to_contacts_dialog_user").text(username);
-        $('#add_to_contacts_form input[name="username"]').val(username);
-        $("#add_to_contacts_dialog").dialog("open");
-    }
+        function add_to_contacts_dialog_init(username){
+            $("#add_to_contacts_dialog_user").text(username);
+            $('#add_to_contacts_form input[name="username"]').val(username);
+            $("#add_to_contacts_dialog").dialog("open");
+        }
+    {% else %}
+        function add_to_contacts_dialog_init(username){
+            login_dialog_init("Чтобы добавить пользователя в контакты, пожалуйста, войдите в систему");
+        }
+    {% endif %}
 </script>

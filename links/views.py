@@ -1,4 +1,4 @@
-# coding=utf8
+# -*- coding:utf-8 -*-
 from django.core.validators import URLValidator
 from django.db import IntegrityError
 from django.http import HttpResponse

@@ -1,57 +1,43 @@
 * Add fields to Location - address, geo coordinates, telephone, email
-* Data from TIKs
-* Bookmarks on the page
-* Registration, change password, etc.
-
-* (!) В User admin добавить поля со временем регистрации
-* on changing voter's region on profile page - "избиратель" can disappear
-
-* (!) Подписать какие символы может содержать username + оформление формы регистрации
-* add tips to buttons and ? signs to get help on features of the system
-* if no region is selected for voting, path on profile page is not displayed properly
-
-* Гражданин наблюдатель - первая ссылка (?)
 * Ввести время в модели
-* поиск по положению юзера - карта
-
-* Put nginx.conf into repo
-* Use pagespeed to optimize load time
-* https://www.google.com/webmasters/
-* merge and compress static files using django staticfiles
-
-* Настройка nginx - медиа файлы - есть ли доступ к templates?
-* рыжие иконки в темные
+* (!) Подписать какие символы может содержать username + оформление формы регистрации
+* убрать tips
+* if no region is selected for voting, path on profile page is not displayed properly
+* login using username or email
+* on entering wrong password user is redirected to login page
+* возможность показывать ссылки с верхнего уровня (со 2го на 3й)
 * When window width is small, side blocks look ugly
 
+
+
+
+* Put nginx.conf into repo
+* Настройка nginx - медиа файлы - есть ли доступ к templates?
 * in become voter dialog indicate if user has signed up somewhere else
-* Add entering location in registration form
-* Add captcha to registration form if loginza is not used (use email confirmation instead)
-* email confirmation of registration
 * кэшировать страницы для незалогиненных юзеров и показывать их с помощью nginx (без django) - пока с django
+* Use pagespeed to optimize load time
+* on changing voter's region on profile page - "избиратель" can disappear
+* add tips to buttons and ? signs to get help on features of the system
+* https://www.google.com/webmasters/
 
 ====== Base version ===================
 * при нажатии регистрация в логин диалоге, показывать форму регистрации внутри диалога
 * count how often people click on buttons in side bars (can we pass it to google analytics or yandex metrika?)
   (at least look at post requests)
-* on entering wrong password user is redirected to login page
 * create backbone js view for user and link lists
 * In dialogs title is usually similar to the text inside the window - what to do?
 * password save by browser (check)
 * 'Add user' button with search (name, profession, location) (?)
 * loginza produces js errors on closing dialogs by Esc
-* In become voter dialog the same ajax request is repeated twice
-* Messages inserted into login dialogs are repeated (main.js, profile, location) (?)
 * show population of the regions and statistics from previous elections
-* возможность показывать ссылки с верхнего уровня (со 2го на 3й)
 * Зарубежные территории
 * rss feeds for project news, regional news
 * поиск по сайту
 * Table for members of location comission and ability to fill them for verified users
+* run Fabric script to automate deployment completely
 
 ====== Later ===========
 * Favicon
-* Forgot password button
-* login using username or email
 * autogenerate username from first and last name
 * notifications about new users in the region
 * limit user's ability to add links (daily limit?)
@@ -65,7 +51,6 @@
 * speed up init_db and init_test_data
 * if Back button of browser is used, javascript icon-buttons are not update
 * кнопка для bookmark page
-* run Fabric script to automate deployment completely
 
 Tasks:
     * interface for managing reports on users and links

@@ -3,6 +3,7 @@ from urllib import quote
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.forms.widgets import Media
 
 from users.models import Contact
 from reports.models import Report, REPORT_REASONS
@@ -29,3 +30,48 @@ def user_data(request):
         context['LOGINZA_IFRAME_URL'] = quote(settings.URL_PREFIX+reverse('loginza.views.return_callback'), '')
 
     return context
+
+def grakon_media(request):
+    media = Media()
+    media.add_css({
+        'all': (
+            'libs/yaml/base.css',
+            'css/hlist.css',
+            'libs/jquery-ui/jquery-ui.css',
+            'css/layout.css',
+            'css/typography.css',
+            'css/style.css',
+            'libs/tipsy/tipsy.css',
+            'css/julia_style.css',
+        ),
+    })
+
+    if settings.DEBUG:
+        js = ('libs/jquery.js', 'libs/jquery-ui/jquery-ui.js')
+    else:
+        js = ('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
+                'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
+
+    js += (
+        'libs/underscore.js',
+        'libs/tipsy/jquery.tipsy.js',
+        'libs/backbone.js',
+        #'http://userapi.com/js/api/openapi.js?47', # for VKontakte comments
+        'http://loginza.ru/js/widget.js',
+        'js/main.js',
+    )
+    media.add_js(js)
+    return {'grakon_media': media}
+
+def uni_form_media(request):
+    media = Media()
+    media.add_css({
+        'all': (
+            'libs/uni-form/uni-form.css',
+            'libs/uni-form/default.uni-form.css'
+        )
+    })
+    media.add_js((
+        'libs/uni-form/uni-form.jquery.js',
+    ))
+    return {'uni_form_media': media}

@@ -43,6 +43,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 
     'grakon.context_processors.user_data',
+    'grakon.context_processors.grakon_media',
+    'grakon.context_processors.uni_form_media',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,9 +65,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'loginza',
     'tinymce',
     'south',
+    'uni_form',
 
     'grakon',
     'locations',
@@ -75,7 +79,6 @@ INSTALLED_APPS = (
     'reports',
     'users',
     'links',
-    
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -121,8 +124,8 @@ TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'libs', 'tiny_mce')
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'relative_urls': False,
-    'width': 900,
-    'height': 500,
+    'width': 600,
+    'height': 300,
     'theme_advanced_buttons3': ",fontselect,fontsizeselect,forecolor,backcolor,|,sub,sup,|,charmap,",
     'extended_valid_elements': "script[type|src],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder],",
 }

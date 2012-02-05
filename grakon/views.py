@@ -1,12 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import UpdateView
 
+from grakon.forms import ProfileForm
 from locations.models import Location
 
-class BaseProfile(TemplateView):
+class BaseProfile(object):
     template_name = 'users/profile.html'
+    profile_view = None # 'my_profile' or 'edit_profile'
 
     def get_user(self):
         raise NotImplemented
@@ -28,17 +32,37 @@ class BaseProfile(TemplateView):
             'links': list(profile.links.all().select_related()),
             'contacts': list(profile.contacts.all()) if user.is_authenticated() else [],
             'have_in_contacts': list(profile.have_in_contacts.all()),
+            'profile_view': self.profile_view,
         })
         return ctx
 
-class Profile(BaseProfile):
+class Profile(BaseProfile, TemplateView):
+    profile_view = 'my_profile'
+
     def get_user(self):
         return get_object_or_404(User, username=self.kwargs.get('username'))
 
 profile = Profile.as_view()
 
-class MyProfile(BaseProfile):
+class MyProfile(BaseProfile, TemplateView):
+    profile_view = 'my_profile'
+
     def get_user(self):
         return self.request.user
 
 my_profile = login_required(MyProfile.as_view())
+
+class EditProfile(BaseProfile, UpdateView):
+    form_class = ProfileForm
+    profile_view = 'edit_profile'
+
+    def get_user(self):
+        return self.request.user
+
+    def get_object(self):
+        return self.request.user.get_profile()
+
+    def get_success_url(self):
+        return reverse('my_profile')
+
+edit_profile = login_required(EditProfile.as_view())

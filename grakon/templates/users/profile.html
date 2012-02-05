@@ -58,7 +58,7 @@
 
     <h2>{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h2>
 
-    <div>{{ profile_user.profile.about }}</div>
+    <div>{{ profile_user.profile.about|safe }}</div>
 
     {% include "dialogs/report.html" %}
 
@@ -183,8 +183,8 @@
 
         <li>
             <span id="voter_path_span">
-            {% if activities.voter %}
-                {% with location=activities.voter.location %}
+            {% if roles.voter %}
+                {% with location=roles.voter.location %}
                 {% include "elements/location_path.html" %}
                 {% endwith %} - Избиратель
             {% else %}
@@ -193,7 +193,7 @@
             </span>
 
             {% if profile_user == user %}
-                {% if activities.voter %}
+                {% if roles.voter %}
                     {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" "" "" %}
                 {% else %}
                     {% button "check" "Записаться в избиратели" "become_voter" "" "" %}
@@ -217,11 +217,9 @@
             $("#become_voter_dialog").on("become_voter", function(event, location_id){
                 update_path("voter_path_span", "become_voter_form");
 
+                var new_title =  (form_location_id("become_voter_form")!="") ? "Сменить избирательный округ" : "Записаться в избиратели";
+                $("#become_voter .ui-button-text").text(new_title);
                 $("#become_voter .ui-icon").toggleClass("ui-icon-check").toggleClass("ui-icon-arrowreturnthick-1-e");
-                if (form_location_id("become_voter_form")!="")
-                    $("#become_voter .ui-button-text").text("Сменить избирательный округ");
-                else
-                    $("#become_voter .ui-button-text").text("Записаться в избиратели");
             });
         </script>
     {% endif %}

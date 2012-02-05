@@ -3,39 +3,10 @@ from smtplib import SMTPException
 
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render_to_response
-from django.template import RequestContext
+from django.http import HttpResponse
 
-from locations.models import Location
-from links.models import Link
 from users.models import Contact, Role
-
-def current_profile(request):
-    """ Show profile of the currently logged in user """
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('login'))
-    return profile(request, request.user.username)
-
-def profile(request, username):
-    user = get_object_or_404(User, username=username)
-
-    activities = {}
-    for role in Role.objects.filter(user=user).select_related():
-        activities[role.type] = {'user': role.user, 'location': role.location}
-
-    context = {
-        'profile_user': user,
-        'profile': user.get_profile(),
-        'activities': activities,
-        'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
-        'links': list(Link.objects.filter(user=user).select_related()),
-        'contacts': list(Contact.objects.filter(user=user)) if user.is_authenticated() else [],
-        'have_in_contacts': list(Contact.objects.filter(contact=user)),
-    }
-    return render_to_response('users/profile.html', context_instance=RequestContext(request, context))
 
 def become_voter(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():

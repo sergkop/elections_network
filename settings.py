@@ -1,4 +1,6 @@
-from site_settings import *
+import os.path
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 TIME_ZONE = 'Europe/Moscow'
@@ -24,13 +26,6 @@ STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -47,7 +42,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     'django.contrib.messages.context_processors.messages',
 
-    'users.context_processors.user_data',
+    'grakon.context_processors.user_data',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,7 +83,7 @@ AUTHENTICATION_BACKENDS = (
     'loginza.authentication.LoginzaBackend',
 )
 
-AUTH_PROFILE_MODULE = 'users.Profile'
+AUTH_PROFILE_MODULE = 'grakon.Profile'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/users/'
 
@@ -136,3 +131,5 @@ TINYMCE_COMPRESSOR = False # TODO: compression doesn't work at the moment
 # force removal of mysite.fcgi from URL:
 # http://docs.djangoproject.com/en/dev/howto/deployment/fastcgi/#forcing-the-url-prefix-to-a-particular-value
 FORCE_SCRIPT_NAME = ''
+
+from site_settings import *

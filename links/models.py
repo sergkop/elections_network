@@ -1,12 +1,12 @@
 # coding=utf8
-from django.contrib.auth.models import User
 from django.db import models
 
 from locations.models import Location
+from users.models import Profile
 
 class Link(models.Model):
     location = models.ForeignKey(Location)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(Profile, related_name='links')
     name = models.CharField(max_length=200)
     url = models.URLField()
     time = models.DateTimeField(auto_now=True)

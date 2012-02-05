@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^links/', include('links.urls')),
     url(r'^location/', include('locations.urls')),
+    url(r'^', include('grakon.urls')),
     url(r'^', include('navigation.urls')),
     url(r'^', include('users.urls')),
     url(r'^', include('reports.urls')),

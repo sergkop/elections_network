@@ -1,16 +1,6 @@
-* Add fields to Location - address, geo coordinates, telephone, email
-* Ввести время в модели
-* (!) Подписать какие символы может содержать username + оформление формы регистрации
-* убрать tips
+* When window width is small, side blocks look ugly
 * if no region is selected for voting, path on profile page is not displayed properly
 * login using username or email
-* on entering wrong password user is redirected to login page
-* возможность показывать ссылки с верхнего уровня (со 2го на 3й)
-* When window width is small, side blocks look ugly
-
-
-
-
 * Put nginx.conf into repo
 * Настройка nginx - медиа файлы - есть ли доступ к templates?
 * in become voter dialog indicate if user has signed up somewhere else

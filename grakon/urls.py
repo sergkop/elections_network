@@ -31,10 +31,6 @@ urlpatterns += patterns('django.contrib.auth.views',
             'password_reset_confirm', name='password_reset_confirm', kwargs={'set_password_form': SetPasswordForm}),
 )
 
-urlpatterns += patterns('',
-    
-)
-
 from django.views.generic.base import TemplateView
 
 urlpatterns += patterns('grakon.views',

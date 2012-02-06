@@ -26,7 +26,10 @@ def main(request):
 
         results_lst = filter(lambda result_tik: result_tik['tvd'] not in merged_tvds, get_regions_data(name))
 
-        left.append((name, title, len(results_lst))) # float(len(merged_data))/(len(merged_data)+len(results_lst)+0.01)*100
+        count = len(results_lst) # float(len(merged_data))/(len(merged_data)+len(results_lst)+0.01)*100
+        if not os.path.exists(os.path.join(DATA_PATH, 'regions', name+'-center.json')):
+            count += 1
+        left.append((name, title, count)) 
 
     return render_to_response('main.html', {'REGIONS': left})
 

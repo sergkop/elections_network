@@ -16,7 +16,7 @@
                 $('#result_panel label').css("background-color", "#fff");
                 var search_name = name.replace("города ", "").substr(0, 4);
                 $('#result_panel label:contains("'+search_name+'")').css("background-color", "f4f");
-                
+
                 AddressCheckMap.showCoordinates();
             });
 
@@ -44,6 +44,8 @@
 
     <form action="" method="post">
         <div style="background-color:#D0F0F2; margin:1em; padding: 1em;">
+            Почтовый индекс: <input id="postcode" type="text" name="postcode" size="10" value=""/>
+            <br/><br/>
             Адрес ТИКа: <input id="address" type="text" name="address" size="85" value=""/>
         </div>
 
@@ -55,9 +57,7 @@
             выбрать соответствующий ему вариант из списка "иерархия участков" внизу
         </div>
 
-        <div style="display: none;">
-            Почтовый индекс: <input id="postcode" type="text" name="postcode" size="10" value=""/>
-        </div>
+        
 
         <div style="background-color:#A6FFCB; margin:1em; padding: 1em;">
             <span style="color:red;font-weight: bold;">III шаг</span>

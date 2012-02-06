@@ -26,7 +26,7 @@ def main(request):
 
         results_lst = filter(lambda result_tik: result_tik['tvd'] not in merged_tvds, get_regions_data(name))
 
-        left.append((name, title, float(len(merged_data))/(len(merged_data)+len(results_lst)+0.01)*100))
+        left.append((name, title, len(results_lst))) # float(len(merged_data))/(len(merged_data)+len(results_lst)+0.01)*100
 
     return render_to_response('main.html', {'REGIONS': left})
 
@@ -59,11 +59,7 @@ def region(request, name):
 
         return redirect('region', name)
 
-    merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
-    try:
-        merged_data = json.loads(open(merge_data_path).read().decode('utf8'))
-    except IOError:
-        merged_data = []
+    merged_data = get_merge_data(name)
 
     merged_vrnorgs = [tik_merged['vrnorg'] for tik_merged in merged_data]
     merged_tvds = [tik_merged['tvd'] for tik_merged in merged_data]
@@ -90,6 +86,15 @@ def region(request, name):
                 .replace(u'ная районная', u'ный район').replace(u'кая районная', u'кий район') \
                 .replace(u'кого района', u'кий район').replace(u'ного района', u'ный район') \
                 .replace(u'г.', '').replace(u'города', '')
+
+    # special processing for central regional TIKs
+    center_data_path = os.path.join(DATA_PATH, 'regions', name+'-center.json')
+    try:
+        center_data = json.loads(open(center_data_path).read().decode('utf8'))
+    except IOError:
+        results_lst.append({'name': region[1], 'tvd': 0, 'root': 0})
+    else:
+        info_tiks = filter(lambda info_tik: info_tik['vrnorg']!=center_data['vrnorg'], info_tiks)
 
     context = {
         'name': region[0],

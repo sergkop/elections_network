@@ -5,8 +5,9 @@
 <body>
     <ul>
         {% for name, title, num in REGIONS %}
-            <li style="background-color: {% if num < 30 %}#FF8FBC{% else %}{% if num < 70 %}#FFFBC4{% else %}#B0FFC5{% endif %}{% endif %}">
-                <a href="{% url region name %}">{{ title }}</a> (&#8776;{{ num|floatformat }}%)
+            <!--li style="background-color: {% if num < 70 %}#FF8FBC{% else %}{% if num < 95 %}#FFFBC4{% else %}#B0FFC5{% endif %}{% endif %}"-->
+            <li style="background-color: {% if num > 0 %}#FF8FBC{% else %}#B0FFC5{% endif %}">
+                <a href="{% url region name %}">{{ title }}</a> (&#8776;{{ num|floatformat }})
             </li>
         {% endfor %}
     </ul>

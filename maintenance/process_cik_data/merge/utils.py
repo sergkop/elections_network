@@ -18,9 +18,12 @@ def get_merge_data(name):
         return []
 
 def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord, postcode, address):
-    results_data_path = os.path.join(DATA_PATH, 'regions', name+'.json')
-    results_data = json.loads(open(results_data_path).read().decode('utf8'))
-    result_tik = filter(lambda node: node['tvd']==tvd and node['root']==root, results_data)[0]
+    if tvd != '0': # TIK
+        results_data_path = os.path.join(DATA_PATH, 'regions', name+'.json')
+        results_data = json.loads(open(results_data_path).read().decode('utf8'))
+        result_tik = filter(lambda node: node['tvd']==tvd and node['root']==root, results_data)[0]
+    else: # IKS
+        result_tik = {'name': name}
 
     # find region in info data
     info_data_path = os.path.join(DATA_PATH, 'regions', name+'-info.json')
@@ -38,12 +41,17 @@ def merge_data(name, tvd, root, vrnorg, vrnkomis, new_name, x_coord, y_coord, po
     if x_coord and y_coord:
         result_tik['x_coord'], result_tik['y_coord'] = x_coord, y_coord
 
-    merge_data = get_merge_data(name)
-    merge_data.append(result_tik)
+    if tvd != '0':
+        merge_data = get_merge_data(name)
+        merge_data.append(result_tik)
 
-    merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
-    with open(merge_data_path, 'w') as f:
-        f.write(json.dumps(merge_data, indent=4, ensure_ascii=False).encode('utf8'))
+        merge_data_path = os.path.join(DATA_PATH, 'regions', name+'-merge.json')
+        with open(merge_data_path, 'w') as f:
+            f.write(json.dumps(merge_data, indent=4, ensure_ascii=False).encode('utf8'))
+    else:
+        center_data_path = os.path.join(DATA_PATH, 'regions', name+'-center.json')
+        with open(center_data_path, 'w') as f:
+            f.write(json.dumps(result_tik, indent=4, ensure_ascii=False).encode('utf8'))
 
 def parse_address(address):
     address = address.replace(u'мунициальный ', '')

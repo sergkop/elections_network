@@ -3,10 +3,8 @@ from django.db import models
 class Location(models.Model):
     """ The number of non-null values of parent specifies the level of location """
     # keys to the parents of the corresponding level (if present)
-    parent_1 = models.ForeignKey('self', null=True, blank=True, related_name='parents_1')
-    parent_2 = models.ForeignKey('self', null=True, blank=True, related_name='parents_2')
-    parent_3 = models.ForeignKey('self', null=True, blank=True, related_name='parents_3')
-    # TODO: we only need 2 parents
+    region = models.ForeignKey('self', null=True, blank=True, related_name='same_region_locations')
+    tik = models.ForeignKey('self', null=True, blank=True, related_name='same_tik_locations')
 
     # TODO: how about region and it's code?
     name = models.CharField(max_length=150)
@@ -25,11 +23,10 @@ class Location(models.Model):
     # Coordinates used in Yandex maps
     x_coord = models.FloatField()
     y_coord = models.FloatField()
-    # TODO: location level 
 
     # TODO: make name unique?
     class Meta:
-        unique_together = ('name', 'parent_1', 'parent_2', 'parent_3')
+        unique_together = ('name', 'region', 'tik')
 
     #def level(self):
     #    # TODO: UIK, TIK or IKS
@@ -41,8 +38,6 @@ class Location(models.Model):
     def __unicode__(self, full_path=False):
         name = self.name
         if full_path:
-            if self.parent_3:
-                name = str(self.parent_3) + u'->' + name
             if self.parent_2:
                 name = str(self.parent_2) + u'->' + name
             if self.parent_1:

@@ -54,10 +54,10 @@ class Command(BaseCommand):
                 db_entries[location[0]] = {'entry': Location.objects.create(name=location[0], **default_location_fields), 'sub': {}}
             elif len(location) == 2:
                 db_entries[location[0]]['sub'][location[1]] = \
-                        Location.objects.create(name=location[1], parent_1=db_entries[location[0]]['entry'], **default_location_fields)
+                        Location.objects.create(name=location[1], region=db_entries[location[0]]['entry'], **default_location_fields)
             elif len(location) == 3:
-                Location.objects.create(name=location[2], parent_1=db_entries[location[0]]['entry'],
-                        parent_2=db_entries[location[0]]['sub'][location[1]], **default_location_fields)
+                Location.objects.create(name=location[2], region=db_entries[location[0]]['entry'],
+                        tik=db_entries[location[0]]['sub'][location[1]], **default_location_fields)
             i += 1
             
             if i > 100:

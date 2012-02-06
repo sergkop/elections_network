@@ -1,8 +1,8 @@
 # coding=utf8
 from django.db import models
 
+from grakon.models import Profile
 from locations.models import Location
-from users.models import Profile
 
 class Link(models.Model):
     location = models.ForeignKey(Location)

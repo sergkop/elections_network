@@ -80,80 +80,81 @@
 {% endblock %}
 
 {% block content %}
-<div>
-    <p>Интернет-площадка для общественного контроля за выборами позволяет гражданам, желающим помочь
-    провести в нашей стране <b>прозрачные</b> и <b>честные выборы</b>:</p>
-    <ul>
-        <li>находить единомышленников</li>
-        <li>совместно осуществлять контроль за выборами</li>
-        <li>проводить освещение хода выборов, параллельное официальному.</li>
-    </ul>
 
-    <p>
-        <span style="color: red;"><b>ВНИМАНИЕ</b>:</span> это <b>прототип интернет-площадки</b>, предназначенный для <b>внутреннего использования</b>
-        командой разработчиков и тестировщиков. Подробная информация о проекте доступна на
-        <b><a href="http://bit.ly/elections_site" target="_blank">сайте проекта</a></b>.
-        Вы можете оставить свои замечания, предложения или сообщить нам о багах, нажав <b>зеленую кнопку</b>
-        на левой стороне экрана. Вы также можете написать нам на admin@grakon.org.
-    </p>
+    <p>Интернет-площадка Гракон объединяет организации и активных граждан для проведения единого общественного мониторинга выборов президента 4 марта.
 
-</div>
+    <p>Найдите свой избирательный округ – и увидите, как проходят выборы в Вашем городе: [серия выпадающих меню].</p>
+
+    <p>Присоединяйтесь – помогите удостовериться, что выборы пройдут честно: [кнопка “войти”]</p>
+
+    <p>Посмотрите, кто уже участвует в работе площадки. [стрелка влево]</p>
+
+    <p>На сайт постоянно добавляются ссылки на полезные местные ресурсы о выборах. [стрелка вправо]</p>
+
+    <p>В течение оставшегося времени до выборов 4 марта на площадку будут добавляться новые типы участников:
+    члены УИК, представители СМИ и полиции. Появятся новые эффективные инструменты: обжаловать нарушения,
+    выложить списки членов УИК, выложить копии протоколов и сравнить с официальными результатами ЦИК и другие.
+    Заходите на площадку почаще и зарегистрируйтесь, чтобы получать новости проекта: [кнопка “Войти”]</p>
+
+    <p>Наглядная презентация площадки с помощью диаграмм: [ссылка на pdf презентации]</p>
+
+    <p>Подробнее о проекте: [ссылка на страницу “о проекте”]</p>
 
 
-<div>
-    <center><h4>Найдите свой избирательный округ</h4></center>
-    <table style="width: 100%;">
-        <tr>
-            <td style="width:50%;">
-                <div id="choose_regions">
-                    <form action="{% url goto_location %}" method="get" style="display:inline;">
-                        {% include "elements/region_choice.html" %}
-                        <center>
-                            <input id="goto_location" type="submit" value="Перейти"/>
-                        </center>
-                    </form>
-                </div>
-            </td>
-            <td style="width:10%;vertical-align:middle;">
-                <b>или</b>
-            </td>
-            <td style="vertical-align:middle;">
-                {% button "search" "Найти на карте" "map_location" "map_search" %}
-            </td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <center><h4>Найдите свой избирательный округ</h4></center>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width:50%;">
+                    <div id="choose_regions">
+                        <form action="{% url goto_location %}" method="get" style="display:inline;">
+                            {% include "elements/region_choice.html" %}
+                            <center>
+                                <input id="goto_location" type="submit" value="Перейти"/>
+                            </center>
+                        </form>
+                    </div>
+                </td>
+                <td style="width:10%;vertical-align:middle;">
+                    <b>или</b>
+                </td>
+                <td style="vertical-align:middle;">
+                    {% button "search" "Найти на карте" "map_location" "map_search" %}
+                </td>
+            </tr>
+        </table>
+    </div>
 
-<!--div>
-    {% if not user.is_authenticated %}
-        Чтобы получить полный доступ к системе, необходимо
-        <div-->
-            <!--<a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
-            <span class="text_between_btns">или</span>-->
-            <!--center><span id="login_btn2" class="clickable">Войти</span></center>
-        </div>
-    {% else %}
-        <h4>
-            Вы вошли в систему как
-            <a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
-        </h4>
-        <br/>
-        <button id="profile_btn">
-            <a href="{{ user.get_absolute_url }}">Перейти на свою страницу</a>
-        </button>
-    {% endif %}
-</div-->
+    <!--div>
+        {% if not user.is_authenticated %}
+            Чтобы получить полный доступ к системе, необходимо
+            <div-->
+                <!--<a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
+                <span class="text_between_btns">или</span>-->
+                <!--center><span id="login_btn2" class="clickable">Войти</span></center>
+            </div>
+        {% else %}
+            <h4>
+                Вы вошли в систему как
+                <a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
+            </h4>
+            <br/>
+            <button id="profile_btn">
+                <a href="{{ user.get_absolute_url }}">Перейти на свою страницу</a>
+            </button>
+        {% endif %}
+    </div-->
 
-<script type="text/javascript">
-    // TODO: icon doesn't appear, button element is needed
-    $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}});
-    set_select_location("choose_regions", []);
+    <script type="text/javascript">
+        // TODO: icon doesn't appear, button element is needed
+        $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}});
+        set_select_location("choose_regions", []);
 
-    //$("#map_location").button({icons: {primary: "ui-icon-search"}});
+        //$("#map_location").button({icons: {primary: "ui-icon-search"}});
 
-    $("#login_btn2").click(function(){
-        login_dialog_init();
-    });
-</script>
+        $("#login_btn2").click(function(){
+            login_dialog_init();
+        });
+    </script>
 
 {% endblock %}

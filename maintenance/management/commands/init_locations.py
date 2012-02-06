@@ -37,6 +37,7 @@ class Command(BaseCommand):
             if os.path.exists(data_path(region, 'merge')) and os.path.exists(data_path(region, 'center')):
                 info = json.loads(open(data_path(region, 'center')).read().decode('utf8'))
 
+                # TODO: take telephone from data files, not merged
                 Location(
                     name = info['name'],
 

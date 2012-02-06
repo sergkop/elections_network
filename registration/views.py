@@ -92,5 +92,5 @@ def loginza_register(request):
     form.initial['first_name'] = data['name']['first_name']
     form.initial['last_name'] = data['name']['last_name']
 
-    return render_to_response('users/loginza_register.html', {'form': form},
+    return render_to_response('registration/loginza_register.html', {'form': form},
             context_instance=RequestContext(request))

@@ -3,7 +3,7 @@
 {% load elements %}
 
 {% block left_column %}
-    <div class="ym-clearfix">
+    <!--div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Команда</h4>
         </div>
@@ -30,11 +30,11 @@
                 <li><a href="https://www.facebook.com/groups/297268326975464">Facebook</a></li>
             </ul>
         </div>
-    </div>
+    </div-->
 {% endblock %}
 
 {% block right_column %}
-    <div class="ym-clearfix">
+    <!--div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Наши цели</h4>
         </div>
@@ -62,7 +62,7 @@
                 <button id="become_partner">Стать партнером</button>
             </a>
         </div>
-    </div>
+    </div-->
 {% endblock %}
 
 {% block content_header %}
@@ -70,5 +70,17 @@
 {% endblock %}
 
 {% block content %}
-    {{ content|safe }}
+    <p>Чтобы следить за разработкой и участвовать в обсуждениях площадки “подружитесь” с нами:</p>
+    <ul>
+        <li><a href="http://grakonteam.livejournal.com/">Livejournal</a></li>
+        <li><a href="https://www.facebook.com/groups/grakon/">группа на Facebook</a></li>
+        <li><a href="http://vkontakte.ru/club33572670">группа ВКонтакте</a></li>
+        <li><a href="https://twitter.com/#!/GrakonTeam">Twitter</a></li>
+    </ul>
+
+    <p>Чтобы оставить комментарий о работе площадки, воспользуйтесь зеленой кнопкой 
+    <span style="color:green;">“Оставить отзыв”</span> в левом краю экрана</p>
+
+    <p>Чтобы связаться с нами по любым другим вопросам отправьте нам <a href="mailto:admin@grakon.org">электронное письмо.</p>
+
 {% endblock %}

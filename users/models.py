@@ -14,6 +14,7 @@ class Role(models.Model):
     user = models.ForeignKey(Profile, related_name='roles')
     location = models.ForeignKey(Location)
     type = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    time = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('user', 'location', 'type')
@@ -24,6 +25,7 @@ class Role(models.Model):
 class Contact(models.Model):
     user = models.ForeignKey(Profile, related_name='contacts')
     contact = models.ForeignKey(Profile, related_name='have_in_contacts')
+    time = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('user', 'contact')

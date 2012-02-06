@@ -1,17 +1,29 @@
+{% load elements %}
+
 {% if user.is_authenticated %}
     <div id="become_observer_dialog">
-        <center>
-            Чтобы записаться в наблюдатели, заполните
-            <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">форму</a>
-            на сайте организации Гражданин Наблюдатель.
-        </center>
+        Выберите через какую организацию Вы хотите записаться в наблюдатели:
+
+        <ul>
+            <li>
+                <b><a href="http://www.nabludatel.org/stat-nablyudatelem/">Гражданин наблюдатель</a></b><br/>
+                Гражданин Наблюдатель проводит интенсивные тренинги для обучения наблюдателей эффективным действиям
+                в случаях обнаружения нарушений на участках, включая практические упражнения. Выдает направления
+                в наблюдатели от СМИ и партий.
+            </li>
+
+            <li>
+                <b>Партнер</b><br/>
+                Здесь будут добавляться дополнительные возможности стать наблюдателем с появлением новых партнеров.
+            </li>
+        </ul>
     </div>
 {% endif %}
 
 <script type="text/javascript">
     // Become observer dialog
     {% if user.is_authenticated %}
-        $("#become_observer_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в наблюдатели",
+        $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
             buttons: {
                 "Записаться": function(){
                     window.open("http://www.nabludatel.org/stat-nablyudatelem/");

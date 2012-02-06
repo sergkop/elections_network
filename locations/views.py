@@ -38,25 +38,25 @@ def location(request, loc_id):
     participants = {} # {role_type: [users]}
     query = Q(location=location)
 
-    if not location.parent_2:
-        query |= Q(location__parent_2=location) if location.parent_1 else Q(location__parent_1=location)
+    if not location.tik:
+        query |= Q(location__tik=location) if location.region else Q(location__region=location)
 
     for role in Role.objects.filter(query).select_related():
         participants.setdefault(role.type, []).append(role.user)
 
     # Get sub-regions
-    if location.parent_2:
+    if location.tik:
         sub_regions = []
-    elif location.parent_1:
-        sub_regions = list(Location.objects.filter(parent_2=location))
+    elif location.region:
+        sub_regions = list(Location.objects.filter(tik=location))
     else:
-        sub_regions = list(Location.objects.filter(parent_1=location, parent_2=None))
+        sub_regions = list(Location.objects.filter(region=location, tik=None))
 
     context = {
         'current_location': location,
         'participants': participants,
         'links': list(Link.objects.filter(location=location)),
-        'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
+        'locations': list(Location.objects.filter(region=None).order_by('name')),
         'is_voter_here': request.user.is_authenticated() and any(request.user==voter for voter in participants.get('voter', [])),
         'sub_regions': sub_regions,
     }
@@ -74,16 +74,16 @@ def get_sub_regions(request):
         except Location.DoesNotExist:
             return HttpResponse('[]')
 
-        if location.parent_2: # 3rd level location
+        if location.tik: # 3rd level location
             return HttpResponse('[]') # 3rd level locations have no children
-        elif location.parent_1: # 2nd level location
+        elif location.region: # 2nd level location
             res = []
-            for loc in Location.objects.filter(parent_2=location).order_by('name'):
+            for loc in Location.objects.filter(tik=location).order_by('name'):
                 res.append({'name': loc.name, 'id': loc.id})
             return HttpResponse(json.dumps(res))
         else: # 1st level location
             res = []
-            for loc in Location.objects.filter(parent_1=location, parent_2=None).order_by('name'):
+            for loc in Location.objects.filter(region=location, tik=None).order_by('name'):
                 res.append({'name': loc.name, 'id': loc.id})
             return HttpResponse(json.dumps(res))
 

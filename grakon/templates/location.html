@@ -3,8 +3,8 @@
 {% load elements %}
 
 {% block title %}
-{% if current_location.parent_1 %}{{ current_location.parent_1 }} - {% endif %}
-{% if current_location.parent_2 %}{{ current_location.parent_2 }} - {% endif %}
+{% if current_location.region %}{{ current_location.region }} - {% endif %}
+{% if current_location.tik %}{{ current_location.tik }} - {% endif %}
 {{ current_location }} - Гражданский контроль за выборами
 {% endblock %}
 
@@ -20,14 +20,14 @@
             <ul>
                 <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
 
-                {% if current_location.parent_1 %}
+                {% if current_location.region %}
                     <li>
-                        <a href="{{ current_location.parent_1.get_absolute_url }}">{{ current_location.parent_1 }}<i></i><b></b></a> 
+                        <a href="{{ current_location.region.get_absolute_url }}">{{ current_location.region }}<i></i><b></b></a> 
                     </li>
                 {% endif %}
-                {% if current_location.parent_2 %}
+                {% if current_location.tik %}
                     <li>
-                        <a href="{{ current_location.parent_2.get_absolute_url }}">{{ current_location.parent_2 }}<i></i><b></b></a>
+                        <a href="{{ current_location.tik.get_absolute_url }}">{{ current_location.tik }}<i></i><b></b></a>
                     </li>
                 {% endif %}
 
@@ -122,7 +122,7 @@
 
     <script type="text/javascript">
         // TODO: move it inside become_voter.html
-        $("#voters_ul li").each(function(index){
+        /*$("#voters_ul li").each(function(index){
             new UserListItem($(this));
         });
 
@@ -133,7 +133,7 @@
 
         $("#report_dialog").on("report_dialog_event", function(event, username){
             $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
-        });
+        });*/
     </script>
 {% endblock %}
 

@@ -18,14 +18,14 @@ def main(request):
     context = {
         'voter_count': voter_count,
         'ending': ending,
-        'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
+        'locations': list(Location.objects.filter(region=None).order_by('name')),
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 
 def static_page(request, name, template):
-    page = get_object_or_404(Page, name=name)
+    #page = get_object_or_404(Page, name=name)
     context = {
-        'content': page.content,
+        #'content': page.content,
     }
     return render_to_response(template, context_instance=RequestContext(request, context))
 

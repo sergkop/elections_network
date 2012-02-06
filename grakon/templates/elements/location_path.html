@@ -1,7 +1,7 @@
-{% if location.parent_1 %}
-    <a href="{{ location.parent_1.get_absolute_url }}">{{ location.parent_1 }}</a> &rarr;
+{% if location.region %}
+    <a href="{{ location.region.get_absolute_url }}">{{ location.region }}</a> &rarr;
 {% endif %}
-{% if location.parent_2 %}
-    <a href="{{ location.parent_2.get_absolute_url }}">{{ location.parent_2 }}</a> &rarr;
+{% if location.tik %}
+    <a href="{{ location.tik.get_absolute_url }}">{{ location.tik }}</a> &rarr;
 {% endif %}
 <a href="{{ location.get_absolute_url }}">{{ location }}</a>

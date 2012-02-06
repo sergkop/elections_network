@@ -30,7 +30,7 @@ class BaseProfile(object):
             'profile_user': user,
             'profile': profile,
             'roles': roles,
-            'locations': list(Location.objects.filter(parent_1=None).order_by('name')),
+            'locations': list(Location.objects.filter(region=None).order_by('name')),
             'links': list(profile.links.all().select_related()),
             'contacts': list(profile.contacts.all()) if user.is_authenticated() else [],
             'have_in_contacts': list(profile.have_in_contacts.all()),

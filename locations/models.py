@@ -11,8 +11,8 @@ class Location(models.Model):
 
     postcode = models.IntegerField()
     address = models.CharField(max_length=200)
-    telephone = models.CharField(max_length=50)
-    email = models.CharField(max_length=40)
+    telephone = models.CharField(max_length=50, blank=True)
+    email = models.CharField(max_length=40, blank=True)
 
     # Ids required to access data from izbirkom.ru
     tvd = models.IntegerField()
@@ -21,8 +21,8 @@ class Location(models.Model):
     vrnkomis = models.IntegerField()
 
     # Coordinates used in Yandex maps
-    x_coord = models.FloatField()
-    y_coord = models.FloatField()
+    x_coord = models.FloatField(blank=True, null=True)
+    y_coord = models.FloatField(blank=True, null=True)
 
     # TODO: make name unique?
     class Meta:
@@ -30,7 +30,7 @@ class Location(models.Model):
 
     #def level(self):
     #    # TODO: UIK, TIK or IKS
-    #    if self.parent_1:
+    #    if self.region:
     #        return 2
     #    else:
     #        return 1
@@ -38,10 +38,10 @@ class Location(models.Model):
     def __unicode__(self, full_path=False):
         name = self.name
         if full_path:
-            if self.parent_2:
-                name = str(self.parent_2) + u'->' + name
-            if self.parent_1:
-                name = str(self.parent_1) + u'->' + name
+            if self.tik:
+                name = str(self.tik) + u'->' + name
+            if self.region:
+                name = str(self.region) + u'->' + name
         return name
 
     @models.permalink

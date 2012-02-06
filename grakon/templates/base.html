@@ -14,8 +14,8 @@
 
     <script type="text/javascript">
         var CURRENT_LOCATION = [
-            {% if current_location.parent_1 %}{{current_location.parent_1.id }},{% endif %}
-            {% if current_location.parent_2 %}{{current_location.parent_2.id }},{% endif %}
+            {% if current_location.region %}{{current_location.region.id }},{% endif %}
+            {% if current_location.tik %}{{current_location.tik.id }},{% endif %}
             {% if current_location %}{{ current_location.id }}{% endif %}
         ];
         var IS_USER_PROFILE = {% if user == profile_user %}true{% else %}false{% endif %};

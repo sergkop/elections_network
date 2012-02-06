@@ -6,7 +6,7 @@
     text-decoration: none;
     font-size: 350%;
     line-height: 0.8571em;
-    margin: 0.4286em 0 0;
+    margin: 0.4286em 0 0 0.5em;
 }
 
 #title_link:visited  {
@@ -15,7 +15,6 @@
 #slogan {
     text-align: left;
     color: #fff;
-    margin-left: 6em;
     font-size: 150%;
 }
 

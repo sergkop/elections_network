@@ -63,19 +63,6 @@
 
     <div class="ym-clearfix">
         <div class="side_block_header">
-            <h4>Наблюдатели</h4>
-        </div>
-
-        <div class="content_block">
-            <ul class="side_list">
-                {% for observer in roles.observer %}
-                    <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
-                {% endfor %}
-            </ul>
-            {% button "check" "Записаться в наблюдатели" "become_observer" %}
-        </div>
-
-        <div class="side_block_header">
             <h4>Избиратели</h4>
         </div>
 
@@ -90,6 +77,43 @@
             {% else %}
                 {% button "check" "Записаться в избиратели" "become_voter" %}
             {% endif %}
+        </div>
+
+        <div class="side_block_header">
+            <h4>Наблюдатели</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                {% for observer in roles.observer %}
+                    <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
+                {% endfor %}
+            </ul>
+            {% button "check" "Записаться в наблюдатели" "become_observer" %}
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>Предствители СМИ (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Записаться в представители СМИ" "become_journalist" %}
+            </div>
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>Юристы (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Записаться в юристы" "become_lawyer" %}
+            </div>
         </div>
     </div>
 
@@ -160,6 +184,18 @@
 
         <div class="content_block">
             {% button "pencil" "Зафиксировать нарушение" "submit_complaint_btn" %}
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>Выложить протоколы (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Выложить протокол" "publish_protocol" %}
+            </div>
         </div>
     </div>
 

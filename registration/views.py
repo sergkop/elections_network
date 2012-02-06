@@ -5,54 +5,51 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
+from django.template.response import TemplateResponse
 
 from loginza.models import Identity, UserMap
 from loginza.templatetags.loginza_widget import _return_path
 
 from registration.forms import CompleteRegistrationForm, RegistrationForm
-from registration.models import RegistrationProfile
+from registration.models import ActivationProfile
 import registration.signals
 
-# TODO: add captcha (?)
 def register(request):
     if request.user.is_authenticated():
-        return redirect('my_profile')
+        return redirect('edit_profile')
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
 
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
+            user = form.save()
 
-            #new_user = RegistrationProfile.objects.create_inactive_user(username, email, password)
-            #return redirect('registration_complete')
+            #user = auth.authenticate(username=username, password=password)
+            #assert user and user.is_authenticated()
+            #auth.login(request, user)
 
-            user = User.objects.create_user(username, form.cleaned_data['email'], password)
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.save()
-
-            user = auth.authenticate(username=username, password=password)
-
-            assert user and user.is_authenticated()
-            auth.login(request, user)
-
-            # TODO: redirect to a message with confirmation
-            return redirect(user.get_absolute_url())
-
+            return redirect('registration_completed')
     else:
         form = RegistrationForm()
 
-    return render_to_response('users/register.html',
-            context_instance=RequestContext(request, {'form': form}))
+    return TemplateResponse(request, 'registration/register.html', {'form': form})
+
+def registration_completed(request):
+    if request.user.is_authenticated():
+        return redirect('my_profile')
+    return TemplateResponse(request, 'registration/registration_completed.html')
 
 def activate(request, activation_key):
-    account = RegistrationProfile.objects.activate_user(activation_key)
+    account = ActivationProfile.objects.activate_user(activation_key)
     if account:
-        return redirect('registration_activation_complete')
+        return redirect('activation_completed')
 
-    return render_to_response('users/activate.html', context_instance=RequestContext(request, kwargs))
+    return TemplateResponse(request, 'registration/activation_fail.html')
+
+def activation_completed(request):
+    if request.user.is_authenticated():
+        return redirect('my_profile')
+    return TemplateResponse(request, 'registration/activation_completed.html')
 
 # TODO: if username and email match an existing account - suggest to link them
 def loginza_register(request):

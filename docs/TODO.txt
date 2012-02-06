@@ -9,6 +9,7 @@
 * on changing voter's region on profile page - "избиратель" can disappear
 * add tips to buttons and ? signs to get help on features of the system
 * https://www.google.com/webmasters/
+* Центральный блок сползает вниз при малой ширине (редактирование профайла, карты, disqus)
 
 ====== Base version ===================
 * при нажатии регистрация в логин диалоге, показывать форму регистрации внутри диалога

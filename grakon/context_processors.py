@@ -15,6 +15,7 @@ def user_data(request):
         'YA_METRIKA_ID': settings.YA_METRIKA_ID,
         'DISQUS_SHORTNAME': settings.DISQUS_SHORTNAME,
         'YANDEX_MAPS_KEY': settings.YANDEX_MAPS_KEY,
+        'URL_PREFIX': settings.URL_PREFIX,
     }
     if request.user.is_authenticated():
         profile = request.user.get_profile()

@@ -6,15 +6,16 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT}),
-    url(r'^%s/' % ADMIN_PREFIX, include(admin.site.urls)),
 
-    url(r'^links/', include('links.urls')),
-    url(r'^location/', include('locations.urls')),
     url(r'^', include('grakon.urls')),
     url(r'^', include('navigation.urls')),
     url(r'^', include('users.urls')),
     url(r'^', include('reports.urls')),
-    (r'^', include('registration.urls')),
+    url(r'^', include('registration.urls')),
+    url(r'^links/', include('links.urls')),
+    url(r'^location/', include('locations.urls')),
     url(r'^loginza/', include('loginza.urls')),
     (r'^tinymce/', include('tinymce.urls')),
+
+    url(r'^%s/' % ADMIN_PREFIX, include(admin.site.urls)),
 )

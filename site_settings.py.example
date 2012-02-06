@@ -7,9 +7,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True # MUST be False in production
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
+ADMINS = ()
 
 MANAGERS = ADMINS
 
@@ -23,6 +21,8 @@ DATABASES = {
         'PORT': '',                                            # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+DEFAULT_FROM_EMAIL = 'admin@grakon.org'
 
 URL_PREFIX = 'http://127.0.0.1:8000' # put an appropriate domain name here
 

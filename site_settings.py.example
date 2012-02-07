@@ -33,6 +33,8 @@ VIRTUALENV = "" # set to ".../env/lib/python2.7/site-packages" if you are using 
 
 #VK_APP_ID = 1 # set proper VKontakte app id for comments wall
 
+GOOGLE_ANALYTICS_ID = 'UA-28992589-1'
+
 YA_METRIKA_ID = 12237667 # Yandex Metrika id
 
 ADMIN_PREFIX = 'admin' # prefix to access django admin interface (change for security reasons)

@@ -9,7 +9,12 @@
         </div>
 
         <div class="content_block">
-            <ul class="side_list"></ul>
+            <ul class="side_list">
+                <li>web-разработчик (Django, jQuery)</li>
+                <li>копирайтер</li>
+                <li>юрист</li>
+            </ul>
+            {% button "check" "Вступить в команду" "join_team" "mailto:admin@grakon.org" %}
         </div>
 
         <div class="side_block_header">
@@ -21,6 +26,7 @@
                 <li>Ввод адресов УИКов и поиск на карте</li>
                 <li>Сбор ссылок на полезные ресурсы и группы в соц. сетях</li>
             </ul>
+            {% button "check" "Записаться волонтером" "become_volonteer" "mailto:admin@grakon.org" %}
         </div>
 
         <div class="side_block_header">
@@ -55,8 +61,11 @@
         </div>
 
         <div class="content_block">
-            <ul class="side_list">
-            </ul>
+            <center>
+                <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+                <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none"
+                        data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,lj,moikrug"></div>
+            </center>
         </div>
 
         <div class="side_block_header">
@@ -76,5 +85,5 @@
 {% endblock %}
 
 {% block content %}
-
+    <p>Мы будем рады вашей помощи. Чтобы поучаствовать, выберите пункт в левой или правой колонке.</p>
 {% endblock %}

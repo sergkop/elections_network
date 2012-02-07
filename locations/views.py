@@ -38,9 +38,9 @@ class LocationView(TemplateView):
         if location.tik:
             sub_regions = []
         elif location.region:
-            sub_regions = list(Location.objects.filter(tik=location))
+            sub_regions = list(Location.objects.filter(tik=location).order_by('name'))
         else:
-            sub_regions = list(Location.objects.filter(region=location, tik=None))
+            sub_regions = list(Location.objects.filter(region=location, tik=None).order_by('name'))
 
         ctx.update({
             'loc_id': kwargs['loc_id'],
@@ -48,7 +48,8 @@ class LocationView(TemplateView):
             'current_location': location,
             'participants': participants,
             'links': list(Link.objects.filter(location=location)),
-            'locations': list(Location.objects.filter(region=None).order_by('name')),
+            'locations': list(Location.objects.filter(region=None).order_by('name')), # used in become voter dialog
+            'all_locations': list(Location.objects.all()), # needed for the map
             'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
             'sub_regions': sub_regions,
         })

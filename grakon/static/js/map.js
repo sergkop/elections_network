@@ -73,7 +73,7 @@ var ElectionMap = {
 		// Показать на карте заданное место
 		ElectionMap.setDefaultViewport(place);
 
-		ElectionMap.addButtons();
+		//ElectionMap.addButtons();
 	},
 	
 	/**

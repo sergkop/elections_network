@@ -15,9 +15,11 @@
                 <li>Записались {{ voter_count }} избирател{{ ending }}</li>
             </ul>
 
-            <center>
+            {% if request.user.is_authenticated %}
+                {% button "check" "Сменить избирательный округ" "become_voter" %}
+            {% else %}
                 {% button "check" "Записаться в избиратели" "become_voter" %}
-            </center>
+            {% endif %}
         </div>
 
         <div class="side_block_header">
@@ -115,7 +117,23 @@
                 {% button "check" "Выложить протокол" "publish_protocol" %}
             </div>
         </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>События (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Добавить событие" "add_event" %}
+            </div>
+        </div>
     </div>
+
+    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none"
+            data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,lj,moikrug"></div>
 
     {% include "dialogs/submit_complaint.html" %}
 

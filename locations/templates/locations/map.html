@@ -4,14 +4,23 @@
     <script type="text/javascript" src="{{ STATIC_URL }}/js/map.js"></script>
 
     <script type="text/javascript">
-        var electionCommissions = { {{ current_location.id }}:
+        /*var electionCommissions = { {{ current_location.id }}:
                 new ElectionCommission({{ current_location.id }}, 1, "{{ current_location.name }}", "{{ current_location.name }}", "{{ current_location.address }}",
                 {{ current_location.x_coord|floatformat:10 }}, {{ current_location.y_coord|floatformat:10 }}, {numVoters: 500, numObservers: 5} )
-        };
+        };*/
+
+        var electionCommissions = {};
+        {% for location in all_locations %}
+            {% if location.x_coord %}
+                electionCommissions[{{ location.id }}] = new ElectionCommission({{ location.id }}, {{ location.level }}, "{{ location.name }}",
+                "{{ location.name }}", "{{ location.address }}", {{ location.x_coord|floatformat:10 }},
+                {{ location.y_coord|floatformat:10 }}, {numVoters: 500, numObservers: 5});
+            {% endif %}
+        {% endfor %}
     </script>
 
     <center>
-        <div id="publicElectionsMap" style="width: 500px; height:300px;"></div>
+        <div id="publicElectionsMap" style="width: 500px; height:500px;"></div>
     </center>
 
     <script type="text/javascript">

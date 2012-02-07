@@ -78,7 +78,11 @@
             {% if is_voter_here %}
                 {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" %}
             {% else %}
-                {% button "check" "Сменить избирательный округ" "become_voter" %} <!--TODO: Записаться в избиратели-->
+                {% if request.user.is_authenticated %}
+                    {% button "check" "Сменить избирательный округ" "become_voter" %}
+                {% else %}
+                    {% button "check" "Записаться в избиратели" "become_voter" %}
+                {% endif %}
             {% endif %}
         </div>
 
@@ -198,6 +202,18 @@
 
             <div class="content_block">
                 {% button "check" "Выложить протокол" "publish_protocol" %}
+            </div>
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>События (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Добавить событие" "add_event" %}
             </div>
         </div>
     </div>

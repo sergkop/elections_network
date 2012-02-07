@@ -70,10 +70,10 @@
     <h2 class="location_header">{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h2>
 
     {% if profile_user == user %}
-        {% tabs "tabs" profile_view "Профиль" "my_profile" "users/profile_view.html" "Редактировать" "edit_profile" "users/profile_edit.html" %}
+        {% tabs "tabs" profile_view "" "" "Профиль" "my_profile" "profiles/view.html" "Редактировать" "edit_profile" "profiles/edit.html" %}
     {% else %}
         <div class="ym-cbox">
-            {% include "users/profile_view.html" %}
+            {% include "profiles/view.html" %}
         </div>
     {% endif %}
 

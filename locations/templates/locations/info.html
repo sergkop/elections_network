@@ -1,0 +1,29 @@
+<p>
+    <b>Адрес</b>: {{ current_location.postcode }} {{ current_location.address|default:"Адрес недоступен" }}
+</p>
+
+<p>
+    <b>Телефон</b>: {{ current_location.telephone|default:"Телефон недоступен" }}
+</p>
+
+{% if current_location.email %}
+<p>
+    <b>Email</b>: <a href="mailto:{{ current_location.email }}">{{ current_location.email }}</a>
+</p>
+{% endif %}
+
+<p>
+    <b>Информация на сайте ЦентрИзбиркома:</b>
+    <br/>
+    {% if current_location.info_url %}
+        <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
+    {% endif%}
+    <br/>
+    <a href="{{ current_location.results_url }}" target="_blank">Результаты выборов</a>
+</p>
+
+<p>
+    <b>Состав комиссии:</b>
+    <br/>
+    <i>В ближайшее время мы начнем собирать и публиковать списки членов комиссий.</i>
+</p>

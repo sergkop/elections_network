@@ -30,7 +30,10 @@ def static_page(request, name, template):
     return render_to_response(template, context_instance=RequestContext(request, context))
 
 def map_search(request):
-    context = {}
+    context = {
+        'locations': Location.objects.filter(region=None)[:10],
+    }
+    print context['locations'] 
     return render_to_response('map.html', context_instance=RequestContext(request, context))
 
 def development(request):

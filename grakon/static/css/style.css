@@ -12,11 +12,18 @@
 #title_link:visited  {
     color: #fff;
 }
+#title_link sup {
+    padding-left: 0.5em;
+    font-size: 40%;
+    top: -1em;
+}
 #slogan {
     text-align: left;
     color: #fff;
     font-size: 150%;
 }
+
+
 
 /* additional styles */
 
@@ -28,6 +35,14 @@
 
 .user_actions {
     padding: 20px 0 20px;
+}
+
+.news_header {
+    margin: 0.5em 0 0.3em 0;
+}
+
+.news_text {
+    margin-top: 0.7em;
 }
 
 /* Lists in side panels */

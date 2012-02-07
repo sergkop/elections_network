@@ -10,15 +10,15 @@ from django.views.generic.edit import UpdateView
 from grakon.forms import LoginForm, ProfileForm
 from locations.models import Location
 
-class BaseProfile(object):
-    template_name = 'users/profile.html'
+class BaseProfileView(object):
+    template_name = 'profiles/base.html'
     profile_view = None # 'my_profile' or 'edit_profile'
 
     def get_user(self):
         raise NotImplemented
 
     def get_context_data(self, **kwargs):
-        ctx = super(BaseProfile, self).get_context_data(**kwargs)
+        ctx = super(BaseProfileView, self).get_context_data(**kwargs)
         user = self.get_user()
         profile = user.get_profile()
 
@@ -38,23 +38,23 @@ class BaseProfile(object):
         })
         return ctx
 
-class Profile(BaseProfile, TemplateView):
+class ProfileView(BaseProfileView, TemplateView):
     profile_view = 'my_profile'
 
     def get_user(self):
         return get_object_or_404(User, username=self.kwargs.get('username'))
 
-profile = Profile.as_view()
+profile = ProfileView.as_view()
 
-class MyProfile(BaseProfile, TemplateView):
+class MyProfileView(BaseProfileView, TemplateView):
     profile_view = 'my_profile'
 
     def get_user(self):
         return self.request.user
 
-my_profile = login_required(MyProfile.as_view())
+my_profile = login_required(MyProfileView.as_view())
 
-class EditProfile(BaseProfile, UpdateView):
+class EditProfileView(BaseProfileView, UpdateView):
     form_class = ProfileForm
     profile_view = 'edit_profile'
 
@@ -67,7 +67,7 @@ class EditProfile(BaseProfile, UpdateView):
     def get_success_url(self):
         return reverse('my_profile')
 
-edit_profile = login_required(EditProfile.as_view())
+edit_profile = login_required(EditProfileView.as_view())
 
 # TODO: fix it
 def password_change(request, **kwargs):

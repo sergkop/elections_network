@@ -22,8 +22,8 @@
     {% if user.is_authenticated %}
         $("#submit_complaint_dialog").dialog({width:650, height:450, modal: true, title: "Зафиксировать нарушение",
             buttons: {
-                "Составить жалобу": function(){
-                    window.open("http://kuda-komu.net/voting");
+                "Сообщить о нарушении": function(){
+                    window.open("http://kuda-komu.net", "_blank");
                 },
                 "Отмена": function(){$("#submit_complaint_dialog").dialog("close");}
             }

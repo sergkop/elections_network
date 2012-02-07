@@ -1,0 +1,20 @@
+<!--div id="vk_comments"></div>
+<script type="text/javascript">
+    VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});
+</script-->
+
+<!--a href="{{ request.path }}#disqus_thread" data-disqus-identifier="location/{{ current_location.id }}">First article</a-->
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
+    var disqus_identifier = "location/{{ current_location.id }}";
+    var disqus_developer = 1;
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Пожалуйста, активируйте JavaScript, чтобы просматривать <a href="http://disqus.com/?ref_noscript">комментарии</a>.</noscript>

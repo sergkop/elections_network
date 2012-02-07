@@ -2,8 +2,10 @@
 
 {% load uni_form_tags %}
 
-{% block content %}
-    <h2>Регистрация нового пользователя</h2>
+{% block content_header %}
+    <h2 class="location_header">Регистрация нового пользователя</h2>
+{% endblock %}
 
+{% block content %}
     {% uni_form form form.helper %}
 {% endblock %}

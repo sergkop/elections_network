@@ -19,15 +19,16 @@ def button(icon, title, id=None, link='', center='center'):
 @register.tag(name="tabs")
 def tabs_tag(parser, token):
     args = token.split_contents()
-    if len(args) % 3 != 0:
+    if len(args) % 3 != 2:
         raise template.TemplateSyntaxError("Incorrect number of arguments")
     return TabsNode(*args[1:])
 
 class TabsNode(template.Node):
     def __init__(self, *args):
         """
-        args is a sequence of 'id', 'active_url', and tripples (title, url, include_path) (a 1-dimensional list).
+        args is a sequence of 'id', 'active_url', 'param_name', 'param_value' and tripples (title, url, include_path) (a 1-dimensional list).
         All urls must either start with '#' or be urls (starting with '/' or view name).
+        param_name and param_value serve to pass extra parameter to the view (
         """
         self.args = [template.Variable(arg) for arg in args]
 
@@ -35,14 +36,20 @@ class TabsNode(template.Node):
         self.args = [arg.resolve(context) for arg in self.args]
         id = self.args[0]
         active_url = self.args[1]
-        args = self.args[2:]
+        param_name = self.args[2]
+        param_value = self.args[3]
+        args = self.args[4:]
 
         tabs = []
         num = len(args) / 3
         for i in range(num):
             url = args[3*i+1]
             if url[0]!='#' and url[0]!='/':
-                url = reverse(url)
+                context_dict = context.dicts[0] # a hack to extract context dict from RequestContext
+                kwargs = {}
+                if param_name in context_dict:
+                    kwargs[param_name] = param_value
+                url = reverse(url, kwargs=kwargs)
 
             tabs.append({
                 'title': args[3*i],

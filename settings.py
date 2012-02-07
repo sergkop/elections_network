@@ -11,7 +11,7 @@ LANGUAGE_CODE = 'ru-RU'
 SITE_ID = 1
 
 USE_I18N = True
-USE_L10N = True
+USE_L10N = False
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
 MEDIA_URL = "/media/"
@@ -110,7 +110,7 @@ LOGGING = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Loginza settings
-LOGINZA_AMNESIA_PATHS = ('/complete_registration',)
+LOGINZA_AMNESIA_PATHS = ('/registration_completed',)
 LOGINZA_DEFAULT_EMAIL = ""
 
 TINYMCE_JS_URL = STATIC_URL + 'libs/tiny_mce/tiny_mce.js'

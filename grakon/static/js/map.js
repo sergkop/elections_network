@@ -122,7 +122,7 @@ var ElectionMap = {
 
     markElectionCommission: function(commission) {
         // создаём метку для избирательной комиссии с именем и описанием
-        var geoPoint = new YMaps.GeoPoint(commission.yCoord, commission.xCoord);
+        var geoPoint = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
         var placemark = new YMaps.Placemark(geoPoint);
         placemark.name = commission.title;
         placemark.description = commission.address +

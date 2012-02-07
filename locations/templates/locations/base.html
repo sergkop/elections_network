@@ -78,7 +78,7 @@
             {% if is_voter_here %}
                 {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" %}
             {% else %}
-                {% button "check" "Записаться в избиратели" "become_voter" %}
+                {% button "check" "Сменить избирательный округ" "become_voter" %} <!--TODO: Записаться в избиратели-->
             {% endif %}
         </div>
 
@@ -182,11 +182,11 @@
         </div>
 
         <div class="side_block_header">
-            <h4>Зафиксировать нарушение</h4>
+            <h4>Сообщить о нарушении</h4>
         </div>
 
         <div class="content_block">
-            {% button "pencil" "Зафиксировать нарушение" "submit_complaint_btn" %}
+            {% button "pencil" "Сообщить о нарушении" "submit_complaint_btn" %}
         </div>
 
         <div class="disabled-block">
@@ -237,82 +237,7 @@
 {% block content_header %}
     <h2 class="location_header">{{ current_location }}</h2>
 
-    <div>
-        <div id="tabs">
-            <ul>
-                <li><a href="#tab-info">Информация<i></i></a></li>
-                <li><a href="#tab-wall">Стена<i></i></a></li>
-                <li><a href="#tab-map">Карта<i></i></a></li>
-                <li><a href="#tab-help">Помощь<i></i></a></li>
-            </ul>
-
-            <div id="tab-info">
-                <p>
-                    Адрес ТИКа:
-                    
-                    <a href="{{ current_location.results_url }}" target="_blank">Результаты выборов</a>
-
-                    {% if current_location.info_url %}
-                        <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
-                    {% endif%}
-                </p>
-            </div>
-
-            <div id="tab-wall">
-                <!--div id="vk_comments"></div>
-                <script type="text/javascript">
-                    VK.Widgets.Comments("vk_comments", {limit: 10, width: "496", attach: "*", autoPublish: 0});
-                </script-->
-
-                <a href="{{ request.path }}#disqus_thread" data-disqus-identifier="location/{{ current_location.id }}">First article</a>
-
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
-                    var disqus_identifier = "location/{{ current_location.id }}";
-                    var disqus_developer = 1;
-
-                    (function() {
-                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Пожалуйста, активируйте JavaScript, чтобы просматривать <a href="http://disqus.com/?ref_noscript">комментарии</a>.</noscript>
-            </div>
-
-            <div id="tab-map">
-                <p>3</p>
-            </div>
-
-            <div id="tab-help">
-                <p>Найдите свой избирательный округ – и увидите, как проходят выборы в Вашем городе [стрелка наверх].</p>
-
-                <p>Посмотрите, кто будет наблюдателями, журналистами, юристами, членами УИК в вашем избирательном округе.
-                Присоединяйтесь – помогите удостовериться, что выборы на Вашем участке пройдут честно. [стрелка влево]</p>
-
-                <p>Если по Вашему участку ещё нет информации - станьте первым и пригласите своих знакомых.
-                Ссылка на эту страницу: [правильная ссылка].
-                Помогите подготовить Ваш избирательный округ к выборам - добавляйте ссылки на полезные местные ресурсы.
-                Внесите вклад в проведение общественного освещения хода выборов - сообщайте об обнаруженных нарушениях.
-                [стрелка вправо]</p>
-
-                <p>В течение оставшегося времени до выборов 4 марта на площадку будут добавляться новые типы участников:
-                члены УИК, представители СМИ и полиции. Появятся новые эффективные инструменты: обжаловать нарушения,
-                выложить списки членов УИК, выложить копии протоколов и сравнить с официальными результатами ЦИК и другие.
-                Заходите на площадку почаще и зарегистрируйтесь, чтобы получать новости проекта: [кнопка “Войти”].</p>
-
-                <p>Наглядная презентация площадки с помощью диаграмм: [ссылка на pdf презентации]</p>
-
-                <p>Подробнее о проекте: [ссылка на страницу “о проекте”]</p>
-
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $("#tabs").tabs();
-    </script>
+    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
 
     <script type="text/javascript">
         (function () {

@@ -12,8 +12,3 @@ urlpatterns = patterns('navigation.views',
     url(r'^contacts$', 'static_page', {'name': 'contacts', 'template': 'static_pages/contacts.html'}, name='contacts'),
     url(r'^rules$', 'static_page', {'name': 'rules', 'template': 'static_pages/rules.html'}, name='rules'),
 )
-
-urlpatterns += patterns('',
-    url(r'^get_sub_regions$', 'locations.views.get_sub_regions', name='get_sub_regions'),
-    url(r'^goto_location$', 'locations.views.goto_location', name='goto_location'),
-)

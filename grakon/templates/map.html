@@ -12,10 +12,14 @@
 
     <script type="text/javascript">
         var electionCommissions = new Array(
-            new ElectionCommission(1, 1, "Адыгея", "ЦИК Республики Адыгея", "Майкоп, ул. Пионерская 199", 55.923047, 54.892929, {numVoters: 500, numObservers: 5} )
-            //new ElectionCommission(2, 2, "Алтай", "ЦИК Республики Алтай", "Горно-Алтайск, ул. Эркемена Палкина, 1", "http://www.altai_rep.izbirkom.ru/", 1000, 10, 20, 47.233018, 47.416304),
-            //new ElectionCommission(3, 2, "Башкирия", "ЦИК Республики Башкортостан", "Уфа, ул. Заки Валиди, 46", null, 1500, 15, 30, 47.233018, 47.416304),
-            //new ElectionCommission(4, 3, "Бурятия", "ЦИК Республики Бурятия", "Улан-Удэ, ул. Ленина, 54", "http://www.buriat.izbirkom.ru/", 1000, 10, 20, 47.98226, 46.335971)
+            {% for location in locations %}
+                {% if location.x_coord %}
+                    new ElectionCommission({{ location.id }}, 1, "{{ location.name }}", "{{ location.name }}", "{{ location.address }}",
+                    {{ location.x_coord|floatformat:10 }}, {{ location.y_coord|floatformat:10 }}, {numVoters: 500, numObservers: 5} )
+                    {% if not forloop.last %},{% endif %}
+                {% endif %}
+            {% endfor %}
+            //new ElectionCommission(1, 1, "Адыгея", "ЦИК Республики Адыгея", "Майкоп, ул. Пионерская 199", 55.923047, 54.892929, {numVoters: 500, numObservers: 5} )
         );
     </script>
 

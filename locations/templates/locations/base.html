@@ -240,6 +240,9 @@
     {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
 
     <script type="text/javascript">
+        var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
+        var disqus_identifier = "location/{{ current_location.id }}";
+
         (function () {
             var s = document.createElement('script'); s.async = true;
             s.type = 'text/javascript';

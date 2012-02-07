@@ -7,25 +7,49 @@
 
     <div class="ym-clearfix">
         <div class="side_block_header">
-            <h4>Наблюдатели</h4>
-        </div>
-
-        <div class="content_block">
-            <ul class="side_list">
-                <li><a href="#">Ресурсы для наблюдателей</a></li>
-            </ul>
-            {% button "check" "Записаться в наблюдатели" "become_observer" %}
-        </div>
-
-        <div class="side_block_header">
             <h4>Избиратели</h4>
         </div>
 
         <div class="content_block">
-            Записались {{ voter_count }} избирател{{ ending }}
+            <ul class="side_list">
+                <li>Записались {{ voter_count }} избирател{{ ending }}</li>
+            </ul>
+
             <center>
                 {% button "check" "Записаться в избиратели" "become_voter" %}
             </center>
+        </div>
+
+        <div class="side_block_header">
+            <h4>Наблюдатели</h4>
+        </div>
+
+        <div class="content_block">
+            {% button "check" "Записаться в наблюдатели" "become_observer" %}
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>Предствители СМИ (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Записаться в представители СМИ" "become_journalist" %}
+            </div>
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>Юристы (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Записаться в юристы" "become_lawyer" %}
+            </div>
         </div>
     </div>
 
@@ -61,17 +85,35 @@
         <div class="content_block">
             <ul id="links_ul" class="side_list">
                 <li><a href="http://nabludatel.org" target="_blank">Гражданин Наблюдатель</a></li>
+                <li><a href="http://ligaizbirateley.ru/" target="_blank">Лига Избирателей</a></li>
+                <li><a href="http://www.kartanarusheniy.ru/" target="_blank">Карта Нарушений</a></li>
+                <li><a href="http://rosvybory.org/" target="_blank">РосВыборы</a></li>
+                <li><a href="http://golos.org" target="_blank">Голос</a></li>
+                <li><a href="http://rosmiting.ru/" target="_blank">РосМитинг</a></li>
+                <li><a href="https://rosprotest.crowdmap.com/" target="_blank">РосПротест</a></li>
             </ul>
         </div>
 
         <div class="side_block_header">
-            <h4>Зафиксировать нарушение</h4>
+            <h4>Сообщить о нарушении</h4>
         </div>
 
         <div class="content_block">
             <center>
-                {% button "pencil" "Зафиксировать нарушение" "submit_complaint_btn" %}
+                {% button "pencil" "Сообщить о нарушении" "submit_complaint_btn" %}
             </center>
+        </div>
+
+        <div class="disabled-block">
+            <i>&nbsp;</i>
+
+            <div class="side_block_header">
+                <h4>Выложить протоколы (в разработке)</h4>
+            </div>
+
+            <div class="content_block">
+                {% button "check" "Выложить протокол" "publish_protocol" %}
+            </div>
         </div>
     </div>
 

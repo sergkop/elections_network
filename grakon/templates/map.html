@@ -11,16 +11,14 @@
     <script type="text/javascript" src="{{ STATIC_URL }}/js/map.js"></script>
 
     <script type="text/javascript">
-        var electionCommissions = new Array(
-            {% for location in locations %}
-                {% if location.x_coord %}
-                    new ElectionCommission({{ location.id }}, 1, "{{ location.name }}", "{{ location.name }}", "{{ location.address }}",
-                    {{ location.x_coord|floatformat:10 }}, {{ location.y_coord|floatformat:10 }}, {numVoters: 500, numObservers: 5} )
-                    {% if not forloop.last %},{% endif %}
-                {% endif %}
-            {% endfor %}
-            //new ElectionCommission(1, 1, "Адыгея", "ЦИК Республики Адыгея", "Майкоп, ул. Пионерская 199", 55.923047, 54.892929, {numVoters: 500, numObservers: 5} )
-        );
+        var electionCommissions = {};
+        {% for location in locations %}
+            {% if location.x_coord %}
+                electionCommissions[{{ location.id }}] = new ElectionCommission({{ location.id }}, {{ location.level }}, "{{ location.name }}",
+                "{{ location.name }}", "{{ location.address }}", {{ location.x_coord|floatformat:10 }},
+                {{ location.y_coord|floatformat:10 }}, {numVoters: 500, numObservers: 5});
+            {% endif %}
+        {% endfor %}
     </script>
 
 {% endblock %}

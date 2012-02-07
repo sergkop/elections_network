@@ -32,10 +32,12 @@ var ElectionMap = {
 	
 	distanceToNearestElectionCommission: null,
 	
+	objManager: new YMaps.ObjectManager(),
+	
 	// Переменная, в которой заданы все типы масштабирования для карты.
 	MAP_LEVELS: new Array(
         {index: 0, value: "ЦИК"},
-        {index: 4, value: "ИКСы"},
+        {index: 5, value: "ИКСы"},
         {index: 10, value: "ТИКи"}
 	),
 
@@ -65,8 +67,9 @@ var ElectionMap = {
         )); // объявляем доступные типы карт
 		ElectionMap.map.addControl(new YMaps.ToolBar());
 		ElectionMap.map.addControl(new YMaps.Zoom({customTips: ElectionMap.MAP_LEVELS}));
-		ElectionMap.map.addControl(new YMaps.SearchControl({/*geocodeOptions: {geocodeProvider: "yandex#pmap"}, */width: 400}));
+		ElectionMap.map.addControl(new YMaps.SearchControl({/*geocodeOptions: {geocodeProvider: "yandex#pmap"}, */width: 200}));
 		
+		ElectionMap.map.addOverlay( ElectionMap.objManager );
 		// Показать на карте заданное место
 		ElectionMap.setDefaultViewport(place);
 
@@ -89,13 +92,13 @@ var ElectionMap = {
 			s.iconStyle.offset = new YMaps.Point(-16, -16);
 			// Создание метки и добавление пользователя на карту
 			var usermark = new YMaps.Placemark(userLocation, {style: s, hideIcon: false});
-			usermark.description = "Ваше предположительное местоположение";
+			usermark.description = "Ваше местоположение 1";
 			ElectionMap.map.addOverlay(usermark);
 		}
 		// Показываем заданное место на карте.
 		if (place == null || place == "") { // Если место не задано, то для пользователя из России будет определено его местоположение и показано на карте с максимальным масштабом;
 											// для пользователя из-за рубежа карта будет отцентрована по европейской части России.
-            var zoom = 4;
+			var zoom = 4;
 			var center = new YMaps.GeoPoint(37.64, 55.76);
 			
 			if (YMaps.location && YMaps.location.country == "Россия") {
@@ -106,6 +109,22 @@ var ElectionMap = {
 			ElectionMap.map.setCenter(center, zoom);
 			// Считаем все избирательные комиссии на карте
 			ElectionMap.markElectionCommissions();
+		} else {
+			var geocoder = new YMaps.Geocoder(place, {geocodeProvider: "yandex#map"});
+			// Создает обработчик успешного завершения геокодирования
+			YMaps.Events.observe(geocoder, geocoder.Events.Load, function () {
+				// Если объект найден, устанавливает центр карты в центр области показа объекта
+				if (this.length()) {
+					ElectionMap.map.setBounds(this.get(0).getBounds());
+					ElectionMap.markElectionCommissions();
+				} else
+					alert("Ничего не найдено. Извините, пожалуйста!");
+			});
+
+			// Процесс геокодирования завершен с ошибкой
+			YMaps.Events.observe(geocoder, geocoder.Events.Fault, function (gc, error) {
+				alert("Произошла ошибка: " + error);
+			});
 		}
 	},
 
@@ -118,6 +137,8 @@ var ElectionMap = {
 
 		for (var n in electionCommissions)
 			ElectionMap.markElectionCommission(electionCommissions[n]);
+			
+		ElectionMap.resetZoom();
 	},
 
     markElectionCommission: function(commission) {
@@ -126,25 +147,30 @@ var ElectionMap = {
         var placemark = new YMaps.Placemark(geoPoint);
         placemark.name = commission.title;
         placemark.description = commission.address +
-                ' <a href="#" onclick="ElectionMap.showComission(\''+commission+'\', true); return false;"><img src="/static/images/target.png" alt="Цель" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
-                ((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
-                ((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
+                ' <a href="#" onclick="ElectionMap.showComission('+commission.id+'); return false;"><img src="/static/images/target.png" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
+                //((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
+                //((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
                 ('<p><a href="/location/'+commission.id+'">Станица округа</a></p>');
         placemark.setIconContent(commission.shortTitle);
         placemark.id = commission.id;
         placemark.level = commission.level;
         placemark.data = commission.data;
         //placemark.shortTitle = commission.shortTitle;
-        ElectionMap.placemarks[commission.level-1].push(placemark);
+		ElectionMap.placemarks[commission.level-1].push(placemark);
+		ElectionMap.objManager.add(
+			placemark,
+			ElectionMap.MAP_LEVELS[placemark.level-1].index,
+			19
+		);
 
         ElectionMap.checkForVisibility(placemark);
-        ElectionMap.showElectionCommissionMarks();
     },
 
-	showComission: function(comission) {
-        // TODO: fix it
-        ElectionMap.map.setBounds(this.get(0).getBounds());
-	},
+    showComission: function(comission_id) {
+        var commission = electionCommissions[comission_id];
+        var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
+        ElectionMap.map.setCenter(point, 15);
+    },
 
 	/**
 	 * Добавляет на карту 2 кнопки "Изибиратели", "Наблюдатели".
@@ -194,18 +220,7 @@ var ElectionMap = {
 	/**
 	 * Определяет и показывает на карте нужный уровень избирательных комиссий согласно масштабу.
 	 */
-	showElectionCommissionMarks: function() {
-		// Создание диспетчера объектов и добавление его на карту
-		var objManager = new YMaps.ObjectManager();
-		ElectionMap.map.addOverlay(objManager);
-		for (var num=0; num < ElectionMap.placemarks.length; num++)
-			if (num < ElectionMap.MAP_LEVELS.length)
-				objManager.add(
-					ElectionMap.placemarks[num],
-					ElectionMap.MAP_LEVELS[num].index,
-					19
-				);
-		
+	resetZoom: function() {
 		while (ElectionMap.visibleElectionCommissions.length == 0 && ElectionMap.map.getZoom() >= 0) {
 			ElectionMap.map.zoomBy(-1);
 			ElectionMap.checkForVisibility( ElectionMap.centerNearestElectionCommission );

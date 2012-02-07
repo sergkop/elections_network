@@ -32,6 +32,14 @@ class Location(models.Model):
     x_coord = models.FloatField(blank=True, null=True)
     y_coord = models.FloatField(blank=True, null=True)
 
+    def level(self):
+        if self.region_id is None:
+            return 2
+        elif self.tik is None:
+            return 3
+        else:
+            return 4
+
     def is_iks(self):
         return self.region_id is None and self.tik is None
 

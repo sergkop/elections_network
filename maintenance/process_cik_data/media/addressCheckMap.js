@@ -38,28 +38,28 @@
     setPlacemark: function(geoPoint, addressString) {
         // Запускает процесс геокодирования
         var geocoder = new YMaps.Geocoder(geoPoint);
-        
+
         AddressCheckMap.geoResult = new YMaps.Placemark(geoPoint);
         AddressCheckMap.geoResult.description = "(" + AddressCheckMap.geoResult.getCoordPoint().getX() + ", " + AddressCheckMap.geoResult.getCoordPoint().getY() + ")";
-        
+
         // Обработчик успешного завершения процесса геокодирования
         YMaps.Events.observe(geocoder, geocoder.Events.Load, function () {
             for (var i=0; i<this.length(); i++)
                 AddressCheckMap.geoResult.description += "<p>"+this.get(i).text+"</p>";
 
             AddressCheckMap.map.addOverlay( AddressCheckMap.geoResult );
-            
+
             AddressCheckMap.formData(addressString);
         });
-         
+
         // Обработчик неудачного завершения геокодирования
         YMaps.Events.observe(geocoder, geocoder.Events.Fault, function (geocoder, error) {
             AddressCheckMap.map.addOverlay( AddressCheckMap.geoResult );
-            
+
             AddressCheckMap.formData(addressString);
         });
     },
-    
+
     /**
      * Центрирует карту на указанном месте с оптимальным масштабом.
      * @param {place} - место, которое будет показано на карте. Если не задано, то будет показана вся Россия

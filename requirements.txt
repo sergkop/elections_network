@@ -4,3 +4,4 @@ django-tinymce
 south>=0.7.3
 flup
 -e git://github.com/pydanny/django-uni-form.git#egg=uni_form
+bleach

@@ -1,9 +1,9 @@
 # coding=utf8
-from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
+from grakon.models import Profile
 from links.models import Link
 
 # 'other' reason is added at the end of each block later
@@ -36,7 +36,7 @@ for name in REPORT_REASONS:
     REASON_TYPES[name] = dict(REPORT_REASONS[name])
 
 MODELS = {
-    'user': User,
+    'user': Profile,
     'link': Link,
 }
 
@@ -58,7 +58,7 @@ class ReportManager(models.Manager):
                 queryset = model.objects.filter(id__in=object_ids)
 
                 if name == 'user':
-                    res[name] = queryset.values_list('username', flat=True)
+                    res[name] = [str(username) for username in queryset.values_list('username', flat=True)]
                 elif name == 'link':
                     res[name] = queryset.values_list('location_id', 'url')
             else:
@@ -71,7 +71,7 @@ class Report(models.Model):
     object_id = models.PositiveIntegerField()
     item = generic.GenericForeignKey('content_type', 'object_id')
 
-    reporter = models.ForeignKey(User, related_name='users_who_reported')
+    reporter = models.ForeignKey(Profile, related_name='users_who_reported')
     reason = models.CharField(max_length=15, choices=REASON_CHOICES)
     reason_explained = models.TextField()
     time = models.DateTimeField(auto_now=True)

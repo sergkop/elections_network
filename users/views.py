@@ -18,7 +18,7 @@ def become_voter(request):
 
             try:
                 role, created = Role.objects.get_or_create(
-                        type='voter', user=request.user, defaults={'location_id': location_id})
+                        type='voter', user=request.user.get_profile(), defaults={'location_id': location_id})
             except IntegrityError:
                 return HttpResponse(u'Ошибка базы данных')
 

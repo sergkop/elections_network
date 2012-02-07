@@ -21,6 +21,7 @@ def user_data(request):
         profile = request.user.get_profile()
         context['my_profile'] = profile
         context['CONTACTS'] = json.dumps(list(profile.contacts.values_list('contact__username', flat=True)))
+        print Report.objects.user_reports(profile), type(Report.objects.user_reports(profile))
         context['REPORTS'] = json.dumps(Report.objects.user_reports(profile))
     else:
         if request.path is not None and request.path not in settings.LOGINZA_AMNESIA_PATHS:

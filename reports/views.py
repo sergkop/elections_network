@@ -1,8 +1,8 @@
 # coding=utf8
-from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import HttpResponse
 
+from grakon.models import Profile
 from links.models import Link
 from reports.models import Report, REASON_TYPES
 
@@ -14,9 +14,11 @@ def report(request):
 
         if report_type == 'user':
             try:
-                item = User.objects.get(username=request.POST.get('username', ''))
-            except User.DoesNotExist:
+                item = Profile.objects.get(username=request.POST.get('username', ''))
+            except Profile.DoesNotExist:
                 return HttpResponse(u'Пользователь не существует')
+
+            already_msg = u'Вы уже пожаловались на этого пользователя'
 
         elif report_type == 'link':
             try:
@@ -25,12 +27,14 @@ def report(request):
                 return HttpResponse(u'Регион не найден')
 
             try:
-                item = Link.objects.get(url=request.POST.get('report_link_radio', ''), location__id=location_id)
+                item = Link.objects.get(url=request.POST.get('link', ''), location__id=location_id)
             except Link.DoesNotExist:
                 return HttpResponse(u'Ссылка не найдена')
 
+            already_msg = u'Вы уже пожаловались на эту ссылку'
+
         else:
-            return HttpResponse()
+            return HttpResponse(u'Ошибка')
 
         reason = request.POST.get('reason')
         if reason not in REASON_TYPES[report_type]:
@@ -44,10 +48,10 @@ def report(request):
             reason_explained = ''
 
         try:
-            Report.objects.create(item=item, user=request.user,
+            Report.objects.create(item=item, reporter=request.user.get_profile(),
                     reason=reason, reason_explained=reason_explained)
         except IntegrityError:
-            return HttpResponse('Вы уже пожаловались на этот элемент')
+            return HttpResponse()
 
         return HttpResponse('ok')
 

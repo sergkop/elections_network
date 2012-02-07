@@ -1,8 +1,8 @@
 {% if user.is_authenticated %}
     <div id="report_dialog">
         <center>
-            Пожаловаться на пользователя <span id="report_dialog_user" class="dialog_user_span"></span>?
-            Пожаловаться на ссылку <a id="report_dialog_link" href=""></a>?
+            <div id="report_msg_user">Пожаловаться на пользователя <span id="report_dialog_user" class="dialog_user_span"></span>?</div>
+            <div id="report_msg_link">Пожаловаться на ссылку <a id="report_dialog_link" href=""></a>?</div>
         </center>
 
         <form id="report_form" method="post" action="{% url report %}">
@@ -19,7 +19,9 @@
                     Подробности: <input type="text" name="reason_explained" size="40" value="" />
                 </div>
             </div>
+            <input type="hidden" name="type" value="" />
             <input type="hidden" name="username" value="" />
+            <input type="hidden" name="link" value="" />
             <input type="hidden" name="location" value="{{ current_location.id }}" />
         </form>
     </div>
@@ -29,13 +31,18 @@
     // Report dialog
     {% if user.is_authenticated %}
         // TODO: choose proper title
-        $("#report_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться на пользователя",
+        $("#report_dialog").dialog({width: 650, height: 250, modal: true, title: "Пожаловаться",
             buttons: {
                 "Пожаловаться": function(){
                     $.post("{% url report %}", $("#report_form").serialize(), function(data){
                         if (data=="ok"){
-                            //var username = $('#report_user_form input[name="username"]').val();
-                            $("#report_dialog").trigger("report_dialog_event", [username]);
+                            var type = $('#report_form input[name="type"]').val();
+                            var event_data = [];
+                            if (type=="user")
+                                event_data = [$('#report_user_form input[name="username"]').val()];
+                            else if (type=="link")
+                                event_data = [$('#report_user_form input[name="link"]').val()];
+                            $("#report_dialog").trigger("report_dialog_event", event_data);
                             $("#report_dialog").dialog("close");
                             alert("Ваша жалоба будет рассмотрена в ближайшее время");
                         } else
@@ -61,8 +68,14 @@
                 $("#report_reason").append($("<option/>").attr("value", data[0]).html(data[1]));
             });
 
-            //$("#report_dialog_user").text(username);
-            //$('#report_form input[name="username"]').val(username);
+            $('#report_form input[name="type"]').val(type);
+            $("#report_dialog center div").hide();
+            if (type=="user"){
+                $("#report_msg_user").show();
+                $('#report_form input[name="username"]').val(params["username"]);
+            }else if (type=="link")
+                $("#report_msg_link").show();
+
             // TODO: set options for reason
             $("#report_dialog").dialog("open");
             sync_reason_input();

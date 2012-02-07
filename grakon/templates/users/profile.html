@@ -3,6 +3,14 @@
 {% load elements %}
 
 {% block left_column %}
+    {% include "dialogs/report.html" %}
+
+    {% include "dialogs/send_message.html" %}
+
+    {% include "dialogs/add_to_contacts.html" %}
+
+    {% include "dialogs/remove_from_contacts.html" %}
+
     <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Контакты</h4>
@@ -72,14 +80,6 @@
             var list_item = new UserListItem($(this));
         });*/
     </script>
-
-    {% include "dialogs/report.html" %}
-
-    {% include "dialogs/send_message.html" %}
-
-    {% include "dialogs/add_to_contacts.html" %}
-
-    {% include "dialogs/remove_from_contacts.html" %}
 
     {% if user.is_authenticated %}
         <script type="text/javascript">

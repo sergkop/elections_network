@@ -1,4 +1,4 @@
-{% load elements %}
+<!-- {% load elements %} -->
 
 {% if profile_user.profile.about %}<h4>О себе</h4>{% endif %}
 <div>{{ profile_user.profile.about|safe }}</div>
@@ -46,11 +46,14 @@
 
     {% if user.is_authenticated %}
         <script type="text/javascript">
-            $("#report_dialog").on("report_dialog_event", function(){
+            $("#report_dialog").on("report_dialog_event", function(event, username){
                 // TODO: check that this is profile user
                 $("#is_reported").show();
                 $("#report_user").hide();
             });
+
+            if ($.inArray("{{ profile_user.username }}", REPORTS["user"])!=-1)
+                $("#report_user").hide();
         </script>
     {% endif %}
 
@@ -58,12 +61,6 @@
 
 <h4>Участие в выборах</h4>
 <ul>
-    {% if profile_user == user %}
-    <li>
-        {% button "check" "Записаться в наблюдатели" "become_observer" "" "" %}
-    </li>
-    {% endif %}
-
     <li>
         <span id="voter_path_span">
         {% if roles.voter %}
@@ -74,16 +71,22 @@
             Еще не записан на голосование.
         {% endif %}
         </span>
+    </li>
+</ul>
 
-        {% if profile_user == user %}
+{% if profile_user == user %}
+    <div class="user_actions">
+        <center>
             {% if roles.voter %}
                 {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" "" "" %}
             {% else %}
                 {% button "check" "Записаться в избиратели" "become_voter" "" "" %}
             {% endif %}
-        {% endif %}
-    </li>
-</ul>
+
+            {% button "check" "Записаться в наблюдатели" "become_observer" "" "" %}
+        </center>
+    </div>
+{% endif %}
 
 {% if profile_user == user %}
     {% include "dialogs/become_observer.html" %}

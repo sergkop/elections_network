@@ -2,6 +2,12 @@
 
 {% load elements %}
 
+{% block head %}
+    <style type="text/css">
+        .ym-col3 .ym-cbox {display: none;}
+    </style>
+{% endblock %}
+
 {% block left_column %}
     {% include "dialogs/report.html" %}
 

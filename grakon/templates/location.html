@@ -5,7 +5,7 @@
 {% block title %}
 {% if current_location.region %}{{ current_location.region }} - {% endif %}
 {% if current_location.tik %}{{ current_location.tik }} - {% endif %}
-{{ current_location }} - Гражданский контроль за выборами
+{{ current_location }} - Гракон
 {% endblock %}
 
 {% block head %}
@@ -249,6 +249,12 @@
             <div id="tab-info">
                 <p>
                     Адрес ТИКа:
+                    
+                    <a href="{{ current_location.results_url }}" target="_blank">Результаты выборов</a>
+
+                    {% if current_location.info_url %}
+                        <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
+                    {% endif%}
                 </p>
             </div>
 

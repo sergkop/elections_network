@@ -60,7 +60,7 @@ class RegistrationForm(BaseRegistrationForm):
         return user
 
 # TODO: fix it
-class CompleteRegistrationForm(forms.Form):
+class CompleteRegistrationForm(BaseRegistrationForm):
     # TODO: password fields must be optional (required=False)
     def __init__(self, user_id, *args, **kwargs):
         super(CompleteRegistrationForm, self).__init__(*args, **kwargs)

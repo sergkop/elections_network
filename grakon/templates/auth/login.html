@@ -2,10 +2,14 @@
 
 {% load uni_form_tags %}
 
+{% block content_header %}
+    <h2 class="location_header">Вход в систему</h2>
+{% endblock %}
+
 {% block content %}
     {% uni_form form form.helper %}
 
     <a href="{% url password_reset %}">Забыли пароль?</a>
-    
+
     <a href="{% url register %}">Или зарегистрируйтесь</a>
 {% endblock %}

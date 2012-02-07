@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 
+{% load uni_form_tags %}
+
+{% block content_header %}
+    <h2 class="location_header">Завершение регистрации</h2>
+{% endblock %}
+
 {% block content %}
 
-Пожалуйста, установите свой пароль
-<form method="post" action="{% url loginza_register %}">
-{% csrf_token %}
-<table>
-{{ form.as_table }}
-</table>
-
-<input type="submit" value="Зарегистрироваться" />
-
-</form>
+{% uni_form form form.helper %}
 
 {% endblock %}

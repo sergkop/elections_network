@@ -9,7 +9,7 @@ from reports.models import Report, REASON_TYPES
 def report(request):
     if request.method=='POST' and request.user.is_authenticated():
         report_type = request.POST.get('type', '')
-        if report_type not in CONTENT_TYPES:
+        if report_type not in REASON_TYPES:
             return HttpResponse(u'Тип жалобы указан неверно')
 
         if report_type == 'user':

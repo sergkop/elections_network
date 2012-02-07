@@ -1,11 +1,11 @@
 # coding=utf8
 from smtplib import SMTPException
 
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse
 
+from grakon.models import Profile
 from users.models import Contact, Role
 
 def become_voter(request):
@@ -33,12 +33,12 @@ def become_voter(request):
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
-            contact = User.objects.get(username=request.POST.get('username', ''))
-        except User.DoesNotExist:
+            contact = Profile.objects.get(username=request.POST.get('username', ''))
+        except Profile.DoesNotExist:
             return HttpResponse(u'Пользователь не существует')
 
         try:
-            Contact.objects.create(user=request.user, contact=contact)
+            Contact.objects.create(user=request.user.get_profile(), contact=contact)
         except IntegrityError:
             return HttpResponse(u'Пользователь уже добавлен в контакты')
 
@@ -49,11 +49,11 @@ def add_to_contacts(request):
 def remove_from_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
-            contact = User.objects.get(username=request.POST.get('username', ''))
-        except User.DoesNotExist:
+            contact = Profile.objects.get(username=request.POST.get('username', ''))
+        except Profile.DoesNotExist:
             return HttpResponse(u'Пользователь не существует')
 
-        Contact.objects.filter(user=request.user, contact=contact).delete()
+        Contact.objects.filter(user=request.user.get_profile(), contact=contact).delete()
         return HttpResponse('ok')
 
     return HttpResponse(u'Ошибка')
@@ -61,8 +61,8 @@ def remove_from_contacts(request):
 def send_message(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:
-            user = User.objects.get(username=request.POST.get('username', ''))
-        except User.DoesNotExist:
+            profile = Profile.objects.get(username=request.POST.get('username', ''))
+        except Profile.DoesNotExist:
             return HttpResponse(u'Пользователь не существует')
 
         title = request.POST.get('message_title', '')
@@ -74,7 +74,7 @@ def send_message(request):
             return HttpResponse(u'Введите текст сообщения')
 
         try:
-            send_mail(title, message_body, request.user.email, [user.email], fail_silently=False)
+            send_mail(title, message_body, request.user.email, [profile.user.email], fail_silently=False)
         except SMTPException:
             return HttpResponse(u'Не удалось отправить сообщение')
 

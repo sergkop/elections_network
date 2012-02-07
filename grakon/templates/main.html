@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% load elements %}
+{% block head %}
+    <style type="text/css">
+        .ym-col3 .ym-cbox p {font-size: 1em;}
+    </style>
+{% endblock %}
 
 {% block left_column %}
     <h3 class="column_header">Участники</h3>
@@ -143,47 +148,47 @@
 
     <p>Интернет-площадка Гракон объединяет организации и активных граждан для проведения единого общественного мониторинга выборов президента 4 марта.
 
-    <p>Найдите свой избирательный округ – и увидите, как проходят выборы в Вашем городе: [серия выпадающих меню].</p>
+    <p>Найдите свой избирательный округ – и увидите, как проходят выборы в Вашем городе:</p>
+    
+    <table style="width: 100%;">
+        <tr>
+            <td style="width:45%;">
+                <div id="choose_regions">
+                    <form action="{% url goto_location %}" method="get" style="display:inline;">
+                        {% include "elements/region_choice.html" %}
+                        <center>
+                            <input id="goto_location" type="submit" value="Перейти"/>
+                        </center>
+                    </form>
+                </div>
+            </td>
+            <td style="width:20%;vertical-align:middle;text-align:center;">
+                <b>или</b>
+            </td>
+            <td style="vertical-align:middle;">
+                {% button "search" "Найти на карте" "map_location" "map_search" %}
+            </td>
+        </tr>
+    </table>
 
-    <p>Присоединяйтесь – помогите удостовериться, что выборы пройдут честно: [кнопка “войти”]</p>
+    {% if not request.user.is_authenticated %}
+        <p>Присоединяйтесь – помогите удостовериться, что выборы пройдут честно: 
+            {% button "arrowreturnthick-1-e" "Войти" "login_btn2" "" "" %}
+        </p>
+    {% endif %}
 
-    <p>Посмотрите, кто уже участвует в работе площадки. [стрелка влево]</p>
+    <p>Посмотрите, кто уже участвует в работе площадки (<b>левая панель</b>).</p>
 
-    <p>На сайт постоянно добавляются ссылки на полезные местные ресурсы о выборах. [стрелка вправо]</p>
+    <p>На сайт постоянно добавляются ссылки на полезные местные ресурсы о выборах (<b>правая панель</b>).</p>
 
     <p>В течение оставшегося времени до выборов 4 марта на площадку будут добавляться новые типы участников:
     члены УИК, представители СМИ и полиции. Появятся новые эффективные инструменты: обжаловать нарушения,
     выложить списки членов УИК, выложить копии протоколов и сравнить с официальными результатами ЦИК и другие.
     Заходите на площадку почаще и зарегистрируйтесь, чтобы получать новости проекта: [кнопка “Войти”]</p>
 
-    <p>Наглядная презентация площадки с помощью диаграмм: [ссылка на pdf презентации]</p>
+    <p>Вы можете посмотреть <a href="http://bit.ly/elections_pdf">наглядную презентацию</a> площадки в диаграммах.</p>
 
-    <p>Подробнее о проекте: [ссылка на страницу “о проекте”]</p>
-
-
-    <div>
-        <center><h4>Найдите свой избирательный округ</h4></center>
-        <table style="width: 100%;">
-            <tr>
-                <td style="width:50%;">
-                    <div id="choose_regions">
-                        <form action="{% url goto_location %}" method="get" style="display:inline;">
-                            {% include "elements/region_choice.html" %}
-                            <center>
-                                <input id="goto_location" type="submit" value="Перейти"/>
-                            </center>
-                        </form>
-                    </div>
-                </td>
-                <td style="width:10%;vertical-align:middle;">
-                    <b>или</b>
-                </td>
-                <td style="vertical-align:middle;">
-                    {% button "search" "Найти на карте" "map_location" "map_search" %}
-                </td>
-            </tr>
-        </table>
-    </div>
+    <p>Подробнее о проекте можно прочитать <a href="{% url about %}">здесь</a>.</p>
 
     <!--div>
         {% if not user.is_authenticated %}

@@ -6,6 +6,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse
 
 from grakon.models import Profile
+from locations.models import Location
 from users.models import Contact, Role
 
 def become_voter(request):
@@ -17,13 +18,21 @@ def become_voter(request):
                 continue
 
             try:
+                location = Location.objects.get(id=location_id)
+            except Location.DoesNotExist:
+                return HttpResponse(u'Указанный избирательный округ не существует')
+
+            if location.region is None:
+                return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+
+            try:
                 role, created = Role.objects.get_or_create(
-                        type='voter', user=request.user.get_profile(), defaults={'location_id': location_id})
+                        type='voter', user=request.user.get_profile(), defaults={'location': location})
             except IntegrityError:
                 return HttpResponse(u'Ошибка базы данных')
 
             if not created:
-                role.location_id = location_id
+                role.location = location
                 role.save()
 
             return HttpResponse('ok')

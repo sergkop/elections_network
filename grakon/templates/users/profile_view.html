@@ -1,7 +1,28 @@
-<!-- {% load elements %} -->
+{% load elements %}
 
-{% if profile_user.profile.about %}<h4>О себе</h4>{% endif %}
-<div>{{ profile_user.profile.about|safe }}</div>
+<h4>О себе</h4>
+<div>
+    {% if profile_user.profile.about %}
+        {{ profile_user.profile.about|safe }}
+    {% else %}
+        <i>Пользователь еще не добавил информацию о себе.</i>
+    {% endif %}
+</div>
+
+<h4>Участие в выборах</h4>
+<ul>
+    <li>
+        <span id="voter_path_span">
+        {% if roles.voter %}
+            {% with location=roles.voter.location %}
+                {% include "elements/location_path.html" %}
+            {% endwith %} - Избиратель
+        {% else %}
+            Еще не записан на голосование.
+        {% endif %}
+        </span>
+    </li>
+</ul>
 
 {% if profile_user != user %}
     <div id="in_contacts"><i>Добавлен в контакты</i></div>
@@ -59,21 +80,6 @@
 
 {% endif %}
 
-<h4>Участие в выборах</h4>
-<ul>
-    <li>
-        <span id="voter_path_span">
-        {% if roles.voter %}
-            {% with location=roles.voter.location %}
-            {% include "elements/location_path.html" %}
-            {% endwith %} - Избиратель
-        {% else %}
-            Еще не записан на голосование.
-        {% endif %}
-        </span>
-    </li>
-</ul>
-
 {% if profile_user == user %}
     <div class="user_actions">
         <center>
@@ -86,9 +92,7 @@
             {% button "check" "Записаться в наблюдатели" "become_observer" "" "" %}
         </center>
     </div>
-{% endif %}
 
-{% if profile_user == user %}
     {% include "dialogs/become_observer.html" %}
 
     {% include "dialogs/become_voter.html" %}

@@ -67,7 +67,17 @@
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">{{ profile_user.first_name }} {{ profile_user.last_name }} ({{ profile_user.username }})</h2>
+    <h2 class="location_header">
+        {% if profile_user == user %}
+            {{ profile.first_name }} {{ profile.last_name }} ({{ profile.username }})
+        {% else %}
+            {% if profile.show_name %}
+                {{ profile.first_name }} {{ profile.last_name }} ({{ profile.username }})
+            {% else %}
+                {{ profile.username }}
+            {% endif %}
+        {% endif %}
+    </h2>
 
     {% if profile_user == user %}
         {% tabs "tabs" profile_view "" "" "Профиль" "my_profile" "profiles/view.html" "Редактировать" "edit_profile" "profiles/edit.html" %}

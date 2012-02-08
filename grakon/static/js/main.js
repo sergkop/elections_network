@@ -25,19 +25,19 @@ function update_path(span_id, select_div_id){
     var span = $("#"+span_id)
     span.html("");
 
-    var select_1 = $('#'+select_div_id+' [name="region_1"]');
+    var select_1 = $('#'+select_div_id+' [name="region"]');
     if (select_1.val()!=""){
         var text1 = select_1.children('option[value="'+select_1.val()+'"]').text()
         span.append($("<a/>").attr("href", location_url+select_1.val()).text(text1));
     }
 
-    var select_2 = $('#'+select_div_id+' [name="region_2"]');
+    var select_2 = $('#'+select_div_id+' [name="tik"]');
     if (select_2.val()!=""){
         var text2 = select_2.children('option[value="'+select_2.val()+'"]').text()
         span.append("&rarr;").append($("<a/>").attr("href", location_url+select_2.val()).text(text2));
     }
 
-    var select_3 = $('#'+select_div_id+' [name="region_3"]');
+    var select_3 = $('#'+select_div_id+' [name="uik"]');
     if (select_3.val()!=""){
         var text3 = select_3.children('option[value="'+select_3.val()+'"]').text()
         span.append("&rarr;").append($("<a/>").attr("href", location_url+select_3.val()).text(text3));
@@ -47,28 +47,33 @@ function update_path(span_id, select_div_id){
 /* ---- Methods for manipulations with location selectors ---- */
 // path is a list of region ids (top to bottom level) with length from 0 to 3
 function set_select_location(div_id, path){
-    var select_1 = $('#'+div_id+' [name="region_1"]');
-    var select_2 = $('#'+div_id+' [name="region_2"]');
-    var select_3 = $('#'+div_id+' [name="region_3"]');
+    var select_1 = $('#'+div_id+' [name="region"]');
+    var select_2 = $('#'+div_id+' [name="tik"]');
+    var select_3 = $('#'+div_id+' [name="uik"]');
 
     select_1.unbind().change(function(){
         select_3.hide();
 
-        if (select_1.val()==""){
-            select_2.hide();
+        if (select_1.val()=="")
             select_2.val("").change();
-        }
         else
             $.getJSON(GET_SUB_REGIONS_URL, {location: select_1.val()}, function(data){
                 if (data.length>0){
-                    select_2.show();
-                    select_2.children('[value!=""]').remove();
+                    //select_2.children('[value!=""]').remove();
+                    select_2.children().remove();
+
+                    var empty_2 = $("<option/>").val("");
+                    if (select_1.children('[value="'+select_1.val()+'"]').text()=="Зарубежные территории")
+                        var txt = "Выберите страну";
+                    else
+                        var txt = "Выберите район";
+                    select_2.append(empty_2.text(txt));
+
                     $.each(data, function(index, value){
                         select_2.append($("<option/>").val(value["id"]).text(value["name"]));
                     });
                     select_2.val(path.length>1 ? path[1] : "").change();
-                } else
-                    select_2.hide();
+                }
             });
     });
 
@@ -90,16 +95,16 @@ function set_select_location(div_id, path){
         }
     });
 
-    select_1.val(path.length>0 ? path[0] : "").change();
+    select_1.val(path.length>0 ? path[0] : select_1.val()).change();
     select_2.val(path.length>1 ? path[1] : "").change();
     select_3.val(path.length>2 ? path[2] : "");
 }
 
 function form_location_id(div_id){
     // This is a helper method to extract location id from selector block
-    var select_1 = $('#'+div_id+' [name="region_1"]');
-    var select_2 = $('#'+div_id+' [name="region_2"]');
-    var select_3 = $('#'+div_id+' [name="region_3"]');
+    var select_1 = $('#'+div_id+' [name="region"]');
+    var select_2 = $('#'+div_id+' [name="tik"]');
+    var select_3 = $('#'+div_id+' [name="uik"]');
 
     if (select_3.val()!="")
         return select_3.val();

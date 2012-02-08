@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.db import models
 
 # Url templates for pages on izbirkom.ru with information about comissions
@@ -6,6 +7,10 @@ RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_na
 
 #INFO_ROOT_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=0&vrnkomis=0'
 INFO_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=%(vrnorg)d&vrnkomis=%(vrnkomis)d'
+
+FOREIGN_TERRITORIES = u'Зарубежные территории' # Do not change this name without proper changes in production db and 
+FOREIGN_NAME = 'foreign'
+FOREIGN_CODE = 100
 
 class Location(models.Model):
     """ The number of non-null values of parent specifies the level of location """
@@ -48,6 +53,9 @@ class Location(models.Model):
 
     def is_uik(self):
         return self.region_id is not None and self.tik is not None
+
+    def is_foreign(self):
+        return self.region_name==FOREIGN_NAME
 
     def results_url(self):
         """ Link to the page with elections results on izbirkom.ru """

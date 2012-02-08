@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from locations.models import Location
+from locations.utils import regions_list
 from navigation.models import Page
 from users.models import Role
 
@@ -18,7 +19,7 @@ def main(request):
     context = {
         'voter_count': voter_count,
         'ending': ending,
-        'locations': list(Location.objects.filter(region=None).order_by('name')),
+        'locations': regions_list(),
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 

@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
 
 from locations.models import Location
+from locations.utils import regions_list
 from links.models import Link
 from users.models import Role
 
@@ -48,7 +49,7 @@ class LocationView(TemplateView):
             'current_location': location,
             'participants': participants,
             'links': list(Link.objects.filter(location=location)),
-            'locations': list(Location.objects.filter(region=None).order_by('name')), # used in become voter dialog
+            'locations': regions_list(),
             'all_locations': list(Location.objects.all()), # needed for the map
             'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
             'sub_regions': sub_regions,
@@ -86,7 +87,7 @@ def get_sub_regions(request):
 
 # TODO: restructure it and take only one parameter
 def goto_location(request):
-    for name in ('region_3', 'region_2', 'region_1'):
+    for name in ('uik', 'tik', 'region'):
         try:
             location_id = int(request.GET.get(name, ''))
         except ValueError:

@@ -8,7 +8,10 @@ from uni_form.layout import HTML, Layout
 
 from grakon.models import Profile
 from grakon.utils import form_helper
+from locations.models import Location
+from locations.utils import regions_list
 from registration.models import ActivationProfile
+from users.models import Role
 
 password_digit_re = re.compile(r'\d')
 password_letter_re = re.compile(r'[a-zA-Z]')
@@ -16,6 +19,12 @@ password_letter_re = re.compile(r'[a-zA-Z]')
 class BaseRegistrationForm(forms.ModelForm):
     username = forms.RegexField(label=u'Имя пользователя (логин)', max_length=20, min_length=4, regex=r'^[\w\.]+$',
             help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры, подчеркивания и точки)')
+
+    region = forms.CharField(label=u'Выберите субъект РФ, где проживаете', widget=forms.Select(),
+            help_text=u'Если вы находитесь за границей, выберите соответствующий пункт.')
+    tik = forms.CharField(label=u'Выбирите свой район', widget=forms.Select(choices=[('', u'Выберите свой район')]),
+            help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссией')
+
     email = forms.EmailField(label=u'Электронная почта')
     password1 = forms.CharField(label=u'Пароль', widget=forms.PasswordInput(render_value=False),
             help_text=u'Пароль должен быть не короче 8 знаков и содержать по крайней мере одну латинскую букву и одну цифру')
@@ -27,8 +36,16 @@ class BaseRegistrationForm(forms.ModelForm):
 
     helper = form_helper('register', u'Зарегистрироваться')
     # TODO: do we need it?
-    helper.layout = Layout(HTML(
-            r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'))
+    helper.form_id = 'registration_form'
+    helper.layout = Layout(
+        HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
+        HTML(r'<script type="text/javascript">$().ready(function(){  set_select_location("registration_form", []);});</script>'),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(BaseRegistrationForm, self).__init__(*args, **kwargs)
+
+        self.fields['region'].widget.choices = regions_list()
 
     def clean_password1(self):
         password = self.cleaned_data['password1']
@@ -64,6 +81,14 @@ class RegistrationForm(BaseRegistrationForm):
 
         raise forms.ValidationError(u'Пользователь с этим адресом электронной почты уже зарегистрирован')
 
+    def clean_tik(self):
+        try:
+            self.location = Location.objects.get(id=int(self.cleaned_data['tik']))
+        except (ValueError, Location.DoesNotExist):
+            raise forms.ValidationError(u'Выберите свой район')
+
+        return self.cleaned_data['tik']
+
     def save(self):
         user = ActivationProfile.objects.create_inactive_user(self.cleaned_data['username'],
                 self.cleaned_data['email'], self.cleaned_data['password1'])
@@ -72,6 +97,8 @@ class RegistrationForm(BaseRegistrationForm):
         profile.first_name = self.cleaned_data['first_name']
         profile.last_name = self.cleaned_data['last_name']
         profile.save()
+
+        Role(user=profile, location=self.location, type='voter').save()
 
         return user
 

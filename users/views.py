@@ -11,18 +11,15 @@ from users.models import Contact, Role
 
 def become_voter(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        for name in ('region_3', 'region_2', 'region_1'):
+        for name in ('uik', 'tik', 'region'):
             try:
                 location_id = int(request.POST.get(name, ''))
             except ValueError:
                 continue
 
             try:
-                location = Location.objects.get(id=location_id)
+                location = Location.objects.get(id=location_id, region=None)
             except Location.DoesNotExist:
-                return HttpResponse(u'Указанный избирательный округ не существует')
-
-            if location.region is None:
                 return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
 
             try:
@@ -37,7 +34,7 @@ def become_voter(request):
 
             return HttpResponse('ok')
 
-    return HttpResponse(u'Ошибка')
+    return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
 
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():

@@ -12,7 +12,7 @@ class Profile(models.Model):
     last_name = models.CharField(u'Фамилия', max_length=30, default='')
     middle_name = models.CharField(u'Отчество', max_length=30, blank=True, default='')
     show_name = models.BooleanField(u'Показывать настоящее имя', default=False,
-            help_text=u'Если эта галка не выставлена, остальные пользователи будут видеть только ваше имя пользователя')
+            help_text=u'Если эта галка не выставлена, остальные пользователи будут видеть только ваш логин')
     about = HTMLField(u'О себе', default='', blank=True)
 
     @models.permalink

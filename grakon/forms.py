@@ -30,7 +30,7 @@ class ProfileForm(forms.ModelForm):
         attributes= {'span': ['style']}
         styles = ['text-decoration']
         return bleach.clean(self.cleaned_data['about'], tags=tags, attributes=attributes, styles=styles, strip=True)
-    
+
 # TODO: set minimum password complexity
 class SetPasswordForm(auth_forms.SetPasswordForm):
     helper = form_helper('set_password', u'Установить пароль')

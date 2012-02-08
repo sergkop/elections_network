@@ -21,7 +21,9 @@
     <div class="ym-wrapper">
         <div class="breadcrumbs">
             <ul>
-                <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
+                {% if not current_location.is_foreign %}
+                    <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
+                {% endif %}
 
                 {% if current_location.region %}
                     <li>
@@ -41,7 +43,7 @@
                 {% if sub_regions %}
                     <li>
                         <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
-                            <select id="goto_subregion" name="region_1">
+                            <select id="goto_subregion" name="region">
                                 <option value="" selected="selected">Перейти ниже</option>
                                 {% for sub_region in sub_regions %}
                                 <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>

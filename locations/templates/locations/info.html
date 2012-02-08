@@ -1,5 +1,5 @@
 <p>
-    <b>Адрес</b>: {{ current_location.postcode }} {{ current_location.address|default:"Адрес недоступен" }}
+    <b>Адрес</b>: {{ current_location.postcode|default:"" }} {{ current_location.address|default:"Адрес недоступен" }}
 </p>
 
 <p>
@@ -12,15 +12,17 @@
 </p>
 {% endif %}
 
-<p>
-    <b>Информация на сайте Центризбиркома:</b>
-    <br/>
-    {% if current_location.info_url %}
-        <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
-    {% endif%}
-    <br/>
-    <a href="{{ current_location.results_url }}" target="_blank">Результаты выборов</a>
-</p>
+{% if not current_location.is_foreign %}
+    <p>
+        <b>Информация на сайте Центризбиркома:</b>
+        <br/>
+        {% if current_location.info_url %}
+            <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
+        {% endif%}
+        <br/>
+        <a href="{{ current_location.results_url }}" target="_blank">Результаты выборов</a>
+    </p>
+{% endif %}
 
 <p>
     <b>Состав комиссии:</b>

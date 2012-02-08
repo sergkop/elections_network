@@ -150,7 +150,7 @@ var ElectionMap = {
                 ' <a href="#" onclick="ElectionMap.showComission('+commission.id+'); return false;"><img src="/static/images/target.png" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
                 //((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
                 //((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
-                ('<p><a href="/location/'+commission.id+'">Станица округа</a></p>');
+                ('<p><a href="/location/'+commission.id+'">Страница округа</a></p>');
         placemark.setIconContent(commission.shortTitle);
         placemark.id = commission.id;
         placemark.level = commission.level;

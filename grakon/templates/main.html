@@ -39,7 +39,7 @@
             <i>&nbsp;</i>
 
             <div class="side_block_header">
-                <h4>Предствители СМИ (в разработке)</h4>
+                <h4>Представители СМИ (в разработке)</h4>
             </div>
 
             <div class="content_block">
@@ -102,7 +102,7 @@
         </div>
 
         <div class="side_block_header">
-            <h4>Сообщить о нарушении</h4>
+            <h4>Нарушения</h4>
         </div>
 
         <div class="content_block">
@@ -115,7 +115,7 @@
             <i>&nbsp;</i>
 
             <div class="side_block_header">
-                <h4>Выложить протоколы (в разработке)</h4>
+                <h4>Протоколы (в разработке)</h4>
             </div>
 
             <div class="content_block">
@@ -171,11 +171,10 @@
         </tr>
     </table>
 
-    {% if not request.user.is_authenticated %}
-        <p>Присоединяйтесь – помогите удостовериться, что выборы пройдут честно: 
-            {% button "arrowreturnthick-1-e" "Войти" "login_btn2" "" "" %}
-        </p>
-    {% endif %}
+    <p>
+        Присоединяйтесь – помогите удостовериться, что выборы пройдут честно
+        {% if not request.user.is_authenticated %}(<a href="{% url register %}">зарегистрироваться</a>){% endif %}.
+    </p>
 
     <p>Посмотрите, кто уже участвует в работе площадки (<b>левая панель</b>).</p>
 
@@ -186,7 +185,7 @@
     выложить списки членов УИК, выложить копии протоколов и сравнить с официальными результатами ЦИК и другие.
     Заходите на площадку почаще и зарегистрируйтесь, чтобы получать новости проекта: [кнопка “Войти”]</p>
 
-    <p>Вы можете посмотреть <a href="http://bit.ly/elections_pdf">наглядную презентацию</a> площадки в диаграммах.</p>
+    <p>Вы можете посмотреть <a href="http://bit.ly/elections_pdf" target="_blank">наглядную презентацию</a> площадки в диаграммах.</p>
 
     <p>Подробнее о проекте можно прочитать <a href="{% url about %}">здесь</a>.</p>
 
@@ -216,10 +215,6 @@
         set_select_location("choose_regions", []);
 
         //$("#map_location").button({icons: {primary: "ui-icon-search"}});
-
-        $("#login_btn2").click(function(){
-            login_dialog_init();
-        });
     </script>
 
 {% endblock %}

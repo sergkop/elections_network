@@ -9,7 +9,7 @@ from grakon.utils import form_helper
 from registration.models import ActivationProfile
 
 class BaseRegistrationForm(forms.ModelForm):
-    username = forms.RegexField(label=u'Имя пользователя', max_length=20, min_length=4, regex=r'^\w+$',
+    username = forms.RegexField(label=u'Имя пользователя (логин)', max_length=20, min_length=4, regex=r'^\w+$',
             help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры и подчеркивания)')
     email = forms.EmailField(label=u'Электронная почта')
     password1 = forms.CharField(label=u'Пароль', widget=forms.PasswordInput(render_value=False),
@@ -18,7 +18,7 @@ class BaseRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('username', 'first_name', 'middle_name', 'last_name', 'show_name')
+        fields = ('username', 'last_name', 'first_name', 'middle_name', 'show_name')
 
     helper = form_helper('register', u'Зарегистрироваться')
     # TODO: do we need it?

@@ -18,7 +18,7 @@ def become_voter(request):
                 continue
 
             try:
-                location = Location.objects.get(id=location_id, region=None)
+                location = Location.objects.exclude(region=None).get(id=location_id)
             except Location.DoesNotExist:
                 return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
 

@@ -40,7 +40,6 @@ class Command(BaseCommand):
     help = "Loads locations data after first syncdb."
 
     def handle(self, *args, **options):
-        """
         REGIONS = {}
         region_ids_path = os.path.join(settings.PROJECT_PATH, 'data', 'region_ids.txt')
         for line in open(region_ids_path):
@@ -69,7 +68,6 @@ class Command(BaseCommand):
                 tik.save()
 
             i += 1
-        """
 
         from locations.models import FOREIGN_CODE, FOREIGN_NAME, FOREIGN_TERRITORIES
         foreign = location_from_info({'name': FOREIGN_TERRITORIES, 'postcode': 0, 'address': ''})

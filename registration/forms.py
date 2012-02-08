@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+import re
+
 from django import forms
 from django.contrib.auth.models import User
 
@@ -8,12 +10,15 @@ from grakon.models import Profile
 from grakon.utils import form_helper
 from registration.models import ActivationProfile
 
+password_digit_re = re.compile(r'\d')
+password_letter_re = re.compile(r'[a-zA-Z]')
+
 class BaseRegistrationForm(forms.ModelForm):
-    username = forms.RegexField(label=u'Имя пользователя (логин)', max_length=20, min_length=4, regex=r'^\w+$',
-            help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры и подчеркивания)')
+    username = forms.RegexField(label=u'Имя пользователя (логин)', max_length=20, min_length=4, regex=r'^[\w\.]+$',
+            help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры, подчеркивания и точки)')
     email = forms.EmailField(label=u'Электронная почта')
     password1 = forms.CharField(label=u'Пароль', widget=forms.PasswordInput(render_value=False),
-            help_text=u'Пароль должен быть не короче 8 знаков и содержать по крайней мере одну букву, одну цифру и знак препинания')
+            help_text=u'Пароль должен быть не короче 8 знаков и содержать по крайней мере одну латинскую букву и одну цифру')
     password2 = forms.CharField(label=u'Подтвердите пароль', widget=forms.PasswordInput(render_value=False))
 
     class Meta:
@@ -24,6 +29,17 @@ class BaseRegistrationForm(forms.ModelForm):
     # TODO: do we need it?
     helper.layout = Layout(HTML(
             r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'))
+
+    def clean_password1(self):
+        password = self.cleaned_data['password1']
+
+        if len(password) < 8:
+            raise forms.ValidationError(u'Пароль должен содержать не менее 8 символов')
+
+        if password_letter_re.search(password) is None or password_digit_re.search(password) is None:
+            raise forms.ValidationError(u'Пароль должен содержать по крайней мере одну латинскую букву и одну цифру')
+
+        return password
 
     def clean_password2(self):
         password2 = self.cleaned_data['password2']

@@ -8,7 +8,7 @@ class ContactInline(admin.TabularInline):
     fk_name = 'user'
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user',)
+    list_display = ('user', 'first_name', 'last_name', 'show_name')
     ordering = ('user__username',)
     search_fields = ('user__username',)
     inlines = [ContactInline]

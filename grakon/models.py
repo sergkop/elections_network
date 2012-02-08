@@ -42,7 +42,7 @@ class Profile(models.Model):
 
     def __unicode__(self):
         full_name = u'%s %s' % (self.first_name, self.last_name)
-        return full_name.strip() or u'(Неизвестно)'
+        return full_name.strip() or self.username
 
 def create_profile(sender, **kwargs):
     if kwargs.get('created', False):

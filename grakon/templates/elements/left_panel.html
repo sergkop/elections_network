@@ -1,0 +1,62 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Наблюдатели</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for observer in roles.observer %}
+            <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
+        {% endfor %}
+    </ul>
+    {% button "check" "Записаться в наблюдатели" "become_observer" %}
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>Представители СМИ (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Записаться в представители СМИ" "become_journalist" %}
+    </div>
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>Юристы (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Записаться в юристы" "become_lawyer" %}
+    </div>
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>Представители организации (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Записаться в представители организации" "become_representative" %}
+    </div>
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>Члены избирательной комиссии (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Записаться в члены избирательной комиссии" "become_representative" %}
+    </div>
+</div>

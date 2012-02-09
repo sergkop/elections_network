@@ -1,0 +1,47 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Нарушения</h4>
+</div>
+
+<div class="content_block">
+    <center>
+        {% button "pencil" "Сообщить о нарушении" "submit_complaint_btn" %}
+    </center>
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>Протоколы (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Выложить протокол" "publish_protocol" %}
+    </div>
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>События (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Добавить событие" "add_event" %}
+    </div>
+</div>
+
+<div class="disabled-block">
+    <div class="i">&nbsp;</div>
+
+    <div class="side_block_header">
+        <h4>Группы (в разработке)</h4>
+    </div>
+
+    <div class="content_block">
+        {% button "check" "Создать группу" "add_group" %}
+    </div>
+</div>

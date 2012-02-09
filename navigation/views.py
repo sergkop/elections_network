@@ -16,10 +16,12 @@ def main(request):
     else:
         ending = u'ей'
 
+    sub_regions = regions_list()
     context = {
         'voter_count': voter_count,
         'ending': ending,
-        'locations': regions_list(),
+        'locations': sub_regions,
+        'sub_regions': sub_regions,
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 

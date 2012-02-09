@@ -12,6 +12,12 @@
     </style>
 {% endblock %}
 
+{% block breadcrumbs %}
+    {% include "elements/breadcrumbs.html" %}
+
+    {% include "elements/results_table.html" %}
+{% endblock %}
+
 {% block left_column %}
     <h3 class="column_header">Участники</h3>
 
@@ -32,37 +38,7 @@
             {% endif %}
         </div>
 
-        <div class="side_block_header">
-            <h4>Наблюдатели</h4>
-        </div>
-
-        <div class="content_block">
-            {% button "check" "Записаться в наблюдатели" "become_observer" %}
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>Представители СМИ (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Записаться в представители СМИ" "become_journalist" %}
-            </div>
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>Юристы (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Записаться в юристы" "become_lawyer" %}
-            </div>
-        </div>
+        {% include "elements/left_panel.html" %}
     </div>
 
     {% include "dialogs/become_observer.html" %}
@@ -106,39 +82,7 @@
             </ul>
         </div>
 
-        <div class="side_block_header">
-            <h4>Нарушения</h4>
-        </div>
-
-        <div class="content_block">
-            <center>
-                {% button "pencil" "Сообщить о нарушении" "submit_complaint_btn" %}
-            </center>
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>Протоколы (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Выложить протокол" "publish_protocol" %}
-            </div>
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>События (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Добавить событие" "add_event" %}
-            </div>
-        </div>
+        {% include "elements/right_panel.html" %}
     </div>
 
     <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>

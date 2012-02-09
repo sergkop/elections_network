@@ -36,12 +36,13 @@ class LocationView(TemplateView):
             participants.setdefault(role.type, []).append(role.user)
 
         # Get sub-regions
-        if location.tik:
-            sub_regions = []
-        elif location.region:
-            sub_regions = list(Location.objects.filter(tik=location).order_by('name'))
-        else:
-            sub_regions = list(Location.objects.filter(region=location, tik=None).order_by('name'))
+        sub_regions = []
+        if location.region is None:
+            for loc in Location.objects.filter(region=location, tik=None).order_by('name'):
+                sub_regions.append((loc.id, loc.name))
+        elif location.tik is None:
+            for loc in Location.objects.filter(tik=location).order_by('name'):
+                sub_regions.append((loc.id, loc.name))
 
         ctx.update({
             'loc_id': kwargs['loc_id'],

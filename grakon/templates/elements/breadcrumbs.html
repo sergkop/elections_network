@@ -1,0 +1,53 @@
+<div class="ym-wrapper">
+    <div class="breadcrumbs">
+        <ul>
+            {% if not current_location.is_foreign %}
+                <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
+            {% endif %}
+
+            {% if current_location.region %}
+                <li>
+                    <a href="{{ current_location.region.get_absolute_url }}">{{ current_location.region }}<i></i><b></b></a> 
+                </li>
+            {% endif %}
+            {% if current_location.tik %}
+                <li>
+                    <a href="{{ current_location.tik.get_absolute_url }}">{{ current_location.tik }}<i></i><b></b></a>
+                </li>
+            {% endif %}
+
+            {% if current_location %}
+                <li>
+                    <strong>{{ current_location }}<i></i><b></b></strong>
+                </li>
+            {% endif %}
+
+            {% if sub_regions %}
+                <li>
+                    <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
+                        <select id="goto_subregion" name="region">
+                            <option value="" selected="selected">Перейти ниже</option>
+                            {% for id, name in sub_regions %}
+                            <option value="{{ id }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </li>
+            {% endif %}
+
+            {% if current_location.is_tik %}
+                <li>
+                    <select id="goto_subregion" name="region" disabled="disabled">
+                        <option value="" selected="selected">Выбрать УИК</option>
+                    </select>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#goto_subregion").change(function(){
+        $("#goto_subregion_form").submit();
+    });
+</script>

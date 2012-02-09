@@ -18,49 +18,9 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <div class="ym-wrapper">
-        <div class="breadcrumbs">
-            <ul>
-                {% if not current_location.is_foreign %}
-                    <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
-                {% endif %}
+    {% include "elements/breadcrumbs.html" %}
 
-                {% if current_location.region %}
-                    <li>
-                        <a href="{{ current_location.region.get_absolute_url }}">{{ current_location.region }}<i></i><b></b></a> 
-                    </li>
-                {% endif %}
-                {% if current_location.tik %}
-                    <li>
-                        <a href="{{ current_location.tik.get_absolute_url }}">{{ current_location.tik }}<i></i><b></b></a>
-                    </li>
-                {% endif %}
-
-                <li>
-                    <strong>{{ current_location }}<i></i><b></b></strong>
-                </li>
-
-                {% if sub_regions %}
-                    <li>
-                        <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
-                            <select id="goto_subregion" name="region">
-                                <option value="" selected="selected">Перейти ниже</option>
-                                {% for sub_region in sub_regions %}
-                                <option value="{{ sub_region.id }}">{{ sub_region.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        $("#goto_subregion").change(function(){
-            $("#goto_subregion_form").submit();
-        });
-    </script>
+    {% include "elements/results_table.html" %}
 {% endblock %}
 
 {% block left_column %}
@@ -88,47 +48,12 @@
             {% endif %}
         </div>
 
-        <div class="side_block_header">
-            <h4>Наблюдатели</h4>
-        </div>
-
-        <div class="content_block">
-            <ul class="side_list">
-                {% for observer in roles.observer %}
-                    <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
-                {% endfor %}
-            </ul>
-            {% button "check" "Записаться в наблюдатели" "become_observer" %}
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>Представители СМИ (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Записаться в представители СМИ" "become_journalist" %}
-            </div>
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>Юристы (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Записаться в юристы" "become_lawyer" %}
-            </div>
-        </div>
+        {% include "elements/left_panel.html" %}
     </div>
 
-    {% include "dialogs/become_observer.html" %}
-
     {% include "dialogs/become_voter.html" %}
+
+    {% include "dialogs/become_observer.html" %}
 
     {% include "dialogs/report.html" %}
 
@@ -187,37 +112,7 @@
             {% button "circle-plus" "Добавить ссылку" "add_link" %}
         </div>
 
-        <div class="side_block_header">
-            <h4>Нарушения</h4>
-        </div>
-
-        <div class="content_block">
-            {% button "pencil" "Сообщить о нарушении" "submit_complaint_btn" %}
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>Протоколы (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Выложить протокол" "publish_protocol" %}
-            </div>
-        </div>
-
-        <div class="disabled-block">
-            <i>&nbsp;</i>
-
-            <div class="side_block_header">
-                <h4>События (в разработке)</h4>
-            </div>
-
-            <div class="content_block">
-                {% button "check" "Добавить событие" "add_event" %}
-            </div>
-        </div>
+        {% include "elements/right_panel.html" %}
     </div>
 
     {% include "elements/yandex_share.html" %}

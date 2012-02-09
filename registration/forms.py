@@ -142,6 +142,11 @@ class RegistrationForm(forms.ModelForm):
         return user
 
 class LoginzaRegistrationForm(RegistrationForm):
-    def __init__(self, *args, **kwargs):
-        super(LoginzaRegistrationForm, self).__init__(*args, **kwargs)
-        self.helper.form_action = 'loginza_register'
+    # TODO: code duplication (because helper's action is different)
+    helper = form_helper('loginza_register', u'Зарегистрироваться')
+    # TODO: do we need next hidden field?
+    helper.form_id = 'registration_form'
+    helper.layout = Layout(
+        HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
+        HTML(r'<script type="text/javascript">$().ready(function(){  set_select_location("registration_form", []);});</script>'),
+    )

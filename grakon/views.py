@@ -8,6 +8,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
 
 from grakon.forms import LoginForm, ProfileForm
+from grakon.utils import authenticated_redirect
 from locations.models import Location
 
 class BaseProfileView(object):
@@ -75,22 +76,19 @@ def password_change(request, **kwargs):
         return redirect('password_change_forbidden')
     return auth_views.password_change(request, **kwargs)
 
+@authenticated_redirect('my_profile')
 def login(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
     return auth_views.login(request, 'auth/login.html', 'next', LoginForm)
 
 def logout(request):
     next_page = reverse('main') if 'next' in request.REQUEST else None
     return auth_views.logout(request, next_page)
 
+@authenticated_redirect('my_profile')
 def password_reset_done(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
     return TemplateResponse(request, 'auth/password_reset_done.html')
 
 # TODO: show message with notification of password change
+@authenticated_redirect('my_profile')
 def password_change_done(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
     return TemplateResponse(request, 'auth/password_change_done.html')

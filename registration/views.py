@@ -10,14 +10,13 @@ from django.template.response import TemplateResponse
 from loginza.models import UserMap
 from loginza.templatetags.loginza_widget import _return_path
 
+from grakon.utils import authenticated_redirect
 from registration.forms import LoginzaRegistrationForm, RegistrationForm
 from registration.models import ActivationProfile
 import registration.signals
 
+@authenticated_redirect('edit_profile')
 def register(request):
-    if request.user.is_authenticated():
-        return redirect('edit_profile')
-
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
 
@@ -29,29 +28,27 @@ def register(request):
 
     return TemplateResponse(request, 'registration/register.html', {'form': form})
 
+@authenticated_redirect('my_profile')
 def registration_completed(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
     return TemplateResponse(request, 'registration/registration_completed.html')
 
+@authenticated_redirect('my_profile')
 def activate(request, activation_key):
     account = ActivationProfile.objects.activate_user(activation_key)
     if account:
         return redirect('activation_completed')
     return TemplateResponse(request, 'registration/activation_fail.html')
 
+@authenticated_redirect('my_profile')
 def activation_completed(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
     return TemplateResponse(request, 'registration/activation_completed.html')
 
 # TODO: if username and email match an existing account - suggest to link them
 # TODO: if there is a need to delete user, registered with loginza - identity must be removed as well
 # TODO: what if there are several user maps?
+# TODO: indicate if activation email is already sent
+@authenticated_redirect('my_profile')
 def loginza_register(request):
-    if request.user.is_authenticated():
-        return redirect('my_profile')
-
     try:
         identity_id = request.session.get('users_complete_reg_id', None)
         user_map = UserMap.objects.select_related().get(identity__id=identity_id)

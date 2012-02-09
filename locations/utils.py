@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from locations.models import FOREIGN_TERRITORIES, Location
 
+# TODO: cache the result
 def regions_list():
     regions = [('', u'Выберите субъект РФ'), None, None, None] # reserve places for Moscow, St. Petersburg and foreign countries
     for location in Location.objects.filter(region=None).order_by('name'):

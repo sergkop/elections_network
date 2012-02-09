@@ -5,6 +5,6 @@ from locations.models import Location
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('name', 'region', 'tik')
     ordering = ('name',)
-    search_fields = ('name',)
+    search_fields = ('name', 'region')
 
 admin.site.register(Location, LocationAdmin)

@@ -37,14 +37,9 @@
                     <li><a href="{{ voter.get_absolute_url }}">{{ voter.username }}</a></li>
                 {% endfor %}
             </ul>
-            {% if is_voter_here %}
-                {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" %}
-            {% else %}
-                {% if request.user.is_authenticated %}
-                    {% button "check" "Сменить избирательный округ" "become_voter" %}
-                {% else %}
-                    {% button "check" "Записаться в избиратели" "become_voter" %}
-                {% endif %}
+            {% if is_voter_here %}{% endif %}
+            {% if not request.user.is_authenticated %}
+                {% button "check" "Записаться в избиратели" "become_voter" %}
             {% endif %}
         </div>
 

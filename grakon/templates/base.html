@@ -39,7 +39,10 @@
     <header>
         <div class="ym-wrapper">
             <div class="ym-wbox">
-                <a id="title_link" href="{% url main %}">Гракон<sup>бета</sup></a>
+                <div class="logo">
+                    <a href="/"><img src="{{ STATIC_URL }}images/logo_small.png"></a>
+                </div>
+                <a href="{% url main %}" id="title_link">&nbsp;Гракон<sup>бета</sup></a>
                 <span id="slogan">Гражданский контроль за выборами</span>
             </div>
         </div>

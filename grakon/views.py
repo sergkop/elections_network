@@ -10,6 +10,7 @@ from django.views.generic.edit import UpdateView
 from grakon.forms import LoginForm, ProfileForm
 from grakon.utils import authenticated_redirect
 from locations.models import Location
+from locations.utils import regions_list
 
 class BaseProfileView(object):
     template_name = 'profiles/base.html'
@@ -31,7 +32,7 @@ class BaseProfileView(object):
             'profile_user': user,
             'profile': profile,
             'roles': roles,
-            'locations': list(Location.objects.filter(region=None).order_by('name')),
+            'locations': regions_list(),
             'links': list(profile.links.all().select_related()),
             'contacts': list(profile.contacts.all()) if user.is_authenticated() else [],
             'have_in_contacts': list(profile.have_in_contacts.all()),

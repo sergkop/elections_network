@@ -47,6 +47,14 @@ class BaseRegistrationForm(forms.ModelForm):
 
         self.fields['region'].widget.choices = regions_list()
 
+    def clean_tik(self):
+        try:
+            self.location = Location.objects.get(id=int(self.cleaned_data['tik']))
+        except (ValueError, Location.DoesNotExist):
+            raise forms.ValidationError(u'Выберите свой район')
+
+        return self.cleaned_data['tik']
+
     def clean_password1(self):
         password = self.cleaned_data['password1']
 
@@ -81,14 +89,6 @@ class RegistrationForm(BaseRegistrationForm):
 
         raise forms.ValidationError(u'Пользователь с этим адресом электронной почты уже зарегистрирован')
 
-    def clean_tik(self):
-        try:
-            self.location = Location.objects.get(id=int(self.cleaned_data['tik']))
-        except (ValueError, Location.DoesNotExist):
-            raise forms.ValidationError(u'Выберите свой район')
-
-        return self.cleaned_data['tik']
-
     def save(self):
         user = ActivationProfile.objects.create_inactive_user(self.cleaned_data['username'],
                 self.cleaned_data['email'], self.cleaned_data['password1'])
@@ -108,6 +108,9 @@ class CompleteRegistrationForm(BaseRegistrationForm):
     def __init__(self, user_id, *args, **kwargs):
         super(CompleteRegistrationForm, self).__init__(*args, **kwargs)
         self.user_id = user_id
+
+        self.fields['password1'].mandatory = False
+        self.fields['password2'].mandatory = False
 
     def clean_username(self):
         if self.cleaned_data['username']:

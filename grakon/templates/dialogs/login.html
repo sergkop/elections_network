@@ -8,12 +8,12 @@
                     {% csrf_token %}
                     <table>
                     <tr>
-                        <td><label for="">Логин:</label></td>
-                        <td><input type="text" name="username" /></td>
+                        <td><label for="id_username">Логин:</label></td>
+                        <td><input id="id_username" type="text" name="username" /></td>
                     </tr>
                     <tr>
-                        <td><label for="">Пароль:</label></td>
-                        <td><input type="password" name="password" /></td>
+                        <td><label for="id_password">Пароль:</label></td>
+                        <td><input id="id_password" type="password" name="password" /></td>
                     </tr>
                     </table>
 
@@ -24,9 +24,8 @@
                 </form>
             </td>
             <td style="border-left: 1px solid #AAA;">
-                <!--<iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url={{ LOGINZA_IFRAME_URL }}"
-                style="width:359px;height:170px;" scrolling="no" frameborder="no"></iframe>-->
-                В ближайшее время здесь появятся кнопки для авторизации через сторонние сервисы (Vkontakte, Google, Facebook, и пр.)
+                <iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url={{ LOGINZA_IFRAME_URL }}"
+                style="width:359px;height:170px;" scrolling="no" frameborder="no"></iframe>
             </td>
         </tr>
     </table>

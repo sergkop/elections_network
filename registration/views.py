@@ -62,6 +62,8 @@ def loginza_register(request):
     except UserMap.DoesNotExist:
         return redirect('main')
 
+    print user_map
+
     if request.method == 'POST':
         form = CompleteRegistrationForm(user_map.user.id, request.POST)
         if form.is_valid():

@@ -2,7 +2,9 @@
     <div class="breadcrumbs">
         <ul>
             {% if not current_location.is_foreign %}
-                <li class="first"><a href="{% url main %}">Россия<i></i><b></b></a></li>
+                <li class="first">
+                    <a href="{% url main %}">Россия<i></i><b></b></a>
+                </li>
             {% endif %}
 
             {% if current_location.region %}
@@ -10,6 +12,7 @@
                     <a href="{{ current_location.region.get_absolute_url }}">{{ current_location.region }}<i></i><b></b></a> 
                 </li>
             {% endif %}
+
             {% if current_location.tik %}
                 <li>
                     <a href="{{ current_location.tik.get_absolute_url }}">{{ current_location.tik }}<i></i><b></b></a>
@@ -26,7 +29,9 @@
                 <li>
                     <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                         <select id="goto_subregion" name="region">
-                            <option value="" selected="selected">Перейти ниже</option>
+                            {% if current_location %}
+                                <option value="" selected="selected">Перейти ниже</option>
+                            {% endif %}
                             {% for id, name in sub_regions %}
                             <option value="{{ id }}">{{ name }}</option>
                             {% endfor %}

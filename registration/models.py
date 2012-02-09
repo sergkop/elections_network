@@ -11,6 +11,8 @@ from django.template.loader import render_to_string
 from django.utils.hashcompat import sha_constructor
 from django.utils.translation import ugettext_lazy as _
 
+from loginza.models import UserMap
+
 ACTIVATED = 'ALREADY_ACTIVATED'
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
 
@@ -26,6 +28,16 @@ class ActivationManager(models.Manager):
                 user = profile.user
                 user.is_active = True
                 user.save()
+
+                # if user registered with loginza - activate his account
+                try:
+                    user_map = UserMap.objects.get(user=user)
+                except UserMap.DoesNotExist:
+                    pass
+                else:
+                    user_map.verified = True
+                    user_map.save()
+
                 profile.activation_key = ACTIVATED
                 profile.save()
                 return user
@@ -33,13 +45,7 @@ class ActivationManager(models.Manager):
         return False
 
     @transaction.commit_on_success
-    def create_inactive_user(self, username, email, password):
-        """ Create a new, inactive User, generate a RegistrationProfile and email its activation key to the User """
-        # TODO: make sure email is still unique (use transaction)
-        user = User.objects.create_user(username, email, password)
-        user.is_active = False
-        user.save()
-
+    def init_activation(self, user):
         # The activation key is a SHA1 hash, generated from a combination of the username and a random salt
         salt = sha_constructor(str(random.random())).hexdigest()[:5]
         activation_key = sha_constructor(salt+user.username).hexdigest()
@@ -47,7 +53,6 @@ class ActivationManager(models.Manager):
         registration_profile = self.create(user=user, activation_key=activation_key)
         registration_profile.send_activation_email()
 
-        return user
 
     def delete_expired_users(self):
         """

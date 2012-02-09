@@ -7,10 +7,10 @@ from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from django.template.response import TemplateResponse
 
-from loginza.models import Identity, UserMap
+from loginza.models import UserMap
 from loginza.templatetags.loginza_widget import _return_path
 
-from registration.forms import CompleteRegistrationForm, RegistrationForm
+from registration.forms import LoginzaRegistrationForm, RegistrationForm
 from registration.models import ActivationProfile
 import registration.signals
 
@@ -23,11 +23,6 @@ def register(request):
 
         if form.is_valid():
             user = form.save()
-
-            #user = auth.authenticate(username=username, password=password)
-            #assert user and user.is_authenticated()
-            #auth.login(request, user)
-
             return redirect('registration_completed')
     else:
         form = RegistrationForm()
@@ -51,7 +46,8 @@ def activation_completed(request):
     return TemplateResponse(request, 'registration/activation_completed.html')
 
 # TODO: if username and email match an existing account - suggest to link them
-# TODO: if loginza provided email - verification is not needed
+# TODO: if there is a need to delete user, registered with loginza - identity must be removed as well
+# TODO: what if there are several user maps?
 def loginza_register(request):
     if request.user.is_authenticated():
         return redirect('my_profile')
@@ -60,39 +56,34 @@ def loginza_register(request):
         identity_id = request.session.get('users_complete_reg_id', None)
         user_map = UserMap.objects.select_related().get(identity__id=identity_id)
     except UserMap.DoesNotExist:
-        return redirect('main')
+        return redirect('login')
 
-    print user_map
+    user_data = json.loads(user_map.identity.data)
 
     if request.method == 'POST':
-        form = CompleteRegistrationForm(user_map.user.id, request.POST)
+        form = LoginzaRegistrationForm(request.POST, user_map=user_map)
         if form.is_valid():
-            user_map.user.username = form.cleaned_data['username']
-            user_map.user.email = form.cleaned_data['email']
-            user_map.user.first_name = form.cleaned_data['first_name']
-            user_map.user.last_name = form.cleaned_data['last_name']
-            user_map.user.set_password(form.cleaned_data["password1"])
-            user_map.user.save()
+            user = form.save()
 
-            user_map.verified = True
-            user_map.save()
+            # check if email if provided by loginza - no need to verify it then
+            if user_data.get('email') == user.email: # no need to confirm email
+                user = auth.authenticate(username=user.username, password=form.cleaned_data['password1'])
+                assert user and user.is_authenticated()
+                auth.login(request, user)
 
-            #user = auth.authenticate(user_map=user_map)
-            #auth.login(request, user)
-
-            #messages.info(request, u'Добро пожаловать!')
-            del request.session['users_complete_reg_id']
-            return redirect(_return_path(request))
+                #messages.info(request, u'Добро пожаловать!')
+                del request.session['users_complete_reg_id']
+                return redirect(_return_path(request))
+            else:
+                return redirect('registration_completed')
     else:
-        form = CompleteRegistrationForm(user_map.user.id, initial={
+        form = LoginzaRegistrationForm(user_map=user_map, initial={
                 'username': user_map.user.username,
                 'email': user_map.user.email,
         })
 
-    user_map = UserMap.objects.get(user=user_map.user) # TODO: what if there are several user maps?
-    data = json.loads(user_map.identity.data)
-    form.initial['first_name'] = data['name']['first_name']
-    form.initial['last_name'] = data['name']['last_name']
+    form.initial['first_name'] = user_data['name']['first_name']
+    form.initial['last_name'] = user_data['name']['last_name']
 
     return render_to_response('registration/loginza_register.html', {'form': form},
             context_instance=RequestContext(request))

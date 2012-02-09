@@ -3,7 +3,8 @@ from django.core.urlresolvers import reverse
 from django.dispatch.dispatcher import receiver
 from django.shortcuts import redirect
 
-from loginza import signals, models
+from loginza import signals
+from loginza.models import UserMap
 
 @receiver(signals.error)
 def loginza_error_handler(sender, error, **kwargs):
@@ -11,11 +12,12 @@ def loginza_error_handler(sender, error, **kwargs):
 
 @receiver(signals.authenticated)
 def loginza_auth_handler(sender, user, identity, **kwargs):
+    print "loginza_auth_handler"
     try:
         # it's enough to have single identity verified to treat user as verified
-        models.UserMap.objects.get(user=user, verified=True)
+        UserMap.objects.get(user=user, verified=True)
         auth.login(sender, user)
-    except models.UserMap.DoesNotExist:
+    except UserMap.DoesNotExist:
         sender.session['users_complete_reg_id'] = identity.id
         return redirect(reverse('loginza_register'))
     """

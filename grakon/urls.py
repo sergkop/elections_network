@@ -18,7 +18,10 @@ urlpatterns = patterns('grakon.views',
 urlpatterns += patterns('django.contrib.auth.views',
     # The two-step password change
     url(r'^change_password$', 'password_change', name='password_change', kwargs={
-            'template_name': 'auth/password_change.html', 'password_change_form': PasswordChangeForm}),
+            'template_name': 'auth/password_change.html',
+            'password_change_form': PasswordChangeForm,
+            'post_change_redirect': 'password_change_done',
+    }),
 
     # The four-step password reset
     url(r'^password_reset$', 'password_reset', name='password_reset', kwargs={

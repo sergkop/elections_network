@@ -86,10 +86,10 @@
             {% if roles.voter %}
                 {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" "" "" %}
             {% else %}
-                {% button "check" "Записаться в избиратели" "become_voter" "" "" %}
+                {% button "circle-check" "Записаться в избиратели" "become_voter" "" "" %}
             {% endif %}
 
-            {% button "check" "Записаться в наблюдатели" "become_observer" "" "" %}
+            {% button "circle-check" "Записаться в наблюдатели" "become_observer" "" "" %}
         </center>
     </div>
 
@@ -109,7 +109,7 @@
 
             var new_title =  (form_location_id("become_voter_form")!="") ? "Сменить избирательный округ" : "Записаться в избиратели";
             $("#become_voter .ui-button-text").text(new_title);
-            $("#become_voter .ui-icon").toggleClass("ui-icon-check").toggleClass("ui-icon-arrowreturnthick-1-e");
+            $("#become_voter .ui-icon").toggleClass("ui-icon-circle-check").toggleClass("ui-icon-arrowreturnthick-1-e");
         });
     </script>
 {% endif %}

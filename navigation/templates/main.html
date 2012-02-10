@@ -32,9 +32,9 @@
             </ul>
 
             {% if request.user.is_authenticated %}
-                {% button "check" "Сменить избирательный округ" "become_voter" %}
+                {% button "circle-check" "Сменить избирательный округ" "become_voter" %}
             {% else %}
-                {% button "check" "Записаться в избиратели" "become_voter" %}
+                {% button "circle-check" "Записаться в избиратели" "become_voter" %}
             {% endif %}
         </div>
 
@@ -115,7 +115,7 @@
                 <b>или</b>
             </td>
             <td style="vertical-align:middle;">
-                {% button "search" "Найти на карте" "map_location" "map_search" %}
+                {% button "circle-zoomout" "Найти на карте" "map_location" "map_search" %}
             </td>
         </tr>
     </table>

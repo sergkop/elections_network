@@ -89,7 +89,5 @@ def logout(request):
 def password_reset_done(request):
     return TemplateResponse(request, 'auth/password_reset_done.html')
 
-# TODO: show message with notification of password change
-@authenticated_redirect('my_profile')
 def password_change_done(request):
     return TemplateResponse(request, 'auth/password_change_done.html')

@@ -20,13 +20,13 @@
     </script>
 
     <center>
-        <div id="publicElectionsMap" style="width: 500px; height:500px;"></div>
+        <div id="publicElectionsMap" style="width: 100%; height:500px; min-width: 300px;"></div>
     </center>
 
     <script type="text/javascript">
         $(document).ready(function(){
-            ElectionMap.init();
-            ElectionMap.showComission({{ current_location.id }});
+            ElectionMap.init(); // "{% if current_location.region %}{{ current_location.region }}, {% endif %}{{ current_location.name }}"
+            ElectionMap.showRegion({{ current_location.id }});
         });
     </script>
 {% else %}

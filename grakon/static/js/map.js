@@ -24,21 +24,24 @@ var ElectionMap = {
 
     buttons: null,
 
-	electionCommissionLevel: null,
+    electionCommissionLevel: null,
 
-	visibleElectionCommissions: new Array(),
-	
-	centerNearestElectionCommission: null,
-	
-	distanceToNearestElectionCommission: null,
-	
-	objManager: new YMaps.ObjectManager(),
-	
+    visibleElectionCommissions: new Array(),
+
+    centerNearestElectionCommission: null,
+
+    distanceToNearestElectionCommission: null,
+
+    objManager: new YMaps.ObjectManager(),
+
+    placemarkStyles: new Array(),
+
 	// Переменная, в которой заданы все типы масштабирования для карты.
 	MAP_LEVELS: new Array(
-        {index: 0, value: "ЦИК"},
-        {index: 5, value: "ИКСы"},
-        {index: 10, value: "ТИКи"}
+        {index: 2, value: "ЦИК"},
+        {index: 6, value: ""},
+        {index: 12, value: "ТИКи"},
+        {index: 4, value: "ИКСы"}
 	),
 
 	/**
@@ -52,9 +55,11 @@ var ElectionMap = {
 		if (electionCommissionLevel != null && electionCommissionLevel != "")
 			ElectionMap.electionCommissionLevel =  electionCommissionLevel;
 
+        ElectionMap.initPlacemarkStyles();
+
 		ElectionMap.map = new YMaps.Map( document.getElementById("publicElectionsMap") );
-		ElectionMap.map.setType(YMaps.MapType.PMAP);
-		ElectionMap.map.enableScrollZoom();
+		ElectionMap.map.setType(YMaps.MapType.HYBRID);
+		ElectionMap.map.setMinZoom(2);
 
 		// Переименовываем типы карт, чтобы их можно было различать. Народные карты имеют индекс 1, обычные - индекс 2.
 		YMaps.MapType.PMAP.setName("Схема 1");
@@ -67,7 +72,7 @@ var ElectionMap = {
         )); // объявляем доступные типы карт
 		ElectionMap.map.addControl(new YMaps.ToolBar());
 		ElectionMap.map.addControl(new YMaps.Zoom({customTips: ElectionMap.MAP_LEVELS}));
-		ElectionMap.map.addControl(new YMaps.SearchControl({/*geocodeOptions: {geocodeProvider: "yandex#pmap"}, */width: 200}));
+		ElectionMap.map.addControl(new YMaps.SearchControl({width: (place == null || place == "") ? 400 : 200}));
 		
 		ElectionMap.map.addOverlay( ElectionMap.objManager );
 		// Показать на карте заданное место
@@ -75,7 +80,22 @@ var ElectionMap = {
 
 		//ElectionMap.addButtons();
 	},
-	
+
+    /**
+      * Создаём стили для меток избирательных комиссий
+      */
+    initPlacemarkStyles: function() {
+        var s = new YMaps.Style();
+        s.iconStyle = new YMaps.IconStyle();
+        s.iconStyle.href = "/static/images/election_commission.png";
+        s.iconStyle.size = new YMaps.Point(24, 28);
+        s.iconStyle.offset = new YMaps.Point(-17, -19);
+
+        ElectionMap.placemarkStyles.push(s);
+        ElectionMap.placemarkStyles.push("default#orangePoint");
+        ElectionMap.placemarkStyles.push("default#lightbluePoint");
+    },
+
 	/**
 	 * Центрирует карту на указанном месте с оптимальным масштабом.
 	 * @param {place} - место, которое будет показано на карте. Если не задано, то будет показана вся Россия
@@ -92,15 +112,18 @@ var ElectionMap = {
 			s.iconStyle.offset = new YMaps.Point(-16, -16);
 			// Создание метки и добавление пользователя на карту
 			var usermark = new YMaps.Placemark(userLocation, {style: s, hideIcon: false});
-			usermark.description = "Ваше местоположение 1";
+			usermark.description = "Ваше местоположение";
 			ElectionMap.map.addOverlay(usermark);
 		}
+
+		var zoom = ElectionMap.MAP_LEVELS[3].index;
+        var center = new YMaps.GeoPoint(37.64, 55.76);
+
 		// Показываем заданное место на карте.
 		if (place == null || place == "") { // Если место не задано, то для пользователя из России будет определено его местоположение и показано на карте с максимальным масштабом;
 											// для пользователя из-за рубежа карта будет отцентрована по европейской части России.
-			var zoom = 4;
-			var center = new YMaps.GeoPoint(37.64, 55.76);
-			
+            ElectionMap.map.enableScrollZoom();
+
 			if (YMaps.location && YMaps.location.country == "Россия") {
 				center = new YMaps.GeoPoint(YMaps.location.longitude, YMaps.location.latitude);
 				zoom = YMaps.location.zoom;
@@ -118,7 +141,7 @@ var ElectionMap = {
 					ElectionMap.map.setBounds(this.get(0).getBounds());
 					ElectionMap.markElectionCommissions();
 				} else
-					alert("Ничего не найдено. Извините, пожалуйста!");
+					ElectionMap.map.setCenter(center, zoom);
 			});
 
 			// Процесс геокодирования завершен с ошибкой
@@ -144,32 +167,55 @@ var ElectionMap = {
     markElectionCommission: function(commission) {
         // создаём метку для избирательной комиссии с именем и описанием
         var geoPoint = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var placemark = new YMaps.Placemark(geoPoint);
-        placemark.name = commission.title;
+        var styleValue = ElectionMap.placemarkStyles[commission.level-1];
+        var placemark = new YMaps.Placemark(geoPoint, {style: styleValue});
+        placemark.name = '<a href="#" onclick="ElectionMap.showRegion(\''+commission.id+'\')" title="Показать данную область на карте" style="color: black">'+commission.title+'</a>';
         placemark.description = commission.address +
-                ' <a href="#" onclick="ElectionMap.showComission('+commission.id+'); return false;"><img src="/static/images/target.png" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
+                ' <a href="#" onclick="ElectionMap.showRegion('+commission.id+'); return false;"><img src="/static/images/target.png" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
                 //((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
                 //((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
                 ('<p><a href="/location/'+commission.id+'">Страница округа</a></p>');
-        placemark.setIconContent(commission.shortTitle);
-        placemark.id = commission.id;
-        placemark.level = commission.level;
-        placemark.data = commission.data;
-        //placemark.shortTitle = commission.shortTitle;
-		ElectionMap.placemarks[commission.level-1].push(placemark);
-		ElectionMap.objManager.add(
-			placemark,
-			ElectionMap.MAP_LEVELS[placemark.level-1].index,
-			19
-		);
+        placemark.data = commission;
+
+        // добавить значки избирательных комиссий на карту
+        if (commission.level == 2)
+            ElectionMap.addElectionCommissionIcon(placemark);
+
+        placemark.setIconContent( commission.shortTitle );
+
+        ElectionMap.placemarks[commission.level-1].push(placemark);
+        ElectionMap.objManager.add(placemark, ElectionMap.MAP_LEVELS[commission.level-1].index, 19);
 
         ElectionMap.checkForVisibility(placemark);
     },
 
-    showComission: function(comission_id) {
-        var commission = electionCommissions[comission_id];
+    /**
+     * Добавляет иконку избирательной комиссии на карту
+     * @param {placemark} объект YMaps.Placemark
+     */
+    addElectionCommissionIcon: function(placemark) {
+        var icon = new YMaps.Placemark(placemark.getGeoPoint(), {style: ElectionMap.placemarkStyles[0],
+                                    hasHint: true,
+                                    hideIcon: false});
+        icon.name = placemark.name;
+        icon.description = placemark.description;
+        icon.setHintContent(placemark.data.shortTitle);
+        ElectionMap.objManager.add(
+            icon,
+            ElectionMap.MAP_LEVELS[3].index,
+            ElectionMap.MAP_LEVELS[1].index-1
+        );
+    },
+
+    /**
+     * Ищет и показывает на карте заданную область с максимальный масштабом.
+     * @param {commissionId} id комиссии
+    */
+    showRegion: function(commissionId) {
+        var commission = electionCommissions[commissionId];
         var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        ElectionMap.map.setCenter(point, 15);
+        var zoom = (commission.level-1 < ElectionMap.MAP_LEVELS.length-2) ? ElectionMap.MAP_LEVELS[commission.level].index : 15;
+        ElectionMap.map.setCenter(point, zoom);
     },
 
 	/**
@@ -235,7 +281,7 @@ var ElectionMap = {
 			return;
 
 		if (ElectionMap.electionCommissionLevel == null ||
-			ElectionMap.electionCommissionLevel == placemark.level) {
+			ElectionMap.electionCommissionLevel == placemark.data.level) {
 				// Проверить метку на видимость и в положительном случае сохранить в массив видимых избирательных комиссий
 				if (ElectionMap.map.getBounds().contains( placemark.getCoordPoint() ))
 					ElectionMap.visibleElectionCommissions.push( placemark );

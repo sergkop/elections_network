@@ -137,7 +137,7 @@ class RegistrationForm(forms.ModelForm):
             setattr(profile, field, self.cleaned_data[field])
         profile.save()
 
-        Role(user=profile, location=self.location, type='voter').save()
+        Role.objects.get_or_create(type='voter', user=profile, defaults={'location': self.location})
 
         return user
 

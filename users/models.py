@@ -22,6 +22,9 @@ class Role(models.Model):
     def type_name(self):
         return ROLE_TYPES[self.type]
 
+    def __unicode__(self):
+        return unicode(self.user) + ' is ' + self.type + ' at ' + unicode(self.location)
+
 class Contact(models.Model):
     user = models.ForeignKey(Profile, related_name='contacts')
     contact = models.ForeignKey(Profile, related_name='have_in_contacts')

@@ -24,8 +24,7 @@
                 </form>
             </td>
             <td style="border-left: 1px solid #AAA;">
-                <iframe src="http://loginza.ru/api/widget?overlay=loginza&providers_set=google,vkontakte,facebook,livejournal,yandex,mailru,rambler,twitter,odnoklassniki&lang=ru&token_url={{ LOGINZA_IFRAME_URL }}"
-                style="width:359px;height:170px;" scrolling="no" frameborder="no"></iframe>
+                {% include "elements/loginza.html" %}
             </td>
         </tr>
     </table>

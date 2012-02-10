@@ -36,6 +36,6 @@ urlpatterns += patterns('django.contrib.auth.views',
 # TODO: fix it
 from django.views.generic.base import TemplateView
 urlpatterns += patterns('grakon.views',
-    url(r'^auth/password_change_forbidden/$', TemplateView.as_view(template_name='registration/password_change_forbidden.html'),
+    url(r'^password_change_forbidden/$', TemplateView.as_view(template_name='registration/password_change_forbidden.html'),
         name='password_change_forbidden')
 )

@@ -34,11 +34,11 @@ class ProfileForm(forms.ModelForm):
 
 # TODO: set minimum password complexity
 class SetPasswordForm(auth_forms.SetPasswordForm):
-    helper = form_helper('set_password', u'Установить пароль')
+    helper = form_helper('', u'Установить пароль')
 
 # TODO: set minimum password complexity
 class PasswordChangeForm(auth_forms.PasswordChangeForm):
-    helper = form_helper('change_password', u'Сменить пароль')
+    helper = form_helper('password_change', u'Сменить пароль')
 
 class PasswordResetForm(auth_forms.PasswordResetForm):
     helper = form_helper('password_reset', u'Восстановить пароль')

@@ -23,10 +23,14 @@
 
 {% endblock %}
 
+{% block content_header %}
+    <h2 class="location_header">Найти свой избирательный округ</h2>
+{% endblock %}
+
 {% block content %}
-    <h2>Найти свой избирательный округ</h2>
-    <div id="publicElectionsMap" style="height:600px; width: 100%;"></div>
-    <div id="message" style="font-size: 10pt; margin-top: 25px;"></div>
+    <center>
+        <div id="publicElectionsMap" style="height:500px; width: 100%;max-width:1000px;"></div>
+    </center>
 
     <script type="text/javascript">
         $(document).ready(function(){

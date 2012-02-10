@@ -137,6 +137,16 @@
 
     <p>Подробнее о проекте можно прочитать <a href="{% url about %}">здесь</a>.</p>
 
+    <center>
+        <div class="fb-like" data-href="http://grakon.org" data-send="false" data-width="350" data-show-faces="false" data-font="lucida grande"></div>
+        <div id="vk_like" style="display:inline;"></div>
+        <script type="text/javascript">
+            VK.Widgets.Like("vk_like", {type: "mini"});
+        </script>
+
+        <div class="g-plusone" data-size="medium" data-href="http://grakon.org" style="float:right;"></div>
+    </center>
+
     <!--div>
         {% if not user.is_authenticated %}
             Чтобы получить полный доступ к системе, необходимо

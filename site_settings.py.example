@@ -31,7 +31,7 @@ SECRET_KEY = ''
 
 VIRTUALENV = "" # set to ".../env/lib/python2.7/site-packages" if you are using virtualenv
 
-#VK_APP_ID = 1 # set proper VKontakte app id for comments wall
+VK_APP_ID = 2798211 # set proper VKontakte app id for comments wall
 
 GOOGLE_ANALYTICS_ID = 'UA-28992589-1'
 

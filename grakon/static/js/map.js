@@ -171,7 +171,6 @@ var ElectionMap = {
         var placemark = new YMaps.Placemark(geoPoint, {style: styleValue});
         placemark.name = '<a href="#" onclick="ElectionMap.showRegion(\''+commission.id+'\')" title="Показать данную область на карте" style="color: black">'+commission.title+'</a>';
         placemark.description = commission.address +
-                ' <a href="#" onclick="ElectionMap.showRegion('+commission.id+'); return false;"><img src="/static/images/target.png" title="Найти на карте" style="position: relative; bottom: -3px;" /></a>' +
                 //((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
                 //((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
                 ('<p><a href="/location/'+commission.id+'">Страница округа</a></p>');

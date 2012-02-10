@@ -12,8 +12,7 @@
     <center>
         {% include "elements/loginza.html" %}
         <br/>
-        <a href="{% url register %}">Или зарегистрируйтесь</a>
+        <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
+        <a href="{% url register %}">Регистрация</a>
     </center>
-
-    <a href="{% url password_reset %}" style="display: none;">Забыли пароль?</a>
 {% endblock %}

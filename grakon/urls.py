@@ -26,9 +26,11 @@ urlpatterns += patterns('django.contrib.auth.views',
             'password_reset_form': PasswordResetForm,
             'post_reset_redirect': 'password_reset_done',
     }),
-    url(r'^password_reset_complete$', 'password_reset_complete', name='password_reset_complete'),
+    url(r'^password_reset_complete$', 'password_reset_complete', name='password_reset_complete', kwargs={
+            'template_name': 'auth/password_reset_complete.html'}),
     url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-            'password_reset_confirm', name='password_reset_confirm', kwargs={'set_password_form': SetPasswordForm}),
+            'password_reset_confirm', name='password_reset_confirm', kwargs={'set_password_form': SetPasswordForm,
+            'template_name': 'auth/password_reset_confirm.html'}),
 )
 
 # TODO: fix it

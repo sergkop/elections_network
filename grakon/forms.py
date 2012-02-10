@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 import django.contrib.auth.forms as auth_forms
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.utils.http import int_to_base36
 
 import bleach
 from uni_form.layout import HTML, Layout

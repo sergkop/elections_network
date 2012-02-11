@@ -17,16 +17,29 @@ from users.models import Role
 password_digit_re = re.compile(r'\d')
 password_letter_re = re.compile(r'[a-zA-Z]')
 
+# TODO: do we need next hidden field?
+layout = Layout(
+    HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
+    HTML(r'<script type="text/javascript">' \
+            '$().ready(function(){' \
+                'set_select_location("registration_form", [{{ form.region.value|default:"" }}{% if form.tik.value %}, {{ form.tik.value }}{% endif %}]);' \
+            '});' \
+        '</script>'
+    ),
+)
+
 class BaseRegistrationForm(forms.ModelForm):
     username = forms.RegexField(label=u'Имя пользователя (логин)', max_length=20, min_length=4, regex=r'^[\w\.]+$',
-            help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры, подчеркивания и точки)')
+            help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры, подчеркивания и точки).<br/>' \
+                    u'<b>Под этим именем вас будут видеть другие пользователи, если вы не поставите галку ниже.</b>')
 
     region = forms.CharField(label=u'Выберите субъект РФ, где проживаете', widget=forms.Select(),
             help_text=u'Если вы находитесь за границей, выберите соответствующий пункт.')
     tik = forms.CharField(label=u'Выберите свой район', widget=forms.Select(choices=[('', u'Выберите свой район')]),
             help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссией')
 
-    email = forms.EmailField(label=u'Электронная почта')
+    email = forms.EmailField(label=u'Электронная почта',
+            help_text=u'На ваш электронный адрес будет выслано письмо со ссылкой для активации аккаунта')
 
     class Meta:
         model = Profile
@@ -42,6 +55,11 @@ class BaseRegistrationForm(forms.ModelForm):
             self.user_id = None
 
         super(BaseRegistrationForm, self).__init__(*args, **kwargs)
+
+        if self.user_id:
+            self.user_data = json.loads(self.user_map.identity.data)
+            if self.user_data.get('email'):
+                self.fields['email'].widget = forms.HiddenInput()
 
         self.fields['region'].widget.choices = regions_list()
 
@@ -77,32 +95,29 @@ class BaseRegistrationForm(forms.ModelForm):
         if self.user_id:
             user = self.user_map.user
             user.username = username
-            user.email = email
+
+            # if email is provided by loginza - use it (don't accept user's input - it's a security issue)
+            user.email = self.user_data.get('email', email)
+
             user.set_password(password)
+            user.save()
         else:
             # TODO: make sure email is still unique (use transaction)
             user = User.objects.create_user(username, email, password)
-
-        activation_needed = True
-        if self.user_id:
-            user_data = json.loads(self.user_map.identity.data)
-            if user_data.get('email') == email:
-                activation_needed = False
-
-        if activation_needed:
-            user.is_active = False
-            ActivationProfile.objects.init_activation(user)
-        else:
-            self.user_map.verified = True
-            self.user_map.save()
-            # TODO: send email just to notify of registration
-
-        user.save()
 
         profile = user.get_profile()
         for field in self.Meta.fields:
             setattr(profile, field, self.cleaned_data[field])
         profile.save()
+
+        if self.user_id and self.user_data.get('email'): # email activation is not needed
+            self.user_map.verified = True
+            self.user_map.save()
+            # TODO: send email just to notify of registration
+        else:
+            user.is_active = False
+            user.save()
+            ActivationProfile.objects.init_activation(user)
 
         Role.objects.get_or_create(type='voter', user=profile, defaults={'location': self.location})
 
@@ -114,12 +129,8 @@ class RegistrationForm(BaseRegistrationForm):
     password2 = forms.CharField(label=u'Подтвердите пароль', widget=forms.PasswordInput(render_value=False))
 
     helper = form_helper('register', u'Зарегистрироваться')
-    # TODO: do we need next hidden field?
     helper.form_id = 'registration_form'
-    helper.layout = Layout(
-        HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
-        HTML(r'<script type="text/javascript">$().ready(function(){  set_select_location("registration_form", []);});</script>'),
-    )
+    helper.layout = layout
 
     def clean_password1(self):
         password = self.cleaned_data['password1']
@@ -140,11 +151,6 @@ class RegistrationForm(BaseRegistrationForm):
         return password2
 
 class LoginzaRegistrationForm(BaseRegistrationForm):
-    # TODO: code duplication (because helper's action is different)
     helper = form_helper('loginza_register', u'Зарегистрироваться')
-    # TODO: do we need next hidden field?
     helper.form_id = 'registration_form'
-    helper.layout = Layout(
-        HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
-        HTML(r'<script type="text/javascript">$().ready(function(){  set_select_location("registration_form", []);});</script>'),
-    )
+    helper.layout = layout

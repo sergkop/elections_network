@@ -22,7 +22,9 @@
     color: #fff;
     font-size: 150%;
 }
-
+.asteriskField{
+    color: #F00;
+}
 
 
 /* additional styles */

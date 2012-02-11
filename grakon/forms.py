@@ -46,9 +46,11 @@ class PasswordResetForm(auth_forms.PasswordResetForm):
     def save(self, **kwargs):
         for user in self.users_cache:
             subject = u'Смена пароля на grakon.org'
+            profile = user.get_profile()
             message = render_to_string('auth/password_reset_email.html', {
                 'uid': int_to_base36(user.id),
                 'user': user,
+                'full_name': '%s %s' % (profile.first_name, profile.last_name),
                 'token': kwargs['token_generator'].make_token(user),
                 'URL_PREFIX': settings.URL_PREFIX,
             })

@@ -17,7 +17,7 @@ from users.models import Role
 password_digit_re = re.compile(r'\d')
 password_letter_re = re.compile(r'[a-zA-Z]')
 
-class RegistrationForm(forms.ModelForm):
+class BaseRegistrationForm(forms.ModelForm):
     username = forms.RegexField(label=u'Имя пользователя (логин)', max_length=20, min_length=4, regex=r'^[\w\.]+$',
             help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры, подчеркивания и точки)')
 
@@ -27,21 +27,10 @@ class RegistrationForm(forms.ModelForm):
             help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссией')
 
     email = forms.EmailField(label=u'Электронная почта')
-    password1 = forms.CharField(label=u'Пароль', widget=forms.PasswordInput(render_value=False),
-            help_text=u'Пароль должен быть не короче 8 знаков и содержать по крайней мере одну латинскую букву и одну цифру')
-    password2 = forms.CharField(label=u'Подтвердите пароль', widget=forms.PasswordInput(render_value=False))
 
     class Meta:
         model = Profile
         fields = ('username', 'last_name', 'first_name', 'middle_name', 'show_name')
-
-    helper = form_helper('register', u'Зарегистрироваться')
-    # TODO: do we need next hidden field?
-    helper.form_id = 'registration_form'
-    helper.layout = Layout(
-        HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
-        HTML(r'<script type="text/javascript">$().ready(function(){  set_select_location("registration_form", []);});</script>'),
-    )
 
     def __init__(self, *args, **kwargs):
         """ if user_id is passed - loginza was used for registration """
@@ -52,11 +41,7 @@ class RegistrationForm(forms.ModelForm):
         else:
             self.user_id = None
 
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-
-        if self.user_id:
-            self.fields['password1'].required = False
-            self.fields['password2'].required = False
+        super(BaseRegistrationForm, self).__init__(*args, **kwargs)
 
         self.fields['region'].widget.choices = regions_list()
 
@@ -85,27 +70,9 @@ class RegistrationForm(forms.ModelForm):
 
         return self.cleaned_data['tik']
 
-    def clean_password1(self):
-        password = self.cleaned_data['password1']
-
-        if password != '':
-            if len(password) < 8:
-                raise forms.ValidationError(u'Пароль должен содержать не менее 8 символов')
-
-            if password_letter_re.search(password) is None or password_digit_re.search(password) is None:
-                raise forms.ValidationError(u'Пароль должен содержать по крайней мере одну латинскую букву и одну цифру')
-
-        return password
-
-    def clean_password2(self):
-        password2 = self.cleaned_data['password2']
-        if self.cleaned_data.get('password1', '') != self.cleaned_data['password2']:
-            raise forms.ValidationError(u'Введенные вами пароли не совпадают')
-        return password2
-
     def save(self):
         username, email, password = self.cleaned_data['username'], \
-                self.cleaned_data['email'], self.cleaned_data["password1"]
+                self.cleaned_data['email'], self.cleaned_data.get('password1', '')
 
         if self.user_id:
             user = self.user_map.user
@@ -141,7 +108,38 @@ class RegistrationForm(forms.ModelForm):
 
         return user
 
-class LoginzaRegistrationForm(RegistrationForm):
+class RegistrationForm(BaseRegistrationForm):
+    password1 = forms.CharField(label=u'Пароль', widget=forms.PasswordInput(render_value=False),
+            help_text=u'Пароль должен быть не короче 8 знаков и содержать по крайней мере одну латинскую букву и одну цифру')
+    password2 = forms.CharField(label=u'Подтвердите пароль', widget=forms.PasswordInput(render_value=False))
+
+    helper = form_helper('register', u'Зарегистрироваться')
+    # TODO: do we need next hidden field?
+    helper.form_id = 'registration_form'
+    helper.layout = Layout(
+        HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
+        HTML(r'<script type="text/javascript">$().ready(function(){  set_select_location("registration_form", []);});</script>'),
+    )
+
+    def clean_password1(self):
+        password = self.cleaned_data['password1']
+
+        if password != '':
+            if len(password) < 8:
+                raise forms.ValidationError(u'Пароль должен содержать не менее 8 символов')
+
+            if password_letter_re.search(password) is None or password_digit_re.search(password) is None:
+                raise forms.ValidationError(u'Пароль должен содержать по крайней мере одну латинскую букву и одну цифру')
+
+        return password
+
+    def clean_password2(self):
+        password2 = self.cleaned_data['password2']
+        if self.cleaned_data.get('password1', '') != self.cleaned_data['password2']:
+            raise forms.ValidationError(u'Введенные вами пароли не совпадают')
+        return password2
+
+class LoginzaRegistrationForm(BaseRegistrationForm):
     # TODO: code duplication (because helper's action is different)
     helper = form_helper('loginza_register', u'Зарегистрироваться')
     # TODO: do we need next hidden field?

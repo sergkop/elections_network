@@ -48,11 +48,11 @@ table, tbody td {border: none; margin: 0;}
 h2.location_header {/*border-radius: 5px; border: 1px solid #dcdcdc; box-shadow: inset 0 -1px 0 #f2f2f2; padding: 5px 10px;*/ font-size: 2em; text-align: left;  color: #343845; margin: 0.1em 0 0.5em;;}		
 
 footer {background: none; border: none; width: 100%; overflow: hidden; margin-top: 40px;}
-footer .ym-wbox {border-radius: 5px; border: 1px solid #dcdcdc; box-shadow: inset 0 -1px 0 #f2f2f2; text-align: left; padding: 5px 10px; color: #343845; margin-bottom: 1em; font-size: 0.9em;  color: #909397;  width: 100%; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+footer .ym-wbox {border-radius: 5px; border: 1px solid #dcdcdc; box-shadow: inset 0 -1px 0 #f2f2f2; text-align: left; padding: 10px 20px; color: #343845; margin-bottom: 1em; font-size: 0.9em;  color: #909397;  width: 100%; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
 footer  .ym-wrapper { width: 100%; padding: 0 3em;  box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
 footer .ym-wbox a {text-decoration: none; color: #6e7174;}
 	footer .ym-wbox a:hover {color: #7E17A3;}
-	footer div {float: right;}	
+	footer .ym-wbox div {float: right;}	
 	footer div.footer_menu {float: left;}	
 
 .ym-clearfix {margin-bottom: 15px;}
@@ -161,13 +161,13 @@ h3 {margin: 0;}
 }
 
 /*h2.location_header,*/ footer .ym-wbox {
-background-color: #dedede;
-background: -moz-linear-gradient(#EBEBEB, #dedede 70%);
-background: -ms-linear-gradient(#EBEBEB, #dedede 70%);
-background: -o-linear-gradient(#EBEBEB, #dedede 70%);
-background: -webkit-gradient(linear, 0 0, 0 100%, from(#EBEBEB), color-stop(0.7, #dedede));
-background: -webkit-linear-gradient(#EBEBEB, #dedede 70%);
-background: linear-gradient(#EBEBEB, #dedede 70%);}
+background-color: #C2C2C2;
+background: -moz-linear-gradient(#F6F6F6 40%, #C2C2C2);
+background: -ms-linear-gradient(#F6F6F6 40%, #C2C2C2);
+background: -o-linear-gradient(#F6F6F6 40%, #C2C2C2);
+background: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.4, #F6F6F6), to(#C2C2C2));
+background: -webkit-linear-gradient(#F6F6F6 40%, #C2C2C2);
+background: linear-gradient(#F6F6F6 40%, #C2C2C2);}
 
 .side_block_header, .ui-dialog-titlebar { 
 background-color: #d2d2d2;

@@ -90,6 +90,8 @@
 {% block right_column %}
     <h3 class="column_header">Инструменты</h3>
 
+    {% include "blocks/share.html" %}
+
     <div class="ym-clearfix">
         <div class="side_block_header">
             <h4>Полезные ресурсы</h4>
@@ -106,8 +108,6 @@
 
         {% include "elements/right_panel.html" %}
     </div>
-
-    {% include "elements/yandex_share.html" %}
 
     {% include "dialogs/add_link.html" %}
 

@@ -164,19 +164,20 @@ var ElectionMap = {
 		ElectionMap.resetZoom();
 	},
 
+	/**
+	 * Добавляет на карту метку данной избирательной комиссии
+	 * @param {commission} объект типа ElectionCommission
+	 */
     markElectionCommission: function(commission) {
         // создаём метку для избирательной комиссии с именем и описанием
         var geoPoint = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
         var styleValue = ElectionMap.placemarkStyles[commission.level-1];
         var placemark = new YMaps.Placemark(geoPoint, {style: styleValue});
-        placemark.name = '<a href="#" onclick="ElectionMap.showRegion(\''+commission.id+'\')" title="Показать данную область на карте" style="color: black">'+commission.title+'</a>';
-        placemark.description = commission.address +
-                //((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
-                //((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
-                ('<p><a href="/location/'+commission.id+'">Страница округа</a></p>');
+        placemark.name = ElectionMap.buildElectionCommissionName(commission); 
+        placemark.description = ElectionMap.buildElectionCommissionDescription(commission);
         placemark.data = commission;
 
-        // добавить значки избирательных комиссий на карту
+        // добавить значки ИКСов на карту
         if (commission.level == 2)
             ElectionMap.addElectionCommissionIcon(placemark);
 
@@ -186,6 +187,37 @@ var ElectionMap = {
         ElectionMap.objManager.add(placemark, ElectionMap.MAP_LEVELS[commission.level-1].index, 19);
 
         ElectionMap.checkForVisibility(placemark);
+    },
+    
+    /**
+     * Создаёт название избирательного округа в виде HTML-кода.
+     * @param {commission} объект типа ElectionCommission
+     * @returns HTML string
+     */
+    buildElectionCommissionName: function(commission) {
+    	var commissionType;
+    	switch(commission.level) {
+    	case 2: commissionType = "ИК: "; break;
+    	case 3: commissionType = "ТИК: "; break;
+    	default: commissionType = "";
+    	}
+    	var string = '<a href="#" onclick="ElectionMap.showRegion(\''+commission.id+'\'); return false;" ' +
+    					'title="Показать данную область на карте" style="color: black">'+commissionType+commission.title+'</a>';
+    	return string;
+    },
+    
+    /**
+     * Создаёт описание избирательного округа в виде HTML-кода.
+     * @param {commission} объект типа ElectionCommission
+     * @returns HTML string
+     */
+    buildElectionCommissionDescription: function(commission) {
+    	var string = commission.address +
+        //((commission.numVoters != null && commission.numVoters > 0) ?"Избирателей: "+commission.numVoters+"<br/>":"") +
+        //((commission.numObservers != null && commission.numObservers > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
+        ('<p><a href="/location/'+commission.id+'">Страница округа</a></p>');
+    	
+    	return string;
     },
 
     /**

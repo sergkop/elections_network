@@ -89,20 +89,21 @@ class BaseRegistrationForm(forms.ModelForm):
             if user_data.get('email') == email:
                 activation_needed = False
 
-        if activation_needed:
-            user.is_active = False
-            ActivationProfile.objects.init_activation(user)
-        else:
-            self.user_map.verified = True
-            self.user_map.save()
-            # TODO: send email just to notify of registration
-
         user.save()
 
         profile = user.get_profile()
         for field in self.Meta.fields:
             setattr(profile, field, self.cleaned_data[field])
         profile.save()
+
+        if activation_needed:
+            user.is_active = False
+            user.save()
+            ActivationProfile.objects.init_activation(user)
+        else:
+            self.user_map.verified = True
+            self.user_map.save()
+            # TODO: send email just to notify of registration
 
         Role.objects.get_or_create(type='voter', user=profile, defaults={'location': self.location})
 

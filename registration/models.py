@@ -53,7 +53,6 @@ class ActivationManager(models.Manager):
         registration_profile = self.create(user=user, activation_key=activation_key)
         registration_profile.send_activation_email()
 
-
     def delete_expired_users(self):
         """
         Remove expired instances of RegistrationProfile and their associated User's.

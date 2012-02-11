@@ -197,7 +197,7 @@ var ElectionMap = {
     buildElectionCommissionName: function(commission) {
     	var commissionType;
     	switch(commission.level) {
-    	case 2: commissionType = "ИК: "; break;
+    	case 2: commissionType = "ИКС: "; break;
     	case 3: commissionType = "ТИК: "; break;
     	default: commissionType = "";
     	}

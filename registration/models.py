@@ -97,8 +97,10 @@ class ActivationProfile(models.Model):
     # TODO: insert user first_name into email
     def send_activation_email(self):
         subject = u'Активация учетной записи на grakon.org'
+        profile = self.user.get_profile()
         message = render_to_string('registration/activation_email.txt', {
             'activation_key': self.activation_key,
             'URL_PREFIX': settings.URL_PREFIX,
+            'full_name': '%s %s' % (profile.first_name, profile.last_name),
         })
         self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)

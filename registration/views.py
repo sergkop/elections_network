@@ -64,7 +64,7 @@ def loginza_register(request):
 
             # check if email if provided by loginza - no need to verify it then
             if user_data.get('email') == user.email: # no need to confirm email
-                user = auth.authenticate(username=user.username, password=form.cleaned_data['password1'])
+                user = auth.authenticate(username=user.username, password=form.cleaned_data.get('password1',''))
                 assert user and user.is_authenticated()
                 auth.login(request, user)
 
@@ -75,7 +75,6 @@ def loginza_register(request):
                 return redirect('registration_completed')
     else:
         form = LoginzaRegistrationForm(user_map=user_map, initial={
-                'username': user_map.user.username,
                 'email': user_map.user.email,
         })
 

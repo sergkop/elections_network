@@ -4,9 +4,12 @@
 
 {% uni_form form form.helper %}
 
-<hr/>
 
-<p>
-    Если вы забыли пароль, вы можете
-    {% button "pencil" "Сменить пароль" "password_change" "password_change" "" %}
-</p>
+{% if not profile.is_loginza_user %}
+    <hr/>
+
+    <p>
+        Если вы забыли пароль, вы можете
+        {% button "pencil" "Сменить пароль" "password_change" "password_change" "" %}
+    </p>
+{% endif %}

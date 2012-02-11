@@ -51,7 +51,9 @@ class Command(BaseCommand):
             print_progress(i, len(REGIONS))
 
             # Init regional comission
-            regional_location = location_from_info({'name': REGIONS[region][0], 'postcode': 0, 'address': ''})
+            info = json.loads(open(data_path(region, 'center')).read().decode('utf8'))
+            regional_location = location_from_info(info)
+            regional_location.name = REGIONS[region][0]
             regional_location.region_name = region
             regional_location.region_code = REGIONS[region][1]
             regional_location.save()

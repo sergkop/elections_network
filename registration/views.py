@@ -79,8 +79,9 @@ def loginza_register(request):
                 'email': user_map.user.email,
         })
 
-    form.initial['first_name'] = user_data['name']['first_name']
-    form.initial['last_name'] = user_data['name']['last_name']
+    if 'name' in user_data:
+        form.initial['first_name'] = user_data['name'].get('first_name', '')
+        form.initial['last_name'] = user_data['name'].get('last_name', '')
 
     return render_to_response('registration/loginza_register.html', {'form': form},
             context_instance=RequestContext(request))

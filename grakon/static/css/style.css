@@ -167,3 +167,13 @@ select {
     text-align: center;
     margin: 0;
 }
+
+.zoomIn {
+	padding-right: 25px;
+	background: url(/static/images/zoom_in.png) right center no-repeat;
+}
+
+.zoomOut {
+	padding-right: 25px;
+	background: url(/static/images/zoom_out.png) right center no-repeat;
+}

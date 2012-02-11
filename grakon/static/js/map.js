@@ -197,11 +197,11 @@ var ElectionMap = {
     buildElectionCommissionName: function(commission) {
     	var commissionType;
     	switch(commission.level) {
-    	case 2: commissionType = "ИКС: "; break;
-    	case 3: commissionType = "ТИК: "; break;
-    	default: commissionType = "";
+	    	case 2: commissionType = "ИКС: "; break;
+	    	case 3: commissionType = "ТИК: "; break;
+	    	default: commissionType = "";
     	}
-    	var string = '<a href="#" onclick="ElectionMap.showRegion(\''+commission.id+'\'); return false;" ' +
+    	var string = '<a href="#" onclick="ElectionMap.showRegion(\''+commission.id+'\'); return false;" id="commission'+commission.id+'Name" class="zoomIn" ' +
     					'title="Показать данную область на карте" style="color: black">'+commissionType+commission.title+'</a>';
     	return string;
     },
@@ -245,8 +245,36 @@ var ElectionMap = {
     showRegion: function(commissionId) {
         var commission = electionCommissions[commissionId];
         var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var zoom = (commission.level-1 < ElectionMap.MAP_LEVELS.length-2) ? ElectionMap.MAP_LEVELS[commission.level].index : 15;
+        var availZoom = ElectionMap.map.getMaxZoom(new YMaps.GeoBounds(point, point));
+        var maxZoom = (availZoom > 16) ? 16 : availZoom;
+
+        var zoom;
+        switch(commission.level) {
+        	case 1:
+        	case 2:	zoom = (ElectionMap.map.getZoom() != ElectionMap.MAP_LEVELS[commission.level].index) ?
+        						ElectionMap.MAP_LEVELS[commission.level].index :	// показать следующий уровень масштаба ИО с центром на этом
+        							maxZoom; break;	// показать здание ИО в том случае, если масштаб карты уже равен следующему уровню
+        	default: zoom = (ElectionMap.map.getZoom() != maxZoom) ?
+        						maxZoom :
+        							ElectionMap.MAP_LEVELS[commission.level-1].index;
+        }
+
         ElectionMap.map.setCenter(point, zoom);
+        
+        ElectionMap.updateCommissionZoomIcon(commissionId, zoom == maxZoom);
+    },
+    
+    /**
+     * Меняет картинку у названия комисии на "приблизить" или "отдалить"
+     * в соответствии с масштабом карты
+     * @param {commissionId} ID избирательной комиссии
+     * @param {isMaxZoom} true, если максимальный масштаб достигнут
+     */
+    updateCommissionZoomIcon: function(commissionId, isMaxZoom) {
+    	if (isMaxZoom)
+        	$('#commission'+commissionId+'Name').removeClass("zoomIn").addClass("zoomOut");
+        else
+        	$('#commission'+commissionId+'Name').removeClass("zoomOut").addClass("zoomIn");
     },
 
 	/**

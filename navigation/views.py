@@ -25,10 +25,11 @@ def main(request):
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 
-def static_page(request, name, template):
+def static_page(request, name, template, tab=None):
     #page = get_object_or_404(Page, name=name)
     context = {
         #'content': page.content,
+        'tab': tab,
     }
     return render_to_response(template, context_instance=RequestContext(request, context))
 
@@ -37,6 +38,3 @@ def map_search(request):
         'locations': Location.objects.all(),
     }
     return render_to_response('map.html', context_instance=RequestContext(request, context))
-
-def development(request):
-    return render_to_response('development.html', context_instance=RequestContext(request, {}))

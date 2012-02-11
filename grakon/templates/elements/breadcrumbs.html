@@ -1,11 +1,9 @@
 <div class="ym-wrapper">
     <div class="breadcrumbs">
         <ul>
-            {% if not current_location.is_foreign %}
-                <li class="first">
-                    <a href="{% url main %}">Россия<i></i><b></b></a>
-                </li>
-            {% endif %}
+            <li class="first">
+                <a href="{% url main %}">Россия<i></i><b></b></a>
+            </li>
 
             {% if current_location.region %}
                 <li>
@@ -42,8 +40,8 @@
 
             {% if current_location.is_tik %}
                 <li>
-                    <select id="goto_subregion" name="region" disabled="disabled">
-                        <option value="" selected="selected">Выбрать УИК</option>
+                    <select id="goto_subregion" name="region" disabled="disabled" style="width:250px;">
+                        <option value="" selected="selected">Выбрать УИК (в разработке)</option>
                     </select>
                 </li>
             {% endif %}

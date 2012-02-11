@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block head %}
+    <!-- This style is used in a number of pages already - avoid it -->
+    <style type="text/css">
+        .ym-col3 .ym-cbox:last-child {display: none;}
+    </style>
+{% endblock %}
+
+{% block left_column %}
+    <div class="ym-clearfix">
+        <div class="side_block_header">
+            <h4>Команда</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                <li><a href="https://www.facebook.com/mikpanko" target="_blank">Михаил Панько</a> <br/> <i>координатор проекта</i></li>
+                <li><a href="https://www.facebook.com/sergey.kopylov"  target="_blank">Сергей Копылов</a> <br/> <i>главный разработчик</i></li>
+                <li><a href="https://www.facebook.com/profile.php?id=100001256049867"  target="_blank">Леонид Хайлов</a> <br/> <i>разработка интерактивных карт</i></li>
+                <li>Николай Письменный <br/> <i>продвижение и юзабилити</i></li>
+                <li><a href="https://www.facebook.com/dukovsky"  target="_blank">Антон Дуковский</a> <br/> <i>позиционирование проекта</i></li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block right_column %}
+    <div class="ym-clearfix">
+        <div class="side_block_header">
+            <h4>Мы в интернете</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                <li><a href="http://grakonteam.livejournal.com/">Livejournal</a></li>
+                <li><a href="https://www.facebook.com/groups/grakon/">Facebook</a></li>
+                <li><a href="http://vkontakte.ru/club33572670">ВКонтакте</a></li>
+                <li><a href="https://twitter.com/#!/GrakonTeam">Twitter</a></li>
+            </ul>
+        </div>
+
+        <div class="side_block_header">
+            <h4>Документы</h4>
+        </div>
+
+        <div class="content_block">
+            <ul class="side_list">
+                <li><a href="http://bit.ly/elections_pdf">Презентация проекта</a></li>
+                <li><a href="http://bit.ly/zOi7Fz">Подробная презентация проекта</a></li>
+                <li><a href="{{ STATIC_URL }}images/projects_comparison.png">Таблица сравнения с другими проектами</a></li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">О проекте</h2>
+
+    {% tabs "tabs" tab "" "" "Описание" "about" "static_pages/about/about.html" "Правила" "rules" "static_pages/about/rules.html" %}
+{% endblock %}

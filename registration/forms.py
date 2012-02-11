@@ -59,6 +59,7 @@ class BaseRegistrationForm(forms.ModelForm):
         if self.user_id:
             self.user_data = json.loads(self.user_map.identity.data)
             if self.user_data.get('email'):
+                # TODO: if user with this email is already registered, it causes a problem
                 self.fields['email'].widget = forms.HiddenInput()
 
         self.fields['region'].widget.choices = regions_list()

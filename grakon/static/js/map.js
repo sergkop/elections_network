@@ -58,7 +58,7 @@ var ElectionMap = {
         ElectionMap.initPlacemarkStyles();
 
 		ElectionMap.map = new YMaps.Map( document.getElementById("publicElectionsMap") );
-		ElectionMap.map.setType(YMaps.MapType.HYBRID);
+		ElectionMap.map.setType(YMaps.MapType.PMAP);
 		ElectionMap.map.setMinZoom(2);
 
 		// Переименовываем типы карт, чтобы их можно было различать. Народные карты имеют индекс 1, обычные - индекс 2.

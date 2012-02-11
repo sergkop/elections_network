@@ -6,7 +6,7 @@ from grakon.forms import PasswordResetForm, SetPasswordForm, PasswordChangeForm
 urlpatterns = patterns('grakon.views',
     url(r'^profile$', 'my_profile', name='my_profile'),
     url(r'^profile/edit$', 'edit_profile', name='edit_profile'),
-    url(r'^user/(?P<username>[\w+\.])$', 'profile', name='profile'),
+    url(r'^user/(?P<username>[\w\.]+)$', 'profile', name='profile'),
 
     url(r'^login$', 'login', name='login'),
     url(r'^logout$', 'logout', name='logout'),

@@ -1,0 +1,32 @@
+<h4>Об организации</h4>
+<div>
+    {{ organization.about|safe }}
+</div>
+
+<h4>Контакты</h4>
+<p>
+    {% if organization.email %}<b>Email</b>: {{ organization.email }} <br/>{% endif %}
+    {% if organization.telephone %}<b>Телефон</b>: {{ organization.telephone }} <br/>{% endif %}
+    {% if organization.address %}<b>Адрес</b>: {{ organization.address }} <br/>{% endif %}
+    {% if organization.website %}<b>Сайт</b>: <a href="{{ organization.website }}">{{ organization.website }}</a> <br/>{% endif %}
+    {% if organization.representative %}<b>Контактное лицо</b>: {{ organization.representative }} <br/>{% endif %}
+</p>
+
+<h4>Деятельность</h4>
+<ul>
+    {% if organization.signup_observers %}<li>Эта организации помогает записаться в наблюдатели</li>{% endif %}
+    {% if organization.signup_observers %}<li>Эта организации обучает наблюдателей</li>{% endif %}
+</ul>
+
+<h4>Покрываемые регионы</h4>
+<ul>
+    {% for location in locations %}
+        <li>
+            {% if location %}
+                {% include "elements/location_path.html" %}
+            {% else %}
+                <a href="{% url main %}">Россия</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'reports',
     'users',
     'links',
+    #'organizations',
 )
 
 AUTHENTICATION_BACKENDS = (

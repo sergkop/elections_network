@@ -45,7 +45,7 @@ class Location(models.Model):
         else:
             return 4
 
-    def is_iks(self):
+    def is_region(self):
         return self.region_id is None and self.tik is None
 
     def is_tik(self):

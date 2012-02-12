@@ -1,6 +1,9 @@
 $(document).ready(function(){
-
+    $('#map_location').click(goToMap);
 });
+
+var REGION_NAME = "";
+var TIK_NAME = "";
 
 // Default tipsy settings
 $.fn.tipsy.defaults.delayIn = 300;
@@ -27,7 +30,7 @@ function update_path(span_id, select_div_id){
 
     var select_1 = $('#'+select_div_id+' [name="region"]');
     if (select_1.val()!=""){
-        var text1 = select_1.children('option[value="'+select_1.val()+'"]').text()
+        var text1 = select_1.children('option[value="'+select_1.val()+'"]').text();
         span.append($("<a/>").attr("href", location_url+select_1.val()).text(text1));
     }
 
@@ -53,11 +56,14 @@ function set_select_location(div_id, path){
 
     select_1.unbind().change(function(){
         select_3.hide();
+        REGION_NAME = "";
+        TIK_NAME = "";
 
         if (select_1.val()==""){
             select_2.hide();
             select_2.val("").change();
-        } else
+        } else {
+            REGION_NAME = select_1.children('option[value="'+select_1.val()+'"]').text();
             $.getJSON(GET_SUB_REGIONS_URL, {location: select_1.val()}, function(data){
                 if (data.length>0){
                     //select_2.children('[value!=""]').remove();
@@ -77,12 +83,15 @@ function set_select_location(div_id, path){
                     select_2.val(path.length>1 ? path[1] : "").change();
                 }
             });
+        }
     });
 
     select_2.unbind().change(function(){
+        TIK_NAME = "";
         if (select_2.val()=="")
             select_3.hide();
         else {
+            TIK_NAME = select_2.children('option[value="'+select_2.val()+'"]').text();
             $.getJSON(GET_SUB_REGIONS_URL, {location: select_2.val()}, function(data){
                 if (data.length>0){
                     select_3.show();
@@ -261,4 +270,11 @@ var LinkListItem = Backbone.View.extend({
 function in_contacts(username){
     var index = $.inArray(username, CONTACTS);
     return index!=-1;
+}
+
+function goToMap() {
+    var place = REGION_NAME;
+    place += (place.length > 0 && TIK_NAME.length > 0) ? ", "+TIK_NAME : TIK_NAME;
+        
+    location.href = "/map_search?place="+place;
 }

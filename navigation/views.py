@@ -32,6 +32,7 @@ def static_page(request, name, template, tab=None):
     context = {
         #'content': page.content,
         'tab': tab,
+	    'template': template,
     }
     return render_to_response(template, context_instance=RequestContext(request, context))
 

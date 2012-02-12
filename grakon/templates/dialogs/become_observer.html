@@ -8,6 +8,8 @@
                 <span class="dialog_switch_button" id="partner_btn">Оформить документы</span>
             </center>
 
+            <br/>
+
             <div id="grakon_tab">
                 <b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:
 
@@ -21,7 +23,7 @@
                 не будет являться подтвержденным. В ближайшее время мы введем возможность верифицировать этот статус.
             </div>
 
-            <div id="partner_tab">
+            <div id="partner_tab" style="display:none;">
                 <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем заполнить форму на сайте
                 <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a>.
 
@@ -62,7 +64,6 @@
 <script type="text/javascript">
     // Become observer dialog
     function become_observer_dialog_init(){
-        console.log("here");
         set_select_location("become_observer_dialog", CURRENT_LOCATION);
         $("#become_observer_dialog").dialog("open");
     }
@@ -72,7 +73,9 @@
             buttons: {
                 {% if user.is_authenticated %}
                     "Сменить округ": function(){
-                        $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                        form_location_id("become_voter_form")
+                        // TODO: fix it
+                        $.post($("#become_observer_form").attr("action"), $("#become_observer_form").serialize(), function(data){
                             if (data=="ok"){
                                 $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
                                 $("#become_voter_dialog").dialog("close");

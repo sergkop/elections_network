@@ -27,11 +27,12 @@ def main(request):
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 
-def static_page(request, name, template, tab=None):
+def static_page(request, name, template):
     #page = get_object_or_404(Page, name=name)
     context = {
         #'content': page.content,
-        'tab': tab,
+        'tab': name,
+        'template': template,
     }
     return render_to_response(template, context_instance=RequestContext(request, context))
 

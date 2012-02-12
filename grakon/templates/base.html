@@ -65,14 +65,13 @@
     <nav>
         <div class="ym-wrapper">
             <div class="ym-hlist">
-                <ul>
+                <ul> 
                     <li><a href="{% url main %}">Главная</a></li>
                     <li><a href="{% url map_search %}">Карта</a></li>
-                    <li><a href="{% url about %}">О проекте</a></li>
-                    <li><a href="{% url news %}">Разработка</a></li>
-                    <li><a href="{% url partners %}">Партнеры</a></li>
-                    <li><a href="{% url how_to_help %}">Как помочь</a></li>
-                    <li><a href="{% url contacts %}">Контакты</a></li>
+                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
+                    <li><a {% if template == "static_pages/development/base.html" %}class="on"{% endif %} href="{% url news %}">Разработка</a></li>
+                    <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
+                    <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url join_team %}">Как помочь</a></li>
                 </ul>
 
                 <!--form class="ym-searchform">
@@ -129,7 +128,6 @@
                         <a href="{% url about %}">О проекте</a>
                         <a href="http://grakonteam.livejournal.com/" target="_blank">Блог</a>
                         <a href="{% url rules %}">Правила</a>
-                        <a href="{% url contacts %}">Контакты</a>
                     </div>
                     <div>
                         <a href="{% url main %}">Гракон</a> &copy;2012.

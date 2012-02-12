@@ -2,11 +2,33 @@
 
 {% load elements %}
 
+{% block head %}
+    <style type="text/css">
+        .ym-col3 .ym-cbox:last-child {display: none;}
+    </style>
+{% endblock %}
+
 {% block title %}
     Гражданский контроль за президентскими выборами - {{ organization }}
 {% endblock %}
 
 {% block left_column %}
-    <h3 class="column_header">Участники</h3>
+
+{% endblock %}
+
+{% block right_column %}
+
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">{{ organization.title }}</h2>
+
+    {% if "" %}
+        {% tabs "tabs" view "name" name "Информация" "organization_info" "organizations/info.html" %}
+    {% else %}
+        <div class="ym-cbox">
+            {% include "organizations/info.html" %}
+        </div>
+    {% endif %}
 
 {% endblock %}

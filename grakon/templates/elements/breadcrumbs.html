@@ -1,8 +1,13 @@
 <div class="ym-wrapper">
     <div class="breadcrumbs">
         <ul>
+        	
             <li class="first">
-                <a href="{% url main %}">Россия<i></i><b></b></a>
+               {% if not(location.region) and not(location.tik) %}
+               		<strong>Россия<i></i><b></b></strong>
+               {% else %}
+               		<a href="{% url main %}">Россия<i></i><b></b></a> 
+               {% endif %}
             </li>
 
             {% if current_location.region %}

@@ -97,26 +97,23 @@
 
     <p>Найдите свой избирательный округ – и увидите, как проходят выборы в Вашем городе:</p>
 
-    <table style="width: 100%;">
-        <tr>
-            <td style="width:45%;">
-                <div id="choose_regions">
-                    <form action="{% url goto_location %}" method="get" style="display:inline;">
-                        {% include "elements/region_choice.html" %}
-                        <center>
-                            <input id="goto_location" type="submit" value="Перейти"/>
-                        </center>
-                    </form>
-                </div>
-            </td>
-            <td style="width:20%;vertical-align:middle;text-align:center;">
-                <b>или</b>
-            </td>
-            <td style="vertical-align:middle;">
-                {% button "circle-zoomout" "Найти на карте" "map_location" "map_search" %}
-            </td>
-        </tr>
-    </table>
+    
+    <div id="choose_regions" class="fl">
+        <form action="{% url goto_location %}" method="get" style="display:inline;">
+            {% include "elements/region_choice.html" %}
+            <center>
+                <input id="goto_location" type="submit" value="Перейти"/>
+            </center>
+        </form>
+    </div>
+    
+    <div class="fl map-search">	
+        <b>или</b>
+    
+        {% button "circle-zoomout" "Найти на карте" "map_location" "map_search" %}
+    </div>
+    <br clear="all" /><br clear="all" />
+
 
     <p>
         <a href="http://grakon.org/register" target="_blank">Присоединяйтесь</a> – помогите удостовериться, что выборы пройдут честно.

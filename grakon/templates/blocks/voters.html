@@ -1,7 +1,7 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Избиратели</h4>
+    <h4>Избиратели ({{ voter_count }})</h4>
 </div>
 
 <div class="content_block">
@@ -14,6 +14,7 @@
             </li>
         {% endfor %}
     </ul>
+
     {% if is_voter_here %}{% endif %}
     {% if not request.user.is_authenticated %}
         {% button "circle-check" "Записаться в избиратели" "become_voter" %}

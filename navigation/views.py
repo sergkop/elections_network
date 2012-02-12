@@ -9,17 +9,19 @@ from users.models import Role
 
 def main(request):
     voter_count = Role.objects.filter(type='voter').count()
+    """
     if voter_count%10 == 1:
         ending = u'ь'
     elif voter_count%10 in (2, 3, 4):
         ending = u'я'
     else:
         ending = u'ей'
+    """
 
     sub_regions = regions_list()
     context = {
         'voter_count': voter_count,
-        'ending': ending,
+        #'ending': ending,
         'locations': sub_regions,
         'sub_regions': sub_regions,
     }

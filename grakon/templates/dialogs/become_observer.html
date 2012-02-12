@@ -1,7 +1,7 @@
 {% load elements %}
 
-{% if user.is_authenticated %}
-    <div id="become_observer_dialog">
+<div id="become_observer_dialog">
+    {% if user.is_authenticated %}
         <div><b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:</div>
 
         <center>
@@ -17,6 +17,7 @@
         <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем заполнить форму на сайте
         <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a>.
 
+    {% else %}
 
         <!--<ul>
             <li>
@@ -37,35 +38,31 @@
             </li>
         </ul>
         Скоро мы добавим возможность верификации статуса наблюдателя лично, а не только через партнеров.-->
-    </div>
-{% endif %}
+    {% endif %}
+</div>
+
 
 <script type="text/javascript">
     // Become observer dialog
+    function become_observer_dialog_init(){
+        $("#become_observer_dialog").dialog("open");
+    }
+
+    $(function(){
+        $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
+            buttons: {
+                "Записаться": function(){
+                    window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
+                },
+                "Отмена": function(){$("#become_observer_dialog").dialog("close");}
+            }
+        }).dialog("close");
+
+        $("#become_observer").click(function(){
+            become_observer_dialog_init();
+        });
+    });
     {% if user.is_authenticated %}
-        function become_observer_dialog_init(){
-            $("#become_observer_dialog").dialog("open");
-        }
-
-        $(function(){
-            $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
-                buttons: {
-                    "Записаться": function(){
-                        window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
-                    },
-                    "Отмена": function(){$("#become_observer_dialog").dialog("close");}
-                }
-            }).dialog("close");
-
-            $("#become_observer").click(function(){
-                become_observer_dialog_init();
-            });
-        });
     {% else %}
-        $(function(){
-            $("#become_observer").click(function(){
-                login_dialog_init("Чтобы записаться в наблюдатели, пожалуйста, войдите в систему");
-            });
-        });
     {% endif %}
 </script>

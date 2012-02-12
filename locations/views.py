@@ -4,9 +4,10 @@ import json
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.base import TemplateView
 
+from grakon.utils import authenticated_redirect
 from locations.models import Location
 from locations.utils import regions_list
 from links.models import Link
@@ -37,12 +38,17 @@ class LocationView(TemplateView):
 
         # Get sub-regions
         sub_regions = []
+        voter_count = 0
         if location.region is None:
             for loc in Location.objects.filter(region=location, tik=None).order_by('name'):
                 sub_regions.append((loc.id, loc.name))
+
+            voter_count = Role.objects.filter(type='voter', location__region=location).count()
         elif location.tik is None:
             for loc in Location.objects.filter(tik=location).order_by('name'):
                 sub_regions.append((loc.id, loc.name))
+
+            voter_count = Role.objects.filter(type='voter', location__tik=location).count()
 
         ctx.update({
             'loc_id': kwargs['loc_id'],
@@ -54,10 +60,17 @@ class LocationView(TemplateView):
             'all_locations': list(Location.objects.all()), # needed for the map
             'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
             'sub_regions': sub_regions,
+
+            'voter_count': voter_count,
         })
         return ctx
 
-location = LocationView.as_view()
+location_view = LocationView.as_view()
+
+def location_register(request, **kwargs):
+    if request.user.is_authenticated():
+        return redirect(reverse('location_info', args=[kwargs['loc_id']]))
+    return location_view(request, **kwargs)
 
 def get_sub_regions(request):
     if request.is_ajax():
@@ -88,12 +101,17 @@ def get_sub_regions(request):
 
 # TODO: restructure it and take only one parameter
 def goto_location(request):
+    tab = request.GET.get('tab', '')
     for name in ('uik', 'tik', 'region'):
         try:
             location_id = int(request.GET.get(name, ''))
         except ValueError:
             continue
 
-        return HttpResponseRedirect(reverse('location_help', args=[location_id]))
+        url = reverse('location_info', args=[location_id])
+        if tab:
+            print tab
+            url += '/' + tab
+        return HttpResponseRedirect(url)
 
     return HttpResponseRedirect(reverse('main'))

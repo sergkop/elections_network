@@ -1,31 +1,35 @@
-{% if user.is_authenticated %}
-    <div id="become_voter_dialog">
-        <center>
-            Записаться в избиратели на избирательном округе
+<div id="become_voter_dialog">
+    <center>
+        {% if user.is_authenticated %}
+            Вы уже записаны избирателем. Вы хотите сменить свой из
             <form id="become_voter_form" method="post" action="{% url become_voter %}">
                 {% csrf_token %}
                 {% include "elements/region_choice.html" %}
             </form>
-        </center>
-    </div>
-{% endif %}
+        {% else %}
+            Записаться в избиратели на избирательном округе
+            <form id="become_voter_form" method="post" action="{% url become_voter %}">
+                {% csrf_token %}
+                {% include "elements/region_choice.html" %}
+                <input type="hidden" name="tab" value="register" />
+            </form>
+        {% endif %}
+    </center>
+</div>
 
 <script type="text/javascript">
     // Become voter dialog
-    {% if user.is_authenticated %}
-        function become_voter_dialog_init(path){
-            set_select_location("become_voter_form", path);
-            $("#become_voter_dialog").dialog("open");
-        }
+    function become_voter_dialog_init(path){
+        set_select_location("become_voter_form", path);
+        $("#become_voter_dialog").dialog("open");
+    }
 
-        $(function(){
-            $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
-                buttons: {
-                    //"Перейти": function(){
-                    //    $("#become_voter_form").attr("action", "{% url goto_location %}")
-                    //            .attr("method", "get").submit();
-                    //},
-                    "Записаться": function(){
+    $(function(){
+        // TODO: change title depending on authentication
+        $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
+            buttons: {
+                {% if user.is_authenticated %}
+                    "Сменить округ": function(){
                         $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
                             if (data=="ok"){
                                 $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
@@ -36,19 +40,24 @@
                                 alert(data);
                         });
                     },
-                    "Отмена": function(){$("#become_voter_dialog").dialog("close");}
-                }
-            }).dialog("close");
+                {% else %}
+                    "Записаться": function(){
+                        $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                .attr("method", "get").submit();
+                    },
+                {% endif %}
 
-            $("#become_voter").click(function(){
-                become_voter_dialog_init(CURRENT_LOCATION);
-            });
+                "Отмена": function(){$("#become_voter_dialog").dialog("close");}
+            }
+        }).dialog("close");
+
+        $("#become_voter").click(function(){
+            console.log("click");
+            become_voter_dialog_init(CURRENT_LOCATION);
         });
+    });
+
+    {% if user.is_authenticated %}
     {% else %}
-        $(function(){
-            $("#become_voter").click(function(){
-                login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
-            });
-        });
     {% endif %}
 </script>

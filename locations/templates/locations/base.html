@@ -126,7 +126,11 @@
 {% block content_header %}
     <h2 class="location_header">{{ current_location }}</h2>
 
-    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
+    {% if user.is_authenticated %}
+        {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
+    {% else %}
+        {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" "Регистрация" "location_register" "locations/register.html" %}
+    {% endif %}
 
     <script type="text/javascript">
         var disqus_shortname = "{{ DISQUS_SHORTNAME }}";

@@ -22,28 +22,16 @@
     <h3 class="column_header">Участники</h3>
 
     <div class="ym-clearfix">
-        <div class="side_block_header">
-            <h4>Избиратели</h4>
-        </div>
-
-        <div class="content_block">
-            <ul class="side_list">
-                <li>Записались {{ voter_count }} избирател{{ ending }}</li>
-            </ul>
-
-            {% if request.user.is_authenticated %}
-                {% button "circle-check" "Сменить избирательный округ" "become_voter" %}
-            {% else %}
-                {% button "circle-check" "Записаться в избиратели" "become_voter" %}
-            {% endif %}
-        </div>
+        {% include "blocks/voters.html" %}
 
         {% include "elements/left_panel.html" %}
     </div>
 
+    {% include "dialogs/become_voter.html" %}
+
     {% include "dialogs/become_observer.html" %}
 
-    {% if user.is_authenticated %}
+    <!--{% if user.is_authenticated %}
         {% include "dialogs/become_voter.html" %}
 
         <script type="text/javascript">
@@ -58,7 +46,7 @@
                 login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
             });
         </script>
-    {% endif %}
+    {% endif %}-->
 
 {% endblock %}
 

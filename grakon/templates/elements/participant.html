@@ -1,0 +1,4 @@
+<a href="{{ participant.get_absolute_url }}">
+    {{ participant.username }}
+    {% if participant.show_name %}({{ participant.first_name }} {{ participant.last_name }}){% endif %}
+</a>

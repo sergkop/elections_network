@@ -1,0 +1,21 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Избиратели</h4>
+</div>
+
+<div class="content_block">
+    <ul id="voters_ul" class="side_list">
+        {% for voter in participants.voter %}
+            <li>
+                {% with participant=voter %}
+                    {% include "elements/participant.html" %}
+                {% endwith %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% if is_voter_here %}{% endif %}
+    {% if not request.user.is_authenticated %}
+        {% button "circle-check" "Записаться в избиратели" "become_voter" %}
+    {% endif %}
+</div>

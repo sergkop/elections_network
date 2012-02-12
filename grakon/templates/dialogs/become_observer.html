@@ -2,11 +2,25 @@
 
 {% if user.is_authenticated %}
     <div id="become_observer_dialog">
-        Выберите через какую организацию Вы хотите записаться в наблюдатели:
+        <div><b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:</div>
 
-        <ul>
+        <center>
+            <form id="become_observer_form" method="post" action="{% url become_observer %}">
+                {% csrf_token %}
+                {% include "elements/region_choice.html" %}
+            </form>
+        </center>
+
+        После нажатия кнопки "Записаться", вы появитесь в списке наблюдателей, однако этот статус
+        не будет являться подтвержденным. В ближайшее время мы введем возможность верифицировать этот статус.
+
+        <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем заполнить форму на сайте
+        <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a>.
+
+
+        <!--<ul>
             <li>
-                <b><a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a></b><br/>
+                <b></b><br/>
                 Гражданин Наблюдатель проводит интенсивные тренинги для обучения наблюдателей эффективным действиям
                 в случаях обнаружения нарушений на участках, включая практические упражнения. Выдает направления
                 в наблюдатели от СМИ и партий.
@@ -22,32 +36,36 @@
                 Здесь будут добавляться дополнительные возможности стать наблюдателем с появлением новых партнеров.
             </li>
         </ul>
-        Скоро мы добавим возможность верификации статуса наблюдателя лично, а не только через партнеров.
+        Скоро мы добавим возможность верификации статуса наблюдателя лично, а не только через партнеров.-->
     </div>
 {% endif %}
 
 <script type="text/javascript">
     // Become observer dialog
     {% if user.is_authenticated %}
-        $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
-            buttons: {
-                "Записаться": function(){
-                    window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
-                },
-                "Отмена": function(){$("#become_observer_dialog").dialog("close");}
-            }
-        }).dialog("close");
-
         function become_observer_dialog_init(){
             $("#become_observer_dialog").dialog("open");
         }
 
-        $("#become_observer").click(function(){
-            become_observer_dialog_init();
+        $(function(){
+            $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
+                buttons: {
+                    "Записаться": function(){
+                        window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
+                    },
+                    "Отмена": function(){$("#become_observer_dialog").dialog("close");}
+                }
+            }).dialog("close");
+
+            $("#become_observer").click(function(){
+                become_observer_dialog_init();
+            });
         });
     {% else %}
-        $("#become_observer").click(function(){
-            login_dialog_init("Чтобы записаться в наблюдатели, пожалуйста, войдите в систему");
+        $(function(){
+            $("#become_observer").click(function(){
+                login_dialog_init("Чтобы записаться в наблюдатели, пожалуйста, войдите в систему");
+            });
         });
     {% endif %}
 </script>

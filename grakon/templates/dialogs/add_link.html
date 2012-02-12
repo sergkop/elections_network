@@ -25,41 +25,45 @@
 <script type="text/javascript">
     // Add link dialog
     {% if user.is_authenticated %}
-        $("#add_link_dialog").dialog({width: 650, height: 300, modal: true, title: "Добавить ссылку",
-            buttons: {
-                "Добавить": function(){
-                    $.post("{% url add_link %}", $("#add_link_form").serialize(), function(data){
-                        if (data=="ok"){
-                            $("#add_link_dialog").dialog("close");
-                            $("#add_link_dialog").trigger("add_link_event", []);
-                        } else
-                            alert(data);
-                    });
-                },
-                "Отмена": function(){$("#add_link_dialog").dialog("close");}
-            }
-        }).dialog("close");
-
-        // Add link on pressing Enter
-        $("#add_link_form input").keypress(function(e){
-            if(e.which == 13){
-                $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
-            }
-        });
-
         function add_link_dialog_init(location_id){
             $("#link_name_input").val("");
             $("#link_url_input").val("");
             $('#add_link_form input[name="location"]').val(location_id);
             $("#add_link_dialog").dialog("open");
         }
- 
-        $("#add_link").click(function(){
-            add_link_dialog_init("{{ current_location.id }}");
+
+        $(function(){
+            $("#add_link_dialog").dialog({width: 650, height: 300, modal: true, title: "Добавить ссылку",
+                buttons: {
+                    "Добавить": function(){
+                        $.post("{% url add_link %}", $("#add_link_form").serialize(), function(data){
+                            if (data=="ok"){
+                                $("#add_link_dialog").dialog("close");
+                                $("#add_link_dialog").trigger("add_link_event", []);
+                            } else
+                                alert(data);
+                        });
+                    },
+                    "Отмена": function(){$("#add_link_dialog").dialog("close");}
+                }
+            }).dialog("close");
+
+            // Add link on pressing Enter
+            $("#add_link_form input").keypress(function(e){
+                if(e.which == 13){
+                    $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
+                }
+            });
+
+            $("#add_link").click(function(){
+                add_link_dialog_init("{{ current_location.id }}");
+            });
         });
     {% else %}
-        $("#add_link").click(function(){
-            login_dialog_init("Чтобы добавить ссылку, пожалуйста, войдите в систему");
+        $(function(){
+            $("#add_link").click(function(){
+                login_dialog_init("Чтобы добавить ссылку, пожалуйста, войдите в систему");
+            });
         });
     {% endif %}
 </script>

@@ -65,12 +65,14 @@ footer .ym-wbox a {text-decoration: none; color: #6e7174;}
 h4 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2em;}
 .column_header {color: #fff; text-transform: uppercase; text-shadow: none; border: 1px solid #333;}
 .side_block_header {border-radius: 0; background: none; font-size: 0.9em;}
-.side_block_header h4 {font-size: 1.1em; margin: 0; border: none; border-radius: 0; color: #036; text-align: center; text-shadow: 0 1px 0 #eaeaea; padding: 0.6em 1.5em;}
+.side_block_header h4 {font-size: 1.1em; margin: 0; border: none; border-radius: 0; color: #036; text-align: center; text-shadow: 0 1px 0 #eaeaea; padding: 0.8em 1.5em;}
 	.ui-dialog-titlebar {font-weight: normal; font-size: 0.9em;}
 	.ui-dialog-content {font-size: 0.8em;}
 	/*.ui-dialog-content center {text-align:left;}*/
 		
 h3 {margin: 0;}
+.news_header {font-size: 1.3em; margin: 1em 0 0.5em;}
+.news_date {font-style: italic; font-size: 0.9em; color: #888;}
 
 .ym-wbox {padding: 0;}	
 .ym-col1 .ym-cbox {padding: 0;}	
@@ -142,7 +144,7 @@ h3 {margin: 0;}
 .header-table td, .header-table th {border: 1px solid #ccc; padding: 5px 10px;}
 	.header-table thead {border: 1px solid #ccc;}
 	.header-table th {text-align: center;}
-	.header-table .header-table-shortcut {border: none !important; vertical-align: bottom; font-weight: normal; font-size: 0.9em}	
+	.header-table .header-table-shortcut {border: none !important; vertical-align: middle; font-weight: normal; font-size: 0.9em}	
 
 .map-search {margin: 0 15px; white-space: nowrap; padding: 12px 0;}	
 	.map-search center {display: inline;}

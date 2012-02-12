@@ -7,6 +7,7 @@ p {margin: 1em 0 1em; font-size: inherit;}
 ul, ul li {margin-bottom: 1em; margin-top: 0;}
 header, nav {background: none; min-width: 980px;}
 table, tbody td {border: none; margin: 0;}
+.fl {float: left;}
 .mainRadius {border-radius: 0 0 5px 5px !important;}
 .ym-hlist {border-radius: 5px; border: 1px solid #bbb;}
 .ym-hlist ul {margin-left: -1em;}
@@ -141,6 +142,12 @@ h3 {margin: 0;}
 .header-table td, .header-table th {border: 1px solid #ccc; padding: 5px 10px;}
 	.header-table thead {border: 1px solid #ccc;}
 	.header-table th {text-align: center;}
+	.header-table .header-table-shortcut {border: none !important; vertical-align: bottom; font-weight: normal; font-size: 0.9em}	
+
+.map-search {margin: 0 15px; white-space: nowrap; padding: 12px 0;}	
+	.map-search center {display: inline;}
+	
+
 
 /* backgrounds */
 .breadcrumbs ul li strong, .ym-hlist ul li a.on {  background-color: #006dcc;

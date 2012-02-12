@@ -1,43 +1,60 @@
 {% load elements %}
 
 <div id="become_observer_dialog">
-    {% if user.is_authenticated %}
-        <div><b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:</div>
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% if user.is_authenticated %}
+            <center>
+                <span class="dialog_switch_button dialog_switch_button_active" id="grakon_btn">На площадке</span>
+                <span class="dialog_switch_button" id="partner_btn">Оформить документы</span>
+            </center>
 
+            <div id="grakon_tab">
+                <b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:
+
+                <center>
+                    <form id="become_observer_form" method="post" action="{% url become_observer %}">
+                        {% csrf_token %}
+                    </form>
+                </center>
+
+                После нажатия кнопки "Записаться", вы появитесь в списке наблюдателей, однако этот статус
+                не будет являться подтвержденным. В ближайшее время мы введем возможность верифицировать этот статус.
+            </div>
+
+            <div id="partner_tab">
+                <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем заполнить форму на сайте
+                <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a>.
+
+                <ul>
+                    <li>
+                        <b></b><br/>
+                        Гражданин Наблюдатель проводит интенсивные тренинги для обучения наблюдателей эффективным действиям
+                        в случаях обнаружения нарушений на участках, включая практические упражнения. Выдает направления
+                        в наблюдатели от СМИ и партий.
+                        <br/>
+                        После заполнения анкеты на сайте Гражданина Наблюдателя с Вами свяжутся в течение нескольких дней и пригласят на тренинг. Сразу после этого мы добавим Вам статус наблюдателя на площадке Гракон.
+                        <br/>
+                        Если Вы уже записались в наблюдатели через Гражданин Наблюдатель, то в ближайшее время на вашу электронную почту
+                        придет письмо с инструкцией по получению статуса наблюдателя на площадке.
+                    </li>
+
+                    <li>
+                        <b>Партнер</b><br/>
+                        Здесь будут добавляться дополнительные возможности стать наблюдателем с появлением новых партнеров.
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    {% else %}
         <center>
-            <form id="become_observer_form" method="post" action="{% url become_observer %}">
+            Чтобы записаться в наблюдатели, выберите свою территориальную избирательную комиссию
+
+            <form id="become_observer_form" method="get" action="{% url goto_location %}">
                 {% csrf_token %}
                 {% include "elements/region_choice.html" %}
+                <input type="hidden" name="tab" value="register" />
             </form>
         </center>
-
-        После нажатия кнопки "Записаться", вы появитесь в списке наблюдателей, однако этот статус
-        не будет являться подтвержденным. В ближайшее время мы введем возможность верифицировать этот статус.
-
-        <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем заполнить форму на сайте
-        <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a>.
-
-    {% else %}
-
-        <!--<ul>
-            <li>
-                <b></b><br/>
-                Гражданин Наблюдатель проводит интенсивные тренинги для обучения наблюдателей эффективным действиям
-                в случаях обнаружения нарушений на участках, включая практические упражнения. Выдает направления
-                в наблюдатели от СМИ и партий.
-                <br/>
-                После заполнения анкеты на сайте Гражданина Наблюдателя с Вами свяжутся в течение нескольких дней и пригласят на тренинг. Сразу после этого мы добавим Вам статус наблюдателя на площадке Гракон.
-                <br/>
-                Если Вы уже записались в наблюдатели через Гражданин Наблюдатель, то в ближайшее время на вашу электронную почту
-                придет письмо с инструкцией по получению статуса наблюдателя на площадке.
-            </li>
-
-            <li>
-                <b>Партнер</b><br/>
-                Здесь будут добавляться дополнительные возможности стать наблюдателем с появлением новых партнеров.
-            </li>
-        </ul>
-        Скоро мы добавим возможность верификации статуса наблюдателя лично, а не только через партнеров.-->
     {% endif %}
 </div>
 
@@ -45,24 +62,51 @@
 <script type="text/javascript">
     // Become observer dialog
     function become_observer_dialog_init(){
+        console.log("here");
+        set_select_location("become_observer_dialog", CURRENT_LOCATION);
         $("#become_observer_dialog").dialog("open");
     }
 
     $(function(){
         $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
             buttons: {
-                "Записаться": function(){
-                    window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
-                },
+                {% if user.is_authenticated %}
+                    "Сменить округ": function(){
+                        $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                            if (data=="ok"){
+                                $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+                                $("#become_voter_dialog").dialog("close");
+                                $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                        .attr("method", "get").submit();
+                            } else
+                                alert(data);
+                        });
+                        // window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
+                    },
+                {% else %}
+                    "Записаться": function(){
+                        $("#become_observer_form").submit();
+                    },
+                {% endif %}
+
                 "Отмена": function(){$("#become_observer_dialog").dialog("close");}
             }
         }).dialog("close");
 
         $("#become_observer").click(function(){
-            become_observer_dialog_init();
+            {% if current_location.is_tik or current_location.is_uik %}
+                {% if not user.is_authenticated %}
+                    {% if view == "location_register" %}
+                        alert("Чтобы записаться в наблюдатели, пожалуйста, зарегистрируйтесь.");
+                    {% else %}
+                        window.location.href = "{% url location_register current_location.id %}";
+                    {% endif %}
+                {% else %}
+                    become_observer_dialog_init();
+                {% endif %}
+            {% else %}
+                become_observer_dialog_init();
+            {% endif %}
         });
     });
-    {% if user.is_authenticated %}
-    {% else %}
-    {% endif %}
 </script>

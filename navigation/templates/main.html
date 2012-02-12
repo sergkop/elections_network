@@ -85,7 +85,6 @@
 
     <p>Найдите свой избирательный округ – и увидите, как проходят выборы в Вашем городе:</p>
 
-    
     <div id="choose_regions" class="fl">
         <form action="{% url goto_location %}" method="get" style="display:inline;">
             {% include "elements/region_choice.html" %}
@@ -94,10 +93,10 @@
             </center>
         </form>
     </div>
-    
+
     <div class="fl map-search">	
         <b>или</b>
-    
+
         {% button "circle-zoomout" "Найти на карте" "map_location" "map_search" %}
     </div>
     <br clear="all" /><br clear="all" />

@@ -26,6 +26,17 @@
     color: #F00;
 }
 
+.dialog_switch_button {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+.dialog_switch_button_active {
+    background-color: #BCE4EB;
+}
+
 
 /* additional styles */
 

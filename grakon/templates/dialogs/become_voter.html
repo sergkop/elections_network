@@ -8,7 +8,7 @@
             </form>
         {% else %}
             Записаться в избиратели на избирательном округе
-            <form id="become_voter_form" method="post" action="{% url become_voter %}">
+            <form id="become_voter_form" method="get" action="{% url goto_location %}">
                 {% csrf_token %}
                 {% include "elements/region_choice.html" %}
                 <input type="hidden" name="tab" value="register" />
@@ -41,10 +41,7 @@
                         });
                     },
                 {% else %}
-                    "Записаться": function(){
-                        $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                .attr("method", "get").submit();
-                    },
+                    "Записаться": function(){$("#become_voter_form").submit();},
                 {% endif %}
 
                 "Отмена": function(){$("#become_voter_dialog").dialog("close");}

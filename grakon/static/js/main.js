@@ -54,12 +54,14 @@ function set_select_location(div_id, path){
     select_1.unbind().change(function(){
         select_3.hide();
 
-        if (select_1.val()=="")
+        if (select_1.val()==""){
+            select_2.hide();
             select_2.val("").change();
-        else
+        } else
             $.getJSON(GET_SUB_REGIONS_URL, {location: select_1.val()}, function(data){
                 if (data.length>0){
                     //select_2.children('[value!=""]').remove();
+                    select_2.show();
                     select_2.children().remove();
 
                     var empty_2 = $("<option/>").val("");

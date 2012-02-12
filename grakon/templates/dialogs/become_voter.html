@@ -13,38 +13,42 @@
 <script type="text/javascript">
     // Become voter dialog
     {% if user.is_authenticated %}
-        $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
-            buttons: {
-                //"Перейти": function(){
-                //    $("#become_voter_form").attr("action", "{% url goto_location %}")
-                //            .attr("method", "get").submit();
-                //},
-                "Записаться": function(){
-                    $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
-                        if (data=="ok"){
-                            $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
-                            $("#become_voter_dialog").dialog("close");
-                            $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                    .attr("method", "get").submit();
-                        } else
-                            alert(data);
-                    });
-                },
-                "Отмена": function(){$("#become_voter_dialog").dialog("close");}
-            }
-        }).dialog("close");
-
         function become_voter_dialog_init(path){
             set_select_location("become_voter_form", path);
             $("#become_voter_dialog").dialog("open");
         }
 
-        $("#become_voter").click(function(){
-            become_voter_dialog_init(CURRENT_LOCATION);
+        $(function(){
+            $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
+                buttons: {
+                    //"Перейти": function(){
+                    //    $("#become_voter_form").attr("action", "{% url goto_location %}")
+                    //            .attr("method", "get").submit();
+                    //},
+                    "Записаться": function(){
+                        $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                            if (data=="ok"){
+                                $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+                                $("#become_voter_dialog").dialog("close");
+                                $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                        .attr("method", "get").submit();
+                            } else
+                                alert(data);
+                        });
+                    },
+                    "Отмена": function(){$("#become_voter_dialog").dialog("close");}
+                }
+            }).dialog("close");
+
+            $("#become_voter").click(function(){
+                become_voter_dialog_init(CURRENT_LOCATION);
+            });
         });
     {% else %}
-        $("#become_voter").click(function(){
-            login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
+        $(function(){
+            $("#become_voter").click(function(){
+                login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
+            });
         });
     {% endif %}
 </script>

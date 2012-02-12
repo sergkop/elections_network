@@ -36,6 +36,33 @@ def become_voter(request):
 
     return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
 
+def become_observer(request):
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        for name in ('uik', 'tik', 'region'):
+            try:
+                location_id = int(request.POST.get(name, ''))
+            except ValueError:
+                continue
+
+            try:
+                location = Location.objects.exclude(region=None).get(id=location_id)
+            except Location.DoesNotExist:
+                return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+
+            try:
+                role, created = Role.objects.get_or_create(
+                        type='voter', user=request.user.get_profile(), defaults={'location': location})
+            except IntegrityError:
+                return HttpResponse(u'Ошибка базы данных')
+
+            if not created:
+                role.location = location
+                role.save()
+
+            return HttpResponse('ok')
+
+    return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:

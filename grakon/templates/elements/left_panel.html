@@ -1,17 +1,6 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Наблюдатели</h4>
-</div>
-
-<div class="content_block">
-    <ul class="side_list">
-        {% for observer in roles.observer %}
-            <li><a href="{{ observer.get_absolute_url }}">{{ observer.username }}</a></li>
-        {% endfor %}
-    </ul>
-    {% button "circle-check" "Записаться в наблюдатели" "become_observer" %}
-</div>
+{% include "blocks/observers.html" %}
 
 <div class="disabled-block">
     <div class="i">&nbsp;</div>

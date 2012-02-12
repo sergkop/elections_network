@@ -1,0 +1,18 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Наблюдатели</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for observer in roles.observer %}
+            <li>
+                {% with participant=observer %}
+                    {% include "elements/participant.html" %}
+                {% endwith %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% button "circle-check" "Записаться в наблюдатели" "become_observer" %}
+</div>

@@ -50,7 +50,7 @@
             <script type="text/javascript">
                 $("#become_voter").click(function(){
                     {% if view == "location_register" %}
-                        alert("Чтобы записаться в наблюдатели, пожалуйста, зарегистрируйтесь.");
+                        alert("Чтобы записаться в избиратели, пожалуйста, зарегистрируйтесь.");
                     {% else %}
                         window.location.href = "{% url location_register current_location.id %}";
                     {% endif %}

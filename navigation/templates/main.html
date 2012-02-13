@@ -38,24 +38,6 @@
             change_location_dialog_init("Записаться в избиратели", "Выберите ваш избирательный округ", "become_voter");
         });
     </script>
-
-    <!--{% if user.is_authenticated %}
-        {% include "dialogs/become_voter.html" %}
-
-        <script type="text/javascript">
-            // Become voter
-            $("#become_voter").click(function(){
-                become_voter_dialog_init([]);
-            });
-        </script>
-    {% else %}
-        <script type="text/javascript">
-            $("#become_voter").click(function(){
-                login_dialog_init("Чтобы записаться в избиратели, пожалуйста, войдите в систему");
-            });
-        </script>
-    {% endif %}-->
-
 {% endblock %}
 
 {% block right_column %}

@@ -5,6 +5,7 @@ from django.template import RequestContext
 from locations.models import Location
 from locations.utils import regions_list
 from navigation.models import Page
+from organizations.models import OrganizationCoverage
 from users.models import Role
 
 def main(request):
@@ -24,6 +25,7 @@ def main(request):
         #'ending': ending,
         'locations': sub_regions,
         'sub_regions': sub_regions,
+        'organizations': OrganizationCoverage.objects.organizations_at_location(None),
     }
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 

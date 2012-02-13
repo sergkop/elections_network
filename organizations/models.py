@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.db import models
+from django.db.models import Q
 
 from tinymce.models import HTMLField
 
@@ -21,9 +22,6 @@ class Organization(models.Model):
     signup_observers = models.BooleanField(u'Запись в наблюдатели', default=False)
     teach_observers = models.BooleanField(u'Обучение наблюдателей', default=False)
 
-    def __unicode__(self):
-        return self.title
-
     # TODO: implement it
     def covers_location(self, location):
         if not location.region_id:
@@ -31,9 +29,33 @@ class Organization(models.Model):
         elif not location.tik_id:
             pass
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('organization_info', (), {'name': self.name})
+
+    def __unicode__(self):
+        return self.title
+
+class OrganizationCoverageManager(models.Manager):
+    def organizations_at_location(self, location):
+        if location is None:
+            queryset = self.filter(location=None)
+        elif location.region is None:
+            queryset = self.filter(Q(location=None) | Q(location=location))
+        elif location.tik is None:
+            queryset = self.filter(Q(location=None) | Q(location__id__in=[location.region_id, location.id]))
+        else:
+            queryset = self.filter(Q(location=None) | Q(location__id__in=[location.tik_id, location.region_id, location.id]))
+
+        organization_ids = set(queryset.values_list('organization', flat=True))
+
+        return Organization.objects.filter(id__in=organization_ids)
+
 class OrganizationCoverage(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True)
     organization = models.ForeignKey(Organization)
+
+    objects = OrganizationCoverageManager()
 
     class Meta:
         unique_together = ('organization', 'location')

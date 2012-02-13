@@ -10,6 +10,21 @@
     </center>
 </div>
 
+<div class="side_block_header">
+    <h4>Организации</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for organization in organizations %}
+            <li>
+                {% include "elements/organization.html" %}
+            </li>
+        {% endfor %}
+    </ul>
+    <!--{% button "circle-check" "Добавить организацию" "add_organization" %}-->
+</div>
+
 <div class="disabled-block">
     <div class="i">&nbsp;</div>
 
@@ -31,17 +46,5 @@
 
     <div class="content_block">
         {% button "circle-check" "Добавить событие" "add_event" %}
-    </div>
-</div>
-
-<div class="disabled-block">
-    <div class="i">&nbsp;</div>
-
-    <div class="side_block_header">
-        <h4>Группы (в разработке)</h4>
-    </div>
-
-    <div class="content_block">
-        {% button "circle-check" "Создать группу" "add_group" %}
     </div>
 </div>

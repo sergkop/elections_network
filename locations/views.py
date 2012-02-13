@@ -10,6 +10,7 @@ from django.views.generic.base import TemplateView
 from grakon.utils import authenticated_redirect
 from locations.models import Location
 from locations.utils import regions_list
+from organizations.models import OrganizationCoverage
 from links.models import Link
 from users.models import Role
 
@@ -62,6 +63,7 @@ class LocationView(TemplateView):
             'sub_regions': sub_regions,
 
             'voter_count': voter_count,
+            'organizations': OrganizationCoverage.objects.organizations_at_location(location),
         })
         return ctx
 

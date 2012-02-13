@@ -1,7 +1,7 @@
 {% if current_location.x_coord %}
 
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}/js/map.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
     <script type="text/javascript" src="{% url map_data %}"></script>
 
     <center>

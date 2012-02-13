@@ -31,6 +31,14 @@
 
     {% include "dialogs/become_observer.html" %}
 
+    {% include "dialogs/change_location.html" %}
+
+    <script type="text/javascript">
+        $("#become_voter").click(function(){
+            change_location_dialog_init("Записаться в избиратели", "Выберите ваш избирательный округ", "become_voter");
+        });
+    </script>
+
     <!--{% if user.is_authenticated %}
         {% include "dialogs/become_voter.html" %}
 

@@ -39,7 +39,9 @@ class Organization(models.Model):
         return self.title
 
 class OrganizationCoverageManager(models.Manager):
+    # TODO: cache this function on a short period (10 min)
     def organizations_at_location(self, location):
+        """ Generates required data for right side Organization block only """
         if location is None:
             queryset = self.filter(location=None)
         elif location.region is None:
@@ -49,9 +51,10 @@ class OrganizationCoverageManager(models.Manager):
         else:
             queryset = self.filter(Q(location=None) | Q(location__id__in=[location.tik_id, location.region_id, location.id]))
 
-        organization_ids = set(queryset.values_list('organization', flat=True))
+        organization_ids = set(queryset.values_list('organization_id', flat=True))
 
-        return Organization.objects.filter(id__in=organization_ids)
+        return Organization.objects.filter(id__in=organization_ids).only(
+                'name', 'title', 'signup_observers', 'teach_observers', 'verified', 'is_partner')
 
 class OrganizationCoverage(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True)

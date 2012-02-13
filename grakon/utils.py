@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.cache import cache
 from django.shortcuts import redirect
 
 from uni_form.helper import FormHelper
@@ -21,3 +23,19 @@ def authenticated_redirect(view_name):
         return new_view
 
     return view_decorator
+
+def cache_function(key, timeout):
+    settings
+    def decorator(func):
+        def new_func(*args, **kwargs):
+            res = cache.get(key)
+            if res:
+                return res
+
+            res = func(*args, **kwargs)
+            cache.set(key, res, timeout)
+            return res
+
+        return new_func
+
+    return decorator

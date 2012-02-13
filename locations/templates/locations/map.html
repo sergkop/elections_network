@@ -10,8 +10,8 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            //ElectionMap.init(); // "{% if current_location.region %}{{ current_location.region }}, {% endif %}{{ current_location.name }}"
-            //ElectionMap.showRegion({{ current_location.id }});
+            ElectionMap.init(); // "{% if current_location.region %}{{ current_location.region }}, {% endif %}{{ current_location.name }}"
+            ElectionMap.showRegion({{ current_location.id }});
         });
     </script>
 {% else %}

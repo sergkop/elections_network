@@ -40,19 +40,19 @@ class Location(models.Model):
     def level(self):
         if self.region_id is None:
             return 2
-        elif self.tik is None:
+        elif self.tik_id is None:
             return 3
         else:
             return 4
 
     def is_region(self):
-        return self.region_id is None and self.tik is None
+        return self.region_id is None and self.tik_id is None
 
     def is_tik(self):
-        return self.region_id is not None and self.tik is None
+        return self.region_id is not None and self.tik_id is None
 
     def is_uik(self):
-        return self.region_id is not None and self.tik is not None
+        return self.region_id is not None and self.tik_id is not None
 
     def is_foreign(self):
         return self.region_name==FOREIGN_NAME

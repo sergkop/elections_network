@@ -122,6 +122,6 @@ def goto_location(request):
 # TODO: needs to be cached
 def map_data(request):
     context = {
-        'all_locations': list(Location.objects.all()),
+        'all_locations': list(Location.objects.all().only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address')),
     }
     return render_to_response('locations/map_data.js', context, mimetype='application/javascript')

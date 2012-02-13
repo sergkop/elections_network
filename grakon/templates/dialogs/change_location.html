@@ -1,0 +1,34 @@
+<div id="change_location_dialog">
+    <center>
+        <div id="change_location_text"></div>
+        <form id="change_location_form" method="get" action="{% url goto_location %}">
+            {% csrf_token %}
+            {% include "elements/region_choice.html" %}
+            <input type="hidden" name="tab" value="{% if not user.is_authenticated %}register{% endif %}" />
+            <input type="hidden" name="dialog" id="dialog_to_open" value="" />
+        </form>
+    </center>
+</div>
+
+<script type="text/javascript">
+    // Change location dialog
+    function change_location_dialog_init(title, text, dialog){
+        $("#change_location_dialog").dialog({title: title});
+        $("#change_location_text").text(text);
+        $("#dialog_to_open").val(dialog);
+        set_select_location("change_location_form", CURRENT_LOCATION);
+        $("#change_location_dialog").dialog("open");
+    }
+
+    $("#change_location_dialog").dialog({width:650, height:250, modal: true,
+        buttons: {
+            "Записаться": function(){
+                if ($('#change_location_form [name="tik"]').val()=="")
+                    alert("Необходимо выбрать ТИК");
+                else
+                    $("#change_location_form").submit();
+            },
+            "Отмена": function(){$("#change_location_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

@@ -6,6 +6,8 @@ from tinymce.models import HTMLField
 
 from locations.models import Location
 
+# TODO: increase max_length of title
+# TODO: limit name format
 class Organization(models.Model):
     name = models.CharField(max_length=30, unique=True)
     title = models.CharField(max_length=50)

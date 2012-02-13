@@ -104,6 +104,7 @@ def get_sub_regions(request):
 # TODO: restructure it and take only one parameter
 def goto_location(request):
     tab = request.GET.get('tab', '')
+    dialog = request.GET.get('dialog', '')
     for name in ('uik', 'tik', 'region'):
         try:
             location_id = int(request.GET.get(name, ''))
@@ -112,8 +113,9 @@ def goto_location(request):
 
         url = reverse('location_info', args=[location_id])
         if tab:
-            print tab
             url += '/' + tab
+        if dialog:
+            url += '?dialog=' + dialog
         return HttpResponseRedirect(url)
 
     return HttpResponseRedirect(reverse('main'))

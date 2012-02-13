@@ -6,13 +6,6 @@
                 {% csrf_token %}
                 {% include "elements/region_choice.html" %}
             </form>
-        {% else %}
-            Записаться в избиратели на избирательном округе
-            <form id="become_voter_form" method="get" action="{% url goto_location %}">
-                {% csrf_token %}
-                {% include "elements/region_choice.html" %}
-                <input type="hidden" name="tab" value="register" />
-            </form>
         {% endif %}
     </center>
 </div>
@@ -24,37 +17,29 @@
         $("#become_voter_dialog").dialog("open");
     }
 
-    $(function(){
-        // TODO: change title depending on authentication
-        $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Записаться в избиратели",
-            buttons: {
-                {% if user.is_authenticated %}
-                    "Сменить округ": function(){
-                        $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
-                            if (data=="ok"){
-                                $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
-                                $("#become_voter_dialog").dialog("close");
-                                $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                        .attr("method", "get").submit();
-                            } else
-                                alert(data);
-                        });
-                    },
-                {% else %}
-                    "Записаться": function(){$("#become_voter_form").submit();},
-                {% endif %}
+    $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Сменить избирательный округ",
+        buttons: {
+            {% if user.is_authenticated %}
+                "Сменить округ": function(){
+                    $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+                            $("#become_voter_dialog").dialog("close");
+                            $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                    .attr("method", "get").submit();
+                        } else
+                            alert(data);
+                    });
+                },
+            {% else %}
+                "Записаться": function(){$("#become_voter_form").submit();},
+            {% endif %}
 
-                "Отмена": function(){$("#become_voter_dialog").dialog("close");}
-            }
-        }).dialog("close");
+            "Отмена": function(){$("#become_voter_dialog").dialog("close");}
+        }
+    }).dialog("close");
 
-        $("#become_voter").click(function(){
-            console.log("click");
-            become_voter_dialog_init(CURRENT_LOCATION);
-        });
+    $("#become_voter").click(function(){
+        become_voter_dialog_init(CURRENT_LOCATION);
     });
-
-    {% if user.is_authenticated %}
-    {% else %}
-    {% endif %}
 </script>

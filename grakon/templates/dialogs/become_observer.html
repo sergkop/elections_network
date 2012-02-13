@@ -72,69 +72,65 @@
         $("#become_observer_dialog").dialog("open");
     }
 
-    $(function(){
-        $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
-            buttons: {
-                "Записаться": function(){
-                    {% if current_location.is_tik or current_location.is_uik %}
-                        {% if user.is_authenticated %}
-                            $.post($("#become_observer_form").attr("action"), $("#become_observer_form").serialize(), function(data){
-                                if (data=="ok"){
-                                    $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
-                                    $("#become_voter_dialog").dialog("close");
-                                    $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                            .attr("method", "get").submit();
-                                } else
-                                    alert(data);
-                            });
-                            // window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
+    $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
+        buttons: {
+            "Записаться": function(){
+                {% if current_location.is_tik or current_location.is_uik %}
+                    {% if user.is_authenticated %}
+                        $.post($("#become_observer_form").attr("action"), $("#become_observer_form").serialize(), function(data){
+                            if (data=="ok"){
+                                $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+                                $("#become_voter_dialog").dialog("close");
+                                $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                        .attr("method", "get").submit();
+                            } else
+                                alert(data);
+                        });
+                        // window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
 
-                        {% else %}
-
-                        {% endif %}
                     {% else %}
-                        if ($('#become_observer_form [name="tik"]').val()=="")
-                            alert("Необходимо выбрать ТИК");
-                        else
-                            $("#become_observer_form").submit();
-                    {% endif %}
-                    
-                },
-                    
 
-                "Отмена": function(){$("#become_observer_dialog").dialog("close");}
-            }
-        }).dialog("close");
-
-        $("#become_observer").click(function(){
-            {% if current_location.is_tik or current_location.is_uik %}
-                {% if not user.is_authenticated %}
-                    {% if view == "location_register" %}
-                        alert("Чтобы записаться в наблюдатели, пожалуйста, зарегистрируйтесь.");
-                    {% else %}
-                        window.location.href = "{% url location_register current_location.id %}";
                     {% endif %}
                 {% else %}
-                    $("#grakon_btn").click(function(){
-                        $("#grakon_btn").addClass("dialog_switch_button_active");
-                        $("#partner_btn").removeClass("dialog_switch_button_active");
+                    if ($('#become_observer_form [name="tik"]').val()=="")
+                        alert("Необходимо выбрать ТИК");
+                    else
+                        $("#become_observer_form").submit();
+                {% endif %}
+            },
+            "Отмена": function(){$("#become_observer_dialog").dialog("close");}
+        }
+    }).dialog("close");
 
-                        $("#grakon_tab").show();
-                        $("#partner_tab").hide();
-                    });
-                    $("#partner_btn").click(function(){
-                        $("#grakon_btn").removeClass("dialog_switch_button_active");
-                        $("#partner_btn").addClass("dialog_switch_button_active");
-
-                        $("#grakon_tab").hide();
-                        $("#partner_tab").show();
-                    });
-
-                    become_observer_dialog_init();
+    $("#become_observer").click(function(){
+        {% if current_location.is_tik or current_location.is_uik %}
+            {% if not user.is_authenticated %}
+                {% if view == "location_register" %}
+                    alert("Чтобы записаться в наблюдатели, пожалуйста, зарегистрируйтесь.");
+                {% else %}
+                    window.location.href = "{% url location_register current_location.id %}";
                 {% endif %}
             {% else %}
+                // TODO: move it out of click()
+                $("#grakon_btn").click(function(){
+                    $("#grakon_btn").addClass("dialog_switch_button_active");
+                    $("#partner_btn").removeClass("dialog_switch_button_active");
+
+                    $("#grakon_tab").show();
+                    $("#partner_tab").hide();
+                });
+                $("#partner_btn").click(function(){
+                    $("#grakon_btn").removeClass("dialog_switch_button_active");
+                    $("#partner_btn").addClass("dialog_switch_button_active");
+
+                    $("#grakon_tab").hide();
+                    $("#partner_tab").show();
+                });
+
                 become_observer_dialog_init();
             {% endif %}
-        });
+        {% else %}
+            become_observer_dialog_init();
+        {% endif %}
     });
 </script>

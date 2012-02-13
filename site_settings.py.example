@@ -22,6 +22,15 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'grakon-cache',
+        'TIMEOUT': 60,
+        'KEY_PREFIX': '', # Set it unique for each server working with the same cache instance
+    }
+}
+
 DEFAULT_FROM_EMAIL = 'admin@grakon.org'
 
 URL_PREFIX = 'http://127.0.0.1:8000' # put an appropriate domain name here

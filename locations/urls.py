@@ -10,5 +10,5 @@ urlpatterns = patterns('locations.views',
     url(r'^get_sub_regions$', 'get_sub_regions', name='get_sub_regions'),
     url(r'^goto_location$', 'goto_location', name='goto_location'),
 
-    url(r'^map_data.js$', 'map_data', name='map_data'),
+    url(r'^map_data$', 'map_data', name='map_data'),
 )

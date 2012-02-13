@@ -4,7 +4,7 @@ import json
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
 from grakon.utils import authenticated_redirect
@@ -58,7 +58,6 @@ class LocationView(TemplateView):
             'participants': participants,
             'links': list(Link.objects.filter(location=location)),
             'locations': regions_list(),
-            'all_locations': list(Location.objects.all()), # needed for the map
             'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
             'sub_regions': sub_regions,
 
@@ -119,3 +118,10 @@ def goto_location(request):
         return HttpResponseRedirect(url)
 
     return HttpResponseRedirect(reverse('main'))
+
+# TODO: needs to be cached
+def map_data(request):
+    context = {
+        'all_locations': list(Location.objects.all()),
+    }
+    return render_to_response('locations/map_data.js', context, mimetype='application/javascript')

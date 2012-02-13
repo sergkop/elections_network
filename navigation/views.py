@@ -40,7 +40,6 @@ def static_page(request, name, template):
 
 def map_search(request):
     context = {
-        'locations': Location.objects.all(),
         'place': request.GET.get('place', ''),
     }
     return render_to_response('map.html', context_instance=RequestContext(request, context))

@@ -9,18 +9,7 @@
 
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}/js/map.js"></script>
-
-    <script type="text/javascript">
-        var electionCommissions = {};
-        {% for location in locations %}
-            {% if location.x_coord %}
-                electionCommissions[{{ location.id }}] = new ElectionCommission({{ location.id }}, {{ location.level }}, "{{ location.name }}",
-                "{{ location.name }}", "{{ location.address }}", {{ location.x_coord|floatformat:10 }},
-                {{ location.y_coord|floatformat:10 }}, {numVoters: 500, numObservers: 5});
-            {% endif %}
-        {% endfor %}
-    </script>
-
+    <script type="text/javascript" src="{% url map_data %}"></script>
 {% endblock %}
 
 {% block content_header %}

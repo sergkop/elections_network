@@ -131,3 +131,7 @@ TINYMCE_COMPRESSOR = False # TODO: compression doesn't work at the moment
 FORCE_SCRIPT_NAME = ''
 
 from site_settings import *
+
+if DEBUG:
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    INSTALLED_APPS += ('debug_toolbar',)

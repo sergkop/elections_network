@@ -63,6 +63,7 @@ Build a graph of database structure (requires graphviz and pygraphviz):
 Deployment:
 
     * install postfix (smtp client)
+    * install memcached
 
     * Configure vkontakte comments, remove {autoPublish: 0} option of vkontakte comments in templates/location.html in production
     * configure yandex.metrika

@@ -6,3 +6,4 @@ flup
 -e git://github.com/pydanny/django-uni-form.git#egg=uni_form
 bleach
 django-debug-toolbar
+pylibmc

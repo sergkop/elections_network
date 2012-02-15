@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <style type="text/css">
+        .ym-col1 {width: 0px;}
+        .ym-col2 {width: 0px;}
+        .ym-col3 {margin-left: 20px; width: 100%;}
+    </style>
+    
+    <script type="text/javascript">
+    	var Address = {
+    	    VIB_ID: 100100031793505,
+    	    AUTHENTICITY_TOKEN: "6c3e5ba2e795907e32ba0d4fb1e3b16a206bf074",
+    	    VIB_TITLE: "Выборы Президента Российской Федерации 4 марта 2012 года",
+    	    addressId: null,
+    	    
+	    	Utils: {
+	    	    pathParts: new Array(),
+	    	    titleParts: new Array(),
+	    	    lastLevel: null,
+	    	    
+	    	    addSelect: function(data, level) {
+		        	var selectID = "level"+level;
+
+		        	Address.Utils.lastLevel = new Object();
+		        	
+		        	$('div#addressFields').append( $('<select/>').attr('id', selectID) );
+		        	$('select#'+selectID).append( $('<option/>').attr('selected', 'selected').text('=== Выберите свой адрес ===') );
+		        	$.each(data, function(key, value){
+		        	    var id = value.attr.id;
+		            	$('select#'+selectID).append( $('<option/>').attr('value', id).text( value.attr.caption ) );
+		            	Address.Utils.lastLevel[id] = value;
+		        	});
+		        	$('select#'+selectID).change(function() {
+		            	var id = $('select#'+selectID+' option:selected').val();
+		            	if (id!="") {
+		            	    $('select#'+selectID+' + select').remove();
+		            	    Address.addressId = Address.Utils.lastLevel[id].attr.addrId;
+		            	    Address.Utils.pathParts.push( id );
+		            	    Address.Utils.titleParts.push( Address.Utils.lastLevel[id].attr.caption );
+		            		Address.showLevelById(id, level+1);
+		            	}
+		        	});
+		    	},
+
+		    	getAddressPath: function() {
+			    	return Address.Utils.pathParts.join(", ");
+		    	},
+
+		    	getAddressTitle: function() {
+			    	return Address.Utils.titleParts.join(", ");
+		    	}
+    		},
+    		
+	    	showLevelById: function(id, level) {
+	    	    $.ajax({
+	            	url: '/uik_search',
+	            	data: {
+	    	        	url: 'http://cikrf.ru/dynservices/gas/serviceone/gettreelevel',
+	            		'id': id,
+	            		'level': level
+	            	},
+	            	dataType: 'json',
+	            	success: function(response) {
+	                	if (response.length > 0)
+	                    	Address.Utils.addSelect(response, level);
+	                	else
+		                	Address.findUIK();
+	            	},
+	            	error: function() {
+	                	alert("Извините! Произошла какая-то ошибка. Попробуйте ещё раз.");
+	            	}
+	        	});
+	    	},
+
+	    	findUIK: function() {
+		    	$.ajax({
+			    	url: '/uik_search',
+			    	data: {
+			    	    url: 'http://cikrf.ru/dynservices/gas/serviceone/showresult', 
+			    	    authenticityToken: Address.AUTHENTICITY_TOKEN,
+			    		sendRequest: encodeURIComponent('Отправить запрос'),
+			    		addressId: Address.addressId,
+			    		vibId: Address.VIB_ID,
+			    		subjfed: "",
+			    		subjfedName: "",
+			    		addressTitle: encodeURIComponent(Address.Utils.getAddressTitle()),
+			    		vibTitle: encodeURIComponent(Address.VIB_TITLE),
+			    		addressPath: Address.Utils.getAddressPath()
+			    	},
+			    	dataType: 'html',
+			    	success: function(html) {
+				    	$('#result').text( $(html).find("div.dotted").text() );
+			    	},
+			    	alert: function() {
+				    	alert('Извините! Запрос не сработал. Попробуйте ещё раз.');
+			    	}
+		    	});
+	    	}
+    	}
+
+    	$(document).ready(function(){
+	    	$('#findUIK').click(function() {
+		    	$('#addressFields').html("");
+	    	    Address.showLevelById("path_", 0);
+	    	});
+    	});
+    </script>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Найти свою участковую избирательную комиссию</h2>
+{% endblock %}
+
+{% block content %}
+	<button id="findUIK">Найти свой УИК</button>
+    <div id="addressFields"></div>
+    <div id="result"></div>
+{% endblock %}

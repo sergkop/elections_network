@@ -74,10 +74,9 @@ var ElectionMap = {
 
         ElectionMap.initPlacemarkStyles();
 
-        ElectionMap.map = new YMaps.Map(document
-                .getElementById("publicElectionsMap"));
-        ElectionMap.map.setType(YMaps.MapType.PMAP);
-        ElectionMap.map.setMinZoom(2);
+        ElectionMap.set( new YMaps.Map(document.getElementById("publicElectionsMap")) );
+        ElectionMap.get().setType(YMaps.MapType.PMAP);
+        ElectionMap.get().setMinZoom(2);
 
         // Переименовываем типы карт, чтобы их можно было различать. Народные
         // карты имеют индекс 1, обычные - индекс 2.
@@ -85,19 +84,19 @@ var ElectionMap = {
         YMaps.MapType.MAP.setName("Схема 2");
         YMaps.MapType.PHYBRID.setName("Гибрид 1");
         YMaps.MapType.HYBRID.setName("Гибрид 2");
-        ElectionMap.map.addControl(new YMaps.TypeControl( [ YMaps.MapType.PMAP,
+        ElectionMap.get().addControl(new YMaps.TypeControl( [ YMaps.MapType.PMAP,
                 YMaps.MapType.MAP, YMaps.MapType.SATELLITE,
                 YMaps.MapType.PHYBRID, YMaps.MapType.HYBRID, ],
                 [ 0, 1, 2, 3, 4 ])); // объявляем доступные типы карт
-        ElectionMap.map.addControl(new YMaps.ToolBar());
-        ElectionMap.map.addControl(new YMaps.Zoom( {
+        ElectionMap.get().addControl(new YMaps.ToolBar());
+        ElectionMap.get().addControl(new YMaps.Zoom( {
             customTips : ElectionMap.MAP_LEVELS
         }));
-        ElectionMap.map.addControl(new YMaps.SearchControl( {
+        ElectionMap.get().addControl(new YMaps.SearchControl( {
             width : (place == null || place == "") ? 400 : 200
         }));
 
-        ElectionMap.map.addOverlay(ElectionMap.objManager);
+        ElectionMap.get().addOverlay(ElectionMap.objManager);
         // Показать на карте заданное место
         ElectionMap.setDefaultViewport(place);
 
@@ -117,6 +116,22 @@ var ElectionMap = {
         ElectionMap.placemarkStyles.push(s);
         ElectionMap.placemarkStyles.push("default#orangePoint");
         ElectionMap.placemarkStyles.push("default#lightbluePoint");
+    },
+    
+    /**
+     * Задаёт объект карты для данной сессии.
+     * @param {map} объект типа YMaps.Map
+     */
+    set: function(map) {
+        this.map = map;
+    },
+    
+    /**
+     * Возвращает объект карты
+     * @returns объект типа YMaps.Map
+     */
+    get: function() {
+        return this.map;
     },
 
     /**
@@ -143,7 +158,7 @@ var ElectionMap = {
                 hideIcon : false
             });
             usermark.description = "Ваше местоположение";
-            ElectionMap.map.addOverlay(usermark);
+            ElectionMap.get().addOverlay(usermark);
         }
 
         var zoom = ElectionMap.MAP_LEVELS[3].index;
@@ -157,7 +172,7 @@ var ElectionMap = {
                                             // масштабом;
             // для пользователя из-за рубежа карта будет отцентрована по
             // европейской части России.
-            ElectionMap.map.enableScrollZoom();
+            ElectionMap.get().enableScrollZoom();
 
             if (YMaps.location && YMaps.location.country == "Россия") {
                 center = new YMaps.GeoPoint(YMaps.location.longitude,
@@ -165,7 +180,7 @@ var ElectionMap = {
                 zoom = YMaps.location.zoom;
             }
 
-            ElectionMap.map.setCenter(center, zoom);
+            ElectionMap.get().setCenter(center, zoom);
             // Считаем все избирательные комиссии на карте
             ElectionMap.markElectionCommissions();
         } else {
@@ -177,10 +192,10 @@ var ElectionMap = {
                 // Если объект найден, устанавливает центр карты в центр области
                 // показа объекта
                     if (this.length()) {
-                        ElectionMap.map.setBounds(this.get(0).getBounds());
+                        ElectionMap.get().setBounds(this.get(0).getBounds());
                         ElectionMap.markElectionCommissions();
                     } else
-                        ElectionMap.map.setCenter(center, zoom);
+                        ElectionMap.get().setCenter(center, zoom);
                 });
 
             // Процесс геокодирования завершен с ошибкой
@@ -312,7 +327,7 @@ var ElectionMap = {
     showRegion : function(commissionId) {
         var commission = electionCommissions[commissionId];
         var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var availZoom = ElectionMap.map.getMaxZoom(new YMaps.GeoBounds(point,
+        var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point,
                 point));
         var maxZoom = (availZoom > 16) ? 16 : availZoom;
 
@@ -320,18 +335,18 @@ var ElectionMap = {
         switch (commission.level) {
         case 1:
         case 2:
-            zoom = (ElectionMap.map.getZoom() != ElectionMap.MAP_LEVELS[commission.level].index) ? ElectionMap.MAP_LEVELS[commission.level].index
+            zoom = (ElectionMap.get().getZoom() != ElectionMap.MAP_LEVELS[commission.level].index) ? ElectionMap.MAP_LEVELS[commission.level].index
                     : // показать следующий уровень масштаба ИО с центром на
                         // этом
                     maxZoom;
             break; // показать здание ИО в том случае, если масштаб карты уже
                     // равен следующему уровню
         default:
-            zoom = (ElectionMap.map.getZoom() != maxZoom) ? maxZoom
+            zoom = (ElectionMap.get().getZoom() != maxZoom) ? maxZoom
                     : ElectionMap.MAP_LEVELS[commission.level - 1].index;
         }
 
-        ElectionMap.map.setCenter(point, zoom);
+        ElectionMap.get().setCenter(point, zoom);
 
         ElectionMap.updateCommissionZoomIcon(commissionId, zoom == maxZoom);
     },
@@ -382,7 +397,7 @@ var ElectionMap = {
                 ElectionMap.buttonClick, buttons);
         buttons.push(button);
 
-        ElectionMap.map.addControl(new YMaps.ToolBar(buttons),
+        ElectionMap.get().addControl(new YMaps.ToolBar(buttons),
                 new YMaps.ControlPosition(YMaps.ControlPosition.BOTTOM_LEFT,
                         new YMaps.Point(20, 20)));
     },
@@ -411,8 +426,8 @@ var ElectionMap = {
      */
     resetZoom : function() {
         while (ElectionMap.visibleElectionCommissions.length == 0
-                && ElectionMap.map.getZoom() >= 0) {
-            ElectionMap.map.zoomBy(-1);
+                && ElectionMap.get().getZoom() >= 0) {
+            ElectionMap.get().zoomBy(-1);
             ElectionMap
                     .checkForVisibility(ElectionMap.centerNearestElectionCommission);
         }
@@ -424,19 +439,19 @@ var ElectionMap = {
      *            масштабе карты
      */
     checkForVisibility : function(placemark) {
-        if (ElectionMap.map.getBounds() == null)
+        if (ElectionMap.get().getBounds() == null)
             return;
 
         if (ElectionMap.electionCommissionLevel == null
                 || ElectionMap.electionCommissionLevel == placemark.data.level) {
             // Проверить метку на видимость и в положительном случае сохранить в
             // массив видимых избирательных комиссий
-            if (ElectionMap.map.getBounds().contains(placemark.getCoordPoint()))
+            if (ElectionMap.get().getBounds().contains(placemark.getCoordPoint()))
                 ElectionMap.visibleElectionCommissions.push(placemark);
 
             // Найти ближайшую избирательную комиссию к центру карты
-            var mapCenter = new YMaps.GeoPoint(ElectionMap.map.getCenter()
-                    .getX(), ElectionMap.map.getCenter().getY());
+            var mapCenter = new YMaps.GeoPoint(ElectionMap.get().getCenter()
+                    .getX(), ElectionMap.get().getCenter().getY());
             var distanceToElectionCommission = mapCenter.distance(placemark
                     .getGeoPoint());
             if (ElectionMap.distanceToNearestElectionCommission == null

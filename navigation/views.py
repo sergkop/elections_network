@@ -1,6 +1,9 @@
 # coding=utf8
+import urllib
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.http import HttpResponse
+from django.utils import simplejson as json
 
 from locations.models import Location
 from locations.utils import regions_list
@@ -43,3 +46,11 @@ def map_search(request):
         'place': request.GET.get('place', ''),
     }
     return render_to_response('map.html', context_instance=RequestContext(request, context))
+
+def uik_search(request):
+	url = request.REQUEST.get('url', None)
+	if url is not None:
+		response = urllib.urlopen(request.REQUEST.get('url'), urllib.urlencode(request.REQUEST)).read()
+		return HttpResponse(response)
+	else:
+		return render_to_response('uik_search.html', context_instance=RequestContext(request))

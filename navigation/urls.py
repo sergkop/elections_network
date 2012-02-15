@@ -6,6 +6,7 @@ def tabbed_static_url(name, template):
 urlpatterns = patterns('navigation.views',
     url(r'^$', 'main', name='main'),
     url(r'^map_search$', 'map_search', name='map_search'),
+    url(r'^uik_search$', 'uik_search', name='uik_search'),
 
     # Static pages
     tabbed_static_url('about', 'static_pages/about/base.html'),

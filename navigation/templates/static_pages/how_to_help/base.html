@@ -7,10 +7,21 @@
     <style type="text/css">
         .ym-col3 .ym-cbox:last-child {display: none;}
     </style>
+    <style type="text/css">
+	/* for static pages */
+        .ym-col1 {width: 0px;}
+        .ym-col2 {width: 0px;}
+        .ym-col3 {margin-left: 0; width: 100%; padding: 15px 0;}
+		h2.location_header {margin-left: 15px;}
+    </style>
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">О проекте</h2>
+    <h2 class="location_header">О проекте
+        <div style="float: right">
+            {% include "elements/share.html" %}
+        </div>
+    </h2>
 
     {% tabs "tabs" tab "" "" "Присоединиться к команде" "join_team" "static_pages/how_to_help/join_team.html" "Пожертвовать деньги" "donate" "static_pages/how_to_help/donate.html" "Записаться в волонтеры" "volunteer" "static_pages/how_to_help/volunteer.html" "Распространить информацию" "share" "static_pages/how_to_help/share.html" "Обратная связь" "feedback" "static_pages/how_to_help/feedback.html" %}
 {% endblock %}

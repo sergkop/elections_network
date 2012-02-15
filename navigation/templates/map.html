@@ -2,18 +2,23 @@
 
 {% block head %}
     <style type="text/css">
+	/* for static pages */
         .ym-col1 {width: 0px;}
         .ym-col2 {width: 0px;}
-        .ym-col3 {margin-left: 20px; width: 100%;}
+        .ym-col3 {margin-left: 0; width: 100%; padding: 15px 0;}
+		h2.location_header {margin-left: 15px;}
     </style>
-
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
     <script type="text/javascript" src="{% url map_data %}"></script>
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">Найти свой избирательный округ</h2>
+    <h2 class="location_header">Найти свой избирательный округ
+    <div style="float: right; margin-top: 0.2em">
+   	 {% include "elements/share.html" %}
+    </div>
+    </h2>
 {% endblock %}
 
 {% block content %}

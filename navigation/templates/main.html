@@ -72,32 +72,37 @@
 
 {% block content %}
 
-    <p>Интернет-площадка Гракон объединяет организации и активных граждан для проведения единого общественного мониторинга выборов президента 4 марта.
+<h2>Что такое Гракон?</h2>
+<div style="width:100%" id="__ss_11568118"><strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/mikpanko/ss-11568118" title="Гракон">Гракон</a></strong><object id="__sse11568118" width="100%" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=electionsprojectpresentationshort-120214095332-phpapp02&stripped_title=ss-11568118&userName=mikpanko" /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/><param name="wmode" value="transparent"/><embed name="__sse11568118" src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=electionsprojectpresentationshort-120214095332-phpapp02&stripped_title=ss-11568118&userName=mikpanko" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" width="100%" height="355"></embed></object><div style="padding:5px 0 12px">View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/mikpanko">mikpanko</a>.</div></div>
 
-    <h4>Найдите свой избирательный округ &mdash;<br /> и увидите, как проходят выборы в Вашем городе:</h4>
-
-    <div id="choose_regions" class="fl">
-        <form action="{% url goto_location %}" method="get" style="display:inline;">
-            {% include "elements/region_choice.html" %}
-            <center>
-                <input id="goto_location" type="submit" value="Перейти"/>
-            </center>
-        </form>
+    <p>Теперь Вы можете:</p>
+    
+    <div class="step"><i>1</i> <p>найти свой избирательный округ и посмотреть, как проходят выборы в Вашем городе:</p>
+        <div id="choose_regions">
+            <form action="{% url goto_location %}" method="get" style="display:inline;">
+                {% include "elements/region_choice.html" %}
+                <style>
+                    .map, .map center {display: inline;}
+                </style>
+                
+                    <input id="goto_location" type="submit" value="Перейти"/>&nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;<div class="map-search">{% button "circle-zoomout" "Найти на карте" "map_location" %}</div>
+               
+            </form><br />
+        </div>
     </div>
-
-    <div class="fl map-search">	
-        <b>или</b>&nbsp;&nbsp;&nbsp;
-
-        {% button "circle-zoomout" "Найти на карте" "map_location" %}
+    
+    
+    <div class="step"><i>2</i> <p>начать участвовать в работе на своем избирательном участке. Для этого выберите кнопку соответствующую Вашему статусу в левой колонке "Участники"</p></div>
+    
+    <div class="step"><i>3</i> <p>следить за новостями проекта</p>
+    <div style="width: 100px">{% button "circle-check" "Подписаться" "subscribe"%}</div>
     </div>
-    <br clear="all" />
-
-
+    
     <p>
         <a href="http://grakon.org/register" target="_blank">Присоединяйтесь</a> – помогите удостовериться, что выборы пройдут честно.
     </p>
 
-    <p>Посмотрите, кто уже участвует в работе площадки (<b>левая панель</b>).</p>
+  <!--  <p>Посмотрите, кто уже участвует в работе площадки (<b>левая панель</b>).</p>
 
     <p>На сайт постоянно добавляются ссылки на полезные местные ресурсы о выборах (<b>правая панель</b>).</p>
 
@@ -108,7 +113,7 @@
 
     <p>Вы можете посмотреть <a href="http://bit.ly/elections_pdf" target="_blank">наглядную презентацию</a> площадки в диаграммах.</p>
 
-    <p>Подробнее о проекте можно прочитать <a href="{% url about %}">здесь</a>.</p>
+    <p>Подробнее о проекте можно прочитать <a href="{% url about %}">здесь</a>.</p>-->
 
     <!--div>
         {% if not user.is_authenticated %}

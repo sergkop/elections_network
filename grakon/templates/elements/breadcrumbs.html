@@ -2,7 +2,7 @@
     <div class="breadcrumbs">
         <ul>
             <li class="first">
-                {% if current_location %}
+               {% if current_location %}
                     <a href="{% url main %}">Россия<i></i><b></b></a>
                {% else %}
                     <strong>Россия<i></i><b></b></strong>
@@ -32,7 +32,7 @@
                     <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                         <select id="goto_subregion" name="region">
                             {% if current_location %}
-                                <option value="" selected="selected">Перейти ниже</option>
+                                <option value="" selected="selected">Выбрать ТИК</option>
                             {% endif %}
                             {% for id, name in sub_regions %}
                             <option value="{{ id }}">{{ name }}</option>

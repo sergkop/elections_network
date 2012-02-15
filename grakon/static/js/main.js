@@ -74,7 +74,7 @@ function set_select_location(div_id, path){
                     if (select_1.children('[value="'+select_1.val()+'"]').text()=="Зарубежные территории")
                         var txt = "Выберите страну";
                     else
-                        var txt = "Выберите район";
+                        var txt = "Выберите ТИК";
                     select_2.append(empty_2.text(txt));
 
                     $.each(data, function(index, value){

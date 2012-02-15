@@ -1,5 +1,18 @@
-<center>
+
+	<!-- Put this script tag to the <head> of your page -->
+	<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?48"></script>
+    
+    <script type="text/javascript">
+      VK.init({apiId: 2805265, onlyWidgets: true});
+    </script>
+    
+    <!-- Put this div tag to the place, where the Like block will be -->
     <div id="vk_like" style="display:inline;"></div>
+    <script type="text/javascript">
+    VK.Widgets.Like("vk_like", {type: "mini"});
+    </script>
+   
+   <!-- <div id="vk_like"></div>
     <script type="text/javascript">
         VK.Widgets.Like("vk_like", {
             type: "vertical",
@@ -9,13 +22,29 @@
             pageUrl: "http://grakon.org",
             pageImage: "http://grakon.org/static/images/logo_small.png"
         }, 1);
-    </script>
+    </script>-->
+    
+    <div class="fb-like" data-href="http://grakon.org/" data-send="false" data-layout="button_count" data-width="40" data-show-faces="true" data-font="lucida grande"></div>
 
-    <div class="fb-like" data-href="http://grakon.org" data-send="false" data-layout="box_count"
-            data-width="110" data-show-faces="false" data-font="lucida grande"></div>
+    <!--<div class="fb-like" data-href="http://grakon.org" data-send="false" data-layout="box_count"
+            data-width="110" data-show-faces="false" data-font="lucida grande"></div>-->
 
-    <div class="g-plusone" data-size="tall" data-href="http://grakon.org"></div>
+<!-- Place this tag where you want the +1 button to render -->
+<g:plusone annotation="inline" width="120" href="http://grakon.org/"></g:plusone>
+
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'ru'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+    <!--<div class="g-plusone" data-size="tall" data-href="http://grakon.org"></div>-->
 
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://grakon.org" data-text="Гражданский контроль за президентскими выборами" data-lang="no" data-related="GrakonTeam">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</center>
+

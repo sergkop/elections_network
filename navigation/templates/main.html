@@ -27,17 +27,10 @@
         {% include "elements/left_panel.html" %}
     </div>
 
-    {% include "dialogs/become_voter.html" %}
-
     {% include "dialogs/become_observer.html" %}
 
     {% include "dialogs/change_location.html" %}
 
-    <script type="text/javascript">
-        $("#become_voter").click(function(){
-            change_location_dialog_init("Записаться в избиратели", "Выберите ваш избирательный округ", "become_voter");
-        });
-    </script>
 {% endblock %}
 
 {% block right_column %}
@@ -115,39 +108,6 @@
     <p>
         <a href="http://grakon.org/register" target="_blank">Присоединяйтесь</a> – помогите удостовериться, что выборы пройдут честно.
     </p>
-
-  <!--  <p>Посмотрите, кто уже участвует в работе площадки (<b>левая панель</b>).</p>
-
-    <p>На сайт постоянно добавляются ссылки на полезные местные ресурсы о выборах (<b>правая панель</b>).</p>
-
-    <p>В течение оставшегося времени до выборов 4 марта на площадку будут добавляться новые типы участников:
-    члены УИК, представители СМИ, юристы и другие. Появятся новые эффективные инструменты: выложить и обжаловать нарушения,
-    выложить списки членов УИК, выложить копии протоколов и сравнить их с официальными результатами ЦИК и другие.
-    Заходите на площадку почаще. Зарегистрируйтесь, чтобы участвовать в работе и чтобы Вас могли найти активные избиратели в Вашем городе. Приглашайте на Гракон друзей.</p>
-
-    <p>Вы можете посмотреть <a href="http://bit.ly/elections_pdf" target="_blank">наглядную презентацию</a> площадки в диаграммах.</p>
-
-    <p>Подробнее о проекте можно прочитать <a href="{% url about %}">здесь</a>.</p>-->
-
-    <!--div>
-        {% if not user.is_authenticated %}
-            Чтобы получить полный доступ к системе, необходимо
-            <div-->
-                <!--<a id="reg_btn" href="{% url register %}">Зарегистрируйтесь</a>
-                <span class="text_between_btns">или</span>-->
-                <!--center><span id="login_btn2" class="clickable">Войти</span></center>
-            </div>
-        {% else %}
-            <h4>
-                Вы вошли в систему как
-                <a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
-            </h4>
-            <br/>
-            <button id="profile_btn">
-                <a href="{{ user.get_absolute_url }}">Перейти на свою страницу</a>
-            </button>
-        {% endif %}
-    </div-->
 
     <script type="text/javascript">
         // TODO: icon doesn't appear, button element is needed

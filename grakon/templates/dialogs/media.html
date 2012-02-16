@@ -1,0 +1,45 @@
+<div id="become_media_dialog">
+    <center>
+        {% if user.is_authenticated %}
+            Вы уже записаны избирателем. Вы хотите сменить свой из
+            <form id="become_media_form" method="post" action="{% url become_media %}">
+                {% csrf_token %}
+                {% include "elements/region_choice.html" %}
+            </form>
+        {% endif %}
+    </center>
+</div>
+
+<script type="text/javascript">
+    // Become media dialog
+    function become_media_dialog_init(path){
+        set_select_location("become_media_form", path);
+        $("#become_media_dialog").dialog("open");
+    }
+
+    $("#become_media_dialog").dialog({width:650, height:250, modal: true, title: "Сменить избирательный округ",
+        buttons: {
+            {% if user.is_authenticated %}
+                "Сменить округ": function(){
+                    $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+                            $("#become_voter_dialog").dialog("close");
+                            $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                    .attr("method", "get").submit();
+                        } else
+                            alert(data);
+                    });
+                },
+            {% else %}
+                "Записаться": function(){$("#become_voter_form").submit();},
+            {% endif %}
+
+            "Отмена": function(){$("#become_voter_dialog").dialog("close");}
+        }
+    }).dialog("close");
+
+    $("#become_voter").click(function(){
+        become_voter_dialog_init(CURRENT_LOCATION);
+    });
+</script>

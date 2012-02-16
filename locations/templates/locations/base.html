@@ -37,28 +37,6 @@
         {% include "dialogs/change_location.html" %}
     {% endif %}
 
-    {% if current_location.is_region %}
-        <script type="text/javascript">
-            $("#become_voter").click(function(){
-                change_location_dialog_init("Записаться в избиратели", "Выберите ваш избирательный округ", "become_voter");
-            });
-        </script>
-    {% else %}
-        {% if user.is_authenticated %}
-            {% include "dialogs/become_voter.html" %}
-        {% else %}
-            <script type="text/javascript">
-                $("#become_voter").click(function(){
-                    {% if view == "location_register" %}
-                        alert("Чтобы записаться в избиратели, пожалуйста, зарегистрируйтесь.");
-                    {% else %}
-                        window.location.href = "{% url location_register current_location.id %}";
-                    {% endif %}
-                });
-            </script>
-        {% endif %}
-    {% endif %}
-
     {% if user.is_authenticated %}
         {% include "dialogs/add_to_contacts.html" %}
 

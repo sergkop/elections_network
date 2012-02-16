@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     url(r'^links/', include('links.urls')),
     url(r'^location/', include('locations.urls')),
     url(r'^loginza/', include('loginza.urls')),
-    (r'^tinymce/', include('tinymce.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
 
     url(r'^%s/' % settings.ADMIN_PREFIX, include(admin.site.urls)),
 )

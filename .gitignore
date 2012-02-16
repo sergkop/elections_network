@@ -10,3 +10,4 @@ static/admin
 templates/admin
 site_settings.py
 media/address_cache/*
+django_kit

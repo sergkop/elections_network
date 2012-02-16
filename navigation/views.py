@@ -1,10 +1,11 @@
 # coding=utf8
-import urllib
 import os.path
+import urllib
+
+from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse
-from django.utils import simplejson as json
 
 from locations.models import Location
 from locations.utils import regions_list
@@ -49,24 +50,28 @@ def map_search(request):
     return render_to_response('map.html', context_instance=RequestContext(request, context))
 
 def uik_search(request):
-	url = request.REQUEST.get('url', None)
-	if url is not None:
-		if request.REQUEST.get('id', None) is None:
-			response = urllib.urlopen(request.REQUEST.get('url'), urllib.urlencode(request.REQUEST)).read()
-		else:
-			currentDir = os.path.abspath(os.curdir)
-			cacheDir = os.path.join(currentDir, "navigation")
-			cacheDir = os.path.join(cacheDir, "cache")
-			cacheFile = os.path.join(cacheDir, request.REQUEST.get('id') + '.json')
-			if os.path.exists(cacheFile):
-				cache = open(cacheFile, "r")
-				response = cache.read()
-				cache.close()
-			else:
-				response = urllib.urlopen(request.REQUEST.get('url'), urllib.urlencode(request.REQUEST)).read()
-				cache = open(cacheFile, "w")
-				cache.write(response)
-				cache.close()
-		return HttpResponse(response)
-	else:
-		return render_to_response('uik_search.html', RequestContext(request))
+    return render_to_response('uik_search.html', context_instance=RequestContext(request))
+
+def uik_search_data(request):
+    url = request.GET.get('url')
+
+    if not url:
+        return HttpResponse(u'Необходимо указать url')
+
+    url_prefix = 'http://cikrf.ru/dynservices/gas/serviceone/'
+
+    if request.GET.get('id') is None:
+        response = urllib.urlopen(url_prefix+url, urllib.urlencode(request.GET)).read()
+    else:
+        # TODO: security issue with passing id
+        cache_path = os.path.join(settings.PROJECT_PATH, 'media', 'address_cache',
+                request.GET.get('id') + '.json')
+
+        if not os.path.exists(cache_path):
+            data = urllib.urlopen(url_prefix+url, urllib.urlencode(request.GET)).read()
+            with open(cache_path, 'w') as cache_file:
+                cache_file.write(data)
+
+        with open(cache_path, 'r') as cache_file:
+            data = cache_file.read()
+    return HttpResponse(data)

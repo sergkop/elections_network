@@ -54,9 +54,9 @@
     		
 	    	showLevelById: function(id, level) {
 	    	    $.ajax({
-	            	url: '/uik_search',
+	            	url: '/uik_search_data',
 	            	data: {
-	    	        	url: 'http://cikrf.ru/dynservices/gas/serviceone/gettreelevel',
+	    	        	url: 'gettreelevel',
 	            		'id': id,
 	            		'level': level
 	            	},
@@ -75,9 +75,9 @@
 
 	    	findUIK: function() {
 		    	$.ajax({
-			    	url: '/uik_search',
+			    	url: '/uik_search_data',
 			    	data: {
-			    	    url: 'http://cikrf.ru/dynservices/gas/serviceone/showresult', 
+			    	    url: 'showresult', 
 			    	    authenticityToken: Address.AUTHENTICITY_TOKEN,
 			    		sendRequest: encodeURIComponent('Отправить запрос'),
 			    		addressId: Address.addressId,

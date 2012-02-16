@@ -79,6 +79,7 @@ INSTALLED_APPS = (
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'registration.backend.EmailAuthenticationBackend',
     'loginza.authentication.LoginzaBackend',
 )
 

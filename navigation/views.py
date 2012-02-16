@@ -1,5 +1,6 @@
 # coding=utf8
 import urllib
+import os.path
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -50,7 +51,22 @@ def map_search(request):
 def uik_search(request):
 	url = request.REQUEST.get('url', None)
 	if url is not None:
-		response = urllib.urlopen(request.REQUEST.get('url'), urllib.urlencode(request.REQUEST)).read()
+		if request.REQUEST.get('id', None) is None:
+			response = urllib.urlopen(request.REQUEST.get('url'), urllib.urlencode(request.REQUEST)).read()
+		else:
+			currentDir = os.path.abspath(os.curdir)
+			cacheDir = os.path.join(currentDir, "navigation")
+			cacheDir = os.path.join(cacheDir, "cache")
+			cacheFile = os.path.join(cacheDir, request.REQUEST.get('id') + '.json')
+			if os.path.exists(cacheFile):
+				cache = open(cacheFile, "r")
+				response = cache.read()
+				cache.close()
+			else:
+				response = urllib.urlopen(request.REQUEST.get('url'), urllib.urlencode(request.REQUEST)).read()
+				cache = open(cacheFile, "w")
+				cache.write(response)
+				cache.close()
 		return HttpResponse(response)
 	else:
-		return render_to_response('uik_search.html', context_instance=RequestContext(request))
+		return render_to_response('uik_search.html', RequestContext(request))

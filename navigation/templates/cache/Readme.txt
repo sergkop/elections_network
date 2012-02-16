@@ -1,0 +1,1 @@
+The folder "cache" is used to save results (files) of the /uik_search page queries.

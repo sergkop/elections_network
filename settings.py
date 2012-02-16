@@ -65,7 +65,6 @@ INSTALLED_APPS = (
     'tinymce',
     'south',
     'uni_form',
-    'django_extensions',
 
     'grakon',
     'locations',

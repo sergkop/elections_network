@@ -7,3 +7,4 @@ flup
 bleach
 django-debug-toolbar
 pylibmc
+django-extensions

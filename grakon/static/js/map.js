@@ -114,7 +114,7 @@ var ElectionMap = {
         s.iconStyle.offset = new YMaps.Point(-17, -19);
 
         ElectionMap.placemarkStyles.push(s);
-        ElectionMap.placemarkStyles.push("default#orangePoint");
+        ElectionMap.placemarkStyles.push("default#darkbluePoint");
         ElectionMap.placemarkStyles.push("default#lightbluePoint");
     },
     

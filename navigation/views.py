@@ -1,5 +1,6 @@
 # coding=utf8
 import os.path
+import re
 import urllib
 
 from django.conf import settings
@@ -61,11 +62,10 @@ def uik_search_data(request):
     url_prefix = 'http://cikrf.ru/dynservices/gas/serviceone/'
 
     if request.GET.get('id') is None:
-        response = urllib.urlopen(url_prefix+url, urllib.urlencode(request.GET)).read()
+        data = urllib.urlopen(url_prefix+url, urllib.urlencode(request.GET)).read()
     else:
-        # TODO: security issue with passing id
         cache_path = os.path.join(settings.PROJECT_PATH, 'media', 'address_cache',
-                request.GET.get('id') + '.json')
+                cache_file_name( request.GET.get('id') ))
 
         if not os.path.exists(cache_path):
             data = urllib.urlopen(url_prefix+url, urllib.urlencode(request.GET)).read()
@@ -75,3 +75,12 @@ def uik_search_data(request):
         with open(cache_path, 'r') as cache_file:
             data = cache_file.read()
     return HttpResponse(data)
+
+def cache_file_name(id):
+    file_parts = re.findall(r'\w+',id)
+    file_name = "".join(file_parts)
+
+    if file_name == "":
+        return "wrong_id.json"
+
+    return file_name + ".json"

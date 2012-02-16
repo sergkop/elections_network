@@ -9,3 +9,4 @@ database.sqlite
 static/admin
 templates/admin
 site_settings.py
+django_kit

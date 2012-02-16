@@ -4,25 +4,29 @@ from django.db.models import Q
 
 from tinymce.models import HTMLField
 
+from grakon.models import Profile
 from locations.models import Location
 
 # TODO: increase max_length of title
 # TODO: limit name format
 class Organization(models.Model):
-    name = models.CharField(max_length=30, unique=True)
-    title = models.CharField(max_length=50)
+    name = models.CharField(u'Идентификатор', max_length=30, unique=True, )
+    title = models.CharField(u'Название', max_length=50)
     about = HTMLField(u'Описание', default='')
     telephone = models.CharField(u'Телефон', max_length=50, blank=True)
     address = models.CharField(u'Адрес', max_length=200, blank=True)
-    website = models.URLField(u'Сайт', blank=True)
+    website = models.URLField(u'Сайт', blank=True,
+            help_text=u'Адрес сайта должен начинаться с http:// или https://')
     email = models.CharField(u'Электронная почта', max_length=100, blank=True)
     representative = models.CharField(u'Контактное лицо', max_length=100, blank=True)
 
     verified = models.BooleanField(default=False)
     is_partner = models.BooleanField(default=False)
 
-    signup_observers = models.BooleanField(u'Запись в наблюдатели', default=False)
-    teach_observers = models.BooleanField(u'Обучение наблюдателей', default=False)
+    signup_observers = models.BooleanField(u'Запись в наблюдатели', default=False,
+            help_text=u'Укажите помогает ли ваша организация записаться в наблюдатели')
+    teach_observers = models.BooleanField(u'Обучение наблюдателей', default=False,
+            help_text=u'Укажите занимается ли ваша организация обучением наблюдателей')
 
     # TODO: implement it
     def covers_location(self, location):
@@ -67,3 +71,14 @@ class OrganizationCoverage(models.Model):
 
     def __unicode__(self):
         return unicode(self.organization) + ': ' + unicode(self.location)
+
+class OrganizationRepresentative(models.Model):
+    organization = models.ForeignKey(Organization)
+    user = models.ForeignKey(Profile)
+    time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('organization', 'user')
+
+    def __unicode__(self):
+        return unicode(self.organization) + ': ' + unicode(self.user)

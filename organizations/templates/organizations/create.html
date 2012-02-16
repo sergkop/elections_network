@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load elements uni_form_tags %}
+
+{% block title %}
+    Гражданский контроль за президентскими выборами - Регистрация организации
+{% endblock %}
+
+{% block header %}
+    <script src="/static/libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Регистрация организации</h2>
+{% endblock %}
+
+{% block content %}
+    <b>После заполнения формы, пожалуйста, напишите нам на
+    <a href="mailto:admin@grakon.org">admin@grakon.org</a> и укажите в каких
+    регионах страны действует ваша организация. Мы подтвердим
+    статус вашей организации, после чего она начнет отображаться на страницах
+    соответствующих регионов.</b>.
+
+    {% uni_form form form.helper %}
+{% endblock %}

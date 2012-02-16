@@ -12,6 +12,7 @@ from grakon.utils import authenticated_redirect
 from locations.models import Location
 from locations.utils import regions_list
 
+# TODO: check if user is representative of an organization
 class BaseProfileView(object):
     template_name = 'profiles/base.html'
     profile_view = None # 'my_profile' or 'edit_profile'

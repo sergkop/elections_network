@@ -4,64 +4,77 @@ from smtplib import SMTPException
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse
+from django.views.generic.base import View
 
 from grakon.models import Profile
 from locations.models import Location
+from organizations.models import Organization
 from users.models import Contact, Role
 
-def become_voter(request):
-    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        for name in ('uik', 'tik', 'region'):
-            try:
-                location_id = int(request.POST.get(name, ''))
-            except ValueError:
-                continue
+class RoleSignupView(View):
+    role = '' # 'voter', 'observer'
 
-            try:
-                location = Location.objects.exclude(region=None).get(id=location_id)
-            except Location.DoesNotExist:
-                return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+    def get_data(self):
+        """
+        Method to extract role-specific data.
+        Return error or None.
+        """
+        return None
 
-            try:
-                role, created = Role.objects.get_or_create(
-                        type='voter', user=request.user.get_profile(), defaults={'location': location})
-            except IntegrityError:
-                return HttpResponse(u'Ошибка базы данных')
+    def role_fields(self):
+        return {}
 
-            if not created:
-                role.location = location
-                role.save()
+    def post(self, request):
+        error = u'Вы можете записаться только на уровне ТИК или УИК'
 
-            return HttpResponse('ok')
+        if not (request.is_ajax() and request.user.is_authenticated()):
+            return HttpResponse(error)
 
-    return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+        try:
+            location_id = int(self.request.POST.get('uik', self.request.POST.get('tik', '')))
+        except ValueError:
+            return HttpResponse(error)
 
-def become_observer(request):
-    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        for name in ('uik', 'tik', 'region'):
-            try:
-                location_id = int(request.POST.get(name, ''))
-            except ValueError:
-                continue
+        try:
+            self.location = Location.objects.exclude(region=None).get(id=location_id)
+        except Location.DoesNotExist:
+            return HttpResponse(error)
 
-            try:
-                location = Location.objects.exclude(region=None).get(id=location_id)
-            except Location.DoesNotExist:
-                return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+        res = self.get_data()
+        if res: # return error
+            return HttpResponse(res)
 
-            try:
-                role, created = Role.objects.get_or_create(
-                        type='voter', user=request.user.get_profile(), defaults={'location': location})
-            except IntegrityError:
-                return HttpResponse(u'Ошибка базы данных')
+        defaults = self.role_fields()
+        defaults['location'] = self.location
 
-            if not created:
-                role.location = location
-                role.save()
+        try:
+            role, created = Role.objects.get_or_create(type=self.role,
+                    user=request.user.get_profile(), defaults=defaults)
+        except IntegrityError:
+            return HttpResponse(u'Ошибка базы данных')
 
-            return HttpResponse('ok')
+        if not created:
+            for field in defaults:
+                setattr(role, field, defaults[field])
+            role.save()
 
-    return HttpResponse(u'Вы можете записаться только на уровне ТИК или УИК')
+        return HttpResponse('ok')
+
+class VoterSignupView(RoleSignupView):
+    role = 'voter'
+
+class ObserverSignupView(RoleSignupView):
+    role = 'observer'
+
+    def get_data(self):
+        try:
+            self.organization = Organization.objects.get(
+                    name=self.request.POST.get('organization', ''))
+        except Organization.DoesNotExist:
+            return u'Организация указана неверно'
+
+    def role_fields(self):
+        return {'organization': self.organization}
 
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():

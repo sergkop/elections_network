@@ -7,11 +7,10 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.http import int_to_base36
 
-import bleach
 from uni_form.layout import HTML, Layout
 
 from grakon.models import Profile
-from grakon.utils import form_helper
+from grakon.utils import clean_html, form_helper
 
 class LoginForm(auth_forms.AuthenticationForm):
     helper = form_helper('login', u'Войти')
@@ -25,12 +24,8 @@ class ProfileForm(forms.ModelForm):
 
     helper = form_helper('edit_profile', u'Сохранить')
 
-    # TODO: bring it in accordance with tinymce filter
     def clean_about(self):
-        tags = ('span', 'strong', 'b', 'em', 'i', 'u', 'strike', 's', 'li', 'ol', 'ul', 'p', 'br')
-        attributes= {'span': ['style']}
-        styles = ['text-decoration']
-        return bleach.clean(self.cleaned_data['about'], tags=tags, attributes=attributes, styles=styles, strip=True)
+        return clean_html(self.cleaned_data['about'])
 
 # TODO: set minimum password complexity
 class SetPasswordForm(auth_forms.SetPasswordForm):

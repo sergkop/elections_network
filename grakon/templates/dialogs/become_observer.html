@@ -16,6 +16,14 @@
                 <center>
                     <form id="become_observer_form" method="post" action="{% url become_observer %}">
                         {% csrf_token %}
+                        <select name="organization">
+                            {% for organization in organizations %}
+                                {% if organization.signup_observers %}
+                                    <option value="{{ organization.name }}">{{ organization.title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="tik" value="{{ current_location.id }}" />
                     </form>
                 </center>
 
@@ -46,10 +54,6 @@
                     </li>
                 </ul>
             </div>
-
-            <script type="text/javascript">
-                
-            </script>
         {% endif %}
     {% else %}
         <center>
@@ -72,34 +76,35 @@
         $("#become_observer_dialog").dialog("open");
     }
 
-    $("#become_observer_dialog").dialog({width:650, height:450, modal: true, title: "Записаться в наблюдатели",
-        buttons: {
-            "Записаться": function(){
-                {% if current_location.is_tik or current_location.is_uik %}
-                    {% if user.is_authenticated %}
-                        $.post($("#become_observer_form").attr("action"), $("#become_observer_form").serialize(), function(data){
-                            if (data=="ok"){
-                                $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
-                                $("#become_voter_dialog").dialog("close");
-                                $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                        .attr("method", "get").submit();
-                            } else
-                                alert(data);
-                        });
-                        // window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
+    var signup_button = {text: "Записаться", click: function signup(){
+        {% if current_location.is_tik or current_location.is_uik %}
+            {% if user.is_authenticated %}
+                $.post($("#become_observer_form").attr("action"), $("#become_observer_form").serialize(), function(data){
+                    if (data!="ok"){
+                        alert(data);
+                    } else
+                        $("#become_observer_dialog").dialog("close");
+                    // TODO: update the list of observers or page
+                });
+                // window.open("http://www.nabludatel.org/stat-nablyudatelem/", "_blank");
 
-                    {% else %}
+            {% else %}
 
-                    {% endif %}
-                {% else %}
-                    if ($('#become_observer_form [name="tik"]').val()=="")
-                        alert("Необходимо выбрать ТИК");
-                    else
-                        $("#become_observer_form").submit();
-                {% endif %}
-            },
-            "Отмена": function(){$("#become_observer_dialog").dialog("close");}
-        }
+            {% endif %}
+        {% else %}
+            if ($('#become_observer_form [name="tik"]').val()=="")
+                alert("Необходимо выбрать ТИК");
+            else
+                $("#become_observer_form").submit();
+        {% endif %}
+    }};
+
+    var cancel_button = {text: "Отмена", click: function(){
+        $("#become_observer_dialog").dialog("close");
+    }};
+
+    $("#become_observer_dialog").dialog({width:650, height:450, modal: true,
+            title: "Записаться в наблюдатели", buttons: [signup_button, cancel_button]
     }).dialog("close");
 
     $("#become_observer").click(function(){
@@ -118,6 +123,9 @@
 
                     $("#grakon_tab").show();
                     $("#partner_tab").hide();
+
+                    $("#become_observer_dialog").dialog("option", "buttons",
+                            [signup_button, cancel_button]);
                 });
                 $("#partner_btn").click(function(){
                     $("#grakon_btn").removeClass("dialog_switch_button_active");
@@ -125,6 +133,8 @@
 
                     $("#grakon_tab").hide();
                     $("#partner_tab").show();
+
+                    $("#become_observer_dialog").dialog("option", "buttons", [cancel_button]);
                 });
 
                 become_observer_dialog_init();

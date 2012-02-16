@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import redirect
 
+import bleach
 from uni_form.helper import FormHelper
 from uni_form.layout import Submit
 
@@ -39,3 +40,11 @@ def cache_function(key, timeout):
         return new_func
 
     return decorator
+
+# TODO: bring it in accordance with tinymce filter
+def clean_html(html):
+    """ Clean html fields edited by tinymce """
+    tags = ('span', 'strong', 'b', 'em', 'i', 'u', 'strike', 's', 'li', 'ol', 'ul', 'p', 'br')
+    attributes= {'span': ['style']}
+    styles = ['text-decoration']
+    return bleach.clean(html, tags=tags, attributes=attributes, styles=styles, strip=True)

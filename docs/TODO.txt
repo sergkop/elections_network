@@ -4,7 +4,6 @@
 * Put nginx.conf into repo
 * Настройка nginx - медиа файлы - есть ли доступ к templates?
 * in become voter dialog indicate if user has signed up somewhere else
-* кэшировать страницы для незалогиненных юзеров и показывать их с помощью nginx (без django) - пока с django
 * Use pagespeed to optimize load time
 * on changing voter's region on profile page - "избиратель" can disappear
 * add tips to buttons and ? signs to get help on features of the system

@@ -10,7 +10,7 @@
         </p>
 
         <p>Вы можете пройти процедуру автоматического составления официальной жалобы на сайте
-        <a href="http://kuda-komu.net" target="_blank">Куда? Кому?</a>.</p>
+        <a href="http://kuda-komu.net/voting/" target="_blank">Куда? Кому?</a>.</p>
     </div>
 {% endif %}
 
@@ -22,7 +22,7 @@
         $("#submit_complaint_dialog").dialog({width:650, height:450, modal: true, title: "Зафиксировать нарушение",
             buttons: {
                 "Сообщить о нарушении": function(){
-                    window.open("http://kuda-komu.net", "_blank");
+                    window.open("http://kuda-komu.net/voting/", "_blank");
                 },
                 "Отмена": function(){$("#submit_complaint_dialog").dialog("close");}
             }

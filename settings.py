@@ -42,12 +42,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -82,6 +84,9 @@ AUTHENTICATION_BACKENDS = (
     'registration.backend.EmailAuthenticationBackend',
     'loginza.authentication.LoginzaBackend',
 )
+
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+CACHE_MIDDLEWARE_SECONDS = 300 #5 minutes
 
 AUTH_PROFILE_MODULE = 'grakon.Profile'
 LOGIN_URL = '/login'

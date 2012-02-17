@@ -19,8 +19,6 @@
 
                     <input id="login_form_submit" type="submit" value="Войти" />
                     <a id="login_dialog_register" href="{% url register %}">Регистрация</a>
-                    <!--input type="hidden" name="next" {% if next %}value="{{ next }}"{% else %}value="{{ request.get_full_path }}"{% endif %} /-->
-
                 </form>
 
                 <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;

@@ -36,7 +36,7 @@ class BaseRegistrationForm(forms.ModelForm):
     region = forms.CharField(label=u'Выберите субъект РФ, где проживаете', widget=forms.Select(),
             help_text=u'Если вы находитесь за границей, выберите соответствующий пункт.')
     tik = forms.CharField(label=u'Выберите свой район', widget=forms.Select(choices=[('', u'Выберите свой район')]),
-            help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссией')
+            help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссии')
 
     email = forms.EmailField(label=u'Электронная почта',
             help_text=u'На ваш электронный адрес будет выслано письмо со ссылкой для активации аккаунта')

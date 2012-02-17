@@ -79,6 +79,12 @@ INSTALLED_APPS = (
     'organizations',
 )
 
+try:
+    import captcha
+    INSTALLED_APPS = INSTALLED_APPS + ('captcha',)
+except ImportError:
+    pass
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'registration.backend.EmailAuthenticationBackend',
@@ -91,7 +97,8 @@ CACHE_MIDDLEWARE_SECONDS = 300 #5 minutes
 AUTH_PROFILE_MODULE = 'grakon.Profile'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/profile'
-
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_dots',)
+CAPTCHA_FONT_SIZE = 20
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.

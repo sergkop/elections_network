@@ -188,3 +188,16 @@ select {
 	padding-right: 25px;
 	background: url(/static/images/zoom_out.png) right center no-repeat;
 }
+
+#div_id_captcha img{
+	float: left;
+	margin-right: 5px;
+}
+
+#id_captcha_1{
+	width: 35%;
+	margin: 0;
+	background: none repeat scroll 0 0 #FFF;
+	border: 1px solid #AAA;
+	padding: 4px 2px
+}

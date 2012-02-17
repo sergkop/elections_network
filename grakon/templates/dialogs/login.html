@@ -26,7 +26,7 @@
                 <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
             </td>
             <td style="border-left: 1px solid #AAA;">
-                {% include "elements/loginza.html" %}
+                {% include "elements/loginza-lazy.html" %}
             </td>
         </tr>
     </table>
@@ -41,8 +41,8 @@
     $("#login_form_submit").button();
     $("#login_dialog_register").button();
 
-    // TODO: implement logging in without page reload (?)
     function login_dialog_init(message){
+        load_lazy_loginza();
         $("#login_intro_span").text(message);
         $("#login_form_submit").button();
         $("#login_dialog").dialog("open");

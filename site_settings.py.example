@@ -51,3 +51,6 @@ ADMIN_PREFIX = 'admin' # prefix to access django admin interface (change for sec
 DISQUS_SHORTNAME = 'grakon'
 
 YANDEX_MAPS_KEY = 'ADSyKU8BAAAAD-VBCwIA5ak5VGynqt5xp2tzedBMfAmF8-kAAAAAAAAAAAD_nM6wtAPq97uJHRvkF_aJL3gRVQ=='
+
+DISCUS_SECRET_KEY = 'VUuOVeNPqm1JlMuldLNuFJgqURMF5EEr7UZ8rjxmtje2mJTY4Ahh7J7CsUILk0Cn'
+DISCUS_PUBLIC_KEY = 'w6DmLFjTlAlrDcRp1rbLV0cXOUWEKNyQaTxTqOYeKJkvizRtI1UFvjbfco9D61ed'

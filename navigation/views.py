@@ -27,6 +27,7 @@ def main(request):
 
     sub_regions = regions_list()
     context = {
+        'name': 'main',
         'voter_count': voter_count,
         #'ending': ending,
         'locations': sub_regions,
@@ -46,6 +47,7 @@ def static_page(request, name, template):
 
 def map_search(request):
     context = {
+        'name': 'map',
         'place': request.GET.get('place', ''),
     }
     return render_to_response('map.html', context_instance=RequestContext(request, context))

@@ -71,8 +71,8 @@
         <div class="ym-wrapper">
             <div class="ym-hlist">
                 <ul> 
-                    <li><a href="{% url main %}">Главная</a></li>
-                    <li><a href="{% url map_search %}">Карта</a></li>
+                    <li><a {% if name == "main" %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
+                    <li><a {% if name == "map" %}class="on"{% endif %}href="{% url map_search %}">Карта</a></li>
                     <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
                     <li><a {% if template == "static_pages/development/base.html" %}class="on"{% endif %} href="{% url news %}">Разработка</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>

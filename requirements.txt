@@ -7,3 +7,5 @@ flup
 bleach
 django-debug-toolbar
 pylibmc
+PIL
+django-simple-captcha

@@ -23,6 +23,14 @@ urlpatterns = patterns('',
     url(r'^%s/' % settings.ADMIN_PREFIX, include(admin.site.urls)),
 )
 
+try:
+    import captcha
+    urlpatterns += patterns('',
+        url(r'^captcha/', include('captcha.urls')),
+    )
+except ImportError:
+    pass
+
 urlpatterns += staticfiles_urlpatterns()
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)

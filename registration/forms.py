@@ -14,8 +14,14 @@ from locations.utils import regions_list
 from registration.models import ActivationProfile
 from users.models import Role
 
+try:
+    from captcha.fields import CaptchaField
+except ImportError:
+    CaptchaField = None
+
 password_digit_re = re.compile(r'\d')
 password_letter_re = re.compile(r'[a-zA-Z]')
+    
 
 # TODO: do we need next hidden field?
 layout = Layout(
@@ -132,7 +138,11 @@ class RegistrationForm(BaseRegistrationForm):
     helper = form_helper('register', u'Зарегистрироваться')
     helper.form_id = 'registration_form'
     helper.layout = layout
-
+    if CaptchaField:
+        captcha = CaptchaField(label=u'Код проверки', error_messages = {'invalid': u'Неверный код проверки'},
+                               help_text=u'Пожалуйста, введите цифры и буквы с картинки слева, чтобы мы могли отличить вас от робота',
+                               )
+        
     def clean_password1(self):
         password = self.cleaned_data['password1']
 

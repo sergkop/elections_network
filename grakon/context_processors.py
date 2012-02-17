@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.forms.widgets import Media
 from django.utils.safestring import mark_safe
@@ -16,34 +17,34 @@ import time
 def get_disqus_config(user):
     template = '''
     var disqus_config = function() {
-        this.page.remote_auth_s3 = "%(message)s %(sig)s %(timestamp)s";
+        this.page.remote_auth_s3 = "%(encoded_message)s";
         this.page.api_key = "%(pub_key)s";
     }
     '''
-    if not user.is_authenticated():
-        return ''
+    message_template = '%(message)s %(sig)s %(timestamp)s'
     secret_key = getattr(settings, 'DISQUS_SECRET_KEY', None)
     public_key = getattr(settings, 'DISQUS_PUBLIC_KEY', None)
     if secret_key is None or public_key is None:
         return ''
-    profile = None
-    try:
-        profile = user.profile
-    except:
-        return ''
     
-    data = json.dumps({
-        'id': profile.pk,
-        'username': profile.username,
-        'email': profile.user.email,
-    })
+    if user.is_authenticated():
+        profile = None
+        try:
+            profile = user.profile
+        except ObjectDoesNotExist:
+            return ''
+        data = json.dumps({
+            'id': profile.pk,
+            'username': profile.username,
+            'email': profile.user.email,
+        })
+    else:
+        data = json.dumps({})
     message = base64.b64encode(data)
     timestamp = int(time.time())
     sig = hmac.HMAC(secret_key, '%s %s' % (message, timestamp), hashlib.sha1).hexdigest()
-    config = template % {'message': message,
-                         'sig': sig,
-                         'timestamp': timestamp,
-                         'pub_key': public_key}
+    encoded_message = message_template % {'message': message, 'sig': sig, 'timestamp': timestamp} 
+    config = template % {'encoded_message': encoded_message, 'pub_key': public_key}
     return mark_safe(config)
 
 

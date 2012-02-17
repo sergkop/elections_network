@@ -12,7 +12,6 @@ def loginza_error_handler(sender, error, **kwargs):
 
 @receiver(signals.authenticated)
 def loginza_auth_handler(sender, user, identity, **kwargs):
-    print "loginza_auth_handler"
     try:
         # it's enough to have single identity verified to treat user as verified
         UserMap.objects.get(user=user, verified=True)

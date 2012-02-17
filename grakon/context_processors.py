@@ -22,6 +22,10 @@ def get_disqus_config(user):
     '''
     if not user.is_authenticated():
         return ''
+    secret_key = getattr(settings, 'DISQUS_SECRET_KEY', None)
+    public_key = getattr(settings, 'DISQUS_PUBLIC_KEY', None)
+    if secret_key is None or public_key is None:
+        return ''
     profile = None
     try:
         profile = user.profile
@@ -35,11 +39,11 @@ def get_disqus_config(user):
     })
     message = base64.b64encode(data)
     timestamp = int(time.time())
-    sig = hmac.HMAC(settings.DISQUS_SECRET_KEY, '%s %s' % (message, timestamp), hashlib.sha1).hexdigest()
+    sig = hmac.HMAC(secret_key, '%s %s' % (message, timestamp), hashlib.sha1).hexdigest()
     config = template % {'message': message,
                          'sig': sig,
                          'timestamp': timestamp,
-                         'pub_key': settings.DISQUS_PUBLIC_KEY}
+                         'pub_key': public_key}
     return mark_safe(config)
 
 

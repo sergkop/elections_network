@@ -1,12 +1,47 @@
-import json
-from urllib import quote
-
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.forms.widgets import Media
-
-from users.models import Contact
+from django.utils.safestring import mark_safe
 from reports.models import Report, REPORT_REASONS
+from urllib import quote
+from users.models import Contact
+import base64
+import hashlib
+import hmac
+import json
+import time
+
+
+
+def get_disqus_config(user):
+    template = '''
+    var disqus_config = function() {
+        this.page.remote_auth_s3 = "%(message)s %(sig)s %(timestamp)s";
+        this.page.api_key = "%(pub_key)s";
+    }
+    '''
+    if not user.is_authenticated():
+        return ''
+    profile = None
+    try:
+        profile = user.profile
+    except:
+        return ''
+    
+    data = json.dumps({
+        'id': profile.pk,
+        'username': profile.username,
+        'email': profile.user.email,
+    })
+    message = base64.b64encode(data)
+    timestamp = int(time.time())
+    sig = hmac.HMAC(settings.DISQUS_SECRET_KEY, '%s %s' % (message, timestamp), hashlib.sha1).hexdigest()
+    config = template % {'message': message,
+                         'sig': sig,
+                         'timestamp': timestamp,
+                         'pub_key': settings.DISQUS_PUBLIC_KEY}
+    return mark_safe(config)
+
 
 def user_data(request):
     context = {
@@ -15,6 +50,7 @@ def user_data(request):
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'YA_METRIKA_ID': settings.YA_METRIKA_ID,
         'DISQUS_SHORTNAME': settings.DISQUS_SHORTNAME,
+        'DISQUS_CONFIG': get_disqus_config(request.user),
         'YANDEX_MAPS_KEY': settings.YANDEX_MAPS_KEY,
         'URL_PREFIX': settings.URL_PREFIX,
     }

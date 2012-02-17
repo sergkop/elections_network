@@ -76,6 +76,31 @@ class ObserverSignupView(RoleSignupView):
     def role_fields(self):
         return {'organization': self.organization}
 
+class JournalistSignupView(RoleSignupView):
+    role = 'journalist'
+
+    def get_data(self):
+        self.data = self.request.POST.get('data', '')[:200]
+        if not self.data:
+            return u'Необходимо ввести вашу организацию и должность'
+
+    def role_fields(self):
+        return {'data': self.data}
+
+class LawyerSignupView(RoleSignupView):
+    role = 'lawyer'
+
+class ProsecutorSignupView(RoleSignupView):
+    role = 'prosecutor'
+
+    def get_data(self):
+        self.data = self.request.POST.get('data', '')[:200]
+        if not self.data:
+            return u'Необходимо ввести вашу организацию и должность'
+
+    def role_fields(self):
+        return {'data': self.data}
+
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:

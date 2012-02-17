@@ -1,0 +1,20 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Представители СМИ</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for participant in participants.journalist %}
+            <li>
+                {% include "elements/participant.html" %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% button "circle-check" "Записаться в представители СМИ" "become_journalist" %}
+</div>
+
+{% with role="journalist" dialog_template="dialogs/become_journalist.html" status_plural="представители СМИ" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

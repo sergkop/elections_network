@@ -1,0 +1,26 @@
+{% if current_location.is_tik or current_location.is_uik %}
+    {% if user.is_authenticated %}
+        {% include dialog_template %}
+
+        <script type="text/javascript">
+            $("#become_{{ role }}").click(become_{{ role }}_dialog_init);
+        </script>
+    {% else %}
+        <script type="text/javascript">
+            $("#become_{{ role }}").click(function(){
+                {% if view == "location_register" %}
+                    alert("Чтобы записаться в {{ status_plural }}, пожалуйста, зарегистрируйтесь.");
+                {% else %}
+                    window.location.href = "{% url location_register current_location.id %}";
+                {% endif %}
+            });
+        </script>
+    {% endif %}
+{% else %}
+    <script type="text/javascript">
+        $("#become_{{ role }}").click(function(){
+            change_location_dialog_init("Записаться в {{ status_plural }}",
+                    "Выберите ваш избирательный округ", "{{ role }}");
+        });
+    </script>
+{% endif %}

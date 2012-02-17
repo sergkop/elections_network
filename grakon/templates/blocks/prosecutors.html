@@ -1,0 +1,20 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Представители прокуратуры</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for participant in participants.prosecutor %}
+            <li>
+                {% include "elements/participant.html" %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% button "circle-check" "Записаться в представители прокуратуры" "become_prosecutor" %}
+</div>
+
+{% with role="prosecutor" dialog_template="dialogs/become_prosecutor.html" status_plural="представители прокуратуры" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

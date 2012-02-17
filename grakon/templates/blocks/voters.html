@@ -6,11 +6,9 @@
 
 <div class="content_block">
     <ul id="voters_ul" class="side_list">
-        {% for voter in participants.voter %}
+        {% for participant in participants.voter %}
             <li>
-                {% with participant=voter %}
-                    {% include "elements/participant.html" %}
-                {% endwith %}
+                {% include "elements/participant.html" %}
             </li>
         {% endfor %}
     </ul>
@@ -21,24 +19,27 @@
     {% endif %}
 </div>
 
-{% if not current_location or current_location.is_region %}
+{% with role="voter" dialog_template="dialogs/become_voter.html" status_plural="избиратели" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}
+
+{% if user.is_authenticated %}
+    {% include "dialogs/add_to_contacts.html" %}
+
     <script type="text/javascript">
-        $("#become_voter").click(function(){
-            change_location_dialog_init("Записаться в избиратели", "Выберите ваш избирательный округ", "become_voter");
-        });
+        // Become voter
+        /*$("#become_voter_dialog").on("become_voter_event", function(event, location_id){
+            var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
+            if (location_id=={{ current_location.id }}){
+                $("#become_voter .ui-button-text").text("Сменить избирательный округ");
+                if (user_voter_li.length==0)
+                    $("#voters_ul").append($("<li/>").append(
+                        $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}")
+                    ));
+            } else {
+                $("#become_voter .ui-button-text").text("Записаться в избиратели");
+                user_voter_li.remove();
+            }
+        });*/
     </script>
-{% else %}
-    {% if user.is_authenticated %}
-        {% include "dialogs/become_voter.html" %}
-    {% else %}
-        <script type="text/javascript">
-            $("#become_voter").click(function(){
-                {% if view == "location_register" %}
-                    alert("Чтобы записаться в избиратели, пожалуйста, зарегистрируйтесь.");
-                {% else %}
-                    window.location.href = "{% url location_register current_location.id %}";
-                {% endif %}
-            });
-        </script>
-    {% endif %}
 {% endif %}

@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import redirect
 
@@ -26,7 +25,6 @@ def authenticated_redirect(view_name):
     return view_decorator
 
 def cache_function(key, timeout):
-    settings
     def decorator(func):
         def new_func(*args, **kwargs):
             res = cache.get(key)

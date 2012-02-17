@@ -3,6 +3,7 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.simple import direct_to_template
 
 admin.autodiscover()
 
@@ -18,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^loginza/', include('loginza.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 
+    (r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
     url(r'^%s/' % settings.ADMIN_PREFIX, include(admin.site.urls)),
 )
 

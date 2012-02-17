@@ -1,20 +1,20 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Наблюдатели</h4>
+    <h4>Юристы</h4>
 </div>
 
 <div class="content_block">
     <ul class="side_list">
-        {% for participant in participants.observer %}
+        {% for participant in participants.lawyer %}
             <li>
                 {% include "elements/participant.html" %}
             </li>
         {% endfor %}
     </ul>
-    {% button "circle-check" "Записаться в наблюдатели" "become_observer" %}
+    {% button "circle-check" "Записаться в юристы" "become_lawyer" %}
 </div>
 
-{% with role="observer" dialog_template="dialogs/become_observer.html" status_plural="наблюдатели" %}
+{% with role="lawyer" dialog_template="dialogs/become_lawyer.html" status_plural="юристы" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

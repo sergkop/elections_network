@@ -1,0 +1,24 @@
+<div id="become_journalist_dialog">
+    Чтобы записаться представителем СМИ укажите какую организацию вы представляете
+    и вашу должность.
+    <br/><br/>
+    <form id="become_journalist_form" method="post" action="{% url become_journalist %}">
+        {% csrf_token %}
+        <input type="text" name="data" value="" size="60" maxlength="200" />
+        <input type="hidden" name="tik" value="{{ current_location.id }}" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function become_journalist_dialog_init(){
+        $("#become_journalist_dialog").dialog("open");
+    }
+
+    $("#become_journalist_dialog").dialog({width:650, height:250, modal: true,
+        title: "Стать представителем СМИ",
+        buttons: {
+            "Записаться": function(){signup_for_role("journalist", "{{ request.path }}");},
+            "Отмена": function(){$("#become_journalist_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

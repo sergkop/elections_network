@@ -8,6 +8,9 @@ from organizations.models import Organization
 ROLE_CHOICES = (
     ('observer', u'Наблюдатель'),
     ('voter', u'Избиратель'),
+    ('journalist', u'Представитель СМИ'),
+    ('lawyer', u'Юрист'),
+    ('prosecutor', u'Представитель прокуратуры'),
 )
 ROLE_TYPES = dict(ROLE_CHOICES)
 

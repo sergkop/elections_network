@@ -1,30 +1,18 @@
 {% load elements %}
 
+{% if current_location.is_region %}
+    {% include "dialogs/change_location.html" %}
+{% endif %}
+
+{% include "blocks/voters.html" %}
+
 {% include "blocks/observers.html" %}
 
-<div class="disabled-block">
-    <div class="i">&nbsp;</div>
+{% include "blocks/journalists.html" %}
 
-    <div class="side_block_header">
-        <h4>Представители СМИ (в разработке)</h4>
-    </div>
+{% include "blocks/lawyers.html" %}
 
-    <div class="content_block">
-        {% button "circle-check" "Записаться в представители СМИ" "become_journalist" %}
-    </div>
-</div>
-
-<div class="disabled-block">
-    <div class="i">&nbsp;</div>
-
-    <div class="side_block_header">
-        <h4>Юристы (в разработке)</h4>
-    </div>
-
-    <div class="content_block">
-        {% button "circle-check" "Записаться в юристы" "become_lawyer" %}
-    </div>
-</div>
+{% include "blocks/prosecutors.html" %}
 
 <div class="disabled-block">
     <div class="i">&nbsp;</div>
@@ -37,3 +25,21 @@
         {% button "circle-check" "Записаться в члены избирательной комиссии" "become_representative" %}
     </div>
 </div>
+
+<script type="text/javascript">
+    // TODO: move it inside become_voter.html
+    /*$("#voters_ul li").each(function(index){
+        new UserListItem($(this));
+    });
+
+    $("#add_to_contacts_dialog").on("add_to_contacts_event", function(event, username){
+        // TODO: explicit use of url (use global variable instead) - everywhere
+        $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-plus").css("visibility", "hidden");
+    });
+
+    $("#report_dialog").on("report_dialog_event", function(event, username){
+        $('#voters_ul li a[href="/users/'+username+'/"]').parent().children(".ui-icon-notice").css("visibility", "hidden");
+    });*/
+</script>
+
+{% include "dialogs/report.html" %}

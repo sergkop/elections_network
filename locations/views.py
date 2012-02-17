@@ -13,7 +13,7 @@ from locations.models import Location
 from locations.utils import regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
-from users.models import Role
+from users.models import Role, ROLE_TYPES
 
 # TODO: mark links previously reported by user
 class LocationView(TemplateView):
@@ -52,6 +52,10 @@ class LocationView(TemplateView):
 
             voter_count = Role.objects.filter(type='voter', location__tik=location).count()
 
+        dialog = ''
+        if self.request.GET.get('dialog', '') in ROLE_TYPES:
+            dialog = self.request.GET.get('dialog', '')
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
@@ -61,6 +65,7 @@ class LocationView(TemplateView):
             'locations': regions_list(),
             'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
             'sub_regions': sub_regions,
+            'dialog': dialog,
 
             'voter_count': voter_count,
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),

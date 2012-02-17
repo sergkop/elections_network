@@ -275,6 +275,19 @@ function in_contacts(username){
 function goToMap() {
     var place = REGION_NAME;
     place += (place.length > 0 && TIK_NAME.length > 0) ? ", "+TIK_NAME : TIK_NAME;
-        
+
     location.href = "/map_search?place="+place;
+}
+
+function signup_for_role(role, url){
+    $.post($("#become_"+role+"_form").attr("action"), $("#become_"+role+"_form").serialize(), function(data){
+        if (data!="ok"){
+            alert(data);
+        } else {
+            $("#become_"+role+"_dialog").dialog("close");
+            window.location.href = url;
+            // TODO: update the list of participants with js without page reload
+        }
+    });
+    // window.open(url, "_blank");
 }

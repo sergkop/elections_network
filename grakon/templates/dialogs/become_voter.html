@@ -1,45 +1,37 @@
 <div id="become_voter_dialog">
     <center>
-        {% if user.is_authenticated %}
-            Вы уже записаны избирателем. Вы хотите сменить свой из
-            <form id="become_voter_form" method="post" action="{% url become_voter %}">
-                {% csrf_token %}
-                {% include "elements/region_choice.html" %}
-            </form>
-        {% endif %}
+        Вы уже записаны избирателем. Вы хотите сменить свой из
+        <form id="become_voter_form" method="post" action="{% url become_voter %}">
+            {% csrf_token %}
+            {% include "elements/region_choice.html" %}
+        </form>
     </center>
 </div>
 
 <script type="text/javascript">
     // Become voter dialog
-    function become_voter_dialog_init(path){
-        set_select_location("become_voter_form", path);
+    // TODO: depricate this view? (leave code for events)
+    function become_voter_dialog_init(){
         $("#become_voter_dialog").dialog("open");
     }
 
     $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Сменить избирательный округ",
         buttons: {
-            {% if user.is_authenticated %}
-                "Сменить округ": function(){
-                    $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
-                        if (data=="ok"){
-                            $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
-                            $("#become_voter_dialog").dialog("close");
-                            $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                    .attr("method", "get").submit();
-                        } else
-                            alert(data);
-                    });
-                },
-            {% else %}
-                "Записаться": function(){$("#become_voter_form").submit();},
-            {% endif %}
-
+            "Сменить округ": function(){
+                $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
+                    if (data=="ok"){
+                        $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+                        $("#become_voter_dialog").dialog("close");
+                        $("#become_voter_form").attr("action", "{% url goto_location %}")
+                                .attr("method", "get").submit();
+                    } else
+                        alert(data);
+                });
+            },
             "Отмена": function(){$("#become_voter_dialog").dialog("close");}
         }
     }).dialog("close");
 
-    $("#become_voter").click(function(){
-        become_voter_dialog_init(CURRENT_LOCATION);
-    });
+    // TODO: move it to left panel
+    $("#become_voter").click(become_voter_dialog_init);
 </script>

@@ -1,0 +1,23 @@
+<div id="become_prosecutor_dialog">
+    Чтобы записаться представителем прокуратуры, укажите какую организацию вы представляете
+    и вашу должность.
+    <br/><br/>
+    <form id="become_prosecutor_form" method="post" action="{% url become_prosecutor %}">
+        {% csrf_token %}
+        <input type="text" name="data" value="" size="60" maxlength="200" />
+        <input type="hidden" name="tik" value="{{ current_location.id }}" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function become_prosecutor_dialog_init(){
+        $("#become_prosecutor_dialog").dialog("open");
+    }
+
+    $("#become_prosecutor_dialog").dialog({width:650, height:250, modal: true, title: "Стать представителем организации",
+        buttons: {
+            "Записаться": function(){signup_for_role("prosecutor", "{{ request.path }}");},
+            "Отмена": function(){$("#become_prosecutor_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

@@ -6,9 +6,13 @@
 
 <div class="content_block">
     <ul class="side_list">
-        {% for participant in participants.observer %}
+        {% for role in participants.observer %}
             <li>
-                {% include "elements/participant.html" %}
+                {% with participant=role.user %}
+                    {% include "elements/participant.html" %}
+                {% endwith %}
+                <br/>
+                <i>{{ role.organization }}</i>
             </li>
         {% endfor %}
     </ul>

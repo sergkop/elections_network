@@ -16,7 +16,7 @@
                 {% csrf_token %}
                 <select name="organization">
                     {% for organization in organizations %}
-                        {% if organization.signup_observers %}
+                        {% if organization.signup_observers and organization.verified %}
                             <option value="{{ organization.name }}">{{ organization.title }}</option>
                         {% endif %}
                     {% endfor %}
@@ -30,27 +30,22 @@
     </div>
 
     <div id="partner_tab" style="display:none;">
-        <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем заполнить форму на сайте
-        <a href="http://www.nabludatel.org/stat-nablyudatelem/" target="_blank">Гражданин наблюдатель</a>.
+        <b>Если вы еще не записались в наблюдатели</b>, мы рекоммендуем зарегистрироваться
+        на сайте одной из следующих организаций:
 
         <ul>
-            <li>
-                <b></b><br/>
-                Гражданин Наблюдатель проводит интенсивные тренинги для обучения наблюдателей эффективным действиям
-                в случаях обнаружения нарушений на участках, включая практические упражнения. Выдает направления
-                в наблюдатели от СМИ и партий.
-                <br/>
-                После заполнения анкеты на сайте Гражданина Наблюдателя с Вами свяжутся в течение нескольких дней и пригласят на тренинг. Сразу после этого мы добавим Вам статус наблюдателя на площадке Гракон.
-                <br/>
-                Если Вы уже записались в наблюдатели через Гражданин Наблюдатель, то в ближайшее время на вашу электронную почту
-                придет письмо с инструкцией по получению статуса наблюдателя на площадке.
-            </li>
-
-            <li>
-                <b>Партнер</b><br/>
-                Здесь будут добавляться дополнительные возможности стать наблюдателем с появлением новых партнеров.
-            </li>
+            {% for organization in organizations %}
+                {% if organization.signup_observers and organization.is_partner %}
+                    <li>
+                        <b><a href="{{ organization.get_absolute_url }}" target="_blank">{{ organization }}</a></b><br/>
+                        <!--{{ organization.about|safe }}-->
+                    </li>
+                {% endif %}
+            {% endfor %}
         </ul>
+
+        Если вы хотите, чтобы здесь отображалась ваша организация, пожалуйста,
+        <a href="{% url create_organization %}">зарегистрируйте</a> ее и свяжитесь с нами.
     </div>
 </div>
 

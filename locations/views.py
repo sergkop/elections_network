@@ -35,12 +35,12 @@ class LocationView(TemplateView):
         if not location.tik:
             query |= Q(location__tik=location) if location.region else Q(location__region=location)
 
-        for role in Role.objects.filter(query).select_related('user'):
-            participants.setdefault(role.type, []).append(role.user)
+        for role in Role.objects.filter(query).select_related():
+            participants.setdefault(role.type, []).append(role)
 
         # Sort participants by name and limit the length of the lists
         for role in participants:
-            participants[role] = sorted(participants[role], key=lambda p: p.username.lower())[:30]
+            participants[role] = sorted(participants[role], key=lambda r: r.user.username.lower())[:30]
 
         # Get sub-regions
         sub_regions = []

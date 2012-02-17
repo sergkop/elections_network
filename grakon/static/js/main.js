@@ -277,6 +277,7 @@ function goToMap() {
     place += (place.length > 0 && TIK_NAME.length > 0) ? ", "+TIK_NAME : TIK_NAME;
 
     location.href = "/map_search?place="+place;
+    return false;
 }
 
 function signup_for_role(role, url){

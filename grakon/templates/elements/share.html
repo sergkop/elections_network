@@ -1,26 +1,39 @@
-<div class="social" style="float: right; padding-top: 7px;">
-		<div style="float: left; padding: 2px 6px 0 0; line-height: 0;">
-        <!-- Place this tag where you want the +1 button to render -->
-        <g:plusone size="small" annotation="none"></g:plusone>
+<div class="social">
+	<iframe src="//www.facebook.com/plugins/like.php?locale=ru_RU&amp;href=http%3A%2F%2Fgrakon.org%2F&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+    
+    <div style="margin: 9px 0; height: 22px; overflow: hidden;">
+        <!-- Put this script tag to the <head> of your page -->
+        <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?48"></script>
         
-        <!-- Place this render call where appropriate -->
         <script type="text/javascript">
-          (function() {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-          })();
+          VK.init({apiId: 2805265, onlyWidgets: true});
         </script>
-		<a rel="nofollow" target="_blank" href="http://www.facebook.com/share.php?u=http://grakon.org/" original-title="Поделиться в Facebook"><img src="/static/images/facebook.gif" alt=""></a>
- 
         
-        <a href="http://vkontakte.ru/share.php?url=http://grakon.org/" target="_blank"><img src="/static/images/vkontakte.gif"/></a>
         
-       
+        <!-- Put this div tag to the place, where the Like block will be -->
+        <div id="vk_like"></div>
+    </div>
+    
+		<script type="text/javascript">
+        VK.Widgets.Like("vk_like", {type: "button"});
+        </script>
+        <div style="width: 200px; overflow: hidden; margin-bottom: 9px;">
+            <a href="https://twitter.com/grakonteam" class="twitter-follow-button" data-show-count="false" data-lang="ru">Читать @grakonteam</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </div>
-		<div style=" float: left; width: 65px; overflow: hidden;">
-            <a href="https://twitter.com/grakonteam" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Читать</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-		</div>
+    
+    <!-- Place this tag where you want the +1 button to render -->
+    <g:plusone size="small" annotation="inline" width="200"></g:plusone>
+    
+    <!-- Place this render call where appropriate -->
+    <script type="text/javascript">
+      window.___gcfg = {lang: 'ru'};
+    
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>	
 </div>
 

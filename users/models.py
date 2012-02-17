@@ -20,7 +20,7 @@ class Role(models.Model):
     type = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
     organization = models.ForeignKey(Organization, blank=True, null=True)
-    data = models.CharField(max_length=200, default='')
+    data = models.CharField(max_length=200, default='', blank=True)
     verified = models.BooleanField(default=False)
 
     time = models.DateTimeField(auto_now=True)

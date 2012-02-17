@@ -38,6 +38,10 @@ class LocationView(TemplateView):
         for role in Role.objects.filter(query).select_related('user'):
             participants.setdefault(role.type, []).append(role.user)
 
+        # Sort participants by name and limit the length of the lists
+        for role in participants:
+            participants[role] = sorted(participants[role], key=lambda p: p.username)[:30]
+
         # Get sub-regions
         sub_regions = []
         voter_count = 0

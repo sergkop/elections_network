@@ -40,7 +40,7 @@ class LocationView(TemplateView):
 
         # Sort participants by name and limit the length of the lists
         for role in participants:
-            participants[role] = sorted(participants[role], key=lambda p: p.username)[:30]
+            participants[role] = sorted(participants[role], key=lambda p: p.username.lower())[:30]
 
         # Get sub-regions
         sub_regions = []

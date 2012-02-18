@@ -13,32 +13,42 @@
     	    AUTHENTICITY_TOKEN: "6c3e5ba2e795907e32ba0d4fb1e3b16a206bf074",
     	    VIB_TITLE: "Выборы Президента Российской Федерации 4 марта 2012 года",
     	    addressId: null,
+    	    DEFAULT_MESSAGE: '=== Выберите свой адрес ===',
     	    
 	    	Utils: {
 	    	    pathParts: new Array(),
 	    	    titleParts: new Array(),
-	    	    lastLevel: null,
+	    	    levels: new Array(),
 	    	    
-	    	    addSelect: function(data, level) {
-		        	var selectID = "level"+level;
-
-		        	Address.Utils.lastLevel = new Object();
+	    	    addSelect: function(data) {
+    	            var index = $('div#addressFields > select').length;
+    	            var level = new Object();
 		        	
-		        	$('div#addressFields').append( $('<select/>').attr('id', selectID) );
-		        	$('select#'+selectID).append( $('<option/>').attr('selected', 'selected').text('=== Выберите свой адрес ===') );
+		        	$('div#addressFields').append( $('<select/>').attr('id', index) );
+		        	$('select#'+index).append( $('<option/>').attr('selected', 'selected').text(Address.DEFAULT_MESSAGE) );
 		        	$.each(data, function(key, value){
 		        	    var id = value.attr.id;
-		            	$('select#'+selectID).append( $('<option/>').attr('value', id).text( value.attr.caption ) );
-		            	Address.Utils.lastLevel[id] = value;
+		            	$('select#'+index).append( $('<option/>').attr('value', id).text( value.attr.caption ) );
+		            	level[id] = value;
 		        	});
-		        	$('select#'+selectID).change(function() {
-		            	var id = $('select#'+selectID+' option:selected').val();
+
+		        	Address.Utils.levels.push(level);
+		        	
+		        	$('select#'+index).change(function() {
+		            	var id = $(this).children('option:selected').val();
+		            	$("div#result").html("");
 		            	if (id!="") {
-		            	    $('select#'+selectID+' + select').remove();
-		            	    Address.addressId = Address.Utils.lastLevel[id].attr.addrId;
-		            	    Address.Utils.pathParts.push( id );
-		            	    Address.Utils.titleParts.push( Address.Utils.lastLevel[id].attr.caption );
-		            		Address.showLevelById(id, level+1);
+		            	    $(this).nextAll('select').remove();
+		            	    var index = $(this).prevAll('select').length;
+                            for (var i=Address.Utils.levels.length-1; i>index; i--) {
+                                Address.Utils.pathParts.pop();
+                                Address.Utils.titleParts.pop();
+                                Address.Utils.levels.pop();
+                            }
+		            	    Address.addressId = Address.Utils.levels[index][id].attr.addrId;
+		            	    Address.Utils.pathParts[index] = id;
+		            	    Address.Utils.titleParts[index] = Address.Utils.levels[index][id].attr.caption;
+		            		Address.showLevelById(id, index+1);
 		            	}
 		        	});
 		    	},
@@ -63,7 +73,7 @@
 	            	dataType: 'json',
 	            	success: function(response) {
 	                	if (response.length > 0)
-	                    	Address.Utils.addSelect(response, level);
+	                    	Address.Utils.addSelect(response);
 	                	else
 		                	Address.findUIK();
 	            	},
@@ -90,7 +100,14 @@
 			    	},
 			    	dataType: 'html',
 			    	success: function(html) {
-				    	$('#result').text( $(html).find("div.dotted").text() );
+				    	if ($(html).find("div.dotted").length > 0)
+				    	    $('#result').text( $(html).find("div.dotted").text() );
+				    	else if ($(html).attr("id") == "uik")
+				    	    $('#result').text( $(html).text() );
+				    	else {
+				    	    $('#result').html( "Уважаемый пользователь! К сожалению, данные не были найдены." );
+				    	    window.console.log(html);
+				    	}
 			    	},
 			    	alert: function() {
 				    	alert('Извините! Запрос не сработал. Попробуйте ещё раз.');
@@ -102,6 +119,7 @@
     	$(document).ready(function(){
 	    	$('#findUIK').click(function() {
 		    	$('#addressFields').html("");
+		    	$('#result').html("");
 	    	    Address.showLevelById("path_", 0);
 	    	});
     	});
@@ -115,5 +133,5 @@
 {% block content %}
 	<button id="findUIK">Найти свой УИК</button>
     <div id="addressFields"></div>
-    <div id="result"></div>
+    <div id="result" style="margin-top: 50px; font-size: 150%; font-weight: 30%;"></div>
 {% endblock %}

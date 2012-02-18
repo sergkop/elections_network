@@ -1,0 +1,23 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Представители власти ({{ counters.authority }})</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for role in participants.authority %}
+            <li>
+                {% with participant=role.user %}
+                    {% include "elements/participant.html" %}
+                {% endwith %} <br/>
+                <i>{{ role.data }}</i>
+            </li>
+        {% endfor %}
+    </ul>
+    {% button "circle-check" "Записаться в представители власти" "become_authority" %}
+</div>
+
+{% with role="authority" dialog_template="dialogs/become_authority.html" status_plural="представители власти" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

@@ -21,6 +21,7 @@ def regions_list():
     return regions
 
 # TODO: cache it, at least for the main page
+# TODO: count members differently?
 def get_roles_counters(location):
     """ location = None for Russia """
     voter_count = 0

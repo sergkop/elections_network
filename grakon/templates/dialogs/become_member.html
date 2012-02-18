@@ -1,0 +1,25 @@
+<div id="become_member_dialog">
+    {% if current_location.is_tik %}
+        Вы хотите записаться членом ТИК?
+    {% else %}
+        Вы хотите записаться членом УИК?
+    {% endif %}
+    <form id="become_member_form" method="post" action="{% url become_member %}">
+        {% csrf_token %}
+        <input type="hidden" name="tik" value="{{ current_location.id }}" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function become_member_dialog_init(){
+        $("#become_member_dialog").dialog("open");
+    }
+
+    $("#become_member_dialog").dialog({width:650, height:250, modal: true,
+        title: "Стать членом комиссии",
+        buttons: {
+            "Записаться": function(){signup_for_role("member", "{{ request.path }}");},
+            "Отмена": function(){$("#become_member_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

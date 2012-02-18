@@ -1,18 +1,18 @@
-from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
-from django.forms.widgets import Media
-from django.utils.safestring import mark_safe
-from reports.models import Report, REPORT_REASONS
-from urllib import quote
-from users.models import Contact
 import base64
 import hashlib
 import hmac
 import json
 import time
+from urllib import quote
 
+from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.forms.widgets import Media
+from django.utils.safestring import mark_safe
 
+from reports.models import Report, REPORT_REASONS
+from users.models import Contact
 
 def get_disqus_config(user):
     template = '''
@@ -26,7 +26,7 @@ def get_disqus_config(user):
     public_key = getattr(settings, 'DISQUS_PUBLIC_KEY', None)
     if secret_key is None or public_key is None:
         return ''
-    
+
     if user.is_authenticated():
         profile = None
         try:
@@ -46,7 +46,6 @@ def get_disqus_config(user):
     encoded_message = message_template % {'message': message, 'sig': sig, 'timestamp': timestamp} 
     config = template % {'encoded_message': encoded_message, 'pub_key': public_key}
     return mark_safe(config)
-
 
 def user_data(request):
     context = {

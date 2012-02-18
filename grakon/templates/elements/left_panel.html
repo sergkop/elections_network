@@ -14,17 +14,9 @@
 
 {% include "blocks/prosecutors.html" %}
 
-<div class="disabled-block">
-    <div class="i">&nbsp;</div>
+{% include "blocks/members.html" %}
 
-    <div class="side_block_header">
-        <h4>Члены избирательной комиссии (в разработке)</h4>
-    </div>
-
-    <div class="content_block">
-        {% button "circle-check" "Записаться в члены избирательной комиссии" "become_representative" %}
-    </div>
-</div>
+{% include "blocks/authorities.html" %}
 
 <script type="text/javascript">
     // TODO: move it inside become_voter.html

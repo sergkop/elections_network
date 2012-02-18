@@ -94,6 +94,9 @@ class LawyerSignupView(BaseRoleWithDataSignupView):
 class ProsecutorSignupView(BaseRoleWithDataSignupView):
     role = 'prosecutor'
 
+class MemberSignupView(RoleSignupView):
+    role = 'member'
+
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:

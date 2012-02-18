@@ -1,0 +1,17 @@
+<div id="become_authority_dialog">
+    Чтобы записаться представителем власти, свяжитесь с нами по адресу
+    <a href="mailto:admin@grakon.org">admin@grakon.org</a>.
+</div>
+
+<script type="text/javascript">
+    function become_authority_dialog_init(){
+        $("#become_authority_dialog").dialog("open");
+    }
+
+    $("#become_authority_dialog").dialog({width:650, height:250, modal: true,
+        title: "Стать представителем власти",
+        buttons: {
+            "Отмена": function(){$("#become_authority_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

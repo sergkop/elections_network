@@ -1,0 +1,23 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Члены избирательной комиссии ({{ counters.member }})</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for role in participants.member %}
+            <li>
+                {% with participant=role.user %}
+                    {% include "elements/participant.html" %}
+                {% endwith %} <br/>
+                <i>{{ role.data }}</i>
+            </li>
+        {% endfor %}
+    </ul>
+    {% button "circle-check" "Записаться в члены комиссии" "become_member" %}
+</div>
+
+{% with role="member" dialog_template="dialogs/become_member.html" status_plural="члены комиссии" %}
+    {% include "elements/dialog_open_button.html" %}
+{% endwith %}

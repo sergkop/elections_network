@@ -31,26 +31,20 @@
                 <li>
                     <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                         <select id="goto_subregion" name="region">
-                            {% if current_location %}
+                            {% if current_location.is_region %}
                                 <option value="" selected="selected">Выбрать ТИК</option>
                             {% endif %}
+                            {% if current_location.is_tik %}
+                                <option value="" selected="selected">Выбрать УИК</option>
+                            {% endif %}
                             {% for id, name in sub_regions %}
-                            <option value="{{ id }}">{{ name }}</option>
+                                <option value="{{ id }}">{{ name }}</option>
                             {% endfor %}
                         </select>
                     </form>
                 </li>
             {% endif %}
-
-            {% if current_location.is_tik %}
-                <li>
-                    <select id="goto_subregion" name="region" disabled="disabled" style="width:250px;">
-                        <option value="" selected="selected">Выбрать УИК (в разработке)</option>
-                    </select>
-                </li>
-            {% endif %}
         </ul>
-        
     </div>
 </div>
 

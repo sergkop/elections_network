@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import json
 import os.path
 import sys
@@ -22,8 +23,8 @@ def location_from_info(info):
     return Location(
         name = info['name'],
 
-        postcode = info['postcode'],
-        address = info['address'],
+        postcode = info.get('postcode'),
+        address = info.get('address', ''),
         telephone = info.get('telephone', ''),
         email = info.get('email', ''),
 
@@ -46,6 +47,7 @@ class Command(BaseCommand):
             region_title, region_name, region_id = line.split(', ')
             REGIONS[region_name] = (region_title, int(region_id.strip()))
 
+        """
         i = 0
         for region in REGIONS:
             print_progress(i, len(REGIONS))
@@ -69,6 +71,7 @@ class Command(BaseCommand):
 
             i += 1
 
+        # Init foreign countries
         from locations.models import FOREIGN_CODE, FOREIGN_NAME, FOREIGN_TERRITORIES
         foreign = location_from_info({'name': FOREIGN_TERRITORIES, 'postcode': 0, 'address': ''})
         foreign.region_name = FOREIGN_NAME
@@ -82,3 +85,37 @@ class Command(BaseCommand):
             location.region_code = FOREIGN_CODE
             location.region = foreign
             location.save()
+        """
+
+        # init uiks
+        from locations.models import Location
+        for region in REGIONS:
+            print region
+
+            region_location = Location.objects.get(region_name=region, region=None)
+
+            uiks_path = os.path.join(settings.PROJECT_PATH, 'data', 'regions', region+'.json')
+            tiks_list = json.loads(open(uiks_path).read().decode('utf8'))
+            j = 0
+            for tik in tiks_list:
+                tik_location = Location.objects.get(region=region_location, tvd=tik['tvd'])
+
+                print_progress(j, len(tiks_list))
+                for uik_data in tik['sub']:
+                    if uik_data['name'].startswith(u'УИК №'):
+                        uik_data['name'] = uik_data['name'][5:]
+                    else:
+                        print uik_data['name'], region
+                        raise ValueError
+
+                    uik = location_from_info(uik_data)
+
+                    uik.region = region_location
+                    uik.tik = tik_location
+
+                    uik.region_name = region
+                    uik.region_code = REGIONS[region][1]
+
+                    uik.save()
+
+                j += 1

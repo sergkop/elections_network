@@ -1,6 +1,6 @@
 {% load elements %}
 
-{% if current_location.is_region %}
+{% if not current_location or current_location.is_region %}
     {% include "dialogs/change_location.html" %}
 {% endif %}
 

@@ -29,7 +29,7 @@ def get_roles_counters(location):
     elif location.is_region():
         query = Q(location__region=location)
     elif location.is_tik():
-        query = Q(location__tik=location)
+        query = Q(location__tik=location) | Q(location=location)
     elif location.is_uik():
         query = Q(location=location)
 

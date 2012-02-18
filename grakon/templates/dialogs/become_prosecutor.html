@@ -12,6 +12,7 @@
 <script type="text/javascript">
     function become_prosecutor_dialog_init(){
         $("#become_prosecutor_dialog").dialog("open");
+        prevent_enter_work("#become_prosecutor_form input");
     }
 
     $("#become_prosecutor_dialog").dialog({width:650, height:250, modal: true, title: "Стать представителем организации",

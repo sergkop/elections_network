@@ -1,10 +1,9 @@
 <div id="become_journalist_dialog">
-    Чтобы записаться представителем СМИ укажите какую организацию вы представляете
-    и вашу должность.
+    Чтобы записаться представителем СМИ укажите какую организацию вы представляете.
     <br/><br/>
     <form id="become_journalist_form" method="post" action="{% url become_journalist %}">
         {% csrf_token %}
-        <input type="text" name="data" value="" size="60" maxlength="200" />
+        <input type="text" name="data" value="" size="50" maxlength="50" />
         <input type="hidden" name="tik" value="{{ current_location.id }}" />
     </form>
 </div>
@@ -12,6 +11,7 @@
 <script type="text/javascript">
     function become_journalist_dialog_init(){
         $("#become_journalist_dialog").dialog("open");
+        prevent_enter_work("#become_journalist_form input");
     }
 
     $("#become_journalist_dialog").dialog({width:650, height:250, modal: true,

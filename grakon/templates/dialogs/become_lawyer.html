@@ -1,9 +1,10 @@
 <div id="become_lawyer_dialog">
     <center>
-        Записаться юристом на выбранном избирательном округе?
-
+        Чтобы записаться юристом укажите какую организацию вы представляете.
+        <br/><br/>
         <form id="become_lawyer_form" method="post" action="{% url become_lawyer %}">
             {% csrf_token %}
+            <input type="text" name="data" value="" size="50" maxlength="50" />
             <input type="hidden" name="tik" value="{{ current_location.id }}" />
         </form>
     </center>
@@ -12,6 +13,7 @@
 <script type="text/javascript">
     function become_lawyer_dialog_init(){
         $("#become_lawyer_dialog").dialog("open");
+        prevent_enter_work("#become_lawyer_form input");
     }
 
     $("#become_lawyer_dialog").dialog({width:650, height:250, modal: true, title: "Стать юристом",

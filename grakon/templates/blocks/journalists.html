@@ -10,7 +10,8 @@
             <li>
                 {% with participant=role.user %}
                     {% include "elements/participant.html" %}
-                {% endwith %}
+                {% endwith %} <br/>
+                <i>{{ role.data }}</i>
             </li>
         {% endfor %}
     </ul>

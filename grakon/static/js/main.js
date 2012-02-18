@@ -292,3 +292,12 @@ function signup_for_role(role, url){
     });
     // window.open(url, "_blank");
 }
+
+function prevent_enter_work(selector){
+    $(selector).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+}

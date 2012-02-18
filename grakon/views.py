@@ -25,14 +25,10 @@ class BaseProfileView(object):
         user = self.get_user()
         profile = user.get_profile()
 
-        roles = {}
-        for role in profile.roles.select_related('location'):
-            roles[role.type] = {'user': profile, 'location': role.location}
-
         ctx.update({
             'profile_user': user,
             'profile': profile,
-            'roles': roles,
+            'roles': profile.roles.select_related('location').order_by('type'),
             'locations': regions_list(),
             'links': list(profile.links.all().select_related()),
             'contacts': list(profile.contacts.all()) if user.is_authenticated() else [],

@@ -15,17 +15,15 @@
 
 <h4>Участие в выборах</h4>
 <ul>
-    <li>
-        <span id="voter_path_span">
-        {% if roles.voter %}
-            {% with location=roles.voter.location %}
-                {% include "elements/location_path.html" %}
-            {% endwith %} - Избиратель
-        {% else %}
-            Еще не записан на голосование.
-        {% endif %}
-        </span>
-    </li>
+    {% for role in roles %}
+        <li>
+            <span>
+                {% with location=role.location %}
+                    {% include "elements/location_path.html" %}
+                {% endwith %} - {{ role.get_type_display }}
+            </span>
+        </li>
+    {% endfor %}
 </ul>
 
 {% if profile_user != user %}
@@ -86,14 +84,10 @@
 
 {% if profile_user == user %}
     <div class="user_actions">
+        Чтобы записаться участником в своем избирательном округе, перейдите на страницу
+        округа и запишитесь, нажав соответсвующую кнопку в левой панели.
         <center>
-            {% if roles.voter %}
-                {% button "arrowreturnthick-1-e" "Сменить избирательный округ" "become_voter" "" "" %}
-            {% else %}
-                {% button "circle-check" "Записаться в избиратели" "become_voter" "" "" %}
-            {% endif %}
-
-            {% button "circle-check" "Записаться в наблюдатели" "become_observer" "" "" %}
+            {% button "circle-check" "Стать участником" "become_participant" "" "" %}
         </center>
     </div>
 
@@ -101,19 +95,17 @@
 
     {% include "dialogs/become_voter.html" %}
 
+    {% include "dialogs/change_location.html" %}
+
     <script type="text/javascript">
-        // Become observer
-        $("#become_observer").click(function(){become_observer_dialog_init();});
+        $("#become_participant").click(function(){
+            change_location_dialog_init("Стать участником", "Выберите ваш избирательный округ", "");
+        });
 
-        // Become voter dialog
-        $("#become_voter").click(function(){become_voter_dialog_init(get_path("voter_path_span"));});
-
-        $("#become_voter_dialog").on("become_voter", function(event, location_id){
-            update_path("voter_path_span", "become_voter_form");
-
+        /*$("#become_voter_dialog").on("become_voter", function(event, location_id){
             var new_title =  (form_location_id("become_voter_form")!="") ? "Сменить избирательный округ" : "Записаться в избиратели";
             $("#become_voter .ui-button-text").text(new_title);
             $("#become_voter .ui-icon").toggleClass("ui-icon-circle-check").toggleClass("ui-icon-arrowreturnthick-1-e");
-        });
+        });*/
     </script>
 {% endif %}

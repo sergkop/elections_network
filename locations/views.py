@@ -60,6 +60,7 @@ class LocationView(TemplateView):
             dialog = self.request.GET.get('dialog', '')
 
         ctx.update({
+            'name': kwargs['name'],
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
             'current_location': location,
@@ -128,7 +129,7 @@ def goto_location(request):
 
     return HttpResponseRedirect(reverse('main'))
 
-@cache_page(60)
+@cache_page(1)
 def map_data(request):
     context = {
         'all_locations': list(Location.objects.all().only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address')),

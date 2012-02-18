@@ -72,9 +72,9 @@ function set_select_location(div_id, path){
 
                     var empty_2 = $("<option/>").val("");
                     if (select_1.children('[value="'+select_1.val()+'"]').text()=="Зарубежные территории")
-                        var txt = "Выберите страну";
+                        var txt = "Выбрать страну";
                     else
-                        var txt = "Выберите ТИК";
+                        var txt = "Выбрать ТИК";
                     select_2.append(empty_2.text(txt));
 
                     $.each(data, function(index, value){

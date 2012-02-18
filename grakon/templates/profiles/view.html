@@ -17,11 +17,9 @@
 <ul>
     {% for role in roles %}
         <li>
-            <span>
-                {% with location=role.location %}
-                    {% include "elements/location_path.html" %}
-                {% endwith %} - {{ role.get_type_display }}
-            </span>
+            {% with location=role.location %}
+                {% include "elements/location_path.html" %}
+            {% endwith %} - {{ role.get_type_display }}
         </li>
     {% endfor %}
 </ul>

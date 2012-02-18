@@ -39,6 +39,8 @@ var ElectionMap = {
     objManager : new YMaps.ObjectManager(),
 
     placemarkStyles : new Array(),
+    
+    MAX_ZOOM: 16,   // максимальный уровень масштабирования
 
     // Переменная, в которой заданы все типы масштабирования для карты.
     MAP_LEVELS : new Array( {
@@ -231,12 +233,24 @@ var ElectionMap = {
         var geoPoint = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
         var styleValue = ElectionMap.placemarkStyles[commission.level - 1];
         var placemark = new YMaps.Placemark(geoPoint, {
+            draggable: true,
+            balloonOptions: {maxWidth: 300},
             style : styleValue
         });
-        placemark.name = ElectionMap.buildElectionCommissionName(commission);
+        var index = ElectionMap.placemarks[commission.level-1].length;
+        placemark.data = commission;
+        placemark.name = ElectionMap.buildElectionCommissionName(commission, index);
         placemark.description = ElectionMap
                 .buildElectionCommissionDescription(commission);
-        placemark.data = commission;
+        
+        // при открытии балуна обновить картинку лупы
+        YMaps.Events.observe(placemark, placemark.Events.BalloonOpen, ElectionMap.updateCommissionZoomIcon);
+        
+        // после перетаскивания вернуть метку назад
+        YMaps.Events.observe(placemark, placemark.Events.DragEnd, function (obj) {
+            placemark.setGeoPoint(geoPoint);
+            obj.update();
+        });
 
         // добавить значки ИКСов на карту
         if (commission.level == 2)
@@ -256,9 +270,10 @@ var ElectionMap = {
      * 
      * @param {commission}
      *            объект типа ElectionCommission
+     * @param {index} положение метки избирательной комиссии в массиве меток
      * @returns HTML string
      */
-    buildElectionCommissionName : function(commission) {
+    buildElectionCommissionName : function(commission, index) {
         var commissionType;
         switch (commission.level) {
         case 2:
@@ -270,9 +285,8 @@ var ElectionMap = {
         default:
             commissionType = "";
         }
-        var string = '<a href="#" onclick="ElectionMap.showRegion(\''
-                + commission.id
-                + '\'); return false;" id="commission'
+        var string = '<a href="#" onclick="ElectionMap.showRegion('
+                + commission.id + ', ' + index + '); return false;" id="commission'
                 + commission.id
                 + 'Name" class="zoomIn" '
                 + 'title="Показать данную область на карте" style="color: black">'
@@ -322,13 +336,14 @@ var ElectionMap = {
      * 
      * @param {commissionId}
      *            id комиссии
+     * @param {index} позиция метки избирательной комиссии в массиве меток
      */
-    showRegion : function(commissionId) {
+    showRegion : function(commissionId, index) {
         var commission = electionCommissions[commissionId];
         var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
         var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point,
                 point));
-        var maxZoom = (availZoom > 16) ? 16 : availZoom;
+        var maxZoom = (availZoom > ElectionMap.MAX_ZOOM) ? ElectionMap.MAX_ZOOM : availZoom;
 
         var zoom;
         switch (commission.level) {
@@ -347,25 +362,34 @@ var ElectionMap = {
 
         ElectionMap.get().setCenter(point, zoom);
 
-        ElectionMap.updateCommissionZoomIcon(commissionId, zoom == maxZoom);
+        var placemark = ElectionMap.placemarks[commission.level-1][index];
+        ElectionMap.updateCommissionZoomIcon(placemark);
     },
 
     /**
      * Меняет картинку у названия комисии на "приблизить" или "отдалить" в
      * соответствии с масштабом карты
      * 
-     * @param {commissionId}
-     *            ID избирательной комиссии
-     * @param {isMaxZoom}
-     *            true, если максимальный масштаб достигнут
+     * @param {placemark}
+     *            метка избирательной комиссии [YMaps.Placemark]
      */
-    updateCommissionZoomIcon : function(commissionId, isMaxZoom) {
-        if (isMaxZoom)
-            $('#commission' + commissionId + 'Name').removeClass("zoomIn")
+    updateCommissionZoomIcon : function(placemark) {
+        if (ElectionMap.atMaxZoom())
+            $('#commission' + placemark.data.id + 'Name').removeClass("zoomIn")
                     .addClass("zoomOut");
         else
-            $('#commission' + commissionId + 'Name').removeClass("zoomOut")
+            $('#commission' + placemark.data.id + 'Name').removeClass("zoomOut")
                     .addClass("zoomIn");
+    },
+    
+    /**
+     * @returns true, если масштаб карты больше или равен максимальному; false, в противном случае
+     */
+    atMaxZoom: function() {
+        var point = ElectionMap.get().getCenter();
+        var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point, point));
+        var maxZoom = (availZoom > ElectionMap.MAX_ZOOM) ? ElectionMap.MAX_ZOOM : availZoom;
+        return (ElectionMap.get().getZoom() >= maxZoom);
     },
 
     /**

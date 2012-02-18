@@ -10,7 +10,7 @@ from django.views.generic.base import TemplateView
 
 from grakon.utils import authenticated_redirect
 from locations.models import Location
-from locations.utils import regions_list
+from locations.utils import get_roles_counters, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
 from users.models import Role, ROLE_TYPES
@@ -48,17 +48,12 @@ class LocationView(TemplateView):
 
         # Get sub-regions
         sub_regions = []
-        voter_count = 0
         if location.region is None:
             for loc in Location.objects.filter(region=location, tik=None).only('id', 'name').order_by('name'):
                 sub_regions.append((loc.id, loc.name))
-
-            voter_count = Role.objects.filter(type='voter', location__region=location).count()
         elif location.tik is None:
             for loc in Location.objects.filter(tik=location).only('id', 'name').order_by('name'):
                 sub_regions.append((loc.id, loc.name))
-
-            voter_count = Role.objects.filter(type='voter', location__tik=location).count()
 
         dialog = ''
         if self.request.GET.get('dialog', '') in ROLE_TYPES:
@@ -75,7 +70,7 @@ class LocationView(TemplateView):
             'sub_regions': sub_regions,
             'dialog': dialog,
 
-            'voter_count': voter_count,
+            'counters': get_roles_counters(location),
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),
         })
         return ctx

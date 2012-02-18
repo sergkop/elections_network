@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from locations.models import Location
-from locations.utils import regions_list
+from locations.utils import get_roles_counters, regions_list
 from navigation.models import Page
 from organizations.models import OrganizationCoverage
 from users.models import Role
@@ -28,7 +28,7 @@ def main(request):
     sub_regions = regions_list()
     context = {
         'name': 'main',
-        'voter_count': voter_count,
+        'counters': get_roles_counters(None),
         #'ending': ending,
         'locations': sub_regions,
         'sub_regions': sub_regions,

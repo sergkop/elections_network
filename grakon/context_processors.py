@@ -98,7 +98,7 @@ def grakon_media(request):
         'libs/underscore.js',
         'libs/tipsy/jquery.tipsy.js',
         'libs/backbone.js',
-        'http://userapi.com/js/api/openapi.js?47', # VKontakte
+        'http://userapi.com/js/api/openapi.js?48', # VKontakte
         'http://loginza.ru/js/widget.js',
         'js/main.js',
     )

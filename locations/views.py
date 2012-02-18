@@ -65,6 +65,7 @@ class LocationView(TemplateView):
             dialog = self.request.GET.get('dialog', '')
 
         ctx.update({
+            'name': kwargs['name'],
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
             'current_location': location,

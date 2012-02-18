@@ -134,7 +134,7 @@ def goto_location(request):
 
     return HttpResponseRedirect(reverse('main'))
 
-@cache_page(60)
+@cache_page(1)
 def map_data(request):
     context = {
         'all_locations': list(Location.objects.all().only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address')),

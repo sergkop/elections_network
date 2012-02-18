@@ -77,6 +77,7 @@ var ElectionMap = {
         ElectionMap.set( new YMaps.Map(document.getElementById("publicElectionsMap")) );
         ElectionMap.get().setType(YMaps.MapType.PMAP);
         ElectionMap.get().setMinZoom(2);
+        ElectionMap.get().enableScrollZoom();
 
         // Переименовываем типы карт, чтобы их можно было различать. Народные
         // карты имеют индекс 1, обычные - индекс 2.
@@ -172,8 +173,6 @@ var ElectionMap = {
                                             // масштабом;
             // для пользователя из-за рубежа карта будет отцентрована по
             // европейской части России.
-            ElectionMap.get().enableScrollZoom();
-
             if (YMaps.location && YMaps.location.country == "Россия") {
                 center = new YMaps.GeoPoint(YMaps.location.longitude,
                         YMaps.location.latitude);

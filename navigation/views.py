@@ -27,7 +27,6 @@ def main(request):
 
     sub_regions = regions_list()
     context = {
-        'name': 'main',
         'counters': get_roles_counters(None),
         #'ending': ending,
         'locations': sub_regions,

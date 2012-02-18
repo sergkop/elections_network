@@ -11,6 +11,8 @@ ROLE_CHOICES = (
     ('journalist', u'Представитель СМИ'),
     ('lawyer', u'Юрист'),
     ('prosecutor', u'Представитель прокуратуры'),
+    ('member', u'Член избирательной комиссии'),
+    ('authority', u'Представитель власти'),
 )
 ROLE_TYPES = dict(ROLE_CHOICES)
 

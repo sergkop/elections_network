@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 
-from users.views import JournalistSignupView, LawyerSignupView, ObserverSignupView, \
-        ProsecutorSignupView, VoterSignupView
+from users.views import JournalistSignupView, LawyerSignupView, MemberSignupView, \
+        ObserverSignupView, ProsecutorSignupView, VoterSignupView
 
 urlpatterns = patterns('users.views',
     url(r'^become_voter$', VoterSignupView.as_view(), name='become_voter'),
@@ -9,6 +9,7 @@ urlpatterns = patterns('users.views',
     url(r'^become_journalist$', JournalistSignupView.as_view(), name='become_journalist'),
     url(r'^become_lawyer$', LawyerSignupView.as_view(), name='become_lawyer'),
     url(r'^become_prosecutor$', ProsecutorSignupView.as_view(), name='become_prosecutor'),
+    url(r'^become_member$', MemberSignupView.as_view(), name='become_member'),
 
     url(r'^add_to_contacts$', 'add_to_contacts', name='add_to_contacts'),
     url(r'^remove_from_contacts$', 'remove_from_contacts', name='remove_from_contacts'),

@@ -5,7 +5,11 @@
     {% if profile_user.profile.about %}
         {{ profile_user.profile.about|safe }}
     {% else %}
-        <i>Пользователь еще не добавил информацию о себе.</i>
+        {% if profile_user == user %}
+            <i><a href="{% url edit_profile %}">Добавьте</a> информацию о себе.</i>
+        {% else %}
+            <i>Пользователь еще не добавил информацию о себе.</i>
+        {% endif %}
     {% endif %}
 </div>
 

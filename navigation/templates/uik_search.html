@@ -13,7 +13,7 @@
     	    AUTHENTICITY_TOKEN: "6c3e5ba2e795907e32ba0d4fb1e3b16a206bf074",
     	    VIB_TITLE: "Выборы Президента Российской Федерации 4 марта 2012 года",
     	    addressId: null,
-    	    DEFAULT_MESSAGE: '=== Выберите свой адрес ===',
+    	    DEFAULT_MESSAGE: 'Выберите свой адрес',
     	    
 	    	Utils: {
 	    	    pathParts: new Array(),
@@ -101,9 +101,9 @@
 			    	dataType: 'html',
 			    	success: function(html) {
 				    	if ($(html).find("div.dotted").length > 0)
-				    	    $('#result').text( $(html).find("div.dotted").text() );
+				    	    $('#result').show().text( $(html).find("div.dotted").text() );
 				    	else if ($(html).attr("id") == "uik")
-				    	    $('#result').text( $(html).text() );
+				    	    $('#result').show().text( $(html).text() );
 				    	else {
 				    	    $('#result').html( "Уважаемый пользователь! К сожалению, данные не были найдены." );
 				    	    window.console.log(html);
@@ -131,7 +131,10 @@
 {% endblock %}
 
 {% block content %}
-	<button id="findUIK">Найти свой УИК</button>
+    <button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" id="findUIK">
+        <span class="ui-button-icon-primary ui-icon ui-icon-circle-zoomout"></span>
+        <span class="ui-button-text">Найти свой УИК</span>
+    </button>
     <div id="addressFields"></div>
-    <div id="result" style="margin-top: 50px; font-size: 150%; font-weight: 30%;"></div>
+    <h3 id="result"></h3>
 {% endblock %}

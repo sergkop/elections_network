@@ -158,6 +158,9 @@ h3 {margin: 0;}
 	.step i {position: absolute; top: 0.45em; left: 10px; font-size: 4em; color: #0077CA; font-style: normal; line-height: 0;}
 	
 .social {background-color: #fff; border: 1px solid #dedede; border-radius: 5px; padding: 7px 10px}	
+
+#addressFields select {display: block; margin-top: 10px;}
+#result {background-color: #e1e1e1; padding: 15px 30px; text-align: center; line-height: 1.4em; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; display: none; }
 	
 
 

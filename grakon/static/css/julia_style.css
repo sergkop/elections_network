@@ -162,6 +162,8 @@ h3 {margin: 0;}
 
 #addressFields select {display: block; margin-top: 10px;}
 #result {background-color: #e1e1e1; padding: 15px 30px; text-align: center; line-height: 1.4em; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; display: none; }
+
+.checkboxinput  {margin-left: 51%;}
 	
 
 

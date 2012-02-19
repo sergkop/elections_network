@@ -15,9 +15,7 @@
         {% endfor %}
     </ul>
 
-    {% if not request.user.is_authenticated %}
-        {% button "circle-check" "Записаться в избиратели" "become_voter" %}
-    {% endif %}
+    {% button "circle-check" "Записаться в избиратели" "become_voter" %}
 </div>
 
 {% with role="voter" dialog_template="dialogs/become_voter.html" status_plural="избиратели" %}

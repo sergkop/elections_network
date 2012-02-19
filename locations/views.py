@@ -59,6 +59,12 @@ class LocationView(TemplateView):
         if self.request.GET.get('dialog', '') in ROLE_TYPES:
             dialog = self.request.GET.get('dialog', '')
 
+        signed_up_in_uik = False
+        if self.request.user.is_authenticated():
+            voter_roles = Role.objects.filter(user=self.request.user.get_profile(), type='voter').select_related('location')
+            if voter_roles:
+                signed_up_in_uik = voter_roles[0].location.is_uik()
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
@@ -69,6 +75,7 @@ class LocationView(TemplateView):
             'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
             'sub_regions': sub_regions,
             'dialog': dialog,
+            'signed_up_in_uik': signed_up_in_uik,
 
             'counters': get_roles_counters(location),
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),

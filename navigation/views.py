@@ -18,6 +18,7 @@ from organizations.models import OrganizationCoverage
 from users.models import Role
 
 # create a subclass and override the handler methods
+# TODO: reimplement usign scrapy
 class CikHTMLParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)

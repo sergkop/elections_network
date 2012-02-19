@@ -8,7 +8,7 @@
     {% if organization.email %}<b>Email</b>: {{ organization.email }} <br/>{% endif %}
     {% if organization.telephone %}<b>Телефон</b>: {{ organization.telephone }} <br/>{% endif %}
     {% if organization.address %}<b>Адрес</b>: {{ organization.address }} <br/>{% endif %}
-    {% if organization.website %}<b>Сайт</b>: <a href="{{ organization.website }}">{{ organization.website }}</a> <br/>{% endif %}
+    {% if organization.website %}<b>Сайт</b>: <a href="{{ organization.website }}" target="_blank">{{ organization.website }}</a> <br/>{% endif %}
     {% if organization.representative %}<b>Контактное лицо</b>: {{ organization.representative }} <br/>{% endif %}
 </p>
 

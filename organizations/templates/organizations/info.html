@@ -14,8 +14,14 @@
 
 <h4>Деятельность</h4>
 <ul>
-    {% if organization.signup_observers %}<li>Эта организации помогает записаться в наблюдатели</li>{% endif %}
-    {% if organization.signup_observers %}<li>Эта организации обучает наблюдателей</li>{% endif %}
+    {% if organization.signup_observers %}<li>Запись в наблюдатели</li>{% endif %}
+    {% if organization.teach_observers %}<li>Обучение наблюдателей</li>{% endif %}
+    {% if organization.signup_journalists %}<li>Запись в представителей СМИ</li>{% endif %}
+    {% if organization.observer_coordination %}<li>Координация групп наблюдения</li>{% endif %}
+    {% if organization.mobile_groups %}<li>Мобильные группы</li>{% endif %}
+    {% if organization.signup_lawyers %}<li>Юридическая помощь</li>{% endif %}
+    {% if organization.news_publishing %}<li>Публикация новостей</li>{% endif %}
+    {% if organization.elections_info %}<li>Распространение информации о выборах</li>{% endif %}
 </ul>
 
 <h4>Покрываемые регионы</h4>

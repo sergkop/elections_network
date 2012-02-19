@@ -28,6 +28,15 @@ class Organization(models.Model):
     teach_observers = models.BooleanField(u'Обучение наблюдателей', default=False,
             help_text=u'Укажите занимается ли ваша организация обучением наблюдателей')
 
+    signup_journalists = models.BooleanField(u'Запись в представителей СМИ', default=False,
+            help_text=u'Укажите помогает ли ваша организация записаться в представители СМИ')
+    observer_coordination = models.BooleanField(u'Координация групп наблюдения', default=False)
+    mobile_groups = models.BooleanField(u'Мобильные группы', default=False)
+    signup_lawyers = models.BooleanField(u'Юридическая помощь', default=False,
+            help_text=u'Укажите оказывает ли ваша организация юридическую помощь')
+    news_publishing = models.BooleanField(u'Публикация новостей', default=False)
+    elections_info = models.BooleanField(u'Распространение информации о выборах', default=False)
+
     # TODO: implement it
     def covers_location(self, location):
         if not location.region_id:

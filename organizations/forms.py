@@ -23,7 +23,7 @@ class EditOrganizationForm(forms.ModelForm):
 
     class Meta:
         model = Organization
-        exclude = ('verified', 'is_partner', 'name', 'signup_observers', 'teach_observers')
+        fields = ('title', 'about', 'telephone', 'address', 'website', 'email')
 
     def clean_about(self):
         return clean_html(self.cleaned_data['about'])

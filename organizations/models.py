@@ -9,14 +9,14 @@ from locations.models import Location
 
 # TODO: increase max_length of title
 # TODO: limit name format
+# TODO: drop exclude field?
 class Organization(models.Model):
     name = models.CharField(u'Идентификатор', max_length=30, unique=True, )
     title = models.CharField(u'Название', max_length=50)
     about = HTMLField(u'Описание', default='')
     telephone = models.CharField(u'Телефон', max_length=50, blank=True)
     address = models.CharField(u'Адрес', max_length=200, blank=True)
-    website = models.URLField(u'Сайт', blank=True,
-            help_text=u'Адрес сайта должен начинаться с http:// или https://')
+    website = models.URLField(u'Сайт', help_text=u'Адрес сайта должен начинаться с http:// или https://')
     email = models.CharField(u'Электронная почта', max_length=100, blank=True)
     representative = models.CharField(u'Контактное лицо', max_length=100, blank=True)
 

@@ -6,7 +6,7 @@ from uni_form.layout import HTML, Layout
 from grakon.utils import clean_html, form_helper
 from locations.models import Location
 from locations.utils import regions_list
-from organizations.models import Organization, OrganizationCoverage
+from organizations.models import Organization
 
 class CreateOrganizationForm(forms.ModelForm):
     name = forms.RegexField(label=u'Идентификатор', max_length=20, min_length=2, regex=r'^[\w\.]+$',
@@ -16,7 +16,8 @@ class CreateOrganizationForm(forms.ModelForm):
     region = forms.CharField(label=u'Выберите субъект РФ, где работает ваша организация', widget=forms.Select(),
             help_text=u'Оставьте поле незаполненным, если ваша организация работает по всей стране', required=False)
     tik = forms.CharField(label=u'Выберите район', widget=forms.Select(choices=[('', u'Выберите район')]),
-            help_text=u'Если ваша организация работает в нескольких районах, напишите нам письмо на admin@grakon.org с указанием этого.' \
+            help_text=u'<b>Оставьте поле незаполненным, если ваша организация работает во всем субъекте</b><br/>' \
+                    u'Если ваша организация работает в нескольких районах, напишите нам письмо на admin@grakon.org с указанием этого.' \
                     u'При этом укажите названия районов как они указаны на нашем сайте.', required=False)
 
     helper = form_helper('', u'Создать')
@@ -58,11 +59,6 @@ class CreateOrganizationForm(forms.ModelForm):
                 self.location = None
 
         return self.cleaned_data
-
-    def save(self):
-        organization = super(CreateOrganizationForm, self).save()
-        OrganizationCoverage.objects.get_or_create(organization=organization, location=self.location)
-        return organization
 
 class EditOrganizationForm(forms.ModelForm):
     helper = form_helper('', u'Редактировать')

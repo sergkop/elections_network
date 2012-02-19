@@ -17,9 +17,11 @@
 <div class="content_block">
     <ul class="side_list">
         {% for organization in organizations %}
-            <li>
-                {% include "elements/organization.html" %}
-            </li>
+            {% if organization.verified %}
+                <li>
+                    {% include "elements/organization.html" %}
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
     {% button "circle-plus" "Добавить организацию" "add_organization" "create_organization" %}

@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
@@ -67,8 +68,28 @@ class CreateOrganizationView(CreateView):
 
     def form_valid(self, form):
         response = super(CreateOrganizationView, self).form_valid(form)
-        OrganizationRepresentative.objects.get_or_create(organization=self.object,
+
+        profile = self.request.user.get_profile()
+        organization = self.object
+
+        OrganizationRepresentative.objects.get_or_create(organization=organization,
                 user=self.request.user.get_profile())
+
+        OrganizationCoverage.objects.get_or_create(organization=organization, location=form.location)
+
+        # Send email to us stating that new organization has registered
+        subject = u'Зарегистрирована новая организация - %s' % organization.title
+
+        message = u"""Зарегистрирована новая организация:
+Название: %s
+Идентификатор: %s
+Сайт: %s
+Пользователь: %s
+Email: %s
+""" % (organization.title, organization.name, organization.website, profile.username, profile.user.email)
+
+        send_mail(subject, message, 'admin@grakon.org', ['admin@grakon.org'], fail_silently=False)
+
         return response
 
 create_organization = login_required(CreateOrganizationView.as_view())

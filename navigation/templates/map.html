@@ -9,6 +9,7 @@
 		h2.location_header {margin-left: 15px;}
     </style>
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
     <script type="text/javascript" src="{% url map_data %}"></script>
 {% endblock %}
@@ -19,7 +20,7 @@
 
 {% block content %}
     <center>
-        <div id="publicElectionsMap" style="height:500px; width: 100%;max-width:1000px;"></div>
+        <div id="publicElectionsMap" style="height:500px; min-width: 300px;"></div>
     </center>
 
     <script type="text/javascript">

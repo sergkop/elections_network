@@ -56,6 +56,12 @@ var ElectionMap = {
         index : 4,
         value : "ИКСы"
     }),
+    
+    MAP_TYPES: new Array(YMaps.MapType.PMAP,
+                         YMaps.MapType.MAP,
+                         YMaps.MapType.SATELLITE,
+                         YMaps.MapType.PHYBRID,
+                         YMaps.MapType.HYBRID),
 
     /**
      * Добавляем Народную Яндекс.Карту на страницу и отмечаем на ней все
@@ -71,39 +77,60 @@ var ElectionMap = {
      *            попасть в масштаб карты по-умолчанию.
      */
     init : function(place, electionCommissionLevel) {
-        if (electionCommissionLevel != null && electionCommissionLevel != "")
-            ElectionMap.electionCommissionLevel = electionCommissionLevel;
-
+        ElectionMap.initElectionCommissionLevel(electionCommissionLevel);
         ElectionMap.initPlacemarkStyles();
-
-        ElectionMap.set( new YMaps.Map(document.getElementById("publicElectionsMap")) );
-        ElectionMap.get().setType(YMaps.MapType.PMAP);
-        ElectionMap.get().setMinZoom(2);
-        ElectionMap.get().enableScrollZoom();
-
-        // Переименовываем типы карт, чтобы их можно было различать. Народные
-        // карты имеют индекс 1, обычные - индекс 2.
-        YMaps.MapType.PMAP.setName("Схема 1");
-        YMaps.MapType.MAP.setName("Схема 2");
-        YMaps.MapType.PHYBRID.setName("Гибрид 1");
-        YMaps.MapType.HYBRID.setName("Гибрид 2");
-        ElectionMap.get().addControl(new YMaps.TypeControl( [ YMaps.MapType.PMAP,
-                YMaps.MapType.MAP, YMaps.MapType.SATELLITE,
-                YMaps.MapType.PHYBRID, YMaps.MapType.HYBRID, ],
-                [ 0, 1, 2, 3, 4 ])); // объявляем доступные типы карт
-        ElectionMap.get().addControl(new YMaps.ToolBar());
-        ElectionMap.get().addControl(new YMaps.Zoom( {
-            customTips : ElectionMap.MAP_LEVELS
-        }));
-        ElectionMap.get().addControl(new YMaps.SearchControl( {
-            width : (place == null || place == "") ? 400 : 200
-        }));
+        ElectionMap.initMap("publicElectionsMap");
+        ElectionMap.initTools(place);
 
         ElectionMap.get().addOverlay(ElectionMap.objManager);
+        ElectionMap.setUserLocation();
+        
         // Показать на карте заданное место
-        ElectionMap.setDefaultViewport(place);
+        ElectionMap.setDefaultView(place);
 
         // ElectionMap.addButtons();
+    },
+    
+    /**
+     * Задаёт уровень избирательного округа. Как минимум одна коммиссия данного уровня будет показана на начальном виде. 
+     * @param {electionCommissionLevel} число от 1 до 3
+     */
+    initElectionCommissionLevel: function(electionCommissionLevel) {
+        if (electionCommissionLevel != null && electionCommissionLevel != "")
+            ElectionMap.electionCommissionLevel = electionCommissionLevel;
+    },
+    
+    /**
+     * Создаёт карту и задаёт настройки
+     * @param {mapDivID} ID HTML-контейнера карты
+     */
+    initMap: function(mapDivID) {
+        ElectionMap.set( new YMaps.Map(document.getElementById(mapDivID)) );
+        
+        // Задаёт сохранённый тип карты
+        var savedMapTypeIndex = $.cookie('MAP_TYPE_INDEX');
+        if (savedMapTypeIndex == null)
+            ElectionMap.get().setType(YMaps.MapType.PMAP);
+        else
+            ElectionMap.get().setType( ElectionMap.MAP_TYPES[savedMapTypeIndex] );
+        
+        ElectionMap.get().setMinZoom(2);
+        ElectionMap.get().enableScrollZoom();
+        
+        // Сохраняем выбранный тип карты в кукиз
+        YMaps.Events.observe(ElectionMap.get(), ElectionMap.get().Events.TypeChange, function(map) {
+            $.cookie('MAP_TYPE_INDEX', ElectionMap.MAP_TYPES.indexOf(map.getType()), {expires: 92, path: '/'});
+        });
+        
+        // Переименовываем типы карт, чтобы их можно было различать. Народные
+        // карты имеют индекс 1, обычные - индекс 2.
+        YMaps.MapType.PMAP.setName("Схематический вид 1");
+        YMaps.MapType.MAP.setName("Схематический вид 2");
+        YMaps.MapType.SATELLITE.setName("Спутниковый вид");
+        YMaps.MapType.PHYBRID.setName("Гибридный вид 1");
+        YMaps.MapType.HYBRID.setName("Гибридный вид 2");
+        ElectionMap.get().addControl(new YMaps.TypeControl( ElectionMap.MAP_TYPES,
+                [ 0, 1, 2, 3, 4 ], {width: 175})); // объявляем доступные типы карт
     },
 
     /**
@@ -136,15 +163,71 @@ var ElectionMap = {
     get: function() {
         return this.map;
     },
-
+    
     /**
-     * Центрирует карту на указанном месте с оптимальным масштабом.
-     * 
-     * @param {place} -
-     *            место, которое будет показано на карте. Если не задано, то
-     *            будет показана вся Россия
+     * Добавляет кнопки и панели масштабирования и поиска
      */
-    setDefaultViewport : function(place) {
+    initTools: function(place) {
+        // Добавляем кнопки
+        var maximizeButton = ElectionMap.buildMaximizeButton();
+        var toolbar = new YMaps.ToolBar([
+                                     maximizeButton,
+                                     new YMaps.ToolBar.MoveButton(),
+                                     new YMaps.ToolBar.MagnifierButton(),
+                                     new YMaps.ToolBar.RulerButton()]);
+        ElectionMap.get().addControl(toolbar);
+        
+        // Добавляем панель масштабирования
+        ElectionMap.get().addControl(new YMaps.Zoom( {
+            customTips : ElectionMap.MAP_LEVELS
+        }));
+        
+        // Добавляем панель поиска
+        ElectionMap.get().addControl(new YMaps.SearchControl( {
+            width : (place == null || place == "") ? 400 : 200
+        }));
+    },
+    
+    /**
+     * Создаёт кнопку "на полный экран"
+     * @returns объект типа YMaps.ToolBarToggleButton
+     */
+    buildMaximizeButton: function() {
+        // Создание кнопки-флажка
+        var button = new YMaps.ToolBarToggleButton({ 
+            icon: "/static/images/fullscreen.gif", 
+            hint: "Разворачивает карту на весь экран"
+        });
+
+        // Если кнопка активна, то карта разворачивается во весь экран
+        YMaps.Events.observe(button, button.Events.Select, function () {
+            setSize();
+        });
+        
+        // Если кнопка неактивна, то карта принимает фиксированный размер
+        YMaps.Events.observe(button, button.Events.Deselect, function () {
+            setSize('100%', 500, true);
+        });
+        
+        // Функция устанавливает новые размеры для карты
+        function setSize (newWidth, newHeight, relative) {
+            YMaps.jQuery(ElectionMap.get().getContainer()).css({
+                position: relative ? 'relative' : 'fixed',
+                left: 0,
+                top: 0,
+                width: newWidth || "100%", 
+                height: newHeight || "100%"
+            });
+            ElectionMap.get().redraw();
+        }
+        
+        return button;
+    },
+    
+    /**
+     * Отмечает приблизительное местоположение пользователя на карте
+     */
+    setUserLocation: function() {
         // Определяем координаты пользователя и отмечаем на карте
         if (YMaps.location) {
             var userLocation = new YMaps.GeoPoint(YMaps.location.longitude,
@@ -163,7 +246,16 @@ var ElectionMap = {
             usermark.description = "Ваше местоположение";
             ElectionMap.get().addOverlay(usermark);
         }
+    },
 
+    /**
+     * Центрирует карту на указанном месте с оптимальным масштабом.
+     * 
+     * @param {place} -
+     *            место, которое будет показано на карте. Если не задано, то
+     *            будет показана вся Россия
+     */
+    setDefaultView: function(place) {
         var zoom = ElectionMap.MAP_LEVELS[3].index;
         var center = new YMaps.GeoPoint(37.64, 55.76);
 

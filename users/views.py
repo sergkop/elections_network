@@ -1,14 +1,16 @@
 # coding=utf8
-from smtplib import SMTPException
-
+from .forms import MessageForm
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.views.generic.base import View
-
+from django.views.generic.edit import FormView
 from grakon.models import Profile
+from grakon.utils import ajaxize
 from locations.models import Location
 from organizations.models import Organization
+from smtplib import SMTPException
 from users.models import Contact, Role
 
 class RoleSignupView(View):
@@ -156,26 +158,45 @@ def remove_from_contacts(request):
 
     return HttpResponse(u'Ошибка')
 
-def send_message(request):
-    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        try:
-            profile = Profile.objects.get(username=request.POST.get('username', ''))
-        except Profile.DoesNotExist:
-            return HttpResponse(u'Пользователь не существует')
+class SendMessage(FormView):
+    form_class = MessageForm
+    
+    def get_form_kwargs(self):
+        kwargs = super(SendMessage, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
+    def form_valid(self, form):
+        result = form.send()
+        if result:
+            return result
+        return ajaxize(form)
+        
+    def form_invalid(self, form):
+        return ajaxize(form)
 
-        title = request.POST.get('message_title', '')
-        if title == '':
-            return HttpResponse(u'Введите тему сообщения')
+#def send_message(request):
+#    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+#        try:
+#            profile = Profile.objects.get(username=request.POST.get('username', ''))
+#        except Profile.DoesNotExist:
+#            return HttpResponse(u'Пользователь не существует')
+#
+#        title = request.POST.get('message_title', '')
+#        if title == '':
+#            return HttpResponse(u'Введите тему сообщения')
+#
+#        message_body = request.POST.get('message_body', '')
+#        if message_body == '':
+#            return HttpResponse(u'Введите текст сообщения')
+#
+#        try:
+#            send_mail(title, message_body, request.user.email, [profile.user.email], fail_silently=False)
+#        except SMTPException:
+#            return HttpResponse(u'Не удалось отправить сообщение')
+#
+#        return HttpResponse('ok')
+#
+#    return HttpResponse(u'Ошибка')
 
-        message_body = request.POST.get('message_body', '')
-        if message_body == '':
-            return HttpResponse(u'Введите текст сообщения')
-
-        try:
-            send_mail(title, message_body, request.user.email, [profile.user.email], fail_silently=False)
-        except SMTPException:
-            return HttpResponse(u'Не удалось отправить сообщение')
-
-        return HttpResponse('ok')
-
-    return HttpResponse(u'Ошибка')
+send_message = login_required(SendMessage.as_view())

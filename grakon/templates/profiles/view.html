@@ -51,7 +51,7 @@
 
         // Send message
         $("#send_message").click(function(){
-            send_message_dialog_init("{{ profile_user.username }}");
+            send_message_dialog_init("{{ profile_user.username }}", "{{ profile_user.pk }}");
         });
 
         // Add to contacts

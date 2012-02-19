@@ -201,3 +201,5 @@ select {
 	border: 1px solid #AAA;
 	padding: 4px 2px
 }
+
+.ui-dialog .uniForm{ z-index: 1007 !important; }

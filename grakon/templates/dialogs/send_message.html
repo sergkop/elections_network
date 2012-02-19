@@ -1,9 +1,12 @@
+{% load uni_form_tags %}
 {% if user.is_authenticated %}
     <div id="send_message_dialog">
-        <center>
+        <div style="text-align: center">
             Отправить сообщение пользователю <span id="send_message_dialog_user" class="dialog_user_span"></span>
-        </center>
+        </div>
 
+		{% uni_form message_form message_form.helper %}
+		{% comment %}
         <form id="send_message_form" method="post" action="{% url send_message %}">
             {% csrf_token %}
             <table>
@@ -18,32 +21,34 @@
             </table>
             <input type="hidden" name="username" value="" />
         </form>
+        {% endcomment %}
     </div>
 {% endif %}
 
 <script type="text/javascript">
     // Send message dialog
     {% if user.is_authenticated %}
-        $("#send_message_dialog").dialog({width: 650, height: 350, modal: true, title: "Отправить сообщение", buttons: {
+        $("#send_message_dialog").dialog({width: 650, height: 500, modal: true, title: "Отправить сообщение", buttons: {
             "Отправить": function(){
                 $.post("{% url send_message %}", $("#send_message_form").serialize(), function(data){
                     $("#send_message_dialog").dialog("close");
-                    if (data=="ok")
+                    if (data=="ok"){
                         alert("Сообщение успешно отправлено на email пользователя");
-                    else
+                    }else{
                         alert(data);
+                    }
                 });
             },
             "Отмена": function(){$("#send_message_dialog").dialog("close");}
         }}).dialog("close");
 
-        function send_message_dialog_init(username){
+        function send_message_dialog_init(username, pk){
             $("#send_message_dialog_user").text(username);
-            $('#send_message_form input[name="username"]').val(username);
+            $('#send_message_form input[name="to_user"]').val(pk);
             $("#send_message_dialog").dialog("open");
         }
     {% else %}
-        function send_message_dialog_init(username){
+        function send_message_dialog_init(){
             login_dialog_init("Чтобы отправить сообщение, пожалуйста, войдите в систему");
         }
     {% endif %}

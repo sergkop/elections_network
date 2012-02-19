@@ -18,7 +18,7 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
-
+SERVER_EMAIL = 'admin@grakon.org'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # List of callables that know how to import templates from various sources.
@@ -39,6 +39,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'grakon.context_processors.user_data',
     'grakon.context_processors.grakon_media',
     'grakon.context_processors.uni_form_media',
+    'users.context_processors.message_form',
 )
 
 MIDDLEWARE_CLASSES = (

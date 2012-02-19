@@ -1,9 +1,11 @@
+# -*- coding:utf-8 -*-
 from django.core.cache import cache
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect
-
-import bleach
 from uni_form.helper import FormHelper
 from uni_form.layout import Submit
+import bleach
+
 
 def form_helper(action_name, button_name):
     """ Shortcut to generate django-uniform helper """
@@ -39,7 +41,6 @@ def cache_function(key, timeout):
 
     return decorator
 
-# TODO: bring it in accordance with tinymce filter
 def clean_html(html):
     """ Clean html fields edited by tinymce """
     tags = ['a', 'address', 'b', 'big', 'br', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img', 'li', 
@@ -50,3 +51,19 @@ def clean_html(html):
     
     styles = ['text-decoration', 'font-size', 'font-family', 'text-align', 'padding-left', 'color', 'background-color', ]
     return bleach.clean(html, tags=tags, attributes=attributes, styles=styles, strip=True)
+
+def ajaxize(form):
+    if form.is_valid():
+        return HttpResponse(u'ok')
+    else:
+        errorstr = []
+        for fieldname, errorlist in form.errors.items():
+            fielderror = u''
+            if fieldname in form.fields and form.fields[fieldname].label:
+                fielderror += u'%s: ' % form.fields[fieldname].label
+            fielderror += u', '.join(errorlist)
+            errorstr.append(fielderror)
+        errorstr = u'; '.join(errorstr)
+        return HttpResponse(errorstr)
+#        return HttpResponseBadRequest(str)
+            

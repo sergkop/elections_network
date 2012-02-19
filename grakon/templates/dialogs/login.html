@@ -8,7 +8,7 @@
                     {% csrf_token %}
                     <table>
                     <tr>
-                        <td><label for="id_username">Логин:</label></td>
+                        <td><label for="id_username">Логин/email:</label></td>
                         <td><input id="id_username" type="text" name="username" /></td>
                     </tr>
                     <tr>
@@ -21,7 +21,8 @@
                     <a id="login_dialog_register" href="{% url register %}">Регистрация</a>
                 </form>
 
-                <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
+                <a href="{% url password_reset %}">Забыли пароль?</a><br>
+                <a href="{% url password_reset %}">Раньше входили через соцсети, но сейчас по какой-то причине не можете?</a>&nbsp;&nbsp;&nbsp;
             </td>
             <td style="border-left: 1px solid #AAA;">
                 {% include "elements/loginza-lazy.html" %}

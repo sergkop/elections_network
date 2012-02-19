@@ -1,16 +1,6 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Нарушения (0)</h4>
-</div>
-
-<div class="content_block">
-    <center>
-        {% button "alert" "Сообщить о нарушении" "submit_complaint_btn" %}
-    </center>
-</div>
-
-<div class="side_block_header">
     <h4>Организации</h4>
 </div>
 
@@ -25,6 +15,16 @@
         {% endfor %}
     </ul>
     {% button "circle-plus" "Добавить организацию" "add_organization" "create_organization" %}
+</div>
+
+<div class="side_block_header">
+    <h4>Нарушения (0)</h4>
+</div>
+
+<div class="content_block">
+    <center>
+        {% button "alert" "Сообщить о нарушении" "submit_complaint_btn" %}
+    </center>
 </div>
 
 <div class="disabled-block">

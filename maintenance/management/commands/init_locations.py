@@ -98,7 +98,11 @@ class Command(BaseCommand):
             tiks_list = json.loads(open(uiks_path).read().decode('utf8'))
             j = 0
             for tik in tiks_list:
-                tik_location = Location.objects.get(region=region_location, tvd=tik['tvd'])
+                try:
+                    tik_location = Location.objects.get(region=region_location, tvd=tik['tvd'])
+                except Location.DoesNotExist:
+                    print region, tik['tvd']
+                    continue
 
                 print_progress(j, len(tiks_list))
                 for uik_data in tik['sub']:

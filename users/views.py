@@ -67,8 +67,9 @@ class ObserverSignupView(RoleSignupView):
     role = 'observer'
 
     def get_data(self):
+        # TODO: filter only organizations with work with observers
         try:
-            self.organization = Organization.objects.get(
+            self.organization = Organization.objects.get(signup_observers=True,
                     name=self.request.POST.get('organization', ''))
         except Organization.DoesNotExist:
             return u'Организация указана неверно'

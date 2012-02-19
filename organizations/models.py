@@ -66,7 +66,7 @@ class OrganizationCoverageManager(models.Manager):
 
         organization_ids = set(queryset.values_list('organization_id', flat=True))
 
-        return Organization.objects.filter(id__in=organization_ids).only(
+        return Organization.objects.filter(id__in=organization_ids).order_by('title').only(
                 'name', 'title', 'signup_observers', 'teach_observers', 'verified', 'is_partner')
 
 class OrganizationCoverage(models.Model):

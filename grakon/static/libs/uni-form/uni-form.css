@@ -35,14 +35,15 @@
     
     /* This are the main units that contain form elements */
     .uniForm .ctrlHolder,
-    .uniForm .buttonHolder{ margin: 0; padding: 0; clear: both; }
+    .uniForm .buttonHolder{ margin: 0; padding: 0; clear: both;}
+		 .uniForm .buttonHolder {text-align:center !important;}
     
     /* Clear all floats */ 
     .uniForm:after,
       .uniForm .buttonHolder:after, 
       .uniForm .ctrlHolder:after, 
         .uniForm .ctrlHolder .multiField:after,
-          .uniForm .inlineLabel:after{ content: "."; display: block; height: 0; line-height: 0; font-size: 0; clear: both; min-height: 0; visibility: hidden; }
+          .uniForm .inlineLabel:after{ content: "."; display: block; height: 0; line-height: 0; font-size: 0; clear: both; min-height: 0; visibility: hidden;}
       
       .uniForm label,
       .uniForm button{ cursor: pointer; }

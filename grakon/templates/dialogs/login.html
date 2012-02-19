@@ -21,7 +21,8 @@
                     <a id="login_dialog_register" href="{% url register %}">Регистрация</a>
                 </form>
 
-                <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
+                <a href="{% url password_reset %}">Забыли пароль?</a><br>
+                <a href="{% url password_reset %}">Раньше входили через соцсети, но сейчас по какой-то причине не можете?</a>&nbsp;&nbsp;&nbsp;
             </td>
             <td style="border-left: 1px solid #AAA;">
                 {% include "elements/loginza-lazy.html" %}

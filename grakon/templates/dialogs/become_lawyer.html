@@ -4,7 +4,18 @@
         <br/><br/>
         <form id="become_lawyer_form" method="post" action="{% url become_lawyer %}">
             {% csrf_token %}
-            <input type="text" name="data" value="" size="50" maxlength="50" />
+            <select name="organization">
+                {% for organization in organizations %}
+                    {% if organization.signup_lawyers and organization.verified %}
+                        <option value="{{ organization.name }}">{{ organization.title }}</option>
+                    {% endif %}
+                {% endfor %}
+                <option value="">Другая организация</option>
+            </select>
+            <div id="other_lawyer_organization">
+                <br/>
+                <input type="text" name="data" value="" size="50" maxlength="50" />
+            </div>
             <input type="hidden" name="tik" value="{{ current_location.id }}" />
         </form>
     </center>
@@ -22,4 +33,14 @@
             "Отмена": function(){$("#become_lawyer_dialog").dialog("close");}
         }
     }).dialog("close");
+
+    function sync_lawyer_organization_input(){
+        if ($("#become_lawyer_form select").val()=="")
+            $("#other_lawyer_organization").show();
+        else
+            $("#other_lawyer_organization").hide();
+    }
+
+    $("#become_lawyer_form select").change(sync_lawyer_organization_input);
+    sync_lawyer_organization_input();
 </script>

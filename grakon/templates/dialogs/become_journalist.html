@@ -3,7 +3,18 @@
     <br/><br/>
     <form id="become_journalist_form" method="post" action="{% url become_journalist %}">
         {% csrf_token %}
-        <input type="text" name="data" value="" size="50" maxlength="50" />
+        <select name="organization">
+            {% for organization in organizations %}
+                {% if organization.signup_journalists and organization.verified %}
+                    <option value="{{ organization.name }}">{{ organization.title }}</option>
+                {% endif %}
+            {% endfor %}
+            <option value="">Другая организация</option>
+        </select>
+        <div id="other_journalist_organization">
+            <br/>
+            <input type="text" name="data" value="" size="50" maxlength="50" />
+        </div>
         <input type="hidden" name="tik" value="{{ current_location.id }}" />
     </form>
 </div>
@@ -21,4 +32,14 @@
             "Отмена": function(){$("#become_journalist_dialog").dialog("close");}
         }
     }).dialog("close");
+
+    function sync_journalist_organization_input(){
+        if ($("#become_journalist_form select").val()=="")
+            $("#other_journalist_organization").show();
+        else
+            $("#other_journalist_organization").hide();
+    }
+
+    $("#become_journalist_form select").change(sync_journalist_organization_input);
+    sync_journalist_organization_input();
 </script>

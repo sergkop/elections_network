@@ -11,7 +11,13 @@
                 {% with participant=role.user %}
                     {% include "elements/participant.html" %}
                 {% endwith %} <br/>
-                <i>{{ role.data }}</i>
+                <i>
+                    {% if role.organization %}
+                        {{ role.organization }}
+                    {% else %}
+                        {{ role.data }}
+                    {% endif %}
+                </i>
             </li>
         {% endfor %}
     </ul>

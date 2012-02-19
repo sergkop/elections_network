@@ -20,7 +20,12 @@
                             <option value="{{ organization.name }}">{{ organization.title }}</option>
                         {% endif %}
                     {% endfor %}
+                    <option value="">Другая организация</option>
                 </select>
+                <div id="other_observer_organization">
+                    <br/>
+                    <input type="text" name="data" value="" size="50" maxlength="50" />
+                </div>
                 <input type="hidden" name="tik" value="{{ current_location.id }}" />
             </form>
         </center>
@@ -87,4 +92,14 @@
     $("#become_observer_dialog").dialog({width:650, height:450, modal: true,
             title: "Записаться в наблюдатели", buttons: [signup_button, cancel_button]
     }).dialog("close");
+
+    function sync_observer_organization_input(){
+        if ($("#become_observer_form select").val()=="")
+            $("#other_observer_organization").show();
+        else
+            $("#other_observer_organization").hide();
+    }
+
+    $("#become_observer_form select").change(sync_observer_organization_input);
+    sync_observer_organization_input();
 </script>

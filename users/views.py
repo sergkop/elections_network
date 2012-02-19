@@ -67,15 +67,18 @@ class ObserverSignupView(RoleSignupView):
     role = 'observer'
 
     def get_data(self):
-        # TODO: filter only organizations with work with observers
+        self.data = ''
         try:
             self.organization = Organization.objects.get(signup_observers=True,
                     name=self.request.POST.get('organization', ''))
         except Organization.DoesNotExist:
-            return u'Организация указана неверно'
+            if self.request.POST.get('data'):
+                self.data = self.request.POST.get('data', '')[:50]
+            else:
+                return u'Организация указана неверно'
 
     def role_fields(self):
-        return {'organization': self.organization}
+        return {'organization': getattr(self, 'organization', None), 'data': getattr(self, 'data', '')}
 
 class BaseRoleWithDataSignupView(RoleSignupView):
     def get_data(self):
@@ -89,8 +92,35 @@ class BaseRoleWithDataSignupView(RoleSignupView):
 class JournalistSignupView(BaseRoleWithDataSignupView):
     role = 'journalist'
 
+    def get_data(self):
+        try:
+            self.organization = Organization.objects.get(signup_journalists=True,
+                    name=self.request.POST.get('organization', ''))
+        except Organization.DoesNotExist:
+            if self.request.POST.get('data'):
+                self.data = self.request.POST.get('data', '')[:50]
+            else:
+                return u'Организация указана неверно'
+
+    def role_fields(self):
+        return {'organization': getattr(self, 'organization', None), 'data': getattr(self, 'data', '')}
+
 class LawyerSignupView(BaseRoleWithDataSignupView):
     role = 'lawyer'
+
+    def get_data(self):
+        self.data = ''
+        try:
+            self.organization = Organization.objects.get(signup_lawyers=True,
+                    name=self.request.POST.get('organization', ''))
+        except Organization.DoesNotExist:
+            if self.request.POST.get('data'):
+                self.data = self.request.POST.get('data', '')[:50]
+            else:
+                return u'Организация указана неверно'
+
+    def role_fields(self):
+        return {'organization': getattr(self, 'organization', None), 'data': getattr(self, 'data', '')}
 
 class ProsecutorSignupView(BaseRoleWithDataSignupView):
     role = 'prosecutor'

@@ -33,12 +33,12 @@
     
     .uniForm legend{ font-weight: bold; font-size: 100%; margin: 0; padding: 1.5em 0; }
   
-    .uniForm .ctrlHolder{ padding: 1em; border-bottom: 1px solid #efefef; }
+    .uniForm .ctrlHolder{ padding: 1em; border-top: 1px solid #efefef; }
     .uniForm .ctrlHolder.focused{ background: #fffcdf; }
     
     .uniForm .inlineLabels .noLabel{}
     
-    .uniForm .buttonHolder{ background: #efefef; text-align: right; margin: 1.5em 0 0 0; padding: 1.5em;
+    .uniForm .buttonHolder{text-align: right; margin: 1.5em 0 0 0; padding: 1.5em;
                             /* CSS3 */
                             border-radius:         4px;
                             -webkit-border-radius: 4px;

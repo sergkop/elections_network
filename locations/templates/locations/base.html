@@ -18,6 +18,15 @@
     {% include "elements/breadcrumbs.html" %}
 
     {% include "elements/results_table.html" %}
+
+    {% if user.is_authenticated and not signed_up_in_uik %}
+        <center>
+            <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
+                Вы еще не записались избирателем на свой УИК. Вы можете найти УИК по адресу
+                проживания <a href="{% url uik_search %}" target="_blank">здесь</a>.
+            </span>
+        </center>
+    {% endif %}
 {% endblock %}
 
 {% block left_column %}
@@ -77,7 +86,12 @@
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">{{ current_location }}</h2>
+    <h2 class="location_header">
+        {% if current_location.is_uik %}
+            УИК №
+        {% endif %}
+        {{ current_location }}
+    </h2>
 
     {% if user.is_authenticated %}
         {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}

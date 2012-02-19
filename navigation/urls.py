@@ -12,6 +12,7 @@ urlpatterns = patterns('navigation.views',
     # Static pages
     tabbed_static_url('about', 'static_pages/about/base.html'),
     tabbed_static_url('rules', 'static_pages/about/base.html'),
+	tabbed_static_url('comparision', 'static_pages/about/base.html'),
 
     tabbed_static_url('news', 'static_pages/development/base.html'),
     tabbed_static_url('functionality', 'static_pages/development/base.html'),

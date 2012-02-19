@@ -16,6 +16,14 @@ ROLE_CHOICES = (
 )
 ROLE_TYPES = dict(ROLE_CHOICES)
 
+class RoleManager(models.Manager):
+    # TODO: do we need it?
+    def get_user_roles(self, user):
+        res = {}
+        for role in self.filter(user=user):
+            res[role.type] = role
+        return res
+
 class Role(models.Model):
     user = models.ForeignKey(Profile, related_name='roles')
     location = models.ForeignKey(Location)
@@ -26,6 +34,8 @@ class Role(models.Model):
     verified = models.BooleanField(default=False)
 
     time = models.DateTimeField(auto_now=True)
+
+    objects = RoleManager()
 
     class Meta:
         unique_together = ('user', 'location', 'type')

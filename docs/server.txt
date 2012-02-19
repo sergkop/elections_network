@@ -1,0 +1,6 @@
+Moving db data between sqlite and mysql
+    python manage.py dumpdata -a --natural > dump.json
+
+    python manage.py syncdb
+    python manage.py reset contenttypes
+    python manage.py loaddata dump.json

@@ -1,37 +1,29 @@
 <div id="become_voter_dialog">
-    <center>
-        Вы уже записаны избирателем. Вы хотите сменить свой из
-        <form id="become_voter_form" method="post" action="{% url become_voter %}">
-            {% csrf_token %}
-            {% include "elements/region_choice.html" %}
-        </form>
-    </center>
+    Записаться избирателем на выбранном округе?
+    <form id="become_voter_form" method="post" action="{% url become_voter %}">
+        {% csrf_token %}
+        <input type="hidden" name="tik" value="{{ current_location.id }}" />
+    </form>
 </div>
 
 <script type="text/javascript">
-    // Become voter dialog
-    // TODO: depricate this view? (leave code for events)
     function become_voter_dialog_init(){
         $("#become_voter_dialog").dialog("open");
     }
 
-    $("#become_voter_dialog").dialog({width:650, height:250, modal: true, title: "Сменить избирательный округ",
+    $("#become_voter_dialog").dialog({width:650, height:250, modal: true,
+        title: "Стать избирателем",
         buttons: {
-            "Сменить округ": function(){
-                $.post($("#become_voter_form").attr("action"), $("#become_voter_form").serialize(), function(data){
-                    if (data=="ok"){
-                        $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
-                        $("#become_voter_dialog").dialog("close");
-                        $("#become_voter_form").attr("action", "{% url goto_location %}")
-                                .attr("method", "get").submit();
-                    } else
-                        alert(data);
-                });
-            },
+            "Записаться": function(){signup_for_role("voter", "{{ request.path }}");},
             "Отмена": function(){$("#become_voter_dialog").dialog("close");}
         }
     }).dialog("close");
 
-    // TODO: move it to left panel
-    $("#become_voter").click(become_voter_dialog_init);
+    /*if (data=="ok"){
+            $("#become_voter_dialog").trigger("become_voter_event", [form_location_id("become_voter_form")]);
+            $("#become_voter_dialog").dialog("close");
+            $("#become_voter_form").attr("action", "{% url goto_location %}")
+                    .attr("method", "get").submit();
+        } else
+            alert(data);*/
 </script>

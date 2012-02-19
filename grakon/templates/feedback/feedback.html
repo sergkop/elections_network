@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load uni_form_tags %}
+
+{% block title %}Обратная связь{% endblock %}
+
+{% block content %}
+	<h2>Обратная связь</h2>
+	<h3>Отправьте нам сообщение!</h3>
+	{% uni_form form form.helper %}
+{% endblock %}

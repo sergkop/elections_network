@@ -49,12 +49,30 @@ class MessageForm(forms.Form):
         except SMTPException:
             return u'Невозможно отправить сообщение'
 
-#        
-#    
-#class AdminMessageForm(forms.Form):
-#    body = forms.CharField(widget=Textarea(attrs={'cols':60, 'rows':4}), label=u'Сообщение')
-#    
-#    def __init__(self, request, *args, **kwargs):
-#        self.request = request
-#        self.from_user = self.request.user
-#        super(AdminMessageForm, self).__init__(*args, **kwargs)
+class FeedbackForm(forms.Form):
+    name = forms.CharField(label=u'Ваше имя')
+    body = forms.CharField(widget=Textarea(attrs={'style': 'width:100%;'}), label=u'Сообщение')
+    
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(FeedbackForm, self).__init__(*args, **kwargs)
+        if self.request.user.is_authenticated():
+            del self.fields['name']
+
+        self.helper = FormHelper()
+        self.helper.form_action = reverse('feedback')
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('', u'Отправить'))
+
+    def send(self):
+        ctx = {
+            'message': self.cleaned_data['body'],
+            'user': self.request.user,
+        }
+        if 'name' in self.cleaned_data:
+            ctx['name'] = self.cleaned_data['name']
+        if self.request.user.is_authenticated():
+            ctx['link']  = u'%s%s' % (settings.URL_PREFIX, reverse('profile', kwargs={'username': self.request.user.username}))
+        from_mail = settings.SERVER_EMAIL
+        message = render_to_string('feedback/mail.txt', ctx)
+        send_mail(u'Сообщение обратной связи', message, from_mail, [from_mail], fail_silently=False)

@@ -1,0 +1,12 @@
+{% if user.is_authenticated %}
+Имя: {{ user.profile }}
+Имя учётной записи: {{ user.username }}
+Ссылка: {{ link }}
+Еmail: {{ user.email }}
+Id: {{ user.id }}
+{% else %}
+[Анонимный пользователь]
+Имя: {{ name }}
+{% endif %}
+------------------------------------------------
+{{ message }}

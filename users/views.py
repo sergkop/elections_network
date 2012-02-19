@@ -1,9 +1,10 @@
 # coding=utf8
-from .forms import MessageForm
+from .forms import MessageForm, FeedbackForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from grakon.models import Profile
@@ -200,3 +201,18 @@ class SendMessage(FormView):
 #    return HttpResponse(u'Ошибка')
 
 send_message = login_required(SendMessage.as_view())
+
+class Feedback(FormView):
+    form_class = FeedbackForm
+    template_name = 'feedback/feedback.html'
+    
+    def get_form_kwargs(self):
+        kwargs = super(Feedback, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
+    def form_valid(self, form):
+        form.send()
+        return redirect('feedback_thanks')
+        
+feedback = Feedback.as_view()

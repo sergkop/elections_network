@@ -1,11 +1,9 @@
-<!--a href="{{ request.path }}#disqus_thread" data-disqus-identifier="location/{{ current_location.id }}">First article</a-->
-
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-	{{ DISQUS_CONFIG }}
+    {{ DISQUS_CONFIG }}
     var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
     var disqus_identifier = "location/{{ current_location.id }}";
-    var disqus_developer = 0;
+    var disqus_developer = 1;
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -14,3 +14,7 @@ class ProfileAdmin(admin.ModelAdmin):
     inlines = [ContactInline]
 
 admin.site.register(Profile, ProfileAdmin)
+
+# Hack to show verified tick in loginza UserMap admin
+from loginza.models import UserMap
+admin.site._registry[UserMap].list_display.append('verified')

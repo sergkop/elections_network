@@ -28,7 +28,12 @@
     $("#become_journalist_dialog").dialog({width:650, height:250, modal: true,
         title: "Стать представителем СМИ",
         buttons: {
-            "Записаться": function(){signup_for_role("journalist", "{{ request.path }}");},
+            "Записаться": function(){
+                {% with yandex_target="journalist" %}
+                    {% include "services/yandex-target.html" %}
+                {% endwith %}
+                signup_for_role("journalist", "{{ request.path }}");
+            },
             "Отмена": function(){$("#become_journalist_dialog").dialog("close");}
         }
     }).dialog("close");

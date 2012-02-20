@@ -14,7 +14,12 @@
     $("#become_voter_dialog").dialog({width:650, height:250, modal: true,
         title: "Стать избирателем",
         buttons: {
-            "Записаться": function(){signup_for_role("voter", "{{ request.path }}");},
+            "Записаться": function(){
+                {% with yandex_target="voter" %}
+                    {% include "services/yandex-target.html" %}
+                {% endwith %}
+                signup_for_role("voter", "{{ request.path }}");
+            },
             "Отмена": function(){$("#become_voter_dialog").dialog("close");}
         }
     }).dialog("close");

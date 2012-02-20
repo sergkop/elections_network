@@ -82,7 +82,12 @@
 
     var signup_button = {
         text: "Записаться",
-        click: function signup(){signup_for_role("observer", "{{ request.path }}");}
+        click: function signup(){
+            {% with yandex_target="observer" %}
+                {% include "services/yandex-target.html" %}
+            {% endwith %}
+            signup_for_role("observer", "{{ request.path }}");
+        }
     };
 
     var cancel_button = {text: "Отмена", click: function(){

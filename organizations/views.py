@@ -82,11 +82,11 @@ class CreateOrganizationView(CreateView):
 
         message = u"""Зарегистрирована новая организация:
 Название: %s
-Идентификатор: %s
+Страница: %s
 Сайт: %s
 Пользователь: %s
 Email: %s
-""" % (organization.title, organization.name, organization.website, profile.username, profile.user.email)
+""" % (organization.title, organization.get_absolute_url(), organization.website, profile.username, profile.user.email)
 
         send_mail(subject, message, 'admin@grakon.org', ['admin@grakon.org'], fail_silently=False)
 

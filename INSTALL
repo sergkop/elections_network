@@ -1,5 +1,5 @@
 Installation of required software (for Ubuntu and Mac OS):
-    * sudo aptitude install python python-setuptools git
+    * sudo aptitude install python python-setuptools git libmysqlclient-dev
     * sudo easy_install pip
 
     * git clone git://github.com/sergkop/elections_network.git CODE_DIR

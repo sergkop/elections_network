@@ -9,3 +9,4 @@ django-debug-toolbar
 pylibmc
 PIL
 django-simple-captcha
+mysql-python

@@ -28,10 +28,10 @@ class Location(models.Model):
     email = models.CharField(max_length=40, blank=True)
 
     # Ids required to access data from izbirkom.ru
-    tvd = models.IntegerField()
+    tvd = models.BigIntegerField()
     root = models.IntegerField()
-    vrnorg = models.IntegerField(blank=True, null=True)
-    vrnkomis = models.IntegerField(blank=True, null=True)
+    vrnorg = models.BigIntegerField(blank=True, null=True)
+    vrnkomis = models.BigIntegerField(blank=True, null=True)
 
     # Coordinates used in Yandex maps
     x_coord = models.FloatField(blank=True, null=True)

@@ -1,15 +1,22 @@
 # -*- coding:utf-8 -*-
+from .forms import CreateOrganizationForm, EditOrganizationForm, \
+    VerificationForm
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
-
+from django.views.generic.list import ListView
 from grakon.models import Profile
 from locations.models import Location
-from organizations.forms import CreateOrganizationForm, EditOrganizationForm
-from organizations.models import Organization, OrganizationCoverage, OrganizationRepresentative
+from organizations.models import Organization, OrganizationCoverage, \
+    OrganizationRepresentative
+from users.models import Role
+
 
 class BaseOrganizationView(object):
     template_name = 'organizations/base.html'
@@ -17,32 +24,27 @@ class BaseOrganizationView(object):
     model = Organization
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Organization.objects.select_related(),
-                name=self.kwargs.get('name', ''))
-
-    def get_representatives(self):
-        if not hasattr(self, 'representatives'):
-            self.representative_ids = OrganizationRepresentative.objects.filter(organization=self.object) \
-                .values_list('user', flat=True)
-            self.representatives = Profile.objects.filter(id__in=self.representative_ids)
+        return get_object_or_404(Organization.objects.select_related(), name=self.kwargs.get('name', ''))
 
     def get_context_data(self, **kwargs):
         ctx = super(BaseOrganizationView, self).get_context_data(**kwargs)
-
-        self.get_representatives()
-        is_representative = self.request.user.id in self.representative_ids
-
-        location_ids = OrganizationCoverage.objects.filter(organization=self.object).values_list('location_id', flat=True)
-        locations = list(Location.objects.filter(id__in=location_ids).select_related())
-        if None in location_ids:
-            locations.append(None) # special processing for the whole country
+        is_representative = False
+        if self.request.user.is_authenticated():
+            try:
+                profile = self.request.user.profile
+                is_representative = profile.is_representative(self.object)
+            except ObjectDoesNotExist:
+                pass 
+            
+        locations = self.object.get_locations()
 
         ctx.update({
             'name': self.kwargs['name'],
             'view': self.view,
             'organization': self.object,
             'locations': locations,
-            'representatives': self.representatives,
+            'representatives': self.object.get_representative_profiles(),
+            'observers': self.object.get_observers(),
             'is_representative': is_representative,
         })
         return ctx
@@ -93,3 +95,39 @@ Email: %s
         return response
 
 create_organization = login_required(CreateOrganizationView.as_view())
+
+class Verification(BaseOrganizationView, DetailView):
+    view = 'verification'
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(Verification, self).get_context_data(**kwargs)
+        roles = self.object.get_unverified_roles()
+        for role in roles:
+            role.form = VerificationForm(request=self.request, instance=role, initial={'verified': True})
+        ctx.update({
+            'tab': 'verification',
+            'roles': roles
+        })
+        return ctx
+    
+verification = login_required(Verification.as_view())
+
+class Verify(UpdateView):
+    model = Role
+    form_class = VerificationForm
+    
+    def get_form_kwargs(self):
+        kwargs = super(Verify, self).get_form_kwargs()
+        kwargs.update({
+            'request': self.request
+        })
+        return kwargs
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        return HttpResponse('ok')
+    
+    def form_invalid(self, form):
+        return HttpResponse(u'Подтвердить пользователя не удалось')
+    
+verify = login_required(Verify.as_view())

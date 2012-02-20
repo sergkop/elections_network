@@ -43,6 +43,10 @@ class Profile(models.Model):
     def __unicode__(self):
         full_name = u'%s %s' % (self.first_name, self.last_name)
         return full_name.strip() or self.username
+    
+    def is_representative(self, organization):
+        profiles = organization.get_representative_profiles()
+        return profiles.filter(pk=self.pk).exists()
 
 def create_profile(sender, **kwargs):
     if kwargs.get('created', False):

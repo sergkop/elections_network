@@ -1,0 +1,32 @@
+{% load elements %}
+
+{% if roles %}
+<table class="">
+	<tr>
+		<th>Ник</th>
+		<th>Фамилия</th>
+		<th>Имя</th>
+		<th>E-mail</th>
+		<th>Роль</th>
+		<th>Действие</th>
+	</tr>
+	{% for role in roles %}
+	<tr>
+		<td>{{ role.user.username }}</td>
+		<td>{{ role.user.last_name }}</td>
+		<td>{{ role.user.first_name }}</td>
+		<td>{{ role.user.user.email }}</td>
+		<td>{{ role.get_type_display }}</td>
+		<td class="verification_td">
+			<form action="{% url verify role.pk %}" method="post">
+				{% csrf_token %}
+				{{ role.form }}
+			</form>
+			{% button "circle-check" "Подтвердить" %}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<h2>Нет не верифицированных пользователей</h2>
+{% endif %}

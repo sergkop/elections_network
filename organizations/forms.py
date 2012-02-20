@@ -1,12 +1,14 @@
 # -*- coding:utf-8 -*-
 from django import forms
-
-from uni_form.layout import HTML, Layout
-
+from django.forms.widgets import HiddenInput
 from grakon.utils import clean_html, form_helper
 from locations.models import Location
 from locations.utils import regions_list
 from organizations.models import Organization
+from uni_form.layout import HTML, Layout
+from users.models import Role
+
+
 
 class CreateOrganizationForm(forms.ModelForm):
     name = forms.RegexField(label=u'Идентификатор', max_length=20, min_length=2, regex=r'^[\w\.]+$',
@@ -69,3 +71,19 @@ class EditOrganizationForm(forms.ModelForm):
 
     def clean_about(self):
         return clean_html(self.cleaned_data['about'])
+    
+class VerificationForm(forms.ModelForm):
+    class Meta:
+        model = Role
+        fields = ['verified']
+        
+    def __init__(self, request, *args, **kwargs):
+        super(VerificationForm, self).__init__(*args, **kwargs)
+        self.request = request
+        self.fields['verified'].widget = HiddenInput()
+        
+    def clean(self):
+        profile = self.request.user.profile
+        if not profile.is_representative(self.instance.organization):
+            raise forms.ValidationError(u'Вы не представитель организации')
+        return self.cleaned_data

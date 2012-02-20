@@ -1,11 +1,14 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from django.db.models import Q
-
-from tinymce.models import HTMLField
-
 from grakon.models import Profile
 from locations.models import Location
+from tinymce.models import HTMLField
+
+
+
+class OrganizationManager(models.Manager):
+    pass
 
 # TODO: increase max_length of title
 # TODO: limit name format
@@ -36,6 +39,8 @@ class Organization(models.Model):
             help_text=u'Укажите оказывает ли ваша организация юридическую помощь')
     news_publishing = models.BooleanField(u'Публикация новостей', default=False)
     elections_info = models.BooleanField(u'Распространение информации о выборах', default=False)
+    
+    objects = OrganizationManager()
 
     # TODO: implement it
     def covers_location(self, location):
@@ -50,6 +55,32 @@ class Organization(models.Model):
 
     def __unicode__(self):
         return self.title
+    
+    def get_representatives(self):
+        return self.organizationrepresentative_set.all()
+        return OrganizationRepresentative.objects.filter(organization=self).values_list('user', flat=True)
+    
+    def get_representative_profiles(self):
+        representatives = self.get_representatives().values_list('user', flat=True)
+        profiles = Profile.objects.filter(id__in=representatives)
+        return profiles
+    
+    def get_locations(self):
+        location_ids =  self.organizationcoverage_set.values_list('location_id', flat=True)
+        locations = Location.objects.filter(id__in=location_ids).select_related()
+        if None in location_ids:
+            locations.append(None) # special processing for the whole country
+        return locations
+
+    def get_verified_roles(self):
+        return self.role_set.filter(verified=True)
+    
+    def get_unverified_roles(self):
+        return self.role_set.filter(verified=False)
+    
+    def get_observers(self):
+        roles = self.get_verified_roles().filter(type = 'observer').values_list('user', flat=True)
+        return Profile.objects.filter(pk__in = roles)
 
 class OrganizationCoverageManager(models.Manager):
     # TODO: cache this function on a short period (10 min)

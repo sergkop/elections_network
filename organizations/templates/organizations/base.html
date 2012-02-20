@@ -6,6 +6,7 @@
     <style type="text/css">
         .ym-col3 .ym-cbox:last-child {display: none;}
     </style>
+    <script type="text/javascript" src="/static/organizations/verification.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -26,6 +27,20 @@
                 {% endfor %}
             </ul>
         </div>
+        {% if observers %}
+	        <div class="side_block_header">
+	            <h4>Наблюдатели</h4>
+	        </div>
+	        <div class="content_block">
+	            <ul id="participants_ul" class="side_list">
+	                {% for participant in observers %}
+	                <li>
+	                    {% include "elements/participant.html" %}
+	                </li>
+	                {% endfor %}
+	            </ul>
+	        </div>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -37,7 +52,7 @@
     <h2 class="location_header">{{ organization.title }}</h2>
 
     {% if is_representative %}
-        {% tabs "tabs" view "name" name "Информация" "organization_info" "organizations/info.html" "Редактировать" "edit_organization" "organizations/edit.html" %}
+        {% tabs "tabs" view "name" name "Информация" "organization_info" "organizations/info.html" "Редактировать" "edit_organization" "organizations/edit.html" "Верификация" "verification" "organizations/verification.html" %}
     {% else %}
         <div class="ym-cbox">
             {% include "organizations/info.html" %}

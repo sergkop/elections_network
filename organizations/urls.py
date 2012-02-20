@@ -4,4 +4,6 @@ urlpatterns = patterns('organizations.views',
     url(r'^organization/(?P<name>[\w\.]+)$', 'organization_info', name='organization_info'),
     url(r'^organization/(?P<name>[\w\.]+)/edit$', 'edit_organization', name='edit_organization'),
     url(r'^create_organization$', 'create_organization', name='create_organization'),
+    url(r'^organization/(?P<name>[\w\.]+)/verification$', 'verification', name='verification'),
+    url(r'^verify/(?P<pk>\d+)/$', 'verify', name='verify'),
 )

@@ -38,7 +38,7 @@ class CikHTMLParser(HTMLParser):
         if self.save_data:
             self.data += data
 
-@cache_view('main_page', 30)
+@cache_view('main_page', 60)
 def main(request):
     voter_count = Role.objects.filter(type='voter').count()
     """

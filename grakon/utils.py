@@ -2,10 +2,10 @@
 from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect
+
+import bleach
 from uni_form.helper import FormHelper
 from uni_form.layout import Submit
-import bleach
-
 
 def form_helper(action_name, button_name):
     """ Shortcut to generate django-uniform helper """
@@ -35,6 +35,25 @@ def cache_function(key, timeout):
 
             res = func(*args, **kwargs)
             cache.set(key, res, timeout)
+            return res
+
+        return new_func
+
+    return decorator
+
+def cache_view(key, timeout, only_anonym=True):
+    def decorator(func):
+        def new_func(request, *args, **kwargs):
+            if (only_anonym and not request.user.is_authenticated()) or not only_anonym:
+                res = cache.get(key)
+                if res:
+                    return res
+
+                res = func(request, *args, **kwargs)
+                cache.set(key, res, timeout)
+            else:
+                res = func(request, *args, **kwargs)
+
             return res
 
         return new_func

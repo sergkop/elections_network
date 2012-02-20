@@ -31,7 +31,7 @@ class MessageForm(forms.Form):
         title = self.cleaned_data['title']
         title = u' '.join(title.split('\n'))
         body = self.cleaned_data['body']
-        from_mail = settings.SERVER_EMAIL
+        from_mail = settings.DEFAULT_FROM_EMAIL
         show_email = self.cleaned_data['show_email']
         to_user = self.cleaned_data['to_user']
         ctx = { 
@@ -73,6 +73,6 @@ class FeedbackForm(forms.Form):
             ctx['name'] = self.cleaned_data['name']
         if self.request.user.is_authenticated():
             ctx['link']  = u'%s%s' % (settings.URL_PREFIX, reverse('profile', kwargs={'username': self.request.user.username}))
-        from_mail = settings.SERVER_EMAIL
+        from_mail = settings.DEFAULT_FROM_EMAIL
         message = render_to_string('feedback/mail.txt', ctx)
         send_mail(u'Сообщение обратной связи', message, from_mail, [from_mail], fail_silently=False)

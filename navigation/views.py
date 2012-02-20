@@ -4,13 +4,14 @@ import os.path
 import re
 import urllib
 
-from HTMLParser import HTMLParser
-
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
+from HTMLParser import HTMLParser
+
+from grakon.utils import cache_view
 from locations.models import Location
 from locations.utils import get_roles_counters, regions_list
 from navigation.models import Page
@@ -37,6 +38,7 @@ class CikHTMLParser(HTMLParser):
         if self.save_data:
             self.data += data
 
+@cache_view('main_page', 30)
 def main(request):
     voter_count = Role.objects.filter(type='voter').count()
     """
@@ -114,7 +116,7 @@ def uik_search_data(request):
 
         with open(cache_path, 'r') as cache_file:
             data = cache_file.read()
-            
+
     return HttpResponse(data)
 
 def cache_file_name(id):
@@ -131,7 +133,7 @@ def save_uik_data(uik_data):
         return
 
     uiks_db_path = os.path.join(settings.PROJECT_PATH, 'media', 'address_cache', 'found_uiks_db.csv')
-        
+
     if not os.path.exists(uiks_db_path):
         with open(uiks_db_path, 'w') as uiks_db_file:
             uiks_db_writer = csv.writer(uiks_db_file, delimiter=';', quotechar='"')

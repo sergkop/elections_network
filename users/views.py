@@ -205,7 +205,7 @@ send_message = login_required(SendMessage.as_view())
 class Feedback(FormView):
     form_class = FeedbackForm
     template_name = 'feedback/feedback.html'
-    
+
     def get_form_kwargs(self):
         kwargs = super(Feedback, self).get_form_kwargs()
         kwargs.update({'request': self.request})

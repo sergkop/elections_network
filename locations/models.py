@@ -76,6 +76,9 @@ class Location(models.Model):
 
     def __unicode__(self, full_path=False):
         name = self.name
+        if self.is_uik():
+            name = u'УИК № ' + name
+
         if full_path:
             if self.tik:
                 name = str(self.tik) + u'->' + name

@@ -3,6 +3,7 @@
 {% load elements %}
 
 {% block title %}
+Результаты президентских выборов -
 {% if current_location.region %}{{ current_location.region }} - {% endif %}
 {% if current_location.tik %}{{ current_location.tik }} - {% endif %}
 {{ current_location }} - Гракон
@@ -76,9 +77,6 @@
 
 {% block content_header %}
     <h2 class="location_header">
-        {% if current_location.is_uik %}
-            УИК №
-        {% endif %}
         {{ current_location }}
     </h2>
 

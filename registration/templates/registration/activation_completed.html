@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h2>Ваша учётная запись активирована</h2>
+{% block content_header %}
+    <h2 class="location_header">Ваша учётная запись активирована</h2>
+{% endblock %}
 
-Спасибо за регистрацию! Теперь вы можете <a href="{% url login %}">войти</a> в систему.
+{% block content %}
+    <p>Спасибо за регистрацию! Теперь вы можете <a href="{% url login %}">войти</a> в систему.</p>
 {% endblock %}

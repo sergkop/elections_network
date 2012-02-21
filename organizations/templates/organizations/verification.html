@@ -8,6 +8,7 @@
 		<th>Имя</th>
 		<th>E-mail</th>
 		<th>Роль</th>
+		<th>Расположение</th>
 		<th>Действие</th>
 	</tr>
 	{% for role in roles %}
@@ -17,6 +18,7 @@
 		<td>{{ role.user.first_name }}</td>
 		<td>{{ role.user.user.email }}</td>
 		<td>{{ role.get_type_display }}</td>
+		<td>{{ role.location }}</td>
 		<td class="verification_td">
 			<form action="{% url verify role.pk %}" method="post">
 				{% csrf_token %}

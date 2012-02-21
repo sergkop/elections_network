@@ -328,7 +328,7 @@
 	.center {
 		display:block;
 		text-align:center;
-		margin: 1.5em auto 0 auto;
+		margin: 0;
 	}
 
 	/* Generic classes for table-width and design definition */

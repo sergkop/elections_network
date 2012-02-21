@@ -1,0 +1,25 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Нарушения (0)</h4>
+</div>
+
+<div class="content_block">
+    <div class="center">
+        {% button "alert" "Сообщить о нарушении" "submit_complaint_btn" %}
+    </div>
+</div>
+
+{% if user.is_authenticated %}
+    {% include "dialogs/submit_complaint.html" %}
+{% endif %}
+
+<script type="text/javascript">
+    $("#submit_complaint_btn").click(function(){
+        {% if user.is_authenticated %}
+            submit_complaint_dialog_init()
+        {% else %}
+            login_dialog_init("Чтобы сообщить о нарушении, пожалуйста, войдите в систему");
+        {% endif %}
+    });
+</script>

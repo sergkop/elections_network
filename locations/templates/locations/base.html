@@ -18,15 +18,6 @@
     {% include "elements/breadcrumbs.html" %}
 
     {% include "elements/results_table.html" %}
-
-    {% if user.is_authenticated and not signed_up_in_uik %}
-        <center>
-            <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
-                Вы еще не записались избирателем на свой УИК. Вы можете найти УИК по адресу
-                проживания <a href="{% url uik_search %}" target="_blank">здесь</a>.
-            </span>
-        </center>
-    {% endif %}
 {% endblock %}
 
 {% block left_column %}
@@ -58,8 +49,6 @@
     </div>
 
     {% include "dialogs/add_link.html" %}
-
-    {% include "dialogs/submit_complaint.html" %}
 
     {% if user.is_authenticated %}
         <script type="text/javascript">
@@ -123,4 +112,3 @@
         </script>
     {% endif %}
 {% endblock %}
-

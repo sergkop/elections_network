@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load elements %}
+
 {% block head %}
     <style type="text/css">
         .ym-col1 {width: 0px;}
@@ -117,7 +119,7 @@
     	}
 
     	$(document).ready(function(){
-	    	$('#findUIK').click(function() {
+	    	$('#find_uik').click(function() {
 		    	$('#addressFields').html("");
 		    	$('#result').html("");
 	    	    Address.showLevelById("path_", 0);
@@ -131,10 +133,11 @@
 {% endblock %}
 
 {% block content %}
-    <button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" id="findUIK">
-        <span class="ui-button-icon-primary ui-icon ui-icon-circle-zoomout"></span>
-        <span class="ui-button-text">Найти свой УИК</span>
-    </button>
+    {% button "circle-zoomout" "Найти свой УИК" "find_uik" "" "" %}
     <div id="addressFields"></div>
     <h3 id="result"></h3>
+    <div style="margin:1em;">
+        Мы не сохраняем ваш адрес. Этот инструмент основан на инструменте сайта ЦИК
+        "<a href="http://cikrf.ru/uiksearch.html" target="_blank">Найди свой участок</a>".
+    </div>
 {% endblock %}

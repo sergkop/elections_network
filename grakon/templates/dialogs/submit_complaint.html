@@ -1,43 +1,28 @@
-{% if user.is_authenticated %}
-    <div id="submit_complaint_dialog">
-        <p>Инструмент публикации нарушений находится в разработке и появится в ближайшее время.</p>
+<div id="submit_complaint_dialog">
+    <p>Инструмент публикации нарушений находится в разработке и появится в ближайшее время.</p>
 
-        <p>
-            Дополнительно вы можете оставить сообщение о нарушении на сайте
-            <a href="http://www.kartanarusheniy.ru/" target="_blank">Карты нарушений</a>,
-            где также имеется <a href="http://www.kartanarusheniy.ru/pages/claim" target="_blank">подробная информация</a>
-            о процедуре составления и подачи жалоб.
-        </p>
+    <p>
+        Дополнительно вы можете оставить сообщение о нарушении на сайте
+        <a href="http://www.kartanarusheniy.ru/" target="_blank">Карты нарушений</a>,
+        где также имеется <a href="http://www.kartanarusheniy.ru/pages/claim" target="_blank">подробная информация</a>
+        о процедуре составления и подачи жалоб.
+    </p>
 
-        <p>Вы можете пройти процедуру автоматического составления официальной жалобы на сайте
-        <a href="http://kuda-komu.net/voting/" target="_blank">Куда? Кому?</a>.</p>
-    </div>
-{% endif %}
+    <p>Вы можете пройти процедуру автоматического составления официальной жалобы на сайте
+    <a href="http://kuda-komu.net/voting/" target="_blank">Куда? Кому?</a>.</p>
+</div>
 
 <script type="text/javascript">
-    // put button with id="submit_complaint_btn" on the page to use this dialog
+    function submit_complaint_dialog_init(){
+        $("#submit_complaint_dialog").dialog("open");
+    }
 
-    // Submit complaint dialog
-    {% if user.is_authenticated %}
-        $("#submit_complaint_dialog").dialog({width:650, height:450, modal: true, title: "Зафиксировать нарушение",
-            buttons: {
-                "Сообщить о нарушении": function(){
-                    window.open("http://kuda-komu.net/voting/", "_blank");
-                },
-                "Отмена": function(){$("#submit_complaint_dialog").dialog("close");}
-            }
-        }).dialog("close");
-
-        function submit_complaint_dialog_init(){
-            $("#submit_complaint_dialog").dialog("open");
+    $("#submit_complaint_dialog").dialog({width:650, height:450, modal: true, title: "Зафиксировать нарушение",
+        buttons: {
+            "Сообщить о нарушении": function(){
+                window.open("http://kuda-komu.net/voting/", "_blank");
+            },
+            "Отмена": function(){$("#submit_complaint_dialog").dialog("close");}
         }
-
-        $("#submit_complaint_btn").click(function(){
-            submit_complaint_dialog_init();
-        });
-    {% else %}
-        $("#submit_complaint_btn").click(function(){
-            login_dialog_init("Чтобы сообщить о нарушении, пожалуйста, войдите в систему");
-        });
-    {% endif %}
+    }).dialog("close");
 </script>

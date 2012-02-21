@@ -1,0 +1,28 @@
+{% load elements %}
+
+<div class="side_block_header">
+    <h4>Организации</h4>
+</div>
+
+<div class="content_block">
+    <ul class="side_list">
+        {% for organization in organizations %}
+            {% if organization.verified %}
+                <li>
+                    {% include "elements/organization.html" %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% button "circle-plus" "Добавить организацию" "add_organization" %}
+</div>
+
+<script type="text/javascript">
+    $("#add_organization").click(function(){
+        {% if user.is_authenticated %}
+            window.location.href = "{% url create_organization %}";
+        {% else %}
+            login_dialog_init("Чтобы добавить организацию, пожалуйста, войдите в систему");
+        {% endif %}
+    });
+</script>

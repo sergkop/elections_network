@@ -1,31 +1,8 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Организации</h4>
-</div>
+{% include "blocks/organizations.html" %}
 
-<div class="content_block">
-    <ul class="side_list">
-        {% for organization in organizations %}
-            {% if organization.verified %}
-                <li>
-                    {% include "elements/organization.html" %}
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-    {% button "circle-plus" "Добавить организацию" "add_organization" "create_organization" %}
-</div>
-
-<div class="side_block_header">
-    <h4>Нарушения (0)</h4>
-</div>
-
-<div class="content_block">
-    <center>
-        {% button "alert" "Сообщить о нарушении" "submit_complaint_btn" %}
-    </center>
-</div>
+{% include "blocks/complaints.html" %}
 
 <div class="disabled-block">
     <div class="i">&nbsp;</div>

@@ -5,7 +5,8 @@
         <tr>
             <td>
                 <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
-                    {% csrf_token %}
+                    <input type="hidden" value="" name="csrfmiddlewaretoken"/>
+                    <!--{% csrf_token %}-->
                     <table>
                     <tr>
                         <td><label for="id_username">Логин/email:</label></td>
@@ -36,6 +37,8 @@
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
     }}).dialog("close");
+
+    $('#login_form [name="csrfmiddlewaretoken"]').val(get_cookie("csrftoken"));
 
     $("#login_form_submit").button();
     $("#login_dialog_register").button();

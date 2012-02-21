@@ -5,9 +5,10 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect, render_to_response
+from django.views.decorators.cache import cache_page
 from django.views.generic.base import TemplateView
 
-from grakon.utils import authenticated_redirect, cache_function
+from grakon.utils import authenticated_redirect
 from locations.models import Location
 from locations.utils import get_roles_counters, regions_list
 from organizations.models import OrganizationCoverage
@@ -134,7 +135,7 @@ def goto_location(request):
 
     return HttpResponseRedirect(reverse('main'))
 
-@cache_function('map_data', 1200)
+@cache_page(60)
 def map_data(request):
     context = {
         'all_locations': list(Location.objects.all().only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address')),

@@ -97,10 +97,10 @@ def uik_search_data(request):
             uik_data = fetch_uik_data.search(parser.data)
 
             save_uik_data(uik_data)
-            
+
             if uik_data is not None and len(uik_data.groups()) == 3:
                 data = "<p id=\"uik\">УИК №%s: %s, телефон %s</p>" % (uik_data.group(1),uik_data.group(2),uik_data.group(3))
-                
+
         parser.close()
     # Если запрос части адреса
     else:

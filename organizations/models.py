@@ -66,8 +66,15 @@ class OrganizationCoverageManager(models.Manager):
 
         organization_ids = set(queryset.values_list('organization_id', flat=True))
 
-        return Organization.objects.filter(id__in=organization_ids).order_by('title').only(
+        organizations = Organization.objects.filter(id__in=organization_ids).order_by('title').only(
                 'name', 'title', 'signup_observers', 'teach_observers', 'verified', 'is_partner')
+
+        for representative in OrganizationRepresentative.objects.filter(organization__in=organization_ids):
+            organization = (filter(lambda org: org.id==representative.organization_id, organizations) or [None])[0]
+            if organization:
+                organization.representative = True
+
+        return organizations
 
 class OrganizationCoverage(models.Model):
     location = models.ForeignKey(Location, blank=True, null=True)

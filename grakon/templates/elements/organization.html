@@ -1,13 +1,17 @@
 <a href="{{ organization.get_absolute_url }}">{{ organization.title }}</a>
 <br/>
-{% if organization.signup_observers %}
-    {% if organization.teach_observers %}
-        <i>Запись и обучение наблюдателей</i>
+{% if organization.representative %}
+    {% if organization.signup_observers %}
+        {% if organization.teach_observers %}
+            <i>Запись и обучение наблюдателей</i>
+        {% else %}
+            <i>Запись наблюдателей</i>
+        {% endif %}
     {% else %}
-        <i>Запись наблюдателей</i>
+        {% if organization.teach_observers %}
+            <i>Обучение наблюдателей</i>
+        {% endif %}
     {% endif %}
 {% else %}
-    {% if organization.teach_observers %}
-        <i>Обучение наблюдателей</i>
-    {% endif %}
+    <i style="color:red;">Нет представителя</i>
 {% endif %}

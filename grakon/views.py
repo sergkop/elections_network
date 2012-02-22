@@ -35,6 +35,7 @@ class BaseProfileView(object):
             'have_in_contacts': list(profile.have_in_contacts.all()),
             'profile_view': self.profile_view,
         })
+        print ctx['contacts']
         return ctx
 
 class ProfileView(BaseProfileView, TemplateView):

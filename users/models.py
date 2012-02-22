@@ -53,3 +53,6 @@ class Contact(models.Model):
 
     class Meta:
         unique_together = ('user', 'contact')
+
+    def __unicode__(self):
+        return unicode(self.user) + ' has ' + unicode(self.contact) + ' in contacts'

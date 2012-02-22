@@ -24,9 +24,11 @@
         <div class="content_block">
             <ul id="contacts_ul" class="side_list">
                 {% for contact in contacts %}
-                <li>
-                    <a href="{{ contact.contact.get_absolute_url }}">{{ contact.contact.username }}</a>
-                </li>
+                    <li>
+                        {% with participant=contact.contact %}
+                            {% include "elements/participant.html" %}
+                        {% endwith %}
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -37,7 +39,11 @@
         <div class="content_block">
             <ul id="have_in_contacts_ul" class="side_list">
                 {% for contact in have_in_contacts %}
-                    <li><a href="{{ contact.user.get_absolute_url }}">{{ contact.user.username }}</a></li>
+                    <li>
+                        {% with participant=contact.user %}
+                            {% include "elements/participant.html" %}
+                        {% endwith %}
+                    </li>
                 {% endfor %}
             </ul>
         </div>

@@ -85,12 +85,12 @@
     {% block breadcrumbs %}{% endblock %}
 
     {% if user.is_authenticated and not signed_up_in_uik %}
-        <center>
+        <div class="center" style="margin:1em;">
             <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
                 Вы еще не записались избирателем на свой УИК. Вы можете найти УИК по адресу
                 проживания <a href="{% url uik_search %}" target="_blank">здесь</a>.
             </span>
-        </center>
+        </div>
     {% endif %}
 
     <div id="main">
@@ -128,10 +128,8 @@
                         <a href="{% url rules %}">Правила</a>
                         <a href="{% url sitemap %}">Карта сайта</a>
                     </div>
-                    
-                    
                     <div>
-                    	<a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
+                        <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
                         <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="texttop"/></a>
                         <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="texttop"/></a>         
                         <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="texttop"/></a>  

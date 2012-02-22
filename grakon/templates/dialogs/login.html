@@ -6,7 +6,6 @@
             <td>
                 <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
                     <input type="hidden" value="" name="csrfmiddlewaretoken"/>
-                    <!--{% csrf_token %}-->
                     <table>
                     <tr>
                         <td><label for="id_username">Логин/email:</label></td>

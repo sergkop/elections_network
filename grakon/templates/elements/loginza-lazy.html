@@ -3,6 +3,9 @@
 
 <script type="text/javascript">
     function load_lazy_loginza(){
-        $("#lazy_loginza").attr("src", function(i, val){return $(this).attr("tmp-src");});
+        if (!$("#lazy_loginza").attr("src"))
+            $("#lazy_loginza").attr("src", function(i, val){return $(this).attr("tmp-src");});
     };
+
+    setTimeout("load_lazy_loginza()", 5000);
 </script>

@@ -35,25 +35,6 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Что такое Гракон?</h2>
-    <script>
-        $(document).ready(function(){		
-            function resizeSlide() {					
-                jQuery("#__ss_11568118").css('width','100%').find('iframe').css('width','100%');
-                var slideHeight = jQuery("#__ss_11568118").width()/1.1917;
-                jQuery("#__ss_11568118").css('height',slideHeight).find('iframe').css('height',slideHeight);
-                jQuery("#player div").css('background-color', '#fff');				
-            }
-            resizeSlide();
-            $(window).resize(function() {
-                resizeSlide();
-            });
-        });
-    </script>
-
-    <p>Нажмите на иконку <img src="{{ STATIC_URL }}images/fullscreen.gif" align="absmiddle" style="padding: 3px; border: 1px solid #ccc; border-radius: 5px;" /> в правом нижнем углу презентации для полноэкранного просмотра</p>
-    <div id="__ss_11568118" style="border: 1px solid #ccc; width:100%"><iframe src="http://www.slideshare.net/slideshow/embed_code/11568118" width="100%" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
-
     <p>Теперь Вы можете:</p>
 
     <div class="step"><i>1</i> <p>найти свой избирательный округ и посмотреть, как проходят выборы в Вашем городе:</p>
@@ -64,15 +45,14 @@
                     .map, .map center {display: inline;}
                 </style>
 
-                <input id="goto_location" type="submit" value="Перейти"/>&nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;<div class="map-search">{% button "circle-zoomout" "Найти на карте" "map_location" %}</div>
-               
+                <input id="goto_location" type="submit" value="Перейти"/>&nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;
+                <div class="map-search">{% button "circle-zoomout" "Найти на карте" "map_location" "" "" %}</div>
             </form><br />
         </div>
     </div>
-    
-    
+
     <div class="step"><i>2</i> <p>начать участвовать в работе на своем избирательном участке. Для этого выберите кнопку соответствующую Вашему статусу в левой колонке "Участники"</p></div>
-    
+
     <div class="step"><i>3</i> <div style="margin-bottom: 7px;">следить за новостями проекта</div>
                 	<a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="absmiddle" /></a>
                     <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="absmiddle" /></a>
@@ -80,11 +60,30 @@
                     <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="absmiddle" /></a>           
 
     </div>
-   
+
     <script type="text/javascript">
         // TODO: icon doesn't appear, button element is needed
         $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}});
         set_select_location("choose_regions", []);
     </script>
+
+    <h2>Что такое Гракон?</h2>
+    <script>
+        $(document).ready(function(){
+            function resizeSlide() {
+                jQuery("#__ss_11568118").css('width','100%').find('iframe').css('width','100%');
+                var slideHeight = jQuery("#__ss_11568118").width()/1.1917;
+                jQuery("#__ss_11568118").css('height',slideHeight).find('iframe').css('height',slideHeight);
+                jQuery("#player div").css('background-color', '#fff');              
+            }
+            resizeSlide();
+            $(window).resize(function() {
+                resizeSlide();
+            });
+        });
+    </script>
+
+    <p>Нажмите на иконку <img src="{{ STATIC_URL }}images/fullscreen.gif" align="absmiddle" style="padding: 3px; border: 1px solid #ccc; border-radius: 5px;" /> в правом нижнем углу презентации для полноэкранного просмотра</p>
+    <div id="__ss_11568118" style="border: 1px solid #ccc; width:100%"><iframe src="http://www.slideshare.net/slideshow/embed_code/11568118" width="100%" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
 
 {% endblock %}

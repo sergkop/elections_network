@@ -34,4 +34,25 @@
     });*/
 </script>
 
+{% if user.is_authenticated %}
+    {% include "dialogs/add_to_contacts.html" %}
+
+    <script type="text/javascript">
+        // Become voter
+        /*$("#become_voter_dialog").on("become_voter_event", function(event, location_id){
+            var user_voter_li = $('#voters_ul li a[href="{{ user.get_absolute_url }}"]').parent();
+            if (location_id=={{ current_location.id }}){
+                $("#become_voter .ui-button-text").text("Сменить избирательный округ");
+                if (user_voter_li.length==0)
+                    $("#voters_ul").append($("<li/>").append(
+                        $("<a/>").attr("href", "{{ user.get_absolute_url }}").text("{{ user.username }}")
+                    ));
+            } else {
+                $("#become_voter .ui-button-text").text("Записаться в избиратели");
+                user_voter_li.remove();
+            }
+        });*/
+    </script>
+{% endif %}
+
 {% include "dialogs/report.html" %}

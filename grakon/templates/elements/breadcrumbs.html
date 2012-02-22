@@ -32,13 +32,13 @@
                     <form id="goto_subregion_form" action="{% url goto_location %}" method="get" style="display:inline; margin:0; padding:0;">
                         <select id="goto_subregion" name="region">
                             {% if current_location.is_region %}
-                                <option value="" selected="selected">Выбрать ТИК</option>
+                                <option value="" selected="selected">Выбрать район (ТИК)</option>
                             {% endif %}
                             {% if current_location.is_tik %}
-                                <option value="" selected="selected">Выбрать УИК</option>
+                                <option value="" selected="selected">Выбрать участок</option>
                             {% endif %}
                             {% for id, name in sub_regions %}
-                                <option value="{{ id }}">{{ name }}</option>
+                                <option value="{{ id }}">{% if current_location.is_tik %}УИК № {% endif %}{{ name }}</option>
                             {% endfor %}
                         </select>
                     </form>

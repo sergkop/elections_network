@@ -74,7 +74,7 @@ function set_select_location(div_id, path){
                     if (select_1.children('[value="'+select_1.val()+'"]').text()=="Зарубежные территории")
                         var txt = "Выбрать страну";
                     else
-                        var txt = "Выбрать ТИК";
+                        var txt = "Выбрать район (ТИК)";
                     select_2.append(empty_2.text(txt));
 
                     $.each(data, function(index, value){
@@ -97,7 +97,7 @@ function set_select_location(div_id, path){
                     select_3.show();
                     select_3.children('[value!=""]').remove();
                     $.each(data, function(index, value){
-                        select_3.append($("<option/>").val(value["id"]).text(value["name"]));
+                        select_3.append($("<option/>").val(value["id"]).text("УИК № "+value["name"]));
                     });
                     select_3.val(path.length>2 ? path[2] : "");
                 } else

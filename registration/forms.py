@@ -48,7 +48,7 @@ class BaseRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('username', 'last_name', 'first_name', 'middle_name', 'show_name')
+        fields = ('username', 'last_name', 'first_name', 'show_name')
 
     def __init__(self, *args, **kwargs):
         """ if user_id is passed - loginza was used for registration """
@@ -131,7 +131,7 @@ class BaseRegistrationForm(forms.ModelForm):
 
 class RegistrationForm(BaseRegistrationForm):
     password1 = forms.CharField(label=u'Пароль', widget=forms.PasswordInput(render_value=False),
-            help_text=u'Пароль должен быть не короче 8 знаков и содержать по крайней мере одну латинскую букву и одну цифру')
+            help_text=u'Пароль должен быть не короче <b>8 знаков</b> и содержать по крайней мере одну латинскую букву и одну цифру')
     password2 = forms.CharField(label=u'Подтвердите пароль', widget=forms.PasswordInput(render_value=False))
 
     helper = form_helper('register', u'Зарегистрироваться')

@@ -1,15 +1,18 @@
 {# Put this block a div element and call set_select_location(div_id, path) #}
-<select name="region">
-    {% for id, name in locations %}
-        <option value="{{ id }}">{{ name }}</option>
-    {% endfor %}
-</select>
-<br/>
-<select name="tik">
-    <option value="">Выбрать свой ТИК</option>
-</select>
-<br/>
-<select name="uik">
-    <option value="">Выбрать свой УИК</option>
-</select>
-<br/>
+<div>
+    <select name="region">
+        {% for id, name in locations %}
+            <option value="{{ id }}">{{ name }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div>
+    <select name="tik">
+        <option value=""></option>
+    </select>
+</div>
+<div>
+    <select name="uik">
+        <option value="">Выбрать участок</option>
+    </select>
+</div>

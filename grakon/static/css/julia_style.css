@@ -9,6 +9,7 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 	ul ul {margin-bottom: 1.5em;}
 	ul ul li {margin-bottom: 0.3em;}
 header, nav {background: none; min-width: 980px;}
+nav {margin-top: 5px;}
 table, tbody td {border: none; margin: 0;}
 .fl {float: left;}
 .mainRadius {border-radius: 0 0 5px 5px !important;}
@@ -23,11 +24,10 @@ table, tbody td {border: none; margin: 0;}
 .login_logout {padding: 0.4em 1em 0 0; color: #333; text-shadow: 0 1px 0 #fff;}
 	.login_logout a { color: #333; font-size: 0.9em;}
 	
-#slogan	{font-size: 200%; float: right; line-height:1.6em;}	
-#title_link, #slogan {color: #f2f2f2 !important;} 
-	header .ym-wbox {padding-left: 2.5em; padding-top: 2.5em; padding-bottom: 1.5em; position: relative;}
-	header .ym-wbox .logo {position: absolute; top: 10px; left: 0;}
-	header .header-social {position: absolute; top: 0; right: 20px; padding: 5px 0;}
+#title_link {color: #f2f2f2 !important; float: left; line-height: 0.7em;} 
+	#title_link small {display: block; margin-top: 0.1em; font-size: 30%; font-weight: normal; letter-spacing: 1px;}
+	header .ym-wbox {padding: 0.7em 0 0.7em 2.5em; position: relative;}
+	header .ym-wbox .logo {position: absolute; top: 20px; left: 0;}
 	
 .breadcrumbs {border-radius: 4px; margin: 1.5em 0 0.5em;  border: 1px solid #ccc;}	
 	.breadcrumbs ul {padding: 0;}
@@ -159,7 +159,8 @@ h3 {margin: 0;}
 .step {position: relative; padding-left: 55px; margin-bottom: 30px;}
 	.step i {position: absolute; top: 0.45em; left: 10px; font-size: 4em; color: #0077CA; font-style: normal; line-height: 0;}
 	
-.social {background-color: #fff; border: 1px solid #dedede; border-radius: 5px; padding: 7px 10px}	
+.social { position: absolute; bottom: 0; right: 0;}
+	.social td {padding: 0 0 0 15px;}	
 
 #addressFields select {display: block; margin-top: 10px;}
 #result {background-color: #e1e1e1; padding: 15px 30px; text-align: center; line-height: 1.4em; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; display: none; }

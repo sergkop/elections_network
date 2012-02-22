@@ -15,7 +15,7 @@ from grakon.utils import cache_view
 from locations.models import Location
 from locations.utils import get_roles_counters, regions_list
 from navigation.models import Page
-from organizations.models import OrganizationCoverage
+from organizations.models import Organization, OrganizationCoverage
 from users.models import Role
 
 # create a subclass and override the handler methods
@@ -61,9 +61,7 @@ def main(request):
     return render_to_response('main.html', context_instance=RequestContext(request, context))
 
 def static_page(request, name, template):
-    #page = get_object_or_404(Page, name=name)
     context = {
-        #'content': page.content,
         'tab': name,
         'template': template,
     }
@@ -90,10 +88,10 @@ def uik_search_data(request):
     # Если проводится запрос данных УИК, то сохранить их в специальный файл
     if request.GET.get('id') is None:
         data = urllib.urlopen(url_prefix+url, urllib.urlencode(request.GET)).read()
-        
+
         parser = CikHTMLParser()
         parser.feed(data)
-        
+
         if len(parser.data) > 0:
             fetch_uik_data = re.compile('№(\d+)[^:]+:\s(.+),\sтелефон:\s([^\r\n]+)')
             uik_data = fetch_uik_data.search(parser.data)
@@ -148,3 +146,10 @@ def save_uik_data(uik_data):
     with open(uiks_db_path, 'a') as uiks_db_file:
         uiks_db_writer = csv.writer(uiks_db_file, delimiter=';', quotechar='"')
         uiks_db_writer.writerow([uik_data.group(1), uik_data.group(2), uik_data.group(3)])
+
+def sitemap(request):
+    context = {
+        'locations': Location.objects.filter(region=None).only('id', 'name'),
+        'organizations': Organization.objects.filter(verified=True),
+    }
+    return render_to_response('sitemap.html', context_instance=RequestContext(request, context))

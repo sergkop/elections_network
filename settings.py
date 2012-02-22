@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 
     'loginza',
     'tinymce',
@@ -91,8 +92,8 @@ AUTHENTICATION_BACKENDS = (
     'loginza.authentication.LoginzaBackend',
 )
 
-#CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
-#CACHE_MIDDLEWARE_SECONDS = 300 #5 minutes
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+CACHE_MIDDLEWARE_SECONDS = 120
 
 AUTH_PROFILE_MODULE = 'grakon.Profile'
 LOGIN_URL = '/login'

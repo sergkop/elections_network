@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content_header %}
+    <h2 class="location_header">Карта сайта</h2>
+{% endblock %}
+
+{% block content %}
+    <h3>Регионы</h3>
+    <ul>
+        {% for location in locations %}
+            <li><a href="{{ location.get_absolute_url }}">{{ location.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Организации</h3>
+    <ul>
+        {% for organization in organizations %}
+            <li><a href="{{ organization.get_absolute_url }}">{{ organization.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

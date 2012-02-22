@@ -5,6 +5,9 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.simple import direct_to_template
 
+from locations.sitemap import LocationSitemap
+from organizations.sitemap import OrganizationSitemap
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -20,6 +23,11 @@ urlpatterns = patterns('',
     url(r'^tinymce/', include('tinymce.urls')),
 
     (r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': {
+        'locations': LocationSitemap,
+        'organizations': OrganizationSitemap,
+    }}),
+
     url(r'^%s/' % settings.ADMIN_PREFIX, include(admin.site.urls)),
 )
 

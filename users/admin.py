@@ -3,7 +3,7 @@ from django.contrib import admin
 from users.models import Contact, Role
 
 class RoleAdmin(admin.ModelAdmin):
-    list_display = ('user', 'location', 'type')
+    list_display = ('user', 'location', 'type', 'verified')
     ordering = ('user__username',)
     search_fields = ('user__username',)
 

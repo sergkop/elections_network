@@ -39,7 +39,6 @@
 
 
 /* additional styles */
-
 .login_logout {
     float: right;
     padding-right: 5px;
@@ -203,3 +202,12 @@ select {
 }
 
 .ui-dialog .uniForm{ z-index: 1007 !important; }
+
+/* User activity */
+.points {display: inline; float: right; font-weight: bold; font-size: 2em;}
+.points_active {color: #58B555;}
+.points_inactive {color: #B0BFB0;}
+.checklist_form {display: inline;}
+
+/* Banners */
+.banner {margin: 1em;}

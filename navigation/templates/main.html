@@ -45,8 +45,13 @@
                     .map, .map center {display: inline;}
                 </style>
 
-                <input id="goto_location" type="submit" value="Перейти"/>&nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;
-                <div class="map-search">{% button "circle-zoomout" "Найти на карте" "map_location" "" "" %}</div>
+                <div style="display: inline;">
+                    {% button "arrowreturnthick-1-e" "Перейти" "goto_location" "" "" %}
+                </div>
+                &nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;
+                <div style="display: inline;">
+                    {% button "circle-zoomout" "Найти на карте" "map_location" "" "" %}
+                </div>
             </form><br />
         </div>
     </div>
@@ -62,8 +67,6 @@
     </div>
 
     <script type="text/javascript">
-        // TODO: icon doesn't appear, button element is needed
-        $("#goto_location").button({icons: {primary: "ui-icon-arrowreturnthick-1-e"}});
         set_select_location("choose_regions", []);
     </script>
 

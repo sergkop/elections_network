@@ -26,6 +26,7 @@ urlpatterns = patterns('navigation.views',
 #    tabbed_static_url('feedback', 'static_pages/how_to_help/base.html'),
 
     url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),
+	url(r'^faq$', 'static_page', {'name': 'faq', 'template': 'static_pages/faq.html'}, name='faq'),
 
     url(r'^sitemap$', 'sitemap', name='sitemap'),
 )

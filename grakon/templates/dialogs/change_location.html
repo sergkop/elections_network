@@ -4,7 +4,6 @@
         <form id="change_location_form" method="get" action="{% url goto_location %}">
             {% csrf_token %}
             {% include "elements/region_choice.html" %}
-            <input type="hidden" name="tab" value="{% if not user.is_authenticated %}register{% endif %}" />
             <input type="hidden" name="dialog" id="dialog_to_open" value="" />
         </form>
     </center>

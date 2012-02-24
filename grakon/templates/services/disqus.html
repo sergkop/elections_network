@@ -1,0 +1,14 @@
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    {{ DISQUS_CONFIG }}
+    var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
+    var disqus_identifier = "{{ disqus_identifier }}";
+    var disqus_developer = 0;
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Пожалуйста, активируйте JavaScript, чтобы просматривать <a href="http://disqus.com/?ref_noscript">комментарии</a>.</noscript>

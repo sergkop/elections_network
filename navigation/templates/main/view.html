@@ -1,0 +1,77 @@
+{% load elements %}
+
+{% include "dialogs/find_uik.html" %}
+
+<h2>Что такое Гракон?</h2>
+<p>Гракон - мини-соцсеть для координации работы любых организаций и граждан,
+объединенных одной целью - <b>проведением честных выборов</b> президента 4 марта.
+
+Удобная структура площадки позволяет участникам эффективно находить поблизости
+именно тех людей и группы, которые могут им помочь. В результате активные участники
+могут скоординировать свои действия в день выборов и минимизировать шансы
+возникновения нарушений на участках.
+</p>
+
+<h2>Примите участие!</h2>
+
+<div class="step"><i>1</i> <p>Найдите свой избирательный округ и посмотрите, как проходят выборы в Вашем городе:</p>
+    <div id="choose_regions">
+        {% include "elements/region_choice.html" %}
+        <div style="display: inline;">
+            {% button "arrowreturnthick-1-e" "Перейти" "goto_location" "" "" %}
+        </div>
+        &nbsp; &nbsp; <b>или</b>&nbsp; &nbsp;
+        <div style="display: inline;">
+            {% button "circle-zoomout" "Найти на карте" "map_location" "" "" %}
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="step"><i>2</i>
+    {% if request.user.is_authenticated %}
+        <p>Начните участвовать в работе на своем избирательном участке.
+        Для этого выберите свою роль на выборах в панели слева и запишитесь.</p>
+    {% else %}
+        <p>Начните участвовать в работе на своем избирательном участке.
+        Для этого необходимо зарегистрироваться.
+        </p>
+        <div>{% button "circle-check" "Регистрация" "login_content" "" "" %}</div>
+    {% endif %}
+</div>
+
+<hr/>
+
+<div class="step"><i>3</i> <div style="margin-bottom: 7px;">следить за новостями проекта</div>
+                <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="absmiddle" /></a>
+                <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="absmiddle" /></a>
+                <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="absmiddle" /></a>         
+                <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="absmiddle" /></a>           
+</div>
+
+<script type="text/javascript">
+    set_select_location("choose_regions", []);
+    $("#login_content").click(function(){
+        login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах");
+    });
+</script>
+
+<h2>Что такое Гракон?</h2>
+<script>
+    $(document).ready(function(){
+        function resizeSlide() {
+            jQuery("#__ss_11568118").css('width','100%').find('iframe').css('width','100%');
+            var slideHeight = jQuery("#__ss_11568118").width()/1.1917;
+            jQuery("#__ss_11568118").css('height',slideHeight).find('iframe').css('height',slideHeight);
+            jQuery("#player div").css('background-color', '#fff');              
+        }
+        resizeSlide();
+        $(window).resize(function() {
+            resizeSlide();
+        });
+    });
+</script>
+
+<p>Нажмите на иконку <img src="{{ STATIC_URL }}images/fullscreen.gif" align="absmiddle" style="padding: 3px; border: 1px solid #ccc; border-radius: 5px;" /> в правом нижнем углу презентации для полноэкранного просмотра</p>
+<div id="__ss_11568118" style="border: 1px solid #ccc; width:100%"><iframe src="http://www.slideshare.net/slideshow/embed_code/11568118" width="100%" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>

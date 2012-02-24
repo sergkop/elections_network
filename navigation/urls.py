@@ -4,7 +4,9 @@ def tabbed_static_url(name, template):
     return url(r'^'+name+'$', 'static_page', {'name': name, 'template': template}, name=name)
 
 urlpatterns = patterns('navigation.views',
-    url(r'^$', 'main', name='main'),
+    url(r'^$', 'main', {'tab': 'main'}, name='main'),
+    url(r'^wall$', 'wall', {'tab': 'wall'}, name='wall'),
+
     url(r'^map_search$', 'map_search', name='map_search'),
     url(r'^uik_search$', 'uik_search', name='uik_search'),
     url(r'^uik_search_data$', 'uik_search_data', name='uik_search_data'),

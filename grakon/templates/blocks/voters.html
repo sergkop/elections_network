@@ -18,6 +18,12 @@
     {% button "circle-check" "Записаться в избиратели" "become_voter" %}
 </div>
 
-{% with role="voter" dialog_template="dialogs/become_voter.html" status_plural="избиратели" %}
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_voter.html" %}
+    {% endif %}
+{% endif %}
+
+{% with role="voter" status_plural="избиратели" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

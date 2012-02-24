@@ -16,11 +16,11 @@ class LoginForm(auth_forms.AuthenticationForm):
     helper = form_helper('login', u'Войти')
     helper.layout = Layout(HTML(
             r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'))
-    
+
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].label = u'Имя пользователя или электронная почта'
-        
+
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')

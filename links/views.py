@@ -23,7 +23,7 @@ def add_link(request):
             return HttpResponse(u'Неправильный формат url')
 
         try:
-            Link.objects.create(location_id=location_id, user=request.user.get_profile(), url=url, name=name)
+            Link.objects.create(location_id=location_id, user=request.profile, url=url, name=name)
         except IntegrityError:
             return HttpResponse(u'Такая ссылка уже добавлена')
 

@@ -17,6 +17,12 @@
     {% button "circle-check" "Записаться в представители прокуратуры" "become_prosecutor" %}
 </div>
 
-{% with role="prosecutor" dialog_template="dialogs/become_prosecutor.html" status_plural="представители прокуратуры" %}
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_prosecutor.html" %}
+    {% endif %}
+{% endif %}
+
+{% with role="prosecutor" status_plural="представители прокуратуры" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

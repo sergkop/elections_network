@@ -28,22 +28,11 @@ class LocationView(TemplateView):
             raise Http404(u'Избирательный округ не найден')
 
         # Get the list of role
-        participants = {} # {role_type: [users]}
         query = Q(location=location)
-
         if not location.tik:
             query |= Q(location__tik=location) if location.region else Q(location__region=location)
 
-        for role in Role.objects.filter(query).select_related():
-            participants.setdefault(role.type, []).append(role)
-
-        # Sort participants by name and limit the length of the lists
-        for role in participants:
-            participants[role] = sorted(participants[role], key=lambda r: r.user.username.lower())
-
-            # Temporary hack
-            if len(participants[role]) > 30:
-                participants[role] = []
+        participants = Role.objects.get_participants(query)
 
         # Get sub-regions
         sub_regions = []
@@ -60,7 +49,7 @@ class LocationView(TemplateView):
 
         signed_up_in_uik = False
         if self.request.user.is_authenticated():
-            voter_roles = Role.objects.filter(user=self.request.user.get_profile(), type='voter').select_related('location')
+            voter_roles = Role.objects.filter(user=self.request.profile, type='voter').select_related('location')
             if voter_roles:
                 signed_up_in_uik = voter_roles[0].location.is_uik()
 
@@ -75,6 +64,7 @@ class LocationView(TemplateView):
             'sub_regions': sub_regions,
             'dialog': dialog,
             'signed_up_in_uik': signed_up_in_uik,
+            'disqus_identifier': 'location/' + str(location.id),
 
             'counters': get_roles_counters(location),
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),

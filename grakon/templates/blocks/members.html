@@ -18,6 +18,12 @@
     {% button "circle-check" "Записаться в члены комиссии" "become_member" %}
 </div>
 
-{% with role="member" dialog_template="dialogs/become_member.html" status_plural="члены комиссии" %}
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_member.html" %}
+    {% endif %}
+{% endif %}
+
+{% with role="member" status_plural="члены комиссии" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

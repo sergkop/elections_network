@@ -17,12 +17,26 @@ ROLE_CHOICES = (
 ROLE_TYPES = dict(ROLE_CHOICES)
 
 class RoleManager(models.Manager):
-    # TODO: do we need it?
-    def get_user_roles(self, user):
-        res = {}
-        for role in self.filter(user=user):
-            res[role.type] = role
-        return res
+    def get_participants(self, query):
+        participants = {}
+
+        # TODO: limit to the 10?
+        for role in self.filter(query).select_related():
+            participants.setdefault(role.type, []).append(role)
+
+        # Sort participants by name and limit the length of the lists
+        for role in participants:
+            show_name_participants = filter(lambda p: p.user.show_name, participants[role])
+            other_participants = filter(lambda p: not p.user.show_name, participants[role])
+
+            participants[role] = sorted(show_name_participants, key=lambda r: r.user.username.lower())
+            participants[role] += sorted(other_participants, key=lambda r: r.user.username.lower())
+
+            # Temporary hack
+            if len(participants[role]) > 10:
+                participants[role] = participants[role][:10]
+
+        return participants
 
 class Role(models.Model):
     user = models.ForeignKey(Profile, related_name='roles')

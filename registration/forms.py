@@ -25,12 +25,12 @@ password_letter_re = re.compile(r'[a-zA-Z]')
 # TODO: do we need next hidden field?
 layout = Layout(
     HTML(r'<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{{ request.get_full_path }}{% endif %}" />'),
-    HTML(r'<script type="text/javascript">' \
-            '$().ready(function(){' \
-                'set_select_location("registration_form", [{{ form.region.value|default:"" }}{% if form.tik.value %}, {{ form.tik.value }}{% endif %}]);' \
-            '});' \
-        '</script>'
-    ),
+    #HTML(r'<script type="text/javascript">' \
+    #        '$().ready(function(){' \
+    #            'set_select_location("registration_form", [{{ form.region.value|default:"" }}{% if form.tik.value %}, {{ form.tik.value }}{% endif %}]);' \
+    #        '});' \
+    #    '</script>'
+    #),
 )
 
 class BaseRegistrationForm(forms.ModelForm):
@@ -38,17 +38,17 @@ class BaseRegistrationForm(forms.ModelForm):
             help_text=u'Имя пользователя может содержать от 4 до 20 символов (латинские буквы, цифры, подчеркивания и точки).<br/>' \
                     u'<b>Под этим именем вас будут видеть другие пользователи, если вы не поставите галку ниже.</b>')
 
-    region = forms.CharField(label=u'Выберите субъект РФ, где проживаете', widget=forms.Select(),
-            help_text=u'Если вы находитесь за границей, выберите соответствующий пункт.')
-    tik = forms.CharField(label=u'Выберите свой район', widget=forms.Select(choices=[('', u'Выберите свой район')]),
-            help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссии')
+    #region = forms.CharField(label=u'Выберите субъект РФ, где проживаете', widget=forms.Select(),
+    #        help_text=u'Если вы находитесь за границей, выберите соответствующий пункт.')
+    #tik = forms.CharField(label=u'Выберите свой район', widget=forms.Select(choices=[('', u'Выберите свой район')]),
+    #        help_text=u'Районы выделены по принципу отношения к территориальной избирательной комиссии')
 
     email = forms.EmailField(label=u'Электронная почта',
             help_text=u'На ваш электронный адрес будет выслано письмо со ссылкой для активации аккаунта')
 
     class Meta:
         model = Profile
-        fields = ('username', 'last_name', 'first_name', 'show_name')
+        fields = ('username', 'last_name', 'first_name')
 
     def __init__(self, *args, **kwargs):
         """ if user_id is passed - loginza was used for registration """
@@ -67,7 +67,7 @@ class BaseRegistrationForm(forms.ModelForm):
                 # TODO: if user with this email is already registered, it causes a problem
                 self.fields['email'].widget = forms.HiddenInput()
 
-        self.fields['region'].widget.choices = regions_list()
+        #self.fields['region'].widget.choices = regions_list()
 
     def clean_username(self):
         try:
@@ -79,20 +79,20 @@ class BaseRegistrationForm(forms.ModelForm):
         raise forms.ValidationError(u'Пользователь с этим именем уже существует')
 
     def clean_email(self):
-        try: 
+        try:
             User.objects.exclude(id=self.user_id).get(email=self.cleaned_data['email'])
         except User.DoesNotExist: 
             return self.cleaned_data['email']
 
         raise forms.ValidationError(u'Пользователь с этим адресом электронной почты уже зарегистрирован')
 
-    def clean_tik(self):
-        try:
-            self.location = Location.objects.get(id=int(self.cleaned_data['tik']))
-        except (ValueError, Location.DoesNotExist):
-            raise forms.ValidationError(u'Выберите свой район')
-
-        return self.cleaned_data['tik']
+    #def clean_tik(self):
+    #    try:
+    #        self.location = Location.objects.get(id=int(self.cleaned_data['tik']))
+    #    except (ValueError, Location.DoesNotExist):
+    #        raise forms.ValidationError(u'Выберите свой район')
+    #s
+    #    return self.cleaned_data['tik']
 
     def save(self):
         username, email, password = self.cleaned_data['username'], \
@@ -125,7 +125,7 @@ class BaseRegistrationForm(forms.ModelForm):
             user.save()
             ActivationProfile.objects.init_activation(user)
 
-        Role.objects.get_or_create(type='voter', user=profile, defaults={'location': self.location})
+        #Role.objects.get_or_create(type='voter', user=profile, defaults={'location': self.location})
 
         return user
 

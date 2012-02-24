@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_views
@@ -35,7 +36,6 @@ class BaseProfileView(object):
             'have_in_contacts': list(profile.have_in_contacts.all()),
             'profile_view': self.profile_view,
         })
-        print ctx['contacts']
         return ctx
 
 class ProfileView(BaseProfileView, TemplateView):
@@ -44,7 +44,7 @@ class ProfileView(BaseProfileView, TemplateView):
     def get_user(self):
         return get_object_or_404(User, username=self.kwargs.get('username'))
 
-profile = ProfileView.as_view()
+view_profile = ProfileView.as_view()
 
 class MyProfileView(BaseProfileView, TemplateView):
     profile_view = 'my_profile'
@@ -62,16 +62,35 @@ class EditProfileView(BaseProfileView, UpdateView):
         return self.request.user
 
     def get_object(self):
-        return self.request.user.get_profile()
+        return self.request.profile
 
     def get_success_url(self):
         return reverse('my_profile')
 
 edit_profile = login_required(EditProfileView.as_view())
 
+def update_profile(request):
+    # TODO: implement it
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        request.profile
+        
+        try:
+            contact = Profile.objects.get(username=request.POST.get('username', ''))
+        except Profile.DoesNotExist:
+            return HttpResponse(u'Пользователь не существует')
+
+        try:
+            Contact.objects.create(user=request.profile, contact=contact)
+        except IntegrityError:
+            return HttpResponse(u'Пользователь уже добавлен в контакты')
+
+        return HttpResponse('ok')
+
+    return HttpResponse(u'Ошибка')
+
 # TODO: fix it
 def password_change(request, **kwargs):
-    if request.user.get_profile().is_loginza_user():
+    if request.profile.is_loginza_user():
         return redirect('password_change_forbidden')
     return auth_views.password_change(request, **kwargs)
 

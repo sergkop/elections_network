@@ -15,25 +15,7 @@
 
 <h4>Участие в выборах</h4>
 <ul>
-    {% for role in roles %}
-        <li>
-            {% with location=role.location %}
-                {% include "elements/location_path.html" %}
-            {% endwith %} - {{ role.get_type_display }}
-
-            {% if role.organization %}
-                <br/>
-                <i>{{ role.organization }}</i>
-            {% else %}
-                {% if role.data %}
-                    <br/>
-                    <i>{{ role.data }}</i>
-                {% endif %}
-            {% endif %}
-            <br/>
-            
-        </li>
-    {% endfor %}
+    {% include "elements/roles.html" %}
 </ul>
 
 {% if profile_user != user %}
@@ -41,12 +23,10 @@
     <div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
 
     <div class="user_actions">
-        <center>
-            {% button "mail-closed" "Отправить сообщение" "send_message" "" "" %}
-            {% button "circle-plus" "Добавить в контакты" "add_to_contacts" "" "" %}
-            {% button "circle-minus" "Удалить из контактов" "remove_from_contacts" "" "" %}
-            {% button "alert" "Пожаловаться" "report_user" "" "" %}
-        </center>
+        {% button "mail-closed" "Отправить сообщение" "send_message" "" "" %}
+        {% button "circle-plus" "Добавить в контакты" "add_to_contacts" "" "" %}
+        {% button "circle-minus" "Удалить из контактов" "remove_from_contacts" "" "" %}
+        {% button "alert" "Пожаловаться" "report_user" "" "" %}
     </div>
 
     <script type="text/javascript">
@@ -89,16 +69,15 @@
                 $("#report_user").hide();
         </script>
     {% endif %}
-
 {% endif %}
 
 {% if profile_user == user %}
-    <div class="user_actions">
+    <div>
         Чтобы записаться участником в своем избирательном округе, перейдите на страницу
         округа и запишитесь, нажав соответсвующую кнопку в левой панели.
-        <center>
-            {% button "circle-check" "Стать участником" "become_participant" "" "" %}
-        </center>
+    </div>
+    <div class="user_actions">
+        {% button "circle-check" "Стать участником" "become_participant" "" "" %}
     </div>
 
     {% include "dialogs/become_observer.html" %}

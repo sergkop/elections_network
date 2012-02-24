@@ -18,6 +18,10 @@
     {% button "circle-check" "Записаться в представители власти" "become_authority" %}
 </div>
 
-{% with role="authority" dialog_template="dialogs/become_authority.html" status_plural="представители власти" %}
+{% if user.is_authenticated %}
+    {% include "dialogs/become_authority.html" %}
+{% endif %}
+
+{% with role="authority" status_plural="представители власти" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

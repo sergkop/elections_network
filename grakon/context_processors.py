@@ -39,7 +39,7 @@ def get_disqus_config(user):
             'email': profile.user.email,
         })
     else:
-        data = json.dumps({})
+        data = '{}'
     message = base64.b64encode(data)
     timestamp = int(time.time())
     sig = hmac.HMAC(secret_key, '%s %s' % (message, timestamp), hashlib.sha1).hexdigest()
@@ -59,10 +59,9 @@ def user_data(request):
         'URL_PREFIX': settings.URL_PREFIX,
     }
     if request.user.is_authenticated():
-        profile = request.user.get_profile()
-        context['my_profile'] = profile
-        context['CONTACTS'] = json.dumps(list(profile.contacts.values_list('contact__username', flat=True)))
-        context['REPORTS'] = json.dumps(Report.objects.user_reports(profile))
+        context['my_profile'] = request.profile
+        context['CONTACTS'] = json.dumps(list(request.profile.contacts.values_list('contact__username', flat=True)))
+        context['REPORTS'] = json.dumps(Report.objects.user_reports(request.profile))
     else:
         if request.path is not None and request.path not in settings.LOGINZA_AMNESIA_PATHS:
             request.session['loginza_return_path'] = request.path

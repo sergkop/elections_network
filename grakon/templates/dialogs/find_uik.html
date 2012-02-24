@@ -1,0 +1,25 @@
+<div id="find_uik_dialog">
+    <div id="addressFields"></div>
+    <h4 id="result"></h3>
+    <div style="margin:1em;">
+        Мы не сохраняем ваш адрес. Этот инструмент предназначен только для того,
+        чтобы помочь вам найти свой избирательный участок.
+
+        Альтернативно, вы можете воспользоваться функцией
+        "<a href="http://cikrf.ru/uiksearch.html" target="_blank">Найди свой участок</a>"
+        на сайте ЦИК.
+    </div>
+</div>
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/uiks.js"></script>
+
+<script type="text/javascript">
+    function find_uik_dialog_init(){
+        $("#find_uik_dialog").dialog("open");
+    }
+
+    $("#find_uik_dialog").dialog({width: 650, height: 450, modal: true,
+        title: "Найти свой избирательный участок (УИК)", buttons: {
+            "Отмена": function(){$("#find_uik_dialog").dialog("close");}
+    }}).dialog("close");
+</script>

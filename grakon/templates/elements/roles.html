@@ -1,0 +1,17 @@
+{% for role in roles %}
+    <li>
+        {% with location=role.location %}
+            {% include "elements/location_path.html" %}
+        {% endwith %} - {{ role.get_type_display }}
+
+        {% if role.organization %}
+            <br/>
+            <i>{{ role.organization }}</i>
+        {% else %}
+            {% if role.data %}
+                <br/>
+                <i>{{ role.data }}</i>
+            {% endif %}
+        {% endif %}
+    </li>
+{% endfor %}

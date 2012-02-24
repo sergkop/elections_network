@@ -25,6 +25,12 @@
     {% button "circle-check" "Записаться в наблюдатели" "become_observer" %}
 </div>
 
-{% with role="observer" dialog_template="dialogs/become_observer.html" status_plural="наблюдатели" %}
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_observer.html" %}
+    {% endif %}
+{% endif %}
+
+{% with role="observer" status_plural="наблюдатели" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

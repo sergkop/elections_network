@@ -80,25 +80,9 @@
         {{ current_location }}
     </h2>
 
-    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "locations/wall.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
+    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
 
-    <script type="text/javascript">
-        var disqus_shortname = "{{ DISQUS_SHORTNAME }}";
-        var disqus_identifier = "location/{{ current_location.id }}";
-
-        (function () {
-            var s = document.createElement('script'); s.async = true;
-            s.type = 'text/javascript';
-            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-        }());
-
-        // Add counter in the header of the wall tab
-        var display_counter = $("<a/>").attr("data-disqus-identifier", "location/{{ current_location.id }}")
-                .attr("href", "{{ request.path }}#disqus_thread");
-        $("#tabs ul li:nth-child(2)").append(display_counter);
-        display_counter.click(function(){$(this).attr("href", $("#tabs ul li:nth-child(2) a:first").attr("href"))});
-    </script>
+    {% include "services/disqus-counter.html" %}
 
     {% if dialog %}
         <script type="text/javascript">

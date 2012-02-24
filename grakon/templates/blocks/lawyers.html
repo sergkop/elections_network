@@ -25,6 +25,10 @@
     {% button "circle-check" "Записаться в юристы" "become_lawyer" %}
 </div>
 
-{% with role="lawyer" dialog_template="dialogs/become_lawyer.html" status_plural="юристы" %}
+{% if user.is_authenticated %}
+    {% include "dialogs/become_lawyer.html" %}
+{% endif %}
+
+{% with role="lawyer" status_plural="юристы" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

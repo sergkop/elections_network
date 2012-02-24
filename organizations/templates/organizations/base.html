@@ -26,6 +26,32 @@
                 {% endfor %}
             </ul>
         </div>
+
+        {% if organization.signup_observers %}
+            <div class="side_block_header">
+                <h4>Наблюдатели ({{ counters.observer }})</h4>
+            </div>
+            <div class="content_block">
+                <ul class="side_list">
+                    {% for role in participants.observer %}
+                        <li>
+                            {% with participant=role.user %}
+                                {% include "elements/participant.html" %}
+                            {% endwith %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!--{% button "circle-check" "Записаться в наблюдатели" "become_observer" %}-->
+            </div>
+
+            {% if request.user.is_authenticated %}
+                {% include "dialogs/change_location.html" %}
+            {% endif %}
+
+            {% with role="observer" status_plural="наблюдатели" %}
+                {% include "elements/dialog_open_button.html" %}
+            {% endwith %}
+        {% endif %}
     </div>
 {% endblock %}
 

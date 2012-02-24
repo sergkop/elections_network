@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+    Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
+{% block head %}
+    <style type="text/css">
+        .ym-col3 .ym-cbox p {font-size: 1em;}
+        .ym-col3 .ym-cbox {display: none;}
+    </style>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% include "elements/breadcrumbs.html" %}
+
+    {% include "elements/results_table.html" %}
+{% endblock %}
+
+{% block left_column %}
+    <h3 class="column_header">Участники ({{ total_counter }})</h3>
+
+    <div class="ym-clearfix">
+        {% include "elements/left_panel.html" %}
+    </div>
+{% endblock %}
+
+{% block right_column %}
+    <h3 class="column_header">Инструменты</h3>
+
+    <div class="ym-clearfix">
+        {% include "elements/right_panel.html" %}
+    </div>
+{% endblock %}
+
+{% block content_header %}
+    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Стена" "wall" "services/disqus.html" %}
+
+    {% include "services/disqus-counter.html" %}
+{% endblock %}

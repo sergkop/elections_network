@@ -52,7 +52,7 @@ class RoleSignupView(View):
 
         try:
             role, created = Role.objects.get_or_create(type=self.role,
-                    user=request.user.get_profile(), defaults=defaults)
+                    user=request.profile, defaults=defaults)
         except IntegrityError:
             return HttpResponse(u'Ошибка базы данных')
 
@@ -139,7 +139,7 @@ def add_to_contacts(request):
             return HttpResponse(u'Пользователь не существует')
 
         try:
-            Contact.objects.create(user=request.user.get_profile(), contact=contact)
+            Contact.objects.create(user=request.profile, contact=contact)
         except IntegrityError:
             return HttpResponse(u'Пользователь уже добавлен в контакты')
 
@@ -154,25 +154,25 @@ def remove_from_contacts(request):
         except Profile.DoesNotExist:
             return HttpResponse(u'Пользователь не существует')
 
-        Contact.objects.filter(user=request.user.get_profile(), contact=contact).delete()
+        Contact.objects.filter(user=request.profile, contact=contact).delete()
         return HttpResponse('ok')
 
     return HttpResponse(u'Ошибка')
 
 class SendMessage(FormView):
     form_class = MessageForm
-    
+
     def get_form_kwargs(self):
         kwargs = super(SendMessage, self).get_form_kwargs()
         kwargs.update({'request': self.request})
         return kwargs
-    
+
     def form_valid(self, form):
         result = form.send()
         if result:
             return result
         return ajaxize(form)
-        
+
     def form_invalid(self, form):
         return ajaxize(form)
 

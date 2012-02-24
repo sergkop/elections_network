@@ -24,6 +24,12 @@
     {% button "circle-check" "Записаться в представители СМИ" "become_journalist" %}
 </div>
 
-{% with role="journalist" dialog_template="dialogs/become_journalist.html" status_plural="представители СМИ" %}
+{% if user.is_authenticated %}
+    {% if current_location.is_tik or current_location.is_uik %}
+        {% include "dialogs/become_journalist.html" %}
+    {% endif %}
+{% endif %}
+
+{% with role="journalist" status_plural="представители СМИ" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

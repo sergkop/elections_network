@@ -1,7 +1,3 @@
-{% if user.is_authenticated %}
-    {% include dialog_template %}
-{% endif %}
-
 <script type="text/javascript">
     $("#become_{{ role }}").click(function(){
         {% if user.is_authenticated %}

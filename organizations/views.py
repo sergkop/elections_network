@@ -2,6 +2,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -10,6 +11,7 @@ from grakon.models import Profile
 from locations.models import Location
 from organizations.forms import CreateOrganizationForm, EditOrganizationForm
 from organizations.models import Organization, OrganizationCoverage, OrganizationRepresentative
+from users.models import Role
 
 class BaseOrganizationView(object):
     template_name = 'organizations/base.html'
@@ -29,20 +31,29 @@ class BaseOrganizationView(object):
     def get_context_data(self, **kwargs):
         ctx = super(BaseOrganizationView, self).get_context_data(**kwargs)
 
+        organization = self.object
+
         self.get_representatives()
         is_representative = self.request.user.id in self.representative_ids
 
-        location_ids = OrganizationCoverage.objects.filter(organization=self.object).values_list('location_id', flat=True)
+        location_ids = OrganizationCoverage.objects.filter(organization=organization).values_list('location_id', flat=True)
         locations = list(Location.objects.filter(id__in=location_ids).select_related())
         if None in location_ids:
             locations.append(None) # special processing for the whole country
 
+        participants = Role.objects.get_participants(Q(organization=organization))
+        counters = {}
+        if organization.signup_observers:
+            counters['observer'] = Role.objects.filter(organization=organization, type='observer').count()
+
         ctx.update({
             'name': self.kwargs['name'],
             'view': self.view,
-            'organization': self.object,
+            'organization': organization,
             'locations': locations,
             'representatives': self.representatives,
+            'participants': participants,
+            'counters': counters,
             'is_representative': is_representative,
         })
         return ctx
@@ -69,24 +80,24 @@ class CreateOrganizationView(CreateView):
     def form_valid(self, form):
         response = super(CreateOrganizationView, self).form_valid(form)
 
-        profile = self.request.user.get_profile()
+        profile = self.request.profile
         organization = self.object
 
-        OrganizationRepresentative.objects.get_or_create(organization=organization,
-                user=self.request.user.get_profile())
+        OrganizationRepresentative.objects.get_or_create(organization=organization, user=profile)
 
         OrganizationCoverage.objects.get_or_create(organization=organization, location=form.location)
 
         # Send email to us stating that new organization has registered
         subject = u'Зарегистрирована новая организация - %s' % organization.title
 
-        message = u"""Зарегистрирована новая организация:
-Название: %s
-Страница: %s
-Сайт: %s
-Пользователь: %s
-Email: %s
-""" % (organization.title, organization.get_absolute_url(), organization.website, profile.username, profile.user.email)
+        message = u'Зарегистрирована новая организация:\n' \
+                u'Название: %s\n' \
+                u'Страница: %s\n' \
+                u'Сайт: %s\n' \
+                u'Пользователь: %s\n' \
+                u'Email: %s' % (
+                organization.title, organization.get_absolute_url(), organization.website,
+                profile.username, profile.user.email)
 
         send_mail(subject, message, 'admin@grakon.org', ['admin@grakon.org'], fail_silently=False)
 

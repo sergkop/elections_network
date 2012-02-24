@@ -88,15 +88,6 @@
 
     {% block breadcrumbs %}{% endblock %}
 
-    {% if user.is_authenticated and not signed_up_in_uik %}
-        <div class="center" style="margin:1em;">
-            <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
-                Вы еще не записались избирателем на свой УИК. Вы можете найти УИК по адресу
-                проживания <a href="{% url uik_search %}" target="_blank">здесь</a>.
-            </span>
-        </div>
-    {% endif %}
-
     <div id="main">
         <div class="ym-wrapper">
             <div class="ym-wbox">

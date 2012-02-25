@@ -79,19 +79,39 @@
 
         <div class="user_actions">
             {% button "circle-check" "Наблюдатель" "become_observer1" "" "" %}
-            {% button "circle-check" "Член комиссии" "become_member" "" "" %}
-            {% button "circle-check" "Представитель СМИ" "become_journalist" "" "" %}
+            {% button "circle-check" "Член комиссии" "become_member1" "" "" %}
+            {% button "circle-check" "Представитель СМИ" "become_journalist1" "" "" %}
 
         </div>
 
         <div class="user_actions">
-            {% button "circle-check" "Юрист" "become_lawyer" "" "" %}
-            {% button "circle-check" "Представитель прокуратуры" "become_prosecutor" "" "" %}
-            {% button "circle-check" "Представитель власти" "become_authority" "" "" %}
+            {% button "circle-check" "Юрист" "become_lawyer1" "" "" %}
+            {% button "circle-check" "Представитель прокуратуры" "become_prosecutor1" "" "" %}
+            {% button "circle-check" "Представитель власти" "become_authority1" "" "" %}
         </div>
     </div>
 
     {% with btn_id="become_observer1" role="observer" status_plural="наблюдатели" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_member1" role="member" status_plural="члены комиссии" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_journalist1" role="journalist" status_plural="представители СМИ" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_lawyer1" role="lawyer" status_plural="юристы" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_prosecutor1" role="prosecutor" status_plural="представители прокуратуры" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
+
+    {% with btn_id="become_authority1" role="authority" status_plural="представители власти" %}
         {% include "elements/dialog_open_button.html" %}
     {% endwith %}
 

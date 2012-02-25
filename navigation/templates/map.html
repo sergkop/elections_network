@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Карта - Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
 {% block head %}
     <style type="text/css">
-	/* for static pages */
+    /* for static pages */
         .ym-col1 {width: 0px;}
         .ym-col2 {width: 0px;}
         .ym-col3 {margin-left: 0; width: 100%; padding: 15px 0;}
-		h2.location_header {margin-left: 15px;}
+        h2.location_header {margin-left: 15px;}
     </style>
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.cookie.js"></script>

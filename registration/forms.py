@@ -31,7 +31,7 @@ class BaseRegistrationForm(forms.ModelForm):
                     u'<b>Под этим именем вас будут видеть другие пользователи.</b>')
 
     email = forms.EmailField(label=u'Электронная почта',
-            help_text=u'На ваш электронный адрес будет выслано письмо со ссылкой для активации аккаунта')
+            help_text=u'<b>На ваш электронный адрес будет выслано письмо со ссылкой для активации аккаунта</b>')
 
     class Meta:
         model = Profile

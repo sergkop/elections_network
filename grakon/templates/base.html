@@ -88,6 +88,15 @@
 
     {% block breadcrumbs %}{% endblock %}
 
+    {% if request.user.is_authenticated and not request.roles.voter %}
+        <div class="center" style="margin:1em;">
+            <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
+                Вы еще не записались избирателем на свой участок. Вы можете сделать это
+                <a href="{% url main %}">здесь</a>.
+            </span>
+        </div>
+    {% endif %}
+
     <div id="main">
         <div class="ym-wrapper">
             <div class="ym-wbox">

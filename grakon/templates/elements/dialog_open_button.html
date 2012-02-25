@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $("#become_{{ role }}").click(function(){
+    $("#{{ btn_id }}").click(function(){
         {% if user.is_authenticated %}
             {% if current_location.is_tik or current_location.is_uik %}
                 become_{{ role }}_dialog_init();

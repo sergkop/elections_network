@@ -29,6 +29,6 @@
     {% include "dialogs/become_lawyer.html" %}
 {% endif %}
 
-{% with role="lawyer" status_plural="юристы" %}
+{% with btn_id="become_lawyer" role="lawyer" status_plural="юристы" %}
     {% include "elements/dialog_open_button.html" %}
 {% endwith %}

@@ -38,7 +38,7 @@
         <hr/>
     {% endif %}
 
-    {% if request.profile %}
+    {% if not request.roles.voter %}
         <div class="check-list-step"><i>+2<br/>балла</i>
             Выберите район, где вы проживаете и/или будете голосовать.
 
@@ -69,6 +69,10 @@
         <div style="margin:1em;">
             {% include "elements/share_horizontal.html" %}
         </div>
+        или подпишитесь на нас:
+        <div>
+            {% include "elements/read_us.html" %}
+        </div>
     </div>
 
     <hr/>
@@ -80,7 +84,6 @@
             <ul>
                 {% include "elements/roles.html" %}
             </ul>
-            <div class="points points_active">+N</div>
         {% endif %}
 
         <div class="user_actions">
@@ -99,12 +102,20 @@
 
     <hr/>
 
-    <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-
-    <div class="check-list-step"><i>+3<br/>балла</i>
-        <p>Добавить информацию о себе</p>
-        {{ form.about }}
-    </div>
+    {% if not request.profile.about %}
+        <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+        <div class="check-list-step"><i>+3<br/>балла</i>
+            <p>Добавьте информацию о себе. Вы можете оставить свои координаты,
+            написать про учавстие в выборах и как готовность помочь другим участникам.</p>
+            <form action="{% url update_profile %}?fields=about" method="post">
+                {% csrf_token %}
+                {{ form.about }}
+                <div>
+                    {% button "circle-check" "Добавить" "save_about" "" "" %}
+                </div>
+            </form>
+        </div>
+    {% endif %}
 {% else %}
     <h2>Что такое Гракон?</h2>
     <p>Гракон - мини-соцсеть для координации работы любых организаций и граждан,
@@ -147,11 +158,9 @@
 
     <hr/>
 
-    <div class="step"><i>3</i> <div style="margin-bottom: 7px;">следить за новостями проекта</div>
-                    <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="absmiddle" /></a>
-                    <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="absmiddle" /></a>
-                    <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="absmiddle" /></a>         
-                    <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="absmiddle" /></a>           
+    <div class="step"><i>3</i>
+        <div style="margin-bottom: 7px;">следить за новостями проекта</div>
+        {% include "elements/read_us.html" %}
     </div>
 
     <script type="text/javascript">

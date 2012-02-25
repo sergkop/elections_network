@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
 
 from grakon.forms import LoginForm, ProfileForm
-from grakon.utils import authenticated_redirect
+from grakon.utils import authenticated_redirect, clean_html
 from locations.models import Location
 from locations.utils import regions_list
 
@@ -85,6 +85,9 @@ def update_profile(request):
 
         elif 'show_name' in fields:
             request.profile.show_name = 'show_name' in request.POST
+
+        elif 'about' in fields:
+            request.profile.about = clean_html(request.POST.get('about', ''))
 
         request.profile.save()
 

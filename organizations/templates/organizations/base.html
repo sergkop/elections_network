@@ -48,7 +48,7 @@
                 {% include "dialogs/change_location.html" %}
             {% endif %}
 
-            {% with role="observer" status_plural="наблюдатели" %}
+            {% with btn_id="become_observer" role="observer" status_plural="наблюдатели" %}
                 {% include "elements/dialog_open_button.html" %}
             {% endwith %}
         {% endif %}

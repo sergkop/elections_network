@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q
+from django.http import HttpResponse
 
 from grakon.utils import cache_function
 from locations.models import FOREIGN_TERRITORIES, Location
@@ -43,7 +44,7 @@ def get_roles_counters(location):
 def get_locations_data(queryset):
     js = 'var electionCommissions = {'
     data = []
-    for location in query.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address'):
+    for location in queryset.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address'):
         if location.x_coord:
             js += str(location.id) + ': ' + location.map_data() + ','
 

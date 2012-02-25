@@ -1,9 +1,5 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Организации</h4>
-</div>
-
 <div class="content_block">
     <ul class="side_list">
         {% for organization in organizations %}
@@ -14,7 +10,7 @@
             {% endif %}
         {% endfor %}
     </ul>
-    {% button "circle-plus" "Добавить организацию" "add_organization" %}
+    {% button "" "Добавить организацию" "add_organization" %}
 </div>
 
 <script type="text/javascript">

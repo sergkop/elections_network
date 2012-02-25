@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 
 from grakon.utils import authenticated_redirect, cache_view
 from locations.models import Location
-from locations.utils import get_roles_counters, regions_list
+from locations.utils import get_locations_data, get_roles_counters, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
 from users.models import Role, ROLE_TYPES
@@ -126,7 +126,16 @@ def goto_location(request):
 
 @cache_view('map_data', 6000, False)
 def map_data(request):
-    context = {
-        'all_locations': list(Location.objects.all().only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address')),
-    }
-    return render_to_response('locations/map_data.js', context, mimetype='application/javascript')
+    return get_locations_data(Location.objects.filter(tik=None))
+
+def locations_data(request):
+    coords = {}
+    for name in ('x1', 'y1', 'x2', 'y2'):
+        try:
+            coords[name] = float(request.GET.get(name, ''))
+        except ValueError:
+            return HttpResponse('"error"')
+
+    queryset = Location.objects.filter(x_coord__gt=coords['x1'], x_coord__lt=coords['x2'],
+            y_coord__gt=coords['y1'], y_coord__lt=coords['y2'])
+    return get_locations_data(queryset)

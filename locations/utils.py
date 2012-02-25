@@ -39,3 +39,14 @@ def get_roles_counters(location):
         counters[role] = Role.objects.filter(Q(type=role) & query).count()
 
     return counters
+
+def get_locations_data(queryset):
+    js = 'var electionCommissions = {'
+    data = []
+    for location in query.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address'):
+        if location.x_coord:
+            js += str(location.id) + ': ' + location.map_data() + ','
+
+    js = js[:-1] + '};'
+
+    return HttpResponse(js, mimetype='application/javascript')

@@ -74,6 +74,15 @@ class Location(models.Model):
         return INFO_URL % {'region_name': self.region_name, 'region_code': self.region_code,
                 'vrnorg': self.vrnorg, 'vrnkomis': self.vrnkomis}
 
+    def map_data(self):
+        """ Return javascript object containing region data """
+        js = 'new ElectionCommission(' + str(self.id) + ',' + str(self.level()) + ','
+        # TODO: name, address require escape
+        js += '"' + self.name + '","' + self.name + '","' + self.address.replace('"', '') + '",'
+        js += str(self.x_coord) + ',' + str(self.y_coord) + ','
+        js += '{numVoters:500,numObservers:5})'
+        return js
+
     def __unicode__(self, full_path=False):
         name = self.name
         if self.is_uik():

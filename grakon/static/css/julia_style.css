@@ -69,18 +69,28 @@ footer .ym-wbox a {text-decoration: none; color: #6e7174;}
 
 .ym-clearfix {margin-bottom: 15px;}
 
-.content_block {box-shadow: none; border: none; background: none; padding: 10px 10px 15px; margin: 0;}
+.content_block {box-shadow: none; border: none; background: none; padding: 10px 10px 15px; margin: 0; display: none;}
 
-.column_header, .ui-dialog-titlebar  {font-size: 1.1em; padding: 0.8em 1.5em; color: #333; margin:0;  border-radius: 3px 3px 0 0; border: 1px solid #ddd; text-shadow: 0 1px 0 #f7f7f7; font-weight: bold;}
+.column_header, .ui-dialog-titlebar  {font-size: 1.1em; padding: 0.8em  1.5em 0.8em 2em; color: #333; margin:0;  border-radius: 3px 3px 0 0; text-shadow: 0 1px 0 #f7f7f7; font-weight: bold;}
 h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2em;}
 	h2 {margin-top: 0.5em;}
 	h4 a {text-decoration: none;}
-.column_header {color: #333; border-bottom: 1px solid #9cc118; box-shadow: 0 1px 0 #bed761;}
-.side_block_header {border-radius: 0; background: none; font-size: 0.9em;}
-.side_block_header h4 {font-size: 1.1em; margin: 0; border: none; border-radius: 0; color: #333; padding: 0.8em 1.5em;}
+.column_header {color: #333;}
+
+.side_block_header {border-radius: 0; background: none; font-size: 0.9em; border-top: 1px solid #9cc118; box-shadow: inset 0 1px 0 #bed761;}
+.side_block_header h4 {font-size: 1.1em; margin: 0; border: none; border-radius: 0; color: #000; padding: 0;}
+	.side_block_header h4 a {display: block; padding: 0.8em  1.5em 0.8em 2em; color: #000}
+	.side_block_header h4 span {padding-right: 13px; background: url(/static/images/dotted-arrow.gif) right center no-repeat;}
 	.ui-dialog-titlebar {font-weight: normal; font-size: 0.9em;}
 	.ui-dialog-content {font-size: 0.8em;}
 	/*.ui-dialog-content center {text-align:left;}*/
+	
+.voters { background: url(/static/images/icon_voter.gif) 10px center no-repeat;}
+.observers { background: url(/static/images/icon_observer.gif) 10px center no-repeat;}
+.members { background: url(/static/images/icon_member.gif) 10px center no-repeat;}
+.authorities { background: url(/static/images/icon_authority.gif) 10px center no-repeat;}
+.journalists { background: url(/static/images/icon_journalist.gif) 10px center no-repeat;}
+.lawyers { background: url(/static/images/icon_lawyer.gif) 10px center no-repeat;}
 		
 h3 {margin: 0;}
 .news_header {font-size: 1.3em; margin: 1em 0 0.5em;}
@@ -243,7 +253,6 @@ background: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0.25, #e6e6e6), to(
 background: -webkit-linear-gradient(#e6e6e6 25%, #d2d2d2);
 background: linear-gradient(#e6e6e6 25%, #d2d2d2);}
 
-.side_block_header {}
 
  .ym-col3 .ui-widget-content .ui-state-default, .ym-col3 .ui-widget-header .ui-state-default {border: none; box-shadow: inset 0 1px 1px #fff; position: relative;}
 

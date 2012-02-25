@@ -1,20 +1,7 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Представители прокуратуры ({{ counters.prosecutor }})</h4>
-</div>
-
-<div class="content_block">
-    <ul class="side_list">
-        {% for role in participants.prosecutor %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %}
-            </li>
-        {% endfor %}
-    </ul>
-    {% button "circle-check" "Записаться в представители прокуратуры" "become_prosecutor" %}
+    <h4><a href="" class="observers"><span>Представители прокуратуры ({{ counters.prosecutor }})</span></a></h4>
 </div>
 
 {% if user.is_authenticated %}

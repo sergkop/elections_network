@@ -1,22 +1,9 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Избиратели ({{ counters.voter }})</h4>
+    <h4><a href="" class="voters"><span>Избиратели ({{ counters.voter }})</span></a></h4>
 </div>
 
-<div class="content_block">
-    <ul id="voters_ul" class="side_list">
-        {% for role in participants.voter %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %}
-            </li>
-        {% endfor %}
-    </ul>
-
-    {% button "circle-check" "Записаться в избиратели" "become_voter" %}
-</div>
 
 {% if user.is_authenticated %}
     {% if current_location.is_tik or current_location.is_uik %}

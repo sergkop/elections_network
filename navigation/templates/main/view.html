@@ -5,9 +5,7 @@
 {% if request.user.is_authenticated %}
     {% if not request.profile.has_name %}
         <div class="check-list-step"><i>+1<br/>балл</i>
-            <p>
-                Введите свои имя и фамилию:
-            </p>
+            <p>Введите свои имя и фамилию:</p>
 
             <form action="{% url update_profile %}?fields=first_name,last_name" method="post">
                 {% csrf_token %}
@@ -18,15 +16,12 @@
                 <div style="margin:0.3em;">Фамилия: {{ form.last_name }}</div>
             </form>
         </div>
-        <hr/>
     {% endif %}
 
     {% if not request.profile.show_name %}
         <div class="check-list-step {% if not request.profile.has_name %}disabled-block{% endif %}"><i>+2<br/>балла</i>
             {% if not request.profile.has_name %}<div class="i">&nbsp;</div>{% endif %}
-            <p>
-                Покажите свое имя остальным пользователям. Это увеличит доверие к вам на площадке.
-            </p>
+            <p>Покажите свое имя остальным пользователям. Это увеличит доверие к вам на площадке.</p>
             <form action="{% url update_profile %}?fields=show_name" method="post">
                 {% csrf_token %}
                 {{ form.show_name }}
@@ -35,12 +30,11 @@
                 </div>
             </form>
         </div>
-        <hr/>
     {% endif %}
 
     {% if not request.roles.voter %}
         <div class="check-list-step"><i>+2<br/>балла</i>
-            Выберите район, где вы проживаете и/или будете голосовать.
+            <p>Выберите район, где вы проживаете и/или будете голосовать.</p>
 
             <form id="become_voter_form" method="post" action="{% url become_voter %}">
                 {% csrf_token %}
@@ -52,7 +46,6 @@
                 {% button "circle-check" "Сохранить" "choose_region" "" "" %}
             </div>
         </div>
-        <hr/>
 
         <script type="text/javascript">
             set_select_location("choose_regions", []);
@@ -65,8 +58,8 @@
     {% endif %}
 
     <div class="check-list-step"><i>+1<br/>балл</i>
-        "Полюбите" нас в соцсетях и расскажите о нас своим друзьям
-        <div style="margin:1em;">
+        <p>"Полюбите" нас в соцсетях и расскажите о нас своим друзьям</p>
+        <div>
             {% include "elements/share_horizontal.html" %}
         </div>
         или подпишитесь на нас:
@@ -75,10 +68,8 @@
         </div>
     </div>
 
-    <hr/>
-
     <div class="check-list-step"><i>+3<br/>балла</i>
-        Стать активным участником на выборах
+        <p>Стать активным участником на выборах</p>
 
         {% if roles %}
             <ul>
@@ -100,8 +91,6 @@
         </div>
     </div>
 
-    <hr/>
-
     {% if not request.profile.about %}
         <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
         <div class="check-list-step"><i>+3<br/>балла</i>
@@ -109,7 +98,9 @@
             написать про учавстие в выборах и как готовность помочь другим участникам.</p>
             <form action="{% url update_profile %}?fields=about" method="post">
                 {% csrf_token %}
-                {{ form.about }}
+                <div style=" overflow: hidden;">
+                    {{ form.about }}
+                </div>
                 <div>
                     {% button "circle-check" "Добавить" "save_about" "" "" %}
                 </div>
@@ -142,7 +133,6 @@
         </div>
     </div>
 
-    <hr/>
 
     <div class="step"><i>2</i>
         {% if request.user.is_authenticated %}
@@ -156,7 +146,6 @@
         {% endif %}
     </div>
 
-    <hr/>
 
     <div class="step"><i>3</i>
         <div style="margin-bottom: 7px;">следить за новостями проекта</div>

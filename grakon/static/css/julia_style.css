@@ -156,8 +156,8 @@ h3 {margin: 0;}
 .step {position: relative; padding-left: 55px; margin-bottom: 10px;}
 	.step i {position: absolute; top: 0.45em; left: 10px; font-size: 4em; color: #0077CA; font-style: normal; line-height: 0;}
 
-.check-list-step {position: relative; padding-left: 80px; margin-bottom: 10px;}
-    .check-list-step i {position: absolute; top: 0.45em; left: 0; font-size: 1.7em; color: #0077CA; font-style: normal; text-align:center;}
+.check-list-step {position: relative; padding-left: 80px; border-bottom: 1px dotted #dedede; padding-bottom: 10px; margin-bottom: 10px;}
+    .check-list-step i {position: absolute; top: 0; left: 0; font-size: 1.7em; color: #0077CA; font-style: normal; text-align:center; width: 70px;}
 
 .social { position: absolute; bottom: 0; right: 0;}
 	.social td {padding: 0 0 0 15px;}	

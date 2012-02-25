@@ -106,8 +106,8 @@ var Address = {
     }
 }
 
-$(document).ready(function(){
+function init_find_uik(){
     $('#addressFields').html("");
     $('#result').html("");
     Address.showLevelById("path_", 0);
-});
+};

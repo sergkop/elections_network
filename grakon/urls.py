@@ -8,6 +8,8 @@ urlpatterns = patterns('grakon.views',
     url(r'^profile/edit$', 'edit_profile', name='edit_profile'),
     url(r'^user/(?P<username>[\w\.]+)$', 'view_profile', name='profile'),
 
+    url(r'^update_profile$', 'update_profile', name='update_profile'),
+
     url(r'^login$', 'login', name='login'),
     url(r'^logout$', 'logout', name='logout'),
 

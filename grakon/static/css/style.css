@@ -214,4 +214,4 @@ select {
 .banner {margin: 1em;}
 
 .find_uik_btn {display: none;}
-#main_tab .find_uik_btn {display:inline;}
+#main_tab .find_uik_btn {display:block;}

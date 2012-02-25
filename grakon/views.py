@@ -69,24 +69,26 @@ class EditProfileView(BaseProfileView, UpdateView):
 
 edit_profile = login_required(EditProfileView.as_view())
 
+@login_required
 def update_profile(request):
     # TODO: implement it
-    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
-        request.profile
-        
-        try:
-            contact = Profile.objects.get(username=request.POST.get('username', ''))
-        except Profile.DoesNotExist:
-            return HttpResponse(u'Пользователь не существует')
+    if request.method=='POST':
+        fields = request.GET.get('fields', '').split(',')
 
-        try:
-            Contact.objects.create(user=request.profile, contact=contact)
-        except IntegrityError:
-            return HttpResponse(u'Пользователь уже добавлен в контакты')
+        if 'first_name' in fields and 'last_name' in fields:
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
 
-        return HttpResponse('ok')
+            if first_name and last_name:
+                request.profile.first_name = first_name
+                request.profile.last_name = last_name
 
-    return HttpResponse(u'Ошибка')
+        elif 'show_name' in fields:
+            request.profile.show_name = 'show_name' in request.POST
+
+        request.profile.save()
+
+    return redirect('main')
 
 # TODO: fix it
 def password_change(request, **kwargs):

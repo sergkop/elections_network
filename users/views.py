@@ -16,6 +16,7 @@ from users.models import Contact, Role
 
 class RoleSignupView(View):
     role = '' # 'voter', 'observer'
+    levels = [] # list of 'region', 'tik', 'uik'
 
     def get_data(self):
         """
@@ -28,20 +29,30 @@ class RoleSignupView(View):
         return {}
 
     def post(self, request):
-        error = u'Вы можете записаться только на уровне ТИК или УИК'
-
         if not (request.is_ajax() and request.user.is_authenticated()):
-            return HttpResponse(error)
+            return HttpResponse(u'Вам необходимо войти в систему')
+
+        post_data = self.request.POST
 
         try:
-            location_id = int(self.request.POST.get('uik', self.request.POST.get('tik', '')))
+            print post_data.get('uik', post_data.get('tik', post_data.get('region', '')))
+            location_id = int(post_data.get('uik', post_data.get('tik', post_data.get('region', ''))))
         except ValueError:
-            return HttpResponse(error)
+            return HttpResponse(u'Неверно указан избирательный округ')
 
         try:
-            self.location = Location.objects.exclude(region=None).get(id=location_id)
+            self.location = Location.objects.get(id=location_id)
         except Location.DoesNotExist:
-            return HttpResponse(error)
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        if self.location.is_region() and 'region' not in self.levels:
+            return HttpResponse(u'Вы не можете записаться на уровне субъекта федерации')
+
+        if self.location.is_tik() and 'tik' not in self.levels:
+            return HttpResponse(u'Необходимо выбрать избирательный участок')
+
+        if self.location.is_uik() and 'uik' not in self.levels:
+            return HttpResponse(u'Вы не можете записаться на уровне избирательного участка')
 
         res = self.get_data()
         if res: # return error
@@ -65,9 +76,11 @@ class RoleSignupView(View):
 
 class VoterSignupView(RoleSignupView):
     role = 'voter'
+    levels = ['uik']
 
 class ObserverSignupView(RoleSignupView):
     role = 'observer'
+    levels = ['uik']
 
     def get_data(self):
         self.data = ''
@@ -94,6 +107,7 @@ class BaseRoleWithDataSignupView(RoleSignupView):
 
 class JournalistSignupView(BaseRoleWithDataSignupView):
     role = 'journalist'
+    levels = ['tik', 'uik']
 
     def get_data(self):
         try:
@@ -110,6 +124,7 @@ class JournalistSignupView(BaseRoleWithDataSignupView):
 
 class LawyerSignupView(BaseRoleWithDataSignupView):
     role = 'lawyer'
+    levels = ['region', 'tik', 'uik']
 
     def get_data(self):
         self.data = ''
@@ -127,9 +142,11 @@ class LawyerSignupView(BaseRoleWithDataSignupView):
 
 class ProsecutorSignupView(BaseRoleWithDataSignupView):
     role = 'prosecutor'
+    levels = ['region', 'tik', 'uik']
 
 class MemberSignupView(RoleSignupView):
     role = 'member'
+    levels = ['region', 'tik', 'uik']
 
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():

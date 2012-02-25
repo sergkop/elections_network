@@ -11,7 +11,7 @@
     <div id="grakon_tab">
         <b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:
 
-        <center>
+        <div class="center">
             <form id="become_observer_form" method="post" action="{% url become_observer %}">
                 {% csrf_token %}
                 <select name="organization">
@@ -28,7 +28,7 @@
                 </div>
                 <input type="hidden" name="tik" value="{{ current_location.id }}" />
             </form>
-        </center>
+        </div>
 
         После нажатия кнопки "Записаться", вы появитесь в списке наблюдателей, однако этот статус
         не будет являться подтвержденным. В ближайшее время мы введем возможность верифицировать этот статус.

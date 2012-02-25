@@ -78,7 +78,7 @@
         {% endif %}
 
         <div class="user_actions">
-            {% button "circle-check" "Наблюдатель" "become_observer" "" "" %}
+            {% button "circle-check" "Наблюдатель" "become_observer1" "" "" %}
             {% button "circle-check" "Член комиссии" "become_member" "" "" %}
             {% button "circle-check" "Представитель СМИ" "become_journalist" "" "" %}
 
@@ -90,6 +90,10 @@
             {% button "circle-check" "Представитель власти" "become_authority" "" "" %}
         </div>
     </div>
+
+    {% with btn_id="become_observer1" role="observer" status_plural="наблюдатели" %}
+        {% include "elements/dialog_open_button.html" %}
+    {% endwith %}
 
     {% if not request.profile.about %}
         <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>

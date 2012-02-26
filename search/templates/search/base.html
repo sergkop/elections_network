@@ -13,6 +13,7 @@
         .ym-col3 {width: 75%; margin-right: 0;}
         .ym-col3 .ym-cbox {display: none;}
         #choose_regions select {width: 20em;}
+        #role_field select {width: 20em;}
     </style>
 {% endblock %}
 
@@ -42,7 +43,7 @@
             </div>
 
             <div class="content_block">
-                <div class="center">
+                <div id="role_field" class="center">
                     {{ role_form.type }}
                 </div>
             </div>

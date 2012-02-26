@@ -56,6 +56,7 @@ class ListSearchView(BaseSearchView):
         if self.role_type:
             query = query & Q(type=self.role_type)
 
+        # TODO: when role_type='' query is not correct
         profile_ids = Role.objects.filter(query).values_list('user', flat=True)
         people = Profile.objects.filter(id__in=profile_ids) \
                 .exclude(user__email='', user__is_active=False) \

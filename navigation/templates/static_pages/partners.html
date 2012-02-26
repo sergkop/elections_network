@@ -2,7 +2,7 @@
 
 {% load elements %}
 
-{% block left_column %}
+
     <div class="ym-clearfix">
         <div class="partner_block">
             <a href="http://nabludatel.org" target="_blank">
@@ -36,9 +36,7 @@
         </div>
         
     </div>
-{% endblock %}
 
-{% block right_column %}
     <div class="ym-clearfix">
 		<div class="partner_block">
             <a href="http://www.yabloko.ru/" target="_blank">
@@ -65,13 +63,13 @@
         </div>
     </div>
 
-{% endblock %}
 
 {% block content_header %}
     <h2 class="location_header">Наши партнеры</h2>
 {% endblock %}
 
 {% block content %}
+<div class="static-content">
    <p>Мы&nbsp;призываем к&nbsp;взаимному сотрудничеству все организации и&nbsp;группы, чья деятельность связана с&nbsp;контролем
 или освещением выборов. Вместо дублирования функциональности, мы&nbsp;будем рады разместить банеры
 и&nbsp;ссылки на&nbsp;Ваши сайты, и&nbsp;перенаправлять заинтересованных пользователей. Примеры сотрудничества:</p>
@@ -85,4 +83,64 @@
     </ul>
 
     <p>Если Вы хотите стать нашим партнером, пишите нам на <a href="mailto:admin@grakon.org">admin@grakon.org</a>.</p>
+    
+	<div class="partners">
+        <div class="partner_block">
+            <a href="http://nabludatel.org" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/gn.jpg" width="150px" class="side_block_image" style="margin-top:15px" />
+            </a>
+        </div>
+        
+        <div class="partner_block">
+			<a href="http://www.ligaizbirateley.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/liga.jpg" width="120" class="side_block_image" />
+            </a>
+        </div>
+       
+        <div class="partner_block">
+			<a href="http://rosvybory.org/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/rosvybory.png" class="side_block_image" style="margin-top:10px" />
+            </a>
+        </div>
+        
+        <div class="partner_block">
+			<a href="http://www.golos.org/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/golos_logo.png" height="80" class="side_block_image" />
+            </a>
+        </div>       
+        
+        
+        <div class="partner_block">
+            <a href="http://kuda-komu.net/voting/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/komukuda.gif" width="150px" class="side_block_image" style="margin-top:15px"  />
+            </a>
+        </div>
+        
+
+		<div class="partner_block">
+            <a href="http://www.yabloko.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/yabloko.jpg" class="side_block_image" style="margin-top:17px"  />
+            </a>
+        </div>    
+        
+        <div class="partner_block">
+            <a href="http://mdp2012.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/prohorov.jpg" width="150px" class="side_block_image" />
+            </a>
+        </div>
+    
+        <div class="partner_block">
+            <a href="http://sidorinlab.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/sidorinlab.png" width="150px" class="side_block_image" style="margin-top:28px"  />
+            </a>
+        </div>
+
+        <div class="partner_block">
+            <a href="http://www.kartanarusheniy.ru/" target="_blank">
+                <img src="{{ STATIC_URL }}images/partners/kartanarusheniy.gif" width="150px" class="side_block_image" />
+            </a>
+        </div>
+        <div class="cl">&nbsp;</div>
+    </div>
+ </div>
 {% endblock %}

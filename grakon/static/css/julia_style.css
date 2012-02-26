@@ -172,7 +172,7 @@ h3 {margin: 0;}
 
 #choose_regions select {margin-bottom: 15px;}
 
-.partner_block {border: none; box-shadow: none; background: none; border-bottom: 1px dotted #ccc; margin: 10px;}
+.partner_block {border: none; box-shadow: none; background: none; margin: 10px; float: left; width: 25%; height: 80px; overflow: hidden;}
 	.partner_block p {margin-bottom: 0; margin-top: 1em; font-size: 0.9em;}
 .ym-clearfix .partner_block:last-child {border-bottom: none;}
 .side_block_image {border: none;}
@@ -207,6 +207,9 @@ h3 {margin: 0;}
 	.main-buttons-blue a, .main-buttons-map a, #login_btn {display: block; padding: 11px 20px; border-radius: 1.5em; color: #fff; text-decoration: none; box-shadow: 0 1px 2px #ccc;}
 	.main-buttons-map a {background: url(/static/images/back_button.gif) 0 0 no-repeat; color: #000;} 
 	#login_btn {padding: 8px 20px;}
+	
+.static-content {background-color: #fff; margin: 0 -15px -15px; padding:1px 20px;}	
+.partners {border-top: 1px dotted #a5a5a5; margin: 20px -20px 0; padding: 20px;}
 
 
 /* backgrounds */

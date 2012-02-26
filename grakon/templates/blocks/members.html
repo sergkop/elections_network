@@ -1,21 +1,7 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Члены избирательной комиссии ({{ counters.member }})</h4>
-</div>
-
-<div class="content_block">
-    <ul class="side_list">
-        {% for role in participants.member %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %} <br/>
-                <i>{{ role.data }}</i>
-            </li>
-        {% endfor %}
-    </ul>
-    {% button "circle-check" "Записаться в члены комиссии" "become_member" %}
+    <h4><a href="" class="members"><span>Члены избирательной комиссии ({{ counters.member }})</span></a></h4>
 </div>
 
 {% if user.is_authenticated %}

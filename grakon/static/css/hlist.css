@@ -3,7 +3,6 @@
 	.ym-hlist {
 		/* containing floats in IE */
 		width:100%;
-		overflow:hidden;
 		/* Bugfix:IE - collapsing horizontal margins */
 		position:relative;
 		/* Repeat the main color from the image */

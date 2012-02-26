@@ -1,27 +1,7 @@
 {% load elements %}
 
 <div class="side_block_header">
-    <h4>Представители СМИ ({{ counters.journalist }})</h4>
-</div>
-
-<div class="content_block">
-    <ul class="side_list">
-        {% for role in participants.journalist %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %} <br/>
-                <i>
-                    {% if role.organization %}
-                        {{ role.organization }}
-                    {% else %}
-                        {{ role.data }}
-                    {% endif %}
-                </i>
-            </li>
-        {% endfor %}
-    </ul>
-    {% button "circle-check" "Записаться в представители СМИ" "become_journalist" %}
+    <h4><a href="" class="journalists"><span>Представители СМИ ({{ counters.journalist }})</span></a></h4>
 </div>
 
 {% if user.is_authenticated %}

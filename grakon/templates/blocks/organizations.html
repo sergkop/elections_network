@@ -1,20 +1,21 @@
 {% load elements %}
+<h3 class="column_header column_header_icon"><span class="organizations">Организации</span></h3>
 
-<div class="side_block_header">
-    <h4>Организации</h4>
-</div>
-
-<div class="content_block">
-    <ul class="side_list">
-        {% for organization in organizations %}
-            {% if organization.verified %}
-                <li>
-                    {% include "elements/organization.html" %}
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-    {% button "circle-plus" "Добавить организацию" "add_organization" %}
+<div class="ym-clearfix">
+    <div class="content_block">
+        <ul class="side_list">
+            {% for organization in organizations %}
+                {% if organization.verified %}
+                    <li>
+                        {% include "elements/organization.html" %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <div class="mt15 mb15">
+      		{% button "" "Добавить организацию" "add_organization" %}
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">

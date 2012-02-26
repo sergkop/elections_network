@@ -207,10 +207,6 @@
 
 	.ym-column { display:table; width:100%; }
 
-	.ym-col1 { float:left; width:20%; }
-	.ym-col2 { float:right; width:20%; }
-	.ym-col3 { width:auto; margin:0 20%; }
-
 	/* (en) Preparation for absolute positioning within content columns */
 	/* (de) Vorbereitung für absolute Positionierungen innerhalb der Inhaltsspalten */
 	.ym-cbox

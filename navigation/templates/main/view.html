@@ -4,11 +4,11 @@
 
 {% if request.user.is_authenticated %}
     {% if not request.profile.has_name %}
-        <div class="check-list-step"><i>+1<br/>балл</i>
+    	<div class="blue-title">+1 балл</div>
+        <div class="check-list-step">        	
             <p>Введите свои имя и фамилию:</p>
-
             <form action="{% url update_profile %}?fields=first_name,last_name" method="post">
-                {% csrf_token %}
+                <!--{% csrf_token %} -->
                 <div style="display:inline; float: right;">
                     {% button "circle-check" "Сохранить" "save_name" "" "" %}
                 </div>
@@ -19,12 +19,13 @@
     {% endif %}
 
     {% if not request.profile.show_name %}
-        <div class="check-list-step {% if not request.profile.has_name %}disabled-block{% endif %}"><i>+2<br/>балла</i>
+    	<div class="blue-title">+1 балл</div>
+        <div class="check-list-step {% if not request.profile.has_name %}disabled-block{% endif %}">
             {% if not request.profile.has_name %}<div class="i">&nbsp;</div>{% endif %}
             <p>Покажите свое имя остальным пользователям. Это увеличит доверие к вам на площадке.</p>
             <form action="{% url update_profile %}?fields=show_name" method="post">
-                {% csrf_token %}
-                {{ form.show_name }}
+                <!--{% csrf_token %}
+                {{ form.show_name }}-->
                 <div style="display:inline;">
                     {% button "circle-check" "Сохранить" "save_show_name" "" "" %}
                 </div>
@@ -33,7 +34,8 @@
     {% endif %}
 
     {% if not request.roles.voter %}
-        <div class="check-list-step"><i>+2<br/>балла</i>
+    	<div class="blue-title">+2 балла</div>
+        <div class="check-list-step">
             <p>Выберите район, где вы проживаете и/или будете голосовать.</p>
 
             <form id="become_voter_form" method="post" action="{% url become_voter %}">
@@ -56,59 +58,51 @@
             });
         </script>
     {% endif %}
-
-    <div class="check-list-step"><i>+1<br/>балл</i>
+	<div class="blue-title">+1 балл</div>
+    <div class="check-list-step">    	
         <p>"Полюбите" нас в соцсетях и расскажите о нас своим друзьям</p>
-        <div>
-            {% include "elements/share_horizontal.html" %}
-        </div>
-        или подпишитесь на нас:
+        {% include "elements/share_horizontal.html" %}
+        <p>или подпишитесь на нас:</p>
         <div>
             {% include "elements/read_us.html" %}
         </div>
     </div>
-
-    <div class="check-list-step"><i>+3<br/>балла</i>
+    
+	<div class="blue-title">+3 балла</div>
+    <div class="check-list-step">   		
         <p>Стать активным участником на выборах</p>
-
         {% if roles %}
-            <ul>
-                {% include "elements/roles.html" %}
-            </ul>
+             {% include "elements/roles.html" %}
         {% endif %}
+			<ul class="nobullet">
+            	<li><span class="pseudolink blue" id="become_observer">Наблюдатель</span></li>
+                <li><span class="pseudolink blue" id="become_member">Член комиссии</span></li>
+                <li><span class="pseudolink blue" id="become_journalist">Представитель СМИ</span></li>
+                <li><span class="pseudolink blue" id="become_lawyer">Юрист</span></li>
+                <li><span class="pseudolink blue" id="become_prosecutor">Представитель прокуратуры</span></li>
+                <li><span class="pseudolink blue" id="become_authority">Представитель власти</span></li>
+            </ul>
 
-        <div class="user_actions">
-            {% button "circle-check" "Наблюдатель" "become_observer" "" "" %}
-            {% button "circle-check" "Член комиссии" "become_member" "" "" %}
-            {% button "circle-check" "Представитель СМИ" "become_journalist" "" "" %}
-
-        </div>
-
-        <div class="user_actions">
-            {% button "circle-check" "Юрист" "become_lawyer" "" "" %}
-            {% button "circle-check" "Представитель прокуратуры" "become_prosecutor" "" "" %}
-            {% button "circle-check" "Представитель власти" "become_authority" "" "" %}
-        </div>
     </div>
 
     {% if not request.profile.about %}
         <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-        <div class="check-list-step"><i>+3<br/>балла</i>
+        <div class="blue-title">+3 балла</div>
+        <div class="check-list-step">        	
             <p>Добавьте информацию о себе. Вы можете оставить свои координаты,
-            написать про учавстие в выборах и как готовность помочь другим участникам.</p>
+            написать про участие в выборах и как готовность помочь другим участникам.</p>
             <form action="{% url update_profile %}?fields=about" method="post">
                 {% csrf_token %}
                 <div style=" overflow: hidden;">
                     {{ form.about }}
                 </div>
-                <div>
+                <div class="mt15">
                     {% button "circle-check" "Добавить" "save_about" "" "" %}
                 </div>
             </form>
         </div>
     {% endif %}
 {% else %}
-    <h2>Что такое Гракон?</h2>
     <p>Гракон - мини-соцсеть для координации работы любых организаций и граждан,
     объединенных одной целью - <b>проведением честных выборов</b> президента 4 марта.
 
@@ -118,8 +112,7 @@
     возникновения нарушений на участках.
     </p>
 
-    <h2>Примите участие!</h2>
-
+	<div class="blue-title">Примите участие!</div>
     <div class="step"><i>1</i> <p>Найдите свой избирательный округ и посмотрите, как проходят выборы в Вашем городе:</p>
         <div id="choose_regions">
             {% include "elements/region_choice.html" %}
@@ -133,7 +126,7 @@
         </div>
     </div>
 
-
+	
     <div class="step"><i>2</i>
         {% if request.user.is_authenticated %}
             <p>Начните участвовать в работе на своем избирательном участке.
@@ -158,8 +151,9 @@
             login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах");
         });
     </script>
-
-    <h2>Презентация</h2>
+    
+	<br />
+	<div class="blue-title">Презентация</div>
     <script>
         $(document).ready(function(){
             function resizeSlide() {

@@ -75,12 +75,13 @@ class Location(models.Model):
                 'vrnorg': self.vrnorg, 'vrnkomis': self.vrnkomis}
 
     def path(self):
+        # using int() is a hack for mysql to avoid using long int
         if not self.region_id:
-            return [self.id]
+            return [int(self.id)]
         elif not self.tik_id:
-            return [self.region_id, self.id]
+            return [int(self.region_id), int(self.id)]
         else:
-            return [self.region_id, self.tik_id, self.id]
+            return [int(self.region_id), int(self.tik_id), int(self.id)]
 
     def map_data(self):
         """ Return javascript object containing region data """

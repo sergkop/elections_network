@@ -58,6 +58,7 @@ class ListSearchView(BaseSearchView):
 
         profile_ids = Role.objects.filter(query).values_list('user', flat=True)
         people = Profile.objects.filter(id__in=profile_ids) \
+                .exclude(user__email='', user__is_active=False) \
                 .only('username', 'show_name', 'first_name', 'last_name').order_by('username')
 
         result_count = len(people)

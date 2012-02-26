@@ -142,9 +142,14 @@
     возникновения нарушений на участках.
     </p>
 
+    {% button "circle-check" "Короткая презентация" "view_presentation" "" %}
+
+    {% include "dialogs/presentation.html" %}
+
     <h2>Примите участие!</h2>
 
-    <div class="step"><i>1</i> <p>Найдите свой избирательный округ и посмотрите, как проходят выборы в Вашем городе:</p>
+    <div class="step"><i>1</i> <p>Найдите <b>свой избирательный участок</b> и
+            посмотрите, как проходят выборы в вашем городе:</p>
         <div id="choose_regions">
             {% include "elements/region_choice.html" %}
             <div style="display: inline;">
@@ -157,48 +162,37 @@
         </div>
     </div>
 
-
     <div class="step"><i>2</i>
-        {% if request.user.is_authenticated %}
-            <p>Начните участвовать в работе на своем избирательном участке.
-            Для этого выберите свою роль на выборах в панели слева и запишитесь.</p>
-        {% else %}
-            <p>Начните участвовать в работе на своем избирательном участке.
-            Для этого необходимо зарегистрироваться.
-            </p>
-            <div>{% button "circle-check" "Регистрация" "login_content" "" "" %}</div>
-        {% endif %}
+        <p>Хотите получать <b>новости</b> о ходе выборов в вашем городе?</p>
+        <div>{% button "circle-check" "Подписаться" "login_content1" "" "" %}</div>
     </div>
 
-
     <div class="step"><i>3</i>
-        <div style="margin-bottom: 7px;">следить за новостями проекта</div>
+        <p>Хотите помочь проведению честных выборов, но нет возможности стать наблюдателем?</p>
+        <ul>
+            <li>Станьте <b>веб-наблюдателем</b> и следите за ходом выборов на своем участке через веб камеру.</li>
+            <li>Войдите в состав <b>мобильной группы</b> для отлова "карусельщиков".</li>
+        </ul>
+        <div>{% button "circle-check" "Подписаться" "login_content2" "" "" %}</div>
+    </div>
+
+    <div class="step"><i>4</i>
+        <p>Уже записались <b>наблюдателем</b> или <b>членом избирательной комиссии</b>?
+        Найдите других наблюдателей на вашем участке.
+        </p>
+        <div>{% button "circle-check" "Регистрация" "login_content3" "" "" %}</div>
+    </div>
+
+    <div class="step"><i>5</i>
+        <p>Следите за <b>новостями проекта</b></p>
         {% include "elements/read_us.html" %}
     </div>
 
     <script type="text/javascript">
         set_select_location("choose_regions", []);
-        $("#login_content").click(function(){
+        $("#login_content1, #login_content2, #login_content3").click(function(){
             login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах");
         });
+        $("#view_presentation").click(function(){presentation_dialog_init();});
     </script>
-
-    <h2>Презентация</h2>
-    <script>
-        $(document).ready(function(){
-            function resizeSlide() {
-                jQuery("#__ss_11568118").css('width','100%').find('iframe').css('width','100%');
-                var slideHeight = jQuery("#__ss_11568118").width()/1.1917;
-                jQuery("#__ss_11568118").css('height',slideHeight).find('iframe').css('height',slideHeight);
-                jQuery("#player div").css('background-color', '#fff');              
-            }
-            resizeSlide();
-            $(window).resize(function() {
-                resizeSlide();
-            });
-        });
-    </script>
-
-    <p>Нажмите на иконку <img src="{{ STATIC_URL }}images/fullscreen.gif" align="absmiddle" style="padding: 3px; border: 1px solid #ccc; border-radius: 5px;" /> в правом нижнем углу презентации для полноэкранного просмотра</p>
-    <div id="__ss_11568118" style="border: 1px solid #ccc; width:100%"><iframe src="http://www.slideshare.net/slideshow/embed_code/11568118" width="100%" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
 {% endif %}

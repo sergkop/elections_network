@@ -1,0 +1,14 @@
+<div id="presentation_dialog">
+    <iframe src="http://www.slideshare.net/slideshow/embed_code/11568118" width="100%"
+        height="490" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+</div>
+
+<script type="text/javascript">
+    function presentation_dialog_init(){
+        $("#player div").css('background-color', '#fff');
+        $("#presentation_dialog").dialog("open");
+    }
+
+    $("#presentation_dialog").dialog({width:625, height:570, modal: true,
+            title: "Короткая презентация"}).dialog("close");
+</script>

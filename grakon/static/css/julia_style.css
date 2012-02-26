@@ -153,7 +153,7 @@ h3 {margin: 0;}
 
 .how-to-help {margin: 0 auto; width: 40em;}
 
-.step {position: relative; padding-left: 55px; margin-bottom: 10px;}
+.step {position: relative; padding-left: 55px; border-bottom: 1px dotted #dedede; padding-bottom: 10px; margin-bottom: 10px;}
 	.step i {position: absolute; top: 0.45em; left: 10px; font-size: 4em; color: #0077CA; font-style: normal; line-height: 0;}
 
 .check-list-step {position: relative; padding-left: 80px; border-bottom: 1px dotted #dedede; padding-bottom: 10px; margin-bottom: 10px;}

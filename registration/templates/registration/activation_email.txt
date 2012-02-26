@@ -1,4 +1,4 @@
-Здравствуйте, {{ full_name }}!
+Здравствуйте{% if full_name %}, {{ full_name }}{% endif %}!
 
 Чтобы активировать свой аккаунт на сайте Гракон,
 пожалуйста, перейдите по ссылке: {{ URL_PREFIX }}{% url activate_account activation_key %}

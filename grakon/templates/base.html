@@ -66,7 +66,7 @@
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
                     <li><a {% if template == "static_pages/faq.html" %}class="on"{% endif %} href="{% url faq %}">FAQ</a></li>
                 </ul>
-
+                
                 <!--form class="ym-searchform">
                     <input class="ym-searchfield" type="search" placeholder="Search..." />
                     <input class="ym-searchbutton" type="submit" value="Search" />
@@ -80,6 +80,7 @@
                         <span id="login_btn" class="clickable">Войти</span>
                     {% endif %}
                 </div>
+                <div class="cl">&nbsp;</div>
             </div>
         </div>
     </nav>
@@ -90,7 +91,7 @@
         </div> 
         &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-map">
-    		<a href="">Ход выборов на карте</a>
+    		<a href="/map_search">Ход выборов на карте</a>
         </div>      
     </div>
     

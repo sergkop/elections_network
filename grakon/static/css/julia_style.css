@@ -11,6 +11,7 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 header, nav {background: none; min-width: 980px;}
 nav {margin-top: 5px;}
 table, tbody td {border: none; margin: 0;}
+.cl {clear: both; height: 0; overflow: hidden;}
 .fl {float: left;}
 .black {color: #000 !important;}
 .blue {color: #2f8dbc !important;}
@@ -33,22 +34,19 @@ a.button {display: inline; padding: 0.5em 1em; color: #ee6105;}
 .mt15 {margin-top: 15px !important;}
 .mb15 {margin-bottom: 15px !important;}
 
-.login_logout {padding: 0.4em 1em 0 0; color: #333; text-shadow: 0 1px 0 #fff;}
-	.login_logout a { color: #333; font-size: 0.9em;}
-
 header .ym-wrapper {border-bottom: 1px solid #80a615;}
 	
 #title_link {color: #f2f2f2 !important; float: left; line-height: 0.7em;} 
 	#title_link small {display: block; margin-top: 0.1em; font-size: 30%; font-weight: normal; letter-spacing: 1px;}
-	header .ym-wbox {padding: 1em 0; position: relative;}
-	header .ym-wbox .logo {float: left;}
+	header .ym-wbox {padding: 9px 0; position: relative;}
+	header .ym-wbox .logo {float: left; margin-left: -12px;}
 	
 .breadcrumbs {border-radius: 4px; margin:0.5em 0 0; box-shadow: 0 2px 2px #ccc;}	
 	h2.breadcrumbs-title {border: none; margin-bottom: 10px; font-size: 1.4em}
 	.breadcrumbs ul {padding: 0;}
 		.breadcrumbs ul li {position: relative; margin: 0;}
 		.breadcrumbs ul li a, .breadcrumbs ul li strong {background: none; color: #333; padding-left: 1.8em; padding-right: 1em; border-radius: 0; position: relative; line-height: 2.5em; display: block; text-shadow: none ; }
-		.breadcrumbs ul li i {position: absolute; top: 0; right: -13px; background:url(/static/images/back_breadcrumbs.png) 0 -109px no-repeat; width: 16px; height: 36px; z-index:2}
+		.breadcrumbs ul li i {position: absolute; top: 0; right: -13px; background:url(/static/images/back_breadcrumbs.png) -1px -109px no-repeat; width: 16px; height: 36px; z-index:2}
 			.breadcrumbs ul li.previous  i {background-position: 0 -37px;}
 			.breadcrumbs ul li strong i {background-position: 0 0;}
 		.breadcrumbs ul li a {text-shadow: 0 1px 0 #fff;}	
@@ -64,8 +62,8 @@ header .ym-wrapper {border-bottom: 1px solid #80a615;}
 .ui-widget-content {background: none; background-color: #fff}		
 		
 
-	.ym-col3 .ym-cbox {padding: 10px 15px; font-size: 1.1em; border-radius: 5px;}
-h2.location_header {/*border-radius: 5px; border: 1px solid #dcdcdc; box-shadow: inset 0 -1px 0 #f2f2f2; padding: 5px 10px;*/ font-size: 2em; text-align: left;  color: #343845; margin: 0.1em 0 0.5em;;}		
+	.ym-col3 .ym-cbox {padding: 10px; font-size: 1.1em; border-radius: 5px;}
+h2.location_header {/*border-radius: 5px; border: 1px solid #dcdcdc; box-shadow: inset 0 -1px 0 #f2f2f2; padding: 5px 10px;*/ font-size: 2em; text-align: left;  color: #2f8dbc; font-weight: bold; margin: 0.1em 0 0.5em;;}		
 
 footer {background: none; border: none; width: 100%; overflow: hidden; margin-top: 40px;}
 footer .ym-wbox {text-align: left; padding: 7px 20px; color: #343845; font-size: 0.9em;  color: #fff;  width: 100%; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
@@ -186,8 +184,8 @@ h3 {margin: 0;}
 
 .how-to-help {margin: 0 auto; width: 40em;}
 
-.step {position: relative; padding-left: 55px; margin-bottom: 10px;}
-	.step i {position: absolute; top: 0.45em; left: 10px; font-size: 4em; color: #0077CA; font-style: normal; line-height: 0;}
+.step {position: relative; padding-left: 45px; margin-bottom: 10px;}
+	.step i {position: absolute; top: 0.45em; left: 0; font-size: 3.5em; color: #f3f3f3; font-style: normal; line-height: 0; font-weight: bold;}
 
 .check-list-step {position: relative; padding-left: 40px; padding-bottom: 10px; margin-bottom: 10px;}
     .check-list-step i {position: absolute; top: 0; left: 0; font-size: 1.7em; color: #0077CA; font-style: normal; text-align:center; width: 70px;}
@@ -200,11 +198,12 @@ h3 {margin: 0;}
 #addressFields select {display: block; margin-top: 10px;}
 #result {background-color: #e1e1e1; padding: 15px 30px; text-align: center; line-height: 1.4em; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; display: none; }
 
-.main-buttons {text-align: center; padding: 25px 0;}
+.main-buttons {text-align: center; padding: 20px 0;}
 	.main-buttons div {display: inline-block; border-radius: 3em; padding: 17px; background-color: #fff; box-shadow: inset 0 1px 1px #dedede;}
 	.main-buttons div, {display: inline; zoom: 1;}	
-	.main-buttons-blue a, .main-buttons-map a {display: block; padding: 10px 20px; border-radius: 1.5em; color: #fff; text-decoration: none; box-shadow: 0 1px 2px #ccc;}
+	.main-buttons-blue a, .main-buttons-map a, #login_btn {display: block; padding: 11px 20px; border-radius: 1.5em; color: #fff; text-decoration: none; box-shadow: 0 1px 2px #ccc;}
 	.main-buttons-map a {background: url(/static/images/back_button.gif) 0 0 no-repeat; color: #000;} 
+	#login_btn {padding: 8px 20px;}
 
 
 /* backgrounds */
@@ -246,12 +245,13 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 }
 	
 .breadcrumbs ul li strong {  
-	background: -moz-linear-gradient(top,#444a52, #2d3035);
-	background: -ms-linear-gradient(top,#444a52, #2d3035);
-	background: -o-linear-gradient(top,#444a52, #2d3035);
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#444a52), to(#2d3035));
-	background: -webkit-linear-gradient(top,#444a52, #2d3035);
-	background: linear-gradient(top,#444a52, #2d3035);}	
+	background-color: #2c89b9;
+	background: -moz-linear-gradient(top, #62c0ee, #2c89b9);
+	background: -ms-linear-gradient(top, #62c0ee, #2c89b9);
+	background: -o-linear-gradient(top, #62c0ee, #2c89b9);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#62c0ee), to(#2c89b9));
+	background: -webkit-linear-gradient(top, #62c0ee, #2c89b9);
+	background: linear-gradient(top, #62c0ee, #2c89b9);}	
   
  .breadcrumbs ul li:hover strong {
   background-color: #003399;
@@ -296,7 +296,7 @@ background: linear-gradient(#e6e6e6 25%, #d2d2d2);}
 	background: linear-gradient(top,#c2d967, #c0d865);
 }	
 
-.ym-col3 .ym-cbox, .ym-clearfix {
+.ym-clearfix {
 	background-color: #91b928;	 
 	background: -moz-linear-gradient(top,#b4d147, #91b928);
 	background: -ms-linear-gradient(top,#b4d147, #91b928);
@@ -326,7 +326,7 @@ background: linear-gradient(#e6e6e6 25%, #d2d2d2);}
 	background: linear-gradient(top, #3f444c, #2a2c31);		
 }
 
-.main-buttons-blue a {
+.main-buttons-blue a, #login_btn {
 	background-color: #2a88b8;
 	background: -moz-linear-gradient(top, #62c1ef, #2a88b8);
 	background: -ms-linear-gradient(top, #62c1ef, #2a88b8);

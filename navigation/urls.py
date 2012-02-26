@@ -7,14 +7,11 @@ urlpatterns = patterns('navigation.views',
     url(r'^$', 'main', {'tab': 'main'}, name='main'),
     url(r'^wall$', 'wall', {'tab': 'wall'}, name='wall'),
 
-    url(r'^uik_search$', 'uik_search', name='uik_search'),
-    url(r'^uik_search_data$', 'uik_search_data', name='uik_search_data'),
-
     # Static pages
     tabbed_static_url('about', 'static_pages/about/base.html'),
     tabbed_static_url('rules', 'static_pages/about/base.html'),
-	tabbed_static_url('comparison', 'static_pages/about/base.html'),
-	tabbed_static_url('publications', 'static_pages/about/base.html'),
+    tabbed_static_url('comparison', 'static_pages/about/base.html'),
+    tabbed_static_url('publications', 'static_pages/about/base.html'),
 
     tabbed_static_url('news', 'static_pages/development/base.html'),
     tabbed_static_url('functionality', 'static_pages/development/base.html'),

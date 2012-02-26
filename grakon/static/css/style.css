@@ -214,3 +214,5 @@ select {
 
 .find_uik_btn {display: none;}
 #main_tab .find_uik_btn {display:block;}
+
+.addressFields select {display: block;}

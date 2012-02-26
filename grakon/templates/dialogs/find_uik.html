@@ -1,6 +1,6 @@
 <div id="find_uik_dialog">
-    <div id="addressFields"></div>
-    <h4 id="result"></h3>
+    <div class="addressFields"></div>
+    <h4 class="addressResult"></h3>
     <div style="margin:1em;">
         Мы не сохраняем ваш адрес. Этот инструмент предназначен только для того,
         чтобы помочь вам найти свой избирательный участок.
@@ -16,6 +16,7 @@
 <script type="text/javascript">
     function find_uik_dialog_init(){
         $("#find_uik_dialog").dialog("open");
+        init_find_uik();
     }
 
     $("#find_uik_dialog").dialog({width: 650, height: 450, modal: true,

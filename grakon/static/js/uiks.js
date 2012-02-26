@@ -11,10 +11,10 @@ var Address = {
         levels: new Array(),
 
         addSelect: function(data) {
-            var index = $('div#addressFields > select').length;
+            var index = $('.addressFields > select').length;
             var level = new Object();
 
-            $('div#addressFields').append( $('<select/>').attr('id', index) );
+            $('.addressFields').append( $('<select/>').attr('id', index) );
             // TODO: change default message depending on the level
             $('select#'+index).append( $('<option/>').attr('selected', 'selected').text(Address.DEFAULT_MESSAGE) );
             $.each(data, function(key, value){
@@ -27,7 +27,7 @@ var Address = {
 
             $('select#'+index).change(function() {
                 var id = $(this).children('option:selected').val();
-                $("div#result").html("");
+                $(".addressResult").html("");
                 if (id!="") {
                     $(this).nextAll('select').remove();
                     var index = $(this).prevAll('select').length;
@@ -92,11 +92,11 @@ var Address = {
             dataType: 'html',
             success: function(html) {
                 if ($(html).find("div.dotted").length > 0)
-                    $('#result').show().text( $(html).find("div.dotted").text() );
+                    $('.addressResult').show().text( $(html).find("div.dotted").text() );
                 else if ($(html).attr("id") == "uik")
-                    $('#result').show().text( $(html).text() );
+                    $('.addressResult').show().text( $(html).text() );
                 else {
-                    $('#result').html( "Уважаемый пользователь! К сожалению, данные не были найдены." );
+                    $('.addressResult').html( "Уважаемый пользователь! К сожалению, данные не были найдены." );
                 }
             },
             alert: function() {
@@ -106,8 +106,8 @@ var Address = {
     }
 }
 
-function init_find_uik(){
-    $('#addressFields').html("");
-    $('#result').html("");
+function init_find_uik(div_id){
+    $(".addressFields").html("");
+    $(".addressResult").html("");
     Address.showLevelById("path_", 0);
 };

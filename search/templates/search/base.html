@@ -35,7 +35,6 @@
                     set_select_location("choose_regions", {{ location_path }});
                     init_find_uik();
                 </script>
-
             </div>
 
             <div class="side_block_header">
@@ -55,7 +54,7 @@
 
 {% block content_header %}
     <h2 class="location_header">Поиск участников{% if result_count %} ({{ result_count }}){% endif %}</h2>
-    {% tabs "tabs" tab "" "" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" %}
+    {% tabs "tabs" tab "" "" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
 
     {# "Таблица" "user_table" "search/table.html" #}
 {% endblock %}

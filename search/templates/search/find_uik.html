@@ -1,0 +1,14 @@
+{% load elements %}
+
+<!--script type="text/javascript" src="{{ STATIC_URL }}js/uiks.js"></script-->
+
+{% block content_header %}
+    <h2 class="location_header">Найти свою участковую избирательную комиссию</h2>
+
+    <div class="addressFields"></div>
+    <h3 class="addressResult"></h3>
+    <div style="margin:1em;">
+        Мы не сохраняем ваш адрес. Этот инструмент основан на инструменте сайта ЦИК
+        "<a href="http://cikrf.ru/uiksearch.html" target="_blank">Найди свой участок</a>".
+    </div>
+{% endblock %}

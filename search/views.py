@@ -1,9 +1,11 @@
 from django.db.models import Q
+from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 
 from grakon.models import Profile
 from locations.models import Location
 from locations.utils import get_roles_query, regions_list
+from search.utils import get_uik_data
 from users.forms import RoleTypeForm
 from users.models import Role, ROLE_CHOICES, ROLE_TYPES
 
@@ -98,3 +100,16 @@ class MapSearchView(BaseSearchView):
         return ctx
 
 map = MapSearchView.as_view()
+
+class FindUikView(BaseSearchView):
+    tab = 'find_uik'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BaseSearchView, self).get_context_data(**kwargs)
+        ctx.update(self.preprocess())
+        return ctx
+
+find_uik = FindUikView.as_view()
+
+def uik_search_data(request):
+    return HttpResponse(get_uik_data(request.GET))

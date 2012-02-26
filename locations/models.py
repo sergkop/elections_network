@@ -74,6 +74,14 @@ class Location(models.Model):
         return INFO_URL % {'region_name': self.region_name, 'region_code': self.region_code,
                 'vrnorg': self.vrnorg, 'vrnkomis': self.vrnkomis}
 
+    def path(self):
+        if not self.region_id:
+            return [self.id]
+        elif not self.tik_id:
+            return [self.region_id, self.id]
+        else:
+            return [self.region_id, self.tik_id, self.id]
+
     def map_data(self):
         """ Return javascript object containing region data """
         js = 'new ElectionCommission(' + str(self.id) + ',' + str(self.level()) + ','

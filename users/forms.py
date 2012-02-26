@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+from smtplib import SMTPException
+
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -6,10 +8,12 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.forms.widgets import HiddenInput, Textarea, CheckboxInput
 from django.template.loader import render_to_string
-from smtplib import SMTPException
+
 from uni_form.helper import FormHelper
 from uni_form.layout import Submit
-#from grakon.models import Profile
+
+from users.models import ROLE_CHOICES, ROLE_TYPES
+#from grakon.utils import form_helper
 
 class MessageForm(forms.Form):
     to_user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=HiddenInput())
@@ -17,16 +21,18 @@ class MessageForm(forms.Form):
     body = forms.CharField(widget=Textarea(attrs={'cols':60, 'rows':4}), label=u'Сообщение')
     show_email = forms.BooleanField(label=u'Раскрыть получателю мой адрес электронной почты', initial=False, required=False)
 
+    #helper = form_helper('send_message', '')
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         self.from_user = self.request.user
         super(MessageForm, self).__init__(*args, **kwargs)
-        
+
         self.helper = FormHelper()
         self.helper.form_action = reverse('send_message')
         self.helper.form_method = 'post'
         self.helper.form_id = 'send_message_form'
-        
+
     def send(self):
         title = self.cleaned_data['title']
         title = u' '.join(title.split('\n'))
@@ -52,7 +58,7 @@ class MessageForm(forms.Form):
 class FeedbackForm(forms.Form):
     name = forms.CharField(label=u'Ваше имя')
     body = forms.CharField(widget=Textarea(attrs={'style': 'width:100%;'}), label=u'Сообщение')
-    
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(FeedbackForm, self).__init__(*args, **kwargs)
@@ -76,3 +82,12 @@ class FeedbackForm(forms.Form):
         from_mail = settings.DEFAULT_FROM_EMAIL
         message = render_to_string('feedback/mail.txt', ctx)
         send_mail(u'Сообщение обратной связи', message, from_mail, [from_mail], fail_silently=False)
+
+class RoleTypeForm(forms.Form):
+    type = forms.CharField(widget=forms.Select(choices=[('', u'Все типы участников')]+list(ROLE_CHOICES)))
+
+    def clean_type(self):
+        role_type = self.cleaned_data['type']
+        if role_type!='' and role_type not in ROLE_TYPES:
+            role_type = ''
+        return role_type

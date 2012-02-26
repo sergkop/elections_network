@@ -21,9 +21,7 @@ def regions_list():
 
     return regions
 
-# TODO: cache it, at least for the main page
-# TODO: count members differently?
-def get_roles_counters(location):
+def get_roles_query(location):
     """ location = None for Russia """
     voter_count = 0
     if not location:
@@ -35,7 +33,13 @@ def get_roles_counters(location):
     elif location.is_uik():
         query = Q(location=location)
 
+    return query
+
+# TODO: cache it, at least for the main page
+# TODO: count members differently?
+def get_roles_counters(location):
     counters = {}
+    query = get_roles_query(location)
     for role in ROLE_TYPES:
         counters[role] = Role.objects.filter(Q(type=role) & query).count()
 

@@ -61,7 +61,7 @@
             <div class="ym-hlist">
                 <ul> 
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                    <li><a {% if name == "map" %}class="on"{% endif %}href="{% url map_search %}">Карта</a></li>
+                    <li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_list %}">Поиск</a></li>
                     <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
                     <li><a {% if template == "static_pages/development/base.html" %}class="on"{% endif %} href="{% url news %}">Новости</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
@@ -125,25 +125,23 @@
     <footer>
         <div class="ym-wrapper">
             <div class="ym-wbox">
-                <center>
-                    <div class="footer_menu">
-                        <a href="{% url about %}">О проекте</a>
-                        <a href="http://grakonteam.livejournal.com/" target="_blank">Блог</a>
-                        <a href="{% url rules %}">Правила</a>
-                        <a href="{% url sitemap %}">Карта сайта</a>
-                    </div>
-                    <div>
-                        <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
-                        <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="texttop"/></a>
-                        <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="texttop"/></a>         
-                        <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="texttop"/></a>  
-                    </div>
-                    <div style="margin-right: 20px;">  
-                        <a href="{% url main %}">Гракон</a> &copy;2012.
-                        &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a>
-                    </div>
-                    <br clear="all"/>
-                </center>
+                <div class="footer_menu">
+                    <a href="{% url about %}">О проекте</a>
+                    <a href="http://grakonteam.livejournal.com/" target="_blank">Блог</a>
+                    <a href="{% url rules %}">Правила</a>
+                    <a href="{% url sitemap %}">Карта сайта</a>
+                </div>
+                <div>
+                    <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
+                    <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="texttop"/></a>
+                    <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="texttop"/></a>         
+                    <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="texttop"/></a>  
+                </div>
+                <div style="margin-right: 20px;">
+                    <a href="{% url main %}">Гракон</a> &copy;2012.
+                    &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a>
+                </div>
+                <br clear="all"/>
             </div>
         </div>
     </footer>

@@ -35,7 +35,6 @@ class RoleSignupView(View):
         post_data = self.request.POST
 
         try:
-            print post_data.get('uik', post_data.get('tik', post_data.get('region', '')))
             location_id = int(post_data.get('uik', post_data.get('tik', post_data.get('region', ''))))
         except ValueError:
             return HttpResponse(u'Неверно указан избирательный округ')

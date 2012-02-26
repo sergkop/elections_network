@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'users',
     'links',
     'organizations',
+    'search',
 )
 
 try:

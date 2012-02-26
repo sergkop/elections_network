@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+    Поиск участников - Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
+{% block head %}
+    <style type="text/css">
+        .ym-col1 {width: 25%;}
+        .ym-col2 {width: 0;}
+        .ym-col3 {width: 75%; margin-right: 0;}
+        .ym-col3 .ym-cbox {display: none;}
+    </style>
+{% endblock %}
+
+{% block left_column %}
+    {% include "dialogs/find_uik.html" %}
+
+    <div class="ym-clearfix">
+        <form id="search" method="get" action="">
+            <div class="side_block_header">
+                <h4>Местоположение</h4>
+            </div>
+
+            <div class="content_block">
+                <div id="choose_regions" class="center">
+                    {% include "elements/region_choice.html" %}
+                </div>
+
+                <script type="text/javascript">
+                    set_select_location("choose_regions", {{ location_path }});
+                    init_find_uik();
+                </script>
+
+            </div>
+
+            <div class="side_block_header">
+                <h4>Тип участника</h4>
+            </div>
+
+            <div class="content_block">
+                {{ role_form.type }}
+            </div>
+
+            {% button "search" "Искать" "search" %}
+        </form>
+    </div>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Поиск участников{% if result_count %} ({{ result_count }}){% endif %}</h2>
+    {% tabs "tabs" tab "" "" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" %}
+
+    {# "Таблица" "user_table" "search/table.html" #}
+{% endblock %}

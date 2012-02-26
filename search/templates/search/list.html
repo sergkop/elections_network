@@ -1,0 +1,11 @@
+{% if role_name %}
+    <h3 style="margin:1em;">{{ role_name }}</h3>
+{% endif %}
+
+<ul>
+    {% for participant in people %}
+        <li>
+            {% include "elements/participant.html" %}
+        </li>
+    {% endfor %}
+</ul>

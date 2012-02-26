@@ -1,0 +1,14 @@
+<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
+<script type="text/javascript" src="{% url map_data %}"></script>
+
+<div class="center">
+    <div id="publicElectionsMap" style="height:500px; min-width: 300px;"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        ElectionMap.init('{{ place }}');
+    });
+</script>

@@ -61,7 +61,7 @@ class CreateOrganizationForm(forms.ModelForm):
         return self.cleaned_data
 
 class EditOrganizationForm(forms.ModelForm):
-    helper = form_helper('', u'Редактировать')
+    helper = form_helper('', u'Сохранить')
 
     class Meta:
         model = Organization

@@ -46,7 +46,7 @@ def get_roles_counters(location):
     return counters
 
 def get_locations_data(queryset):
-    js = 'var electionCommissions = {'
+    js = 'var electionCommissions = { '
     data = []
     for location in queryset.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address'):
         if location.x_coord:

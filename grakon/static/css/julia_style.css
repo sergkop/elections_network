@@ -162,6 +162,10 @@ h3 {margin: 0;}
 .social { position: absolute; bottom: 0; right: 0;}
 	.social td {padding: 0 0 0 15px;}	
 
+.logo_list, .logo_list li {margin: 0; padding: 0; list-style-type: none;}
+    .logo_list {margin-left:70px;}
+    .logo_list li {margin-bottom: 10px;}
+
 #addressFields select {display: block; margin-top: 10px;}
 #result {background-color: #e1e1e1; padding: 15px 30px; text-align: center; line-height: 1.4em; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; display: none; }
 

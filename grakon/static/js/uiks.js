@@ -106,7 +106,7 @@ var Address = {
     }
 }
 
-function init_find_uik(div_id){
+function init_find_uik(){
     $(".addressFields").html("");
     $(".addressResult").html("");
     Address.showLevelById("path_", 0);

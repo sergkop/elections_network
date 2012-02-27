@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block left_column %}
-    <h3 class="column_header">Участники</h3>
+    <h3 class="column_header" style="padding-left: 10px;">Участники</h3>
 
     <div class="ym-clearfix">
         {% include "elements/left_panel.html" %}
@@ -80,7 +80,7 @@
         {{ current_location }}
     </h2>
 
-    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Стена" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
+    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
 
     {% include "services/disqus-counter.html" %}
 

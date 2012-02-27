@@ -59,12 +59,7 @@
 
 /* Lists in side panels */
 .column_header {
-    background: none repeat scroll 0 0 #666666;
-    border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
-    font-size: 150%;
     padding: 5px 10px;
-    text-align: center;
 }
 
 .content_block {
@@ -73,19 +68,11 @@
     border-top: none;
     border-radius: 0 0 3px 3px;
     -moz-border-radius: 0 0 3px 3px;
-    margin: 0 0 10px;
-    padding: 10px;
     -webkit-box-shadow: 0 8px 6px -6px #888;
     -moz-box-shadow: 0 8px 6px -6px #888;
     box-shadow: 0 8px 6px -6px #888;
 }
-.side_block_header {
-    background-color: #C9C9C9;
-    border-radius: 3px 3px 0 0;
-    -moz-border-radius: 3px 3px 0 0;
-    text-align: center;
-    width: 100%;
-}
+
 .side_block_header h4 {
     border: 1px solid #727DC2;
     border-radius: 3px 3px 0 0;
@@ -216,3 +203,6 @@ select {
 #main_tab .find_uik_btn {display:block;}
 
 .addressFields select {display: block;}
+
+.results_table {border: 1px solid;}
+.results_table th, .results_table td {border: 1px solid; text-align: center; vertical-align: middle;}

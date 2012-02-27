@@ -6,17 +6,6 @@
     Часто задаваемые вопросы - Гракон - гражданский контроль за президентскими выборами
 {% endblock %}
 
-<!-- This style is used in a number of pages already - avoid it -->
-<style type="text/css">
-    .ym-col3 .ym-cbox:last-child {display: none;}
-</style>
-<style type="text/css">
-/* for static pages */
-    .ym-col1 {width: 0px;}
-    .ym-col2 {width: 0px;}
-    .ym-col3 {margin-left: 0; width: 100%; padding: 15px 0;}
-    h2.location_header {margin-left: 15px;}
-</style>
 
 
 {% block content_header %}
@@ -24,7 +13,15 @@
 {% endblock %}
 
 {% block content %}
-   <h4 style="margin-top: 5px;">Почему развелось так много разных площадок? И&nbsp;какой толк от&nbsp;Вашей?</h4>
+<style type="text/css">
+/* for static pages */
+    .ym-col1 {width: 0px;}
+    .ym-col2 {width: 0px;}
+    .ym-col3 {margin-left: 0; width: 100%; padding: 0}
+
+</style>
+	<div class="static-content">
+   <h4 style="margin-top:10px;">Почему развелось так много разных площадок? И&nbsp;какой толк от&nbsp;Вашей?</h4>
     <p>Мы&nbsp;рады, что площадок много, потому что много людей неравнодушных к&nbsp;тому, как пройдут эти выборы. У&nbsp;каждой площадки есть свои преимущества. Преимущество Гракона в&nbsp;том, что он&nbsp;позволяет Вам самим найти единомышленников, обратиться к&nbsp;юристу за&nbsp;помощью и&nbsp;скоординировать свои действия с&nbsp;другими участники Гракона для того чтобы контроль над выборами был еще более эффективным. И&nbsp;даже если&nbsp;Вы предпочли не&nbsp;становиться наблюдателем, здесь&nbsp;Вы сможете найти альтернативные способы проявить свою гражданскую позицию. С&nbsp;более подробным сравнением функций Гракона с&nbsp;другими проектами, Вы&nbsp;можете ознакомиться <a href="/comparison">здесь</a>.</p>
     <h4>Какую политическую силу представляет Ваш проект?</h4>
     <p>Мы&nbsp;представляем самую крупную и&nbsp;единственную легитимную силу&nbsp;&mdash; граждан России.</h4>
@@ -73,5 +70,6 @@
     <li>тип участника &laquo;веб-наблюдатель&raquo;;</li>
     <li>инструмент &laquo;группы&raquo; для самоорганизации небольших групп участников.</li>
     </ul>
+    </div>
 
 {% endblock %}

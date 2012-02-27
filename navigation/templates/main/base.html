@@ -6,13 +6,6 @@
     Гракон - гражданский контроль за президентскими выборами
 {% endblock %}
 
-{% block head %}
-    <style type="text/css">
-        .ym-col3 .ym-cbox p {font-size: 1em;}
-        .ym-col3 .ym-cbox {display: none;}
-    </style>
-{% endblock %}
-
 {% block breadcrumbs %}
     {% include "elements/breadcrumbs.html" %}
 
@@ -28,15 +21,9 @@
 {% endblock %}
 
 {% block right_column %}
-    <h3 class="column_header">Инструменты</h3>
-
-    <div class="ym-clearfix">
-        {% include "elements/right_panel.html" %}
-    </div>
+    {% include "elements/right_panel.html" %}
 {% endblock %}
 
 {% block content_header %}
-    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Стена" "wall" "services/disqus.html" %}
-
-    <!--{% include "services/disqus-counter.html" %}-->
+    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Сообщения" "wall" "services/disqus.html" %}
 {% endblock %}

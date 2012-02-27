@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Класс для избирательных округов
  * 
  * @param {level}
@@ -151,6 +151,46 @@ var Grakon = {
 				Grakon.map.zoomIn();
 				Grakon.MAP_LEVELS_ZOOM.areas = Grakon.map.getZoom();
 			}
+		},
+		
+		/**
+		 * Загружаем УИКи для заданного квадрата и показываем их на слое "УИКи"
+		 * @private
+		 * @param {request} Объект XMLHttpRequest с результатами в виде массива JS из объектов ElectionCommission.
+		 */
+		loadUIKsForBBOX: function(request) {
+			if (request.status == 200) {
+				eval(request.responseText);
+				if (electionCommissions != null) {
+					// Добавим слой УИКи
+					if (Grakon.electionCommissionLayers.areas == null) {
+						var areasLayer = new OpenLayers.Layer.Markers( "УИКи" );
+						Grakon.electionCommissionLayers.areas = areasLayer;
+						Grakon.map.addLayer( areasLayer );
+					}
+					
+					// Добавим новые (не показанные) УИКи на карту
+					for (var uikID in electionCommissions)
+						if (Grakon.electionCommissions[uikID] == null) {
+							Grakon.electionCommissions[uikID] = electionCommissions[uikID];
+							var size = new OpenLayers.Size(18,32);
+							var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+							var icon = new OpenLayers.Icon('/static/images/uik.png', size, offset);
+							var uikLocation = new OpenLayers.LonLat(electionCommissions[uikID].xCoord,electionCommissions[uikID].yCoord).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+							var uik = new OpenLayers.Marker(uikLocation,icon);
+							uik.data = electionCommissions[uikID];
+							var popup = new OpenLayers.Popup.AnchoredBubble(uik.data.id, uikLocation,
+														 new OpenLayers.Size(300,200),
+														 uik.data.address,
+														 icon, true, null);
+							Grakon.map.addPopup(popup);
+							popup.hide();
+							Grakon.map.events.register('click', uikLocation, function(){popup.show();});
+							Grakon.electionCommissionLayers.areas.addMarker(uik);
+						}
+				}
+			} else
+				OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
 		},
 		
 		/**
@@ -320,40 +360,7 @@ var Grakon = {
 					'y1': bottom,
 					'y2': top},
 					null,
-					function(request) {
-						if (request.status == 200) {
-							eval(request.responseText);
-							if (electionCommissions != null) {
-								// Добавим слой УИКи
-								if (Grakon.electionCommissionLayers.areas == null) {
-									var areasLayer = new OpenLayers.Layer.Markers( "УИКи" );
-									Grakon.electionCommissionLayers.areas = areasLayer;
-									Grakon.map.addLayer( areasLayer );
-								}
-								
-								// Добавим новые (не показанные) УИКи на карту
-								for (var uikID in electionCommissions)
-									if (Grakon.electionCommissions[uikID] == null) {
-										Grakon.electionCommissions[uikID] = electionCommissions[uikID];
-										var size = new OpenLayers.Size(18,32);
-										var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-										var icon = new OpenLayers.Icon('/static/images/uik.png', size, offset);
-										var uikLocation = new OpenLayers.LonLat(electionCommissions[uikID].xCoord,electionCommissions[uikID].yCoord).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
-										var uik = new OpenLayers.Marker(uikLocation,icon);
-										uik.data = electionCommissions[uikID];
-										var popup = new OpenLayers.Popup.AnchoredBubble(uik.data.id, uikLocation,
-																	 new OpenLayers.Size(300,200),
-																	 uik.data.address,
-																	 icon, true, null);
-										Grakon.map.addPopup(popup);
-										popup.hide();
-										Grakon.map.events.register('click', uikLocation, function(){popup.show();});
-										Grakon.electionCommissionLayers.areas.addMarker(uik);
-									}
-							}
-						} else
-							OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
-					},
+					Grakon.loadUIKsForBBOX,
 					function() {
 						OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
 					}
@@ -464,14 +471,6 @@ var Grakon = {
 		});
 		Grakon.map.addControl(selectCtrl);
 		selectCtrl.activate();
-
-		// Загрузить данные на слой
-		OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-		});
-		OpenLayers.loadURL("/static/districts/49s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-		});
 		
 		Grakon.map.addLayer(districts);
 	},

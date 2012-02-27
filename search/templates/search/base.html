@@ -8,13 +8,15 @@
 
 {% block head %}
     <style type="text/css">
-        .ym-col1 {width: 25%;}
         .ym-col2 {width: 0;}
-        .ym-col3 {width: 75%; margin-right: 0;}
-        .ym-col3 .ym-cbox {display: none;}
-        #choose_regions select {width: 20em;}
-        #role_field select {width: 20em;}
-    </style>
+        .ym-col3 {margin-right: 0; padding-right:0;}
+        #choose_regions select {width: 200px;}
+        #role_field select {width: 200px;}
+		.ym-col1 .ym-clearfix .ui-button {font-size: 0.9em; width: 180px;}
+		.ym-col1 .side_block_header h4 {margin: 10px 10px 5px 15px; font-weight: bold;}
+		.ym-col1 .column_header {padding-left: 15px;}
+
+</style>
 {% endblock %}
 
 {% block left_column %}
@@ -47,14 +49,14 @@
                 </div>
             </div>
 
-            {% button "search" "Искать" "search" %}
+			<div class="mb15 mt15">
+            	{% button "search" "Искать" "search" %}
+            </div>
         </form>
     </div>
 {% endblock %}
 
 {% block content_header %}
     <h2 class="location_header">Поиск участников{% if result_count %} ({{ result_count }}){% endif %}</h2>
-    {% tabs "tabs" tab "" "" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
-
-    {# "Таблица" "user_table" "search/table.html" #}
+    {% tabs "tabs" tab "" "" "Список" "user_list" "search/list.html" "Таблица" "user_table" "search/table.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
 {% endblock %}

@@ -1,10 +1,7 @@
 {% load elements %}
+<h3 class="column_header">Организации</h3>
 
-<div class="side_block_header">
-    <h4>Организации</h4>
-</div>
-
-<div class="content_block">
+<div class="content_block ym-clearfix">
     <ul class="side_list">
         {% for organization in organizations %}
             {% if organization.verified %}
@@ -14,7 +11,9 @@
             {% endif %}
         {% endfor %}
     </ul>
-    {% button "circle-plus" "Добавить организацию" "add_organization" %}
+    <div class="mb15">
+    	{% button "circle-plus" "Добавить организацию" "add_organization" %}
+    </div>    
 </div>
 
 <script type="text/javascript">

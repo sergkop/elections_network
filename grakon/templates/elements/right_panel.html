@@ -4,26 +4,24 @@
 
 {% include "blocks/complaints.html" %}
 
-<div class="disabled-block">
+<h3 class="column_header column_header_icon column_black"><span class="protocols">Протоколы (в&nbsp;разработке)</span></h3>
+
+<div class="disabled-block ym-clearfix clearfix-black">
     <div class="i">&nbsp;</div>
-
-    <div class="side_block_header">
-        <h4>Протоколы (в разработке)</h4>
-    </div>
-
     <div class="content_block">
-        {% button "circle-plus" "Выложить протокол" "publish_protocol" %}
+        <div class="mt15 mb15">
+            {% button "" "Выложить протокол" "publish_protocol" %}
+        </div>
     </div>
 </div>
 
-<div class="disabled-block">
+<h3 class="column_header column_header_icon column_black"><span class="events">Мероприятия (в&nbsp;разработке)</span></h3>
+
+<div class="disabled-block ym-clearfix clearfix-black">
     <div class="i">&nbsp;</div>
-
-    <div class="side_block_header">
-        <h4>Мероприятия (в разработке)</h4>
-    </div>
-
     <div class="content_block">
-        {% button "circle-plus" "Добавить событие" "add_event" %}
+    	<div class="mt15 mb15">
+        	{% button "circle-plus" "Добавить событие" "add_event" %}
+        </div>
     </div>
 </div>

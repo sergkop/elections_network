@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
 
+from loginza.models import UserMap
+
 from grakon.forms import ProfileForm
 from grakon.utils import cache_view
 from locations.models import Location
@@ -18,6 +20,10 @@ class MainView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super(MainView, self).get_context_data(**kwargs)
 
+        inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
+        total_counter = User.objects.exclude(email='').filter(is_active=True) \
+                .exclude(id__in=inactive_ids).count()
+
         sub_regions = regions_list()
         ctx.update({
             'tab': kwargs['tab'],
@@ -25,7 +31,7 @@ class MainView(TemplateView):
             'locations': sub_regions,
             'sub_regions': sub_regions,
             'organizations': OrganizationCoverage.objects.organizations_at_location(None),
-            'total_counter': User.objects.exclude(email='').filter(is_active=True).count(),
+            'total_counter': total_counter,
 
             'disqus_identifier': 'main',
         })

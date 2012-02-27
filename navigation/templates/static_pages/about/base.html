@@ -10,16 +10,13 @@
     <!-- This style is used in a number of pages already - avoid it -->
     <style type="text/css">
         .ym-col3 .ym-cbox:last-child {display: none;}
-		
     </style>
 {% endblock %}
 
 {% block left_column %}
-    <div class="ym-clearfix">
-        <div class="side_block_header">
-            <h4>Команда</h4>
-        </div>
 
+    <h3 class="column_header">Команда</h3>
+    <div class="ym-clearfix">
         <div class="content_block">
             <ul class="side_list">
                 <li><a href="https://www.facebook.com/mikpanko" target="_blank">Михаил Панько</a> <br/> <i>координатор проекта</i></li>
@@ -36,23 +33,21 @@
 {% endblock %}
 
 {% block right_column %}
+    <h3 class="column_header">Документы</h3>
     <div class="ym-clearfix">
-        <div class="side_block_header">
-            <h4>Документы</h4>
-        </div>
-
         <div class="content_block">
             <ul class="side_list">
-                <li><a href="http://bit.ly/elections_pdf">Презентация проекта</a></li>
+                <li><a href="http://bit.ly/elections_pdf" style="font-weight: normal;">Презентация проекта</a></li>
                 <!--li><a href="http://bit.ly/zOi7Fz">Подробная презентация проекта</a></li-->
-                <li><a href="{{ STATIC_URL }}images/table_edited.png">Таблица сравнения с другими проектами</a></li>
+                <li><a href="{{ STATIC_URL }}images/table_edited.png" style="font-weight: normal;">Таблица сравнения с другими проектами</a></li>
             </ul>
         </div>
+
     </div>
 {% endblock %}
 
 {% block content_header %}
     <h2 class="location_header">О проекте</h2>
 
-    {% tabs "tabs" tab "" "" "Описание" "about" "static_pages/about/about.html" "Правила" "rules" "static_pages/about/rules.html" "Сравнение проектов" "comparison" "static_pages/about/comparison.html" "СМИ о нас" "publications" "static_pages/about/publications.html" %}
+    {% tabs "tabs" tab "" "" "Описание" "about" "static_pages/about/about.html" "Правила" "rules" "static_pages/about/rules.html" "Сравнение проектов" "comparison" "static_pages/about/comparison.html" %}
 {% endblock %}

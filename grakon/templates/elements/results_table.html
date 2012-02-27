@@ -1,54 +1,45 @@
-<div class="ym-wrapper mt15">
-    <table width="100%">
+<div class="ym-wrapper header-table">
+    <table width="100%" align="center">
         <tr>
-            <td valign="middle" style="padding-bottom: 0;" align="center">
-                <div class="disabled-block" style="height: 100%; margin: auto;">  
-                    <table width="100%" class="header-table" align="center">
-                        <tr>
-                            <th width="28%" style="text-align:left">Результаты выборов
-                                {% if not current_location %}
-                                    по&nbsp;России:
-                                {% endif %}
-                                {% if current_location.is_region %}
-                                    по&nbsp;субъекту:
-                                {% endif %}
-                                {% if current_location.is_tik %}
-                                    по&nbsp;району:
-                                {% endif %}
-                                {% if current_location.is_uik %}
-                                    по&nbsp;УИКу:
-                                {% endif %}
-                            </th>
-                            <th width="12%">Жириновский</th>
-                            <th width="12%">Зюганов</th>
-                            <th width="12%">Миронов</th>
-                            <th width="12%">Прохоров</th>
-                            <th width="12%">Путин</th>
-                            <th width="12%" rowspan="3" class="header-table-shortcut">
-                                <a href="">Подробные<br /> результаты</a>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>по данным ЦИК</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>по протоколам наблюдателей</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                    <div class="i">&nbsp;</div>   
-                </div>
-            </td>
-
+            <th width="28%" style="text-align:left">Результаты выборов
+                {% if not current_location %}
+                    по&nbsp;России:
+                {% endif %}
+                {% if current_location.is_region %}
+                    по&nbsp;субъекту:
+                {% endif %}
+                {% if current_location.is_tik %}
+                    по&nbsp;району:
+                {% endif %}
+                {% if current_location.is_uik %}
+                    по&nbsp;УИКу:
+                {% endif %}
+            </th>
+            <th width="11%">Жириновский</th>
+            <th width="11%">Зюганов</th>
+            <th width="11%">Миронов</th>
+            <th width="11%">Прохоров</th>
+            <th width="11%">Путин</th>
+            <th width="17%" class="header-table-shortcut"><span class="pseudolink" onclick="jQuery('.header-table').slideUp()">Скрыть результаты</span></th>
         </tr>
-    </table>
+        <tr>
+            <td class="black">по данным ЦИК</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td rowspan="2" class="header-table-shortcut">
+                <!--a href="" class="button">Подробнее</a-->
+            </td>
+        </tr>
+        <tr>
+            <td class="black">по протоколам наблюдателей</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+    </table> 
 </div>

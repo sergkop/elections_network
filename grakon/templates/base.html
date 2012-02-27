@@ -90,10 +90,12 @@
     </nav>
 
     <div class="main-buttons">
-        <div class="main-buttons-blue">
-            <a href="">Записаться</a>
-        </div> 
-        &nbsp; &nbsp; &nbsp; &nbsp;
+        {% if not request.user.is_authenticated %}
+            <div class="main-buttons-blue">
+                <a href="#" id="login_btn1">Записаться</a>
+            </div> 
+            &nbsp; &nbsp; &nbsp; &nbsp;
+        {% endif %}
         <div class="main-buttons-map">
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
@@ -163,7 +165,7 @@
     <!-- TODO: move it to the top -->
     {% include "dialogs/login.html" %}
     <script type="text/javascript">
-        $("#login_btn").click(function(){
+        $("#login_btn, #login_btn1").click(function(){
             login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах");
         });
     </script>

@@ -2,9 +2,13 @@
 
 {% include "dialogs/find_uik.html" %}
 
+<p>Чтобы принять участие в работе площадки, рассказать другим пользователям
+о себе и помочь проведению честных выборов, сделайте следующее.</p>
+
 {% if request.user.is_authenticated %}
     {% if not request.profile.has_name %}
-        <div class="check-list-step"><i>+1<br/>балл</i>
+        <div class="blue-title">+1 балл</div>
+        <div class="check-list-step">
             <p>Введите свои имя и фамилию:</p>
 
             <form action="{% url update_profile %}?fields=first_name,last_name" method="post">
@@ -19,7 +23,8 @@
     {% endif %}
 
     {% if not request.profile.show_name %}
-        <div class="check-list-step {% if not request.profile.has_name %}disabled-block{% endif %}"><i>+2<br/>балла</i>
+        <div class="blue-title">+1 балл</div>
+        <div class="check-list-step {% if not request.profile.has_name %}disabled-block{% endif %}">
             {% if not request.profile.has_name %}<div class="i">&nbsp;</div>{% endif %}
             <p>Покажите свое имя остальным пользователям. Это увеличит доверие к вам на площадке.</p>
             <form action="{% url update_profile %}?fields=show_name" method="post">
@@ -33,7 +38,9 @@
     {% endif %}
 
     {% if not request.roles.voter %}
-        <div class="check-list-step"><i>+2<br/>балла</i>
+        <div class="blue-title">+2 балла</div>
+        <div class="check-list-step">
+
             <p>Выберите район, где вы проживаете и/или будете голосовать.</p>
 
             <form id="become_voter_form" method="post" action="{% url become_voter %}">
@@ -57,38 +64,35 @@
         </script>
     {% endif %}
 
-    <div class="check-list-step"><i>+1<br/>балл</i>
+    <div class="blue-title">+1 балл</div>
+    <div class="check-list-step">
         <p>"Полюбите" нас в соцсетях и расскажите о нас своим друзьям</p>
-        <div>
-            {% include "elements/share_horizontal.html" %}
-        </div>
-        или подпишитесь на нас:
+        {% include "elements/share_horizontal.html" %}
+        <p>или подпишитесь на нас:</p>
         <div>
             {% include "elements/read_us.html" %}
         </div>
     </div>
 
-    <div class="check-list-step"><i>+3<br/>балла</i>
-        <p>Стать активным участником на выборах</p>
+    <div class="blue-title">+3 балла</div>
+    <div class="check-list-step">
+        <p>Станьте активным участником на выборах</p>
 
         {% if roles %}
-            <ul>
+            <!--ul>
                 {% include "elements/roles.html" %}
-            </ul>
+            </ul-->
         {% endif %}
 
-        <div class="user_actions">
-            {% button "circle-check" "Наблюдатель" "become_observer1" "" "" %}
-            {% button "circle-check" "Член комиссии" "become_member1" "" "" %}
-            {% button "circle-check" "Представитель СМИ" "become_journalist1" "" "" %}
+        <ul class="nobullet">
+            <li><span class="pseudolink blue" id="become_observer1">Наблюдатель</span></li>
+            <li><span class="pseudolink blue" id="become_member1">Член комиссии</span></li>
+            <li><span class="pseudolink blue" id="become_journalist1">Представитель СМИ</span></li>
+            <li><span class="pseudolink blue" id="become_lawyer1">Юрист</span></li>
+            <li><span class="pseudolink blue" id="become_prosecutor1">Представитель прокуратуры</span></li>
+            <li><span class="pseudolink blue" id="become_authority1">Представитель власти</span></li>
+        </ul>
 
-        </div>
-
-        <div class="user_actions">
-            {% button "circle-check" "Юрист" "become_lawyer1" "" "" %}
-            {% button "circle-check" "Представитель прокуратуры" "become_prosecutor1" "" "" %}
-            {% button "circle-check" "Представитель власти" "become_authority1" "" "" %}
-        </div>
     </div>
 
     {% with btn_id="become_observer1" role="observer" status_plural="наблюдатели" %}
@@ -117,7 +121,8 @@
 
     {% if not request.profile.about %}
         <script src="{{ STATIC_URL }}libs/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-        <div class="check-list-step"><i>+3<br/>балла</i>
+        <div class="blue-title">+3 балла</div>
+        <div class="check-list-step">
             <p>Добавьте информацию о себе. Вы можете оставить свои координаты,
             написать про участие в выборах и как готовность помочь другим участникам.</p>
             <form action="{% url update_profile %}?fields=about" method="post">
@@ -125,14 +130,13 @@
                 <div style=" overflow: hidden;">
                     {{ form.about }}
                 </div>
-                <div>
+                <div class="mt15">
                     {% button "circle-check" "Добавить" "save_about" "" "" %}
                 </div>
             </form>
         </div>
     {% endif %}
 {% else %}
-    <h2>Что такое Гракон?</h2>
     <p>Гракон - мини-соцсеть для координации работы любых организаций и граждан,
     объединенных одной целью - <b>проведением честных выборов</b> президента 4 марта.
 
@@ -146,7 +150,7 @@
 
     {% include "dialogs/presentation.html" %}
 
-    <h2>Примите участие!</h2>
+    <div class="blue-title">Примите участие!</div>
 
     <div class="step"><i>1</i> <p>Найдите <b>свой избирательный участок</b> и
             посмотрите, как проходят выборы в вашем городе:</p>

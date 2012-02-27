@@ -1,8 +1,6 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Представители СМИ ({{ counters.journalist }})</h4>
-</div>
+<div class="side_block_header side_block_journalist">Представители СМИ ({{ counters.journalist }})</div>
 
 <div class="content_block">
     <ul class="side_list">
@@ -21,10 +19,7 @@
             </li>
         {% endfor %}
     </ul>
-    <div class="mb15 mt15">
-    	{% button "circle-check" "Записаться в&nbsp;представители СМИ" "become_journalist" %}
-    </div>
-   
+    <span class="pseudolink" id="become_journalist">Записаться в&nbsp;представители СМИ</span>   
 </div>
 
 {% if user.is_authenticated %}

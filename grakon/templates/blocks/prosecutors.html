@@ -1,8 +1,6 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Представители прокуратуры ({{ counters.prosecutor }})</h4>
-</div>
+<div class="side_block_header side_block_prosecutor">Представители прокуратуры ({{ counters.prosecutor }})</div>
 
 <div class="content_block">
     <ul class="side_list">
@@ -14,10 +12,7 @@
             </li>
         {% endfor %}
     </ul>
-    <div class="mb15 mt15">
-    	{% button "circle-check" "Записаться в&nbsp;представители прокуратуры" "become_prosecutor" %}
-    </div>
-    
+    <span class="pseudolink" id="become_prosecutor">Записаться в&nbsp;представители прокуратуры</span>   
 </div>
 
 {% if user.is_authenticated %}

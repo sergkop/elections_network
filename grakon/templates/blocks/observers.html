@@ -1,8 +1,6 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Наблюдатели ({{ counters.observer }})</h4>
-</div>
+<div class="side_block_header side_block_observer">Наблюдатели ({{ counters.observer }})</div>
 
 <div class="content_block">
     <ul class="side_list">
@@ -22,10 +20,7 @@
             </li>
         {% endfor %}
     </ul>
-    <div class="mb15 mt15">
-    	{% button "circle-check" "Записаться в&nbsp;наблюдатели" "become_observer" %}
-    </div>
-    
+    <span class="pseudolink" id="become_observer">Записаться в&nbsp;наблюдатели</span>
 </div>
 
 {% if user.is_authenticated %}

@@ -1,8 +1,6 @@
 {% load elements %}
 
-<div class="side_block_header">
-    <h4>Члены избирательной комиссии ({{ counters.member }})</h4>
-</div>
+<div class="side_block_header side_block_member">Члены избирательной комиссии ({{ counters.member }})</div>
 
 <div class="content_block">
     <ul class="side_list">
@@ -15,10 +13,7 @@
             </li>
         {% endfor %}
     </ul>
-    <div class="mb15 mt15">
-    	{% button "circle-check" "Записаться<br />в&nbsp;члены комиссии" "become_member" %}
-    </div>
-   
+    <span class="pseudolink" id="become_member">Записаться в&nbsp;члены комиссии</span>
 </div>
 
 {% if user.is_authenticated %}

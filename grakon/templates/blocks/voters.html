@@ -3,11 +3,11 @@
 	.ym-col1 .ym-clearfix .ui-button {font-size: 0.9em; width: 180px;}
 	.ym-col1 .side_block_header h4 {margin: 10px 10px 5px 15px; font-weight: bold;}
 	.ym-col1 .column_header {padding-left: 15px;}
+	.ym-col1 .content_block {padding: 0 1em 1em 2.4em;}
+	.ym-col1 .content_block .pseudolink {font-style: italic; font-size: 0.9em;}
 
 </style>
-<div class="side_block_header">
-    <h4>Избиратели ({{ counters.voter }})</h4>
-</div>
+<div class="side_block_header side_block_voter">Избиратели ({{ counters.voter }})</div>
 
 <div class="content_block">
     <ul id="voters_ul" class="side_list">
@@ -19,9 +19,9 @@
             </li>
         {% endfor %}
     </ul>
-	<div class="mb15 mt15">
-    	{% button "circle-check" "Записаться в избиратели" "become_voter" %}
-    </div>
+	<span class="pseudolink" id="become_voter">Записаться в избиратели</span>
+    	
+
 </div>
 
 {% if user.is_authenticated %}

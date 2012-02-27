@@ -2,7 +2,8 @@
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
-    <script type="text/javascript" src="{% url map_data %}"></script>
+	<script src="{{ STATIC_URL }}js/OpenLayers.js"></script>
+	<script src="{{ STATIC_URL }}js/OL_Yandex.js" type="text/javascript"></script>
 
     <div class="center">
         <div id="publicElectionsMap" style="height:500px; min-width: 300px;"></div>
@@ -10,7 +11,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            ElectionMap.init("{% if current_location.region %}{{ current_location.region }}, {% endif %}{{ current_location.name }}");
+            Grakon.init("{% if current_location.region %}{{ current_location.region }}, {% endif %}{{ current_location.name }}");
         });
     </script>
 {% else %}

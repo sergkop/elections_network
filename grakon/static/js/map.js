@@ -1,10 +1,10 @@
-/**
- * Класс для избирательных округов
+п»ї/**
+ * РљР»Р°СЃСЃ РґР»СЏ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РѕРєСЂСѓРіРѕРІ
  * 
  * @param {level}
- *            уровень избирательного округа (от 1 до 3)
+ *            СѓСЂРѕРІРµРЅСЊ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР° (РѕС‚ 1 РґРѕ 3)
  * @param {data}
- *            объект типа {numVoters: 4, numObservers: 6}
+ *            РѕР±СЉРµРєС‚ С‚РёРїР° {numVoters: 4, numObservers: 6}
  */
 var ElectionCommission = function(id, level, shortTitle, title, address, xCoord, yCoord, data) {
 	this.id = id;
@@ -19,7 +19,7 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
 
 var Grakon = {
 	/**
-	 * Три стиля (начальный, мышь на элементе и элемент выбран) для субъектов РФ
+	 * РўСЂРё СЃС‚РёР»СЏ (РЅР°С‡Р°Р»СЊРЅС‹Р№, РјС‹С€СЊ РЅР° СЌР»РµРјРµРЅС‚Рµ Рё СЌР»РµРјРµРЅС‚ РІС‹Р±СЂР°РЅ) РґР»СЏ СЃСѓР±СЉРµРєС‚РѕРІ Р Р¤
 	 */
 	REGION_STYLES: {
 		'default':	new OpenLayers.Style({
@@ -47,7 +47,7 @@ var Grakon = {
 	},
 	
 	/**
-	 * Три стиля (начальный, мышь на элементе и элемент выбран) для районов субъекта РФ
+	 * РўСЂРё СЃС‚РёР»СЏ (РЅР°С‡Р°Р»СЊРЅС‹Р№, РјС‹С€СЊ РЅР° СЌР»РµРјРµРЅС‚Рµ Рё СЌР»РµРјРµРЅС‚ РІС‹Р±СЂР°РЅ) РґР»СЏ СЂР°Р№РѕРЅРѕРІ СЃСѓР±СЉРµРєС‚Р° Р Р¤
 	 */
 	DISTRICT_STYLES: {
 		'default':	new OpenLayers.Style({
@@ -77,12 +77,12 @@ var Grakon = {
 	
 	/**
 	 * @private
-	 * Объект OpenLayers.Map — используемая карта.
+	 * РћР±СЉРµРєС‚ OpenLayers.Map вЂ” РёСЃРїРѕР»СЊР·СѓРµРјР°СЏ РєР°СЂС‚Р°.
 	 */
 	map: null,
 	
 	/**
-	 * Свойства создаваемой карты.
+	 * РЎРІРѕР№СЃС‚РІР° СЃРѕР·РґР°РІР°РµРјРѕР№ РєР°СЂС‚С‹.
 	 */
 	MAP_OPTIONS: {
 		projection: new OpenLayers.Projection("EPSG:900913"),
@@ -101,7 +101,7 @@ var Grakon = {
 	},
 	
 	/**
-	 * Уровень масштабирования карты, с которого показываются ТИКи.
+	 * РЈСЂРѕРІРµРЅСЊ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ РєР°СЂС‚С‹, СЃ РєРѕС‚РѕСЂРѕРіРѕ РїРѕРєР°Р·С‹РІР°СЋС‚СЃСЏ РўРРљРё.
 	 */
 	MAP_LEVELS_ZOOM: new Object({
 		'country': 0,
@@ -111,7 +111,7 @@ var Grakon = {
 	}),
 	
 	/**
-	 * Массивы слоёв, соответсвующие уровню в иерархии избирательной комиссии
+	 * РњР°СЃСЃРёРІС‹ СЃР»РѕС‘РІ, СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РёРµ СѓСЂРѕРІРЅСЋ РІ РёРµСЂР°СЂС…РёРё РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё
 	 */
 	borderLayers: new Object({
 		'country': null,
@@ -130,12 +130,12 @@ var Grakon = {
 	electionCommissions: new Object(),
 
 	/**
-	 * Пространство имён для вспомогательных функций
+	 * РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјС‘РЅ РґР»СЏ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹С… С„СѓРЅРєС†РёР№
 	 */
 	Utils: {			
 		/**
-		 * Обработчик клика по субъекту РФ. Максимално приближает карту к выбранному субъекту РФ.
-		 * @param {feature} [OpenLayers.Feature] выбранный объект на карте
+		 * РћР±СЂР°Р±РѕС‚С‡РёРє РєР»РёРєР° РїРѕ СЃСѓР±СЉРµРєС‚Сѓ Р Р¤. РњР°РєСЃРёРјР°Р»РЅРѕ РїСЂРёР±Р»РёР¶Р°РµС‚ РєР°СЂС‚Сѓ Рє РІС‹Р±СЂР°РЅРЅРѕРјСѓ СЃСѓР±СЉРµРєС‚Сѓ Р Р¤.
+		 * @param {feature} [OpenLayers.Feature] РІС‹Р±СЂР°РЅРЅС‹Р№ РѕР±СЉРµРєС‚ РЅР° РєР°СЂС‚Рµ
 		 */
 		regionClickHandler: function(feature) {
 			if (feature != null && feature.geometry != null) {
@@ -154,11 +154,11 @@ var Grakon = {
 		},
 		
 		/**
-		 * callback-метод, который считывает данные из GeoJSON,
-		 * возвращаемого в виде результата асинхронного запроса и
-		 * добавляет их на слой субъектов РФ
+		 * callback-РјРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ СЃС‡РёС‚С‹РІР°РµС‚ РґР°РЅРЅС‹Рµ РёР· GeoJSON,
+		 * РІРѕР·РІСЂР°С‰Р°РµРјРѕРіРѕ РІ РІРёРґРµ СЂРµР·СѓР»СЊС‚Р°С‚Р° Р°СЃРёРЅС…СЂРѕРЅРЅРѕРіРѕ Р·Р°РїСЂРѕСЃР° Рё
+		 * РґРѕР±Р°РІР»СЏРµС‚ РёС… РЅР° СЃР»РѕР№ СЃСѓР±СЉРµРєС‚РѕРІ Р Р¤
 		 * @private
-		 * @param {request} указатель на объект асинхронного запроса
+		 * @param {request} СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РѕР±СЉРµРєС‚ Р°СЃРёРЅС…СЂРѕРЅРЅРѕРіРѕ Р·Р°РїСЂРѕСЃР°
 		 */
 		addRegionBorders: function(request) {
 			if (request.status == 200) {
@@ -169,7 +169,7 @@ var Grakon = {
 				var features = geoJSON.read(request.responseText);
 				Grakon.borderLayers.regions.addFeatures(features);
 			} else
-				OpenLayers.Console.error("Запрос границ субъектов РФ из файла GeoJSON вернул статус: " + request.status);
+				OpenLayers.Console.error("Р—Р°РїСЂРѕСЃ РіСЂР°РЅРёС† СЃСѓР±СЉРµРєС‚РѕРІ Р Р¤ РёР· С„Р°Р№Р»Р° GeoJSON РІРµСЂРЅСѓР» СЃС‚Р°С‚СѓСЃ: " + request.status);
 		},
 		
 		addDistrictBorders: function(request) {
@@ -181,13 +181,13 @@ var Grakon = {
 				var features = geoJSON.read(request.responseText);
 				Grakon.borderLayers.districts.addFeatures(features);
 			} else
-				OpenLayers.Console.error("Запрос границ районов субъекта РФ из файла GeoJSON вернул статус: " + request.status);
+				OpenLayers.Console.error("Р—Р°РїСЂРѕСЃ РіСЂР°РЅРёС† СЂР°Р№РѕРЅРѕРІ СЃСѓР±СЉРµРєС‚Р° Р Р¤ РёР· С„Р°Р№Р»Р° GeoJSON РІРµСЂРЅСѓР» СЃС‚Р°С‚СѓСЃ: " + request.status);
 		}
 	},
 	
 	/**
-	 * Создаёт карту и слои с данными в HTML-контейнере с заданным ID.
-	 * @param {mapDivID} ID HTML-контейнера [String]
+	 * РЎРѕР·РґР°С‘С‚ РєР°СЂС‚Сѓ Рё СЃР»РѕРё СЃ РґР°РЅРЅС‹РјРё РІ HTML-РєРѕРЅС‚РµР№РЅРµСЂРµ СЃ Р·Р°РґР°РЅРЅС‹Рј ID.
+	 * @param {mapDivID} ID HTML-РєРѕРЅС‚РµР№РЅРµСЂР° [String]
 	 */
 	init: function(place) {
 		var mapDivID = "publicElectionsMap";
@@ -201,10 +201,10 @@ var Grakon = {
 	},
 	
 	/**
-     * Отмечает приблизительное местоположение пользователя на карте
+     * РћС‚РјРµС‡Р°РµС‚ РїСЂРёР±Р»РёР·РёС‚РµР»СЊРЅРѕРµ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅР° РєР°СЂС‚Рµ
      */
     setUserLocation: function() {
-        // Определяем координаты пользователя и отмечаем на карте
+        // РћРїСЂРµРґРµР»СЏРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рё РѕС‚РјРµС‡Р°РµРј РЅР° РєР°СЂС‚Рµ
         if (YMaps.location) {
             var size = new OpenLayers.Size(32,32);
 			var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
@@ -218,25 +218,25 @@ var Grakon = {
     },
 	
 	/**
-     * Центрирует карту на указанном месте с оптимальным масштабом.
+     * Р¦РµРЅС‚СЂРёСЂСѓРµС‚ РєР°СЂС‚Сѓ РЅР° СѓРєР°Р·Р°РЅРЅРѕРј РјРµСЃС‚Рµ СЃ РѕРїС‚РёРјР°Р»СЊРЅС‹Рј РјР°СЃС€С‚Р°Р±РѕРј.
      * 
      * @param {place} -
-     *            место, которое будет показано на карте. Если не задано, то
-     *            будет показана вся Россия
+     *            РјРµСЃС‚Рѕ, РєРѕС‚РѕСЂРѕРµ Р±СѓРґРµС‚ РїРѕРєР°Р·Р°РЅРѕ РЅР° РєР°СЂС‚Рµ. Р•СЃР»Рё РЅРµ Р·Р°РґР°РЅРѕ, С‚Рѕ
+     *            Р±СѓРґРµС‚ РїРѕРєР°Р·Р°РЅР° РІСЃСЏ Р РѕСЃСЃРёСЏ
      */
     setDefaultView: function(place) {
         var zoom = Grakon.MAP_LEVELS_ZOOM.regions+1;
         var center = new OpenLayers.LonLat(47.57138, 54.8384).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 
-        // Показываем заданное место на карте.
-        if (place == null || place == "") { // Если место не задано, то для
-                                            // пользователя из России будет
-                                            // определено его местоположение и
-                                            // показано на карте с максимальным
-                                            // масштабом;
-            // для пользователя из-за рубежа карта будет отцентрована по
-            // европейской части России.
-            if (YMaps.location && YMaps.location.country == "Россия") {
+        // РџРѕРєР°Р·С‹РІР°РµРј Р·Р°РґР°РЅРЅРѕРµ РјРµСЃС‚Рѕ РЅР° РєР°СЂС‚Рµ.
+        if (place == null || place == "") { // Р•СЃР»Рё РјРµСЃС‚Рѕ РЅРµ Р·Р°РґР°РЅРѕ, С‚Рѕ РґР»СЏ
+                                            // РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР· Р РѕСЃСЃРёРё Р±СѓРґРµС‚
+                                            // РѕРїСЂРµРґРµР»РµРЅРѕ РµРіРѕ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ Рё
+                                            // РїРѕРєР°Р·Р°РЅРѕ РЅР° РєР°СЂС‚Рµ СЃ РјР°РєСЃРёРјР°Р»СЊРЅС‹Рј
+                                            // РјР°СЃС€С‚Р°Р±РѕРј;
+            // РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР·-Р·Р° СЂСѓР±РµР¶Р° РєР°СЂС‚Р° Р±СѓРґРµС‚ РѕС‚С†РµРЅС‚СЂРѕРІР°РЅР° РїРѕ
+            // РµРІСЂРѕРїРµР№СЃРєРѕР№ С‡Р°СЃС‚Рё Р РѕСЃСЃРёРё.
+            if (YMaps.location && YMaps.location.country == "Р РѕСЃСЃРёСЏ") {
                 center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                 zoom = YMaps.location.zoom;
             }
@@ -246,10 +246,10 @@ var Grakon = {
             var geocoder = new YMaps.Geocoder(place, {
                 geocodeProvider : "yandex#map"
             });
-            // Создает обработчик успешного завершения геокодирования
+            // РЎРѕР·РґР°РµС‚ РѕР±СЂР°Р±РѕС‚С‡РёРє СѓСЃРїРµС€РЅРѕРіРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ РіРµРѕРєРѕРґРёСЂРѕРІР°РЅРёСЏ
             YMaps.Events.observe(geocoder, geocoder.Events.Load, function() {
-                // Если объект найден, устанавливает центр карты в центр области
-                // показа объекта
+                // Р•СЃР»Рё РѕР±СЉРµРєС‚ РЅР°Р№РґРµРЅ, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С†РµРЅС‚СЂ РєР°СЂС‚С‹ РІ С†РµРЅС‚СЂ РѕР±Р»Р°СЃС‚Рё
+                // РїРѕРєР°Р·Р° РѕР±СЉРµРєС‚Р°
                     if (this.length()) {
                         var left = this.get(0).getBounds().getLeft();
 						var bottom = this.get(0).getBounds().getLeft();
@@ -261,15 +261,15 @@ var Grakon = {
                         Grakon.map.setCenter(center, zoom);
 			});
 
-            // Процесс геокодирования завершен с ошибкой
+            // РџСЂРѕС†РµСЃСЃ РіРµРѕРєРѕРґРёСЂРѕРІР°РЅРёСЏ Р·Р°РІРµСЂС€РµРЅ СЃ РѕС€РёР±РєРѕР№
             YMaps.Events.observe(geocoder, geocoder.Events.Fault, function(gc, error) {
-                OpenLayers.Console.error("Произошла ошибка: " + error);
+                OpenLayers.Console.error("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: " + error);
             });
         }
     },
 	
 	/**
-	 * Задаёт способ вывода логов и сообщений об ошибках
+	 * Р—Р°РґР°С‘С‚ СЃРїРѕСЃРѕР± РІС‹РІРѕРґР° Р»РѕРіРѕРІ Рё СЃРѕРѕР±С‰РµРЅРёР№ РѕР± РѕС€РёР±РєР°С…
 	 */
 	setupLogging: function() {
 		OpenLayers.Console = window.console;
@@ -277,36 +277,36 @@ var Grakon = {
 	},
 	
 	/**
-	 * Создаёт карту в заданном HTML-контейнере
-	 * @param {mapDivID} ID HTML-контейнера [String]
+	 * РЎРѕР·РґР°С‘С‚ РєР°СЂС‚Сѓ РІ Р·Р°РґР°РЅРЅРѕРј HTML-РєРѕРЅС‚РµР№РЅРµСЂРµ
+	 * @param {mapDivID} ID HTML-РєРѕРЅС‚РµР№РЅРµСЂР° [String]
 	 */
 	initMap: function(mapDivID) {
 		Grakon.map = new OpenLayers.Map(mapDivID, Grakon.MAP_OPTIONS);
 		
-		// слушаем событие окончания масштабирования
+		// СЃР»СѓС€Р°РµРј СЃРѕР±С‹С‚РёРµ РѕРєРѕРЅС‡Р°РЅРёСЏ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ
 		Grakon.map.events.register("zoomend", Grakon.map, function() {
-			// границы регионов
+			// РіСЂР°РЅРёС†С‹ СЂРµРіРёРѕРЅРѕРІ
 			if (Grakon.borderLayers.regions != null)
 				Grakon.borderLayers.regions.setVisibility( this.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts );
 			
-			// границы районов
+			// РіСЂР°РЅРёС†С‹ СЂР°Р№РѕРЅРѕРІ
 			if (Grakon.borderLayers.districts != null)
 				Grakon.borderLayers.districts.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts );
 				
-			// видимость ИКСов
+			// РІРёРґРёРјРѕСЃС‚СЊ РРљРЎРѕРІ
 			if (Grakon.electionCommissionLayers.regions != null)
 				Grakon.electionCommissionLayers.regions.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.regions );
 				
-			// видимость ТИКов
+			// РІРёРґРёРјРѕСЃС‚СЊ РўРРљРѕРІ
 			if (Grakon.electionCommissionLayers.districts != null)
 				Grakon.electionCommissionLayers.districts.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts );
 				
-			// видимость УИКов
+			// РІРёРґРёРјРѕСЃС‚СЊ РЈРРљРѕРІ
 			if (Grakon.electionCommissionLayers.areas != null)
 				Grakon.electionCommissionLayers.areas.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas );
 		});
 		
-		// слушаем событие окончания перемещения по карте
+		// СЃР»СѓС€Р°РµРј СЃРѕР±С‹С‚РёРµ РѕРєРѕРЅС‡Р°РЅРёСЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РїРѕ РєР°СЂС‚Рµ
 		Grakon.map.events.register("moveend", Grakon.map, function() {
 			if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas) {
 				var bounds = Grakon.map.getExtent().transform(Grakon.map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326")).toArray();
@@ -324,14 +324,14 @@ var Grakon = {
 						if (request.status == 200) {
 							eval(request.responseText);
 							if (electionCommissions != null) {
-								// Добавим слой УИКи
+								// Р”РѕР±Р°РІРёРј СЃР»РѕР№ РЈРРљРё
 								if (Grakon.electionCommissionLayers.areas == null) {
-									var areasLayer = new OpenLayers.Layer.Markers( "УИКи" );
+									var areasLayer = new OpenLayers.Layer.Markers( "РЈРРљРё" );
 									Grakon.electionCommissionLayers.areas = areasLayer;
 									Grakon.map.addLayer( areasLayer );
 								}
 								
-								// Добавим новые (не показанные) УИКи на карту
+								// Р”РѕР±Р°РІРёРј РЅРѕРІС‹Рµ (РЅРµ РїРѕРєР°Р·Р°РЅРЅС‹Рµ) РЈРРљРё РЅР° РєР°СЂС‚Сѓ
 								for (var uikID in electionCommissions)
 									if (Grakon.electionCommissions[uikID] == null) {
 										Grakon.electionCommissions[uikID] = electionCommissions[uikID];
@@ -352,10 +352,10 @@ var Grakon = {
 									}
 							}
 						} else
-							OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
+							OpenLayers.Console.error("Р—Р°РїСЂРѕСЃ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РєРѕРјРёСЃСЃРёР№ РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РєРІР°РґСЂР°С‚Р° РІРµСЂРЅСѓР» СЃС‚Р°С‚СѓСЃ: " + request.status);
 					},
 					function() {
-						OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
+						OpenLayers.Console.error("РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РєРѕРјРёСЃСЃРёР№ РґР»СЏ Р·Р°РґР°РЅРЅРѕРіРѕ РєРІР°РґСЂР°С‚Р°.");
 					}
 				);
 			}
@@ -363,13 +363,13 @@ var Grakon = {
 	},
 	
 	/**
-	 * Создаёт и добавляет слои на карту
+	 * РЎРѕР·РґР°С‘С‚ Рё РґРѕР±Р°РІР»СЏРµС‚ СЃР»РѕРё РЅР° РєР°СЂС‚Сѓ
 	 */
 	initMapLayers: function() {
-		var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс",{sphericalMercator: true});
-		var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
-		var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
-		var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
+		var Y_map = new OpenLayers.Layer.Yandex("РљР°СЂС‚Р°-СЃС…РµРјР° РѕС‚ РЇРЅРґРµРєСЃ",{sphericalMercator: true});
+		var Y_sat = new OpenLayers.Layer.Yandex("Р’РёРґ СЃРѕ СЃРїСѓС‚РЅРёРєР° РѕС‚ РЇРЅРґРµРєСЃ",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
+		var Y_hyb = new OpenLayers.Layer.Yandex("Р“РёР±СЂРёРґРЅС‹Р№ РІРёРґ РѕС‚ РЇРЅРґРµРєСЃ",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
+		var OSM_map = new OpenLayers.Layer.OSM("РљР°СЂС‚Р°-СЃС…РµРјР° РѕС‚ OpenStreetMap");
 		Grakon.map.addLayer(Y_map);
 		Grakon.map.addLayer(OSM_map);
 		Grakon.map.addLayer(Y_sat);
@@ -382,15 +382,15 @@ var Grakon = {
 	},
 	
 	/**
-	 * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
+	 * РЎРѕР·РґР°С‚СЊ РІРµРєС‚РѕСЂРЅС‹Р№ СЃР»РѕР№ СЃСѓР±СЉРµРєС‚РѕРІ Р Р¤ СЃ РІС‹РґРµР»РµРЅРёРµРј С†РІРµС‚РѕРј РїСЂРё РґРµР№СЃС‚РІРёСЏС… РјС‹С€Рё Рё РґРѕР±Р°РІРёС‚СЊ РµРіРѕ РЅР° РєР°СЂС‚Сѓ
 	 */
 	addRegions: function() {			
-		var regions = new OpenLayers.Layer.Vector("Субъекты РФ", {
+		var regions = new OpenLayers.Layer.Vector("РЎСѓР±СЉРµРєС‚С‹ Р Р¤", {
 			projection: new OpenLayers.Projection("EPSG:4326"),
 			styleMap: new OpenLayers.StyleMap(Grakon.REGION_STYLES)
 		});
 
-		// выделять субъект РФ цветом при наведении мыши
+		// РІС‹РґРµР»СЏС‚СЊ СЃСѓР±СЉРµРєС‚ Р Р¤ С†РІРµС‚РѕРј РїСЂРё РЅР°РІРµРґРµРЅРёРё РјС‹С€Рё
 		var highlightCtrl = new OpenLayers.Control.SelectFeature(regions, {
 			hover: true,
 			highlightOnly: true,
@@ -399,7 +399,7 @@ var Grakon = {
 		Grakon.map.addControl(highlightCtrl);
 		highlightCtrl.activate();
 
-		// показать субъект РФ на всю карту при клике на нём
+		// РїРѕРєР°Р·Р°С‚СЊ СЃСѓР±СЉРµРєС‚ Р Р¤ РЅР° РІСЃСЋ РєР°СЂС‚Сѓ РїСЂРё РєР»РёРєРµ РЅР° РЅС‘Рј
 		var selectCtrl = new OpenLayers.Control.SelectFeature(regions, {
 			clickout: true,
 			select: Grakon.Utils.regionClickHandler
@@ -407,22 +407,22 @@ var Grakon = {
 		Grakon.map.addControl(selectCtrl);
 		selectCtrl.activate();
 
-		// Добавить слой на карту
+		// Р”РѕР±Р°РІРёС‚СЊ СЃР»РѕР№ РЅР° РєР°СЂС‚Сѓ
 		Grakon.map.addLayer(regions);
 		Grakon.borderLayers.regions = regions;
 
-		// Загрузить данные на слой
+		// Р—Р°РіСЂСѓР·РёС‚СЊ РґР°РЅРЅС‹Рµ РЅР° СЃР»РѕР№
 		OpenLayers.loadURL(Grakon.MAP_URLS.regions, {}, Grakon.Utils, Grakon.Utils.addRegionBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
+			OpenLayers.Console.error("РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РіСЂР°РЅРёС† СЃСѓР±СЉРµРєС‚РѕРІ Р Р¤");
 		});
 	},
 	
 	/**
-	 * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
+	 * РЎРѕР·РґР°С‚СЊ РІРµРєС‚РѕСЂРЅС‹Р№ СЃР»РѕР№ СЃСѓР±СЉРµРєС‚РѕРІ Р Р¤ СЃ РІС‹РґРµР»РµРЅРёРµРј С†РІРµС‚РѕРј РїСЂРё РґРµР№СЃС‚РІРёСЏС… РјС‹С€Рё Рё РґРѕР±Р°РІРёС‚СЊ РµРіРѕ РЅР° РєР°СЂС‚Сѓ
 	 */
 	addElectionCommissions: function() {
-		// Добавляем слой ТИКов
-		var electionCommissionsLevel3 = new OpenLayers.Layer.Text("ТИКи", {
+		// Р”РѕР±Р°РІР»СЏРµРј СЃР»РѕР№ РўРРљРѕРІ
+		var electionCommissionsLevel3 = new OpenLayers.Layer.Text("РўРРљРё", {
 			location: Grakon.MAP_URLS.electionCommissionsType3,
 			projection: new OpenLayers.Projection("EPSG:4326")
 		});
@@ -430,8 +430,8 @@ var Grakon = {
 		Grakon.map.addLayer(electionCommissionsLevel3);
 		Grakon.electionCommissionLayers.districts = electionCommissionsLevel3;
 		
-		// Добавляем слой ИКСов
-		var electionCommissionsLevel2 = new OpenLayers.Layer.Text("ИКСы", {
+		// Р”РѕР±Р°РІР»СЏРµРј СЃР»РѕР№ РРљРЎРѕРІ
+		var electionCommissionsLevel2 = new OpenLayers.Layer.Text("РРљРЎС‹", {
 			location: Grakon.MAP_URLS.electionCommissionsType2,
 			projection: new OpenLayers.Projection("EPSG:4326")
 		});
@@ -440,15 +440,15 @@ var Grakon = {
 	},
 	
 	addDistricts: function() {			
-		var districts = new OpenLayers.Layer.Vector("Районы", {
+		var districts = new OpenLayers.Layer.Vector("Р Р°Р№РѕРЅС‹", {
 			projection: new OpenLayers.Projection("EPSG:4326"),
 			styleMap: new OpenLayers.StyleMap(Grakon.DISTRICT_STYLES)
 		});
-		// Добавить слой на карту
+		// Р”РѕР±Р°РІРёС‚СЊ СЃР»РѕР№ РЅР° РєР°СЂС‚Сѓ
 		districts.setVisibility(false);
 		Grakon.borderLayers.districts = districts;
 		
-		// выделять субъект РФ цветом при наведении мыши
+		// РІС‹РґРµР»СЏС‚СЊ СЃСѓР±СЉРµРєС‚ Р Р¤ С†РІРµС‚РѕРј РїСЂРё РЅР°РІРµРґРµРЅРёРё РјС‹С€Рё
 		var highlightCtrl = new OpenLayers.Control.SelectFeature(districts, {
 			hover: true,
 			highlightOnly: true,
@@ -457,7 +457,7 @@ var Grakon = {
 		Grakon.map.addControl(highlightCtrl);
 		highlightCtrl.activate();
 
-		// показать субъект РФ на всю карту при клике на нём
+		// РїРѕРєР°Р·Р°С‚СЊ СЃСѓР±СЉРµРєС‚ Р Р¤ РЅР° РІСЃСЋ РєР°СЂС‚Сѓ РїСЂРё РєР»РёРєРµ РЅР° РЅС‘Рј
 		var selectCtrl = new OpenLayers.Control.SelectFeature(districts, {
 			clickout: true,
 			select: Grakon.Utils.districtClickHandler
@@ -465,19 +465,19 @@ var Grakon = {
 		Grakon.map.addControl(selectCtrl);
 		selectCtrl.activate();
 
-		// Загрузить данные на слой
+		// Р—Р°РіСЂСѓР·РёС‚СЊ РґР°РЅРЅС‹Рµ РЅР° СЃР»РѕР№
 		OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+			OpenLayers.Console.error("РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ СЂР°Р№РѕРЅРѕРІ СЃСѓР±СЉРµРєС‚Р° Р Р¤");
 		});
 		OpenLayers.loadURL("/static/districts/49s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+			OpenLayers.Console.error("РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ СЂР°Р№РѕРЅРѕРІ СЃСѓР±СЉРµРєС‚Р° Р Р¤");
 		});
 		
 		Grakon.map.addLayer(districts);
 	},
 	
 	/**
-	 * Добавляет инструменты управления на карту (например, масштабирование и выбор слоя)
+	 * Р”РѕР±Р°РІР»СЏРµС‚ РёРЅСЃС‚СЂСѓРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ РЅР° РєР°СЂС‚Сѓ (РЅР°РїСЂРёРјРµСЂ, РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРµ Рё РІС‹Р±РѕСЂ СЃР»РѕСЏ)
 	 */
 	initMapTools: function() {
 		Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());                  		

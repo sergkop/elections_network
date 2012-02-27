@@ -360,7 +360,7 @@ var Grakon = {
 					'y1': bottom,
 					'y2': top},
 					null,
-					Grakon.loadUIKsForBBOX,
+					Grakon.Utils.loadUIKsForBBOX,
 					function() {
 						OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
 					}

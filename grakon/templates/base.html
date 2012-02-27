@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta property="fb:admins" content="1844239989" />
     <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
-	<link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
-    
+    <link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
+
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
     <meta property="og:image" content="{{ URL_PREFIX }}{{ STATIC_URL }}images/logo_small.png" />
@@ -33,8 +33,8 @@
             {% if current_location.tik %}{{current_location.tik.id }},{% endif %}
             {% if current_location %}{{ current_location.id }}{% endif %}
         ];
-        var IS_USER_PROFILE = {% if user == profile_user %}true{% else %}false{% endif %};
-        var USERNAME = "{{ user.username }}";
+        var IS_USER_PROFILE = {% if request.user == profile_user %}true{% else %}false{% endif %};
+        var USERNAME = "{{ request.user.username }}";
         var CONTACTS = {{ CONTACTS|safe }};
         var REPORTS = {{ REPORTS|safe }};
         var LOGIN_URL = "{% url login %}";
@@ -80,7 +80,10 @@
                 </form-->
 
                 <div class="login_logout">
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
+                        {% if request.roles.voter %}
+                            <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
+                        {% endif %}
                         <a href="{% url my_profile %}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
                         <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
                     {% else %}
@@ -174,7 +177,7 @@
         </div>
     </footer>
 
-{% if not user.is_authenticated %}
+{% if not request.user.is_authenticated %}
     <!-- TODO: move it to the top -->
     {% include "dialogs/login.html" %}
     <script type="text/javascript">

@@ -129,6 +129,7 @@ def map_data(request):
     return get_locations_data(Location.objects.filter(tik=None))
 
 def locations_data(request):
+    """ level = 1,2,3,4 """
     coords = {}
     for name in ('x1', 'y1', 'x2', 'y2'):
         try:
@@ -136,6 +137,21 @@ def locations_data(request):
         except ValueError:
             return HttpResponse('"error"')
 
+    try:
+        level = int(request.GET.get('level', ''))
+    except ValueError:
+        return HttpResponse('"error"')
+
     queryset = Location.objects.filter(x_coord__gt=coords['x1'], x_coord__lt=coords['x2'],
             y_coord__gt=coords['y1'], y_coord__lt=coords['y2'])
+
+    if level == 2:
+        queryset = queryset.filter(region=None)
+    elif level == 3:
+        queryset = queryset.exclude(region=None).filter(tik=None)
+    elif level == 4:
+        queryset = queryset.exclude(tik=None)
+    else:
+        return HttpResponse('"error"')
+
     return get_locations_data(queryset)

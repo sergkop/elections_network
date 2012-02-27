@@ -1,579 +1,486 @@
 /**
- * РљР»Р°СЃСЃ РґР»СЏ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РѕРєСЂСѓРіРѕРІ
+ * Класс для избирательных округов
  * 
  * @param {level}
- *            СѓСЂРѕРІРµРЅСЊ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР° (РѕС‚ 1 РґРѕ 3)
+ *            уровень избирательного округа (от 1 до 3)
  * @param {data}
- *            РѕР±СЉРµРєС‚ С‚РёРїР° {numVoters: 4, numObservers: 6}
+ *            объект типа {numVoters: 4, numObservers: 6}
  */
-var ElectionCommission = function(id, level, shortTitle, title, address,
-        xCoord, yCoord, data) {
-    this.id = id;
-    this.level = level < 1 ? 1 : level > 3 ? 3 : level;
-    this.shortTitle = shortTitle;
-    this.title = title;
-    this.address = address;
-    this.data = data;
-    this.xCoord = xCoord;
-    this.yCoord = yCoord;
+var ElectionCommission = function(id, level, shortTitle, title, address, xCoord, yCoord, data) {
+	this.id = id;
+	this.level = level < 1 ? 1 : level > 3 ? 3 : level;
+	this.shortTitle = shortTitle;
+	this.title = title;
+	this.address = address;
+	this.data = data;
+	this.xCoord = xCoord;
+	this.yCoord = yCoord;
 };
 
-/**
- * РРјРµРЅРѕРІР°РЅРЅР°СЏ РѕР±Р»Р°СЃС‚СЊ РІРёРґРёРјРѕСЃС‚Рё РґР»СЏ РѕР±С‰РµСЃС‚РІРµРЅРЅРѕР№ РєР°СЂС‚С‹ РІС‹Р±РѕСЂРѕРІ.
- */
-var ElectionMap = {
-    map : null,
+var Grakon = {
+	/**
+	 * Три стиля (начальный, мышь на элементе и элемент выбран) для субъектов РФ
+	 */
+	REGION_STYLES: {
+		'default':	new OpenLayers.Style({
+					  'fillColor': '#66cccc',
+					  'fillOpacity': 0.1,
+					  'strokeColor': '#66cccc',
+					  'strokeOpacity': 0.25,
+					  'strokeWidth': 1
+					}),
+		'temporary':	new OpenLayers.Style({
+						  'fillColor': '#ee9900',
+						  'fillOpacity': 0.4,
+						  'strokeColor': '#ee9900',
+						  'strokeOpacity': 1,
+						  'strokeWidth': 2,
+						  'cursor': 'pointer'
+						}),
+		'select':	new OpenLayers.Style({
+					  'fillColor': '#0000ff',
+					  'fillOpacity': 0.4,
+					  'strokeColor': '#0000ff',
+					  'strokeOpacity': 1,
+					  'strokeWidth': 2
+					})
+	},
+	
+	/**
+	 * Три стиля (начальный, мышь на элементе и элемент выбран) для районов субъекта РФ
+	 */
+	DISTRICT_STYLES: {
+		'default':	new OpenLayers.Style({
+					  'fillColor': '#66cccc',
+					  'fillOpacity': 0.2,
+					  'strokeColor': '#000000',
+					  'strokeOpacity': 0.75,
+					  'strokeWidth': 2,
+					  'strokeDashstyle': 'dot'
+					}),
+		'temporary':	new OpenLayers.Style({
+						  'fillColor': '#ee9900',
+						  'fillOpacity': 0.4,
+						  'strokeColor': '#ee9900',
+						  'strokeOpacity': 1,
+						  'strokeWidth': 2,
+						  'cursor': 'pointer'
+						}),
+		'select':	new OpenLayers.Style({
+					  'fillColor': '#0000ff',
+					  'fillOpacity': 0.4,
+					  'strokeColor': '#0000ff',
+					  'strokeOpacity': 1,
+					  'strokeWidth': 2
+					})
+	},
+	
+	/**
+	 * @private
+	 * Объект OpenLayers.Map — используемая карта.
+	 */
+	map: null,
+	
+	/**
+	 * Свойства создаваемой карты.
+	 */
+	MAP_OPTIONS: {
+		projection: new OpenLayers.Projection("EPSG:900913"),
+		units: "m",
+		numZoomLevels: 18,
+		displayProjection: new OpenLayers.Projection("EPSG:4326"),
+		maxResolution: 156543.0339,
+		maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
+		controls:[]
+	},
+	
+	MAP_URLS: {
+		regions: "/static/oblasts_simplified.json",
+		electionCommissionsType2: "/static/election_commissions_level_2.txt",
+		electionCommissionsType3: "/static/election_commissions_level_3.txt"
+	},
+	
+	/**
+	 * Уровень масштабирования карты, с которого показываются ТИКи.
+	 */
+	MAP_LEVELS_ZOOM: new Object({
+		'country': 0,
+		'regions': 3,
+		'districts': 7,
+		'areas': 11
+	}),
+	
+	/**
+	 * Массивы слоёв, соответсвующие уровню в иерархии избирательной комиссии
+	 */
+	borderLayers: new Object({
+		'country': null,
+		'regions': null,
+		'districts': null,
+		'areas': null
+	}),
+	
+	electionCommissionLayers: new Object({
+		'country': null,
+		'regions': null,
+		'districts': null,
+		'areas': null
+	}),
+	
+	electionCommissions: new Object(),
 
-    placemarks : null,
-
-    buttons : null,
-
-    electionCommissionLevel : null,
-
-    visibleElectionCommissions : new Array(),
-
-    centerNearestElectionCommission : null,
-
-    distanceToNearestElectionCommission : null,
-
-    objManager : new YMaps.ObjectManager(),
-
-    placemarkStyles : new Array(),
-    
-    MAX_ZOOM: 16,   // РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓСЂРѕРІРµРЅСЊ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ
-
-    // РџРµСЂРµРјРµРЅРЅР°СЏ, РІ РєРѕС‚РѕСЂРѕР№ Р·Р°РґР°РЅС‹ РІСЃРµ С‚РёРїС‹ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ РґР»СЏ РєР°СЂС‚С‹.
-    MAP_LEVELS : new Array( {
-        index : 2,
-        value : "Р¦РРљ"
-    }, {
-        index : 6,
-        value : ""
-    }, {
-        index : 12,
-        value : "РўРРљРё"
-    }, {
-        index : 4,
-        value : "РРљРЎС‹"
-    }),
-    
-    MAP_TYPES: new Array(YMaps.MapType.PMAP,
-                         YMaps.MapType.MAP,
-                         YMaps.MapType.SATELLITE,
-                         YMaps.MapType.PHYBRID,
-                         YMaps.MapType.HYBRID),
-
-    /**
-     * Р”РѕР±Р°РІР»СЏРµРј РќР°СЂРѕРґРЅСѓСЋ РЇРЅРґРµРєСЃ.РљР°СЂС‚Сѓ РЅР° СЃС‚СЂР°РЅРёС†Сѓ Рё РѕС‚РјРµС‡Р°РµРј РЅР° РЅРµР№ РІСЃРµ
-     * РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹Рµ РєРѕРјРёСЃСЃРёРё.
-     * 
-     * @param {place}
-     *            РЅР°Р·РІР°РЅРёРµ РѕР±Р»Р°СЃС‚Рё РёР»Рё СЂР°Р№РѕРЅР°, РєРѕС‚РѕСЂС‹Р№ СЃР»РµРґСѓРµС‚ РїРѕРєР°Р·Р°С‚СЊ
-     *            РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ. Р—Р°РґР°С‚СЊ null, С‡С‚РѕР±С‹ РїРѕРєР°Р·Р°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ РёР·
-     *            Р РѕСЃСЃРёРё РµРіРѕ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ, Р° РґР»СЏ Р·Р°РіСЂР°РЅРёС‡РЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
-     *            РїРѕРєР°Р·Р°С‚СЊ РµРІСЂРѕРїРµР№СЃРєСѓСЋ С‡Р°СЃС‚СЊ Р РѕСЃСЃРёРё.
-     * @param {electionCommissionLevel}
-     *            СѓРєР°Р·С‹РІР°РµС‚ СѓСЂРѕРІРµРЅСЊ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё, РєРѕС‚РѕСЂР°СЏ РґРѕР»Р¶РЅР°
-     *            РїРѕРїР°СЃС‚СЊ РІ РјР°СЃС€С‚Р°Р± РєР°СЂС‚С‹ РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ.
-     */
-    init : function(place, electionCommissionLevel) {
-        ElectionMap.initElectionCommissionLevel(electionCommissionLevel);
-        ElectionMap.initPlacemarkStyles();
-        ElectionMap.initMap("publicElectionsMap");
-        ElectionMap.initTools(place);
-
-        ElectionMap.get().addOverlay(ElectionMap.objManager);
-        ElectionMap.setUserLocation();
-        
-        // РџРѕРєР°Р·Р°С‚СЊ РЅР° РєР°СЂС‚Рµ Р·Р°РґР°РЅРЅРѕРµ РјРµСЃС‚Рѕ
-        ElectionMap.setDefaultView(place);
-
-        // ElectionMap.addButtons();
-    },
-    
-    /**
-     * Р—Р°РґР°С‘С‚ СѓСЂРѕРІРµРЅСЊ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР°. РљР°Рє РјРёРЅРёРјСѓРј РѕРґРЅР° РєРѕРјРјРёСЃСЃРёСЏ РґР°РЅРЅРѕРіРѕ СѓСЂРѕРІРЅСЏ Р±СѓРґРµС‚ РїРѕРєР°Р·Р°РЅР° РЅР° РЅР°С‡Р°Р»СЊРЅРѕРј РІРёРґРµ. 
-     * @param {electionCommissionLevel} С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 3
-     */
-    initElectionCommissionLevel: function(electionCommissionLevel) {
-        if (electionCommissionLevel != null && electionCommissionLevel != "")
-            ElectionMap.electionCommissionLevel = electionCommissionLevel;
-    },
-    
-    /**
-     * РЎРѕР·РґР°С‘С‚ РєР°СЂС‚Сѓ Рё Р·Р°РґР°С‘С‚ РЅР°СЃС‚СЂРѕР№РєРё
-     * @param {mapDivID} ID HTML-РєРѕРЅС‚РµР№РЅРµСЂР° РєР°СЂС‚С‹
-     */
-    initMap: function(mapDivID) {
-        ElectionMap.set( new YMaps.Map(document.getElementById(mapDivID)) );
-        
-        // Р—Р°РґР°С‘С‚ СЃРѕС…СЂР°РЅС‘РЅРЅС‹Р№ С‚РёРї РєР°СЂС‚С‹
-        var savedMapTypeIndex = $.cookie('MAP_TYPE_INDEX');
-        if (savedMapTypeIndex == null)
-            ElectionMap.get().setType(YMaps.MapType.PMAP);
-        else
-            ElectionMap.get().setType( ElectionMap.MAP_TYPES[savedMapTypeIndex] );
-        
-        ElectionMap.get().setMinZoom(2);
-        ElectionMap.get().enableScrollZoom();
-        
-        // РЎРѕС…СЂР°РЅСЏРµРј РІС‹Р±СЂР°РЅРЅС‹Р№ С‚РёРї РєР°СЂС‚С‹ РІ РєСѓРєРёР·
-        YMaps.Events.observe(ElectionMap.get(), ElectionMap.get().Events.TypeChange, function(map) {
-            $.cookie('MAP_TYPE_INDEX', ElectionMap.MAP_TYPES.indexOf(map.getType()), {expires: 92, path: '/'});
-        });
-        
-        // РџРµСЂРµРёРјРµРЅРѕРІС‹РІР°РµРј С‚РёРїС‹ РєР°СЂС‚, С‡С‚РѕР±С‹ РёС… РјРѕР¶РЅРѕ Р±С‹Р»Рѕ СЂР°Р·Р»РёС‡Р°С‚СЊ. РќР°СЂРѕРґРЅС‹Рµ
-        // РєР°СЂС‚С‹ РёРјРµСЋС‚ РёРЅРґРµРєСЃ 1, РѕР±С‹С‡РЅС‹Рµ - РёРЅРґРµРєСЃ 2.
-        YMaps.MapType.PMAP.setName("РЎС…РµРјР°С‚РёС‡РµСЃРєРёР№ РІРёРґ 1");
-        YMaps.MapType.MAP.setName("РЎС…РµРјР°С‚РёС‡РµСЃРєРёР№ РІРёРґ 2");
-        YMaps.MapType.SATELLITE.setName("РЎРїСѓС‚РЅРёРєРѕРІС‹Р№ РІРёРґ");
-        YMaps.MapType.PHYBRID.setName("Р“РёР±СЂРёРґРЅС‹Р№ РІРёРґ 1");
-        YMaps.MapType.HYBRID.setName("Р“РёР±СЂРёРґРЅС‹Р№ РІРёРґ 2");
-        ElectionMap.get().addControl(new YMaps.TypeControl( ElectionMap.MAP_TYPES,
-                [ 0, 1, 2, 3, 4 ], {width: 175})); // РѕР±СЉСЏРІР»СЏРµРј РґРѕСЃС‚СѓРїРЅС‹Рµ С‚РёРїС‹ РєР°СЂС‚
-    },
-
-    /**
-     * РЎРѕР·РґР°С‘Рј СЃС‚РёР»Рё РґР»СЏ РјРµС‚РѕРє РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РєРѕРјРёСЃСЃРёР№
-     */
-    initPlacemarkStyles : function() {
-        var s = new YMaps.Style();
-        s.iconStyle = new YMaps.IconStyle();
-        s.iconStyle.href = "/static/images/election_commission.png";
-        s.iconStyle.size = new YMaps.Point(24, 28);
-        s.iconStyle.offset = new YMaps.Point(-17, -19);
-
-        ElectionMap.placemarkStyles.push(s);
-        ElectionMap.placemarkStyles.push("default#darkbluePoint");
-        ElectionMap.placemarkStyles.push("default#lightbluePoint");
-    },
-    
-    /**
-     * Р—Р°РґР°С‘С‚ РѕР±СЉРµРєС‚ РєР°СЂС‚С‹ РґР»СЏ РґР°РЅРЅРѕР№ СЃРµСЃСЃРёРё.
-     * @param {map} РѕР±СЉРµРєС‚ С‚РёРїР° YMaps.Map
-     */
-    set: function(map) {
-        this.map = map;
-    },
-    
-    /**
-     * Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕР±СЉРµРєС‚ РєР°СЂС‚С‹
-     * @returns РѕР±СЉРµРєС‚ С‚РёРїР° YMaps.Map
-     */
-    get: function() {
-        return this.map;
-    },
-    
-    /**
-     * Р”РѕР±Р°РІР»СЏРµС‚ РєРЅРѕРїРєРё Рё РїР°РЅРµР»Рё РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ Рё РїРѕРёСЃРєР°
-     */
-    initTools: function(place) {
-        // Р”РѕР±Р°РІР»СЏРµРј РєРЅРѕРїРєРё
-        var maximizeButton = ElectionMap.buildMaximizeButton();
-        var toolbar = new YMaps.ToolBar([
-                                     maximizeButton,
-                                     new YMaps.ToolBar.MoveButton(),
-                                     new YMaps.ToolBar.MagnifierButton(),
-                                     new YMaps.ToolBar.RulerButton()]);
-        ElectionMap.get().addControl(toolbar);
-        
-        // Р”РѕР±Р°РІР»СЏРµРј РїР°РЅРµР»СЊ РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёСЏ
-        ElectionMap.get().addControl(new YMaps.Zoom( {
-            customTips : ElectionMap.MAP_LEVELS
-        }));
-        
-        // Р”РѕР±Р°РІР»СЏРµРј РїР°РЅРµР»СЊ РїРѕРёСЃРєР°
-        ElectionMap.get().addControl(new YMaps.SearchControl( {
-            width : (place == null || place == "") ? 400 : 200
-        }));
-    },
-    
-    /**
-     * РЎРѕР·РґР°С‘С‚ РєРЅРѕРїРєСѓ "РЅР° РїРѕР»РЅС‹Р№ СЌРєСЂР°РЅ"
-     * @returns РѕР±СЉРµРєС‚ С‚РёРїР° YMaps.ToolBarToggleButton
-     */
-    buildMaximizeButton: function() {
-        // РЎРѕР·РґР°РЅРёРµ РєРЅРѕРїРєРё-С„Р»Р°Р¶РєР°
-        var button = new YMaps.ToolBarToggleButton({ 
-            icon: "/static/images/fullscreen.gif", 
-            hint: "Р Р°Р·РІРѕСЂР°С‡РёРІР°РµС‚ РєР°СЂС‚Сѓ РЅР° РІРµСЃСЊ СЌРєСЂР°РЅ"
-        });
-
-        // Р•СЃР»Рё РєРЅРѕРїРєР° Р°РєС‚РёРІРЅР°, С‚Рѕ РєР°СЂС‚Р° СЂР°Р·РІРѕСЂР°С‡РёРІР°РµС‚СЃСЏ РІРѕ РІРµСЃСЊ СЌРєСЂР°РЅ
-        YMaps.Events.observe(button, button.Events.Select, function () {
-            setSize();
-        });
-        
-        // Р•СЃР»Рё РєРЅРѕРїРєР° РЅРµР°РєС‚РёРІРЅР°, С‚Рѕ РєР°СЂС‚Р° РїСЂРёРЅРёРјР°РµС‚ С„РёРєСЃРёСЂРѕРІР°РЅРЅС‹Р№ СЂР°Р·РјРµСЂ
-        YMaps.Events.observe(button, button.Events.Deselect, function () {
-            setSize('100%', 500, true);
-        });
-        
-        // Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РЅРѕРІС‹Рµ СЂР°Р·РјРµСЂС‹ РґР»СЏ РєР°СЂС‚С‹
-        function setSize (newWidth, newHeight, relative) {
-            YMaps.jQuery(ElectionMap.get().getContainer()).css({
-                position: relative ? 'relative' : 'fixed',
-                left: 0,
-                top: 0,
-                width: newWidth || "100%", 
-                height: newHeight || "100%"
-            });
-            ElectionMap.get().redraw();
-        }
-        
-        return button;
-    },
-    
-    /**
-     * РћС‚РјРµС‡Р°РµС‚ РїСЂРёР±Р»РёР·РёС‚РµР»СЊРЅРѕРµ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅР° РєР°СЂС‚Рµ
+	/**
+	 * Пространство имён для вспомогательных функций
+	 */
+	Utils: {			
+		/**
+		 * Обработчик клика по субъекту РФ. Максимално приближает карту к выбранному субъекту РФ.
+		 * @param {feature} [OpenLayers.Feature] выбранный объект на карте
+		 */
+		regionClickHandler: function(feature) {
+			if (feature != null && feature.geometry != null) {
+				Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+				Grakon.map.zoomIn();
+				Grakon.MAP_LEVELS_ZOOM.districts = Grakon.map.getZoom();
+			}
+		},
+		
+		districtClickHandler: function(feature) {
+			if (feature != null && feature.geometry != null) {
+				Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+				Grakon.map.zoomIn();
+				Grakon.MAP_LEVELS_ZOOM.areas = Grakon.map.getZoom();
+			}
+		},
+		
+		/**
+		 * callback-метод, который считывает данные из GeoJSON,
+		 * возвращаемого в виде результата асинхронного запроса и
+		 * добавляет их на слой субъектов РФ
+		 * @private
+		 * @param {request} указатель на объект асинхронного запроса
+		 */
+		addRegionBorders: function(request) {
+			if (request.status == 200) {
+				var geoJSON = new OpenLayers.Format.GeoJSON({
+					'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+					'externalProjection': new OpenLayers.Projection("EPSG:4326")
+				});
+				var features = geoJSON.read(request.responseText);
+				Grakon.borderLayers.regions.addFeatures(features);
+			} else
+				OpenLayers.Console.error("Запрос границ субъектов РФ из файла GeoJSON вернул статус: " + request.status);
+		},
+		
+		addDistrictBorders: function(request) {
+			if (request.status == 200) {
+				var geoJSON = new OpenLayers.Format.GeoJSON({
+					'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+					'externalProjection': new OpenLayers.Projection("EPSG:4326")
+				});
+				var features = geoJSON.read(request.responseText);
+				Grakon.borderLayers.districts.addFeatures(features);
+			} else
+				OpenLayers.Console.error("Запрос границ районов субъекта РФ из файла GeoJSON вернул статус: " + request.status);
+		}
+	},
+	
+	/**
+	 * Создаёт карту и слои с данными в HTML-контейнере с заданным ID.
+	 * @param {mapDivID} ID HTML-контейнера [String]
+	 */
+	init: function(place) {
+		var mapDivID = "map";
+		Grakon.setupLogging();
+		Grakon.initMap(mapDivID);
+		Grakon.initMapLayers();
+		Grakon.initMapTools();
+		
+		Grakon.setUserLocation();
+		Grakon.setDefaultView(place);
+	},
+	
+	/**
+     * Отмечает приблизительное местоположение пользователя на карте
      */
     setUserLocation: function() {
-        // РћРїСЂРµРґРµР»СЏРµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Рё РѕС‚РјРµС‡Р°РµРј РЅР° РєР°СЂС‚Рµ
+        // Определяем координаты пользователя и отмечаем на карте
         if (YMaps.location) {
-            var userLocation = new YMaps.GeoPoint(YMaps.location.longitude,
-                    YMaps.location.latitude);
-            // РЎРѕР·РґР°РЅРёРµ СЃС‚РёР»СЏ РґР»СЏ Р·РЅР°С‡РєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
-            var s = new YMaps.Style();
-            s.iconStyle = new YMaps.IconStyle();
-            s.iconStyle.href = "/static/images/user.png";
-            s.iconStyle.size = new YMaps.Point(32, 32);
-            s.iconStyle.offset = new YMaps.Point(-16, -16);
-            // РЎРѕР·РґР°РЅРёРµ РјРµС‚РєРё Рё РґРѕР±Р°РІР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅР° РєР°СЂС‚Сѓ
-            var usermark = new YMaps.Placemark(userLocation, {
-                style : s,
-                hideIcon : false
-            });
-            usermark.description = "Р’Р°С€Рµ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ";
-            ElectionMap.get().addOverlay(usermark);
+            var size = new OpenLayers.Size(32,32);
+			var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
+			var icon = new OpenLayers.Icon('/static/images/user.png', size, offset);
+			var userCoords = new OpenLayers.LonLat(YMaps.location.longitude,YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+			var user = new OpenLayers.Marker(userCoords,icon);
+			Grakon.map.addMarker(user);
         }
     },
-
-    /**
-     * Р¦РµРЅС‚СЂРёСЂСѓРµС‚ РєР°СЂС‚Сѓ РЅР° СѓРєР°Р·Р°РЅРЅРѕРј РјРµСЃС‚Рµ СЃ РѕРїС‚РёРјР°Р»СЊРЅС‹Рј РјР°СЃС€С‚Р°Р±РѕРј.
+	
+	/**
+     * Центрирует карту на указанном месте с оптимальным масштабом.
      * 
      * @param {place} -
-     *            РјРµСЃС‚Рѕ, РєРѕС‚РѕСЂРѕРµ Р±СѓРґРµС‚ РїРѕРєР°Р·Р°РЅРѕ РЅР° РєР°СЂС‚Рµ. Р•СЃР»Рё РЅРµ Р·Р°РґР°РЅРѕ, С‚Рѕ
-     *            Р±СѓРґРµС‚ РїРѕРєР°Р·Р°РЅР° РІСЃСЏ Р РѕСЃСЃРёСЏ
+     *            место, которое будет показано на карте. Если не задано, то
+     *            будет показана вся Россия
      */
     setDefaultView: function(place) {
-        var zoom = ElectionMap.MAP_LEVELS[3].index;
-        var center = new YMaps.GeoPoint(37.64, 55.76);
+        var zoom = Grakon.MAP_LEVELS_ZOOM.regions+1;
+        var center = new OpenLayers.LonLat(47.57138, 54.8384).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 
-        // РџРѕРєР°Р·С‹РІР°РµРј Р·Р°РґР°РЅРЅРѕРµ РјРµСЃС‚Рѕ РЅР° РєР°СЂС‚Рµ.
-        if (place == null || place == "") { // Р•СЃР»Рё РјРµСЃС‚Рѕ РЅРµ Р·Р°РґР°РЅРѕ, С‚Рѕ РґР»СЏ
-                                            // РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР· Р РѕСЃСЃРёРё Р±СѓРґРµС‚
-                                            // РѕРїСЂРµРґРµР»РµРЅРѕ РµРіРѕ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ Рё
-                                            // РїРѕРєР°Р·Р°РЅРѕ РЅР° РєР°СЂС‚Рµ СЃ РјР°РєСЃРёРјР°Р»СЊРЅС‹Рј
-                                            // РјР°СЃС€С‚Р°Р±РѕРј;
-            // РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР·-Р·Р° СЂСѓР±РµР¶Р° РєР°СЂС‚Р° Р±СѓРґРµС‚ РѕС‚С†РµРЅС‚СЂРѕРІР°РЅР° РїРѕ
-            // РµРІСЂРѕРїРµР№СЃРєРѕР№ С‡Р°СЃС‚Рё Р РѕСЃСЃРёРё.
-            if (YMaps.location && YMaps.location.country == "Р РѕСЃСЃРёСЏ") {
-                center = new YMaps.GeoPoint(YMaps.location.longitude,
-                        YMaps.location.latitude);
+        // Показываем заданное место на карте.
+        if (place == null || place == "") { // Если место не задано, то для
+                                            // пользователя из России будет
+                                            // определено его местоположение и
+                                            // показано на карте с максимальным
+                                            // масштабом;
+            // для пользователя из-за рубежа карта будет отцентрована по
+            // европейской части России.
+            if (YMaps.location && YMaps.location.country == "Россия") {
+                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude)).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                 zoom = YMaps.location.zoom;
             }
 
-            ElectionMap.get().setCenter(center, zoom);
-            // РЎС‡РёС‚Р°РµРј РІСЃРµ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹Рµ РєРѕРјРёСЃСЃРёРё РЅР° РєР°СЂС‚Рµ
-            ElectionMap.markElectionCommissions();
+            Grakon.map.setCenter(center, zoom);
         } else {
             var geocoder = new YMaps.Geocoder(place, {
                 geocodeProvider : "yandex#map"
             });
-            // РЎРѕР·РґР°РµС‚ РѕР±СЂР°Р±РѕС‚С‡РёРє СѓСЃРїРµС€РЅРѕРіРѕ Р·Р°РІРµСЂС€РµРЅРёСЏ РіРµРѕРєРѕРґРёСЂРѕРІР°РЅРёСЏ
+            // Создает обработчик успешного завершения геокодирования
             YMaps.Events.observe(geocoder, geocoder.Events.Load, function() {
-                // Р•СЃР»Рё РѕР±СЉРµРєС‚ РЅР°Р№РґРµРЅ, СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С†РµРЅС‚СЂ РєР°СЂС‚С‹ РІ С†РµРЅС‚СЂ РѕР±Р»Р°СЃС‚Рё
-                // РїРѕРєР°Р·Р° РѕР±СЉРµРєС‚Р°
+                // Если объект найден, устанавливает центр карты в центр области
+                // показа объекта
                     if (this.length()) {
-                        ElectionMap.get().setBounds(this.get(0).getBounds());
-                        ElectionMap.markElectionCommissions();
+                        var left = this.get(0).getBounds().getLeft();
+						var bottom = this.get(0).getBounds().getLeft();
+						var right = this.get(0).getBounds().getLeft();
+						var top = this.get(0).getBounds().getLeft();
+						var bounds = new OpenLayers.Bounds(left, bottom, right, top).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+						Grakon.map.zoomToExtent(bounds);
                     } else
-                        ElectionMap.get().setCenter(center, zoom);
-                });
+                        Grakon.map.setCenter(center, zoom);
+			});
 
-            // РџСЂРѕС†РµСЃСЃ РіРµРѕРєРѕРґРёСЂРѕРІР°РЅРёСЏ Р·Р°РІРµСЂС€РµРЅ СЃ РѕС€РёР±РєРѕР№
-            YMaps.Events.observe(geocoder, geocoder.Events.Fault, function(gc,
-                    error) {
-                alert("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: " + error);
+            // Процесс геокодирования завершен с ошибкой
+            YMaps.Events.observe(geocoder, geocoder.Events.Fault, function(gc, error) {
+                OpenLayers.Console.error("Произошла ошибка: " + error);
             });
         }
     },
+	
+	/**
+	 * Задаёт способ вывода логов и сообщений об ошибках
+	 */
+	setupLogging: function() {
+		OpenLayers.Console = window.console;
+		OpenLayers.Console.userError = OpenLayers.Console.error;
+	},
+	
+	/**
+	 * Создаёт карту в заданном HTML-контейнере
+	 * @param {mapDivID} ID HTML-контейнера [String]
+	 */
+	initMap: function(mapDivID) {
+		Grakon.map = new OpenLayers.Map(mapDivID, Grakon.MAP_OPTIONS);
+		
+		// слушаем событие окончания масштабирования
+		Grakon.map.events.register("zoomend", Grakon.map, function() {
+			// границы регионов
+			if (Grakon.borderLayers.regions != null)
+				Grakon.borderLayers.regions.setVisibility( this.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts );
+			
+			// границы районов
+			if (Grakon.borderLayers.districts != null)
+				Grakon.borderLayers.districts.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts );
+				
+			// видимость ИКСов
+			if (Grakon.electionCommissionLayers.regions != null)
+				Grakon.electionCommissionLayers.regions.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.regions );
+				
+			// видимость ТИКов
+			if (Grakon.electionCommissionLayers.districts != null)
+				Grakon.electionCommissionLayers.districts.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts );
+				
+			// видимость УИКов
+			if (Grakon.electionCommissionLayers.areas != null)
+				Grakon.electionCommissionLayers.areas.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas );
+		});
+		
+		// слушаем событие окончания перемещения по карте
+		Grakon.map.events.register("moveend", Grakon.map, function() {
+			if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas) {
+				var bounds = Grakon.map.getExtent().transform(Grakon.map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326")).toArray();
+				var left = bounds[0];
+				var bottom = bounds[1];
+				var right = bounds[2];
+				var top = bounds[3];
+				OpenLayers.loadURL("/location/locations_data",
+					{'x1': left,
+					'x2': right,
+					'y1': bottom,
+					'y2': top},
+					null,
+					function(request) {
+						if (request.status == 200) {
+							eval(request.responseText);
+							if (electionCommissions != null) {
+								// Добавим слой УИКи
+								if (Grakon.electionCommissionLayers.areas == null) {
+									var areasLayer = new OpenLayers.Layer.Markers( "УИКи" );
+									Grakon.electionCommissionLayers.areas = areasLayer;
+									Grakon.map.addLayer( areasLayer );
+								}
+								
+								// Добавим новые (не показанные) УИКи на карту
+								for (var uikID in electionCommissions)
+									if (Grakon.electionCommissions[uikID] == null) {
+										Grakon.electionCommissions[uikID] = electionCommissions[uikID];
+										var size = new OpenLayers.Size(18,32);
+										var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+										var icon = new OpenLayers.Icon('/static/images/uik.png', size, offset);
+										var uikLocation = new OpenLayers.LonLat(electionCommissions[uikID].xCoord,electionCommissions[uikID].yCoord).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+										var uik = new OpenLayers.Marker(uikLocation,icon);
+										uik.data = electionCommissions[uikID];
+										var popup = new OpenLayers.Popup.AnchoredBubble(uik.data.id, uikLocation,
+																	 new OpenLayers.Size(300,200),
+																	 uik.data.address,
+																	 icon, true, null);
+										Grakon.map.addPopup(popup);
+										popup.hide();
+										Grakon.map.events.register('click', uikLocation, function(){popup.show();});
+										Grakon.electionCommissionLayers.areas.addMarker(uik);
+									}
+							}
+						} else
+							OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
+					},
+					function() {
+						OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
+					}
+				);
+			}
+		});
+	},
+	
+	/**
+	 * Создаёт и добавляет слои на карту
+	 */
+	initMapLayers: function() {
+		var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс",{sphericalMercator: true});
+		var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
+		var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
+		var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
+		Grakon.map.addLayer(Y_map);
+		Grakon.map.addLayer(OSM_map);
+		Grakon.map.addLayer(Y_sat);
+		Grakon.map.addLayer(Y_hyb);
+		Grakon.map.setBaseLayer(Y_hyb);
+		
+		Grakon.addRegions();
+		Grakon.addDistricts();
+		Grakon.addElectionCommissions();
+	},
+	
+	/**
+	 * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
+	 */
+	addRegions: function() {			
+		var regions = new OpenLayers.Layer.Vector("Субъекты РФ", {
+			projection: new OpenLayers.Projection("EPSG:4326"),
+			styleMap: new OpenLayers.StyleMap(Grakon.REGION_STYLES)
+		});
 
-    /**
-     * РћС‚РјРµС‡Р°РµС‚ РЅР° РєР°СЂС‚Рµ РІСЃРµ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹Рµ РєРѕРјРёСЃСЃРёРё.
-     */
-    markElectionCommissions : function() {
-        // Define an election commissions collection for three types of election
-        // commissions
-        ElectionMap.placemarks = new Array(new Array(), new Array(),
-                new Array());
+		// выделять субъект РФ цветом при наведении мыши
+		var highlightCtrl = new OpenLayers.Control.SelectFeature(regions, {
+			hover: true,
+			highlightOnly: true,
+			renderIntent: "temporary"
+		});
+		Grakon.map.addControl(highlightCtrl);
+		highlightCtrl.activate();
 
-        for ( var n in electionCommissions)
-            ElectionMap.markElectionCommission(electionCommissions[n]);
+		// показать субъект РФ на всю карту при клике на нём
+		var selectCtrl = new OpenLayers.Control.SelectFeature(regions, {
+			clickout: true,
+			select: Grakon.Utils.regionClickHandler
+		});
+		Grakon.map.addControl(selectCtrl);
+		selectCtrl.activate();
 
-        ElectionMap.resetZoom();
-    },
+		// Добавить слой на карту
+		Grakon.map.addLayer(regions);
+		Grakon.borderLayers.regions = regions;
 
-    /**
-     * Р”РѕР±Р°РІР»СЏРµС‚ РЅР° РєР°СЂС‚Сѓ РјРµС‚РєСѓ РґР°РЅРЅРѕР№ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё
-     * 
-     * @param {commission}
-     *            РѕР±СЉРµРєС‚ С‚РёРїР° ElectionCommission
-     */
-    markElectionCommission : function(commission) {
-        // СЃРѕР·РґР°С‘Рј РјРµС‚РєСѓ РґР»СЏ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё СЃ РёРјРµРЅРµРј Рё РѕРїРёСЃР°РЅРёРµРј
-        var geoPoint = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var styleValue = ElectionMap.placemarkStyles[commission.level - 1];
-        var placemark = new YMaps.Placemark(geoPoint, {
-            draggable: true,
-            balloonOptions: {maxWidth: 300},
-            style : styleValue
-        });
-        var index = ElectionMap.placemarks[commission.level-1].length;
-        placemark.data = commission;
-        placemark.name = ElectionMap.buildElectionCommissionName(commission, index);
-        placemark.description = ElectionMap
-                .buildElectionCommissionDescription(commission);
-        
-        // РїСЂРё РѕС‚РєСЂС‹С‚РёРё Р±Р°Р»СѓРЅР° РѕР±РЅРѕРІРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ Р»СѓРїС‹
-        YMaps.Events.observe(placemark, placemark.Events.BalloonOpen, ElectionMap.updateCommissionZoomIcon);
-        
-        // РїРѕСЃР»Рµ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёСЏ РІРµСЂРЅСѓС‚СЊ РјРµС‚РєСѓ РЅР°Р·Р°Рґ
-        YMaps.Events.observe(placemark, placemark.Events.DragEnd, function (obj) {
-            placemark.setGeoPoint(geoPoint);
-            obj.update();
-        });
+		// Загрузить данные на слой
+		OpenLayers.loadURL(Grakon.MAP_URLS.regions, {}, Grakon.Utils, Grakon.Utils.addRegionBorders, function() {
+			OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
+		});
+	},
+	
+	/**
+	 * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
+	 */
+	addElectionCommissions: function() {
+		// Добавляем слой ТИКов
+		var electionCommissionsLevel3 = new OpenLayers.Layer.Text("ТИКи", {
+			location: Grakon.MAP_URLS.electionCommissionsType3,
+			projection: new OpenLayers.Projection("EPSG:4326")
+		});
+		electionCommissionsLevel3.setVisibility(false);
+		Grakon.map.addLayer(electionCommissionsLevel3);
+		Grakon.electionCommissionLayers.districts = electionCommissionsLevel3;
+		
+		// Добавляем слой ИКСов
+		var electionCommissionsLevel2 = new OpenLayers.Layer.Text("ИКСы", {
+			location: Grakon.MAP_URLS.electionCommissionsType2,
+			projection: new OpenLayers.Projection("EPSG:4326")
+		});
+		Grakon.map.addLayer(electionCommissionsLevel2);
+		Grakon.electionCommissionLayers.regions = electionCommissionsLevel2;
+	},
+	
+	addDistricts: function() {			
+		var districts = new OpenLayers.Layer.Vector("Районы", {
+			projection: new OpenLayers.Projection("EPSG:4326"),
+			styleMap: new OpenLayers.StyleMap(Grakon.DISTRICT_STYLES)
+		});
+		// Добавить слой на карту
+		districts.setVisibility(false);
+		Grakon.borderLayers.districts = districts;
+		
+		// выделять субъект РФ цветом при наведении мыши
+		var highlightCtrl = new OpenLayers.Control.SelectFeature(districts, {
+			hover: true,
+			highlightOnly: true,
+			renderIntent: "temporary"
+		});
+		Grakon.map.addControl(highlightCtrl);
+		highlightCtrl.activate();
 
-        // РґРѕР±Р°РІРёС‚СЊ Р·РЅР°С‡РєРё РРљРЎРѕРІ РЅР° РєР°СЂС‚Сѓ
-        if (commission.level == 2)
-            ElectionMap.addElectionCommissionIcon(placemark);
+		// показать субъект РФ на всю карту при клике на нём
+		var selectCtrl = new OpenLayers.Control.SelectFeature(districts, {
+			clickout: true,
+			select: Grakon.Utils.districtClickHandler
+		});
+		Grakon.map.addControl(selectCtrl);
+		selectCtrl.activate();
 
-        placemark.setIconContent(commission.shortTitle);
-
-        ElectionMap.placemarks[commission.level - 1].push(placemark);
-        ElectionMap.objManager.add(placemark,
-                ElectionMap.MAP_LEVELS[commission.level - 1].index, 19);
-
-        ElectionMap.checkForVisibility(placemark);
-    },
-
-    /**
-     * РЎРѕР·РґР°С‘С‚ РЅР°Р·РІР°РЅРёРµ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР° РІ РІРёРґРµ HTML-РєРѕРґР°.
-     * 
-     * @param {commission}
-     *            РѕР±СЉРµРєС‚ С‚РёРїР° ElectionCommission
-     * @param {index} РїРѕР»РѕР¶РµРЅРёРµ РјРµС‚РєРё РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё РІ РјР°СЃСЃРёРІРµ РјРµС‚РѕРє
-     * @returns HTML string
-     */
-    buildElectionCommissionName : function(commission, index) {
-        var commissionType;
-        switch (commission.level) {
-        case 2:
-            commissionType = "РРљРЎ: ";
-            break;
-        case 3:
-            commissionType = "РўРРљ: ";
-            break;
-        default:
-            commissionType = "";
-        }
-        var string = '<a href="#" onclick="ElectionMap.showRegion('
-                + commission.id + ', ' + index + '); return false;" id="commission'
-                + commission.id
-                + 'Name" class="zoomIn" '
-                + 'title="РџРѕРєР°Р·Р°С‚СЊ РґР°РЅРЅСѓСЋ РѕР±Р»Р°СЃС‚СЊ РЅР° РєР°СЂС‚Рµ" style="color: black">'
-                + commissionType + commission.title + '</a>';
-        return string;
-    },
-
-    /**
-     * РЎРѕР·РґР°С‘С‚ РѕРїРёСЃР°РЅРёРµ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР° РІ РІРёРґРµ HTML-РєРѕРґР°.
-     * 
-     * @param {commission}
-     *            РѕР±СЉРµРєС‚ С‚РёРїР° ElectionCommission
-     * @returns HTML string
-     */
-    buildElectionCommissionDescription : function(commission) {
-        var string = commission.address +
-        // ((commission.numVoters != null && commission.numVoters > 0)
-        // ?"РР·Р±РёСЂР°С‚РµР»РµР№: "+commission.numVoters+"<br/>":"") +
-                // ((commission.numObservers != null && commission.numObservers
-                // > 0) ?"РќР°Р±Р»СЋРґР°С‚РµР»РµР№: "+commission.numObservers+"<br/>":"") +
-                ('<p><a href="/location/' + commission.id + '">РЎС‚СЂР°РЅРёС†Р° РѕРєСЂСѓРіР°</a></p>');
-
-        return string;
-    },
-
-    /**
-     * Р”РѕР±Р°РІР»СЏРµС‚ РёРєРѕРЅРєСѓ РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё РЅР° РєР°СЂС‚Сѓ
-     * 
-     * @param {placemark}
-     *            РѕР±СЉРµРєС‚ YMaps.Placemark
-     */
-    addElectionCommissionIcon : function(placemark) {
-        var icon = new YMaps.Placemark(placemark.getGeoPoint(), {
-            style : ElectionMap.placemarkStyles[0],
-            hasHint : true,
-            hideIcon : false
-        });
-        icon.name = placemark.name;
-        icon.description = placemark.description;
-        icon.setHintContent(placemark.data.shortTitle);
-        ElectionMap.objManager.add(icon, ElectionMap.MAP_LEVELS[3].index,
-                ElectionMap.MAP_LEVELS[1].index - 1);
-    },
-
-    /**
-     * РС‰РµС‚ Рё РїРѕРєР°Р·С‹РІР°РµС‚ РЅР° РєР°СЂС‚Рµ Р·Р°РґР°РЅРЅСѓСЋ РѕР±Р»Р°СЃС‚СЊ СЃ РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ РјР°СЃС€С‚Р°Р±РѕРј.
-     * 
-     * @param {commissionId}
-     *            id РєРѕРјРёСЃСЃРёРё
-     * @param {index} РїРѕР·РёС†РёСЏ РјРµС‚РєРё РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё РІ РјР°СЃСЃРёРІРµ РјРµС‚РѕРє
-     */
-    showRegion : function(commissionId, index) {
-        var commission = electionCommissions[commissionId];
-        var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point,
-                point));
-        var maxZoom = (availZoom > ElectionMap.MAX_ZOOM) ? ElectionMap.MAX_ZOOM : availZoom;
-
-        var zoom;
-        switch (commission.level) {
-        case 1:
-        case 2:
-            zoom = (ElectionMap.get().getZoom() != ElectionMap.MAP_LEVELS[commission.level].index) ? ElectionMap.MAP_LEVELS[commission.level].index
-                    : // РїРѕРєР°Р·Р°С‚СЊ СЃР»РµРґСѓСЋС‰РёР№ СѓСЂРѕРІРµРЅСЊ РјР°СЃС€С‚Р°Р±Р° РРћ СЃ С†РµРЅС‚СЂРѕРј РЅР°
-                        // СЌС‚РѕРј
-                    maxZoom;
-            break; // РїРѕРєР°Р·Р°С‚СЊ Р·РґР°РЅРёРµ РРћ РІ С‚РѕРј СЃР»СѓС‡Р°Рµ, РµСЃР»Рё РјР°СЃС€С‚Р°Р± РєР°СЂС‚С‹ СѓР¶Рµ
-                    // СЂР°РІРµРЅ СЃР»РµРґСѓСЋС‰РµРјСѓ СѓСЂРѕРІРЅСЋ
-        default:
-            zoom = (ElectionMap.get().getZoom() != maxZoom) ? maxZoom
-                    : ElectionMap.MAP_LEVELS[commission.level - 1].index;
-        }
-
-        ElectionMap.get().setCenter(point, zoom);
-
-        var placemark = ElectionMap.placemarks[commission.level-1][index];
-        ElectionMap.updateCommissionZoomIcon(placemark);
-    },
-
-    /**
-     * РњРµРЅСЏРµС‚ РєР°СЂС‚РёРЅРєСѓ Сѓ РЅР°Р·РІР°РЅРёСЏ РєРѕРјРёСЃРёРё РЅР° "РїСЂРёР±Р»РёР·РёС‚СЊ" РёР»Рё "РѕС‚РґР°Р»РёС‚СЊ" РІ
-     * СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ РјР°СЃС€С‚Р°Р±РѕРј РєР°СЂС‚С‹
-     * 
-     * @param {placemark}
-     *            РјРµС‚РєР° РёР·Р±РёСЂР°С‚РµР»СЊРЅРѕР№ РєРѕРјРёСЃСЃРёРё [YMaps.Placemark]
-     */
-    updateCommissionZoomIcon : function(placemark) {
-        if (ElectionMap.atMaxZoom())
-            $('#commission' + placemark.data.id + 'Name').removeClass("zoomIn")
-                    .addClass("zoomOut");
-        else
-            $('#commission' + placemark.data.id + 'Name').removeClass("zoomOut")
-                    .addClass("zoomIn");
-    },
-    
-    /**
-     * @returns true, РµСЃР»Рё РјР°СЃС€С‚Р°Р± РєР°СЂС‚С‹ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРµРЅ РјР°РєСЃРёРјР°Р»СЊРЅРѕРјСѓ; false, РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ
-     */
-    atMaxZoom: function() {
-        var point = ElectionMap.get().getCenter();
-        var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point, point));
-        var maxZoom = (availZoom > ElectionMap.MAX_ZOOM) ? ElectionMap.MAX_ZOOM : availZoom;
-        return (ElectionMap.get().getZoom() >= maxZoom);
-    },
-
-    /**
-     * Р”РѕР±Р°РІР»СЏРµС‚ РЅР° РєР°СЂС‚Сѓ 2 РєРЅРѕРїРєРё "РР·РёР±РёСЂР°С‚РµР»Рё", "РќР°Р±Р»СЋРґР°С‚РµР»Рё".
-     */
-    addButtons : function() {
-        var button;
-        var buttons = new Array();
-
-        // РљРЅРѕРїРєР° "РР·Р±РёСЂР°С‚РµР»Рё"
-        button = new YMaps.ToolBarButton( {
-            caption : "РР·Р±РёСЂР°С‚РµР»Рё",
-            hint : "РџРѕРєР°Р·С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РёР·Р±РёСЂР°С‚РµР»РµР№ РЅР° РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РѕРєСЂСѓРіР°С…"
-        });
-        button.dataType = "numVoters";
-        YMaps.Events.observe(button, button.Events.Click,
-                ElectionMap.buttonClick, buttons);
-        buttons.push(button);
-
-        // РљРЅРѕРїРєР° "РќР°Р±Р»СЋРґР°С‚РµР»Рё"
-        button = new YMaps.ToolBarButton(
-                {
-                    caption : "РќР°Р±Р»СЋРґР°С‚РµР»Рё",
-                    hint : "РџРѕРєР°Р·С‹РІР°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РЅР°Р±Р»СЋРґР°С‚РµР»РµР№ РЅР° РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РѕРєСЂСѓРіР°С…"
-                });
-        button.dataType = "numObservers";
-        YMaps.Events.observe(button, button.Events.Click,
-                ElectionMap.buttonClick, buttons);
-        buttons.push(button);
-
-        ElectionMap.get().addControl(new YMaps.ToolBar(buttons),
-                new YMaps.ControlPosition(YMaps.ControlPosition.BOTTOM_LEFT,
-                        new YMaps.Point(20, 20)));
-    },
-
-    buttonClick : function(button) {
-        if (button.isSelected()) {
-            for ( var num in ElectionMap.placemarks)
-                for ( var i in ElectionMap.placemarks[num])
-                    ElectionMap.placemarks[num][i]
-                            .setIconContent(ElectionMap.placemarks[num][i].shortTitle);
-            button.deselect()
-        } else {
-            for ( var num in ElectionMap.placemarks)
-                for ( var i in ElectionMap.placemarks[num])
-                    ElectionMap.placemarks[num][i]
-                            .setIconContent(ElectionMap.placemarks[num][i].data[button.dataType]);
-            for ( var num in this)
-                this[num].deselect();
-            button.select();
-        }
-    },
-
-    /**
-     * РћРїСЂРµРґРµР»СЏРµС‚ Рё РїРѕРєР°Р·С‹РІР°РµС‚ РЅР° РєР°СЂС‚Рµ РЅСѓР¶РЅС‹Р№ СѓСЂРѕРІРµРЅСЊ РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РєРѕРјРёСЃСЃРёР№
-     * СЃРѕРіР»Р°СЃРЅРѕ РјР°СЃС€С‚Р°Р±Сѓ.
-     */
-    resetZoom : function() {
-        while (ElectionMap.visibleElectionCommissions.length == 0
-                && ElectionMap.get().getZoom() >= 0) {
-            ElectionMap.get().zoomBy(-1);
-            ElectionMap
-                    .checkForVisibility(ElectionMap.centerNearestElectionCommission);
-        }
-    },
-
-    /**
-     * @param {placemark}
-     *            [YMaps.Placemark] РјРµС‚РєР° РґР»СЏ РїСЂРѕРІРµСЂРєРё РЅР° РІРёРґРёРјРѕСЃС‚СЊ РІ Р·Р°РґР°РЅРЅРѕРј
-     *            РјР°СЃС€С‚Р°Р±Рµ РєР°СЂС‚С‹
-     */
-    checkForVisibility : function(placemark) {
-        if (ElectionMap.get().getBounds() == null)
-            return;
-
-        if (ElectionMap.electionCommissionLevel == null
-                || ElectionMap.electionCommissionLevel == placemark.data.level) {
-            // РџСЂРѕРІРµСЂРёС‚СЊ РјРµС‚РєСѓ РЅР° РІРёРґРёРјРѕСЃС‚СЊ Рё РІ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРј СЃР»СѓС‡Р°Рµ СЃРѕС…СЂР°РЅРёС‚СЊ РІ
-            // РјР°СЃСЃРёРІ РІРёРґРёРјС‹С… РёР·Р±РёСЂР°С‚РµР»СЊРЅС‹С… РєРѕРјРёСЃСЃРёР№
-            if (ElectionMap.get().getBounds().contains(placemark.getCoordPoint()))
-                ElectionMap.visibleElectionCommissions.push(placemark);
-
-            // РќР°Р№С‚Рё Р±Р»РёР¶Р°Р№С€СѓСЋ РёР·Р±РёСЂР°С‚РµР»СЊРЅСѓСЋ РєРѕРјРёСЃСЃРёСЋ Рє С†РµРЅС‚СЂСѓ РєР°СЂС‚С‹
-            var mapCenter = new YMaps.GeoPoint(ElectionMap.get().getCenter()
-                    .getX(), ElectionMap.get().getCenter().getY());
-            var distanceToElectionCommission = mapCenter.distance(placemark
-                    .getGeoPoint());
-            if (ElectionMap.distanceToNearestElectionCommission == null
-                    || distanceToElectionCommission < ElectionMap.distanceToNearestElectionCommission) {
-                ElectionMap.distanceToNearestElectionCommission = distanceToElectionCommission;
-                ElectionMap.centerNearestElectionCommission = placemark;
-            }
-        }
-    }
+		// Загрузить данные на слой
+		OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+		});
+		OpenLayers.loadURL("/static/districts/49s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+		});
+		
+		Grakon.map.addLayer(districts);
+	},
+	
+	/**
+	 * Добавляет инструменты управления на карту (например, масштабирование и выбор слоя)
+	 */
+	initMapTools: function() {
+		Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());                  		
+		Grakon.map.addControl(new OpenLayers.Control.LayerSwitcher());
+		Grakon.map.addControl(new OpenLayers.Control.Navigation());
+		Grakon.map.addControl(new OpenLayers.Control.MousePosition());
+	}
 };

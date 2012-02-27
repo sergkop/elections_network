@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Класс для избирательных округов
  * 
  * @param {level}
@@ -6,249 +6,218 @@
  * @param {data}
  *            объект типа {numVoters: 4, numObservers: 6}
  */
-var ElectionCommission = function(id, level, shortTitle, title, address,
-        xCoord, yCoord, data) {
-    this.id = id;
-    this.level = level < 1 ? 1 : level > 3 ? 3 : level;
-    this.shortTitle = shortTitle;
-    this.title = title;
-    this.address = address;
-    this.data = data;
-    this.xCoord = xCoord;
-    this.yCoord = yCoord;
+var ElectionCommission = function(id, level, shortTitle, title, address, xCoord, yCoord, data) {
+	this.id = id;
+	this.level = level < 1 ? 1 : level > 3 ? 3 : level;
+	this.shortTitle = shortTitle;
+	this.title = title;
+	this.address = address;
+	this.data = data;
+	this.xCoord = xCoord;
+	this.yCoord = yCoord;
 };
 
-/**
- * Именованная область видимости для общественной карты выборов.
- */
-var ElectionMap = {
-    map : null,
+var Grakon = {
+	/**
+	 * Три стиля (начальный, мышь на элементе и элемент выбран) для субъектов РФ
+	 */
+	REGION_STYLES: {
+		'default':	new OpenLayers.Style({
+					  'fillColor': '#66cccc',
+					  'fillOpacity': 0.1,
+					  'strokeColor': '#66cccc',
+					  'strokeOpacity': 0.25,
+					  'strokeWidth': 1
+					}),
+		'temporary':	new OpenLayers.Style({
+						  'fillColor': '#ee9900',
+						  'fillOpacity': 0.4,
+						  'strokeColor': '#ee9900',
+						  'strokeOpacity': 1,
+						  'strokeWidth': 2,
+						  'cursor': 'pointer'
+						}),
+		'select':	new OpenLayers.Style({
+					  'fillColor': '#0000ff',
+					  'fillOpacity': 0.4,
+					  'strokeColor': '#0000ff',
+					  'strokeOpacity': 1,
+					  'strokeWidth': 2
+					})
+	},
+	
+	/**
+	 * Три стиля (начальный, мышь на элементе и элемент выбран) для районов субъекта РФ
+	 */
+	DISTRICT_STYLES: {
+		'default':	new OpenLayers.Style({
+					  'fillColor': '#66cccc',
+					  'fillOpacity': 0.2,
+					  'strokeColor': '#000000',
+					  'strokeOpacity': 0.75,
+					  'strokeWidth': 2,
+					  'strokeDashstyle': 'dot'
+					}),
+		'temporary':	new OpenLayers.Style({
+						  'fillColor': '#ee9900',
+						  'fillOpacity': 0.4,
+						  'strokeColor': '#ee9900',
+						  'strokeOpacity': 1,
+						  'strokeWidth': 2,
+						  'cursor': 'pointer'
+						}),
+		'select':	new OpenLayers.Style({
+					  'fillColor': '#0000ff',
+					  'fillOpacity': 0.4,
+					  'strokeColor': '#0000ff',
+					  'strokeOpacity': 1,
+					  'strokeWidth': 2
+					})
+	},
+	
+	/**
+	 * @private
+	 * Объект OpenLayers.Map — используемая карта.
+	 */
+	map: null,
+	
+	/**
+	 * Свойства создаваемой карты.
+	 */
+	MAP_OPTIONS: {
+		projection: new OpenLayers.Projection("EPSG:900913"),
+		units: "m",
+		numZoomLevels: 18,
+		displayProjection: new OpenLayers.Projection("EPSG:4326"),
+		maxResolution: 156543.0339,
+		maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
+		controls:[]
+	},
+	
+	MAP_URLS: {
+		regions: "/static/oblasts_simplified.json",
+		electionCommissionsType2: "/static/election_commissions_level_2.txt",
+		electionCommissionsType3: "/static/election_commissions_level_3.txt"
+	},
+	
+	/**
+	 * Уровень масштабирования карты, с которого показываются ТИКи.
+	 */
+	MAP_LEVELS_ZOOM: new Object({
+		'country': 0,
+		'regions': 3,
+		'districts': 7,
+		'areas': 11
+	}),
+	
+	/**
+	 * Массивы слоёв, соответсвующие уровню в иерархии избирательной комиссии
+	 */
+	borderLayers: new Object({
+		'country': null,
+		'regions': null,
+		'districts': null,
+		'areas': null
+	}),
+	
+	electionCommissionLayers: new Object({
+		'country': null,
+		'regions': null,
+		'districts': null,
+		'areas': null
+	}),
+	
+	electionCommissions: new Object(),
 
-    placemarks : null,
-
-    buttons : null,
-
-    electionCommissionLevel : null,
-
-    visibleElectionCommissions : new Array(),
-
-    centerNearestElectionCommission : null,
-
-    distanceToNearestElectionCommission : null,
-
-    objManager : new YMaps.ObjectManager(),
-
-    placemarkStyles : new Array(),
-    
-    MAX_ZOOM: 16,   // максимальный уровень масштабирования
-
-    // Переменная, в которой заданы все типы масштабирования для карты.
-    MAP_LEVELS : new Array( {
-        index : 2,
-        value : "ЦИК"
-    }, {
-        index : 6,
-        value : ""
-    }, {
-        index : 12,
-        value : "ТИКи"
-    }, {
-        index : 4,
-        value : "ИКСы"
-    }),
-    
-    MAP_TYPES: new Array(YMaps.MapType.PMAP,
-                         YMaps.MapType.MAP,
-                         YMaps.MapType.SATELLITE,
-                         YMaps.MapType.PHYBRID,
-                         YMaps.MapType.HYBRID),
-
-    /**
-     * Добавляем Народную Яндекс.Карту на страницу и отмечаем на ней все
-     * избирательные комиссии.
-     * 
-     * @param {place}
-     *            название области или района, который следует показать
-     *            по-умолчанию. Задать null, чтобы показать пользователю из
-     *            России его местоположение, а для заграничного пользователя
-     *            показать европейскую часть России.
-     * @param {electionCommissionLevel}
-     *            указывает уровень избирательной комиссии, которая должна
-     *            попасть в масштаб карты по-умолчанию.
-     */
-    init : function(place, electionCommissionLevel) {
-        ElectionMap.initElectionCommissionLevel(electionCommissionLevel);
-        ElectionMap.initPlacemarkStyles();
-        ElectionMap.initMap("publicElectionsMap");
-        ElectionMap.initTools(place);
-
-        ElectionMap.get().addOverlay(ElectionMap.objManager);
-        ElectionMap.setUserLocation();
-        
-        // Показать на карте заданное место
-        ElectionMap.setDefaultView(place);
-
-        // ElectionMap.addButtons();
-    },
-    
-    /**
-     * Задаёт уровень избирательного округа. Как минимум одна коммиссия данного уровня будет показана на начальном виде. 
-     * @param {electionCommissionLevel} число от 1 до 3
-     */
-    initElectionCommissionLevel: function(electionCommissionLevel) {
-        if (electionCommissionLevel != null && electionCommissionLevel != "")
-            ElectionMap.electionCommissionLevel = electionCommissionLevel;
-    },
-    
-    /**
-     * Создаёт карту и задаёт настройки
-     * @param {mapDivID} ID HTML-контейнера карты
-     */
-    initMap: function(mapDivID) {
-        ElectionMap.set( new YMaps.Map(document.getElementById(mapDivID)) );
-        
-        // Задаёт сохранённый тип карты
-        var savedMapTypeIndex = $.cookie('MAP_TYPE_INDEX');
-        if (savedMapTypeIndex == null)
-            ElectionMap.get().setType(YMaps.MapType.PMAP);
-        else
-            ElectionMap.get().setType( ElectionMap.MAP_TYPES[savedMapTypeIndex] );
-        
-        ElectionMap.get().setMinZoom(2);
-        ElectionMap.get().enableScrollZoom();
-        
-        // Сохраняем выбранный тип карты в кукиз
-        YMaps.Events.observe(ElectionMap.get(), ElectionMap.get().Events.TypeChange, function(map) {
-            $.cookie('MAP_TYPE_INDEX', ElectionMap.MAP_TYPES.indexOf(map.getType()), {expires: 92, path: '/'});
-        });
-        
-        // Переименовываем типы карт, чтобы их можно было различать. Народные
-        // карты имеют индекс 1, обычные - индекс 2.
-        YMaps.MapType.PMAP.setName("Схематический вид 1");
-        YMaps.MapType.MAP.setName("Схематический вид 2");
-        YMaps.MapType.SATELLITE.setName("Спутниковый вид");
-        YMaps.MapType.PHYBRID.setName("Гибридный вид 1");
-        YMaps.MapType.HYBRID.setName("Гибридный вид 2");
-        ElectionMap.get().addControl(new YMaps.TypeControl( ElectionMap.MAP_TYPES,
-                [ 0, 1, 2, 3, 4 ], {width: 175})); // объявляем доступные типы карт
-    },
-
-    /**
-     * Создаём стили для меток избирательных комиссий
-     */
-    initPlacemarkStyles : function() {
-        var s = new YMaps.Style();
-        s.iconStyle = new YMaps.IconStyle();
-        s.iconStyle.href = "/static/images/election_commission.png";
-        s.iconStyle.size = new YMaps.Point(24, 28);
-        s.iconStyle.offset = new YMaps.Point(-17, -19);
-
-        ElectionMap.placemarkStyles.push(s);
-        ElectionMap.placemarkStyles.push("default#darkbluePoint");
-        ElectionMap.placemarkStyles.push("default#lightbluePoint");
-    },
-    
-    /**
-     * Задаёт объект карты для данной сессии.
-     * @param {map} объект типа YMaps.Map
-     */
-    set: function(map) {
-        this.map = map;
-    },
-    
-    /**
-     * Возвращает объект карты
-     * @returns объект типа YMaps.Map
-     */
-    get: function() {
-        return this.map;
-    },
-    
-    /**
-     * Добавляет кнопки и панели масштабирования и поиска
-     */
-    initTools: function(place) {
-        // Добавляем кнопки
-        var maximizeButton = ElectionMap.buildMaximizeButton();
-        var toolbar = new YMaps.ToolBar([
-                                     maximizeButton,
-                                     new YMaps.ToolBar.MoveButton(),
-                                     new YMaps.ToolBar.MagnifierButton(),
-                                     new YMaps.ToolBar.RulerButton()]);
-        ElectionMap.get().addControl(toolbar);
-        
-        // Добавляем панель масштабирования
-        ElectionMap.get().addControl(new YMaps.Zoom( {
-            customTips : ElectionMap.MAP_LEVELS
-        }));
-        
-        // Добавляем панель поиска
-        ElectionMap.get().addControl(new YMaps.SearchControl( {
-            width : (place == null || place == "") ? 400 : 200
-        }));
-    },
-    
-    /**
-     * Создаёт кнопку "на полный экран"
-     * @returns объект типа YMaps.ToolBarToggleButton
-     */
-    buildMaximizeButton: function() {
-        // Создание кнопки-флажка
-        var button = new YMaps.ToolBarToggleButton({ 
-            icon: "/static/images/fullscreen.gif", 
-            hint: "Разворачивает карту на весь экран"
-        });
-
-        // Если кнопка активна, то карта разворачивается во весь экран
-        YMaps.Events.observe(button, button.Events.Select, function () {
-            setSize();
-        });
-        
-        // Если кнопка неактивна, то карта принимает фиксированный размер
-        YMaps.Events.observe(button, button.Events.Deselect, function () {
-            setSize('100%', 500, true);
-        });
-        
-        // Функция устанавливает новые размеры для карты
-        function setSize (newWidth, newHeight, relative) {
-            YMaps.jQuery(ElectionMap.get().getContainer()).css({
-                position: relative ? 'relative' : 'fixed',
-                left: 0,
-                top: 0,
-                width: newWidth || "100%", 
-                height: newHeight || "100%"
-            });
-            ElectionMap.get().redraw();
-        }
-        
-        return button;
-    },
-    
-    /**
+	/**
+	 * Пространство имён для вспомогательных функций
+	 */
+	Utils: {			
+		/**
+		 * Обработчик клика по субъекту РФ. Максимално приближает карту к выбранному субъекту РФ.
+		 * @param {feature} [OpenLayers.Feature] выбранный объект на карте
+		 */
+		regionClickHandler: function(feature) {
+			if (feature != null && feature.geometry != null) {
+				Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+				Grakon.map.zoomIn();
+				Grakon.MAP_LEVELS_ZOOM.districts = Grakon.map.getZoom();
+			}
+		},
+		
+		districtClickHandler: function(feature) {
+			if (feature != null && feature.geometry != null) {
+				Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+				Grakon.map.zoomIn();
+				Grakon.MAP_LEVELS_ZOOM.areas = Grakon.map.getZoom();
+			}
+		},
+		
+		/**
+		 * callback-метод, который считывает данные из GeoJSON,
+		 * возвращаемого в виде результата асинхронного запроса и
+		 * добавляет их на слой субъектов РФ
+		 * @private
+		 * @param {request} указатель на объект асинхронного запроса
+		 */
+		addRegionBorders: function(request) {
+			if (request.status == 200) {
+				var geoJSON = new OpenLayers.Format.GeoJSON({
+					'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+					'externalProjection': new OpenLayers.Projection("EPSG:4326")
+				});
+				var features = geoJSON.read(request.responseText);
+				Grakon.borderLayers.regions.addFeatures(features);
+			} else
+				OpenLayers.Console.error("Запрос границ субъектов РФ из файла GeoJSON вернул статус: " + request.status);
+		},
+		
+		addDistrictBorders: function(request) {
+			if (request.status == 200) {
+				var geoJSON = new OpenLayers.Format.GeoJSON({
+					'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+					'externalProjection': new OpenLayers.Projection("EPSG:4326")
+				});
+				var features = geoJSON.read(request.responseText);
+				Grakon.borderLayers.districts.addFeatures(features);
+			} else
+				OpenLayers.Console.error("Запрос границ районов субъекта РФ из файла GeoJSON вернул статус: " + request.status);
+		}
+	},
+	
+	/**
+	 * Создаёт карту и слои с данными в HTML-контейнере с заданным ID.
+	 * @param {mapDivID} ID HTML-контейнера [String]
+	 */
+	init: function(place) {
+		var mapDivID = "publicElectionsMap";
+		Grakon.setupLogging();
+		Grakon.initMap(mapDivID);
+		Grakon.initMapLayers();
+		Grakon.initMapTools();
+		
+		Grakon.setUserLocation();
+		Grakon.setDefaultView(place);
+	},
+	
+	/**
      * Отмечает приблизительное местоположение пользователя на карте
      */
     setUserLocation: function() {
         // Определяем координаты пользователя и отмечаем на карте
         if (YMaps.location) {
-            var userLocation = new YMaps.GeoPoint(YMaps.location.longitude,
-                    YMaps.location.latitude);
-            // Создание стиля для значка пользователя
-            var s = new YMaps.Style();
-            s.iconStyle = new YMaps.IconStyle();
-            s.iconStyle.href = "/static/images/user.png";
-            s.iconStyle.size = new YMaps.Point(32, 32);
-            s.iconStyle.offset = new YMaps.Point(-16, -16);
-            // Создание метки и добавление пользователя на карту
-            var usermark = new YMaps.Placemark(userLocation, {
-                style : s,
-                hideIcon : false
-            });
-            usermark.description = "Ваше местоположение";
-            ElectionMap.get().addOverlay(usermark);
+            var size = new OpenLayers.Size(32,32);
+			var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
+			var icon = new OpenLayers.Icon('/static/images/user.png', size, offset);
+			var userCoords = new OpenLayers.LonLat(YMaps.location.longitude,YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+			var user = new OpenLayers.Marker(userCoords,icon);
+			var infoLayer = new OpenLayers.Layer.Markers("Users", {projection: new OpenLayers.Projection("EPSG:4326")});
+			infoLayer.addMarker(user);
+			Grakon.map.addLayer(infoLayer);
         }
     },
-
-    /**
+	
+	/**
      * Центрирует карту на указанном месте с оптимальным масштабом.
      * 
      * @param {place} -
@@ -256,8 +225,8 @@ var ElectionMap = {
      *            будет показана вся Россия
      */
     setDefaultView: function(place) {
-        var zoom = ElectionMap.MAP_LEVELS[3].index;
-        var center = new YMaps.GeoPoint(37.64, 55.76);
+        var zoom = Grakon.MAP_LEVELS_ZOOM.regions+1;
+        var center = new OpenLayers.LonLat(47.57138, 54.8384).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 
         // Показываем заданное место на карте.
         if (place == null || place == "") { // Если место не задано, то для
@@ -268,14 +237,11 @@ var ElectionMap = {
             // для пользователя из-за рубежа карта будет отцентрована по
             // европейской части России.
             if (YMaps.location && YMaps.location.country == "Россия") {
-                center = new YMaps.GeoPoint(YMaps.location.longitude,
-                        YMaps.location.latitude);
+                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                 zoom = YMaps.location.zoom;
             }
 
-            ElectionMap.get().setCenter(center, zoom);
-            // Считаем все избирательные комиссии на карте
-            ElectionMap.markElectionCommissions();
+            Grakon.map.setCenter(center, zoom);
         } else {
             var geocoder = new YMaps.Geocoder(place, {
                 geocodeProvider : "yandex#map"
@@ -285,295 +251,238 @@ var ElectionMap = {
                 // Если объект найден, устанавливает центр карты в центр области
                 // показа объекта
                     if (this.length()) {
-                        ElectionMap.get().setBounds(this.get(0).getBounds());
-                        ElectionMap.markElectionCommissions();
+                        var left = this.get(0).getBounds().getLeft();
+						var bottom = this.get(0).getBounds().getBottom();
+						var right = this.get(0).getBounds().getRight();
+						var top = this.get(0).getBounds().getTop();
+						var bounds = new OpenLayers.Bounds(left, bottom, right, top).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+						Grakon.map.zoomToExtent(bounds);
                     } else
-                        ElectionMap.get().setCenter(center, zoom);
-                });
+                        Grakon.map.setCenter(center, zoom);
+			});
 
             // Процесс геокодирования завершен с ошибкой
-            YMaps.Events.observe(geocoder, geocoder.Events.Fault, function(gc,
-                    error) {
-                alert("Произошла ошибка: " + error);
+            YMaps.Events.observe(geocoder, geocoder.Events.Fault, function(gc, error) {
+                OpenLayers.Console.error("Произошла ошибка: " + error);
             });
         }
     },
+	
+	/**
+	 * Задаёт способ вывода логов и сообщений об ошибках
+	 */
+	setupLogging: function() {
+		OpenLayers.Console = window.console;
+		OpenLayers.Console.userError = OpenLayers.Console.error;
+	},
+	
+	/**
+	 * Создаёт карту в заданном HTML-контейнере
+	 * @param {mapDivID} ID HTML-контейнера [String]
+	 */
+	initMap: function(mapDivID) {
+		Grakon.map = new OpenLayers.Map(mapDivID, Grakon.MAP_OPTIONS);
+		
+		// слушаем событие окончания масштабирования
+		Grakon.map.events.register("zoomend", Grakon.map, function() {
+			// границы регионов
+			if (Grakon.borderLayers.regions != null)
+				Grakon.borderLayers.regions.setVisibility( this.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts );
+			
+			// границы районов
+			if (Grakon.borderLayers.districts != null)
+				Grakon.borderLayers.districts.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts );
+				
+			// видимость ИКСов
+			if (Grakon.electionCommissionLayers.regions != null)
+				Grakon.electionCommissionLayers.regions.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.regions );
+				
+			// видимость ТИКов
+			if (Grakon.electionCommissionLayers.districts != null)
+				Grakon.electionCommissionLayers.districts.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts );
+				
+			// видимость УИКов
+			if (Grakon.electionCommissionLayers.areas != null)
+				Grakon.electionCommissionLayers.areas.setVisibility( this.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas );
+		});
+		
+		// слушаем событие окончания перемещения по карте
+		Grakon.map.events.register("moveend", Grakon.map, function() {
+			if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas) {
+				var bounds = Grakon.map.getExtent().transform(Grakon.map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326")).toArray();
+				var left = bounds[0];
+				var bottom = bounds[1];
+				var right = bounds[2];
+				var top = bounds[3];
+				OpenLayers.loadURL("/location/locations_data",
+					{'x1': left,
+					'x2': right,
+					'y1': bottom,
+					'y2': top},
+					null,
+					function(request) {
+						if (request.status == 200) {
+							eval(request.responseText);
+							if (electionCommissions != null) {
+								// Добавим слой УИКи
+								if (Grakon.electionCommissionLayers.areas == null) {
+									var areasLayer = new OpenLayers.Layer.Markers( "УИКи" );
+									Grakon.electionCommissionLayers.areas = areasLayer;
+									Grakon.map.addLayer( areasLayer );
+								}
+								
+								// Добавим новые (не показанные) УИКи на карту
+								for (var uikID in electionCommissions)
+									if (Grakon.electionCommissions[uikID] == null) {
+										Grakon.electionCommissions[uikID] = electionCommissions[uikID];
+										var size = new OpenLayers.Size(18,32);
+										var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+										var icon = new OpenLayers.Icon('/static/images/uik.png', size, offset);
+										var uikLocation = new OpenLayers.LonLat(electionCommissions[uikID].xCoord,electionCommissions[uikID].yCoord).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+										var uik = new OpenLayers.Marker(uikLocation,icon);
+										uik.data = electionCommissions[uikID];
+										var popup = new OpenLayers.Popup.AnchoredBubble(uik.data.id, uikLocation,
+																	 new OpenLayers.Size(300,200),
+																	 uik.data.address,
+																	 icon, true, null);
+										Grakon.map.addPopup(popup);
+										popup.hide();
+										Grakon.map.events.register('click', uikLocation, function(){popup.show();});
+										Grakon.electionCommissionLayers.areas.addMarker(uik);
+									}
+							}
+						} else
+							OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
+					},
+					function() {
+						OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
+					}
+				);
+			}
+		});
+	},
+	
+	/**
+	 * Создаёт и добавляет слои на карту
+	 */
+	initMapLayers: function() {
+		var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс",{sphericalMercator: true});
+		var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
+		var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
+		var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
+		Grakon.map.addLayer(Y_map);
+		Grakon.map.addLayer(OSM_map);
+		Grakon.map.addLayer(Y_sat);
+		Grakon.map.addLayer(Y_hyb);
+		Grakon.map.setBaseLayer(Y_hyb);
+		
+		Grakon.addRegions();
+		Grakon.addDistricts();
+		Grakon.addElectionCommissions();
+	},
+	
+	/**
+	 * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
+	 */
+	addRegions: function() {			
+		var regions = new OpenLayers.Layer.Vector("Субъекты РФ", {
+			projection: new OpenLayers.Projection("EPSG:4326"),
+			styleMap: new OpenLayers.StyleMap(Grakon.REGION_STYLES)
+		});
 
-    /**
-     * Отмечает на карте все избирательные комиссии.
-     */
-    markElectionCommissions : function() {
-        // Define an election commissions collection for three types of election
-        // commissions
-        ElectionMap.placemarks = new Array(new Array(), new Array(),
-                new Array());
+		// выделять субъект РФ цветом при наведении мыши
+		var highlightCtrl = new OpenLayers.Control.SelectFeature(regions, {
+			hover: true,
+			highlightOnly: true,
+			renderIntent: "temporary"
+		});
+		Grakon.map.addControl(highlightCtrl);
+		highlightCtrl.activate();
 
-        for ( var n in electionCommissions)
-            ElectionMap.markElectionCommission(electionCommissions[n]);
+		// показать субъект РФ на всю карту при клике на нём
+		var selectCtrl = new OpenLayers.Control.SelectFeature(regions, {
+			clickout: true,
+			select: Grakon.Utils.regionClickHandler
+		});
+		Grakon.map.addControl(selectCtrl);
+		selectCtrl.activate();
 
-        ElectionMap.resetZoom();
-    },
+		// Добавить слой на карту
+		Grakon.map.addLayer(regions);
+		Grakon.borderLayers.regions = regions;
 
-    /**
-     * Добавляет на карту метку данной избирательной комиссии
-     * 
-     * @param {commission}
-     *            объект типа ElectionCommission
-     */
-    markElectionCommission : function(commission) {
-        // создаём метку для избирательной комиссии с именем и описанием
-        var geoPoint = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var styleValue = ElectionMap.placemarkStyles[commission.level - 1];
-        var placemark = new YMaps.Placemark(geoPoint, {
-            draggable: true,
-            balloonOptions: {maxWidth: 300},
-            style : styleValue
-        });
-        var index = ElectionMap.placemarks[commission.level-1].length;
-        placemark.data = commission;
-        placemark.name = ElectionMap.buildElectionCommissionName(commission, index);
-        placemark.description = ElectionMap
-                .buildElectionCommissionDescription(commission);
-        
-        // при открытии балуна обновить картинку лупы
-        YMaps.Events.observe(placemark, placemark.Events.BalloonOpen, ElectionMap.updateCommissionZoomIcon);
-        
-        // после перетаскивания вернуть метку назад
-        YMaps.Events.observe(placemark, placemark.Events.DragEnd, function (obj) {
-            placemark.setGeoPoint(geoPoint);
-            obj.update();
-        });
+		// Загрузить данные на слой
+		OpenLayers.loadURL(Grakon.MAP_URLS.regions, {}, Grakon.Utils, Grakon.Utils.addRegionBorders, function() {
+			OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
+		});
+	},
+	
+	/**
+	 * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
+	 */
+	addElectionCommissions: function() {
+		// Добавляем слой ТИКов
+		var electionCommissionsLevel3 = new OpenLayers.Layer.Text("ТИКи", {
+			location: Grakon.MAP_URLS.electionCommissionsType3,
+			projection: new OpenLayers.Projection("EPSG:4326")
+		});
+		electionCommissionsLevel3.setVisibility(false);
+		Grakon.map.addLayer(electionCommissionsLevel3);
+		Grakon.electionCommissionLayers.districts = electionCommissionsLevel3;
+		
+		// Добавляем слой ИКСов
+		var electionCommissionsLevel2 = new OpenLayers.Layer.Text("ИКСы", {
+			location: Grakon.MAP_URLS.electionCommissionsType2,
+			projection: new OpenLayers.Projection("EPSG:4326")
+		});
+		Grakon.map.addLayer(electionCommissionsLevel2);
+		Grakon.electionCommissionLayers.regions = electionCommissionsLevel2;
+	},
+	
+	addDistricts: function() {			
+		var districts = new OpenLayers.Layer.Vector("Районы", {
+			projection: new OpenLayers.Projection("EPSG:4326"),
+			styleMap: new OpenLayers.StyleMap(Grakon.DISTRICT_STYLES)
+		});
+		// Добавить слой на карту
+		districts.setVisibility(false);
+		Grakon.borderLayers.districts = districts;
+		
+		// выделять субъект РФ цветом при наведении мыши
+		var highlightCtrl = new OpenLayers.Control.SelectFeature(districts, {
+			hover: true,
+			highlightOnly: true,
+			renderIntent: "temporary"
+		});
+		Grakon.map.addControl(highlightCtrl);
+		highlightCtrl.activate();
 
-        // добавить значки ИКСов на карту
-        if (commission.level == 2)
-            ElectionMap.addElectionCommissionIcon(placemark);
+		// показать субъект РФ на всю карту при клике на нём
+		var selectCtrl = new OpenLayers.Control.SelectFeature(districts, {
+			clickout: true,
+			select: Grakon.Utils.districtClickHandler
+		});
+		Grakon.map.addControl(selectCtrl);
+		selectCtrl.activate();
 
-        placemark.setIconContent(commission.shortTitle);
-
-        ElectionMap.placemarks[commission.level - 1].push(placemark);
-        ElectionMap.objManager.add(placemark,
-                ElectionMap.MAP_LEVELS[commission.level - 1].index, 19);
-
-        ElectionMap.checkForVisibility(placemark);
-    },
-
-    /**
-     * Создаёт название избирательного округа в виде HTML-кода.
-     * 
-     * @param {commission}
-     *            объект типа ElectionCommission
-     * @param {index} положение метки избирательной комиссии в массиве меток
-     * @returns HTML string
-     */
-    buildElectionCommissionName : function(commission, index) {
-        var commissionType;
-        switch (commission.level) {
-        case 2:
-            commissionType = "ИКС: ";
-            break;
-        case 3:
-            commissionType = "ТИК: ";
-            break;
-        default:
-            commissionType = "";
-        }
-        var string = '<a href="#" onclick="ElectionMap.showRegion('
-                + commission.id + ', ' + index + '); return false;" id="commission'
-                + commission.id
-                + 'Name" class="zoomIn" '
-                + 'title="Показать данную область на карте" style="color: black">'
-                + commissionType + commission.title + '</a>';
-        return string;
-    },
-
-    /**
-     * Создаёт описание избирательного округа в виде HTML-кода.
-     * 
-     * @param {commission}
-     *            объект типа ElectionCommission
-     * @returns HTML string
-     */
-    buildElectionCommissionDescription : function(commission) {
-        var string = commission.address +
-        // ((commission.numVoters != null && commission.numVoters > 0)
-        // ?"Избирателей: "+commission.numVoters+"<br/>":"") +
-                // ((commission.numObservers != null && commission.numObservers
-                // > 0) ?"Наблюдателей: "+commission.numObservers+"<br/>":"") +
-                ('<p><a href="/location/' + commission.id + '">Страница округа</a></p>');
-
-        return string;
-    },
-
-    /**
-     * Добавляет иконку избирательной комиссии на карту
-     * 
-     * @param {placemark}
-     *            объект YMaps.Placemark
-     */
-    addElectionCommissionIcon : function(placemark) {
-        var icon = new YMaps.Placemark(placemark.getGeoPoint(), {
-            style : ElectionMap.placemarkStyles[0],
-            hasHint : true,
-            hideIcon : false
-        });
-        icon.name = placemark.name;
-        icon.description = placemark.description;
-        icon.setHintContent(placemark.data.shortTitle);
-        ElectionMap.objManager.add(icon, ElectionMap.MAP_LEVELS[3].index,
-                ElectionMap.MAP_LEVELS[1].index - 1);
-    },
-
-    /**
-     * Ищет и показывает на карте заданную область с максимальный масштабом.
-     * 
-     * @param {commissionId}
-     *            id комиссии
-     * @param {index} позиция метки избирательной комиссии в массиве меток
-     */
-    showRegion : function(commissionId, index) {
-        var commission = electionCommissions[commissionId];
-        var point = new YMaps.GeoPoint(commission.xCoord, commission.yCoord);
-        var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point,
-                point));
-        var maxZoom = (availZoom > ElectionMap.MAX_ZOOM) ? ElectionMap.MAX_ZOOM : availZoom;
-
-        var zoom;
-        switch (commission.level) {
-        case 1:
-        case 2:
-            zoom = (ElectionMap.get().getZoom() != ElectionMap.MAP_LEVELS[commission.level].index) ? ElectionMap.MAP_LEVELS[commission.level].index
-                    : // показать следующий уровень масштаба ИО с центром на
-                        // этом
-                    maxZoom;
-            break; // показать здание ИО в том случае, если масштаб карты уже
-                    // равен следующему уровню
-        default:
-            zoom = (ElectionMap.get().getZoom() != maxZoom) ? maxZoom
-                    : ElectionMap.MAP_LEVELS[commission.level - 1].index;
-        }
-
-        ElectionMap.get().setCenter(point, zoom);
-
-        var placemark = ElectionMap.placemarks[commission.level-1][index];
-        ElectionMap.updateCommissionZoomIcon(placemark);
-    },
-
-    /**
-     * Меняет картинку у названия комисии на "приблизить" или "отдалить" в
-     * соответствии с масштабом карты
-     * 
-     * @param {placemark}
-     *            метка избирательной комиссии [YMaps.Placemark]
-     */
-    updateCommissionZoomIcon : function(placemark) {
-        if (ElectionMap.atMaxZoom())
-            $('#commission' + placemark.data.id + 'Name').removeClass("zoomIn")
-                    .addClass("zoomOut");
-        else
-            $('#commission' + placemark.data.id + 'Name').removeClass("zoomOut")
-                    .addClass("zoomIn");
-    },
-    
-    /**
-     * @returns true, если масштаб карты больше или равен максимальному; false, в противном случае
-     */
-    atMaxZoom: function() {
-        var point = ElectionMap.get().getCenter();
-        var availZoom = ElectionMap.get().getMaxZoom(new YMaps.GeoBounds(point, point));
-        var maxZoom = (availZoom > ElectionMap.MAX_ZOOM) ? ElectionMap.MAX_ZOOM : availZoom;
-        return (ElectionMap.get().getZoom() >= maxZoom);
-    },
-
-    /**
-     * Добавляет на карту 2 кнопки "Изибиратели", "Наблюдатели".
-     */
-    addButtons : function() {
-        var button;
-        var buttons = new Array();
-
-        // Кнопка "Избиратели"
-        button = new YMaps.ToolBarButton( {
-            caption : "Избиратели",
-            hint : "Показывает количество избирателей на избирательных округах"
-        });
-        button.dataType = "numVoters";
-        YMaps.Events.observe(button, button.Events.Click,
-                ElectionMap.buttonClick, buttons);
-        buttons.push(button);
-
-        // Кнопка "Наблюдатели"
-        button = new YMaps.ToolBarButton(
-                {
-                    caption : "Наблюдатели",
-                    hint : "Показывает количество наблюдателей на избирательных округах"
-                });
-        button.dataType = "numObservers";
-        YMaps.Events.observe(button, button.Events.Click,
-                ElectionMap.buttonClick, buttons);
-        buttons.push(button);
-
-        ElectionMap.get().addControl(new YMaps.ToolBar(buttons),
-                new YMaps.ControlPosition(YMaps.ControlPosition.BOTTOM_LEFT,
-                        new YMaps.Point(20, 20)));
-    },
-
-    buttonClick : function(button) {
-        if (button.isSelected()) {
-            for ( var num in ElectionMap.placemarks)
-                for ( var i in ElectionMap.placemarks[num])
-                    ElectionMap.placemarks[num][i]
-                            .setIconContent(ElectionMap.placemarks[num][i].shortTitle);
-            button.deselect()
-        } else {
-            for ( var num in ElectionMap.placemarks)
-                for ( var i in ElectionMap.placemarks[num])
-                    ElectionMap.placemarks[num][i]
-                            .setIconContent(ElectionMap.placemarks[num][i].data[button.dataType]);
-            for ( var num in this)
-                this[num].deselect();
-            button.select();
-        }
-    },
-
-    /**
-     * Определяет и показывает на карте нужный уровень избирательных комиссий
-     * согласно масштабу.
-     */
-    resetZoom : function() {
-        while (ElectionMap.visibleElectionCommissions.length == 0
-                && ElectionMap.get().getZoom() >= 0) {
-            ElectionMap.get().zoomBy(-1);
-            ElectionMap
-                    .checkForVisibility(ElectionMap.centerNearestElectionCommission);
-        }
-    },
-
-    /**
-     * @param {placemark}
-     *            [YMaps.Placemark] метка для проверки на видимость в заданном
-     *            масштабе карты
-     */
-    checkForVisibility : function(placemark) {
-        if (ElectionMap.get().getBounds() == null)
-            return;
-
-        if (ElectionMap.electionCommissionLevel == null
-                || ElectionMap.electionCommissionLevel == placemark.data.level) {
-            // Проверить метку на видимость и в положительном случае сохранить в
-            // массив видимых избирательных комиссий
-            if (ElectionMap.get().getBounds().contains(placemark.getCoordPoint()))
-                ElectionMap.visibleElectionCommissions.push(placemark);
-
-            // Найти ближайшую избирательную комиссию к центру карты
-            var mapCenter = new YMaps.GeoPoint(ElectionMap.get().getCenter()
-                    .getX(), ElectionMap.get().getCenter().getY());
-            var distanceToElectionCommission = mapCenter.distance(placemark
-                    .getGeoPoint());
-            if (ElectionMap.distanceToNearestElectionCommission == null
-                    || distanceToElectionCommission < ElectionMap.distanceToNearestElectionCommission) {
-                ElectionMap.distanceToNearestElectionCommission = distanceToElectionCommission;
-                ElectionMap.centerNearestElectionCommission = placemark;
-            }
-        }
-    }
+		// Загрузить данные на слой
+		OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+		});
+		OpenLayers.loadURL("/static/districts/49s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+		});
+		
+		Grakon.map.addLayer(districts);
+	},
+	
+	/**
+	 * Добавляет инструменты управления на карту (например, масштабирование и выбор слоя)
+	 */
+	initMapTools: function() {
+		Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());                  		
+		Grakon.map.addControl(new OpenLayers.Control.LayerSwitcher());
+		Grakon.map.addControl(new OpenLayers.Control.Navigation());
+		Grakon.map.addControl(new OpenLayers.Control.MousePosition());
+	}
 };

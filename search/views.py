@@ -13,7 +13,9 @@ class BaseSearchView(TemplateView):
     template_name = 'search/base.html'
     tab = '' # 'user_list', 'user_table' or 'map'
 
-    def preprocess(self):
+    def get_context_data(self, **kwargs):
+        ctx = super(BaseSearchView, self).get_context_data(**kwargs)
+
         loc_id = ''
         for name in ('uik', 'tik', 'region'):
             loc_id = self.request.GET.get(name, '')
@@ -37,22 +39,22 @@ class BaseSearchView(TemplateView):
         else:
             self.role_type = ''
 
-        return {
+        ctx.update({
             'tab': self.tab,
             'locations': regions_list(),
             'location_path': str(self.location.path()) if self.location else '[]',
             'role_form': role_form,
             'role_name': ROLE_TYPES[self.role_type] if self.role_type else '',
-            'name': 'search',
-        }
+            'name': 'search', # requiered to highlight main menu item
+        })
+        return ctx
 
 # TODO: show only verified users
 class ListSearchView(BaseSearchView):
     tab = 'user_list'
 
     def get_context_data(self, **kwargs):
-        ctx = super(BaseSearchView, self).get_context_data(**kwargs)
-        ctx.update(self.preprocess())
+        ctx = super(ListSearchView, self).get_context_data(**kwargs)
 
         query = get_roles_query(self.location)
         if self.role_type:
@@ -81,8 +83,56 @@ class TableSearchView(BaseSearchView):
     tab = 'user_table'
 
     def get_context_data(self, **kwargs):
-        ctx = super(BaseSearchView, self).get_context_data(**kwargs)
-        ctx.update(self.preprocess())
+        ctx = super(TableSearchView, self).get_context_data(**kwargs)
+
+        if self.role_type == '':
+            role_queryset = Role.objects.exclude(user__user__email='', user__user__is_active=False)
+
+            distr = {}
+            # TODO: total number for each subregion
+            if not self.location:
+                sub_regions = Location.objects.filter(region=None).order_by('name')
+
+                for role_type, region in role_queryset.values_list('type', 'location__region'):
+                    distr.setdefault(region, {}).setdefault(role_type, 0)
+                    distr[region][role_type] += 1
+            elif self.location.is_region():
+                sub_regions = Location.objects.filter(region=self.location, tik=None).order_by('name')
+
+                for role_type, tik in role_queryset.filter(location__region=self.location) \
+                        .values_list('type', 'location__tik'):
+                    distr.setdefault(tik, {}).setdefault(role_type, 0)
+                    distr[tik][role_type] += 1
+            elif self.location.is_tik():
+                sub_regions = Location.objects.filter(tik=self.location).order_by('name')
+
+                for role_type, uik in role_queryset.filter(location__tik=self.location) \
+                        .values_list('type', 'location__id'):
+                    distr.setdefault(uik, {}).setdefault(role_type, 0)
+                    distr[uik][role_type] += 1
+            elif self.location.is_uik():
+                sub_regions = []
+
+            total = {}
+            for loc_id in distr:
+                for role_type in distr[loc_id]:
+                    total.setdefault(role_type, 0)
+                    total[role_type] += distr[loc_id][role_type]
+
+            for role_type in role_queryset.filter(location=self.location) \
+                    .values_list('type', flat=True):
+                total.setdefault(role_type, 0)
+                total[role_type] += 1
+
+            lines = []
+            for sub_region in sub_regions:
+                if sub_region.id in distr:
+                    lines.append({'location': sub_region, 'data': distr.get(sub_region.id, {})})
+
+            ctx.update({
+                'lines': lines,
+                'total': total,
+            })
         return ctx
 
 user_table = TableSearchView.as_view()
@@ -91,8 +141,7 @@ class MapSearchView(BaseSearchView):
     tab = 'map'
 
     def get_context_data(self, **kwargs):
-        ctx = super(BaseSearchView, self).get_context_data(**kwargs)
-        ctx.update(self.preprocess())
+        ctx = super(MapSearchView, self).get_context_data(**kwargs)
 
         ctx.update({
             'place': self.request.GET.get('place', '')

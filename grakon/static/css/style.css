@@ -216,3 +216,6 @@ select {
 #main_tab .find_uik_btn {display:block;}
 
 .addressFields select {display: block;}
+
+.results_table {border: 1px solid;}
+.results_table th, .results_table td {border: 1px solid; text-align: center; vertical-align: middle;}

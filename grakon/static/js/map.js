@@ -190,7 +190,7 @@ var Grakon = {
 	 * @param {mapDivID} ID HTML-контейнера [String]
 	 */
 	init: function(place) {
-		var mapDivID = "map";
+		var mapDivID = "publicElectionsMap";
 		Grakon.setupLogging();
 		Grakon.initMap(mapDivID);
 		Grakon.initMapLayers();
@@ -211,7 +211,9 @@ var Grakon = {
 			var icon = new OpenLayers.Icon('/static/images/user.png', size, offset);
 			var userCoords = new OpenLayers.LonLat(YMaps.location.longitude,YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
 			var user = new OpenLayers.Marker(userCoords,icon);
-			Grakon.map.addMarker(user);
+			var infoLayer = new OpenLayers.Layer.Markers("Users", {projection: new OpenLayers.Projection("EPSG:4326")});
+			infoLayer.addMarker(user);
+			Grakon.map.addLayer(infoLayer);
         }
     },
 	
@@ -235,7 +237,7 @@ var Grakon = {
             // для пользователя из-за рубежа карта будет отцентрована по
             // европейской части России.
             if (YMaps.location && YMaps.location.country == "Россия") {
-                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude)).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
                 zoom = YMaps.location.zoom;
             }
 

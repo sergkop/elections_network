@@ -171,7 +171,7 @@ var Grakon = {
 					
 					// Добавим новые (не показанные) УИКи на карту
 					for (var uikID in electionCommissions)
-						if (Grakon.electionCommissions[uikID] == null) {
+						if (Grakon.electionCommissions[uikID] == null && electionCommissions[uikID].level == 3) {
 							Grakon.electionCommissions[uikID] = electionCommissions[uikID];
 							var size = new OpenLayers.Size(18,32);
 							var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);

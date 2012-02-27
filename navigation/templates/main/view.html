@@ -2,10 +2,10 @@
 
 {% include "dialogs/find_uik.html" %}
 
-<p>Чтобы принять участие в работе площадки, рассказать другим пользователям
-о себе и помочь проведению честных выборов, сделайте следующее.</p>
-
 {% if request.user.is_authenticated %}
+    <p>Чтобы принять участие в работе площадки, рассказать другим пользователям
+    о себе и помочь проведению честных выборов, сделайте следующее.</p>
+
     {% if not request.profile.has_name %}
         <div class="blue-title">+1 балл</div>
         <div class="check-list-step">
@@ -37,7 +37,7 @@
         </div>
     {% endif %}
 
-    {% if not request.roles.voter %}
+    {% if not request.roles.voter or not request.roles.voter.location.is_uik %}
         <div class="blue-title">+2 балла</div>
         <div class="check-list-step">
 

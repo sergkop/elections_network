@@ -122,7 +122,7 @@ function set_select_location(div_id, path){
     select_2.val(path.length>1 ? path[1] : "").change();
     select_3.val(path.length>2 ? path[2] : "");
 
-    $(".fing_uik_btn").click(function(){find_uik_dialog_init();});
+    $(".find_uik_btn").click(function(){find_uik_dialog_init();});
 }
 
 function form_location_id(div_id){

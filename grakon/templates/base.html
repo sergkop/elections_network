@@ -99,17 +99,23 @@
         <div class="main-buttons-map">
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
+        <div class="main-buttons-blue">
+            <a href="{% url find_uik %}">Найди свой участок</a>
+        </div> 
+        &nbsp; &nbsp; &nbsp; &nbsp;
     </div>
 
     {% block breadcrumbs %}{% endblock %}
 
-    {% if request.user.is_authenticated and not request.roles.voter %}
-        <div class="center" style="margin:1em;">
-            <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
-                Вы еще не записались избирателем на свой участок. Вы можете сделать это
-                <a href="{% url main %}">здесь</a>.
-            </span>
-        </div>
+    {% if request.user.is_authenticated %}
+        {% if not request.roles.voter or not request.roles.voter.location.is_uik %}
+            <div class="center" style="margin:1em;">
+                <span style="background-color:#F72F50; color:white; font-weight: bold; padding: 0.3em;">
+                    Вы еще не записались избирателем на свой участок. Вы можете сделать это
+                    <a href="{% url main %}">здесь</a>.
+                </span>
+            </div>
+        {% endif %}
     {% endif %}
 
     <div id="main">

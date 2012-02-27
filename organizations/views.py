@@ -92,9 +92,9 @@ class CreateOrganizationView(CreateView):
 
         message = u'Зарегистрирована новая организация:\n' \
                 u'Название: %s\n' \
-                u'Страница: %s\n' \
+                u'Страница: http://grakon.org%s\n' \
                 u'Сайт: %s\n' \
-                u'Пользователь: %s\n' \
+                u'Пользователь: http://grakon.org/user/%s\n' \
                 u'Email: %s' % (
                 organization.title, organization.get_absolute_url(), organization.website,
                 profile.username, profile.user.email)

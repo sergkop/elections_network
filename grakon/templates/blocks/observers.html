@@ -22,7 +22,10 @@
             </li>
         {% endfor %}
     </ul>
-    {% button "circle-check" "Записаться в наблюдатели" "become_observer" %}
+    <div class="mb15 mt15">
+    	{% button "circle-check" "Записаться в&nbsp;наблюдатели" "become_observer" %}
+    </div>
+    
 </div>
 
 {% if user.is_authenticated %}

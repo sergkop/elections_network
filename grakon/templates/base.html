@@ -100,10 +100,14 @@
         <div class="main-buttons-map">
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
+        &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-blue">
             <a href="{% url find_uik %}">Найди свой участок</a>
-        </div> 
+        </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
+        <div class="main-buttons-blue">
+            <a href="{% url campaign %}">Акции</a>
+        </div>
     </div>
 
     {% block breadcrumbs %}{% endblock %}

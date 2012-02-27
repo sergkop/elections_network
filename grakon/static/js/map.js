@@ -252,9 +252,9 @@ var Grakon = {
                 // показа объекта
                     if (this.length()) {
                         var left = this.get(0).getBounds().getLeft();
-						var bottom = this.get(0).getBounds().getLeft();
-						var right = this.get(0).getBounds().getLeft();
-						var top = this.get(0).getBounds().getLeft();
+						var bottom = this.get(0).getBounds().getBottom();
+						var right = this.get(0).getBounds().getRight();
+						var top = this.get(0).getBounds().getTop();
 						var bounds = new OpenLayers.Bounds(left, bottom, right, top).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 						Grakon.map.zoomToExtent(bounds);
                     } else

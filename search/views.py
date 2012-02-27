@@ -2,6 +2,8 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 
+from loginza.models import UserMap
+
 from grakon.models import Profile
 from locations.models import Location
 from locations.utils import get_roles_query, regions_list
@@ -39,6 +41,8 @@ class BaseSearchView(TemplateView):
         else:
             self.role_type = ''
 
+        self.inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
+
         ctx.update({
             'tab': self.tab,
             'locations': regions_list(),
@@ -63,7 +67,7 @@ class ListSearchView(BaseSearchView):
         # TODO: when role_type='' query is not correct
         profile_ids = Role.objects.filter(query).values_list('user', flat=True)
         people = Profile.objects.filter(id__in=profile_ids) \
-                .exclude(user__email='', user__is_active=False) \
+                .exclude(user__email='', user__is_active=False, id__in=self.inactive_ids) \
                 .only('username', 'show_name', 'first_name', 'last_name').order_by('username')
 
         result_count = len(people)
@@ -86,7 +90,8 @@ class TableSearchView(BaseSearchView):
         ctx = super(TableSearchView, self).get_context_data(**kwargs)
 
         if self.role_type == '':
-            role_queryset = Role.objects.exclude(user__user__email='', user__user__is_active=False)
+            role_queryset = Role.objects.exclude(user__user__email='', user__user__is_active=False,
+                    user__user__id__in=self.inactive_ids)
 
             distr = {}
             # TODO: total number for each subregion

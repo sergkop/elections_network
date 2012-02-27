@@ -148,9 +148,9 @@ def locations_data(request):
     if level == 2:
         queryset = queryset.filter(region=None)
     elif level == 3:
-        queryset = queryset.exclude(region=None).filter(tik=None)
+        queryset = queryset.filter(tik=None)
     elif level == 4:
-        queryset = queryset.exclude(tik=None)
+        pass
     else:
         return HttpResponse('"error"')
 

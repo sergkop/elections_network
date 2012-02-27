@@ -8,7 +8,7 @@
  */
 var ElectionCommission = function(id, level, shortTitle, title, address, xCoord, yCoord, data) {
 	this.id = id;
-	this.level = level < 1 ? 1 : level > 3 ? 3 : level;
+	this.level = level < 1 ? 1 : level > 4 ? 4 : level;
 	this.shortTitle = shortTitle;
 	this.title = title;
 	this.address = address;
@@ -171,7 +171,7 @@ var Grakon = {
 					
 					// Добавим новые (не показанные) УИКи на карту
 					for (var uikID in electionCommissions)
-						if (Grakon.electionCommissions[uikID] == null && electionCommissions[uikID].level == 3) {
+						if (Grakon.electionCommissions[uikID] == null && electionCommissions[uikID].level == 4) {
 							Grakon.electionCommissions[uikID] = electionCommissions[uikID];
 							var size = new OpenLayers.Size(18,32);
 							var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);

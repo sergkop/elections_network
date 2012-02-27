@@ -14,7 +14,10 @@
             </li>
         {% endfor %}
     </ul>
-    {% button "circle-check" "Записаться в представители прокуратуры" "become_prosecutor" %}
+    <div class="mb15 mt15">
+    	{% button "circle-check" "Записаться в&nbsp;представители прокуратуры" "become_prosecutor" %}
+    </div>
+    
 </div>
 
 {% if user.is_authenticated %}

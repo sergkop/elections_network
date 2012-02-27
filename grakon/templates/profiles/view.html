@@ -1,6 +1,6 @@
 {% load elements %}
-
-<h4>О себе</h4>
+<div class="static-content">
+<h4 style="margin-top: 10px;">О себе</h4>
 <div>
     {% if profile_user.profile.about %}
         {{ profile_user.profile.about|safe }}
@@ -23,8 +23,8 @@
     <div id="is_reported" {% if not is_reported %}style="display:none;"{% endif %}><b>Вы пожаловались на этого пользователя</b></div>
 
     <div class="user_actions">
-        {% button "mail-closed" "Отправить сообщение" "send_message" "" "" %}
-        {% button "circle-plus" "Добавить в контакты" "add_to_contacts" "" "" %}
+        {% button "mail-closed" "Отправить сообщение" "send_message" "" "" %}&nbsp; 
+        {% button "circle-plus" "Добавить в контакты" "add_to_contacts" "" "" %}&nbsp; 
         {% button "circle-minus" "Удалить из контактов" "remove_from_contacts" "" "" %}
         {% button "alert" "Пожаловаться" "report_user" "" "" %}
     </div>
@@ -98,3 +98,5 @@
         });*/
     </script>
 {% endif %}
+<br />
+</div>

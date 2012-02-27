@@ -10,6 +10,7 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 	ul ul li {margin-bottom: 0.3em;}
 header, nav {background: none;}
 nav {margin-top: 5px;}
+.mb5 {margin-bottom: 5px;}
 table, tbody td {border: none; margin: 0;}
 .cl {clear: both; height: 0; overflow: hidden;}
 .fl {float: left;}
@@ -77,7 +78,7 @@ footer .ym-wbox a {text-decoration: none; color: #fff;}
 
 .content_block {box-shadow: none; border: none; background: none; margin: 0;}
 
-.column_header, .ui-dialog-titlebar  {font-size: 1em; padding: 0.8em  0.5em 0.8em 2em; color: #333; margin:0;  border-radius: 3px 3px 0 0;}
+.column_header  {font-size: 1em; padding: 0.8em  0.5em 0.8em 2em; color: #333; margin:0;  border-radius: 3px 3px 0 0;}
 	.column_header	{text-shadow: 0 1px 0 #d0df96;}
 	.ui-dialog-titlebar {color: #fff;}
 h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2em;}
@@ -124,7 +125,6 @@ h3 {margin: 0;}
 
 .ui-tabs .ui-tabs-nav {padding: 0.4em 1em 0 1em; font-size: 1em;}
 .ui-widget {font-family: Arial, Helvetica, sans-serif;}
-.ui-widget-header {border-radius: 3px;}
 .ui-tabs {padding: 0; border-radius: 5px 5px 0 0; margin-bottom: 2em;}
 
 .ym-col3 .ui-tabs .ui-tabs-nav li {font-size: 1.1em; font-weight: normal;  margin-right: 5px; line-height:1.6em;}
@@ -145,10 +145,6 @@ h3 {margin: 0;}
 
 .ui-button {margin: 0;}
 
-.ui-state-hover .ui-icon, .ui-state-focus .ui-icon  {
-    background-image: url(/static/libs/jquery-ui/images/ui-icons_ffffff_256x240.png);
-}
-
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, #goto_location, #map_location {font-family: Arial, Helvetica, sans-serif; border: none; color: #333333;}
 .ui-button {border-radius: 1.5em; }
 
@@ -167,7 +163,6 @@ h3 {margin: 0;}
 	
 	
 .ui-dialog .ui-dialog-buttonpane {padding-right: 0;}
-.ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #d4d4d4; background: none; border-radius: 5px; font-weight: bold; color: #c77405;}
 
 .ui-state-default .ui-icon {background-image:url(/static/images/ui-icons_ef8c08_256x240_2.png); display: none;}
 
@@ -211,6 +206,11 @@ h3 {margin: 0;}
 	
 .static-content {background-color: #fff; margin: 0 -15px -15px; padding:1px 20px;}	
 .partners {border-top: 1px dotted #a5a5a5; margin: 20px -20px 0; padding: 20px;}
+
+#login_intro_span {display: block; margin: 0 0 15px; font-size: 1.2em}
+#login_form td {padding: 0 10px 10px 0; vertical-align: middle;}
+	#login_form label {color: #adadad;}
+	#login_dialog_register {color: #000;}
 
 
 /* backgrounds */

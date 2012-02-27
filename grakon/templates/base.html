@@ -4,7 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta property="fb:admins" content="1844239989" />
-    <!--link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon" /-->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
+	<link rel="icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
+    
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
     <meta property="og:image" content="{{ URL_PREFIX }}{{ STATIC_URL }}images/logo_small.png" />
@@ -177,7 +179,7 @@
     {% include "dialogs/login.html" %}
     <script type="text/javascript">
         $("#login_btn, #login_btn1").click(function(){
-            login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах");
+            login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах:");
         });
     </script>
 {% endif %}

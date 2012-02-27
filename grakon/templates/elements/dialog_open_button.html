@@ -5,7 +5,7 @@
                 become_{{ role }}_dialog_init();
             {% else %}
                 change_location_dialog_init("Записаться в {{ status_plural }}",
-                        "Выберите ваш избирательный округ", "{{ role }}");
+                        "Выберите ваш избирательный округ:", "{{ role }}");
             {% endif %}
         {% else %}
             login_dialog_init("Чтобы записаться в {{ status_plural }}, пожалуйста, войдите в систему");

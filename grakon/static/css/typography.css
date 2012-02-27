@@ -363,7 +363,7 @@
 	th, td {
 		line-height: 1.5em;
 		vertical-align: top;
-		padding: 0.7143em 0.5em;
+		padding: 0;
 	}
 
 	th *:first-child, td *:first-child {

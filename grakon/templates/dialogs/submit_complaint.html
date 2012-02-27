@@ -1,5 +1,5 @@
 <div id="submit_complaint_dialog">
-    <p>Инструмент публикации нарушений находится в разработке и появится в ближайшее время.</p>
+    <p style="margin-top: 0;">Инструмент публикации нарушений находится в разработке и появится в ближайшее время.</p>
 
     <p>
         Дополнительно вы можете оставить сообщение о нарушении на сайте
@@ -17,7 +17,7 @@
         $("#submit_complaint_dialog").dialog("open");
     }
 
-    $("#submit_complaint_dialog").dialog({width:650, height:450, modal: true, title: "Зафиксировать нарушение",
+    $("#submit_complaint_dialog").dialog({width:650, height:250, modal: true, title: "Зафиксировать нарушение",
         buttons: {
             "Сообщить о нарушении": function(){
                 window.open("http://kuda-komu.net/voting/", "_blank");

@@ -3,7 +3,7 @@
 
     <table class="login_dialog_table">
         <tr>
-            <td>
+            <td style="padding-right: 10px;" width="50%">
                 <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
                     <input type="hidden" value="" name="csrfmiddlewaretoken"/>
                     <table>
@@ -15,24 +15,37 @@
                         <td><label for="id_password">Пароль:</label></td>
                         <td><input id="id_password" type="password" name="password" /></td>
                     </tr>
+                    <tr>
+                    	<td>&nbsp;</td>
+                        <td>
+                        	<div>
+                            	<input id="login_form_submit" type="submit" value="Войти" />&nbsp; &nbsp;<a href="{% url password_reset %}">Забыли пароль?</a>
+                            </div>
+                        	<div style="margin-top:7px;">
+                        		<a id="login_dialog_register" href="{% url register %}">Регистрация</a>
+                            </div></td>
+                    </tr>
                     </table>
 
-                    <input id="login_form_submit" type="submit" value="Войти" />
-                    <a id="login_dialog_register" href="{% url register %}">Регистрация</a>
+                    
+                    
                 </form>
-
-                <a href="{% url password_reset %}">Забыли пароль?</a><br/><br/>
-                <a href="{% url password_reset %}">Раньше входили через соцсети, но сейчас по какой-то причине не можете?</a>&nbsp;&nbsp;&nbsp;
             </td>
-            <td style="border-left: 1px solid #AAA;">
+            <td style="border-left: 1px solid #ddd; padding-left: 10px;">
                 {% include "elements/loginza-lazy.html" %}
+                
             </td>
+        </tr>
+        <tr>
+        	<td colspan="2">
+            	<p style="margin-top:30px">Если Вы зарегистрированы на нашем сайте, но сейчас войти через соц. сети не можете,<br /> пройдите по <a href="{% url password_reset %}">этой ссылке</a> &mdash; мы пришлем вам новый пароль</p>
+           </td>        
         </tr>
     </table>
 
 <script type="text/javascript">
     // Login dialog
-    $("#login_dialog").dialog({width: 670, height: 380, modal: true, title: "Войдите в систему", buttons: {
+    $("#login_dialog").dialog({width: 670, height: 420, modal: true, title: "Войдите в систему", buttons: {
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
     }}).dialog("close");

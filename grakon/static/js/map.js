@@ -464,14 +464,6 @@ var Grakon = {
 		});
 		Grakon.map.addControl(selectCtrl);
 		selectCtrl.activate();
-
-		// Загрузить данные на слой
-		OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-		});
-		OpenLayers.loadURL("/static/districts/49s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-			OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-		});
 		
 		Grakon.map.addLayer(districts);
 	},

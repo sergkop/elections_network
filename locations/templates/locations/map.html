@@ -1,9 +1,9 @@
 {% if current_location.x_coord and not current_location.is_uik %}
     <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YANDEX_MAPS_KEY }}&modules=pmap" type="text/javascript"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
-	<script src="{{ STATIC_URL }}js/OpenLayers.js"></script>
+	<script src="{{ STATIC_URL }}js/OpenLayers.js" type="text/javascript"></script>
 	<script src="{{ STATIC_URL }}js/OL_Yandex.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/map.js"></script>
 
     <div class="center">
         <div id="publicElectionsMap" style="height:500px; min-width: 300px;"></div>

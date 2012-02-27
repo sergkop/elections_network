@@ -28,15 +28,13 @@
 {% endblock %}
 
 {% block right_column %}
-    <h3 class="column_header">Инструменты</h3>
-
-    <div class="ym-clearfix">
-        {% include "elements/right_panel.html" %}
-    </div>
+    
+{% include "elements/right_panel.html" %}
+   
 {% endblock %}
 
 {% block content_header %}
-    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Сообщения" "wall" "services/disqus.html" %}
+    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Стена" "wall" "services/disqus.html" %}
 
-    <!--{% include "services/disqus-counter.html" %}-->
+    {% include "services/disqus-counter.html" %}
 {% endblock %}

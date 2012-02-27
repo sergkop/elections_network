@@ -3,7 +3,6 @@
 	.ym-hlist {
 		/* containing floats in IE */
 		width:100%;
-		overflow:hidden;
 		/* Bugfix:IE - collapsing horizontal margins */
 		position:relative;
 		/* Repeat the main color from the image */
@@ -31,10 +30,11 @@
 	}
 
 	.ym-hlist ul li a,
-	.ym-hlist ul li strong {
+	.ym-hlist ul li strong,
+	.button {
         background-color: #332FBA;
 		color:#fff;
-		display:block;
+		display:inline-block;
 		font-size:1em;
 		line-height: 2em;
 		padding: 0 0.5em;
@@ -42,8 +42,12 @@
 		text-decoration:none;
 		text-shadow: 0 1px 1px rgba(0,0,0,.5);
 		width:auto;
-        -webkit-border-radius: 0.2em;
-        -moz-border-radius: 0.2em;
+	}
+	.ym-hlist ul li a,
+	.ym-hlist ul li strong,
+	.button, {
+		display: inline;
+		zoom:1;
 	}
 
 	.ym-hlist ul li a:focus,
@@ -51,9 +55,6 @@
 	.ym-hlist ul li a:active  {
 		color: #ccc;
 		background:#666;
-		-webkit-border-radius: 0.2em;
-		-moz-border-radius: 0.2em;
-		border-radius: 0.2em;
 		text-decoration:none;
 		outline: 0 none;
         color: #eee;

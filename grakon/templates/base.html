@@ -19,6 +19,10 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
     </script>
     <![endif]-->
+    <!--[if lt IE 10]>
+    <script type="text/javascript" src="/static/js/PIE.js"></script>
+    <script type="text/javascript" src="/static/js/iehacks.js"></script>
+    <![endif]-->
     <script type="text/javascript" src="{{ STATIC_URL }}libs/lightbox/jquery.lightbox-0.5.min.js"></script>
     <link href="{{ STATIC_URL }}libs/lightbox/jquery.lightbox-0.5.css" type="text/css" media="all" rel="stylesheet" />
     <script type="text/javascript">
@@ -48,8 +52,6 @@
                 <div class="logo">
                     <a href="/"><img src="{{ STATIC_URL }}images/logo_small.png"></a>
                 </div>
-                <a href="{% url main %}" id="title_link">Гракон
-                <small>гражданский контроль за выборами</small></a>
                 {% include "elements/share.html" %}
                 <br clear="all" />
             </div>
@@ -82,9 +84,20 @@
                         <span id="login_btn" class="clickable">Войти</span>
                     {% endif %}
                 </div>
+                <div class="cl">&nbsp;</div>
             </div>
         </div>
     </nav>
+
+    <div class="main-buttons">
+        <div class="main-buttons-blue">
+            <a href="">Записаться</a>
+        </div> 
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <div class="main-buttons-map">
+            <a href="{% url map %}">Ход выборов на карте</a>
+        </div>
+    </div>
 
     {% block breadcrumbs %}{% endblock %}
 

@@ -7,7 +7,6 @@
 
 	/* Layout Module Configuration */
 	.ym-wrapper {
-		max-width: 80em;
 		margin: 0 auto;
 	}
 
@@ -75,19 +74,23 @@
 	/* Column-Set Configuration: 1-3 (sidebar left) */
     /* left column */
     .ym-col1 {
-        width: 25%;
+        width: 228px;
         padding-top: 15px;
+		position: absolute;
     }
     /* right column */
     .ym-col2 {
-        width: 25%;
+        width: 228px;
         padding-top: 15px;
+		position: absolute;
+		right: 3em;
     }
     /* center column */
     .ym-col3 {
-        margin-left: 25%;
-        margin-right: 25%;
+        padding-left: 248px;
+        padding-right: 248px;
         padding-top: 15px;
+		min-height: 1100px;
     } 
 
 	/* skip links styling */

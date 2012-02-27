@@ -153,10 +153,6 @@ map = MapSearchView.as_view()
 class FindUikView(BaseSearchView):
     tab = 'find_uik'
 
-    def get_context_data(self, **kwargs):
-        ctx = super(FindUikView, self).get_context_data(**kwargs)
-        return ctx
-
 find_uik = FindUikView.as_view()
 
 def uik_search_data(request):

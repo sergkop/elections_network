@@ -12,7 +12,7 @@ from locations.models import Location
 from locations.utils import get_roles_counters, regions_list
 from navigation.models import Page
 from organizations.models import Organization, OrganizationCoverage
-from users.models import Role
+from users.models import CommissionMember, Role
 
 class MainView(TemplateView):
     template_name = 'main/base.html'
@@ -33,6 +33,7 @@ class MainView(TemplateView):
             'organizations': OrganizationCoverage.objects.organizations_at_location(None),
             'total_counter': total_counter,
 
+            'commission_members_count': CommissionMember.objects.count(),
             'disqus_identifier': 'main',
         })
 

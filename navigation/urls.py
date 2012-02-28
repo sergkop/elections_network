@@ -14,6 +14,7 @@ urlpatterns = patterns('navigation.views',
     tabbed_static_url('publications', 'static_pages/about/base.html'),
 	
 	tabbed_static_url('campaign', 'static_pages/campaign/base.html'),
+	tabbed_static_url('pressure', 'static_pages/campaign/base.html'),
 	tabbed_static_url('observation', 'static_pages/campaign/base.html'),
 
     tabbed_static_url('news', 'static_pages/development/base.html'),

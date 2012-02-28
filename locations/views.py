@@ -54,6 +54,8 @@ class LocationView(TemplateView):
             if voter_roles:
                 signed_up_in_uik = voter_roles[0].location.is_uik()
 
+        commission_members = CommissionMember.objects.filter(location=location)
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
@@ -69,7 +71,8 @@ class LocationView(TemplateView):
 
             'counters': get_roles_counters(location),
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),
-            'commission_members': CommissionMember.objects.filter(location=location),
+            'commission_members': commission_members,
+            'commission_members_count': len(commission_members),
             'add_commission_member_form': CommissionMemberForm(),
         })
         return ctx

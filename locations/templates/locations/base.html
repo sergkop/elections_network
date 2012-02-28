@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block right_column %}
-    <h3 class="column_header">Члены комиссии</h3>
+    <h3 class="column_header">Члены комиссии ({{ commission_members_count }})</h3>
     <div class="ym-clearfix">
         <div class="content_block">
             <div class="mt15 mb15">
@@ -91,9 +91,10 @@
 
     {% include "services/disqus-counter.html" %}
 
-    {% if dialog %}
-        <script type="text/javascript">
+    <script type="text/javascript">
+        $("#add_commission_member, #add_commission_member1, #add_commission_member2").click(add_commission_member_dialog_init);
+        {% if dialog %}
             become_{{ dialog }}_dialog_init();
-        </script>
-    {% endif %}
+        {% endif %}
+    </script>
 {% endblock %}

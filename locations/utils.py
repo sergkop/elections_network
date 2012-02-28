@@ -74,9 +74,21 @@ def get_locations_data(queryset, level):
         role_query = role_query | Q(location__tik__in=tik_ids)
 
     inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
-    roles = Role.objects.exclude(user__user__email='', user__user__is_active=False,
-            user__in=inactive_ids).filter(role_query).values_list('type', 'location')
-    all_locations = Location.objects.filter(loc_query).values_list('id', 'region', 'tik')
+    roles = list(Role.objects.exclude(user__user__email='', user__user__is_active=False,
+            user__in=inactive_ids).filter(role_query).values_list('type', 'location'))
+    all_locations = list(Location.objects.filter(loc_query).values_list('id', 'region', 'tik'))
+
+    locations_by_region = {}
+    for id, region, tik in all_locations:
+        locations_by_region.setdefault(region, []).append(id)
+
+    locations_by_tik = {}
+    for id, region, tik in all_locations:
+        locations_by_tik.setdefault(tik, []).append(id)
+
+    roles_by_location = {}
+    for role_type, location in roles:
+        roles_by_location.setdefault(location, []).append(role_type)
 
     # {loc_id: [related_locations]}
     user_counts = {}
@@ -84,17 +96,15 @@ def get_locations_data(queryset, level):
         related_locations = [location.id]
 
         if location.is_region():
-            related_locations += [id for id, region, tik in all_locations if region==location.id]
+            related_locations += locations_by_region[location.id]
         elif location.is_tik():
-            related_locations += [id for id, region, tik in all_locations if tik==location.id]
+            related_locations += locations_by_tik[location.id]
 
         user_counts[location.id] = {}
         location_roles = filter(lambda role: role[1] in related_locations, roles)
         for role_type, loc_id in location_roles:
             user_counts[location.id].setdefault(role_type, 0)
             user_counts[location.id][role_type] += 1
-
-    print user_counts
 
     for location in locations:
         if location.x_coord:

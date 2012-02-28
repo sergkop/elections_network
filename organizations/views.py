@@ -45,6 +45,8 @@ class BaseOrganizationView(object):
         counters = {}
         if organization.signup_observers:
             counters['observer'] = Role.objects.filter(organization=organization, type='observer').count()
+        if organization.signup_journalists:
+            counters['journalist'] = Role.objects.filter(organization=organization, type='journalist').count()
 
         ctx.update({
             'name': self.kwargs['name'],

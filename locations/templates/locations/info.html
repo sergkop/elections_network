@@ -1,3 +1,5 @@
+{% load elements %}
+
 <p>
     <b>Адрес</b>: {{ current_location.postcode|default:"" }} {{ current_location.address|default:"Адрес недоступен" }}
 </p>
@@ -19,7 +21,7 @@
         {% if current_location.info_url %}
             <a href="{{ current_location.info_url }}" target="_blank">Информация о комиссии</a>
             <br/>
-        {% endif%}
+        {% endif %}
         <a href="{{ current_location.results_url }}" target="_blank">Официальные результаты выборов</a>
         (после 4 марта)
     </p>
@@ -28,5 +30,24 @@
 <p>
     <b>Состав комиссии:</b>
     <br/>
-    <i>В ближайшее время мы начнем собирать и публиковать списки членов комиссий.</i>
+
+    <ul>
+        {% for commission_member in commission_members %}
+            <li>
+                <b>{{ commission_member.last_name }} {{ commission_member.first_name }} {{ commission_member.middle_name }}</b>
+                <br/>
+                <i>Должность:</i> {{ commission_member.get_role_display }}
+                <br/>
+                <i>Кем выдвинут:</i> {{ commission_member.get_party_display }}
+                {% if commission_member.job %}
+                <br/>
+                <i>Место работы:</i> {{ commission_member.job }}
+                {% endif %}
+            </li>
+        {% empty %}
+            <li><i>Пока не добавлено ни одного члена комиссии</i></li>
+        {% endfor %}
+    </ul>
+
+    {% button "" "Добавить члена комиссии" "add_commission_member1" %}
 </p>

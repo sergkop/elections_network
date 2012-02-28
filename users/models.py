@@ -70,3 +70,33 @@ class Contact(models.Model):
 
     def __unicode__(self):
         return unicode(self.user) + ' has ' + unicode(self.contact) + ' in contacts'
+
+MEMBER_CHOICES = (
+    ('chairman', u'Председатель'),
+    ('vice', u'Заместитель председателя'),
+    ('secretary', u'Секретарь'),
+    ('prg', u'Член с правом решающего голоса'),
+    ('psg', u'Член с правом совещательного голоса'),
+    ('other', u'Другое'),
+)
+
+PARTY_CHOICES = (
+    ('ER', u'Единая Россия'),
+    ('KPRF', u'КПРФ'),
+    ('LDPR', u'ЛДПР'),
+    ('SR', u'Справедливая Россия'),
+    ('Prohorov', u'Штаб Прохорова'),
+    ('other', u'Другое'),
+)
+
+class CommissionMember(models.Model):
+    last_name = models.CharField(u'Фамилия', max_length=50)
+    first_name = models.CharField(u'Имя', max_length=50)
+    middle_name = models.CharField(u'Отчество', max_length=50, blank=True)
+    role = models.CharField(u'Должность', max_length=100, choices=MEMBER_CHOICES)
+    party = models.CharField(u'Кем выдвинут', max_length=100, choices=PARTY_CHOICES)
+    job = models.CharField(u'Место работы', max_length=100, blank=True)
+
+    user = models.ForeignKey(Profile)
+    location = models.ForeignKey(Location)
+    time = models.DateTimeField(auto_now=True)

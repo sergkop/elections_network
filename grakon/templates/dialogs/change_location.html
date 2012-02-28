@@ -1,20 +1,20 @@
 <div id="change_location_dialog">
-	<table width="100%">
-    	<tr>
-        	<td width="50%">    
-    <div id="change_location_text" class="mb15"></div>
-    <form id="change_location_form" method="get" action="{% url goto_location %}">
-        {% csrf_token %}
-        {% include "elements/region_choice.html" %}
-        <input type="hidden" name="dialog" id="dialog_to_open" value="" />
-    </form>
-    		</td>
+    <table width="100%">
+        <tr>
+            <td width="50%">    
+                <div id="change_location_text" class="mb15"></div>
+                <form id="change_location_form" method="get" action="{% url goto_location %}">
+                    {% csrf_token %}
+                    {% include "elements/region_choice.html" %}
+                    <input type="hidden" name="dialog" id="dialog_to_open" value="" />
+                </form>
+            </td>
             
             <td><a href="{% url find_uik %}" target="_blank">Найдите номер своего УИК</a> <span style="color: #aaa">
-            	(ссылка откроется в&nbsp;новом окне)</span>
-    		</td>
-         </tr>
-     </table>
+                (ссылка откроется в&nbsp;новом окне)</span>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <script type="text/javascript">

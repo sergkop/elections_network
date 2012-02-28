@@ -88,7 +88,7 @@ class Location(models.Model):
         js = 'new ElectionCommission(' + str(self.id) + ',' + str(self.level()) + ','
         # TODO: name, address require escape
         js += '"' + self.name + '","' + self.name + '","' + self.address.replace('"', '') + '",'
-        js += str(self.x_coord) + ',' + str(self.y_coord) + ',{'
+        js += str(self.x_coord) + ',' + str(self.y_coord) + ',{ '
     
         if 'voter' in counts:
             js += 'voters:' + str(counts['voter']) + ','

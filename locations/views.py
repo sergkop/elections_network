@@ -12,7 +12,8 @@ from locations.models import Location
 from locations.utils import get_locations_data, get_roles_counters, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
-from users.models import Role, ROLE_TYPES
+from users.forms import CommissionMemberForm
+from users.models import CommissionMember, Role, ROLE_TYPES
 
 # TODO: mark links previously reported by user
 class LocationView(TemplateView):
@@ -68,15 +69,12 @@ class LocationView(TemplateView):
 
             'counters': get_roles_counters(location),
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),
+            'commission_members': CommissionMember.objects.filter(location=location),
+            'add_commission_member_form': CommissionMemberForm(),
         })
         return ctx
 
 location_view = LocationView.as_view()
-
-def location_register(request, **kwargs):
-    if request.user.is_authenticated():
-        return redirect(reverse('location_info', args=[kwargs['loc_id']]))
-    return location_view(request, **kwargs)
 
 def get_sub_regions(request):
     if request.is_ajax():

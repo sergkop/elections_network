@@ -247,8 +247,17 @@ var Grakon = {
          * @returns строку HTML используемую в качестве контента для всплывающей подсказки на метке
          */
         buildElectionCommissionMarkerContent: function(electionCommission) {
-            var content = "<h3>"+electionCommission.title+"</h3>";
-            content += "<p>"+electionCommission.address+"</p>"
+            var type;
+            switch(electionCommission.level) {
+              case 1: type = '<span class="commissionType">Центральная Избирательная Комиссия</span><br/>'; break;
+              case 2: type = '<span class="commissionType">Избирательная Комиссия Субъекта РФ</span><br/>'; break;
+              case 3: type = '<span class="commissionType">Территориальная Избирательная Комиссия</span><br/>'; break;
+              case 4: type = '<span class="commissionType">Участковая Избирательная Комиссия</span><br/>'; break;
+            }
+            var address = '<span class="address">'+electionCommission.address+'</span>';
+            var title = ((electionCommission.level == 4) ? "УИК №" : "") + electionCommission.title;
+            var content = "<h3>"+title+"</h3>";
+            content += "<p>"+type+address+"</p>"
             if (electionCommission.data != null) {
                 content += "<p>";
                 content += (electionCommission.data.voters != null) ? "Избирателей: " + electionCommission.data.voters + "<br/>" : "";
@@ -257,7 +266,15 @@ var Grakon = {
                 content += (electionCommission.data.journalists != null) ? "Представителей СМИ: " + electionCommission.data.journalists + "<br/>" : "";
                 content += "</p>";
             }
+            content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
             return content;
+        },
+        
+        removePopups: function() {
+            if (Grakon.Utils.currentPopup != null) {
+                Grakon.Utils.currentPopup.toggle();
+                Grakon.map.removePopup( Grakon.Utils.currentPopup );
+            }
         },
         
         /**
@@ -284,10 +301,7 @@ var Grakon = {
             var marker = feature.createMarker();
  
             var markerClick = function (evt) {
-                if (Grakon.Utils.currentPopup != null) {
-                    Grakon.Utils.currentPopup.toggle();
-                    Grakon.map.removePopup( Grakon.Utils.currentPopup );
-                }
+                Grakon.Utils.removePopups();
                 
                 if (this.popup == null) {
                     this.popup = this.createPopup(this.closeBox);
@@ -438,6 +452,8 @@ var Grakon = {
      * По изменению масштабирования переключать слои
      */
     mapZoomEndHandler: function() {
+        Grakon.Utils.removePopups();
+        
         // границы регионов
         if (Grakon.borderLayers.regions != null)
             Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() > 1 );

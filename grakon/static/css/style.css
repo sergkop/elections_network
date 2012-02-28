@@ -175,6 +175,15 @@ select {
 	background: url(/static/images/zoom_out.png) right center no-repeat;
 }
 
+.commissionType {
+    font-size: 9pt;
+    font-style: italic;
+}
+
+.address {
+    font-weight: bold;
+}
+
 #div_id_captcha img{
 	float: left;
 	margin-right: 5px;

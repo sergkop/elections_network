@@ -100,7 +100,6 @@ var Grakon = {
      * Объект OpenLayers.Map — используемая карта.
      */
     map: null,
-    mapZoomBeforeMove: null,
     moscowBounds: new OpenLayers.Bounds(37.22, 55.48, 37.95, 56.03).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
     
     /**
@@ -133,7 +132,8 @@ var Grakon = {
         'country': 0,
         'regions': 3,
         'districts': 7,
-        'areas': 11
+        'areas': 11,
+        'max': 16
     }),
     
     /**
@@ -160,11 +160,8 @@ var Grakon = {
      */
     Utils: {
         AutoSizeFramedCloudMaxSize: OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
-            'autoSize': true, 
-            'maxSize': new OpenLayers.Size(480,480)
+            'autoSize': true
         }),
-        
-        currentPopup: null,
         
         /**
          * Обработчик клика по субъекту РФ. Максимално приближает карту к выбранному субъекту РФ.
@@ -173,16 +170,16 @@ var Grakon = {
         regionClickHandler: function(feature) {
             if (feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+                Grakon.MAP_LEVELS_ZOOM.districts = (Grakon.map.getZoom() > 4) ? Grakon.map.getZoom() : Grakon.MAP_LEVELS_ZOOM.districts;
                 Grakon.map.zoomIn();
-                Grakon.MAP_LEVELS_ZOOM.districts = Grakon.map.getZoom();
             }
         },
         
         districtClickHandler: function(feature) {
             if (feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+                Grakon.MAP_LEVELS_ZOOM.areas = (Grakon.map.getZoom() > 4) ? Grakon.map.getZoom() : Grakon.MAP_LEVELS_ZOOM.areas;
                 Grakon.map.zoomIn();
-                Grakon.MAP_LEVELS_ZOOM.areas = Grakon.map.getZoom();
             }
         },
         
@@ -224,7 +221,7 @@ var Grakon = {
          */
         loadCommissionsForBBOX: function(request) {
             if (request.status == 200) {
-                if (request.responseText == "error")
+                if (request.responseText.indexOf('electionCommissions') == -1)
                     return;
                 eval(request.responseText);
                 if (electionCommissions) {
@@ -249,15 +246,16 @@ var Grakon = {
         buildElectionCommissionMarkerContent: function(electionCommission) {
             var type;
             switch(electionCommission.level) {
-              case 1: type = '<span class="commissionType">Центральная Избирательная Комиссия</span><br/>'; break;
-              case 2: type = '<span class="commissionType">Избирательная Комиссия Субъекта РФ</span><br/>'; break;
-              case 3: type = '<span class="commissionType">Территориальная Избирательная Комиссия</span><br/>'; break;
-              case 4: type = '<span class="commissionType">Участковая Избирательная Комиссия</span><br/>'; break;
+              case 1: type = 'Центральная Избирательная Комиссия'; break;
+              case 2: type = 'Избирательная Комиссия Субъекта РФ'; break;
+              case 3: type = 'Территориальная Избирательная Комиссия'; break;
+              case 4: type = 'Участковая Избирательная Комиссия'; break;
             }
-            var address = '<span class="address">'+electionCommission.address+'</span>';
             var title = ((electionCommission.level == 4) ? "УИК №" : "") + electionCommission.title;
-            var content = "<h3>"+title+"</h3>";
-            content += "<p>"+type+address+"</p>"
+            
+            var content = '<h3><a href="#" class="zoomIn" onclick="Grakon.zoomOnElectionCommission('+electionCommission.xCoord+', '+electionCommission.yCoord+', '+electionCommission.level+'); return false;">'+title+'</a></h3>';
+            content += '<p class="commissionType">'+type+'</p>';
+            content += '<p class="address">'+electionCommission.address+'</p>';
             if (electionCommission.data != null) {
                 content += "<p>";
                 content += (electionCommission.data.voters != null) ? "Избирателей: " + electionCommission.data.voters + "<br/>" : "";
@@ -271,9 +269,11 @@ var Grakon = {
         },
         
         removePopups: function() {
-            if (Grakon.Utils.currentPopup != null) {
-                Grakon.Utils.currentPopup.toggle();
-                Grakon.map.removePopup( Grakon.Utils.currentPopup );
+            if (Grakon.map.popups != null) {
+                for (var n in Grakon.map.popups) {
+                    Grakon.map.popups[n].toggle();
+                    Grakon.map.removePopup( Grakon.map.popups[n] );
+                }
             }
         },
         
@@ -303,19 +303,47 @@ var Grakon = {
             var markerClick = function (evt) {
                 Grakon.Utils.removePopups();
                 
-                if (this.popup == null) {
+                if (this.popup == null)
                     this.popup = this.createPopup(this.closeBox);
-                    Grakon.map.addPopup(this.popup);
-                    this.popup.show();
-                } else {
-                    this.popup.toggle();
-                }
-                Grakon.Utils.currentPopup = this.popup;
+                Grakon.Utils.updateCommissionZoomIcon(this.popup);
+                Grakon.map.addPopup(this.popup);
+                this.popup.show();
+                
                 OpenLayers.Event.stop(evt);
             };
             marker.events.register("mousedown", feature, markerClick);
  
             layer.addMarker(marker);
+        },
+        
+        /**
+         * @param {level} уровень приближения карты
+         * @returns масштаб для заданного уровня приближения на карте
+         */
+        getZoomForLevel: function(level) {
+            var zoom;
+            switch (level) {
+              case 2: zoom = Grakon.MAP_LEVELS_ZOOM.regions; break;
+              case 3: zoom = Grakon.MAP_LEVELS_ZOOM.districts; break;
+              case 4: zoom = Grakon.MAP_LEVELS_ZOOM.areas; break;
+              default: zoom = 4;
+            }
+            return zoom;
+        },
+        
+        /**
+         * Обработчик события открытия попапа при клике на метку.
+         * Меняет картинку лупы в зависимости от масштаба.
+         * @param {popup} объект типа OpenLayers.Popup
+         */
+        updateCommissionZoomIcon: function(popup) {
+            if (popup == null)
+                return;
+            var contentHTML = popup.contentHTML;
+            if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
+                popup.setContentHTML( contentHTML.replace("zoomIn", "zoomOut") );
+            else
+                popup.setContentHTML( contentHTML.replace("zoomOut", "zoomIn") );
         }
     },
     
@@ -418,11 +446,6 @@ var Grakon = {
     initMap: function(mapDivID) {
         Grakon.map = new OpenLayers.Map(mapDivID, Grakon.MAP_OPTIONS);
         
-        // слушаем событие начала масштабирования
-        Grakon.map.events.register("movestart", Grakon.map, function () {
-            Grakon.mapZoomBeforeMove = Grakon.map.getZoom();
-        });
-        
         // слушаем событие окончания масштабирования
         Grakon.map.events.register("zoomend", Grakon.map, Grakon.mapZoomEndHandler);
         
@@ -456,11 +479,11 @@ var Grakon = {
         
         // границы регионов
         if (Grakon.borderLayers.regions != null)
-            Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() > 1 );
+            Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
         
         // границы районов
         if (Grakon.borderLayers.districts != null) {
-            if (Grakon.getLevel() > 2) {
+            if (Grakon.getLevel() >= 3) {
                 Grakon.borderLayers.districts.setVisibility( true );
                 var styles = (Grakon.getLevel() > 3) ? Grakon.AREA_DISTRICT_STYLES : Grakon.DISTRICT_STYLES;
                 if (Grakon.borderLayers.districts.styleMap != styles) {
@@ -632,5 +655,26 @@ var Grakon = {
         else if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.regions)
             level = 2
         return level;
+    },
+
+    /**
+     * Приблизить карту к заданным координатам.
+     * @param {lon} долгота
+     * @param {lat} широта
+     * @param {type} тип избирательной комиссии
+     */
+    zoomOnElectionCommission: function(lon, lat, type) {
+        var nextZoom;
+        var defaultZoom = Grakon.Utils.getZoomForLevel(type);
+                
+        if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
+            nextZoom = defaultZoom;
+        else if (Grakon.getLevel() >= 4)
+            nextZoom = Grakon.MAP_LEVELS_ZOOM.max;
+        else
+            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel()+1 );
+        
+        var center = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+        Grakon.map.setCenter(center, nextZoom);
     }
 };

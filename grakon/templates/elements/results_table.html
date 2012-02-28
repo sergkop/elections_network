@@ -1,45 +1,52 @@
 <div class="ym-wrapper header-table">
-    <table width="100%" align="center">
-        <tr>
-            <th width="28%" style="text-align:left">Результаты выборов
-                {% if not current_location %}
-                    по&nbsp;России:
-                {% endif %}
-                {% if current_location.is_region %}
-                    по&nbsp;субъекту:
-                {% endif %}
-                {% if current_location.is_tik %}
-                    по&nbsp;району:
-                {% endif %}
-                {% if current_location.is_uik %}
-                    по&nbsp;УИКу:
-                {% endif %}
-            </th>
-            <th width="11%">Жириновский</th>
-            <th width="11%">Зюганов</th>
-            <th width="11%">Миронов</th>
-            <th width="11%">Прохоров</th>
-            <th width="11%">Путин</th>
-            <th width="17%" class="header-table-shortcut"><span class="pseudolink" onclick="jQuery('.header-table').slideUp()">Скрыть результаты</span></th>
-        </tr>
-        <tr>
-            <td class="black">по данным ЦИК</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td rowspan="2" class="header-table-shortcut">
-                <!--a href="" class="button">Подробнее</a-->
-            </td>
-        </tr>
-        <tr>
-            <td class="black">по протоколам наблюдателей</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-        </tr>
-    </table> 
+	<div class="result_toggle">
+    	<span class="pseudolink" onclick="jQuery('#header-table').slideToggle(); if(jQuery(this).html()=='Скрыть результаты') {jQuery(this).html('Показать результаты');} else {jQuery(this).html('Скрыть результаты');}">Скрыть результаты</span>
+    </div>	
+    <div id="header-table">
+    	<div style="height: 100px;">
+        <table width="100%" align="center">
+            <tr>
+                <th width="28%" style="text-align:left">Результаты выборов
+                    {% if not current_location %}
+                        по&nbsp;России:
+                    {% endif %}
+                    {% if current_location.is_region %}
+                        по&nbsp;субъекту:
+                    {% endif %}
+                    {% if current_location.is_tik %}
+                        по&nbsp;району:
+                    {% endif %}
+                    {% if current_location.is_uik %}
+                        по&nbsp;УИКу:
+                    {% endif %}
+                </th>
+                <th width="11%">Жириновский</th>
+                <th width="11%">Зюганов</th>
+                <th width="11%">Миронов</th>
+                <th width="11%">Прохоров</th>
+                <th width="11%">Путин</th>
+                <th width="17%" class="header-table-shortcut">&nbsp;</th>
+            </tr>
+            <tr>
+                <td class="black">по данным ЦИК</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td rowspan="2" class="header-table-shortcut">
+                    <!--a href="" class="button">Подробнее</a-->
+                </td>
+            </tr>
+            <tr>
+                <td class="black">по протоколам наблюдателей</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+            </tr>
+        </table> 
+        </div>
+    </div>
 </div>

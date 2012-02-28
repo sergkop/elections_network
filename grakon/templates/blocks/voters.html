@@ -10,7 +10,7 @@
 <div class="side_block_header side_block_voter">Избиратели ({{ counters.voter }})</div>
 
 <div class="content_block">
-    <ul id="voters_ul" class="side_list">
+    <ul id="voters_ul">
         {% for role in participants.voter %}
             <li>
                 {% with participant=role.user %}

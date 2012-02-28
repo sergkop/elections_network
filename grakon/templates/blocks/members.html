@@ -3,7 +3,7 @@
 <div class="side_block_header side_block_member">Члены избирательной комиссии ({{ counters.member }})</div>
 
 <div class="content_block">
-    <ul class="side_list">
+    <ul>
         {% for role in participants.member %}
             <li>
                 {% with participant=role.user %}

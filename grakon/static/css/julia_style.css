@@ -11,6 +11,7 @@ ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 header, nav {background: none;}
 nav {margin-top: 5px;}
 .mb5 {margin-bottom: 5px;}
+.mt10 {margin-top: 10px;}
 table, tbody td {border: none; margin: 0;}
 .cl {clear: both; height: 0; overflow: hidden;}
 .fl {float: left;}
@@ -137,7 +138,7 @@ h3 {margin: 0;}
 
 .ym-col3 .ui-state-default i, .ym-col3 .ui-widget-content .ui-state-default i, .ym-col3 .ui-widget-header .ui-state-default i {position: absolute; top: 0; right: -36px; background: url(/static/images/back_tab_blue.png) 0 0 no-repeat; width: 40px; height: 30px; display: none;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected i {background:url(/static/images/back_tab_white.png) 0 0 no-repeat; height: 32px; display: none;}
-.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 35px; margin-top: -1px; background-color: #fff; line-height: 1.2em; padding: 0 0.5em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 37px; margin-top: -1px; background-color: #fff; line-height: 1.2em; padding: 0 0.5em;}
 .ui-tabs .ui-tabs-nav {padding: 0;}
 .ui-tabs .ui-tabs-panel {background-color: #fff; margin-top: 0;}
 
@@ -175,13 +176,15 @@ h3 {margin: 0;}
 .ym-clearfix .partner_block:last-child {border-bottom: none;}
 .side_block_image {border: none;}
 
-.header-table {margin: 0 auto;}
+.header-table {margin: 0 auto 1.5em; position: relative;}
 .header-table table {background-color: #fff;}
 .header-table td, .header-table th {border-bottom: 1px solid #f3f3f3; padding: 5px 10px;}
 	.header-table td {color: #9f9f9f;}
 	.header-table thead {border-bottom: 1px solid #f3f3f3;}
 	.header-table th.header-table-shortcut {font-weight: normal; text-align: center;}		
-	.header-table td.header-table-shortcut {border: none !important; vertical-align: middle; color: #333; text-align: center;} 	
+	.header-table td.header-table-shortcut {border: none !important; vertical-align: middle; color: #333; text-align: center;} 
+
+.result_toggle {position: absolute; top: 0; right: 3em; padding: 0.5em 1em 0.6em; border-radius: 0 0 5px 5px; box-shadow: inset 0 1px 1px #ccc, 0 1px 2px #cecece; z-index:2}		
 
 .how-to-help {margin: 0 auto; width: 40em;}
 
@@ -343,4 +346,13 @@ background: linear-gradient(#f6f6f6 25%, #d2d2d2);}
 	background: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0.2, #e15a00), to(#f26000)) !important;
 	background: -webkit-linear-gradient(left, #e15a00 20%, #f26000) !important;
 	background: linear-gradient(left, #e15a00 20%, #f26000) !important;
+}
+
+.result_toggle {
+	background: -moz-linear-gradient(top, #e1e3d9, #fefefe);
+	background: -ms-linear-gradient(top, #e1e3d9, #fefefe);
+	background: -o-linear-gradient(top, #e1e3d9, #fefefe);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#e1e3d9), to(#fefefe));
+	background: -webkit-linear-gradient(top, #e1e3d9, #fefefe);
+	background: linear-gradient(top, #e1e3d9, #fefefe);	
 }

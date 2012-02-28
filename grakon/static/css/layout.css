@@ -75,13 +75,11 @@
     /* left column */
     .ym-col1 {
         width: 228px;
-        padding-top: 15px;
 		position: absolute;
     }
     /* right column */
     .ym-col2 {
         width: 228px;
-        padding-top: 15px;
 		position: absolute;
 		right: 3em;
     }
@@ -89,8 +87,6 @@
     .ym-col3 {
         padding-left: 248px;
         padding-right: 248px;
-        padding-top: 15px;
-		min-height: 1100px;
     } 
 
 	/* skip links styling */

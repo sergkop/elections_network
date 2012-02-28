@@ -159,7 +159,7 @@ var Grakon = {
      * Пространство имён для вспомогательных функций
      */
     Utils: {
-        AutoSizeFramedCloudMaxSize: OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+        AutoSizeAnchored: OpenLayers.Class(OpenLayers.Popup.Anchored, {
             'autoSize': true
         }),
         
@@ -170,16 +170,37 @@ var Grakon = {
         regionClickHandler: function(feature) {
             if (feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
-                Grakon.MAP_LEVELS_ZOOM.districts = (Grakon.map.getZoom() > 4) ? Grakon.map.getZoom() : Grakon.MAP_LEVELS_ZOOM.districts;
-                Grakon.map.zoomIn();
+                
+                var center;
+                if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts) {
+                    var containedIKS = new OpenLayers.Bounds();
+                    var iksList = Grakon.electionCommissionLayers.regions.markers;
+                    
+                    for (var pos in iksList)
+                        if (feature.geometry.intersects( new OpenLayers.Geometry.Point(iksList[pos].lonlat.lon, iksList[pos].lonlat.lat) ))
+                            containedIKS.extend(iksList[pos].lonlat);
+                        
+                    center = (containedIKS.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedIKS.getCenterLonLat();
+                        
+                    Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.districts);
+                } else
+                    Grakon.map.zoomIn();
             }
         },
         
         districtClickHandler: function(feature) {
             if (feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
-                Grakon.MAP_LEVELS_ZOOM.areas = (Grakon.map.getZoom() > 4) ? Grakon.map.getZoom() : Grakon.MAP_LEVELS_ZOOM.areas;
-                Grakon.map.zoomIn();
+                
+                if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.areas) {
+                    var containedTIK = new OpenLayers.Bounds();
+                    var tikList = Grakon.electionCommissionLayers.districts.markers;
+                    for (var pos in tikList)
+                        if (feature.geometry.intersects( new OpenLayers.Geometry.Point(tikList[pos].lonlat.lon, tikList[pos].lonlat.lat) ))
+                            containedTIK.extend(tikList[pos].lonlat);
+                    Grakon.map.setCenter(containedTIK.getCenterLonLat(), Grakon.MAP_LEVELS_ZOOM.areas);
+                } else
+                    Grakon.map.zoomIn();
             }
         },
         
@@ -260,7 +281,7 @@ var Grakon = {
                 content += "<p>";
                 content += (electionCommission.data.voters != null) ? "Избирателей: " + electionCommission.data.voters + "<br/>" : "";
                 content += (electionCommission.data.observers != null) ? "Наблюдателей: " + electionCommission.data.observers + "<br/>" : "";
-                content += (electionCommission.data.members != null) ? "Членов комисии: " + electionCommission.data.members + "<br/>" : "";
+                content += (electionCommission.data.members != null) ? "Членов комиссии: " + electionCommission.data.members + "<br/>" : "";
                 content += (electionCommission.data.journalists != null) ? "Представителей СМИ: " + electionCommission.data.journalists + "<br/>" : "";
                 content += "</p>";
             }
@@ -290,9 +311,9 @@ var Grakon = {
             
             var feature = new OpenLayers.Feature(layer, location, data); 
             feature.closeBox = true;
-            feature.popupClass = Grakon.AutoSizeFramedCloudMaxSize;
+            feature.popupClass = Grakon.AutoSizeAnchored;
             feature.data.popupContentHTML = content;
-            feature.data.overflow = "auto";
+            feature.data.overflow = "visible";
             feature.data.icon = new OpenLayers.Icon(
                 Grakon.ELECTION_COMMISSION_IMAGES[level],
                 new OpenLayers.Size(18, 32),
@@ -300,20 +321,48 @@ var Grakon = {
                     
             var marker = feature.createMarker();
  
-            var markerClick = function (evt) {
-                Grakon.Utils.removePopups();
-                
-                if (this.popup == null)
-                    this.popup = this.createPopup(this.closeBox);
-                Grakon.Utils.updateCommissionZoomIcon(this.popup);
-                Grakon.map.addPopup(this.popup);
-                this.popup.show();
-                
-                OpenLayers.Event.stop(evt);
-            };
-            marker.events.register("mousedown", feature, markerClick);
+            marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
+            marker.events.register("mouseover", feature, Grakon.Utils.markerHover);
+            marker.events.register("mouseout", feature, Grakon.Utils.markerHover);
  
             layer.addMarker(marker);
+        },
+        
+        markerClick: function (evt) {
+            Grakon.Utils.removePopups();
+            
+            this.popup = this.createPopup(this.closeBox);
+            Grakon.Utils.updateCommissionZoomIcon(this.popup);
+            Grakon.map.addPopup(this.popup);
+            
+            OpenLayers.Event.stop(evt);
+        },
+        
+        markerHover: function (evt) {
+            if (Grakon.map.popups != null && Grakon.map.popups[0] != null && Grakon.map.popups[0].id != "hint")
+                return;
+            
+            Grakon.Utils.removePopups();
+            
+            if (evt.type == "mouseover") {
+                var pattern = /\<a[^\>]+\>([^\<]+)\<\/a\>\<\/h3\>/;
+                var matches = pattern.exec(this.data.popupContentHTML);
+                
+                if (matches != null) {
+                    var width = (matches[1].length + 5) * 10;
+                    
+                    var type = "";
+                    if (this.data.icon.url.indexOf("iks") != -1)
+                        type = "ИКС: ";
+                    else if (this.data.icon.url.indexOf("tik") != -1)
+                        type = "ТИК: ";
+                    
+                    var content = "<center><b>"+type+matches[1]+"</b></center>";
+                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 16), content, null, false)
+                    Grakon.map.addPopup(popup);
+                }
+                OpenLayers.Event.stop(evt);
+            }
         },
         
         /**

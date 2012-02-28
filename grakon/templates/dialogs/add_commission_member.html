@@ -1,8 +1,9 @@
 {% load uni_form_tags %}
 
 <div id="add_commission_member_dialog">
-    <p style="margin:0.3em;">Перед добавлением члена комиссии убедитесь, что он еще не добавлен на
-    <a href="{{ current_location.get_absolute_url }}">участок</a>.</p>
+    <p style="margin:0.3em;">Перед добавлением члена комиссии
+    <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a> убедитесь,
+    что он еще не добавлен в список.</p>
     <form id="add_commission_member_form" class="dialog_form" method="post" action="{% url add_commission_member %}">
         {% csrf_token %}
         <style type="text/css">
@@ -15,9 +16,8 @@
 </div>
 
 <script type="text/javascript">
-    function add_commission_member_dialog_init(location_id){
-        $("#commission_member_first_name_input").val("");
-        $('#add_commission_member_form input[name="location"]').val(location_id);
+    function add_commission_member_dialog_init(){
+        $('#add_commission_member_form input[name="location"]').val({{ current_location.id }});
         $("#add_commission_member_dialog").dialog("open");
     }
 
@@ -36,9 +36,5 @@
                 "Отмена": function(){$("#add_commission_member_dialog").dialog("close");}
             }
         }).dialog("close");
-
-        $("#add_commission_member, #add_commission_member1").click(function(){
-            add_commission_member_dialog_init("{{ current_location.id }}");
-        });
     });
 </script>

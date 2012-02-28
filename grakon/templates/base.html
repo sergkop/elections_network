@@ -119,6 +119,12 @@
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
+        {% if disqus_identifier == "main" %}
+            <div class="main-buttons-blue">
+                <a href="#" id="add_commission_member2">Добавить члена коммиссии</a>
+            </div>
+            &nbsp; &nbsp; &nbsp; &nbsp;
+        {% endif %}
         <div class="main-buttons-blue">
             <a href="{% url campaign %}">Акции</a>
         </div>

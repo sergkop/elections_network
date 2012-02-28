@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
-from grakon.utils import authenticated_redirect, cache_view
+from grakon.utils import authenticated_redirect
 from locations.models import Location
 from locations.utils import get_locations_data, get_roles_counters, regions_list
 from organizations.models import OrganizationCoverage
@@ -123,10 +123,6 @@ def goto_location(request):
         return HttpResponseRedirect(url)
 
     return HttpResponseRedirect(reverse('main'))
-
-@cache_view('map_data', 6000, False)
-def map_data(request):
-    return get_locations_data(Location.objects.filter(tik=None))
 
 def locations_data(request):
     """ level = 2, 3, 4 """

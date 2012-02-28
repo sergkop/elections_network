@@ -61,25 +61,22 @@ def get_locations_data(queryset, level):
     # TODO: limit locations number according to the level (don't get uiks for the whole country at once)
     locations = list(queryset.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address'))
 
-    # Get ids of all locations that need to be taken into account for statistics
-    all_ids = [loc.id for loc in locations]
-
-    # Add all locations in regions
     region_ids = [loc.id for loc in locations if loc.is_region()]
-    all_ids += Location.objects.filter(region__in=region_ids).values_list('id', flat=True)
+    tik_ids = [loc.id for loc in locations if loc.is_tik()]
+    uik_ids = [loc.id for loc in locations if loc.is_uik()]
 
-    # Add all locations in tiks
+    # TODO: уровень 3: delta_x=20, delta_y=10 уровень 4: 1,8 и 0,9
+
+    loc_query = Q(id__in=region_ids) | Q(region__in=region_ids)
+    role_query = Q(location__in=region_ids) | Q(location__region__in=region_ids)
     if level >= 3:
-        tik_ids = [loc.id for loc in locations if loc.is_tik()]
-        all_ids += Location.objects.filter(tik__in=tik_ids).values_list('id', flat=True)
-
-    # Remove duplicate ids
-    all_ids = set(all_ids)
+        loc_query = loc_query | Q(tik__in=tik_ids)
+        role_query = role_query | Q(location__tik__in=tik_ids)
 
     inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
     roles = Role.objects.exclude(user__user__email='', user__user__is_active=False,
-            user__in=inactive_ids).filter(location__in=all_ids).values_list('type', 'location')
-    all_locations = Location.objects.filter(id__in=all_ids).values_list('id', 'region', 'tik')
+            user__in=inactive_ids).filter(role_query).values_list('type', 'location')
+    all_locations = Location.objects.filter(loc_query).values_list('id', 'region', 'tik')
 
     # {loc_id: [related_locations]}
     user_counts = {}
@@ -92,16 +89,16 @@ def get_locations_data(queryset, level):
             related_locations += [id for id, region, tik in all_locations if tik==location.id]
 
         user_counts[location.id] = {}
-        location_roles = filter(lambda role_type, location: location in related_locations, roles)
-        for role_type, location in location_roles:
+        location_roles = filter(lambda role: role[1] in related_locations, roles)
+        for role_type, loc_id in location_roles:
             user_counts[location.id].setdefault(role_type, 0)
-            user_counts[location.id].role_type += 1
+            user_counts[location.id][role_type] += 1
 
     print user_counts
 
     for location in locations:
         if location.x_coord:
-            js += str(location.id) + ': ' + location.map_data() + ','
+            js += str(location.id) + ': ' + location.map_data(user_counts[location.id]) + ','
 
     js = js[:-1] + '};'
 

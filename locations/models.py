@@ -83,13 +83,22 @@ class Location(models.Model):
         else:
             return [int(self.region_id), int(self.tik_id), int(self.id)]
 
-    def map_data(self):
+    def map_data(self, counts):
         """ Return javascript object containing region data """
         js = 'new ElectionCommission(' + str(self.id) + ',' + str(self.level()) + ','
         # TODO: name, address require escape
         js += '"' + self.name + '","' + self.name + '","' + self.address.replace('"', '') + '",'
-        js += str(self.x_coord) + ',' + str(self.y_coord) + ','
-        js += '{numVoters:500,numObservers:5})'
+        js += str(self.x_coord) + ',' + str(self.y_coord) + ',{'
+    
+        if 'voter' in counts:
+            js += 'voters:' + str(counts['voter']) + ','
+        if 'observer' in counts:
+            js += 'observers:' + str(counts['observer']) + ','
+        if 'member' in counts:
+            js += 'members:' + str(counts['member']) + ','
+        if 'journalist' in counts:
+            js += 'journalists:' + str(counts['journalist']) + ','
+        js = js[:-1] + '})'
         return js
 
     def __unicode__(self, full_path=False):

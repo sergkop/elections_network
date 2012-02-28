@@ -21,10 +21,8 @@
 
     {% include "dialogs/remove_from_contacts.html" %}
 
+	<h3 class="column_header column_header_icon"><span class="contacts">Контакты</span></h3>
     <div class="ym-clearfix">
-        <div class="side_block_header">
-            <h4>Контакты</h4>
-        </div>
         <div class="content_block">
             <ul id="contacts_ul" class="side_list">
                 {% for contact in contacts %}
@@ -40,6 +38,7 @@
         <div class="side_block_header">
             <h4>Добавлен в контакты</h4>
         </div>
+        
         <div class="content_block">
             <ul id="have_in_contacts_ul" class="side_list">
                 {% for contact in have_in_contacts %}
@@ -55,10 +54,8 @@
 {% endblock %}
 
 {% block right_column %}
+	<h3 class="column_header column_header_icon"><span class="resources">Ссылки</span></h3>
     <div class="ym-clearfix">
-        <div class="side_block_header">
-            <h4>Ссылки</h4>
-        </div>
         <div class="content_block">
             {% if links %}
             <ul class="side_list">
@@ -71,7 +68,8 @@
                 {% endfor %}
             </ul>
             {% else %}
-            <i>Ссылки еще не добавлены</i>
+            
+            <p style="padding-left: 10px;"><i>Ссылки еще не добавлены</i>	</p>
             {% endif %}
         </div>
     </div>

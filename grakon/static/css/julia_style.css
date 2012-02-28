@@ -100,17 +100,23 @@ h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2
 .side_block_voter { background: url(/static/images/icon_voters.png) 7px 13px no-repeat;}
 .side_block_observer { background: url(/static/images/icon_observer.png) 7px 13px no-repeat;}
 .side_block_member { background: url(/static/images/icon_member.png) 7px 13px no-repeat;}
+	.column_header_icon .side_block_member {background-position: 7px center;}
 .side_block_authority { background: url(/static/images/icon_authority.png) 7px 13px no-repeat;}
 .side_block_prosecutor { background: url(/static/images/icon_prosecutor.png) 7px 13px no-repeat;}
 .side_block_journalist { background: url(/static/images/icon_journalist.png) 7px  13px no-repeat;}
 .side_block_lawyer { background: url(/static/images/icon_lawyer.png) 7px 13px no-repeat;}
-.organizations { background: url(/static/images/icon_organization.gif) 10px center no-repeat;}
-.complaints { background: url(/static/images/icon_complaints.gif) 10px center no-repeat;}
+.organizations { background: url(/static/images/icon_organizations.png) 7px 9px no-repeat;}
+.complaints { background: url(/static/images/icon_complaints.png) 7px center no-repeat;}
 .protocols { background: url(/static/images/icon_protocols.gif) 10px center no-repeat;}
+.team { background: url(/static/images/icon_team.png) 7px center no-repeat;}
+.documents { background: url(/static/images/icon_documents.png) 10px 10px no-repeat;}
 .events { background: url(/static/images/icon_events.gif) 7px center no-repeat;}
+.resources { background: url(/static/images/icon_resources.png) 7px 6px no-repeat;}
+.contacts { background: url(/static/images/icon_contacts.png) 10px 8px no-repeat;}
+.steps{ background: url(/static/images/icon_steps.png) 7px 6px no-repeat;}
 .participants {background: url(/static/images/icon_participants.png) 7px center no-repeat;}
 	.column_header_icon {padding: 0 !important;}
-	.column_header_icon .organizations, .column_header_icon .complaints, .column_header_icon .protocols, .column_header_icon .events, .column_header_icon .participants  {padding: 0.8em 0.5em 0.8em 2em; display: block;} 
+	.column_header_icon .organizations, .column_header_icon .complaints, .column_header_icon .protocols, .column_header_icon .events, .column_header_icon span  {padding: 0.8em 0.5em 0.8em 2em; display: block;} 
 
 		
 h3 {margin: 0;}

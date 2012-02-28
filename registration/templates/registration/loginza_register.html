@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block content %}
+    <div class="static-content">
+        {% uni_form form form.helper %}
 
-{% uni_form form form.helper %}
-
-<div style="display:none;"><script type="text/javascript">
-{% with yandex_target="loginza_register" %}
-    {% include "services/yandex-target.html" %}
-{% endwith %}
-</script></div>
-
+        <div style="display:none;"><script type="text/javascript">
+        {% with yandex_target="loginza_register" %}
+            {% include "services/yandex-target.html" %}
+        {% endwith %}
+        </script></div>
+    </div>
 {% endblock %}

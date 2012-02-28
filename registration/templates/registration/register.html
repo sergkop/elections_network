@@ -7,13 +7,16 @@
 {% endblock %}
 
 {% block content %}
-    <p>Поля отмеченные звездочкой (<span class="asteriskField">*</span>) обязательны для заполнения.</p>
+    <div class="static-content">
+        <p>Поля отмеченные звездочкой (<span class="asteriskField">*</span>) обязательны для заполнения.</p>
 
-    {% uni_form form form.helper %}
+        {% uni_form form form.helper %}
+
+        <div style="display:none;"><script type="text/javascript">
+            {% with yandex_target="register" %}
+                {% include "services/yandex-target.html" %}
+            {% endwith %}
+        </script></div>
+    </div>
 {% endblock %}
 
-<div style="display:none;"><script type="text/javascript">
-{% with yandex_target="register" %}
-    {% include "services/yandex-target.html" %}
-{% endwith %}
-</script></div>

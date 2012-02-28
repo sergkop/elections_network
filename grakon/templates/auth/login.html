@@ -7,12 +7,14 @@
 {% endblock %}
 
 {% block content %}
-    {% uni_form form form.helper %}
+    <div class="static-content">
+        {% uni_form form form.helper %}
 
-    <center>
-        {% include "elements/loginza.html" %}
-        <br/>
-        <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
-        <a href="{% url register %}">Регистрация</a>
-    </center>
+        <div class="center">
+            {% include "elements/loginza.html" %}
+            <br/>
+            <a href="{% url password_reset %}">Забыли пароль?</a>&nbsp;&nbsp;&nbsp;
+            <a href="{% url register %}">Регистрация</a>
+        </div>
+    </div>
 {% endblock %}

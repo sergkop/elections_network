@@ -92,7 +92,11 @@
                             {% if request.roles.voter %}
                                 <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
                             {% endif %}
-                            <a href="{% url my_profile %}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
+                            {% if my_profile.first_name or my_profile.last_name %}
+                                <a href="{% url my_profile %}">{{ my_profile.first_name }} {{ my_profile.last_name }}</a> |
+                            {% else %}
+                                <a href="{% url my_profile %}">Профайл</a> |
+                            {% endif %}
                             <a href="{% url logout %}?next={{ request.get_full_path }}">Выйти</a>
                         </div>
                     {% else %}

@@ -143,7 +143,6 @@ h3 {margin: 0;}
 .ui-tabs .ui-tabs-panel {background-color: #fff; margin-top: 0;}
 
 #tabs, #tabs ul.ui-widget-header {background: none; border: none;}
-	#tabs a { text-shadow: 0 1px 0 #f7f7f7;}
 /*.ui-widget-content, .ui-widget-header {background: none; border: none;}*/
 
 .ui-button {margin: 0;}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+    Как помочь - Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
+{% block head %}
+    <!-- This style is used in a number of pages already - avoid it -->
+    <style type="text/css">
+        .ym-col3 .ym-cbox:last-child {display: none;}
+    </style>
+    <style type="text/css">
+	/* for static pages */
+        .ym-col2 {width: 0px;}
+        .ym-col3 {width: 100%; padding: 15px 0;}
+		h2.location_header {margin-left: 15px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li a{line-height: 1em; text-align: center; height: 49px; padding-top: 5px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 55px;}
+    </style>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Акции</h2>
+
+    {% tabs "tabs" tab "" "" "Собери команду" "campaign" "static_pages/campaign/campaign.html" "Эффективное наблюдение" "observation" "static_pages/campaign/observation.html" %}
+{% endblock %}

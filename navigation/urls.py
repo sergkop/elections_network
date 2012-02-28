@@ -12,6 +12,9 @@ urlpatterns = patterns('navigation.views',
     tabbed_static_url('rules', 'static_pages/about/base.html'),
     tabbed_static_url('comparison', 'static_pages/about/base.html'),
     tabbed_static_url('publications', 'static_pages/about/base.html'),
+	
+	tabbed_static_url('campaign', 'static_pages/campaign/base.html'),
+	tabbed_static_url('observation', 'static_pages/campaign/base.html'),
 
     tabbed_static_url('news', 'static_pages/development/base.html'),
     tabbed_static_url('functionality', 'static_pages/development/base.html'),
@@ -23,7 +26,6 @@ urlpatterns = patterns('navigation.views',
 #    tabbed_static_url('feedback', 'static_pages/how_to_help/base.html'),
 
     url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),
-	url(r'^campaign$', 'static_page', {'name': 'campaign', 'template': 'static_pages/campaign.html'}, name='campaign'),
 	url(r'^faq$', 'static_page', {'name': 'faq', 'template': 'static_pages/faq.html'}, name='faq'),
 
     url(r'^sitemap$', 'sitemap', name='sitemap'),

@@ -12,7 +12,7 @@
             </li>
         {% endfor %}
     </ul>
-    <span class="pseudolink" id="become_prosecutor">Записаться в&nbsp;представители прокуратуры</span>   
+    {% button "circle-plus" "Я &mdash; представитель прокуратуры" "become_prosecutor" %} 
 </div>
 
 {% if user.is_authenticated %}

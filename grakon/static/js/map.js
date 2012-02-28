@@ -160,7 +160,7 @@ var Grakon = {
      */
     Utils: {
         AutoSizeAnchored: OpenLayers.Class(OpenLayers.Popup.Anchored, {
-            'autoSize': true
+            'minSize': new OpenLayers.Size(256, 64)
         }),
         
         /**
@@ -313,7 +313,7 @@ var Grakon = {
             feature.closeBox = true;
             feature.popupClass = Grakon.AutoSizeAnchored;
             feature.data.popupContentHTML = content;
-            feature.data.overflow = "visible";
+            feature.data.overflow = "auto";
             feature.data.icon = new OpenLayers.Icon(
                 Grakon.ELECTION_COMMISSION_IMAGES[level],
                 new OpenLayers.Size(18, 32),
@@ -683,13 +683,26 @@ var Grakon = {
         Grakon.map.addControl(new OpenLayers.Control.LayerSwitcher());
         Grakon.map.addControl(new OpenLayers.Control.Navigation());
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
-        
+
+        var panel = new OpenLayers.Control.NavToolbar();
         var button = new OpenLayers.Control.Button({
-            displayClass: "Test", trigger: function() {alert("True");}
+            displayClass: "fullscreenBtn", trigger: Grakon.resizeMap
         });
-        var panel = new OpenLayers.Control.Panel({defaultControl: button});
         panel.addControls([button]);
         Grakon.map.addControl(panel);
+    },
+    
+    resizeMap: function() {
+        var relative = ($(Grakon.map.div).css('position') != "fixed");
+        var height = (relative) ? "100%" : 500;
+        $(Grakon.map.div).css({
+            position: relative ? 'fixed' : 'relative',
+            left: 0,
+            top: 0,
+            width: "100%", 
+            height: height
+        });
+        Grakon.map.updateSize();
     },
     
     /**

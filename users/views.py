@@ -77,7 +77,7 @@ class RoleSignupView(View):
 
 class VoterSignupView(RoleSignupView):
     role = 'voter'
-    levels = ['uik']
+    levels = ['tik', 'uik']
 
 class ObserverSignupView(RoleSignupView):
     role = 'observer'

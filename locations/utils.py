@@ -79,11 +79,9 @@ def get_locations_data(queryset, level):
     all_locations = list(Location.objects.filter(loc_query).values_list('id', 'region', 'tik'))
 
     locations_by_region = {}
-    for id, region, tik in all_locations:
-        locations_by_region.setdefault(region, []).append(id)
-
     locations_by_tik = {}
     for id, region, tik in all_locations:
+        locations_by_region.setdefault(region, []).append(id)
         locations_by_tik.setdefault(tik, []).append(id)
 
     roles_by_location = {}

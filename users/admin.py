@@ -13,7 +13,7 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'contact__username')
 
 class CommissionMemberAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'role', 'party', 'location')
+    list_display = ('first_name', 'last_name', 'role', 'party', 'location', 'user')
     ordering = ('last_name',)
     search_fields = ('last_name', 'party', 'location__name')
 

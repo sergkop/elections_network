@@ -12,8 +12,8 @@ from django.template.loader import render_to_string
 from uni_form.helper import FormHelper
 from uni_form.layout import Submit
 
-from users.models import ROLE_CHOICES, ROLE_TYPES
 from grakon.utils import form_helper
+from users.models import CommissionMember, ROLE_CHOICES, ROLE_TYPES
 
 class MessageForm(forms.Form):
     to_user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=HiddenInput())
@@ -89,3 +89,8 @@ class RoleTypeForm(forms.Form):
         if role_type!='' and role_type not in ROLE_TYPES:
             role_type = ''
         return role_type
+
+class CommissionMemberForm(forms.ModelForm):
+    class Meta:
+        model = CommissionMember
+        exclude = ('location', 'user', 'time')

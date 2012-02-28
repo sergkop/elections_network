@@ -1,0 +1,44 @@
+{% load uni_form_tags %}
+
+<div id="add_commission_member_dialog">
+    <p style="margin:0.3em;">Перед добавлением члена комиссии убедитесь, что он еще не добавлен на
+    <a href="{{ current_location.get_absolute_url }}">участок</a>.</p>
+    <form id="add_commission_member_form" class="dialog_form" method="post" action="{% url add_commission_member %}">
+        {% csrf_token %}
+        <style type="text/css">
+            #add_commission_member_form .ctrlHolder {margin: 0.2em;}
+        </style>
+        {{ add_commission_member_form|as_uni_form }}
+
+        <input type="hidden" name="location" value="" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function add_commission_member_dialog_init(location_id){
+        $("#commission_member_first_name_input").val("");
+        $('#add_commission_member_form input[name="location"]').val(location_id);
+        $("#add_commission_member_dialog").dialog("open");
+    }
+
+    $(function(){
+        $("#add_commission_member_dialog").dialog({width: 650, height: 400, modal: true, title: "Добавить члена комиссии",
+            buttons: {
+                "Добавить": function(){
+                    $.post("{% url add_commission_member %}", $("#add_commission_member_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#add_commission_member_dialog").dialog("close");
+                            window.location.href = "{{ current_location.get_absolute_url }}";
+                        } else
+                            alert(data);
+                    });
+                },
+                "Отмена": function(){$("#add_commission_member_dialog").dialog("close");}
+            }
+        }).dialog("close");
+
+        $("#add_commission_member, #add_commission_member1").click(function(){
+            add_commission_member_dialog_init("{{ current_location.id }}");
+        });
+    });
+</script>

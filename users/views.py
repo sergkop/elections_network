@@ -1,5 +1,6 @@
 # coding=utf8
-from .forms import MessageForm, FeedbackForm
+from smtplib import SMTPException
+
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db import IntegrityError
@@ -7,11 +8,12 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
+
 from grakon.models import Profile
 from grakon.utils import ajaxize
 from locations.models import Location
 from organizations.models import Organization
-from smtplib import SMTPException
+from users.forms import CommissionMemberForm, MessageForm, FeedbackForm
 from users.models import Contact, Role
 
 class RoleSignupView(View):
@@ -221,7 +223,7 @@ send_message = login_required(SendMessage.as_view())
 class Feedback(FormView):
     form_class = FeedbackForm
     template_name = 'static_pages/how_to_help/base.html'
-    
+
     def get_context_data(self, **kwargs):
         ctx = super(Feedback, self).get_context_data(**kwargs)
         ctx.update({
@@ -233,9 +235,33 @@ class Feedback(FormView):
         kwargs = super(Feedback, self).get_form_kwargs()
         kwargs.update({'request': self.request})
         return kwargs
-    
+
     def form_valid(self, form):
         form.send()
         return redirect('feedback_thanks')
-        
+
 feedback = Feedback.as_view()
+
+def add_commission_member(request):
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        try:
+            location_id = int(request.POST.get('location'))
+        except ValueError:
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        try:
+            location = Location.objects.get(id=location_id)
+        except Location.DoesNotExist:
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        form = CommissionMemberForm(request.POST)
+        if form.is_valid():
+            commission_member = form.save(commit=False)
+            commission_member.location = location
+            commission_member.user = request.profile
+            commission_member.save()
+            return HttpResponse('ok')
+        else:
+            return HttpResponse(u'Заполните обязательные поля')
+
+    return HttpResponse(u'Ошибка')

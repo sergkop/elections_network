@@ -13,7 +13,7 @@
             </li>
         {% endfor %}
     </ul>
-    <span class="pseudolink" id="become_authority">Записаться в&nbsp;представители власти</span>    
+    {% button "circle-plus" "Я &mdash; представитель власти" "become_authority" %}
 </div>
 
 {% if user.is_authenticated %}

@@ -13,15 +13,13 @@ from uni_form.helper import FormHelper
 from uni_form.layout import Submit
 
 from users.models import ROLE_CHOICES, ROLE_TYPES
-#from grakon.utils import form_helper
+from grakon.utils import form_helper
 
 class MessageForm(forms.Form):
     to_user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=HiddenInput())
     title = forms.CharField(required=False, label=u'Тема')
     body = forms.CharField(widget=Textarea(attrs={'cols':60, 'rows':4}), label=u'Сообщение')
     show_email = forms.BooleanField(label=u'Раскрыть получателю мой адрес электронной почты', initial=False, required=False)
-
-    #helper = form_helper('send_message', '')
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
@@ -57,28 +55,28 @@ class MessageForm(forms.Form):
 
 class FeedbackForm(forms.Form):
     name = forms.CharField(label=u'Ваше имя')
+    email = forms.CharField(label=u'Электронная почта')
     body = forms.CharField(widget=Textarea(attrs={'style': 'width:100%;'}), label=u'Сообщение')
+
+    helper = form_helper('feedback', u'Отправить')
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(FeedbackForm, self).__init__(*args, **kwargs)
         if self.request.user.is_authenticated():
             del self.fields['name']
-
-        self.helper = FormHelper()
-        self.helper.form_action = reverse('feedback')
-        self.helper.form_method = 'post'
-        self.helper.add_input(Submit('', u'Отправить'))
+            del self.fields['email']
 
     def send(self):
         ctx = {
             'message': self.cleaned_data['body'],
             'user': self.request.user,
         }
-        if 'name' in self.cleaned_data:
-            ctx['name'] = self.cleaned_data['name']
+        ctx['name'] = self.cleaned_data.get('name', '')
+        ctx['email'] = self.cleaned_data.get('email', '')
         if self.request.user.is_authenticated():
-            ctx['link']  = u'%s%s' % (settings.URL_PREFIX, reverse('profile', kwargs={'username': self.request.user.username}))
+            ctx['link']  = u'%s%s' % (settings.URL_PREFIX, reverse(
+                    'profile', kwargs={'username': self.request.user.username}))
         from_mail = settings.DEFAULT_FROM_EMAIL
         message = render_to_string('feedback/mail.txt', ctx)
         send_mail(u'Сообщение обратной связи', message, from_mail, [from_mail], fail_silently=False)

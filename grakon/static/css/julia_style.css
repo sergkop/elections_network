@@ -215,6 +215,10 @@ h3 {margin: 0;}
 #login_form td {padding: 0 10px 10px 0; vertical-align: middle;}
 	#login_form label {color: #adadad;}
 	#login_dialog_register {color: #000;}
+	
+#add_commission_member_form label {width: 100px; display: block; float: left;}	
+#add_commission_member_form .ctrlHolder {margin: 1em 0 0 0.4em !important;}
+#add_commission_member_form .textInput, #add_commission_member_form select  {width: 15em;}
 
 
 /* backgrounds */

@@ -193,7 +193,7 @@ h3 {margin: 0;}
 .check-list-step {position: relative; padding-left: 40px; padding-bottom: 10px; margin-bottom: 10px;}
     .check-list-step i {position: absolute; top: 0; left: 0; font-size: 1.7em; color: #0077CA; font-style: normal; text-align:center; width: 70px;}
 	
-.blue-title {color: #2f8dbc; font-size: 1.5em; font-weight: bold; border-bottom: 1px dotted #a5a5a5; margin: 0 -0.9em 0.5em; padding: 0 0.9em 0.2em;}	
+.blue-title {color: #2f8dbc; font-size: 1.5em; font-weight: bold; border-bottom: 1px dotted #a5a5a5; margin: 0 0 0.5em; padding: 0 0 0.2em;}	
 
 .social {position: absolute; top: 20px; right: 0;}
 	.social td {padding: 0 0 0 15px;}	

@@ -171,7 +171,6 @@ var Grakon = {
             if (feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
                 
-                var center;
                 if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts) {
                     var containedIKS = new OpenLayers.Bounds();
                     var iksList = Grakon.electionCommissionLayers.regions.markers;
@@ -180,7 +179,7 @@ var Grakon = {
                         if (feature.geometry.intersects( new OpenLayers.Geometry.Point(iksList[pos].lonlat.lon, iksList[pos].lonlat.lat) ))
                             containedIKS.extend(iksList[pos].lonlat);
                         
-                    center = (containedIKS.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedIKS.getCenterLonLat();
+                    var center = (containedIKS.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedIKS.getCenterLonLat();
                         
                     Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.districts);
                 } else
@@ -195,10 +194,14 @@ var Grakon = {
                 if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.areas) {
                     var containedTIK = new OpenLayers.Bounds();
                     var tikList = Grakon.electionCommissionLayers.districts.markers;
+                    
                     for (var pos in tikList)
                         if (feature.geometry.intersects( new OpenLayers.Geometry.Point(tikList[pos].lonlat.lon, tikList[pos].lonlat.lat) ))
                             containedTIK.extend(tikList[pos].lonlat);
-                    Grakon.map.setCenter(containedTIK.getCenterLonLat(), Grakon.MAP_LEVELS_ZOOM.areas);
+                        
+                    var center = (containedTIK.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedTIK.getCenterLonLat();
+                        
+                    Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.areas);
                 } else
                     Grakon.map.zoomIn();
             }

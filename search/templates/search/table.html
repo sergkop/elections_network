@@ -1,17 +1,17 @@
-<table class="results_table">
+<table class="results_table" width="100%">
     <tr>
-        <th>Регионы</th>
-        <th>Избиратели</th>
-        <th>Наблюдатели</th>
-        <th>Члены комиссии</th>
-        <th>СМИ</th>
-        <th>Юристы</th>
+        <th class="left" width="30%">Регионы</th>
+        <th width="14%">Избиратели</th>
+        <th width="12%">Наблюдатели</th>
+        <th width="18%">Члены комиссии</th>
+        <th width="12%">СМИ</th>
+        <th width="14%">Юристы</th>
         <!--th>Представители прокуратуры</th-->
         <!--th>Представители власти</th-->
     </tr>
 
     <tr>
-        <td><b>Всего</b></td>
+        <td class="left">Всего</td>
         <td>{{ total.voter }}</td>
         <td>{{ total.observer }}</td>
         <td>{{ total.member }}</td>
@@ -23,7 +23,7 @@
 
     {% for line in lines %}
     <tr>
-        <td>
+        <td class="left">
             {% if line.location.is_uik %}
                 {{ line.location }}
             {% else %}

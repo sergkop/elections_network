@@ -88,7 +88,7 @@ def grakon_media(request):
     })
 
     if settings.DEBUG:
-        js = ('libs/jquery.js', 'libs/jquery-ui/jquery-ui.js')
+        js = ('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', 'libs/jquery-ui/jquery-ui.js')
     else:
         js = ('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
                 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')

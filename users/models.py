@@ -104,7 +104,7 @@ class CommissionMember(models.Model):
 class WebObserver(models.Model):
     start_time = models.IntegerField(u'Начало наблюдения', help_text=u'Местное время')
     end_time = models.IntegerField(u'Окончание наблюдения')
-    capture_video = models.BooleanField(u'Будет производиться захват видео', default=False)
+    capture_video = models.BooleanField(u'Будет ли производиться захват видео', default=False)
     url = models.URLField(u'Ссылка на видео', blank=True)
 
     user = models.ForeignKey(Profile)

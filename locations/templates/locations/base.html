@@ -30,6 +30,8 @@
 {% endblock %}
 
 {% block right_column %}
+    {% include "blocks/web_observers.html" %}
+
     <h3 class="column_header column_header_icon"><span class="side_block_member">Члены комиссии ({{ commission_members_count }})</span></h3>
     <div class="ym-clearfix">
         <div class="content_block">
@@ -38,8 +40,6 @@
             </div>
         </div>
     </div>
-
-    {% include "blocks/web_observers.html" %}
 
     <h3 class="column_header column_header_icon"><span class="resources">Полезные ресурсы</span></h3>
     <div class="ym-clearfix">

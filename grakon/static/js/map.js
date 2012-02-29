@@ -108,11 +108,10 @@ var Grakon = {
     MAP_OPTIONS: {
         projection: new OpenLayers.Projection("EPSG:900913"),
         units: "m",
-        numZoomLevels: 18,
-        displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        maxResolution: 156543.0339,
-        maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
-        controls:[]
+        numZoomLevels: OpenLayers.Layer.Yandex.MAX_ZOOM_LEVEL,
+	resolutions: OpenLayers.Layer.Yandex.RESOLUTIONS,
+	maxExtent:new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
+        displayProjection: new OpenLayers.Projection("EPSG:4326")
     },
     
     MAP_URLS: {
@@ -249,19 +248,32 @@ var Grakon = {
                     return;
                 eval(request.responseText);
                 if (electionCommissions) {
-                    Grakon.initElectionCommissionLayers();
                     // Добавим новые (не показанные) избирательные комиссии на карту
                     for (var id in electionCommissions)
                         if (Grakon.electionCommissions[id] == null) {
                             Grakon.electionCommissions[id] = id;
                             var location = new OpenLayers.LonLat(electionCommissions[id].xCoord,electionCommissions[id].yCoord).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
                             var popupContentHTML = Grakon.Utils.buildElectionCommissionMarkerContent(electionCommissions[id]);
-                            Grakon.Utils.addMarker(electionCommissions[id].level, location, popupContentHTML, electionCommissions[id].data);
+                            Grakon.Utils.addMarker(id, electionCommissions[id].level, location, popupContentHTML, electionCommissions[id].data);
                         }
                 }
+
+		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.regions );
+		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
+		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
+
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
         },
+
+	removeOutOfMapBoundsMarkers: function(layer) {
+		for (var pos in layer.markers) {
+			if (!Grakon.map.getExtent().containsLonLat( layer.markers[pos].lonlat )) {
+				Grakon.electionCommissions[ layer.markers[pos].ecID ] = null;
+				layer.removeMarker( layer.markers[pos] );
+			}
+		}
+	},
         
         /**
          * @param {electionCommission} объект класса ElectionCommission
@@ -303,7 +315,7 @@ var Grakon = {
         
         /**
          */
-        addMarker: function(level, location, content, data) {
+        addMarker: function(ecID, level, location, content, data) {
             var markers;
             switch(level) {
                 case 2: layer = Grakon.electionCommissionLayers.regions; break;
@@ -323,6 +335,7 @@ var Grakon = {
                 new OpenLayers.Pixel(-9, -32));
                     
             var marker = feature.createMarker();
+	    marker['ecID'] = ecID;
  
             marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
             marker.events.register("mouseover", feature, Grakon.Utils.markerHover);

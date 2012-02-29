@@ -230,6 +230,9 @@ h3 {margin: 0;}
 #become_web_observer_form .ctrlHolder {margin: 1em 0 0 0.4em !important;}
 #become_web_observer_form .textInput, #become_web_observer_form select  {width: 15em;}
 
+.banners {border: 1px solid #dedede; padding: 10px; border-radius: 5px; float: left; margin-right: 20px; margin-bottom: 20px; text-align:center}	
+	.banners img {border: 1px solid #dedede;}
+	.banners textarea {width: 238px; height: 70px; resize: none; border: 1px solid #dedede;}
 
 /* backgrounds */
 header, footer, .ui-dialog-titlebar {

@@ -206,8 +206,6 @@ select {
 .checklist_form {display: inline;}
 
 /* Banners */
-.banner {margin: 1em;}
-
 .find_uik_btn {display: none;}
 #main_tab .find_uik_btn {display:block;}
 

@@ -81,7 +81,7 @@ class VoterSignupView(RoleSignupView):
 
 class ObserverSignupView(RoleSignupView):
     role = 'observer'
-    levels = ['uik']
+    levels = ['tik', 'uik']
 
     def get_data(self):
         self.data = ''

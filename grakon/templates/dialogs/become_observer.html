@@ -1,12 +1,12 @@
 {% load elements %}
 
 <div id="become_observer_dialog">
-    <div class="center">
+    <!--div class="center">
         <span class="dialog_switch_button dialog_switch_button_active" id="grakon_btn">На площадке</span>
         <span class="dialog_switch_button" id="partner_btn">Оформить документы</span>
     </div>
 
-    <br/>
+    <br/-->
 
     <div id="grakon_tab">
         <b>Если вы уже записались в наблюдатели</b>, выберите соответствущую организацию/партию/кандидата:
@@ -55,31 +55,6 @@
 </div>
 
 <script type="text/javascript">
-    // Become observer dialog
-    function become_observer_dialog_init(){
-        $("#become_observer_dialog").dialog("open");
-
-        $("#grakon_btn").click(function(){
-            $("#grakon_btn").addClass("dialog_switch_button_active");
-            $("#partner_btn").removeClass("dialog_switch_button_active");
-
-            $("#grakon_tab").show();
-            $("#partner_tab").hide();
-
-            $("#become_observer_dialog").dialog("option", "buttons",
-                    [signup_button, cancel_button]);
-        });
-        $("#partner_btn").click(function(){
-            $("#grakon_btn").removeClass("dialog_switch_button_active");
-            $("#partner_btn").addClass("dialog_switch_button_active");
-
-            $("#grakon_tab").hide();
-            $("#partner_tab").show();
-
-            $("#become_observer_dialog").dialog("option", "buttons", [cancel_button]);
-        });
-    }
-
     var signup_button = {
         text: "Записаться",
         click: function signup(){
@@ -93,6 +68,18 @@
     var cancel_button = {text: "Отмена", click: function(){
         $("#become_observer_dialog").dialog("close");
     }};
+
+    function become_observer_dialog_init(){
+        $("#become_observer_dialog").dialog("open");
+
+        $("#grakon_btn").click(function(){
+            $("#become_observer_dialog").dialog("option", "buttons",
+                    [signup_button, cancel_button]);
+        });
+        $("#partner_btn").click(function(){
+            $("#become_observer_dialog").dialog("option", "buttons", [cancel_button]);
+        });
+    }
 
     $("#become_observer_dialog").dialog({width:650, height:450, modal: true,
             title: "Записаться в наблюдатели", buttons: [signup_button, cancel_button]

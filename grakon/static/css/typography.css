@@ -73,8 +73,9 @@
 
 	h5 {
 		font-size:116.67%;
-		line-height: 1.2857em;
-		margin: 1.2857em 0 0 0;
+		line-height: 1.3em;
+		margin: 1.5em 0 1em;
+		font-style:italic;
 	}
 
 	h6 {

@@ -15,15 +15,13 @@
     {{ grakon_media }}
     {{ uni_form_media }}
     <!--[if lte IE 7]>
-    <link href="{{ STATIC_URL }}libs/yaml/iehacks.css" rel="stylesheet" type="text/css"/>
+    
     <![endif]-->
     <!--[if IE]>
+    <link href="{{ STATIC_URL }}libs/yaml/iehacks.css" rel="stylesheet" type="text/css"/>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    
     </script>
-    <![endif]-->
-    <!--[if lt IE 10]>
-    <script type="text/javascript" src="/static/js/PIE.js"></script>
-    <script type="text/javascript" src="/static/js/iehacks.js"></script>
     <![endif]-->
     <script type="text/javascript" src="{{ STATIC_URL }}libs/lightbox/jquery.lightbox-0.5.min.js"></script>
     <link href="{{ STATIC_URL }}libs/lightbox/jquery.lightbox-0.5.css" type="text/css" media="all" rel="stylesheet" />
@@ -178,15 +176,14 @@
                     <a href="{% url sitemap %}">Карта сайта</a>
                     <a href="{% url feedback %}">Обратная связь</a>
                 </div>
-                <div>
+                <div style="margin-right: 20px;">
+                    <a href="{% url main %}">Гракон</a> &copy;2012.
+                    &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a> &nbsp; &nbsp;
+                    
                     <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
                     <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="texttop"/></a>
                     <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="texttop"/></a>         
                     <a href="http://grakonteam.livejournal.com/" title="Читайте нас в ЖЖ" target="_blank"><img src="{{ STATIC_URL }}images/lj.png" align="texttop"/></a>  
-                </div>
-                <div style="margin-right: 20px;">
-                    <a href="{% url main %}">Гракон</a> &copy;2012.
-                    &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a>
                 </div>
                 <br clear="all"/>
             </div>

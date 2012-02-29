@@ -299,6 +299,9 @@
 	* @css-for   IE 5.x/Win, IE6
 	* @valid     yes
 	*/
+	
+	.ym-hlist ul li a:focus, .ym-hlist ul li a:hover {background: none; box-shadow: none; color: #ee6105;}
+	footer .ym-wbox a {border: 0 solid;}
 
 }
 

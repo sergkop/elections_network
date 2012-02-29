@@ -361,7 +361,8 @@ var Grakon = {
                         type = "ТИК: ";
                     
                     var content = "<center><b>"+type+matches[1]+"</b></center>";
-                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 16), content, null, false)
+                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 28), content, null, 
+false)
                     Grakon.map.addPopup(popup);
                 }
                 OpenLayers.Event.stop(evt);

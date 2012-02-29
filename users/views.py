@@ -13,8 +13,8 @@ from grakon.models import Profile
 from grakon.utils import ajaxize
 from locations.models import Location
 from organizations.models import Organization
-from users.forms import CommissionMemberForm, MessageForm, FeedbackForm
-from users.models import Contact, Role
+from users.forms import CommissionMemberForm, FeedbackForm, MessageForm, WebObserverForm
+from users.models import Contact, Role, WebObserver
 
 class RoleSignupView(View):
     role = '' # 'voter', 'observer'
@@ -263,5 +263,53 @@ def add_commission_member(request):
             return HttpResponse('ok')
         else:
             return HttpResponse(u'Заполните обязательные поля')
+
+    return HttpResponse(u'Ошибка')
+
+def become_web_observer(request):
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        try:
+            location_id = int(request.POST.get('location'))
+        except ValueError:
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        try:
+            location = Location.objects.get(id=location_id)
+        except Location.DoesNotExist:
+            return HttpResponse(u'Неверно указан избирательный округ')
+
+        form = WebObserverForm(request.POST)
+        if form.is_valid():
+            if not form.cleaned_data['start_time'] in range(7, 24):
+                return HttpResponse(u'Время начала наблюдения указано неверно')
+
+            if not form.cleaned_data['end_time'] in range(8, 25):
+                return HttpResponse(u'Время окончания наблюдения указано неверно')
+
+            if form.cleaned_data['end_time'] <= form.cleaned_data['start_time']:
+                return HttpResponse(u'Время окончания наблюдения должно быть позднее начала')
+
+            form_web_observer = form.save(commit=False)
+            form_web_observer.location = location
+            form_web_observer.user = request.profile
+            form_web_observer.save()
+
+            # Merge overlapping web observers
+            web_observers = WebObserver.objects.filter(location=location, user=request.profile)
+
+            times_covered = set()
+            for web_observer in web_observers:
+                for time in range(web_observer.start_time, web_observer.end_time):
+                    times_covered.add(time)
+
+            WebObserver.objects.filter(location=location, user=request.profile).delete()
+            for time in times_covered:
+                WebObserver.objects.create(location=location, user=request.profile,
+                        start_time=time, end_time=time+1, capture_video=form_web_observer.capture_video,
+                        url=form_web_observer.url)
+
+            return HttpResponse('ok')
+        else:
+            return HttpResponse(u'Поля заполнены неверно')
 
     return HttpResponse(u'Ошибка')

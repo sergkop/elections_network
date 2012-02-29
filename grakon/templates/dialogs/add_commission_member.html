@@ -6,9 +6,6 @@
     что он еще не добавлен в список.</p>
     <form id="add_commission_member_form" class="dialog_form" method="post" action="{% url add_commission_member %}">
         {% csrf_token %}
-        <style type="text/css">
-            #add_commission_member_form .ctrlHolder {margin: 0.2em;}
-        </style>
         {{ add_commission_member_form|as_uni_form }}
 
         <input type="hidden" name="location" value="" />

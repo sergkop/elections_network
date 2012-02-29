@@ -1,0 +1,30 @@
+{% load elements %}
+
+<h3 class="column_header column_header_icon"><span class="">Веб наблюдатели ({{ web_observers_count }})</span></h3>
+
+<div class="content_block ym-clearfix">
+    {% button "circle-plus" "Стать веб наблюдателем" "become_web_observer" %}
+</div>
+
+{% if user.is_authenticated %}
+    {% if current_location.is_uik %}
+        {% include "dialogs/become_web_observer.html" %}
+    {% endif %}
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#become_web_observer, #become_web_observer1").click(function(){
+            {% if user.is_authenticated %}
+                {% if current_location.is_uik %}
+                    become_web_observer_dialog_init();
+                {% else %}
+                    change_location_uik_dialog_init("Записаться в веб наблюдатели",
+                            "Выберите ваш избирательный округ:", "web_observer");
+                {% endif %}
+            {% else %}
+                login_dialog_init("Чтобы записаться в веб наблюдатели, пожалуйста, войдите в систему");
+            {% endif %}
+        });
+    });
+</script>

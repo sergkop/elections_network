@@ -13,6 +13,7 @@ urlpatterns = patterns('users.views',
     url(r'^become_member$', MemberSignupView.as_view(), name='become_member'),
 
     url(r'^add_commission_member$', 'add_commission_member', name='add_commission_member'),
+    url(r'^become_web_observer$', 'become_web_observer', name='become_web_observer'),
 
     url(r'^add_to_contacts$', 'add_to_contacts', name='add_to_contacts'),
     url(r'^remove_from_contacts$', 'remove_from_contacts', name='remove_from_contacts'),

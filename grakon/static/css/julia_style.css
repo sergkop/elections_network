@@ -226,6 +226,10 @@ h3 {margin: 0;}
 #add_commission_member_form .ctrlHolder {margin: 1em 0 0 0.4em !important;}
 #add_commission_member_form .textInput, #add_commission_member_form select  {width: 15em;}
 
+#become_web_observer_form label {width: 100px; display: block; float: left;}
+#become_web_observer_form .ctrlHolder {margin: 1em 0 0 0.4em !important;}
+#become_web_observer_form .textInput, #become_web_observer_form select  {width: 15em;}
+
 
 /* backgrounds */
 header, footer, .ui-dialog-titlebar {

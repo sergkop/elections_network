@@ -215,3 +215,6 @@ select {
 
 .results_table {border: 1px solid;}
 .results_table th, .results_table td {border: 1px solid; text-align: center; vertical-align: middle;}
+
+.web_observers_table {border: 2px solid; width: 100%;}
+.web_observers_table th, .web_observers_table td {border: 2px solid; text-align: center; vertical-align: middle;}

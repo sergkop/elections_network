@@ -12,8 +12,8 @@ from locations.models import Location
 from locations.utils import get_locations_data, get_roles_counters, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
-from users.forms import CommissionMemberForm
-from users.models import CommissionMember, Role, ROLE_TYPES
+from users.forms import CommissionMemberForm, WebObserverForm
+from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
 
 # TODO: mark links previously reported by user
 class LocationView(TemplateView):
@@ -44,9 +44,9 @@ class LocationView(TemplateView):
             for loc in Location.objects.filter(tik=location).only('id', 'name').order_by('name'):
                 sub_regions.append((loc.id, loc.name))
 
-        dialog = ''
-        if self.request.GET.get('dialog', '') in ROLE_TYPES:
-            dialog = self.request.GET.get('dialog', '')
+        dialog = self.request.GET.get('dialog', '')
+        if not dialog in ROLE_TYPES and not dialog in ('web_observer'):
+            dialog = ''
 
         signed_up_in_uik = False
         if self.request.user.is_authenticated():
@@ -71,9 +71,30 @@ class LocationView(TemplateView):
 
             'counters': get_roles_counters(location),
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),
+
             'commission_members': commission_members,
             'commission_members_count': len(commission_members),
             'add_commission_member_form': CommissionMemberForm(),
+        })
+
+        # Web observers
+        web_observers = WebObserver.objects.filter(location=location).select_related('user__user')
+        web_observers_by_time = {}
+        for web_observer in web_observers:
+            for time in range(web_observer.start_time, web_observer.end_time):
+                web_observers_by_time.setdefault(time, []).append(web_observer)
+
+        web_observers_count = len(set(web_observer.user_id for web_observer in web_observers))
+
+        times = []
+        for time in range(7, 24):
+            times.append({'start_time': time, 'web_observers': web_observers_by_time.get(time, [])})
+            times[-1]['end_time'] = time+1 if time<23 else 0
+
+        ctx.update({
+            'times': times,
+            'web_observers_count': web_observers_count,
+            'become_web_observer_form': WebObserverForm(),
         })
         return ctx
 

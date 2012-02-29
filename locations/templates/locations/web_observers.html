@@ -1,0 +1,32 @@
+{% load elements %}
+
+<p>
+    <table class="web_observers_table">
+        <tr>
+            <th>Время</th>
+            <th>Участник</th>
+            <th>Захват видео</th>
+        </tr>
+        {% for time in times %}
+        <tr>
+            <td>{{ time.start_time }}.00 - {{ time.end_time }}.00</td>
+            <td>
+                {% for web_observer in time.web_observers %}
+                    {% with participant=web_observer.user %}
+                        {% include "elements/participant.html" %}
+                    {% endwith %}
+                    <br/>
+                {% endfor %}
+            </td>
+            <td>
+                {% for web_observer in time.web_observers %}
+                    {% if web_observer.capture_video %}+{% endif %}
+                    <br/>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</p>
+
+{% button "" "Стать веб-наблюдателем" "become_web_observer1" %}

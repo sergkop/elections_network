@@ -1,0 +1,40 @@
+<div id="change_location_uik_dialog">
+    <table width="100%">
+        <tr>
+            <td width="50%">
+                <div id="change_location_uik_text" class="mb15"></div>
+                <form id="change_location_uik_form" method="get" action="{% url goto_location %}">
+                    {% csrf_token %}
+                    {% include "elements/region_choice.html" %}
+                    <input type="hidden" name="dialog" id="dialog_to_open" value="" />
+                </form>
+            </td>
+
+            <td><a href="{% url find_uik %}" target="_blank">Найдите номер своего УИК</a> <span style="color: #aaa">
+                (ссылка откроется в&nbsp;новом окне)</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function change_location_uik_dialog_init(title, text, dialog){
+        $("#change_location_uik_dialog").dialog({title: title});
+        $("#change_location_uik_text").text(text);
+        $("#dialog_to_open").val(dialog);
+        set_select_location("change_location_uik_form", CURRENT_LOCATION);
+        $("#change_location_uik_dialog").dialog("open");
+    }
+
+    $("#change_location_uik_dialog").dialog({width:650, height:300, modal: true,
+        buttons: {
+            "Записаться": function(){
+                if ($('#change_location_uik_form [name="uik"]').val()=="")
+                    alert("Необходимо выбрать избирательный участок");
+                else
+                    $("#change_location_uik_form").submit();
+            },
+            "Отмена": function(){$("#change_location_uik_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

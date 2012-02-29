@@ -20,7 +20,6 @@ class RoleManager(models.Manager):
     def get_participants(self, query):
         participants = {}
 
-        # TODO: limit to the 10?
         for role in self.filter(query).select_related():
             participants.setdefault(role.type, []).append(role)
 
@@ -32,7 +31,7 @@ class RoleManager(models.Manager):
             participants[role] = sorted(show_name_participants, key=lambda r: r.user.username.lower())
             participants[role] += sorted(other_participants, key=lambda r: r.user.username.lower())
 
-            # Temporary hack
+            # TODO: Temporary hack
             if len(participants[role]) > 10:
                 participants[role] = participants[role][:10]
 
@@ -86,6 +85,7 @@ PARTY_CHOICES = (
     ('LDPR', u'ЛДПР'),
     ('SR', u'Справедливая Россия'),
     ('Prohorov', u'Штаб Прохорова'),
+    ('Yabloko', u'Яблоко'),
     ('other', u'Другое'),
 )
 
@@ -96,6 +96,16 @@ class CommissionMember(models.Model):
     role = models.CharField(u'Должность', max_length=100, choices=MEMBER_CHOICES)
     party = models.CharField(u'Кем выдвинут', max_length=100, choices=PARTY_CHOICES)
     job = models.CharField(u'Место работы', max_length=100, blank=True)
+
+    user = models.ForeignKey(Profile)
+    location = models.ForeignKey(Location)
+    time = models.DateTimeField(auto_now=True)
+
+class WebObserver(models.Model):
+    start_time = models.IntegerField(u'Начало наблюдения', help_text=u'Местное время')
+    end_time = models.IntegerField(u'Окончание наблюдения')
+    capture_video = models.BooleanField(u'Будет производиться захват видео', default=False)
+    url = models.URLField(u'Ссылка на видео', blank=True)
 
     user = models.ForeignKey(Profile)
     location = models.ForeignKey(Location)

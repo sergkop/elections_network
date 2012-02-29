@@ -1,0 +1,35 @@
+{% load uni_form_tags %}
+
+<div id="become_web_observer_dialog">
+    <p style="margin:0.3em;">Запишитесь в веб-наблюдатели на участок.</p>
+    <form id="become_web_observer_form" class="dialog_form" method="post" action="{% url become_web_observer %}">
+        {% csrf_token %}
+        {{ become_web_observer_form|as_uni_form }}
+
+        <input type="hidden" name="location" value="" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function become_web_observer_dialog_init(){
+        $('#become_web_observer_form input[name="location"]').val({{ current_location.id }});
+        $("#become_web_observer_dialog").dialog("open");
+    }
+
+    $(function(){
+        $("#become_web_observer_dialog").dialog({width: 650, height: 400, modal: true, title: "Записаться в веб наблюдатели",
+            buttons: {
+                "Добавить": function(){
+                    $.post("{% url become_web_observer %}", $("#become_web_observer_form").serialize(), function(data){
+                        if (data=="ok"){
+                            $("#become_web_observer_dialog").dialog("close");
+                            window.location.href = "{% url web_observers current_location.id %}";
+                        } else
+                            alert(data);
+                    });
+                },
+                "Отмена": function(){$("#become_web_observer_dialog").dialog("close");}
+            }
+        }).dialog("close");
+    });
+</script>

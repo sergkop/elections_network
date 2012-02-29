@@ -165,6 +165,12 @@ select {
     margin: 0;
 }
 
+.olPopupContent {
+	background-color: #f3f3f3;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+
 .zoomIn {
 	padding-right: 25px;
 	background: url(/static/images/zoom_in.png) right center no-repeat;

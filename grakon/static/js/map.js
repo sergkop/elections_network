@@ -485,7 +485,18 @@ var Grakon = {
      */
     setupLogging: function() {
         OpenLayers.Console = window.console;
-        OpenLayers.Console.userError = OpenLayers.Console.error;
+		if (OpenLayers.Console != null)
+			OpenLayers.Console.userError = OpenLayers.Console.error;
+		else {
+			OpenLayers.Console = new Object({
+				log: function(msg) {},
+				debug: function(msg) {alert(msg);},
+				info: log,
+				warn: log,
+				userError: log,
+				error: log
+			});
+		}
     },
     
     /**

@@ -169,6 +169,16 @@ div#publicElectionsMap {
 	z-index: 2;
 }
 
+div.olControlNavToolbar {
+	top: 5px;
+	left: 50px;
+}
+
+div.olControlNavToolbar div {
+	float: left;
+	margin: 0 3px;
+}
+
 .olPopupCloseBox, .olPopupContent {
 	opacity: 1;
 	filter: alpha(opacity=100);

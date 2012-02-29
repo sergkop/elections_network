@@ -115,7 +115,7 @@ var Grakon = {
     },
     
     MAP_URLS: {
-        regions: "/static/oblasts_simplified.json",
+        regions: "/static/oblasts_simplified.json"
     },
     
     ELECTION_COMMISSION_IMAGES: new Object({

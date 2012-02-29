@@ -108,9 +108,7 @@ var Grakon = {
     MAP_OPTIONS: {
         projection: new OpenLayers.Projection("EPSG:900913"),
         units: "m",
-        numZoomLevels: OpenLayers.Layer.Yandex.MAX_ZOOM_LEVEL,
-	resolutions: OpenLayers.Layer.Yandex.RESOLUTIONS,
-	maxExtent:new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
+        numZoomLevels: 17,
         displayProjection: new OpenLayers.Projection("EPSG:4326")
     },
     
@@ -596,7 +594,7 @@ false)
         Grakon.map.addLayer(OSM_map);
         Grakon.map.addLayer(Y_sat);
         Grakon.map.addLayer(Y_hyb);
-        Grakon.map.setBaseLayer(Y_map);
+        Grakon.map.setBaseLayer(OSM_map);
         
         Grakon.addRegionBorders();
         Grakon.addDistrictBorders();

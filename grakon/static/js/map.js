@@ -189,7 +189,7 @@ var Grakon = {
         },
         
         districtClickHandler: function(feature) {
-            if (feature != null && feature.geometry != null) {
+            if (Grakon.getLevel() < 4 && feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
                 
                 if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.areas) {

@@ -13,7 +13,7 @@ from uni_form.helper import FormHelper
 from uni_form.layout import Submit
 
 from grakon.utils import form_helper
-from users.models import CommissionMember, ROLE_CHOICES, ROLE_TYPES
+from users.models import CommissionMember, ROLE_CHOICES, ROLE_TYPES, WebObserver
 
 class MessageForm(forms.Form):
     to_user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=HiddenInput())
@@ -94,3 +94,11 @@ class CommissionMemberForm(forms.ModelForm):
     class Meta:
         model = CommissionMember
         exclude = ('location', 'user', 'time')
+
+class WebObserverForm(forms.ModelForm):
+    start_time = forms.IntegerField(u'Начало наблюдения', widget=forms.Select(choices=[(i, str(i)+'.00') for i in range(7, 24)]))
+    end_time = forms.IntegerField(u'Окончание наблюдения', widget=forms.Select(choices=[(i, str(i)+'.00') for i in range(8, 24)]+[(24, '0.00')]))
+
+    class Meta:
+        model = WebObserver
+        exclude = ('url', 'location', 'user', 'time')

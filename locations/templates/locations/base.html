@@ -39,6 +39,8 @@
         </div>
     </div>
 
+    {% include "blocks/web_observers.html" %}
+
     <h3 class="column_header column_header_icon"><span class="resources">Полезные ресурсы</span></h3>
     <div class="ym-clearfix">
         <div class="content_block">
@@ -87,14 +89,20 @@
         {{ current_location }}
     </h2>
 
-    {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Помощь" "location_help" "locations/help.html" %}
+    {% if current_location.is_uik %}
+        {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Веб-наблюдатели" "web_observers" "locations/web_observers.html" %}
+    {% else %}
+        {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" %}
+    {% endif %}
 
     {% include "services/disqus-counter.html" %}
 
     <script type="text/javascript">
         $("#add_commission_member, #add_commission_member1, #add_commission_member2").click(add_commission_member_dialog_init);
         {% if dialog %}
-            become_{{ dialog }}_dialog_init();
+            $(document).ready(function(){
+                become_{{ dialog }}_dialog_init();
+            });
         {% endif %}
     </script>
 {% endblock %}

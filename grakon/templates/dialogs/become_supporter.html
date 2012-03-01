@@ -17,7 +17,7 @@
         title: "Поддержать наблюдателей",
         buttons: {
             "Записаться": function(){
-                signup_for_role("supporter", "{{ request.path }}");
+                signup_for_role("supporter", "{% url supporters current_location.id %}");
             },
             "Отмена": function(){$("#become_supporter_dialog").dialog("close");}
         }

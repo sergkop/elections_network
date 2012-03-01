@@ -108,7 +108,7 @@ def get_locations_data(queryset, level):
         location_roles = filter(lambda role: role[1] in related_locations, roles)
         user_counts[location.id] = {}
         for role_type, loc_id in location_roles:
-            user_counts[location.id][role_type] = user_counts[location.id].get(role_type) + 1
+            user_counts[location.id][role_type] = user_counts[location.id].get(role_type, 0) + 1
 
     for location in locations:
         if location.x_coord:

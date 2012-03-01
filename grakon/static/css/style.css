@@ -179,6 +179,14 @@ div.olControlNavToolbar div {
 	margin: 0 3px;
 }
 
+div.olControlLayerSwitcher div.layersDiv {
+    background-color: #000000;
+}
+
+div.olControlLayerSwitcher div span {
+    background-color: #000000;
+}
+
 .olPopupCloseBox, .olPopupContent {
 	opacity: 1;
 	filter: alpha(opacity=100);

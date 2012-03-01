@@ -100,7 +100,6 @@ var Grakon = {
      * Объект OpenLayers.Map — используемая карта.
      */
     map: null,
-    moscowBounds: new OpenLayers.Bounds(37.22, 55.48, 37.95, 56.03).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
     
     /**
      * Свойства создаваемой карты.
@@ -110,7 +109,8 @@ var Grakon = {
         units: "m",
         numZoomLevels: 17,
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
+        maxExtent: new OpenLayers.Bounds(-180, -85.0511, 180, 85.0511).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
+        maxResolution: 156543.0339
     },
     
     MAP_URLS: {
@@ -554,8 +554,10 @@ false)
         Grakon.Utils.removePopups();
         
         // границы регионов
-        if (Grakon.borderLayers.regions != null)
+        if (Grakon.borderLayers.regions != null) {
             Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
+            Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
+        }
         
         // границы районов
         if (Grakon.borderLayers.districts != null) {
@@ -715,11 +717,21 @@ false)
      * Добавляет инструменты управления на карту (например, масштабирование и выбор слоя)
      */
     initMapTools: function() {
-        Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());                         
-        Grakon.map.addControl(new OpenLayers.Control.LayerSwitcher());
+        Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());
         Grakon.map.addControl(new OpenLayers.Control.Navigation());
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
+        
+        // Создать и изменить стиль у переключателя слоёв
+        var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+        Grakon.map.addControl(layerSwitcher);
+        layerSwitcher.baseLbl.innerHTML = "Карты";
+        layerSwitcher.dataLbl.style.marginTop = "20px";
+        layerSwitcher.dataLbl.innerHTML = "Данные";
+        $('div.olControlLayerSwitcher').find('span').css('background-color', '#000000')
+        if ($.cookie('MAP_TYPE_INDEX') == null)
+            layerSwitcher.maximizeControl();
 
+        // Создать панель из кнопок
         var panel = new OpenLayers.Control.NavToolbar();
         var button = new OpenLayers.Control.Button({
             displayClass: "fullscreenBtn", trigger: Grakon.resizeMap

@@ -100,7 +100,8 @@ var Grakon = {
      * Объект OpenLayers.Map — используемая карта.
      */
     map: null,
-    moscowBounds: new OpenLayers.Bounds(37.22, 55.48, 37.95, 56.03).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
+    
+    layerSwitcher: null,
     
     /**
      * Свойства создаваемой карты.
@@ -108,15 +109,15 @@ var Grakon = {
     MAP_OPTIONS: {
         projection: new OpenLayers.Projection("EPSG:900913"),
         units: "m",
-        numZoomLevels: 18,
+        numZoomLevels: 17,
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
+        maxExtent: new OpenLayers.Bounds(-180, -85.0511, 180, 85.0511).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
         maxResolution: 156543.0339,
-        maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
-        controls:[]
+        controls: new Array()
     },
     
     MAP_URLS: {
-        regions: "/static/oblasts_simplified.json",
+        regions: "/static/oblasts_simplified.json"
     },
     
     ELECTION_COMMISSION_IMAGES: new Object({
@@ -171,7 +172,6 @@ var Grakon = {
             if (feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
                 
-                var center;
                 if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts) {
                     var containedIKS = new OpenLayers.Bounds();
                     var iksList = Grakon.electionCommissionLayers.regions.markers;
@@ -180,7 +180,7 @@ var Grakon = {
                         if (feature.geometry.intersects( new OpenLayers.Geometry.Point(iksList[pos].lonlat.lon, iksList[pos].lonlat.lat) ))
                             containedIKS.extend(iksList[pos].lonlat);
                         
-                    center = (containedIKS.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedIKS.getCenterLonLat();
+                    var center = (containedIKS.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedIKS.getCenterLonLat();
                         
                     Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.districts);
                 } else
@@ -189,16 +189,20 @@ var Grakon = {
         },
         
         districtClickHandler: function(feature) {
-            if (feature != null && feature.geometry != null) {
+            if (Grakon.getLevel() < 4 && feature != null && feature.geometry != null) {
                 Grakon.map.zoomToExtent( feature.geometry.getBounds() );
                 
                 if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.areas) {
                     var containedTIK = new OpenLayers.Bounds();
                     var tikList = Grakon.electionCommissionLayers.districts.markers;
+                    
                     for (var pos in tikList)
                         if (feature.geometry.intersects( new OpenLayers.Geometry.Point(tikList[pos].lonlat.lon, tikList[pos].lonlat.lat) ))
                             containedTIK.extend(tikList[pos].lonlat);
-                    Grakon.map.setCenter(containedTIK.getCenterLonLat(), Grakon.MAP_LEVELS_ZOOM.areas);
+                        
+                    var center = (containedTIK.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedTIK.getCenterLonLat();
+                        
+                    Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.areas);
                 } else
                     Grakon.map.zoomIn();
             }
@@ -246,18 +250,31 @@ var Grakon = {
                     return;
                 eval(request.responseText);
                 if (electionCommissions) {
-                    Grakon.initElectionCommissionLayers();
                     // Добавим новые (не показанные) избирательные комиссии на карту
                     for (var id in electionCommissions)
                         if (Grakon.electionCommissions[id] == null) {
                             Grakon.electionCommissions[id] = id;
                             var location = new OpenLayers.LonLat(electionCommissions[id].xCoord,electionCommissions[id].yCoord).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
                             var popupContentHTML = Grakon.Utils.buildElectionCommissionMarkerContent(electionCommissions[id]);
-                            Grakon.Utils.addMarker(electionCommissions[id].level, location, popupContentHTML, electionCommissions[id].data);
+                            Grakon.Utils.addMarker(id, electionCommissions[id].level, location, popupContentHTML, electionCommissions[id].data);
                         }
                 }
+
+		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.regions );
+		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
+		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
+
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
+        },
+
+        removeOutOfMapBoundsMarkers: function(layer) {
+            for (var pos in layer.markers) {
+                if (!Grakon.map.getExtent().containsLonLat( layer.markers[pos].lonlat )) {
+                    Grakon.electionCommissions[ layer.markers[pos].ecID ] = null;
+                    layer.removeMarker( layer.markers[pos] );
+                }
+            }
         },
         
         /**
@@ -300,7 +317,7 @@ var Grakon = {
         
         /**
          */
-        addMarker: function(level, location, content, data) {
+        addMarker: function(ecID, level, location, content, data) {
             var markers;
             switch(level) {
                 case 2: layer = Grakon.electionCommissionLayers.regions; break;
@@ -320,6 +337,7 @@ var Grakon = {
                 new OpenLayers.Pixel(-9, -32));
                     
             var marker = feature.createMarker();
+	    marker['ecID'] = ecID;
  
             marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
             marker.events.register("mouseover", feature, Grakon.Utils.markerHover);
@@ -358,7 +376,8 @@ var Grakon = {
                         type = "ТИК: ";
                     
                     var content = "<center><b>"+type+matches[1]+"</b></center>";
-                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 16), content, null, false)
+                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 28), content, null, 
+false)
                     Grakon.map.addPopup(popup);
                 }
                 OpenLayers.Event.stop(evt);
@@ -485,7 +504,18 @@ var Grakon = {
      */
     setupLogging: function() {
         OpenLayers.Console = window.console;
-        OpenLayers.Console.userError = OpenLayers.Console.error;
+		if (OpenLayers.Console != null)
+			OpenLayers.Console.userError = OpenLayers.Console.error;
+		else {
+			OpenLayers.Console = new Object({
+				log: function(msg) {},
+				debug: function(msg) {alert(msg);},
+				info: function(msg) {},
+				warn: function(msg) {},
+				userError: function(msg) {},
+				error: function(msg) {}
+			});
+		}
     },
     
     /**
@@ -560,15 +590,24 @@ var Grakon = {
      * Создаёт и добавляет слои на карту
      */
     initMapLayers: function() {
+        var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
         var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс",{sphericalMercator: true});
         var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
         var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
-        var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
-        Grakon.map.addLayer(Y_map);
+        
         Grakon.map.addLayer(OSM_map);
+        Grakon.map.addLayer(Y_map);
         Grakon.map.addLayer(Y_sat);
         Grakon.map.addLayer(Y_hyb);
-        Grakon.map.setBaseLayer(Y_map);
+        
+        // назначаем базовую карту
+        var baseLayer = OSM_map;
+        if ($.cookie('MAP_TYPE_INDEX') != null && Grakon.map.getLayersByName( $.cookie('MAP_TYPE_INDEX') ).length > 0)
+            baseLayer = Grakon.map.getLayersByName( $.cookie('MAP_TYPE_INDEX') ).pop();
+        Grakon.map.setBaseLayer(baseLayer);
+        
+        // запоминаем выбранную карту в cookie
+        Grakon.map.events.register("changelayer", Grakon.map, Grakon.changeMapHandler );
         
         Grakon.addRegionBorders();
         Grakon.addDistrictBorders();
@@ -679,11 +718,23 @@ var Grakon = {
      * Добавляет инструменты управления на карту (например, масштабирование и выбор слоя)
      */
     initMapTools: function() {
-        Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());                         
-        Grakon.map.addControl(new OpenLayers.Control.LayerSwitcher());
+        Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());
+        $('.olControlPanZoomBar').css('left', '14px');
+        
         Grakon.map.addControl(new OpenLayers.Control.Navigation());
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
+        
+        // Создать и изменить стиль у переключателя слоёв
+        Grakon.layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+        Grakon.map.addControl( Grakon.layerSwitcher );
+        Grakon.layerSwitcher.baseLbl.innerHTML = "Карты";
+        Grakon.layerSwitcher.dataLbl.style.marginTop = "20px";
+        Grakon.layerSwitcher.dataLbl.innerHTML = "Данные";
+        $('div.olControlLayerSwitcher').find('span').css('background-color', '#000000')
+        if ($.cookie('MAP_TYPE_INDEX') == null)
+            Grakon.layerSwitcher.maximizeControl();
 
+        // Создать панель из кнопок
         var panel = new OpenLayers.Control.NavToolbar();
         var button = new OpenLayers.Control.Button({
             displayClass: "fullscreenBtn", trigger: Grakon.resizeMap
@@ -692,13 +743,16 @@ var Grakon = {
         Grakon.map.addControl(panel);
     },
     
+    /**
+     * Разворачивает карту на весь экран (или восстанавливает в прежних размерах)
+     */
     resizeMap: function() {
         var relative = ($(Grakon.map.div).css('position') != "fixed");
         var height = (relative) ? "100%" : 500;
         $(Grakon.map.div).css({
             position: relative ? 'fixed' : 'relative',
             left: 0,
-            top: 0,
+            top: relative ? 51 : 0,
             width: "100%", 
             height: height
         });
@@ -738,5 +792,21 @@ var Grakon = {
         
         var center = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
         Grakon.map.setCenter(center, nextZoom);
+    },
+    
+    /**
+     * Сохраняет выбранную карту в cookie
+     * @param {event} объект с аттрибутами layer и property
+     */
+    changeMapHandler: function(event) {
+        if (event.property != 'visibility' || !event.layer['visibility'] ||
+            event.layer == null || Grakon.layerSwitcher == null)
+                return;
+        
+        for (var n in Grakon.layerSwitcher.baseLayers)
+            if (Grakon.layerSwitcher.baseLayers[n].layer == event.layer) {
+                $.cookie('MAP_TYPE_INDEX', event.layer.name, {expires: 92, path: '/'});
+                return;
+            }
     }
 };

@@ -165,6 +165,37 @@ select {
     margin: 0;
 }
 
+div#publicElectionsMap {
+	z-index: 2;
+}
+
+div.olMap {
+    background-color: #ffffff;
+}
+
+div.olControlNavToolbar {
+	top: 10px;
+	left: 60px;
+}
+
+div.olControlNavToolbar div {
+	float: left;
+	margin: 0 3px;
+}
+
+div.olControlLayerSwitcher div.layersDiv {
+    background-color: #000000;
+}
+
+div.olControlLayerSwitcher div span {
+    background-color: #000000;
+}
+
+.olPopupCloseBox, .olPopupContent {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
 .zoomIn {
 	padding-right: 25px;
 	background: url(/static/images/zoom_in.png) right center no-repeat;

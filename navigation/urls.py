@@ -12,12 +12,20 @@ urlpatterns = patterns('navigation.views',
     tabbed_static_url('rules', 'static_pages/about/base.html'),
     tabbed_static_url('comparison', 'static_pages/about/base.html'),
     tabbed_static_url('publications', 'static_pages/about/base.html'),
+<<<<<<< HEAD
 	tabbed_static_url('videoconf', 'static_pages/about/base.html'),
 	
 	tabbed_static_url('campaign', 'static_pages/campaign/base.html'),
 	tabbed_static_url('pressure', 'static_pages/campaign/base.html'),
 	tabbed_static_url('observation', 'static_pages/campaign/base.html'),
 	tabbed_static_url('behaviour', 'static_pages/campaign/base.html'),
+=======
+
+    tabbed_static_url('campaign', 'static_pages/campaign/base.html'),
+    tabbed_static_url('pressure', 'static_pages/campaign/base.html'),
+    tabbed_static_url('observation', 'static_pages/campaign/base.html'),
+    tabbed_static_url('behaviour', 'static_pages/campaign/base.html'),
+>>>>>>> e10694cb2564fc095c270401955c57d5a0b8415e
 
     tabbed_static_url('news', 'static_pages/development/base.html'),
     tabbed_static_url('functionality', 'static_pages/development/base.html'),
@@ -29,7 +37,7 @@ urlpatterns = patterns('navigation.views',
 #    tabbed_static_url('feedback', 'static_pages/how_to_help/base.html'),
 
     url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),
-	url(r'^faq$', 'static_page', {'name': 'faq', 'template': 'static_pages/faq.html'}, name='faq'),
+    url(r'^faq$', 'static_page', {'name': 'faq', 'template': 'static_pages/faq.html'}, name='faq'),
 
     url(r'^sitemap$', 'sitemap', name='sitemap'),
 )

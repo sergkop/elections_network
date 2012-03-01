@@ -93,6 +93,11 @@ def get_locations_data(queryset, level):
     # {loc_id: [related_locations]}
     user_counts = {}
     for location in locations:
+        user_counts[location.id] = {}
+
+        if location.is_region():
+            continue
+
         related_locations = [location.id]
 
         if location.is_region():
@@ -100,7 +105,6 @@ def get_locations_data(queryset, level):
         elif location.is_tik():
             related_locations += locations_by_tik[location.id]
 
-        user_counts[location.id] = {}
         location_roles = filter(lambda role: role[1] in related_locations, roles)
         for role_type, loc_id in location_roles:
             user_counts[location.id].setdefault(role_type, 0)

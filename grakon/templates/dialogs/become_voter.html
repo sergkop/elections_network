@@ -2,7 +2,7 @@
     Записаться избирателем на выбранном округе?
     <form id="become_voter_form" method="post" action="{% url become_voter %}">
         {% csrf_token %}
-        <input type="hidden" name="tik" value="{{ current_location.id }}" />
+        <input type="hidden" name="uik" value="{{ current_location.id }}" />
     </form>
 </div>
 

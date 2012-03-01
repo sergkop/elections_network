@@ -6,7 +6,7 @@
                 <form id="change_location_uik_form" method="get" action="{% url goto_location %}">
                     {% csrf_token %}
                     {% include "elements/region_choice.html" %}
-                    <input type="hidden" name="dialog" id="dialog_to_open" value="" />
+                    <input type="hidden" name="dialog" id="dialog_to_open1" value="" />
                 </form>
             </td>
 
@@ -21,7 +21,7 @@
     function change_location_uik_dialog_init(title, text, dialog){
         $("#change_location_uik_dialog").dialog({title: title});
         $("#change_location_uik_text").text(text);
-        $("#dialog_to_open").val(dialog);
+        $("#dialog_to_open1").val(dialog);
         set_select_location("change_location_uik_form", CURRENT_LOCATION);
         $("#change_location_uik_dialog").dialog("open");
     }

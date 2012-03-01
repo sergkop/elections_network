@@ -13,6 +13,7 @@ ROLE_CHOICES = (
     ('prosecutor', u'Представитель прокуратуры'),
     ('member', u'Член избирательной комиссии'),
     ('authority', u'Представитель власти'),
+    ('supporter', u'Поддержка наблюдателей'),
 )
 ROLE_TYPES = dict(ROLE_CHOICES)
 

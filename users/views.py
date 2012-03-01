@@ -149,6 +149,10 @@ class MemberSignupView(RoleSignupView):
     role = 'member'
     levels = ['region', 'tik', 'uik']
 
+class SupporterSignupView(RoleSignupView):
+    role = 'supporter'
+    levels = ['uik']
+
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:

@@ -1,0 +1,11 @@
+<p>Группа поддержки приходит на избирательный участок в 20.00
+и контролирует, что наблюдатели получили протокол с результатами
+выборов на участке.</p>
+
+<ul>
+    {% for role in participants.supporter %}
+        {% with participant=role.user %}
+            <li>{% include "elements/participant.html" %}</li>
+        {% endwith %}
+    {% endfor %}
+</ul>

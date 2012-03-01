@@ -1,0 +1,25 @@
+<div id="become_supporter_dialog">
+    Вы хотите поддержать наблюдателей на своем избирательном участке,
+    прийдя в 20.00 к участку и проконтролировав, что наблюдатели
+    получили копию протокола?
+    <form id="become_supporter_form" method="post" action="{% url become_supporter %}">
+        {% csrf_token %}
+        <input type="hidden" name="uik" value="{{ current_location.id }}" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    function become_supporter_dialog_init(){
+        $("#become_supporter_dialog").dialog("open");
+    }
+
+    $("#become_supporter_dialog").dialog({width:650, height:250, modal: true,
+        title: "Поддержать наблюдателей",
+        buttons: {
+            "Записаться": function(){
+                signup_for_role("supporter", "{{ request.path }}");
+            },
+            "Отмена": function(){$("#become_supporter_dialog").dialog("close");}
+        }
+    }).dialog("close");
+</script>

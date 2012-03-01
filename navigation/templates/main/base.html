@@ -21,6 +21,8 @@
 {% endblock %}
 
 {% block right_column %}
+    {% include "blocks/supporters.html" %}
+
     {% include "blocks/web_observers.html" %}
 
     <h3 class="column_header column_header_icon"><span class="side_block_member">Члены комиссии ({{ commission_members_count }})</span></h3>

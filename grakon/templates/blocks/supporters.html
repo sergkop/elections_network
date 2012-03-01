@@ -1,0 +1,33 @@
+{% load elements %}
+
+<h3 class="column_header column_header_icon"><span class="">Группа поддержки ({{ counters.supporter }})</span></h3>
+
+<div class="ym-clearfix">
+    <div class="mb15 mt15">
+        {% button "circle-plus" "Поддержать наблюдателей" "become_supporter" %}
+    </div>
+</div>
+
+{% if user.is_authenticated %}
+    {% if current_location.is_uik %}
+        {% include "dialogs/become_supporter.html" %}
+    {% endif %}
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#become_supporter, #become_supporter1").click(function(){
+            {% if user.is_authenticated %}
+                {% if current_location.is_uik %}
+                    become_supporter_dialog_init();
+                {% else %}
+                    console.log("here");
+                    change_location_uik_dialog_init("Поддержать наблюдателей",
+                            "Выберите ваш избирательный округ:", "supporter");
+                {% endif %}
+            {% else %}
+                login_dialog_init("Чтобы поддержать наблюдателей, пожалуйста, войдите в систему");
+            {% endif %}
+        });
+    });
+</script>

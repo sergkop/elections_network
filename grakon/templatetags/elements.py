@@ -6,7 +6,7 @@ register = template.Library()
 
 # TODO: add optional hint (title) and class to tell tipsy to show a tip
 @register.inclusion_tag('elements/button.html')
-def button(icon, title, id=None, link='', center='center'):
+def button(icon, title, id=None, link='', center='center', tip=''):
     """ link is either a url, starting with http:// or https://, or the name of a view """
     if link!='' and not link.startswith('http://') and not link.startswith('https://') and not link.startswith('mailto:'):
         link = reverse(link)
@@ -14,7 +14,7 @@ def button(icon, title, id=None, link='', center='center'):
     external = link.startswith('http') if link else False
 
     return {'icon': icon, 'title': title, 'id': id, 'link': link,
-            'external': external, 'center': center!=''}
+            'external': external, 'center': center!='', 'tip': tip}
 
 @register.tag(name="tabs")
 def tabs_tag(parser, token):

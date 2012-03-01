@@ -12,14 +12,13 @@ $(document).ready(function(){
         var place = REGION_NAME;
         place += (place.length > 0 && TIK_NAME.length > 0) ? ", "+TIK_NAME : TIK_NAME;
 
-        console.log("rfer");
         window.location.href = "/search/map?place="+place;
     });
 });
 
 // Default tipsy settings
-$.fn.tipsy.defaults.delayIn = 300;
-$.fn.tipsy.defaults.delayOut = 300;
+$.fn.tipsy.defaults.delayIn = 150;
+$.fn.tipsy.defaults.delayOut = 200;
 $.fn.tipsy.defaults.fade = true;
 $.fn.tipsy.defaults.opacity = 0.6;
 

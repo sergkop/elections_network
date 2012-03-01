@@ -4,7 +4,7 @@
 
 <div class="ym-clearfix">
     <div class="mb15 mt15">
-        {% button "circle-plus" "Стать веб-наблюдателем" "become_web_observer" %}
+        {% button "circle-plus" "Стать веб-наблюдателем" "become_web_observer" "" "center" "Для тех, кто будет следить за выборами через веб-камеры" %}
     </div>
 </div>
 
@@ -27,6 +27,6 @@
             {% else %}
                 login_dialog_init("Чтобы записаться в веб-наблюдатели, пожалуйста, войдите в систему");
             {% endif %}
-        });
+        }).tipsy();
     });
 </script>

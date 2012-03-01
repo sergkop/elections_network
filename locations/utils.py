@@ -49,6 +49,19 @@ def get_roles_counters(location):
 
     return counters
 
+@cache_function('regions_counters', 15)
+def get_region_counters():
+    location_region = {}
+    for loc_id, region in Location.objects.values_list('id', 'region'):
+        location_region[loc_id] = region
+
+    counters = {}
+    for loc_id, role_type in Role.objects.values_list('location', 'type'):
+        c = counters.setdefault(location_region[loc_id], {})
+        c[role_type] = c.get(role_type, 0) + 1
+
+    return counters
+
 def get_locations_data(queryset, level):
     """ level=2,3,4 """
     js = 'var electionCommissions = { '
@@ -63,52 +76,39 @@ def get_locations_data(queryset, level):
     # TODO: limit locations number according to the level (don't get uiks for the whole country at once)
     locations = list(queryset.only('id', 'x_coord', 'y_coord', 'region', 'tik', 'name', 'address'))
 
-    region_ids = [loc.id for loc in locations if loc.is_region()]
+    #region_ids = [loc.id for loc in locations if loc.is_region()]
     tik_ids = [loc.id for loc in locations if loc.is_tik()]
     uik_ids = [loc.id for loc in locations if loc.is_uik()]
 
     # TODO: уровень 3: delta_x=20, delta_y=10 уровень 4: 1,8 и 0,9
 
-    loc_query = Q(id__in=region_ids) | Q(region__in=region_ids)
-    role_query = Q(location__in=region_ids) | Q(location__region__in=region_ids)
     if level >= 3:
-        loc_query = loc_query | Q(tik__in=tik_ids)
-        role_query = role_query | Q(location__tik__in=tik_ids)
+        inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
+        roles = list(Role.objects.exclude(user__user__email='', user__user__is_active=False,
+                user__in=inactive_ids).filter(location__tik__in=tik_ids).values_list('type', 'location'))
+        all_locations = list(Location.objects.filter(tik__in=tik_ids).values_list('id', 'tik'))
 
-    inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
-    roles = list(Role.objects.exclude(user__user__email='', user__user__is_active=False,
-            user__in=inactive_ids).filter(role_query).values_list('type', 'location'))
-    all_locations = list(Location.objects.filter(loc_query).values_list('id', 'region', 'tik'))
+        locations_by_tik = {}
+        for id, tik in all_locations:
+            locations_by_tik.setdefault(tik, []).append(id)
 
-    locations_by_region = {}
-    locations_by_tik = {}
-    for id, region, tik in all_locations:
-        locations_by_region.setdefault(region, []).append(id)
-        locations_by_tik.setdefault(tik, []).append(id)
-
-    roles_by_location = {}
-    for role_type, location in roles:
-        roles_by_location.setdefault(location, []).append(role_type)
+    region_counters = get_region_counters()
 
     # {loc_id: [related_locations]}
     user_counts = {}
     for location in locations:
-        user_counts[location.id] = {}
-
         if location.is_region():
+            user_counts[location.id] = region_counters.get(location.id, {})
             continue
 
         related_locations = [location.id]
-
-        if location.is_region():
-            related_locations += locations_by_region[location.id]
-        elif location.is_tik():
+        if location.is_tik():
             related_locations += locations_by_tik[location.id]
 
         location_roles = filter(lambda role: role[1] in related_locations, roles)
+        user_counts[location.id] = {}
         for role_type, loc_id in location_roles:
-            user_counts[location.id].setdefault(role_type, 0)
-            user_counts[location.id][role_type] += 1
+            user_counts[location.id][role_type] = user_counts[location.id].get(role_type) + 1
 
     for location in locations:
         if location.x_coord:

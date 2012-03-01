@@ -25,7 +25,7 @@
     <tr>
         <td class="left">
             {% if line.location.is_uik %}
-                {{ line.location }}
+                <a href="{{ line.location.get_absolute_url }}">{{ line.location }}</a>
             {% else %}
                 <a href="{% url user_table %}?region={% if line.location.is_region %}{{ line.location.id }}{% else %}{{ line.location.region_id }}{% endif %}&tik={% if line.location.is_tik %}{{ line.location.id }}{% endif %}{% if line.location.is_uik %}{{ line.location.tik_id }}{% endif %}&uik=">{{ line.location }}</a>
             {% endif %}

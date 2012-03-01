@@ -118,7 +118,7 @@
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
-        {% if disqus_identifier == "main" %}
+        {% if disqus_identifier == "main" or current_location %}
             <div class="main-buttons-blue">
                 <a href="#" id="become_supporter1" title="Прийди с друзьями к участку и проследи, что наблюдатель получил протокол">Поддержать наблюдателей</a>
             </div>

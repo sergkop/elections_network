@@ -55,6 +55,10 @@ class WallView(BaseMainView):
     tab = 'wall'
 wall = WallView.as_view()
 
+class MainNewsView(BaseMainView):
+    tab = 'main_news'
+main_news = MainNewsView.as_view()
+
 def static_page(request, name, template):
     context = {
         'tab': name,

@@ -6,7 +6,7 @@ from loginza.models import UserMap
 
 from grakon.utils import cache_function
 from locations.models import FOREIGN_TERRITORIES, Location
-from users.models import Role, ROLE_TYPES
+from users.models import Role, ROLE_TYPES, WebObserver
 
 @cache_function('regions_list', 600)
 def regions_list():
@@ -44,6 +44,8 @@ def get_roles_counters(location):
     query = get_roles_query(location)
     for role in ROLE_TYPES:
         counters[role] = Role.objects.filter(Q(type=role) & query).count()
+
+    counters['web_observer'] = len(WebObserver.objects.filter(query).distinct().values_list('user', flat=True))
 
     return counters
 

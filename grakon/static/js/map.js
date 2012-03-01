@@ -109,7 +109,8 @@ var Grakon = {
         projection: new OpenLayers.Projection("EPSG:900913"),
         units: "m",
         numZoomLevels: 17,
-        displayProjection: new OpenLayers.Projection("EPSG:4326")
+        displayProjection: new OpenLayers.Projection("EPSG:4326"),
+        maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
     },
     
     MAP_URLS: {
@@ -506,10 +507,10 @@ false)
 			OpenLayers.Console = new Object({
 				log: function(msg) {},
 				debug: function(msg) {alert(msg);},
-				info: log,
-				warn: log,
-				userError: log,
-				error: log
+				info: function(msg) {},
+				warn: function(msg) {},
+				userError: function(msg) {},
+				error: function(msg) {}
 			});
 		}
     },
@@ -586,15 +587,24 @@ false)
      * Создаёт и добавляет слои на карту
      */
     initMapLayers: function() {
+        var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
         var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс",{sphericalMercator: true});
         var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
         var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
-        var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
-        Grakon.map.addLayer(Y_map);
+        
         Grakon.map.addLayer(OSM_map);
+        Grakon.map.addLayer(Y_map);
         Grakon.map.addLayer(Y_sat);
         Grakon.map.addLayer(Y_hyb);
-        Grakon.map.setBaseLayer(OSM_map);
+        
+        // назначаем базовую карту
+        var baseLayer = OSM_map;
+        if ($.cookie('MAP_TYPE_INDEX') != null && Grakon.map.getLayersByName( $.cookie('MAP_TYPE_INDEX') ).length > 0)
+            baseLayer = Grakon.map.getLayersByName( $.cookie('MAP_TYPE_INDEX') ).pop();
+        Grakon.map.setBaseLayer(baseLayer);
+        
+        // запоминаем выбранную карту в cookie
+        Grakon.map.events.register("changelayer", Grakon.map, Grakon.changeMapHandler );
         
         Grakon.addRegionBorders();
         Grakon.addDistrictBorders();
@@ -764,5 +774,20 @@ false)
         
         var center = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
         Grakon.map.setCenter(center, nextZoom);
+    },
+    
+    /**
+     * Сохраняет выбранную карту в cookie
+     * @param {event} объект с аттрибутами layer и property
+     */
+    changeMapHandler: function(event) {
+        if (event.property != 'visibility' || !event.layer['visibility'])
+            return;
+        
+        if (Grakon.map.getLayersByClass( "OpenLayers.Layer.Yandex" ).indexOf( event.layer ) == -1 &&
+            Grakon.map.getLayersByClass( "OpenLayers.Layer.OSM" ).indexOf( event.layer ) == -1)
+                return;
+                
+        $.cookie('MAP_TYPE_INDEX', event.layer.name, {expires: 92, path: '/'});
     }
 };

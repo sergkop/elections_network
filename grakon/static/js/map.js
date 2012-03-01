@@ -110,7 +110,8 @@ var Grakon = {
         numZoomLevels: 17,
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
         maxExtent: new OpenLayers.Bounds(-180, -85.0511, 180, 85.0511).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
-        maxResolution: 156543.0339
+        maxResolution: 156543.0339,
+        controls: new Array()
     },
     
     MAP_URLS: {
@@ -718,6 +719,8 @@ false)
      */
     initMapTools: function() {
         Grakon.map.addControl(new OpenLayers.Control.PanZoomBar());
+        $('.olControlPanZoomBar').css('left', '14px');
+        
         Grakon.map.addControl(new OpenLayers.Control.Navigation());
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
         
@@ -740,13 +743,16 @@ false)
         Grakon.map.addControl(panel);
     },
     
+    /**
+     * Разворачивает карту на весь экран (или восстанавливает в прежних размерах)
+     */
     resizeMap: function() {
         var relative = ($(Grakon.map.div).css('position') != "fixed");
         var height = (relative) ? "100%" : 500;
         $(Grakon.map.div).css({
             position: relative ? 'fixed' : 'relative',
             left: 0,
-            top: 0,
+            top: relative ? 51 : 0,
             width: "100%", 
             height: height
         });

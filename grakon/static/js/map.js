@@ -101,6 +101,8 @@ var Grakon = {
      */
     map: null,
     
+    layerSwitcher: null,
+    
     /**
      * Свойства создаваемой карты.
      */
@@ -266,14 +268,14 @@ var Grakon = {
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
         },
 
-	removeOutOfMapBoundsMarkers: function(layer) {
-		for (var pos in layer.markers) {
-			if (!Grakon.map.getExtent().containsLonLat( layer.markers[pos].lonlat )) {
-				Grakon.electionCommissions[ layer.markers[pos].ecID ] = null;
-				layer.removeMarker( layer.markers[pos] );
-			}
-		}
-	},
+        removeOutOfMapBoundsMarkers: function(layer) {
+            for (var pos in layer.markers) {
+                if (!Grakon.map.getExtent().containsLonLat( layer.markers[pos].lonlat )) {
+                    Grakon.electionCommissions[ layer.markers[pos].ecID ] = null;
+                    layer.removeMarker( layer.markers[pos] );
+                }
+            }
+        },
         
         /**
          * @param {electionCommission} объект класса ElectionCommission
@@ -555,10 +557,8 @@ false)
         Grakon.Utils.removePopups();
         
         // границы регионов
-        if (Grakon.borderLayers.regions != null) {
+        if (Grakon.borderLayers.regions != null)
             Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
-            Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
-        }
         
         // границы районов
         if (Grakon.borderLayers.districts != null) {
@@ -725,14 +725,14 @@ false)
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
         
         // Создать и изменить стиль у переключателя слоёв
-        var layerSwitcher = new OpenLayers.Control.LayerSwitcher();
-        Grakon.map.addControl(layerSwitcher);
-        layerSwitcher.baseLbl.innerHTML = "Карты";
-        layerSwitcher.dataLbl.style.marginTop = "20px";
-        layerSwitcher.dataLbl.innerHTML = "Данные";
+        Grakon.layerSwitcher = new OpenLayers.Control.LayerSwitcher();
+        Grakon.map.addControl( Grakon.layerSwitcher );
+        Grakon.layerSwitcher.baseLbl.innerHTML = "Карты";
+        Grakon.layerSwitcher.dataLbl.style.marginTop = "20px";
+        Grakon.layerSwitcher.dataLbl.innerHTML = "Данные";
         $('div.olControlLayerSwitcher').find('span').css('background-color', '#000000')
         if ($.cookie('MAP_TYPE_INDEX') == null)
-            layerSwitcher.maximizeControl();
+            Grakon.layerSwitcher.maximizeControl();
 
         // Создать панель из кнопок
         var panel = new OpenLayers.Control.NavToolbar();
@@ -799,13 +799,14 @@ false)
      * @param {event} объект с аттрибутами layer и property
      */
     changeMapHandler: function(event) {
-        if (event.property != 'visibility' || !event.layer['visibility'])
-            return;
-        
-        if (Grakon.map.getLayersByClass( "OpenLayers.Layer.Yandex" ).indexOf( event.layer ) == -1 &&
-            Grakon.map.getLayersByClass( "OpenLayers.Layer.OSM" ).indexOf( event.layer ) == -1)
+        if (event.property != 'visibility' || !event.layer['visibility'] ||
+            event.layer == null || Grakon.layerSwitcher == null)
                 return;
-                
-        $.cookie('MAP_TYPE_INDEX', event.layer.name, {expires: 92, path: '/'});
+        
+        for (var n in Grakon.layerSwitcher.baseLayers)
+            if (Grakon.layerSwitcher.baseLayers[n].layer == event.layer) {
+                $.cookie('MAP_TYPE_INDEX', event.layer.name, {expires: 92, path: '/'});
+                return;
+            }
     }
 };

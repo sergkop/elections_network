@@ -617,7 +617,15 @@ false)
         var highlightCtrl = new OpenLayers.Control.SelectFeature(districts, {
             hover: true,
             highlightOnly: true,
-            renderIntent: "temporary"
+            renderIntent: "temporary",
+                callbacks: {
+                        click: function() {
+                                var mousePositionCtrl = Grakon.map.getControlsByClass("OpenLayers.Control.MousePosition")[0];
+                                var center = Grakon.map.getLonLatFromPixel( mousePositionCtrl.lastXy );
+                                var zoom = Grakon.map.getZoom() + 1;
+                                Grakon.map.setCenter(center, zoom);
+                        }
+                }
         });
         Grakon.map.addControl(highlightCtrl);
         highlightCtrl.activate();

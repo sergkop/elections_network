@@ -49,7 +49,7 @@ def get_roles_counters(location):
 
     return counters
 
-@cache_function('regions_counters', 15)
+@cache_function('regions_counters', 300)
 def get_region_counters():
     location_region = {}
     for loc_id, region in Location.objects.values_list('id', 'region'):

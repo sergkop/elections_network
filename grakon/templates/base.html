@@ -45,6 +45,7 @@
 			var h1 = jQuery('.ym-col1').height();
 			var h2 = jQuery('.ym-col2').height();
 			jQuery('.ym-col3').css('min-height', Math.max(h1,h2));
+			
 				
 		});	
     </script>
@@ -75,7 +76,7 @@
                     <li><a {% if template == "static_pages/development/base.html" %}class="on"{% endif %} href="{% url news %}">Новости</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
-                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url observation %}">Акции</a></li>	
+                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url behaviour %}">Акции</a></li>	
                     <li><a {% if template == "static_pages/faq.html" %}class="on"{% endif %} href="{% url faq %}">FAQ</a></li>
                 </ul>
 

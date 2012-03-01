@@ -14,6 +14,9 @@
     <style type="text/css">
 	/* for static pages */
         .ym-col2 {width: 0px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li a {height: 45px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 53px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li {line-height: 1.2em;}
         .ym-col3 {width: 100%; padding: 15px 0;}
 		h2.location_header {margin-left: 15px;}
     </style>
@@ -22,5 +25,5 @@
 {% block content_header %}
     <h2 class="location_header">Акции</h2>
 
-    {% tabs "tabs" tab "" "" "Наблюдение" "observation" "static_pages/campaign/observation.html" "Взаимодействие с членами УИК" "pressure" "static_pages/campaign/pressure.html" "Собери команду" "campaign" "static_pages/campaign/campaign.html" %}
+    {% tabs "tabs" tab "" "" "Поведение избирателя" "behaviour" "static_pages/campaign/behaviour.html" "Наблюдение" "observation" "static_pages/campaign/observation.html" "Взаимодействие<br />с членами УИК" "pressure" "static_pages/campaign/pressure.html" "Собери команду" "campaign" "static_pages/campaign/campaign.html" %}
 {% endblock %}

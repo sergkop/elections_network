@@ -4,8 +4,8 @@ def tabbed_static_url(name, template):
     return url(r'^'+name+'$', 'static_page', {'name': name, 'template': template}, name=name)
 
 urlpatterns = patterns('navigation.views',
-    url(r'^$', 'main', {'tab': 'main'}, name='main'),
-    url(r'^wall$', 'wall', {'tab': 'wall'}, name='wall'),
+    url(r'^$', 'main', name='main'),
+    url(r'^wall$', 'wall', name='wall'),
 
     # Static pages
     tabbed_static_url('about', 'static_pages/about/base.html'),

@@ -15,6 +15,7 @@ from links.models import Link
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
 
+# TODO: don't query lists of roles if it's not needed
 # TODO: mark links previously reported by user
 class LocationView(TemplateView):
     template_name = 'locations/base.html'

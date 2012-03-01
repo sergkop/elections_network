@@ -1,7 +1,9 @@
 {% load elements %}
 
 {% if not current_location or current_location.is_region %}
-    {% include "dialogs/change_location.html" %}
+    {% if request.user.is_authenticated %}
+        {% include "dialogs/change_location.html" %}
+    {% endif %}
 {% endif %}
 
 {% include "blocks/voters.html" %}

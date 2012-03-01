@@ -1,6 +1,8 @@
 {% load elements %}
 
-{% include "dialogs/change_location_uik.html" %}
+{% if request.user.is_authenticated %}
+    {% include "dialogs/change_location_uik.html" %}
+{% endif %}
 
 {% include "blocks/organizations.html" %}
 

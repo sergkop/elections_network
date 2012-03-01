@@ -5,7 +5,7 @@ from users.models import CommissionMember, Contact, Role, WebObserver
 class RoleAdmin(admin.ModelAdmin):
     list_display = ('user', 'location', 'type', 'verified')
     ordering = ('user__username',)
-    search_fields = ('user__username',)
+    search_fields = ('user__username', 'user__user__email')
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('user', 'contact')

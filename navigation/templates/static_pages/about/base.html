@@ -11,6 +11,11 @@
     <style type="text/css">
         .ym-col3 .ym-cbox:last-child {display: none;}
 		.ym-col3 {padding-right: 0;}
+	/* for static pages */
+		.ym-col3 .ui-tabs .ui-tabs-nav li a {height: 45px; text-align:center}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 53px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {padding-top: 2px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li {line-height: 1.2em;}
     </style>
 {% endblock %}
 
@@ -49,5 +54,5 @@
 {% block content_header %}
     <h2 class="location_header">О проекте</h2>
 
-    {% tabs "tabs" tab "" "" "Описание" "about" "static_pages/about/about.html" "Правила" "rules" "static_pages/about/rules.html" "Сравнение проектов" "comparison" "static_pages/about/comparison.html" "О нас в СМИ" "publications" "static_pages/about/publications.html"  "Видеоконференция" "videoconf" "static_pages/about/videoconf.html" %}
+    {% tabs "tabs" tab "" "" "<span style='line-height: 2em'>Описание</span>" "about" "static_pages/about/about.html" "<span style='line-height: 2em'>Правила</span>" "rules" "static_pages/about/rules.html" "<span style='line-height: 2em'>Новости</span>" "news" "static_pages/development/news.html" "<span style='line-height: 2em'>Функциональность</span>" "functionality" "static_pages/development/functionality.html"  "Сравнение<br />проектов" "comparison" "static_pages/about/comparison.html" "<span style='line-height: 2em'>О нас в СМИ</span>" "publications" "static_pages/about/publications.html" %}
 {% endblock %}

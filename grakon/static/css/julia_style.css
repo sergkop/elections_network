@@ -17,6 +17,7 @@ table, tbody td {border: none; margin: 0;}
 .fl {float: left;}
 .black {color: #000 !important;}
 .blue {color: #2f8dbc !important;}
+.grey {color: #999 !important;}	
 .pseudolink {border-bottom: 1px dotted; cursor: pointer;}
 .ym-hlist {background: none; border-bottom: 1px dotted #a5a5a5; padding-bottom:10px;}
 .ym-hlist ul {margin-left: -1.7em;}
@@ -234,6 +235,13 @@ h3 {margin: 0;}
 .banners {border: 1px solid #dedede; padding: 10px; border-radius: 5px; float: left; margin-right: 20px; margin-bottom: 20px; text-align:center}	
 	.banners img {border: 1px solid #dedede;}
 	.banners textarea {width: 238px; height: 70px; resize: none; border: 1px solid #dedede;}
+
+.videoconf {border: 1px dotted #a5a5a5; border-width: 1px 0; margin-bottom:15px; background:url(../images/icon_videoconf.png) 0 center no-repeat; padding-left: 75px;}
+	.videoconf h4 {margin: 1em 0 0.3em; border: none; font-size: 1em; font-weight: bold;}
+		.videoconf h4 a {color: #000;}
+	.videoconf p {font-size: 0.85em; margin: 0 0 1em}
+	.videoconf p a {color: #2f8dbc; text-decoration: none;}
+		.videoconf a:hover {color: #7E17A3;}
 
 /* backgrounds */
 header, footer, .ui-dialog-titlebar {

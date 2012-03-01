@@ -10,6 +10,7 @@
     <!-- This style is used in a number of pages already - avoid it -->
     <style type="text/css">
         .ym-col3 .ym-cbox:last-child {display: none;}
+		.ym-col3 {padding-right: 0;}
     </style>
 {% endblock %}
 
@@ -31,9 +32,7 @@
             </ul>
         </div>
     </div>
-{% endblock %}
-
-{% block right_column %}
+    
     <h3 class="column_header column_header_icon"><span class="documents">Документы</span></h3>
     <div class="ym-clearfix">
         <div class="content_block">
@@ -50,5 +49,5 @@
 {% block content_header %}
     <h2 class="location_header">О проекте</h2>
 
-    {% tabs "tabs" tab "" "" "Описание" "about" "static_pages/about/about.html" "Правила" "rules" "static_pages/about/rules.html" "Сравнение проектов" "comparison" "static_pages/about/comparison.html" "О нас в СМИ" "publications" "static_pages/about/publications.html" %}
+    {% tabs "tabs" tab "" "" "Описание" "about" "static_pages/about/about.html" "Правила" "rules" "static_pages/about/rules.html" "Сравнение проектов" "comparison" "static_pages/about/comparison.html" "О нас в СМИ" "publications" "static_pages/about/publications.html"  "Видеоконференция" "videoconf" "static_pages/about/videoconf.html" %}
 {% endblock %}

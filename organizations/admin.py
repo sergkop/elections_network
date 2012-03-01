@@ -22,11 +22,13 @@ class OrganizationCoverageAdmin(admin.ModelAdmin):
     list_display = ('organization', 'location')
     ordering = ('organization', 'location')
     search_fields = ('organization__title', 'location__name')
+    raw_id_fields = ('location',)
 
 class OrganizationRepresentativeAdmin(admin.ModelAdmin):
     list_display = ('organization', 'user')
     ordering = ('organization', 'user__username')
     search_fields = ('organization__title', 'user__username')
+    raw_id_fields = ('user',)
 
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationCoverage, OrganizationCoverageAdmin)

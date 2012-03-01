@@ -11,6 +11,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'first_name', 'last_name', 'show_name')
     ordering = ('user__username',)
     search_fields = ('user__username',)
+    raw_id_fields = ('user',)
     inlines = [ContactInline]
 
 admin.site.register(Profile, ProfileAdmin)

@@ -62,34 +62,5 @@
     <div class="blue-title">Баннеры</div>
     <p>Специально к этой акции мы подготовили баннеры, которые вы можете разместить на своем сайте.</p>
 
-    <div class="banners">
-        <a href="{{ URL_PREFIX }}" class="banner"><img src="{{ STATIC_URL }}images/banners/web-nabludatel.gif"/></a>
-        <br/><br/>
-        <textarea rows="3" cols="30">&lt;a href="http://grakon.org"&gt; &lt;img src="http://grakon.org/static/images/banners/web-nabludatel.gif"&gt;&lt;/a&gt;</textarea>
-    </div>
-
-    <div class="banners">
-        <a href="{{ URL_PREFIX }}" class="banner"><img src="{{ STATIC_URL }}images/banners/karusel.gif"/></a>
-        <br/><br/>
-        <textarea rows="3" cols="30">&lt;a href="http://grakon.org"&gt; &lt;img src="http://grakon.org/static/images/banners/karusel.gif"&gt;&lt;/a&gt;</textarea>
-    </div>
-
-    <div class="banners">
-        <a href="{{ URL_PREFIX }}" class="banner"><img src="{{ STATIC_URL }}images/banners/mobile-group.gif"/></a>
-        <br/><br/>
-        <textarea rows="3" cols="30">&lt;a href="http://grakon.org"&gt; &lt;img src="http://grakon.org/static/images/banners/mobile-group.gif"&gt;&lt;/a&gt;</textarea>
-    </div>
-
-    <div class="banners">
-        <a href="{{ URL_PREFIX }}" class="banner"><img src="{{ STATIC_URL }}images/banners/journalist.gif"/></a>
-        <br/><br/>
-        <textarea rows="3" cols="30">&lt;a href="http://grakon.org"&gt; &lt;img src="http://grakon.org/static/images/banners/journalist.gif"&gt;&lt;/a&gt;</textarea>
-    </div>
-
-    <div class="banners">
-        <a href="{{ URL_PREFIX }}" class="banner"><img src="{{ STATIC_URL }}images/banners/brave.gif"/></a>
-        <br/><br/>
-        <textarea rows="3" cols="30">&lt;a href="http://grakon.org"&gt; &lt;img src="http://grakon.org/static/images/banners/brave.gif"&gt;&lt;/a&gt;</textarea>
-    </div>
-    <br clear="all" />
+    {% include "elements/banners.html" %}
 </div>

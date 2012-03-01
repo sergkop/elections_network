@@ -14,8 +14,8 @@
 
 {% block left_column %}
 	<div class="videoconf">
-    	<h4><a href="/main_news">Видео-конференция</a></h4>
-        <p><strong><a href="/main_news">2 марта, 20:00 по Москве</a></strong></p>    
+    	<h4><a href="{% url main_news %}">Видео-конференция</a></h4>
+        <p><strong><a href="{% url main_news %}">2 марта, 20:00 по Москве</a></strong></p>    
     </div>
     <h3 class="column_header column_header_icon"><span class="participants">Участники (<b>{{ total_counter }}</b>)</span></h3>
 

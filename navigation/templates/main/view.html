@@ -35,7 +35,7 @@
         </div>
     {% endif %}
 
-    {% if not request.roles.voter or not request.roles.voter.location.is_uik %}
+    {% if not request.roles.voter %}
         <div class="blue-title">Выберите свой район</div>
         <div class="check-list-step">
 

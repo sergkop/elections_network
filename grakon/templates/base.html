@@ -131,15 +131,13 @@
 
     {% block breadcrumbs %}{% endblock %}
 
-    {% if request.user.is_authenticated %}
-        {% if not request.roles.voter or not request.roles.voter.location.is_uik %}
-            <div class="center" style="margin:1em;">
-                <span style="color: #ee6105; font-weight: bold; padding: 0.3em;">
-                    Вы еще не записались избирателем на свой участок. Вы можете сделать это
-                    <a href="{% url main %}" style="color: #ee6105;">здесь</a>.
-                </span>
-            </div>
-        {% endif %}
+    {% if request.user.is_authenticated and not request.roles.voter %}
+        <div class="center" style="margin:1em;">
+            <span style="color: #ee6105; font-weight: bold; padding: 0.3em;">
+                Вы еще не записались избирателем на свой участок. Вы можете сделать это
+                <a href="{% url main %}" style="color: #ee6105;">здесь</a>.
+            </span>
+        </div>
     {% endif %}
 
     <div id="main">

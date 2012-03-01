@@ -169,6 +169,10 @@ div#publicElectionsMap {
 	z-index: 2;
 }
 
+div.olMap {
+    background-color: #ffffff;
+}
+
 div.olControlNavToolbar {
 	top: 10px;
 	left: 60px;

@@ -2,7 +2,15 @@
 <div class="step"><i>1</i> 
   <script type="text/javascript">
     $(function() {
-        $('.banners a').lightBox();
+        $('.banners a').lightBox({
+		imageLoading: '/static/libs/lightbox/lightbox-ico-loading.gif',
+		imageBtnClose: '/static/libs/lightbox/lightbox-btn-close.gif',
+		imageBtnPrev: '/static/libs/lightbox/lightbox-btn-prev.gif',
+		imageBtnNext: '/static/libs/lightbox/lightbox-btn-next.gif',
+		txtImage: 'Памятка',
+		txtOf: 'из'
+			
+		});
     });
     </script>
   <h4 style="margin-top: 0.5em;">Памятки для честных граждан</h4>

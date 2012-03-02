@@ -181,6 +181,16 @@ div.olControlNavToolbar {
 div.olControlNavToolbar div {
 	float: left;
 	margin: 0 3px;
+    width: 24px;
+    height: 22px;
+}
+
+.olControlNavToolbar .fullscreenBtnItemInactive {
+    background: transparent url(../js/theme/default/img/move_feature_off.png) no-repeat center center;
+}
+
+.olControlNavToolbar .fullscreenBtnItemActive {
+    background: transparent url(../js/theme/default/img/move_feature_on.png) no-repeat center center;
 }
 
 div.olControlLayerSwitcher div.layersDiv {
@@ -213,6 +223,76 @@ div.olControlLayerSwitcher div span {
 
 .address {
     font-weight: bold;
+}
+
+.olControlPanel {
+    position: relative;
+    left: 256px;
+}
+
+.olControlPanel div { 
+    display: block;
+    width:  24px;
+    height: 22px;
+    margin: 15px 5px;
+    background-color: transparent;
+    cursor: pointer;
+    float: left;
+}
+
+.olControlPanel .votersItemInactive {
+    background: transparent url("../images/map/voters_inactive.png") no-repeat left center;
+}
+
+.olControlPanel .votersItemActive {
+    background: transparent url("../images/map/voters_active.png") no-repeat left center;
+}
+
+.olControlPanel .observersItemInactive {
+    background: transparent url("../images/map/observer_inactive.png") no-repeat left center;
+}
+
+.olControlPanel .observersItemActive {
+    background: transparent url("../images/map/observer_active.png") no-repeat left center;
+}
+
+.olControlPanel .membersItemInactive {
+    background: transparent url("../images/map/member_inactive.png") no-repeat left center;
+}
+
+.olControlPanel .membersItemActive {
+    background: transparent url("../images/map/member_active.png") no-repeat left center;
+}
+
+.olControlPanel .prosecutorsItemInactive {
+    background: transparent url("../images/map/prosecutor_inactive.png") no-repeat left center;
+}
+
+.olControlPanel .prosecutorsItemActive {
+    background: transparent url("../images/map/prosecutor_active.png") no-repeat left center;
+}
+
+.olControlPanel .authoritiesItemInactive {
+    background: transparent url("../images/map/authority_inactive.png") no-repeat left center;
+}
+
+.olControlPanel .authoritiesItemActive {
+    background: transparent url("../images/map/authority_active.png") no-repeat left center;
+}
+
+.olControlPanel .journalistsItemInactive {
+    background: transparent url("../images/map/journalist_inactive.png") no-repeat left center;
+}
+
+.olControlPanel .journalistsItemActive {
+    background: transparent url("../images/map/journalist_active.png") no-repeat left center;
+}
+
+.markerLabel {
+    font-size: 7pt;
+    height: 11px;
+    width: 36px;
+    text-align: center;
 }
 
 #div_id_captcha img{

@@ -17,6 +17,53 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
     this.yCoord = yCoord;
 };
 
+
+
+/**
+ * Класс всплывающих окон. Используется при плике на метке карты.
+ */
+var AnchoredPopup = OpenLayers.Class(OpenLayers.Popup.Anchored, {
+    'minSize': new OpenLayers.Size(256, 64)
+});
+
+
+
+/**
+ * Класс с функциями для обработки событий с кнопками статистики
+ */
+var StatisticsButtonHandlers = new Object({
+    activate: function(event) {
+        // деактивируем другие кнопки панели
+        var statisticBtnsPanel = Grakon.map.getControlsBy("displayClass", "olControlPanel").pop();
+        for (var pos in statisticBtnsPanel.controls)
+            if (statisticBtnsPanel.controls[pos].displayClass != event.object.displayClass)
+                statisticBtnsPanel.controls[pos].deactivate();
+            
+        Grakon.selectedStatistics = event.object.displayClass;
+
+        Grakon.electionCommissionLayers.regions.clearMarkers();
+        Grakon.electionCommissionLayers.districts.clearMarkers();
+        Grakon.electionCommissionLayers.areas.clearMarkers();
+        Grakon.electionCommissions = new Array();
+        $(".markerLabel").remove();
+        
+        Grakon.loadLocationsData();
+    },
+    deactivate: function(event) {
+        Grakon.electionCommissionLayers.regions.clearMarkers();
+        Grakon.electionCommissionLayers.districts.clearMarkers();
+        Grakon.electionCommissionLayers.areas.clearMarkers();
+        Grakon.electionCommissions = new Array();
+        $(".markerLabel").remove();
+        
+        Grakon.selectedStatistics = null;
+        
+        Grakon.loadLocationsData();
+    }
+});
+
+
+
 var Grakon = {
     /**
      * Три стиля (начальный, мышь на элементе и элемент выбран) для субъектов РФ
@@ -99,11 +146,18 @@ var Grakon = {
         regions: "/static/oblasts_simplified.json"
     },
     
-    ELECTION_COMMISSION_IMAGES: new Object({
-        2: "/static/images/iks.png",
-        3: "/static/images/tik.png",
-        4: "/static/images/uik.png"
-    }),
+    ELECTION_COMMISSION_IMAGES: {
+        "default": {
+            2: "/static/images/iks.png",
+            3: "/static/images/tik.png",
+            4: "/static/images/uik.png"
+        },
+        "label": {
+            2: "/static/images/iksNums.png",
+            3: "/static/images/tikNums.png",
+            4: "/static/images/uikNums.png"
+        }
+    },
     
     /**
      * Уровень масштабирования карты, с которого показываются ТИКи.
@@ -111,9 +165,9 @@ var Grakon = {
     MAP_LEVELS_ZOOM: new Object({
         'country': 0,
         'regions': 3,
-        'districts': 8,
-        'areas': 12,
-        'max': 15
+        'districts': 9,
+        'areas': 13,
+        'max': 16
     }),
     
     /**
@@ -134,15 +188,13 @@ var Grakon = {
     }),
     
     electionCommissions: new Object(),
+    
+    selectedStatistics: null,
 
     /**
      * Пространство имён для вспомогательных функций
      */
-    Utils: {
-        AutoSizeAnchored: OpenLayers.Class(OpenLayers.Popup.Anchored, {
-            'minSize': new OpenLayers.Size(256, 64)
-        }),
-        
+    Utils: {        
         /**
          * callback-метод, который считывает данные из GeoJSON,
          * возвращаемого в виде результата асинхронного запроса и
@@ -195,9 +247,9 @@ var Grakon = {
                         }
                 }
 
-		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.regions );
-		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
-		Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
+                Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.regions );
+                Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
+                Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
 
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
@@ -235,6 +287,8 @@ var Grakon = {
                 content += (electionCommission.data.observers != null) ? "Наблюдателей: " + electionCommission.data.observers + "<br/>" : "";
                 content += (electionCommission.data.members != null) ? "Членов комиссии: " + electionCommission.data.members + "<br/>" : "";
                 content += (electionCommission.data.journalists != null) ? "Представителей СМИ: " + electionCommission.data.journalists + "<br/>" : "";
+                content += (electionCommission.data.prosecutors != null) ? "Прокуроров: " + electionCommission.data.prosecutors + "<br/>" : "";
+                content += (electionCommission.data.authorities != null) ? "Чиновников: " + electionCommission.data.authorities + "<br/>" : "";
                 content += "</p>";
             }
             content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
@@ -261,18 +315,29 @@ var Grakon = {
                 default: return;
             }
             
-            var feature = new OpenLayers.Feature(layer, location, data); 
+            var iconMode = "default";
+            var iconSize = new OpenLayers.Size(18, 32);
+            var iconOffset = new OpenLayers.Pixel(-9, -32);
+            var iconLabel = "";
+            if (Grakon.selectedStatistics != null) {
+                iconMode = "label";
+                iconSize = new OpenLayers.Size(36, 45);
+                iconOffset = new OpenLayers.Pixel(-18, -45);
+                iconLabel = data[Grakon.selectedStatistics];
+            }
+            var feature = new OpenLayers.Feature(layer, location); 
             feature.closeBox = true;
-            feature.popupClass = Grakon.AutoSizeAnchored;
+            feature.popupClass = AnchoredPopup;
             feature.data.popupContentHTML = content;
             feature.data.overflow = "auto";
             feature.data.icon = new OpenLayers.Icon(
-                Grakon.ELECTION_COMMISSION_IMAGES[level],
-                new OpenLayers.Size(18, 32),
-                new OpenLayers.Pixel(-9, -32));
+                Grakon.ELECTION_COMMISSION_IMAGES[iconMode][level],
+                iconSize,
+                iconOffset);
                     
-            var marker = feature.createMarker();
-	    marker['ecID'] = ecID;
+            var marker = new OpenLayers.Marker.LabelMarker(location, feature.data.icon, iconLabel);
+            marker['ecID'] = ecID;
+            marker['data'] = data;
  
             marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
             marker.events.register("mouseover", feature, Grakon.Utils.markerHover);
@@ -311,8 +376,7 @@ var Grakon = {
                         type = "ТИК: ";
                     
                     var content = "<center><b>"+type+matches[1]+"</b></center>";
-                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 28), content, null, 
-false)
+                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 28), content, null, false);
                     Grakon.map.addPopup(popup);
                 }
                 OpenLayers.Event.stop(evt);
@@ -482,25 +546,30 @@ false)
         Grakon.map.events.register("zoomend", Grakon.map, Grakon.mapZoomEndHandler);
         
         // слушаем событие окончания перемещения по карте
-        Grakon.map.events.register("moveend", Grakon.map, function() {
-            var bounds = Grakon.map.getExtent().transform(Grakon.map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326")).toArray();
-            var left = bounds[0];
-            var bottom = bounds[1];
-            var right = bounds[2];
-            var top = bounds[3];
-            OpenLayers.loadURL("/location/locations_data",
-                {'x1': left,
-                'x2': right,
-                'y1': bottom,
-                'y2': top,
-                'level': Grakon.getLevel()},
-                null,
-                Grakon.Utils.loadCommissionsForBBOX,
-                function() {
-                    OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
-                }
-            );
-        });
+        Grakon.map.events.register("moveend", Grakon.map, Grakon.loadLocationsData);
+    },
+    
+    /**
+     * Формирует запрос и скачивает данные об избирательных участках для видимой области на карте
+     */
+    loadLocationsData: function() {
+        var bounds = Grakon.map.getExtent().transform(Grakon.map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326")).toArray();
+        var left = bounds[0];
+        var bottom = bounds[1];
+        var right = bounds[2];
+        var top = bounds[3];
+        OpenLayers.loadURL("/location/locations_data",
+            {'x1': left,
+            'x2': right,
+            'y1': bottom,
+            'y2': top,
+            'level': Grakon.getLevel()},
+            null,
+            Grakon.Utils.loadCommissionsForBBOX,
+            function() {
+                OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
+            }
+        );
     },
     
     /**
@@ -538,6 +607,8 @@ false)
         var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator: true});
         var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator: true});
         var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
+        
+        Y_map.projection = Y_sat.projection = Y_hyb.projection = OSM_map.projection = new OpenLayers.Projection("EPSG:3857");
         
         Grakon.map.addLayer(Y_map);
         Grakon.map.addLayer(Y_sat);
@@ -658,6 +729,10 @@ false)
         Grakon.map.addControl(new OpenLayers.Control.Navigation());
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
         
+        // Добавить инструмент "ссылка на данный вид карты"
+        Grakon.map.addControl(new OpenLayers.Control.Permalink());
+        $(Grakon.map.div).find(".olControlPermalink > a").text("Ссылка на данный вид карты");
+        
         // Создать и изменить стиль у переключателя слоёв
         Grakon.layerSwitcher = new OpenLayers.Control.LayerSwitcher();
         Grakon.map.addControl( Grakon.layerSwitcher );
@@ -670,12 +745,68 @@ false)
 
         // Создать панель из кнопок
         var panel = new OpenLayers.Control.NavToolbar();
-        var button = new OpenLayers.Control.Button({
+        var fullscreenBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Развернуть карту на весь экран",
             displayClass: "fullscreenBtn",
-            trigger: Grakon.resizeMap
+            eventListeners: {
+                activate: Grakon.resizeMap,
+                deactivate: Grakon.resizeMap
+            }
         });
-        panel.addControls([button]);
+        panel.addControls([fullscreenBtn]);
         Grakon.map.addControl(panel);
+        
+        Grakon.addStatisticsPanel();
+    },
+    
+    addStatisticsPanel: function() {
+        var votersBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество избирателей на участках",
+            displayClass: "voters",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var observersBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество наблюдателей на участках",
+            displayClass: "observers",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var journalistsBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество представителей СМИ на участках",
+            displayClass: "journalists",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var membersBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество членов избирательных комиссий",
+            displayClass: "members",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var authoritiesBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество представителей власти на участках",
+            displayClass: "authorities",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var prosecutorsBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество представителей прокуратуры на участках",
+            displayClass: "prosecutors",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var statisticsPanel = new OpenLayers.Control.Panel();
+        
+        statisticsPanel.addControls([votersBtn, observersBtn, journalistsBtn, membersBtn/*, authoritiesBtn, prosecutorsBtn*/]);
+        Grakon.map.addControl(statisticsPanel);
     },
     
     /**
@@ -745,3 +876,91 @@ false)
             }
     }
 };
+
+
+
+/** 
+ * @requires OpenLayers/Marker.js 
+ * 
+ * Class: OpenLayers.Marker.LabelMarker 
+ * 
+ * Inherits from: 
+ *  - <OpenLayers.Marker>
+ */ 
+OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, { 
+
+    /** 
+     * Property: label 
+     * {String} Marker label. 
+     */ 
+    label: "", 
+
+    markerDiv: null,
+                                                 
+    labelOffset: null,
+
+    initialize: function(lonlat, icon, label) { 
+        OpenLayers.Marker.prototype.initialize.apply(this, [lonlat, icon]); 
+
+        this.label = label;
+        this.labelOffset = icon.offset;
+        this.markerDiv = OpenLayers.Util.createDiv();
+        this.markerDiv.appendChild(this.icon.imageDiv); 
+        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset); 
+        var txtDiv = OpenLayers.Util.createDiv(); 
+        txtDiv.className = 'markerLabel'; 
+        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
+        txtDiv.innerHTML = this.label; 
+        this.markerDiv.appendChild(txtDiv); 
+    }, 
+                                                 
+    setLabel: function(label) {
+        this.label = label;
+        this.markerDiv.innerHTML = "";
+        this.markerDiv.appendChild(this.icon.imageDiv); 
+        var txtDiv = OpenLayers.Util.createDiv(); 
+        txtDiv.className = 'markerLabel'; 
+        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
+        txtDiv.innerHTML = this.label; 
+        this.markerDiv.appendChild(txtDiv); 
+    },
+
+    /** 
+     * Method: destroy 
+     * Nullify references and remove event listeners to prevent circular 
+     * references and memory leaks 
+     */ 
+    destroy: function() { 
+        OpenLayers.Marker.prototype.destroy.apply(this, arguments); 
+        this.markerDiv.innerHTML = ""; 
+        this.markerDiv = null; 
+    }, 
+
+    draw: function(px) { 
+        OpenLayers.Util.modifyAlphaImageDiv(this.icon.imageDiv, 
+                                            null, 
+                                            null, 
+                                            this.icon.size, 
+                                            this.icon.url); 
+
+        OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
+        return this.markerDiv; 
+    }, 
+
+    redraw: function(px) { 
+        if ((px != null) && (this.markerDiv != null)) { 
+            OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
+        } 
+    }, 
+
+    moveTo: function (px) { 
+        this.redraw(px); 
+        this.lonlat = this.map.getLonLatFromLayerPx(px); 
+    }, 
+
+    isDrawn: function() { 
+        return false; 
+    }, 
+
+    CLASS_NAME: "OpenLayers.Marker.LabelMarker" 
+});

@@ -84,4 +84,3 @@ def ajaxize(form):
             errorstr.append(fielderror)
         errorstr = u'; '.join(errorstr)
         return HttpResponse(errorstr)
-#        return HttpResponseBadRequest(str)

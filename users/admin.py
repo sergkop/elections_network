@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import CommissionMember, Contact, Role, WebObserver
+from users.models import *
 
 class RoleAdmin(admin.ModelAdmin):
     list_display = ('user', 'location', 'type', 'verified')
@@ -26,7 +26,15 @@ class WebObserverAdmin(admin.ModelAdmin):
     search_fields = ('start_time', 'location__name')
     raw_id_fields = ('location', 'user')
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('from_user', 'to_user', 'title', 'show_email')
+    ordering = ('time',)
+    search_fields = ('from_user__user__username', 'from_user__user__email',
+            'to_user__user__email', 'to_user__user__email')
+    raw_id_fields = ('from_user', 'to_user')
+
 admin.site.register(Role, RoleAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(CommissionMember, CommissionMemberAdmin)
 admin.site.register(WebObserver, WebObserverAdmin)
+admin.site.register(Message, MessageAdmin)

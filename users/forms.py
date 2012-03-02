@@ -13,7 +13,7 @@ from uni_form.helper import FormHelper
 from uni_form.layout import Submit
 
 from grakon.utils import form_helper
-from users.models import CommissionMember, ROLE_CHOICES, ROLE_TYPES, WebObserver
+from users.models import CommissionMember, Message, ROLE_CHOICES, ROLE_TYPES, WebObserver
 
 class MessageForm(forms.Form):
     to_user = forms.ModelChoiceField(queryset=User.objects.all(), required=True, widget=HiddenInput())
@@ -35,7 +35,6 @@ class MessageForm(forms.Form):
         title = self.cleaned_data['title']
         title = u' '.join(title.split('\n'))
         body = self.cleaned_data['body']
-        from_mail = settings.DEFAULT_FROM_EMAIL
         show_email = self.cleaned_data['show_email']
         to_user = self.cleaned_data['to_user']
         ctx = { 
@@ -48,10 +47,13 @@ class MessageForm(forms.Form):
             ctx['from_user'] = self.from_user
         message = render_to_string('mail/notification.txt', ctx)
         mail_title = u'Пользователь %s написал вам сообщение' % self.from_user.username 
+
         try:
-            send_mail(mail_title, message, from_mail, [to_user.email], fail_silently=False)
+            send_mail(mail_title, message, settings.DEFAULT_FROM_EMAIL, [to_user.email], fail_silently=False)
         except SMTPException:
             return u'Невозможно отправить сообщение'
+        else:
+            Message.objects.create(from_user=self.request.profile, to_user=to_user.get_profile(), title=title, body=body, show_email=show_email)
 
 class FeedbackForm(forms.Form):
     name = forms.CharField(label=u'Ваше имя')

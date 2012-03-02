@@ -9,6 +9,7 @@
         $("#presentation_dialog").dialog("open");
     }
 
-    $("#presentation_dialog").dialog({width:625, height:570, modal: true,
+    $(function (){ $("#presentation_dialog").dialog({autoOpen: false, width:625, height:570, modal: true,
             title: "Короткая презентация"}).dialog("close");
+	});
 </script>

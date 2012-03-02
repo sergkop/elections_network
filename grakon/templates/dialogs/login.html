@@ -40,13 +40,14 @@
            </td>
         </tr>
     </table>
+</div>    
 
 <script type="text/javascript">
     // Login dialog
-    $("#login_dialog").dialog({width: 670, height: 450, modal: true, title: "Войдите в систему", buttons: {
+	$(function (){$("#login_dialog").dialog({autoOpen: false, width: 670, height: 450, modal: true, title: "Войдите в систему", buttons: {
         //"Войти": function(){window.location.href=LOGIN_URL+"?next="+window.location.href;},
         "Отмена": function(){$("#login_dialog").dialog("close");}
-    }}).dialog("close");
+    }}).dialog("close");});
 
     $('#login_form [name="csrfmiddlewaretoken"]').val(get_cookie("csrftoken"));
 
@@ -60,3 +61,4 @@
         $("#login_dialog").dialog("open");
     }
 </script>
+</div>

@@ -70,10 +70,9 @@
                 <ul>
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
                     <li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_table %}">Поиск</a></li> 
-                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url behaviour %}">Акции</a></li>	                    
+                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url how_to_use %}">Акции</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
-                   
                     <li><a {% if template == "static_pages/faq.html" %}class="on"{% endif %} href="{% url faq %}">FAQ</a></li>
                     <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
                 </ul>
@@ -85,7 +84,7 @@
 
                 <div class="login_logout">
                     {% if request.user.is_authenticated %}
-                    	<div class="mt10">
+                        <div class="mt10">
                             {% if request.roles.voter %}
                                 <a href="{{ request.roles.voter.location.get_absolute_url }}" style="margin-right: 5px;">Мой участок</a>
                             {% endif %}
@@ -123,7 +122,7 @@
             &nbsp; &nbsp; &nbsp; &nbsp;
         {% endif %}
         <div class="main-buttons-blue">
-            <a href="{% url behaviour %}">Акции</a>
+            <a href="{% url how_to_use %}">Акции</a>
         </div>
     </div>
 

@@ -59,6 +59,10 @@ class MainNewsView(BaseMainView):
     tab = 'main_news'
 main_news = MainNewsView.as_view()
 
+class MainInfoView(BaseMainView):
+    tab = 'main_info'
+main_info = MainInfoView.as_view()
+
 def static_page(request, name, template):
     context = {
         'tab': name,

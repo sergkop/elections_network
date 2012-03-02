@@ -115,12 +115,10 @@
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
-        {% if disqus_identifier == "main" or current_location %}
-            <div class="main-buttons-blue">
-                <a href="#" id="become_supporter1" title="Прийди с друзьями к участку и проследи, что наблюдатель получил протокол">Поддержать наблюдателей</a>
-            </div>
-            &nbsp; &nbsp; &nbsp; &nbsp;
-        {% endif %}
+        <div class="main-buttons-blue">
+            <a href="#" id="clip_btn">Видео-ролик</a>
+        </div>
+        &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-blue">
             <a href="{% url how_to_use %}">Акции</a>
         </div>
@@ -204,6 +202,12 @@
     po.src = 'https://apis.google.com/js/plusone.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
+</script>
+
+{% include "dialogs/clip.html" %}
+
+<script type="text/javascript">
+    $("#clip_btn").click(clip_dialog_init);
 </script>
 
 {% include "services/yandex-metrika.html" %}

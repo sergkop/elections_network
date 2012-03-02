@@ -37,15 +37,25 @@ def get_roles_query(location):
 
     return query
 
-# TODO: cache it, at least for the main page
 # TODO: count members differently?
 def get_roles_counters(location):
     counters = {}
     query = get_roles_query(location)
-    for role in ROLE_TYPES:
-        counters[role] = Role.objects.filter(Q(type=role) & query).count()
 
-    counters['web_observer'] = len(WebObserver.objects.filter(query).distinct().values_list('user', flat=True))
+    inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
+
+    def filter_inactive_users(queryset):
+        return queryset.exclude(user__user__email='', user__user__id__in=inactive_ids).filter(user__user__is_active=True)
+
+    roles = list(filter_inactive_users(Role.objects.filter(query)).values_list('type', 'user'))
+
+    for role_type in ROLE_TYPES:
+        counters[role_type] = len(filter(lambda r: r[0]==role_type, roles))
+
+    counters['total'] = len(set(user_id for role_type, user_id in roles))
+
+    counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \
+            .distinct().values_list('user', flat=True))
 
     return counters
 

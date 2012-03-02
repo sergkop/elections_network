@@ -4,6 +4,7 @@ from django.http import HttpResponse
 
 from loginza.models import UserMap
 
+from grakon.models import Profile
 from grakon.utils import cache_function
 from locations.models import FOREIGN_TERRITORIES, Location
 from users.models import Role, ROLE_TYPES, WebObserver
@@ -52,7 +53,7 @@ def get_roles_counters(location):
     for role_type in ROLE_TYPES:
         counters[role_type] = len(filter(lambda r: r[0]==role_type, roles))
 
-    counters['total'] = len(set(user_id for role_type, user_id in roles))
+    counters['total'] = Profile.objects.exclude(user__email='', user__is_active=False, id__in=inactive_ids).count()
 
     counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \
             .distinct().values_list('user', flat=True))

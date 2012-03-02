@@ -323,7 +323,7 @@ var Grakon = {
                 iconMode = "label";
                 iconSize = new OpenLayers.Size(36, 45);
                 iconOffset = new OpenLayers.Pixel(-18, -45);
-                iconLabel = data[Grakon.selectedStatistics];
+                iconLabel = if (data[Grakon.selectedStatistics] != null) data[Grakon.selectedStatistics] : 0;
             }
             var feature = new OpenLayers.Feature(layer, location); 
             feature.closeBox = true;

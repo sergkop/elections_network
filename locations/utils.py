@@ -53,7 +53,7 @@ def get_roles_counters(location):
     for role_type in ROLE_TYPES:
         counters[role_type] = len(filter(lambda r: r[0]==role_type, roles))
 
-    counters['total'] = Profile.objects.exclude(user__email='', user__is_active=False, id__in=inactive_ids).count()
+    counters['total'] = Profile.objects.exclude(user__email='').exclude(id__in=inactive_ids).filter(user__is_active=True).count()
 
     counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \
             .distinct().values_list('user', flat=True))

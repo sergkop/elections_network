@@ -10,6 +10,11 @@
     <!-- This style is used in a number of pages already - avoid it -->
     <style type="text/css">
         .ym-col3 .ym-cbox:last-child {display: none;}
+		.ym-col3 {padding-right: 0;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li a {height: 45px; text-align:center}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 53px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {padding-top: 2px;}
+		.ym-col3 .ui-tabs .ui-tabs-nav li {line-height: 1.2em;}
     </style>
 {% endblock %}
 
@@ -40,9 +45,7 @@
             {% button "circle-check" "Помочь проекту" "join" "join_team" %}
         </div>
     </div>
-{% endblock %}
-
-{% block right_column %}
+    
     <h3 class="column_header column_header_icon"><span class="resources">Ресурсы</span></h3>
     <div class="ym-clearfix">
         <div class="content_block">
@@ -56,5 +59,5 @@
 {% block content_header %}
     <h2 class="location_header">Разработка</h2>
 
-    {% tabs "tabs" tab "" "" "Новости проекта" "news" "static_pages/development/news.html" "Функциональность" "functionality" "static_pages/development/functionality.html" %}
+    {% tabs "tabs" tab "" "" "<span style='line-height: 2em'>Описание</span>" "about" "static_pages/about/about.html" "<span style='line-height: 2em'>Правила</span>" "rules" "static_pages/about/rules.html" "<span style='line-height: 2em'>Новости</span>" "news" "static_pages/development/news.html" "<span style='line-height: 2em'>Функциональность</span>" "functionality" "static_pages/development/functionality.html"  "Сравнение<br />проектов" "comparison" "static_pages/about/comparison.html" "<span style='line-height: 2em'>О нас в СМИ</span>" "publications" "static_pages/about/publications.html" %}
 {% endblock %}

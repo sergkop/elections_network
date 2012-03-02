@@ -75,26 +75,6 @@ var Grakon = {
                     })
     },
     
-    AREA_DISTRICT_STYLES: {
-        'default':  new OpenLayers.Style({
-                      'fillColor': '#000000',
-                      'fillOpacity': 0,
-                      'strokeColor': '#000000',
-                      'strokeOpacity': 0.75,
-                      'strokeWidth': 2,
-                      'strokeDashstyle': 'dot'
-                    }),
-        'temporary':    new OpenLayers.Style({
-                      'fillColor': '#000000',
-                      'fillOpacity': 0,
-                      'strokeColor': '#ee9900',
-                      'strokeOpacity': 1,
-                      'strokeWidth': 2,
-                      'strokeDashstyle': 'dot'
-                    }),
-        'select':   null
-    },
-    
     /**
      * @private
      * Объект OpenLayers.Map — используемая карта.
@@ -107,12 +87,11 @@ var Grakon = {
      * Свойства создаваемой карты.
      */
     MAP_OPTIONS: {
-        projection: new OpenLayers.Projection("EPSG:900913"),
-        units: "m",
-        numZoomLevels: 17,
+        projection: new OpenLayers.Projection("EPSG:3857"),
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        maxExtent: new OpenLayers.Bounds(-180, -85.0511, 180, 85.0511).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")),
+        maxExtent: new OpenLayers.Bounds(-180, -85.051, 180, 85.051).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857")),
         maxResolution: 156543.0339,
+        units: "m",
         controls: new Array()
     },
     
@@ -132,9 +111,9 @@ var Grakon = {
     MAP_LEVELS_ZOOM: new Object({
         'country': 0,
         'regions': 3,
-        'districts': 7,
-        'areas': 11,
-        'max': 16
+        'districts': 8,
+        'areas': 12,
+        'max': 15
     }),
     
     /**
@@ -165,50 +144,6 @@ var Grakon = {
         }),
         
         /**
-         * Обработчик клика по субъекту РФ. Максимално приближает карту к выбранному субъекту РФ.
-         * @param {feature} [OpenLayers.Feature] выбранный объект на карте
-         */
-        regionClickHandler: function(feature) {
-            if (feature != null && feature.geometry != null) {
-                Grakon.map.zoomToExtent( feature.geometry.getBounds() );
-                
-                if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.districts) {
-                    var containedIKS = new OpenLayers.Bounds();
-                    var iksList = Grakon.electionCommissionLayers.regions.markers;
-                    
-                    for (var pos in iksList)
-                        if (feature.geometry.intersects( new OpenLayers.Geometry.Point(iksList[pos].lonlat.lon, iksList[pos].lonlat.lat) ))
-                            containedIKS.extend(iksList[pos].lonlat);
-                        
-                    var center = (containedIKS.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedIKS.getCenterLonLat();
-                        
-                    Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.districts);
-                } else
-                    Grakon.map.zoomIn();
-            }
-        },
-        
-        districtClickHandler: function(feature) {
-            if (Grakon.getLevel() < 4 && feature != null && feature.geometry != null) {
-                Grakon.map.zoomToExtent( feature.geometry.getBounds() );
-                
-                if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.areas) {
-                    var containedTIK = new OpenLayers.Bounds();
-                    var tikList = Grakon.electionCommissionLayers.districts.markers;
-                    
-                    for (var pos in tikList)
-                        if (feature.geometry.intersects( new OpenLayers.Geometry.Point(tikList[pos].lonlat.lon, tikList[pos].lonlat.lat) ))
-                            containedTIK.extend(tikList[pos].lonlat);
-                        
-                    var center = (containedTIK.left == null) ? feature.geometry.getBounds().getCenterLonLat() : containedTIK.getCenterLonLat();
-                        
-                    Grakon.map.setCenter(center, Grakon.MAP_LEVELS_ZOOM.areas);
-                } else
-                    Grakon.map.zoomIn();
-            }
-        },
-        
-        /**
          * callback-метод, который считывает данные из GeoJSON,
          * возвращаемого в виде результата асинхронного запроса и
          * добавляет их на слой субъектов РФ
@@ -218,7 +153,7 @@ var Grakon = {
         addRegionBorders: function(request) {
             if (request.status == 200) {
                 var geoJSON = new OpenLayers.Format.GeoJSON({
-                    'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+                    'internalProjection': new OpenLayers.Projection("EPSG:3857"),
                     'externalProjection': new OpenLayers.Projection("EPSG:4326")
                 });
                 var features = geoJSON.read(request.responseText);
@@ -230,7 +165,7 @@ var Grakon = {
         addDistrictBorders: function(request) {
             if (request.status == 200) {
                 var geoJSON = new OpenLayers.Format.GeoJSON({
-                    'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+                    'internalProjection': new OpenLayers.Projection("EPSG:3857"),
                     'externalProjection': new OpenLayers.Projection("EPSG:4326")
                 });
                 var features = geoJSON.read(request.responseText);
@@ -383,7 +318,7 @@ false)
                 OpenLayers.Event.stop(evt);
             }
         },
-        
+
         /**
          * @param {level} уровень приближения карты
          * @returns масштаб для заданного уровня приближения на карте
@@ -412,6 +347,24 @@ false)
                 popup.setContentHTML( contentHTML.replace("zoomIn", "zoomOut") );
             else
                 popup.setContentHTML( contentHTML.replace("zoomOut", "zoomIn") );
+        },
+        
+        /**
+         * Обаботчик события клика на регионе или районе.
+         * Если объект умещается на карте, то масштабировать карту на нём,
+         * иначе приблизить на один уровень к указанной позиции.
+         * @param {feature} выбранный регион или район на карте.
+         */
+        clickRegionHandler: function(feature) {
+            if (feature != null && feature.geometry != null &&
+                Grakon.map.getZoom() < Grakon.map.getZoomForExtent( feature.geometry.getBounds() ))
+                    Grakon.map.zoomToExtent( feature.geometry.getBounds() );
+            else {
+                var mousePositionCtrl = Grakon.map.getControlsByClass("OpenLayers.Control.MousePosition")[0];
+                var center = Grakon.map.getLonLatFromPixel( mousePositionCtrl.lastXy );
+                var zoom = Grakon.map.getZoom() + 1;
+                Grakon.map.setCenter(center, zoom);
+            }
         }
     },
     
@@ -457,7 +410,7 @@ false)
      */
     setDefaultView: function(place) {
         var zoom = Grakon.MAP_LEVELS_ZOOM.regions+1;
-        var center = new OpenLayers.LonLat(47.57138, 54.8384).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+        var center = new OpenLayers.LonLat(47.57138, 54.8384).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857"));
 
         // Показываем заданное место на карте.
         if (place == null || place == "") { // Если место не задано, то для
@@ -468,7 +421,7 @@ false)
             // для пользователя из-за рубежа карта будет отцентрована по
             // европейской части России.
             if (YMaps.location && YMaps.location.country == "Россия") {
-                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857"));
                 zoom = YMaps.location.zoom;
             }
 
@@ -486,7 +439,7 @@ false)
                         var bottom = this.get(0).getBounds().getBottom();
                         var right = this.get(0).getBounds().getRight();
                         var top = this.get(0).getBounds().getTop();
-                        var bounds = new OpenLayers.Bounds(left, bottom, right, top).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+                        var bounds = new OpenLayers.Bounds(left, bottom, right, top).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857"));
                         Grakon.map.zoomToExtent(bounds);
                     } else
                         Grakon.map.setCenter(center, zoom);
@@ -561,17 +514,8 @@ false)
             Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
         
         // границы районов
-        if (Grakon.borderLayers.districts != null) {
-            if (Grakon.getLevel() >= 3) {
-                Grakon.borderLayers.districts.setVisibility( true );
-                var styles = (Grakon.getLevel() > 3) ? Grakon.AREA_DISTRICT_STYLES : Grakon.DISTRICT_STYLES;
-                if (Grakon.borderLayers.districts.styleMap != styles) {
-                    Grakon.borderLayers.districts.styleMap = new OpenLayers.StyleMap(styles);
-                    Grakon.borderLayers.districts.redraw();
-                }
-            } else
-                Grakon.borderLayers.districts.setVisibility( false );
-        }
+        if (Grakon.borderLayers.districts != null)
+        	Grakon.borderLayers.districts.setVisibility( Grakon.getLevel() == 3 );
             
         // видимость ИКСов
         if (Grakon.electionCommissionLayers.regions != null)
@@ -589,16 +533,16 @@ false)
     /**
      * Создаёт и добавляет слои на карту
      */
-    initMapLayers: function() {
+    initMapLayers: function() {        
+        var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс", {type: YMaps.MapType.MAP, sphericalMercator: true});
+        var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator: true});
+        var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator: true});
         var OSM_map = new OpenLayers.Layer.OSM("Карта-схема от OpenStreetMap");
-        var Y_map = new OpenLayers.Layer.Yandex("Карта-схема от Яндекс",{sphericalMercator: true});
-        var Y_sat = new OpenLayers.Layer.Yandex("Вид со спутника от Яндекс",{type:YMaps.MapType.SATELLITE, sphericalMercator:true});
-        var Y_hyb = new OpenLayers.Layer.Yandex("Гибридный вид от Яндекс",{type:YMaps.MapType.HYBRID, sphericalMercator:true});
         
-        Grakon.map.addLayer(OSM_map);
         Grakon.map.addLayer(Y_map);
         Grakon.map.addLayer(Y_sat);
         Grakon.map.addLayer(Y_hyb);
+        Grakon.map.addLayer(OSM_map);
         
         // назначаем базовую карту
         var baseLayer = OSM_map;
@@ -627,22 +571,17 @@ false)
         var highlightCtrl = new OpenLayers.Control.SelectFeature(regions, {
             hover: true,
             highlightOnly: true,
-            renderIntent: "temporary"
+            renderIntent: "temporary",
+            callbacks: {
+                click: Grakon.Utils.clickRegionHandler
+            }
         });
         Grakon.map.addControl(highlightCtrl);
         highlightCtrl.activate();
 
-        // показать субъект РФ на всю карту при клике на нём
-        var selectCtrl = new OpenLayers.Control.SelectFeature(regions, {
-            clickout: true,
-            select: Grakon.Utils.regionClickHandler
-        });
-        Grakon.map.addControl(selectCtrl);
-        selectCtrl.activate();
-
         // Добавить слой на карту
         Grakon.map.addLayer(regions);
-        regions.setVisibility( Grakon.getLevel() > 1 );
+        regions.setVisibility( Grakon.getLevel() < 3 );
         Grakon.borderLayers.regions = regions;
 
         // Загрузить данные на слой
@@ -683,26 +622,21 @@ false)
             styleMap: new OpenLayers.StyleMap(Grakon.DISTRICT_STYLES)
         });
         // Добавить слой на карту
-        districts.setVisibility( Grakon.getLevel() > 2 );
+        districts.setVisibility( Grakon.getLevel() == 3 );
         Grakon.borderLayers.districts = districts;
         
         // выделять субъект РФ цветом при наведении мыши
         var highlightCtrl = new OpenLayers.Control.SelectFeature(districts, {
             hover: true,
             highlightOnly: true,
-            renderIntent: "temporary"
+            renderIntent: "temporary",
+            callbacks: {
+                click: Grakon.Utils.clickRegionHandler
+            }
         });
         Grakon.map.addControl(highlightCtrl);
         highlightCtrl.activate();
 
-        // показать субъект РФ на всю карту при клике на нём
-        var selectCtrl = new OpenLayers.Control.SelectFeature(districts, {
-            clickout: true,
-            select: Grakon.Utils.districtClickHandler
-        });
-        Grakon.map.addControl(selectCtrl);
-        selectCtrl.activate();
-        
         // Загрузить данные на слой
         OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
             OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
@@ -730,14 +664,15 @@ false)
         Grakon.layerSwitcher.baseLbl.innerHTML = "Карты";
         Grakon.layerSwitcher.dataLbl.style.marginTop = "20px";
         Grakon.layerSwitcher.dataLbl.innerHTML = "Данные";
-        $('div.olControlLayerSwitcher').find('span').css('background-color', '#000000')
+        $('div.olControlLayerSwitcher').find('span').css('background-color', '#3980a3')
         if ($.cookie('MAP_TYPE_INDEX') == null)
             Grakon.layerSwitcher.maximizeControl();
 
         // Создать панель из кнопок
         var panel = new OpenLayers.Control.NavToolbar();
         var button = new OpenLayers.Control.Button({
-            displayClass: "fullscreenBtn", trigger: Grakon.resizeMap
+            displayClass: "fullscreenBtn",
+            trigger: Grakon.resizeMap
         });
         panel.addControls([button]);
         Grakon.map.addControl(panel);

@@ -71,13 +71,13 @@
             <div class="ym-hlist">
                 <ul>
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                    <li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_table %}">Поиск</a></li>
-                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
-                    <li><a {% if template == "static_pages/development/base.html" %}class="on"{% endif %} href="{% url news %}">Новости</a></li>
+                    <li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_table %}">Поиск</a></li> 
+                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url behaviour %}">Акции</a></li>	                    
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
-                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url behaviour %}">Акции</a></li>	
+                   
                     <li><a {% if template == "static_pages/faq.html" %}class="on"{% endif %} href="{% url faq %}">FAQ</a></li>
+                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
                 </ul>
 
                 <!--form class="ym-searchform">
@@ -175,9 +175,9 @@
                     <a href="{% url sitemap %}">Карта сайта</a>
                     <a href="{% url feedback %}">Обратная связь</a>
                 </div>
-                <div style="margin-right: 20px;">
-                    <a href="{% url main %}">Гракон</a> &copy;2012.
-                    &ndash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a> &nbsp; &nbsp;
+                <div>
+                    <a href="{% url main %}">Гракон</a> &copy;2012
+                    &mdash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a> &nbsp; &nbsp;
                     
                     <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
                     <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="texttop"/></a>

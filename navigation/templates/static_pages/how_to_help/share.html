@@ -10,21 +10,24 @@
     <p>Очевидно, что чем больше людей включится в&nbsp;работу интернет-площадки&nbsp;&mdash; тем яснее будет наша картина результатов (и&nbsp;нарушений)!</p>
 
     {% include "elements/share_horizontal.html" %}
-
-    <h3 style="margin: 1em;">Баннеры</h3>
+	<br /><br />
+    <div class="blue-title">Баннеры</div>
     <p>Вы также можете разместить у себя один из наших баннеров:</p>
 
     {% include "elements/banners.html" %}
 
-    <div>
-        <a class="banner" href="{{ URL_PREFIX }}"><img src="{{ STATIC_URL }}images/banners/warrier_240_200.gif" /></a>
-        <a class="banner" href="{{ URL_PREFIX }}"><img src="{{ STATIC_URL }}images/banners/defend_240_200.gif" /></a>
-    </div>
-
-    <br/>
-    <div>
+    
+    <div class="banners"> 
         <a class="banner" href="{{ URL_PREFIX }}"><img src="{{ STATIC_URL }}images/banners/warrier_240_400.gif" /></a>
-        <a class="banner" href="{{ URL_PREFIX }}"><img src="{{ STATIC_URL }}images/banners/defend_240_400.gif" /></a>
+        <br /><br />
+        <textarea cols="30" rows="3"><a href="http://grakon.org"><img src="http://grakon.org/static/images/banners/warrier_240_400.gif"></a></textarea>
     </div>
+    <div class="banners">     
+        <a class="banner" href="{{ URL_PREFIX }}"><img src="{{ STATIC_URL }}images/banners/defend_240_400.gif" /></a>
+        <br /><br />
+        <textarea cols="30" rows="3"><a href="http://grakon.org"> <img src="http://grakon.org/static/images/banners/defend_240_400.gif"></a></textarea>
+    </div>
+    
+    <br clear="all" />
 
 </div>

@@ -7,41 +7,37 @@
                 <form id="login_form" method="post" action="{% url login %}?next={{ request.get_full_path }}">
                     <input type="hidden" value="" name="csrfmiddlewaretoken"/>
                     <table>
-                    <tr>
-                        <td><label for="id_username">Логин/email:</label></td>
-                        <td><input id="id_username" type="text" name="username" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_password">Пароль:</label></td>
-                        <td><input id="id_password" type="password" name="password" /></td>
-                    </tr>
-                    <tr>
-                    	<td>&nbsp;</td>
-                        <td>
-                        	<div>
-                            	<input id="login_form_submit" type="submit" value="Войти" />
-                            </div>
-                        	<div style="margin-top:7px;">
-                        		<a id="login_dialog_register" href="{% url register %}">Регистрация</a>
-                            </div>
-                            <p><a href="{% url password_reset %}">Забыли пароль?</a></p></td>
-                    </tr>
+                        <tr>
+                            <td><label for="id_username">Логин/email:</label></td>
+                            <td><input id="id_username" type="text" name="username" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="id_password">Пароль:</label></td>
+                            <td><input id="id_password" type="password" name="password" /></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div>
+                                    <input id="login_form_submit" type="submit" value="Войти" />
+                                </div>
+                                <div style="margin-top:7px;">
+                                    <a id="login_dialog_register" href="{% url register %}">Регистрация</a>
+                                </div>
+                                <p><a href="{% url password_reset %}">Забыли пароль?</a></p>
+                            </td>
+                        </tr>
                     </table>
-                    
-
-                    
-                    
                 </form>
             </td>
             <td style="border-left: 1px solid #ddd; padding-left: 10px;">
                 {% include "elements/loginza-lazy.html" %}
-                
             </td>
         </tr>
         <tr>
-        	<td colspan="2">
-            	<p style="margin-top:30px">Если Вы зарегистрированы на нашем сайте, но сейчас войти через соц. сети не можете,<br /> пройдите по <a href="{% url password_reset %}">этой ссылке</a> &mdash; мы пришлем вам новый пароль</p>
-           </td>        
+            <td colspan="2">
+                <p style="margin-top:30px">Если Вы зарегистрированы на нашем сайте, но сейчас войти через соц. сети не можете,<br /> пройдите по <a href="{% url password_reset %}">этой ссылке</a> &mdash; мы пришлем вам новый пароль</p>
+           </td>
         </tr>
     </table>
 

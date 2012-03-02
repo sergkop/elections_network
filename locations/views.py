@@ -17,6 +17,7 @@ from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
 
 # TODO: don't query lists of roles if it's not needed
 # TODO: mark links previously reported by user
+# TODO: web_observers and supporters tabs are not activated for tiks and lead to crush
 class LocationView(TemplateView):
     template_name = 'locations/base.html'
 

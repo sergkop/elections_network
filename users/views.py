@@ -154,6 +154,14 @@ class SupporterSignupView(RoleSignupView):
     role = 'supporter'
     levels = ['uik']
 
+def remove_role(request):
+    if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
+        role_type = request.POST.get('type', '')
+        Role.objects.filter(type=role_type, user=request.profile).delete()
+        return HttpResponse('ok')
+
+    return HttpResponse(u'Ошибка')
+
 def add_to_contacts(request):
     if request.method=='POST' and request.is_ajax() and request.user.is_authenticated():
         try:

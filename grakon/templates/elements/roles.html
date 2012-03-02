@@ -1,5 +1,5 @@
 {% for role in roles %}
-    <li>
+    <li role_type="{{ role.type }}" class="role_item">
         {% with location=role.location %}
             {% include "elements/location_path.html" %}
         {% endwith %} - {{ role.get_type_display }}

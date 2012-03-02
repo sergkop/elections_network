@@ -14,6 +14,12 @@ $(document).ready(function(){
 
         window.location.href = "/search/map?place="+place;
     });
+
+    if (IS_USER_PROFILE){
+        $(".role_item").each(function(index){
+            role_remove_btn($(this));
+        });
+    }
 });
 
 // Default tipsy settings
@@ -322,3 +328,26 @@ function get_cookie(name){
     }
     return cookieValue;
 };
+
+function role_remove_btn(li){
+    var remove_btn = $("<span/>")
+            .attr("title", "Удалить роль")
+            .addClass("side_list_btn ui-icon ui-icon-close")
+            .tipsy({gravity: 'n'})
+            .click(function(){
+                var li = $(this).parent();
+                li.css("background-color", "#D9BDFF");
+
+                var confirmation = confirm("Вы действительно хотите удалить эту роль");
+                li.css("background-color", "#FFFFFF");
+
+                if (confirmation)
+                    $.post("/remove_role", {"type": li.attr("role_type"), "csrfmiddlewaretoken": get_cookie("csrftoken")}, function(data){
+                        if (data != "ok")
+                            alert(data);
+                        else
+                            li.remove()
+                    });
+            })
+            .prependTo($(li));
+}

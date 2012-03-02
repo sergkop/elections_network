@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+    Часто задаваемые вопросы - Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
+{% block head %}
+    <style type="text/css">
+    /* for static pages */
+        .ym-col1 {width: 0px;}
+        .ym-col2 {width: 0px;}
+        .ym-col3 {margin-left: 0; width: 100%; padding: 0}
+    </style>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Помощь</h2>
+
+    {% tabs "tabs" tab "" "" "FAQ" "faq" "static_pages/faq/faq.html" "Веб-наблюдатели" "web_observers_help" "static_pages/faq/web_observers.html" %}
+{% endblock %}

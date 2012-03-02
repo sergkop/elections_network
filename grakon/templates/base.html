@@ -115,12 +115,10 @@
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
-        {% if disqus_identifier == "main" or current_location %}
-            <div class="main-buttons-blue">
-                <a href="#" id="clip_btn">Видео-ролик</a>
-            </div>
-            &nbsp; &nbsp; &nbsp; &nbsp;
-        {% endif %}
+        <div class="main-buttons-blue">
+            <a href="#" id="clip_btn">Видео-ролик</a>
+        </div>
+        &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-blue">
             <a href="{% url how_to_use %}">Акции</a>
         </div>

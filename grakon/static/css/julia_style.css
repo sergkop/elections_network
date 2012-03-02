@@ -178,7 +178,7 @@ h3 {margin: 0;}
 
 #choose_regions select {margin-bottom: 15px;}
 
-.partner_block {border: none; box-shadow: none; background: none; margin: 10px; float: left; width: 25%; height: 80px; overflow: hidden;}
+.partner_block {border: none; box-shadow: none; background: none; margin: 10px; float: left; width: 25%; height: 85px; overflow: hidden;}
 	.partner_block p {margin-bottom: 0; margin-top: 1em; font-size: 0.9em;}
 .ym-clearfix .partner_block:last-child {border-bottom: none;}
 .side_block_image {border: none;}

@@ -152,7 +152,7 @@ class Command(BaseCommand):
             else:
                 name = ''
 
-            message = MESSAGE % name
+            message = MESSAGE #% name
 
             sleep(0.15)
             i += 1

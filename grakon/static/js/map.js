@@ -227,11 +227,11 @@ var Grakon = {
         },
         
         /**
-         * Загружаем УИКи для заданного квадрата и показываем их на слое "УИКи"
+         * Показываем избирательные округа на карте
          * @private
          * @param {request} Объект XMLHttpRequest с результатами в виде массива JS из объектов ElectionCommission.
          */
-        loadCommissionsForBBOX: function(request) {
+        visualizeElectionCommissions: function(request) {
             if (request.status == 200) {
                 if (request.responseText.indexOf('electionCommissions') == -1)
                     return;
@@ -250,6 +250,23 @@ var Grakon = {
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.regions );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
+                
+                var visible = new Array();
+                var tooClose;
+                for (var i in Grakon.electionCommissionLayers.districts.markers) {
+                    
+                    var marker = Grakon.electionCommissionLayers.districts.markers[i];
+                    var markerPixel = Grakon.map.getPixelFromLonLat( marker.lonlat );
+                    
+                    tooClose = false;
+                    for (var j=0; j<visible.length && !tooClose; j++)
+                        if (Grakon.Utils.squareDistance(markerPixel, visible[j]) <= 32*32)
+                            tooClose = true;
+                        
+                    marker.display(!tooClose);
+                    if (!tooClose)
+                        visible.push(markerPixel);
+                }
 
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
@@ -400,6 +417,21 @@ var Grakon = {
         },
         
         /**
+         * @param {level} уровень/тип комиссии
+         * @returns масштаб для заданного уровня приближения на карте
+         */
+        getLayerForLevel: function(level) {
+            var layer;
+            switch (level) {
+              case 2: layer = Grakon.electionCommissionLayers.regions; break;
+              case 3: layer = Grakon.electionCommissionLayers.districts; break;
+              case 4: layer = Grakon.electionCommissionLayers.areas; break;
+              default: layer = null;
+            }
+            return layer;
+        },
+        
+        /**
          * Обработчик события открытия попапа при клике на метку.
          * Меняет картинку лупы в зависимости от масштаба.
          * @param {popup} объект типа OpenLayers.Popup
@@ -430,6 +462,30 @@ var Grakon = {
                 var zoom = Grakon.map.getZoom() + 1;
                 Grakon.map.setCenter(center, zoom);
             }
+        },
+        
+        /**
+         * Подсчитывает квадрат расстояния между двумя пикселями
+         * @param {pixel1} первый пиксель OpenLayers.Pixel
+         * @param {pixel2 второй пиксель OpenLayers.Pixel
+         * @returns возвращает квадрат расстояния как float
+         */
+        squareDistance: function(pixel1, pixel2) {
+            return (pixel1.x - pixel2.x) * (pixel1.x - pixel2.x) + (pixel1.y - pixel2.y) * (pixel1.y - pixel2.y);
+        },
+        
+        /**
+         * Calculates the pixels per unit for a given unit.
+         * @param lonlat a point
+         * @param uom the unit
+         * @returns {Number} pixels per unit
+         */
+        calculatePixelsPerUnit: function(lonlat, uom) {
+            var geometryCenterPixel = Grakon.map.getPixelFromLonLat(lonlat);
+            var pixelSizeInKm = Grakon.map.getGeodesicPixelSize(geometryCenterPixel);
+            
+            var metersPerPixel = Math.max(pixelSizeInKm.w, pixelSizeInKm.h) * 1000;
+            return OpenLayers.INCHES_PER_UNIT[uom] * OpenLayers.METERS_PER_INCH / metersPerPixel;
         }
     },
     
@@ -566,7 +622,7 @@ var Grakon = {
             'y2': top,
             'level': Grakon.getLevel()},
             null,
-            Grakon.Utils.loadCommissionsForBBOX,
+            Grakon.Utils.visualizeElectionCommissions,
             function() {
                 OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
             }

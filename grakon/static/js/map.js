@@ -165,8 +165,8 @@ var Grakon = {
     MAP_LEVELS_ZOOM: new Object({
         'country': 0,
         'regions': 3,
-        'districts': 9,
-        'areas': 13,
+        'districts': 7,
+        'areas': 11,
         'max': 16
     }),
     
@@ -259,6 +259,7 @@ var Grakon = {
             for (var pos in layer.markers) {
                 if (!Grakon.map.getExtent().containsLonLat( layer.markers[pos].lonlat )) {
                     Grakon.electionCommissions[ layer.markers[pos].ecID ] = null;
+                    layer.markers[pos].destroy();
                     layer.removeMarker( layer.markers[pos] );
                 }
             }
@@ -907,17 +908,6 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
         this.markerDiv = OpenLayers.Util.createDiv();
         this.markerDiv.appendChild(this.icon.imageDiv); 
         OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset); 
-        var txtDiv = OpenLayers.Util.createDiv(); 
-        txtDiv.className = 'markerLabel'; 
-        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
-        txtDiv.innerHTML = this.label; 
-        this.markerDiv.appendChild(txtDiv); 
-    }, 
-                                                 
-    setLabel: function(label) {
-        this.label = label;
-        this.markerDiv.innerHTML = "";
-        this.markerDiv.appendChild(this.icon.imageDiv); 
         var txtDiv = OpenLayers.Util.createDiv(); 
         txtDiv.className = 'markerLabel'; 
         OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 

@@ -164,7 +164,7 @@ var Grakon = {
      */
     MAP_LEVELS_ZOOM: new Object({
         'country': 0,
-        'regions': 4,
+        'regions': 1,
         'districts': 7,
         'areas': 13,
         'max': 16
@@ -251,7 +251,11 @@ var Grakon = {
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
                 
-                Grakon.Utils.hideCloseDistrictMarkers();
+                Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.regions );
+                Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.districts );
+                
+                if (Grakon.map.getLayer() < 15)
+                    Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.areas );
 
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
@@ -269,13 +273,14 @@ var Grakon = {
         
         /**
          * Скрывает метки для ТИКов, которые расположены слишком близко к уже добавленным на карту.
+         * @param {layer} слой с метками
          */
-        hideCloseDistrictMarkers: function() {
+        hideCloseMarkers: function(layer) {
             var visible = new Array();
             var tooClose;
-            for (var i in Grakon.electionCommissionLayers.districts.markers) {
+            for (var i in layer.markers) {
                 
-                var marker = Grakon.electionCommissionLayers.districts.markers[i];
+                var marker = layer.markers[i];
                 var markerPixel = Grakon.map.getPixelFromLonLat( marker.lonlat );
                 
                 tooClose = false;

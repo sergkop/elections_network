@@ -39,12 +39,14 @@ class LocationView(TemplateView):
 
         # Get sub-regions
         sub_regions = []
+
+        # TODO: index by region, tik, name is needed to sort by name inside db
         if location.region is None:
-            for loc in Location.objects.filter(region=location, tik=None).only('id', 'name').order_by('name'):
-                sub_regions.append((loc.id, loc.name))
+            sub_regions += list(Location.objects.filter(region=location, tik=None).values_list('id', 'name')) #.order_by('name')
         elif location.tik is None:
-            for loc in Location.objects.filter(tik=location).only('id', 'name').order_by('name'):
-                sub_regions.append((loc.id, loc.name))
+            sub_regions += list(Location.objects.filter(tik=location).values_list('id', 'name')) # .order_by('name')
+
+        sub_regions = sorted(sub_regions, None, lambda r: r[1])
 
         dialog = self.request.GET.get('dialog', '')
         if not dialog in ROLE_TYPES and not dialog in ('web_observer'):

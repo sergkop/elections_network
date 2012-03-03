@@ -91,8 +91,8 @@ PARTY_CHOICES = (
 )
 
 class Message(models.Model):
-    from_user = models.ForeignKey(Profile, verbose_name=u'Пользователю', related_name='sender')
-    to_user = models.ForeignKey(Profile, verbose_name=u'От пользователя', related_name='reciever')
+    from_user = models.ForeignKey(Profile, verbose_name=u'От пользователя', related_name='sender')
+    to_user = models.ForeignKey(Profile, verbose_name=u'Пользователю', related_name='reciever')
     title = models.CharField(u'Тема', max_length=100)
     body = models.TextField(u'Сообщение')
     show_email = models.BooleanField(u'Показывать email', default=False)

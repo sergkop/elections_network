@@ -240,6 +240,8 @@ h3 {margin: 0;}
 	.videoconf p {font-size: 0.85em; margin: 0 0 1em}
 	.videoconf p a {color: #2f8dbc; text-decoration: none;}
 		.videoconf a:hover {color: #7E17A3;}
+		
+.dsq-comment-header {white-space: normal !important;}		
 
 /* backgrounds */
 header, footer, .ui-dialog-titlebar {

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+    Инструменты наблюдателя - Гракон - гражданский контроль за президентскими выборами
+{% endblock %}
+
+
+
+{% block content_header %}
+    <h2 class="location_header">Инструменты наблюдателя</h2>
+{% endblock %}
+
+{% block content %}
+<div class="static-content">
+  <div class="step"><i>1</i> 
+  	<h4 style="margin-top: 0.5em;">Полезные ресурсы</h4>
+    	<ul>
+        	<li><a href="http://vybory.altergeo.ru/">Altergeo</a>&nbsp;&mdash; оперативное добавление фото, видео и&nbsp;данных из&nbsp;протоколов. <br /><a href="http://altergeo.ru/download/">Мобильные версии</a> Altergeo.</li>
+            <li>Мобильное приложение <a href="http://webnabludatel.org/">Веб-наблюдатель</a>. Содержит справочную информацию по&nbsp;возможным нарушениям, позволяет составить и&nbsp;подать жалобу по&nbsp;замеченным нарушениям, поддерживает загрузку фото и&nbsp;видео.</li>
+  		</ul>
+  </div>	
+  <div class="step"><i>2</i> 
+	  <script type="text/javascript">
+        $(function() {
+            $('.banners>a').lightBox({
+            imageLoading: '/static/libs/lightbox/lightbox-ico-loading.gif',
+            imageBtnClose: '/static/libs/lightbox/lightbox-btn-close.gif',
+            imageBtnPrev: '/static/libs/lightbox/lightbox-btn-prev.gif',
+            imageBtnNext: '/static/libs/lightbox/lightbox-btn-next.gif',
+            txtImage: 'Памятка',
+            txtOf: 'из'
+                
+            });
+        });
+        </script>
+      <h4>Инфографика</h4>
+      <ul>
+      	<li><a href="{{ STATIC_URL }}docs/docs.rar">Скачать архивом (rar)</a></li>
+      </ul>
+      <div class="banners"><a href="{{ STATIC_URL }}images/grakon_info.jpg" rel="lightbox"><img src="{{ STATIC_URL }}images/grakon_info_sm.jpg" /></a>
+      <p><a href="{{ STATIC_URL }}images/grakon_info.jpg">Скачать (jpg)</a></p>
+      </div>
+      <div class="banners"><a href="{{ STATIC_URL }}images/liga_info_1.jpg" rel="lightbox"><img src="{{ STATIC_URL }}images/liga_info_1_sm.jpg" /></a>
+      <p><a href="{{ STATIC_URL }}docs/liga_1.pdf">Скачать (pdf)</a></p>
+      </div>
+      <div class="banners"><a href="{{ STATIC_URL }}images/liga_info_2.jpg" rel="lightbox"><img src="{{ STATIC_URL }}images/liga_info_2_sm.jpg" /></a>
+      <p><a href="{{ STATIC_URL }}docs/liga_2.pdf">Скачать (pdf)</a></p>
+      </div>
+      <div class="banners"><a href="{{ STATIC_URL }}images/liga_info_3.jpg" rel="lightbox"><img src="{{ STATIC_URL }}images/liga_info_3_sm.jpg" /></a>
+      <p><a href="{{ STATIC_URL }}docs/liga_3.pdf">Скачать (pdf)</a></p>
+      </div>
+      <div class="banners"><a href="{{ STATIC_URL }}images/liga_info_4.jpg" rel="lightbox"><img src="{{ STATIC_URL }}images/liga_info_4_sm.jpg" /></a>
+      <p><a href="{{ STATIC_URL }}docs/liga_4.pdf">Скачать (pdf)</a></p>
+      </div>
+      <div class="banners"><a href="{{ STATIC_URL }}images/liga_info_5.jpg" rel="lightbox"><img src="{{ STATIC_URL }}images/liga_info_5_sm.jpg" /></a>
+      <p><a href="{{ STATIC_URL }}docs/liga_5.pdf">Скачать (pdf)</a></p>
+      </div>
+      <br clear="all" />
+</div>
+
+ </div>
+{% endblock %}

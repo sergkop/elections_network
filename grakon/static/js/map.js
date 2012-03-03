@@ -644,9 +644,7 @@ var Grakon = {
     /**
      * По изменению масштабирования переключать слои
      */
-    mapZoomEndHandler: function() {
-        Grakon.Utils.removePopups();
-        
+    mapZoomEndHandler: function() {        
         // границы регионов
         if (Grakon.borderLayers.regions != null)
             Grakon.borderLayers.regions.setVisibility( Grakon.getLevel() < 3 );
@@ -666,6 +664,14 @@ var Grakon = {
         // видимость УИКов
         if (Grakon.electionCommissionLayers.areas != null)
             Grakon.electionCommissionLayers.areas.setVisibility( Grakon.getLevel() > 3 );
+        
+        // изменить иконку масштабирования во всплывающем окне
+        if (Grakon.map.popups != null && Grakon.map.popups[0] != null && Grakon.map.popups[0].contentDiv != null)
+            if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.max)
+                $(Grakon.map.popups[0].contentDiv).find('a[class="zoomOut"]').removeClass("zoomOut").addClass("zoomIn");
+            else
+                $(Grakon.map.popups[0].contentDiv).find('a[class="zoomIn"]').removeClass("zoomIn").addClass("zoomOut");
+        
     },
     
     /**
@@ -917,9 +923,9 @@ var Grakon = {
     zoomOnElectionCommission: function(lon, lat, type) {
         var nextZoom;
         var defaultZoom = Grakon.Utils.getZoomForLevel(type);
-                
+        
         if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
-            nextZoom = defaultZoom;
+            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel()-1 );
         else if (Grakon.getLevel() >= 4)
             nextZoom = Grakon.MAP_LEVELS_ZOOM.max;
         else

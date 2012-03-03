@@ -251,22 +251,7 @@ var Grakon = {
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
                 
-                var visible = new Array();
-                var tooClose;
-                for (var i in Grakon.electionCommissionLayers.districts.markers) {
-                    
-                    var marker = Grakon.electionCommissionLayers.districts.markers[i];
-                    var markerPixel = Grakon.map.getPixelFromLonLat( marker.lonlat );
-                    
-                    tooClose = false;
-                    for (var j=0; j<visible.length && !tooClose; j++)
-                        if (Grakon.Utils.squareDistance(markerPixel, visible[j]) <= 32*32)
-                            tooClose = true;
-                        
-                    marker.display(!tooClose);
-                    if (!tooClose)
-                        visible.push(markerPixel);
-                }
+                Grakon.Utils.hideCloseDistrictMarkers();
 
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
@@ -279,6 +264,28 @@ var Grakon = {
                     layer.markers[pos].destroy();
                     layer.removeMarker( layer.markers[pos] );
                 }
+            }
+        },
+        
+        /**
+         * Скрывает метки для ТИКов, которые расположены слишком близко к уже добавленным на карту.
+         */
+        hideCloseDistrictMarkers: function() {
+            var visible = new Array();
+            var tooClose;
+            for (var i in Grakon.electionCommissionLayers.districts.markers) {
+                
+                var marker = Grakon.electionCommissionLayers.districts.markers[i];
+                var markerPixel = Grakon.map.getPixelFromLonLat( marker.lonlat );
+                
+                tooClose = false;
+                for (var j=0; j<visible.length && !tooClose; j++)
+                    if (Grakon.Utils.squareDistance(markerPixel, visible[j]) <= 32*32)
+                        tooClose = true;
+                    
+                marker.display(!tooClose);
+                if (!tooClose)
+                    visible.push(markerPixel);
             }
         },
         
@@ -298,6 +305,7 @@ var Grakon = {
             
             var content = '<h3><a href="#" class="zoomIn" onclick="Grakon.zoomOnElectionCommission('+electionCommission.xCoord+', '+electionCommission.yCoord+', '+electionCommission.level+'); return false;">'+title+'</a></h3>';
             content += '<p class="commissionType">'+type+'</p>';
+            content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
             content += '<p class="address">'+electionCommission.address+'</p>';
             if (electionCommission.data != null) {
                 content += "<p>";
@@ -309,7 +317,6 @@ var Grakon = {
                 content += (electionCommission.data.authorities != null) ? "Чиновников: " + electionCommission.data.authorities + "<br/>" : "";
                 content += "</p>";
             }
-            content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
             return content;
         },
         

@@ -14,6 +14,7 @@ urlpatterns = patterns('navigation.views',
     tabbed_static_url('rules', 'static_pages/about/base.html'),
     tabbed_static_url('comparison', 'static_pages/about/base.html'),
     tabbed_static_url('publications', 'static_pages/about/base.html'),
+	tabbed_static_url('press', 'static_pages/press/base.html'),
 
     tabbed_static_url('campaign', 'static_pages/campaign/base.html'),
     tabbed_static_url('pressure', 'static_pages/campaign/base.html'),
@@ -33,6 +34,8 @@ urlpatterns = patterns('navigation.views',
     tabbed_static_url('faq', 'static_pages/faq/base.html'),
     tabbed_static_url('web_observers_help', 'static_pages/faq/base.html'),
     tabbed_static_url('support_group_help', 'static_pages/faq/base.html'),
+
+	tabbed_static_url('kudakomu', 'static_pages/press/base.html'),
 
     url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),	
 	url(r'^tools$', 'static_page', {'name': 'tools', 'template': 'static_pages/tools.html'}, name='tools'),

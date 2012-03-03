@@ -70,3 +70,20 @@ Deployment:
     * configure Google Analytics
     * set debug=False in site_settings.py on production
     * configure django logging
+
+Init server:
+    useradd -d /home/serg --shell /bin/bash -m serg
+    aptitude install mc nginx memcached postfix
+    add 'serg   ALL=(ALL) ALL' to /etc/sudoers
+    create /home/serg/.ssh/authorized_keys
+    copy id_rsa and id_rsa.pub to /home/serg/.ssh
+
+Restarting the server:
+    ./server.sh
+    /etc/init.d/memcached restart
+    /etc/init.d/postfix restart
+    /etc/init.d/nginx restart
+
+Firewall:
+    sudo ufw disable
+    sudo ufw enable

@@ -1,7 +1,9 @@
 # coding=utf8
 from django.contrib.auth.models import User
+from django.core.cache import cache
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.template import loader, RequestContext
 from django.views.generic.base import TemplateView
 
 from loginza.models import UserMap
@@ -14,7 +16,7 @@ from navigation.models import Page
 from organizations.models import Organization, OrganizationCoverage
 from users.models import CommissionMember, Role
 
-@cache_function('main_page', 60)
+@cache_function('main_page', 180)
 def main_page_context():
     inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
     total_counter = User.objects.exclude(email='').filter(is_active=True) \
@@ -47,9 +49,27 @@ class BaseMainView(TemplateView):
 
         return ctx
 
-class MainView(BaseMainView):
-    tab = 'main'
-main = MainView.as_view()
+#class MainView(BaseMainView):
+#    tab = 'main'
+#main = MainView.as_view()
+
+def main(request):
+    if not request.user.is_authenticated():
+        html = cache.get('main_html')
+        if html:
+            return HttpResponse(html)
+
+    ctx = {'tab': 'main'}
+    ctx.update(main_page_context())
+    if request.user.is_authenticated():
+        ctx.update({'form': ProfileForm()})
+
+    html = loader.render_to_string('main/base.html', context_instance=RequestContext(request, ctx))
+
+    if not request.user.is_authenticated():
+        cache.set('main_html', html, 180)
+
+    return HttpResponse(html)
 
 class WallView(BaseMainView):
     tab = 'wall'

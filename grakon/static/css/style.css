@@ -203,7 +203,6 @@ div.olControlLayerSwitcher div span {
 
 .olPopupCloseBox, .olPopupContent {
 	opacity: 1;
-	filter: alpha(opacity=100);
 }
 
 .zoomIn {

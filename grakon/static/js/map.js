@@ -164,9 +164,9 @@ var Grakon = {
      */
     MAP_LEVELS_ZOOM: new Object({
         'country': 0,
-        'regions': 3,
+        'regions': 4,
         'districts': 7,
-        'areas': 11,
+        'areas': 13,
         'max': 16
     }),
     

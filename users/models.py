@@ -21,7 +21,16 @@ class RoleManager(models.Manager):
     def get_participants(self, query):
         participants = {}
 
-        for role in self.filter(query).select_related():
+        roles_by_type = {}
+        for role_id, role_type in self.filter(query).values_list('id', 'type'):
+            roles_by_type.setdefault(role_type, []).append(role_id)
+
+        role_ids = []
+        for role_type in roles_by_type:
+            # TODO: Temporary hack
+            role_ids += roles_by_type[role_type][:10]
+
+        for role in Role.objects.filter(id__in=role_ids).select_related('user', 'organization'):
             participants.setdefault(role.type, []).append(role)
 
         # Sort participants by name and limit the length of the lists
@@ -31,10 +40,6 @@ class RoleManager(models.Manager):
 
             participants[role] = sorted(show_name_participants, key=lambda r: r.user.username.lower())
             participants[role] += sorted(other_participants, key=lambda r: r.user.username.lower())
-
-            # TODO: Temporary hack
-            if len(participants[role]) > 10:
-                participants[role] = participants[role][:10]
 
         return participants
 

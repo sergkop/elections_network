@@ -235,7 +235,7 @@ h3 {margin: 0;}
 	.banners textarea {width: 238px; height: 70px; resize: none; border: 1px solid #dedede;}
 
 .videoconf {border: 1px dotted #a5a5a5; border-width: 1px 0; margin-bottom:15px; background:url(../images/icon_tools.png) 5px center no-repeat; padding-left: 75px;}
-	.videoconf h4 {margin: 1em 0 0.3em; border: none; font-size: 1em; font-weight: bold;}
+	.videoconf h4 {margin: 0.7em 0 0.5em; border: none; font-size: 1em; font-weight: bold;}
 		.videoconf h4 a {color: #000;}
 	.videoconf p {font-size: 0.85em; margin: 0 0 1em}
 	.videoconf p a {color: #2f8dbc; text-decoration: none;}

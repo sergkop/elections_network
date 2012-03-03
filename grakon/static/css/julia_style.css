@@ -145,7 +145,7 @@ h3 {margin: 0;}
 .ym-col3 .ui-tabs .ui-tabs-nav li a {padding: 5px 10px 0;}
 
 .ym-col3 .ui-state-default i, .ym-col3 .ui-widget-content .ui-state-default i, .ym-col3 .ui-widget-header .ui-state-default i {position: absolute; top: 0; right: -36px; background: url(/static/images/back_tab_blue.png) 0 0 no-repeat; width: 40px; height: 30px; display: none;}
-.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected i {background:url(/static/images/back_tab_white.png) 0 0 no-repeat; height: 32px; display: none;}
+.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected i {height: 32px; display: none;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 37px; margin-top: -1px; background-color: #fff; line-height: 1.2em; padding: 0 0.5em;}
 .ui-tabs .ui-tabs-nav {padding: 0;}
 .ui-tabs .ui-tabs-panel {background-color: #fff; margin-top: 0;}

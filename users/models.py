@@ -30,7 +30,7 @@ class RoleManager(models.Manager):
             # TODO: Temporary hack
             role_ids += roles_by_type[role_type][:10]
 
-        for role in Role.objects.filter(id__in=role_ids).select_related('user', 'organization'):
+        for role in Role.objects.filter(id__in=role_ids).select_related('user', 'location', 'organization'):
             participants.setdefault(role.type, []).append(role)
 
         # Sort participants by name and limit the length of the lists

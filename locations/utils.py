@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse
 
@@ -12,7 +13,7 @@ from users.models import Role, ROLE_TYPES, WebObserver
 @cache_function('regions_list', 1000)
 def regions_list():
     regions = [('', u'Выбрать субъект РФ'), None, None, None] # reserve places for Moscow, St. Petersburg and foreign countries
-    for location in Location.objects.filter(region=None).only('id', 'name').order_by('name'):
+    for location in Location.objects.filter(region__exact=None).only('id', 'name').order_by('name'):
         if location.name == u'Москва':
             regions[1] = (location.id, location.name)
         elif location.name == u'Санкт-Петербург':
@@ -40,6 +41,15 @@ def get_roles_query(location):
 
 # TODO: count members differently?
 def get_roles_counters(location):
+    if location is None:
+        cache_key = 'roles_counter_all'
+    else:
+        cache_key = 'roles_counter_'+str(location.id)
+
+    res = cache.get(cache_key)
+    if res:
+        return res
+
     counters = {}
     query = get_roles_query(location)
 
@@ -57,6 +67,11 @@ def get_roles_counters(location):
 
     counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \
             .distinct().values_list('user', flat=True))
+
+    if location and location.is_uik():
+        cache.set(cache_key, counters, 60)
+    else:
+        cache.set(cache_key, counters, 300)
 
     return counters
 

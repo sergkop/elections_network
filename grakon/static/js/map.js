@@ -13,7 +13,6 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
     this.title = title;
     this.address = address;
     this.data = data;
-    this.data.voters = 50;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
 };
@@ -159,7 +158,7 @@ var Grakon = {
         'regions': 1,
         'districts': 7,
         'areas': 13,
-        'max': 16
+        'max': 15
     }),
     
     /**
@@ -239,14 +238,15 @@ var Grakon = {
                         }
                 }
 
+                // удаляем метки вне карты
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.regions );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
                 
+                // прячем слишком близко расположенные метки
                 Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.regions );
                 Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.districts );
-                
-                if (Grakon.map.getLayer() < 15)
+                if (Grakon.map.getLayer() < 14)
                     Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.areas );
 
             } else
@@ -372,8 +372,7 @@ var Grakon = {
             Grakon.Utils.removePopups();
             
             this.popup = this.createPopup(this.closeBox);
-            this.popup.opacity = 0.75;
-            OpenLayers.Console.debug(this.popup);
+            this.popup.opacity = 0.9;
             Grakon.Utils.updateCommissionZoomIcon(this.popup);
             Grakon.map.addPopup(this.popup);
             
@@ -778,7 +777,7 @@ var Grakon = {
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
         
         // Добавить инструмент "ссылка на данный вид карты"
-        Grakon.map.addControl(new OpenLayers.Control.Permalink());
+        Grakon.map.addControl(new OpenLayers.Control.Permalink('permalink', "/search/map", {anchor: false}));
         $(Grakon.map.div).find(".olControlPermalink > a").text("Ссылка на данный вид карты");
         
         // Создать и изменить стиль у переключателя слоёв
@@ -971,7 +970,15 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
         OpenLayers.Marker.prototype.destroy.apply(this, arguments); 
         this.markerDiv.innerHTML = ""; 
         this.markerDiv = null; 
-    }, 
+    },
+                                                 
+    display: function(visible) { 
+        OpenLayers.Marker.prototype.display.apply(this, arguments);
+        if (visible)
+            $(this.markerDiv).show();
+        else
+            $(this.markerDiv).hide();
+    },
 
     draw: function(px) { 
         OpenLayers.Util.modifyAlphaImageDiv(this.icon.imageDiv, 

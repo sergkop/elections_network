@@ -8,14 +8,14 @@
 <p>
     <table class="web_observers_table">
         <tr>
-            <th>Время</th>
+            <th style="text-align:left;">Время</th>
             <th>Участник</th>
             <th>Захват видео</th>
         </tr>
         {% for time in times %}
         <tr>
-            <td>{{ time.start_time }}.00 - {{ time.end_time }}.00</td>
-            <td>
+            <td style="text-align:left;" width="30%">{{ time.start_time }}:00 &ndash; {{ time.end_time }}:00</td>
+            <td width="35%">
                 {% for web_observer in time.web_observers %}
                     {% with participant=web_observer.user %}
                         {% include "elements/participant.html" %}

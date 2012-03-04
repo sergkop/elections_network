@@ -1,4 +1,5 @@
-import choice
+import string
+from random import choice
 
 from django.contrib.auth.models import User
 from django.db import models

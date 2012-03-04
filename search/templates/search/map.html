@@ -11,6 +11,10 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        Grakon.init('{{ place }}');
+        Grakon.init({
+            lon: '{{ lon }}',
+            lat: '{{ lat }}',
+            zoom: '{{ zoom }}'
+        });
     });
 </script>

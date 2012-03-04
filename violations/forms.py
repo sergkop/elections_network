@@ -51,9 +51,10 @@ class ViolationForm(forms.ModelForm):
 
         return self.cleaned_data
 
-    def save(self):
+    def save(self, commit=True):
         violation = super(ViolationForm, self).save(commit=False)
         violation.violation_id = choice(range(1000))
         violation.location = self.location
-        violation.save()
+        if commit:
+            violation.save()
         return violation

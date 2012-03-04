@@ -1,10 +1,21 @@
 {% load elements %}
+<script type="text/javascript">
+    $(function() {
+        $('#traffic').lightBox({
+		imageLoading: '/static/libs/lightbox/lightbox-ico-loading.gif',
+		imageBtnClose: '/static/libs/lightbox/lightbox-btn-close.gif',
+		imageBtnPrev: '/static/libs/lightbox/lightbox-btn-prev.gif',
+		imageBtnNext: '/static/libs/lightbox/lightbox-btn-next.gif'			
+		});
+    });
+    </script>
 <p><strong>Уважаемые пользователи</strong>,</p>
 <div style="font-style:italic; border-bottom: 1px dotted #a5a5a5; margin-bottom: 2em">
-<p>в&nbsp;настоящее время, в&nbsp;связи с&nbsp;резко возросшим потоком посетителей, в&nbsp;работе сайта могут возникать перебои.</p>
-<p>Мы&nbsp;делаем все возможное, чтобы исправить это как можно быстрее.</p>
-<p>Через несколько часов вы&nbsp;сможете начать выкладывать свои протоколы. Но, в&nbsp;соответствии с&nbsp;российским законодательством, для просмотра они будут доступны после 21:00 по&nbsp;московскому времени.</p>
-<p>Благодарим за&nbsp;терпение и&nbsp;понимание!</p>
+<p>Если вы&nbsp;стали свидетелем нарушения или вам необходима консультация юриста, обращайтесь в <a href="http://centr2012.ru/" target="_blank">Ситуационный центр &laquo;Выборы 2012&raquo;</a>, <a href="http://www.rusotv.org/" target="_blank">Объединенный штаб &laquo;За&nbsp;честные выборы&raquo; от&nbsp;Лиги избирателей</a> или оставляйте сообщение на нашей <a href="/wall">стене</a>.</p>
+<p>Нарушения, зафиксированные Объединенным штабом вы можете посмотреть <a href="http://nabludatel.org/statistic/web/viol.php" target="_blank">здесь</a>.</p>
+<p>Также хотим сообщить, что в настоящее время все проблемы с доступом к сайту решены и мы работаем в полном режиме.</p>
+<p>Все сбои в работе сайта были связаны исключительно с резко возросшим потоком посетителей, DDOS-атакам площадка не подвергалась.</p>
+<p align="center"><a href="{{ STATIC_URL }}images/traffic.jpg" id="traffic"><img src="{{ STATIC_URL }}images/traffic_sm.jpg" alt="Статистика посещений сайта grakon.org"/></a></p>
 
 <p>P.S. Обращаем ваше внимание, что наш сайт не ведет онлайн-трансляцию с избирательных участков. 
 Это <strong>видео доступно на сайте <a href="http://webvybory2012.ru/" target="_blank">Web выборы 2012</a></strong>.</p>

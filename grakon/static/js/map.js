@@ -777,7 +777,7 @@ var Grakon = {
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
         
         // Добавить инструмент "ссылка на данный вид карты"
-        Grakon.map.addControl(new OpenLayers.Control.Permalink());
+        Grakon.map.addControl(new OpenLayers.Control.Permalink('permalink', "/search/map", {anchor: false}));
         $(Grakon.map.div).find(".olControlPermalink > a").text("Ссылка на данный вид карты");
         
         // Создать и изменить стиль у переключателя слоёв

@@ -77,7 +77,7 @@ class BaseRegistrationForm(forms.ModelForm):
         if self.cleaned_data['email1'] != self.cleaned_data['email']:
             raise forms.ValidationError(u'Вы неправильно ввели свой email!')
 
-        return self.cleaned_data['email1']
+        return self.cleaned_data
 
     def save(self):
         username, email, password = self.cleaned_data['username'], \

@@ -58,11 +58,11 @@ class ReportViolationView(CreateView):
     model = Violation
 
     def form_valid(self, form):
-        response = super(ReportViolationView, self).form_valid(form)
-
         violation = form.save(commit=False)
         violation.source = self.request.profile
         violation.save()
+
+        response = super(ReportViolationView, self).form_valid(form)
         return response
 
 report_violation = login_required(ReportViolationView.as_view())

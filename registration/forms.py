@@ -73,6 +73,12 @@ class BaseRegistrationForm(forms.ModelForm):
 
         raise forms.ValidationError(u'Пользователь с этим адресом электронной почты уже зарегистрирован')
 
+    def clean(self):
+        if self.cleaned_data.get('email1') != self.cleaned_data.get('email'):
+            raise forms.ValidationError(u'Введенные электронные адреса не совпадают!')
+
+        return self.cleaned_data
+
     def save(self):
         username, email, password = self.cleaned_data['username'], \
                 self.cleaned_data['email'], self.cleaned_data.get('password1', '')

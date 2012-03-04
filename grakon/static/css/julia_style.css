@@ -116,6 +116,8 @@ h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2
 .resources { background: url(/static/images/icon_resources.png) 7px 6px no-repeat;}
 .contacts { background: url(/static/images/icon_contacts.png) 10px 8px no-repeat;}
 .steps{ background: url(/static/images/icon_steps.png) 7px 6px no-repeat;}
+.support{ background: url(/static/images/icon_support.png) 7px center no-repeat;}
+.web_observers{ background: url(/static/images/icon_web_observers.png) 5px 8px no-repeat;}
 .participants {background: url(/static/images/icon_participants.png) 7px center no-repeat;}
 	.column_header_icon {padding: 0 !important;}
 	.column_header_icon .organizations, .column_header_icon .complaints, .column_header_icon .protocols, .column_header_icon .events, .column_header_icon span  {padding: 0.8em 0.5em 0.8em 2em; display: block;} 

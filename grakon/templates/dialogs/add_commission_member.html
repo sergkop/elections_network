@@ -1,6 +1,6 @@
 {% load uni_form_tags %}
 
-<div id="add_commission_member_dialog">
+<div id="add_commission_member_dialog" style="display: none;">
     <p style="margin:0.3em;">Перед добавлением члена комиссии
     <a href="{{ current_location.get_absolute_url }}">{{ current_location }}</a> убедитесь,
     что он еще не добавлен в список.</p>
@@ -19,7 +19,7 @@
     }
 
     $(function(){
-        $("#add_commission_member_dialog").dialog({width: 650, height: 400, modal: true, title: "Добавить члена комиссии",
+        $("#add_commission_member_dialog").dialog({autoOpen: false, width: 650, height: 400, modal: true, title: "Добавить члена комиссии",
             buttons: {
                 "Добавить": function(){
                     $.post("{% url add_commission_member %}", $("#add_commission_member_form").serialize(), function(data){

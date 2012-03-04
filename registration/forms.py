@@ -32,6 +32,8 @@ class BaseRegistrationForm(forms.ModelForm):
 
     email = forms.EmailField(label=u'Электронная почта',
             help_text=u'<b>На ваш электронный адрес будет выслано письмо со ссылкой для активации аккаунта</b>')
+    email1 = forms.EmailField(label=u'Электронная почта еще раз',
+            help_text=u"<b>Внимание! Проверьте что правильность написания email'а. В случае ошибки ваш аккаунт не будет активирован.</b>")
 
     class Meta:
         model = Profile
@@ -70,6 +72,12 @@ class BaseRegistrationForm(forms.ModelForm):
             return self.cleaned_data['email']
 
         raise forms.ValidationError(u'Пользователь с этим адресом электронной почты уже зарегистрирован')
+
+    def clean_email1(self):
+        if self.cleaned_data['email1'] != self.cleaned_data['email']:
+            raise forms.ValidationError(u'Вы неправильно ввели свой email!')
+
+        return self.cleaned_data['email1']
 
     def save(self):
         username, email, password = self.cleaned_data['username'], \

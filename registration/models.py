@@ -2,9 +2,11 @@
 import datetime
 import random
 import re
+from smtplib import SMTPException
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.db import models
 from django.db import transaction
 from django.template.loader import render_to_string
@@ -51,7 +53,7 @@ class ActivationManager(models.Manager):
         activation_key = sha_constructor(salt+user.username).hexdigest()
 
         registration_profile = self.create(user=user, activation_key=activation_key)
-        registration_profile.send_activation_email()
+        return registration_profile.send_activation_email()
 
     def delete_expired_users(self):
         """
@@ -93,7 +95,6 @@ class ActivationProfile(models.Model):
         return self.activation_key==ACTIVATED or \
                (self.user.date_joined+expiration_date<=datetime.datetime.now())
 
-    # TODO: insert user first_name into email
     def send_activation_email(self):
         subject = u'Активация учетной записи на grakon.org'
         profile = self.user.get_profile()
@@ -102,4 +103,7 @@ class ActivationProfile(models.Model):
             'URL_PREFIX': settings.URL_PREFIX,
             'full_name': '%s %s' % (profile.first_name, profile.last_name),
         })
-        self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+        try:
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.user.email], fail_silently=False)
+        except SMTPException:
+            return 'error'

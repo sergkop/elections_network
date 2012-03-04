@@ -33,6 +33,10 @@ def registration_completed(request):
     return TemplateResponse(request, 'registration/registration_completed.html')
 
 @authenticated_redirect('my_profile')
+def email_not_sent(request):
+    return TemplateResponse(request, 'registration/email_not_sent.html')
+
+@authenticated_redirect('my_profile')
 def activate(request, activation_key):
     account = ActivationProfile.objects.activate_user(activation_key)
     if account:

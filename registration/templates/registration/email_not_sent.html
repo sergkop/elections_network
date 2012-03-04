@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content_header %}
+    <h2 class="location_header">Не удалось отправить письмо на ваш электронный адрес</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="static-content">
+        <p>Возможно вы неправильно указали ваш email при регистрации. Пожалуйста, попробуйте
+        <a href="{% url register %}">зарегистрироваться</a> снова.</p>
+    </div>
+{% endblock %}

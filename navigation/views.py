@@ -16,7 +16,7 @@ from navigation.models import Page
 from organizations.models import Organization, OrganizationCoverage
 from users.models import CommissionMember, Role
 
-@cache_function('main_page', 180)
+@cache_function('main_page', 300)
 def main_page_context():
     inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
     total_counter = User.objects.exclude(email='').filter(is_active=True) \
@@ -67,7 +67,7 @@ def main(request):
     html = loader.render_to_string('main/base.html', context_instance=RequestContext(request, ctx))
 
     if not request.user.is_authenticated():
-        cache.set('main_html', html, 180)
+        cache.set('main_html', html, 300)
 
     return HttpResponse(html)
 

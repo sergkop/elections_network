@@ -8,7 +8,7 @@ from django.db import models
 
 from loginza import signals
 from loginza.conf import settings
-from loginza.models import UserMap, UserMapManager
+from loginza.models import UserMap
 from tinymce.models import HTMLField
 
 class Profile(models.Model):
@@ -77,40 +77,3 @@ def create_profile(sender, **kwargs):
         profile.save()
 
 models.signals.post_save.connect(create_profile, sender=User)
-
-# Hack to fix bug in loginza
-def new_for_identity(self, identity, request):
-    try:
-        user_map = self.get(identity=identity)
-    except self.model.DoesNotExist:
-        # if there is authenticated user - map identity to that user
-        # if not - create new user and mapping for him
-        if request.user.is_authenticated():
-            user = request.user
-        else:
-            loginza_data = json.loads(identity.data)
-
-            loginza_email = loginza_data.get('email', '')
-            email = loginza_email if '@' in loginza_email else settings.DEFAULT_EMAIL
-
-            # if nickname is not set - try to get it from email
-            # e.g. vgarvardt@gmail.com -> vgarvardt
-            loginza_nickname = loginza_data.get('nickname', None)
-            username = loginza_nickname if loginza_nickname is not None else email.split('@')[0]
-
-            # check duplicate user name
-            while True:
-                try:
-                    existing_user = User.objects.get(username=username)
-                    username = '%s%d%s' % (username, existing_user.id,
-                            choice(string.letters)+choice(string.letters))
-                except User.DoesNotExist:
-                    break
-
-            user = User.objects.create_user(username, email)
-
-        user_map = UserMap.objects.create(identity=identity, user=user)
-        signals.created.send(request, user_map=user_map)
-    return user_map
-
-UserMapManager.for_identity = new_for_identity

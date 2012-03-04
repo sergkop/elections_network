@@ -5,6 +5,7 @@ urlpatterns = patterns('registration.views',
 
     url(r'^register$', 'register', name='register'),
     url(r'^registration_completed$', 'registration_completed', name='registration_completed'),
+    url(r'^email_not_sent$', 'email_not_sent', name='email_not_sent'),
 
     # Activation keys get matched by \w+ instead of the more specific
     # [a-fA-F0-9]{40} because a bad activation key should still get to the view;

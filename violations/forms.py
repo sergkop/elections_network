@@ -55,6 +55,6 @@ class ViolationForm(forms.ModelForm):
         violation = super(ViolationForm, self).save(commit=False)
         violation.violation_id = choice(range(1000))
         violation.location = self.location
-        if commit:
-            violation.save()
+        #if commit:
+        #    violation.save()
         return violation

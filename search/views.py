@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
@@ -149,7 +150,9 @@ class MapSearchView(BaseSearchView):
         ctx = super(MapSearchView, self).get_context_data(**kwargs)
 
         ctx.update({
-            'place': self.request.GET.get('place', '')
+            'zoom': self.request.GET.get('zoom', ''),
+            'lat': self.request.GET.get('lat', ''),
+            'lon': self.request.GET.get('lon', '')
         })
         return ctx
 

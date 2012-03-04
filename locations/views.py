@@ -9,11 +9,12 @@ from django.views.generic.base import TemplateView
 
 from grakon.utils import authenticated_redirect
 from locations.models import Location
-from locations.utils import get_locations_data, get_roles_counters, regions_list
+from locations.utils import get_locations_data, get_roles_counters, get_roles_query, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
+from violations.models import Violation
 
 # TODO: don't query lists of roles if it's not needed
 # TODO: mark links previously reported by user
@@ -30,22 +31,18 @@ class LocationView(TemplateView):
         except Location.DoesNotExist:
             raise Http404(u'Избирательный округ не найден')
 
-        # Get the list of role
-        query = Q(location=location)
-        if not location.tik:
-            query |= Q(location__tik=location) if location.region else Q(location__region=location)
-
+        query = get_roles_query(location)
         participants = Role.objects.get_participants(query)
 
         # Get sub-regions
         sub_regions = []
 
-        # TODO: index by region, tik, name is needed to sort by name inside db
         if location.region is None:
             sub_regions += list(Location.objects.filter(region=location, tik=None).values_list('id', 'name')) #.order_by('name')
         elif location.tik is None:
             sub_regions += list(Location.objects.filter(tik=location).values_list('id', 'name')) # .order_by('name')
 
+        # TODO: don't use when sorting will be done in database
         sub_regions = sorted(sub_regions, None, lambda r: r[1])
 
         dialog = self.request.GET.get('dialog', '')
@@ -60,6 +57,13 @@ class LocationView(TemplateView):
 
         commission_members = CommissionMember.objects.filter(location=location)
 
+        counters = get_roles_counters(location)
+
+        if counters['violations'] <= 10:
+            violations = Violation.objects.filter(query)
+        else:
+            violations = []
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
@@ -73,12 +77,14 @@ class LocationView(TemplateView):
             'signed_up_in_uik': signed_up_in_uik,
             'disqus_identifier': 'location/' + str(location.id),
 
-            'counters': get_roles_counters(location),
+            'counters': counters,
             'organizations': OrganizationCoverage.objects.organizations_at_location(location),
 
             'commission_members': commission_members,
             'commission_members_count': len(commission_members),
             'add_commission_member_form': CommissionMemberForm(),
+
+            'violations': violations,
         })
 
         # Web observers

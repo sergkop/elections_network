@@ -9,6 +9,7 @@ from grakon.models import Profile
 from grakon.utils import cache_function
 from locations.models import FOREIGN_TERRITORIES, Location
 from users.models import Role, ROLE_TYPES, WebObserver
+from violations.models import Violation
 
 @cache_function('regions_list', 1000)
 def regions_list():
@@ -28,14 +29,14 @@ def regions_list():
 def get_roles_query(location):
     """ location = None for Russia """
     voter_count = 0
-    if not location:
-        query = Q()
-    elif location.is_region():
-        query = Q(location__region=location)
+    if location is None:
+        return Q()
+
+    query = Q(location=location)
+    if location.is_region():
+        query |= Q(location__region=location)
     elif location.is_tik():
-        query = Q(location__tik=location) | Q(location=location)
-    elif location.is_uik():
-        query = Q(location=location)
+        query |= Q(location__tik=location)
 
     return query
 
@@ -65,8 +66,11 @@ def get_roles_counters(location):
 
     counters['total'] = Profile.objects.exclude(user__email='').exclude(id__in=inactive_ids).filter(user__is_active=True).count()
 
+    # TODO: use count here?
     counters['web_observer'] = len(filter_inactive_users(WebObserver.objects.filter(query)) \
             .distinct().values_list('user', flat=True))
+
+    counters['violations'] = Violation.objects.filter(query).count()
 
     if location and location.is_uik():
         cache.set(cache_key, counters, 300)

@@ -1,0 +1,27 @@
+<h4>Местоположение</h4>
+<p>
+    {% with location=violation.location %}
+        {% include "elements/location_path.html" %}
+    {% endwith %}
+</p>
+
+<h4>Источник</h4>
+<p><a href="{{ violation.source.get_absolute_url }}">{{ violation.source }}</a></p>
+
+{% if violation.text %}
+    <h4>Сообщение</h4>
+    <p>{{ violation.text }}</p>
+{% endif %}
+
+{% if violation.url %}
+    <h4>Ссылка на доказательства</h4>
+    <p><a href="{{ violation.url }}">{{ violation.url }}</a></p>
+{% endif %}
+
+<p>
+    <b>Тип нарушения</b>: {{ violation.get_type_display }}
+    <br/>
+    <b>Время</b>: {{ violation.time }}
+    <!--<br/>
+    <b>Идентификатор</b>: {{ violation.violation_id }}-->
+</p>

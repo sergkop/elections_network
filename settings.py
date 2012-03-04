@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'links',
     'organizations',
     'search',
+    'violations',
 )
 
 try:

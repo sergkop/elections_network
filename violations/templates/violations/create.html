@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load elements uni_form_tags %}
+
+{% block title %}
+    Сообщить о нарушении - Гражданский контроль за президентскими выборами
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Сообщить о нарушении</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="ym-cbox">
+        <div class="static-content">
+            {% uni_form form form.helper %}
+        </div>
+    </div>
+{% endblock %}

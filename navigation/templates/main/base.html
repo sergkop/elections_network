@@ -15,7 +15,7 @@
 {% block left_column %}
 	<div class="videoconf">
     	<h4><a href="/tools">Полезные инструменты для наблюдателей</a></h4>
-    
+
     </div>
     <h3 class="column_header column_header_icon"><span class="participants">Участники (<b>{{ counters.total }}</b>)</span></h3>
 
@@ -25,6 +25,8 @@
 {% endblock %}
 
 {% block right_column %}
+    {% include "blocks/violations.html" %}
+
     {% include "blocks/supporters.html" %}
 
     {% include "blocks/web_observers.html" %}
@@ -56,5 +58,5 @@
 	<div style="text-align:center; font-size: 2em; padding: 0.5em 1em; color: #D90000; border: 1px dotted #a5a5a5; border-width: 1px 0; margin-bottom: 1em">
     	<p style="margin: 0 0 0.2em;">Телефон горячей линии в день голосования<br />8-800-200-2012</p>
     </div>
-    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Новости" "main_news" "main/news.html" "Инфографика" "main_info" "main/info.html" "Сообщения (237)" "wall" "services/disqus.html"%}
+    {% tabs "tabs" tab "" "" "Что делать?" "main" "main/view.html" "Новости" "main_news" "main/news.html" "Инфографика" "main_info" "main/info.html" "Сообщения (445)" "wall" "services/disqus.html"%}
 {% endblock %}

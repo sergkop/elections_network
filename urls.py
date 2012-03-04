@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^', include('search.urls')),
     url(r'^links/', include('links.urls')),
     url(r'^location/', include('locations.urls')),
+    url(r'^violation/', include('violations.urls')),
     url(r'^loginza/', include('loginza.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
 

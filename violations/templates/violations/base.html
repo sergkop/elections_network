@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block content_header %}
+    <h2 class="location_header">{{ violation.get_type_display }}</h2>
+
+    {% if is_owner %}
+        {% tabs "tabs" view "violation_id" violation_id "Нарушение" "violation_view" "violations/view.html" "Редактировать" "violation_edit" "violations/edit.html" %}
+    {% else %}
+        <div class="ym-cbox">
+            <div class="static-content">
+                {% include "violations/view.html" %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

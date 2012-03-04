@@ -1,0 +1,28 @@
+{% load elements %}
+
+<h3 class="column_header mt15 column_header_icon"><span class="complaints">Нарушения ({{ counters.violations }})</span></h3>
+
+<div class="content_block ym-clearfix mb15">
+    <ul>
+        {% for violation in violations %}
+            <li>
+                <a href="{{ violation.get_absolute_url }}">{{ violation.get_type_display }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="mb15 mt15">
+        {% if request.user.is_authenticated %}
+            {% button "" "Сообщить о нарушении" "report_violation" "report_violation" "center" %}
+        {% else %}
+            {% button "" "Сообщить о нарушении" "report_violation" "" "center" %}
+        {% endif %}
+    </div>
+</div>
+
+{% if not request.user.is_authenticated %}
+    <script type="text/javascript">
+        $("#report_violation").click(function(){
+            login_dialog_init("Чтобы сообщить о нарушении, пожалуйста, войдите в систему");
+        });
+    </script>
+{% endif %}

@@ -1,3 +1,6 @@
+import string
+from random import choice
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import simplejson as json
@@ -44,9 +47,9 @@ class UserMapManager(models.Manager):
                 # check duplicate user name
                 while True:
                     try:
+                        existing_user = User.objects.get(username=username)
                         username = '%s%d%s' % (username, existing_user.id,
                                 choice(string.letters)+choice(string.letters))
-                        existing_user = User.objects.get(username=username)
                     except User.DoesNotExist:
                         break
 

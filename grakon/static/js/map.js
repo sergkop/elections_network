@@ -194,7 +194,7 @@ var Grakon = {
     /**
      * Пространство имён для вспомогательных функций
      */
-    Utils: {        
+    Utils: {
         /**
          * callback-метод, который считывает данные из GeoJSON,
          * возвращаемого в виде результата асинхронного запроса и
@@ -308,7 +308,7 @@ var Grakon = {
             }
             var title = ((electionCommission.level == 4) ? "УИК №" : "") + electionCommission.title;
             
-            var content = '<h3><a href="#" class="zoomIn" onclick="Grakon.zoomOnElectionCommission('+electionCommission.xCoord+', '+electionCommission.yCoord+', '+electionCommission.level+'); return false;">'+title+'</a></h3>';
+            var content = '<h3><a href="#" class="zoomIn" onclick="Grakon.zoomOnElectionCommission('+electionCommission.xCoord+', '+electionCommission.yCoord+', '+electionCommission.level+'); return false;" title="Приблизиться">'+title+'</a></h3>';
             content += '<p class="commissionType">'+type+'</p>';
             content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
             content += '<p class="address">'+electionCommission.address+'</p>';
@@ -429,6 +429,7 @@ var Grakon = {
               case 2: zoom = Grakon.MAP_LEVELS_ZOOM.regions; break;
               case 3: zoom = Grakon.MAP_LEVELS_ZOOM.districts; break;
               case 4: zoom = Grakon.MAP_LEVELS_ZOOM.areas; break;
+              case 5: zoom = Grakon.MAP_LEVELS_ZOOM.max; break;
               default: zoom = 4;
             }
             return zoom;
@@ -480,6 +481,8 @@ var Grakon = {
                 var zoom = Grakon.map.getZoom() + 1;
                 Grakon.map.setCenter(center, zoom);
             }
+            
+            OpenLayers.Console.debug(this);
         },
         
         /**
@@ -504,14 +507,17 @@ var Grakon = {
             
             var metersPerPixel = Math.max(pixelSizeInKm.w, pixelSizeInKm.h) * 1000;
             return OpenLayers.INCHES_PER_UNIT[uom] * OpenLayers.METERS_PER_INCH / metersPerPixel;
+        },
+
+        isSet: function(value) {
+            return value != null && value != "" && value != "None";
         }
     },
     
     /**
      * Создаёт карту и слои с данными в HTML-контейнере с заданным ID.
-     * @param {mapDivID} ID HTML-контейнера [String]
      */
-    init: function(place) {
+    init: function(lon, lat, zoom) {
         var mapDivID = "publicElectionsMap";
         Grakon.setupLogging();
         Grakon.initMap(mapDivID);
@@ -519,7 +525,7 @@ var Grakon = {
         Grakon.initMapTools();
         
         Grakon.setUserLocation();
-        Grakon.setDefaultView(place);
+        Grakon.setDefaultView(lon, lat, zoom);
     },
     
     /**
@@ -542,53 +548,14 @@ var Grakon = {
     
     /**
      * Центрирует карту на указанном месте с оптимальным масштабом.
-     * 
-     * @param {place} -
-     *            место, которое будет показано на карте. Если не задано, то
-     *            будет показана вся Россия
      */
-    setDefaultView: function(place) {
-        var zoom = Grakon.MAP_LEVELS_ZOOM.regions+1;
-        var center = new OpenLayers.LonLat(47.57138, 54.8384).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857"));
-
-        // Показываем заданное место на карте.
-        if (place == null || place == "") { // Если место не задано, то для
-                                            // пользователя из России будет
-                                            // определено его местоположение и
-                                            // показано на карте с максимальным
-                                            // масштабом;
-            // для пользователя из-за рубежа карта будет отцентрована по
-            // европейской части России.
-            if (YMaps.location && YMaps.location.country == "Россия") {
-                center = new OpenLayers.LonLat(YMaps.location.longitude, YMaps.location.latitude).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857"));
-                zoom = YMaps.location.zoom;
-            }
-
-            Grakon.map.setCenter(center, zoom);
-        } else {
-            var geocoder = new YMaps.Geocoder(place, {
-                geocodeProvider : "yandex#map"
-            });
-            // Создает обработчик успешного завершения геокодирования
-            YMaps.Events.observe(geocoder, geocoder.Events.Load, function() {
-                // Если объект найден, устанавливает центр карты в центр области
-                // показа объекта
-                    if (this.length()) {
-                        var left = this.get(0).getBounds().getLeft();
-                        var bottom = this.get(0).getBounds().getBottom();
-                        var right = this.get(0).getBounds().getRight();
-                        var top = this.get(0).getBounds().getTop();
-                        var bounds = new OpenLayers.Bounds(left, bottom, right, top).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:3857"));
-                        Grakon.map.zoomToExtent(bounds);
-                    } else
-                        Grakon.map.setCenter(center, zoom);
-            });
-
-            // Процесс геокодирования завершен с ошибкой
-            YMaps.Events.observe(geocoder, geocoder.Events.Fault, function(gc, error) {
-                OpenLayers.Console.error("Произошла ошибка: " + error);
-            });
-        }
+    setDefaultView: function(lon, lat, zoom) {
+        var zoom = (Grakon.Utils.isSet(zoom) && Grakon.Utils.isSet(lon) && Grakon.Utils.isSet(lat)) ? zoom : 4;
+        var lon = (Grakon.Utils.isSet(lon)) ? lon : 47.57138;
+        var lat = (Grakon.Utils.isSet(lat)) ? lat : 54.8384;
+        var center = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
+        
+        Grakon.map.setCenter(center, zoom);
     },
     
     /**
@@ -937,7 +904,7 @@ var Grakon = {
         var defaultZoom = Grakon.Utils.getZoomForLevel(type);
         
         if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
-            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel()-1 );
+            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel() );
         else if (Grakon.getLevel() >= 4)
             nextZoom = Grakon.MAP_LEVELS_ZOOM.max;
         else

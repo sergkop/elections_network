@@ -201,8 +201,7 @@ div.olControlLayerSwitcher div span {
     background-color: #3980a3;
 }
 
-.olPopupCloseBox, .olPopupContent {
-	opacity: 1;
+div.olPopupContent {
     font-size: 10pt;
 }
 

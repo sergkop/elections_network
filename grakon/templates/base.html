@@ -27,6 +27,12 @@
     <script type="text/javascript" src="{{ STATIC_URL }}libs/lightbox/jquery.lightbox-0.5.min.js"></script>
     <link href="{{ STATIC_URL }}libs/lightbox/jquery.lightbox-0.5.css" type="text/css" media="all" rel="stylesheet" />
     <script type="text/javascript">
+        jQuery(document).ready(function(){
+            var h1 = jQuery('.ym-col1').height();
+            var h2 = jQuery('.ym-col2').height();
+            jQuery('.ym-col3').css('min-height', Math.max(h1,h2));
+        });	
+	
         var CURRENT_LOCATION = [
             {% if current_location.region %}{{current_location.region.id }},{% endif %}
             {% if current_location.tik %}{{current_location.tik.id }},{% endif %}
@@ -42,11 +48,7 @@
 
         VK.init({apiId: {{ VK_APP_ID }}, onlyWidgets: true});
 
-        jQuery(document).ready(function(){
-            var h1 = jQuery('.ym-col1').height();
-            var h2 = jQuery('.ym-col2').height();
-            jQuery('.ym-col3').css('min-height', Math.max(h1,h2));
-        });
+
     </script>
     {% block head %}{% endblock %}
 

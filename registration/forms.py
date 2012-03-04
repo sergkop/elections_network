@@ -73,7 +73,7 @@ class BaseRegistrationForm(forms.ModelForm):
 
         raise forms.ValidationError(u'Пользователь с этим адресом электронной почты уже зарегистрирован')
 
-    def clean_email1(self):
+    def clean(self):
         if self.cleaned_data['email1'] != self.cleaned_data['email']:
             raise forms.ValidationError(u'Вы неправильно ввели свой email!')
 

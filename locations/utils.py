@@ -13,7 +13,7 @@ from users.models import Role, ROLE_TYPES, WebObserver
 @cache_function('regions_list', 1000)
 def regions_list():
     regions = [('', u'Выбрать субъект РФ'), None, None, None] # reserve places for Moscow, St. Petersburg and foreign countries
-    for location in Location.objects.filter(region__exact=None).only('id', 'name').order_by('name'):
+    for location in Location.objects.filter(region=None).only('id', 'name').order_by('name'):
         if location.name == u'Москва':
             regions[1] = (location.id, location.name)
         elif location.name == u'Санкт-Петербург':

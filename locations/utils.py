@@ -69,7 +69,7 @@ def get_roles_counters(location):
             .distinct().values_list('user', flat=True))
 
     if location and location.is_uik():
-        cache.set(cache_key, counters, 60)
+        cache.set(cache_key, counters, 300)
     else:
         cache.set(cache_key, counters, 300)
 

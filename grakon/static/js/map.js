@@ -390,14 +390,14 @@ var Grakon = {
             if (Grakon.map.popups != null && Grakon.map.popups[0] != null && Grakon.map.popups[0].id != "hint")
                 return;
             
-            Grakon.Utils.removePopups();
-            
-            if (evt.type == "mouseover") {
+            if (evt.type == "mouseout")
+                Grakon.Utils.removePopups();
+            else if (evt.type == "mouseover") {
                 var pattern = /\<a[^\>]+\>([^\<]+)\<\/a\>\<\/h3\>/;
                 var matches = pattern.exec(this.data.popupContentHTML);
                 
                 if (matches != null) {
-                    var width = (matches[1].length + 5) * 10;
+                    var width = (matches[1].length + 5) * 9;
                     
                     var type = "";
                     if (this.data.icon.url.indexOf("iks") != -1)
@@ -405,9 +405,15 @@ var Grakon = {
                     else if (this.data.icon.url.indexOf("tik") != -1)
                         type = "ТИК: ";
                     
-                    var content = "<center><b>"+type+matches[1]+"</b></center>";
-                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 28), content, null, false);
-                    Grakon.map.addPopup(popup);
+                    var content = "<center>"+type+matches[1]+"</center>";
+                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 20), content, null, false);
+                    
+                    if (Grakon.map.popups != null) {
+                        if (Grakon.map.popups[0] == null)
+                            Grakon.map.addPopup(popup);
+                        else
+                            Grakon.map.popups[0] = popup;
+                    }
                 }
                 OpenLayers.Event.stop(evt);
             }
@@ -784,6 +790,12 @@ var Grakon = {
         highlightCtrl.activate();
 
         // Загрузить данные на слой
+        OpenLayers.loadURL("/static/districts/1s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+            OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+        });
+        OpenLayers.loadURL("/static/districts/16s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+            OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+        });
         OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
             OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
         });

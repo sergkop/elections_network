@@ -13,18 +13,10 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
     this.title = title;
     this.address = address;
     this.data = data;
+    this.data.voters = 50;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
 };
-
-
-
-/**
- * Класс всплывающих окон. Используется при плике на метке карты.
- */
-var AnchoredPopup = OpenLayers.Class(OpenLayers.Popup.Anchored, {
-    'minSize': new OpenLayers.Size(256, 64)
-});
 
 
 
@@ -357,7 +349,7 @@ var Grakon = {
             }
             var feature = new OpenLayers.Feature(layer, location); 
             feature.closeBox = true;
-            feature.popupClass = AnchoredPopup;
+            feature.popupClass = OpenLayers.Popup.Anchored;
             feature.data.popupContentHTML = content;
             feature.data.overflow = "auto";
             feature.data.icon = new OpenLayers.Icon(
@@ -380,6 +372,8 @@ var Grakon = {
             Grakon.Utils.removePopups();
             
             this.popup = this.createPopup(this.closeBox);
+            this.popup.opacity = 0.75;
+            OpenLayers.Console.debug(this.popup);
             Grakon.Utils.updateCommissionZoomIcon(this.popup);
             Grakon.map.addPopup(this.popup);
             

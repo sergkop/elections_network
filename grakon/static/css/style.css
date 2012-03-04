@@ -203,16 +203,25 @@ div.olControlLayerSwitcher div span {
 
 .olPopupCloseBox, .olPopupContent {
 	opacity: 1;
+    font-size: 10pt;
+}
+
+div.olPopupCloseBox {
+    background-image: url(/static/js/theme/default/img/map_close.png)
 }
 
 .zoomIn {
 	padding-right: 25px;
 	background: url(/static/images/zoom_in.png) right center no-repeat;
+    font-weight: bold;
+    font-size: 12pt;
 }
 
 .zoomOut {
 	padding-right: 25px;
 	background: url(/static/images/zoom_out.png) right center no-repeat;
+    font-weight: bold;
+    font-size: 12pt;
 }
 
 .commissionType {
@@ -222,6 +231,8 @@ div.olControlLayerSwitcher div span {
 
 .address {
     font-weight: bold;
+    font-style: italic;
+    font-size: 9pt;
 }
 
 .olControlPanel {

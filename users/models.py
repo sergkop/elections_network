@@ -22,7 +22,7 @@ class RoleManager(models.Manager):
         participants = {}
 
         roles_by_type = {}
-        for role_id, role_type in self.filter(query).values_list('id', 'type'):
+        for role_id, role_type in list(self.filter(query).values_list('id', 'type')):
             roles_by_type.setdefault(role_type, []).append(role_id)
 
         role_ids = []
@@ -30,7 +30,7 @@ class RoleManager(models.Manager):
             # TODO: Temporary hack
             role_ids += roles_by_type[role_type][:10]
 
-        for role in Role.objects.filter(id__in=role_ids).select_related('user', 'location', 'organization'):
+        for role in list(Role.objects.filter(id__in=role_ids).select_related('user', 'organization')):
             participants.setdefault(role.type, []).append(role)
 
         # Sort participants by name and limit the length of the lists

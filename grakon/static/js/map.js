@@ -1,7 +1,7 @@
 /**
  * @requires regions_bbox.js
  */
-document.writeln('<script type="text/javascript" scr="regions_bbox.js"></script>');
+document.writeln('<script type="text/javascript" src="/static/js/regions_bbox.js"></script>');
 
 /**
  * Класс для избирательных округов
@@ -564,8 +564,6 @@ var Grakon = {
                 var zoom = Grakon.map.getZoom() + 1;
                 Grakon.map.setCenter(center, zoom);
             }
-            
-            OpenLayers.Console.debug(this);
         },
         
         /**
@@ -715,8 +713,8 @@ var Grakon = {
             }
         );
 		
-		// load region borders
-		if (Grakon.getLevel() == 3) {
+		// загружаем границы районов
+		if (Grakon.getLevel() == 3 && GRAKON_REGIONS_BBOX != null) {
 			var mapBounds = new OpenLayers.Bounds(left, bottom, right, top).toGeometry();
 			var regionBordersFound;
 			for (var id in GRAKON_REGIONS_BBOX) {
@@ -729,8 +727,8 @@ var Grakon = {
 						}
 					}
 					if (!regionBordersFound)
-						OpenLayers.loadURL("/static/districts/"+id+"s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-							OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ с id: "+id);
+						OpenLayers.loadURL("/static/districts/"+id+"s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function(xhr) {
+							OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
 						});
 				} else {
 					var districtsOutOfMapBounds = new Array();
@@ -847,7 +845,7 @@ var Grakon = {
         });
 		
 		// выделять субъект РФ цветом при наведении мыши
-        Grakon.Utils.initRegionHighlightControl(regions);
+        Grakon.Utils.initRegionHighlightControl(districts);
 		
         // Добавить слой на карту
 		Grakon.map.addLayer(districts);

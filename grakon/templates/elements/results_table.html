@@ -3,10 +3,10 @@
     	<span class="pseudolink" onclick="jQuery('#header-table').slideToggle(); if(jQuery(this).html()=='Скрыть результаты') {jQuery(this).html('Показать результаты');} else {jQuery(this).html('Скрыть результаты');}">Скрыть результаты</span>
     </div>	
     <div id="header-table">
-    	<div style="height: 140px;">
+    	<div style="height: 150px;">
         <table width="100%" align="center">
             <tr>
-                <th width="25%" style="text-align:left">Результаты выборов
+                <th width="30%" style="text-align:left">Результаты выборов
                     {% if not current_location %}
                         по&nbsp;России:
                     {% endif %}
@@ -26,7 +26,7 @@
                 <th width="10%">Прохоров</th>
                 <th width="10%">Путин</th>
                 <th width="10%">Недействительные</th>
-                <th width="15%" class="header-table-shortcut">&nbsp;</th>
+                <th width="10%" class="header-table-shortcut">&nbsp;</th>
             </tr>
             <tr>
                 <td class="black">по данным ЦИК</td>

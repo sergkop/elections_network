@@ -1,4 +1,9 @@
 /**
+ * @requires regions_bbox.js
+ */
+document.writeln('<script type="text/javascript" scr="regions_bbox.js"></script>');
+
+/**
  * Класс для избирательных округов
  * 
  * @param {level}
@@ -51,6 +56,91 @@ var StatisticsButtonHandlers = new Object({
         
         Grakon.loadLocationsData();
     }
+});
+
+
+
+/** 
+ * @requires OpenLayers/Marker.js 
+ * 
+ * Class: OpenLayers.Marker.LabelMarker 
+ * 
+ * Inherits from: 
+ *  - <OpenLayers.Marker>
+ */ 
+OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, { 
+
+    /** 
+     * Property: label 
+     * {String} Marker label. 
+     */ 
+    label: "", 
+
+    markerDiv: null,
+                                                 
+    labelOffset: null,
+
+    initialize: function(lonlat, icon, label) { 
+        OpenLayers.Marker.prototype.initialize.apply(this, [lonlat, icon]); 
+
+        this.label = label;
+        this.labelOffset = icon.offset;
+        this.markerDiv = OpenLayers.Util.createDiv();
+        this.markerDiv.appendChild(this.icon.imageDiv); 
+        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset); 
+        var txtDiv = OpenLayers.Util.createDiv(); 
+        txtDiv.className = 'markerLabel'; 
+        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
+        txtDiv.innerHTML = this.label; 
+        this.markerDiv.appendChild(txtDiv); 
+    },
+
+    /** 
+     * Method: destroy 
+     * Nullify references and remove event listeners to prevent circular 
+     * references and memory leaks 
+     */ 
+    destroy: function() { 
+        OpenLayers.Marker.prototype.destroy.apply(this, arguments); 
+        this.markerDiv.innerHTML = ""; 
+        this.markerDiv = null; 
+    },
+                                                 
+    display: function(visible) { 
+        OpenLayers.Marker.prototype.display.apply(this, arguments);
+        if (visible)
+            $(this.markerDiv).show();
+        else
+            $(this.markerDiv).hide();
+    },
+
+    draw: function(px) { 
+        OpenLayers.Util.modifyAlphaImageDiv(this.icon.imageDiv, 
+                                            null, 
+                                            null, 
+                                            this.icon.size, 
+                                            this.icon.url); 
+
+        OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
+        return this.markerDiv; 
+    }, 
+
+    redraw: function(px) { 
+        if ((px != null) && (this.markerDiv != null)) { 
+            OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
+        } 
+    }, 
+
+    moveTo: function (px) { 
+        this.redraw(px); 
+        this.lonlat = this.map.getLonLatFromLayerPx(px); 
+    }, 
+
+    isDrawn: function() { 
+        return false; 
+    }, 
+
+    CLASS_NAME: "OpenLayers.Marker.LabelMarker" 
 });
 
 
@@ -504,7 +594,25 @@ var Grakon = {
 
         isSet: function(value) {
             return value != null && value != "" && value != "None";
-        }
+        },
+		
+		/**
+		 * Добавляет на заданный слой выделение данных цветов при наведении мыши
+		 * @param {layer} заданный слой
+		 */
+		initRegionHighlightControl: function(layer) {
+			var highlightCtrl = new OpenLayers.Control.SelectFeature(layer, {
+				hover: true,
+				highlightOnly: true,
+				renderIntent: "temporary",
+				callbacks: {
+					click: Grakon.Utils.clickRegionHandler
+				}
+			});
+			
+			Grakon.map.addControl(highlightCtrl);
+			highlightCtrl.activate();
+		}
     },
     
     /**
@@ -515,6 +623,7 @@ var Grakon = {
         Grakon.setupLogging();
         Grakon.initMap(mapDivID);
         Grakon.initMapLayers();
+		Grakon.initDataLayers();
         Grakon.initMapTools();
         
         Grakon.setUserLocation();
@@ -605,6 +714,36 @@ var Grakon = {
                 OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
             }
         );
+		
+		// load region borders
+		if (Grakon.getLevel() == 3) {
+			var mapBounds = new OpenLayers.Bounds(left, bottom, right, top).toGeometry();
+			var regionBordersFound;
+			for (var id in GRAKON_REGIONS_BBOX) {
+				if (mapBounds.intersects( GRAKON_REGIONS_BBOX[id] )) {
+					regionBordersFound = false;
+					for (var pos in Grakon.borderLayers.districts.features) {
+						if (Grakon.borderLayers.districts.features[pos].attributes.id_1 == id) {
+							regionBordersFound = true;
+							break;
+						}
+					}
+					if (!regionBordersFound)
+						OpenLayers.loadURL("/static/districts/"+id+"s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
+							OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ с id: "+id);
+						});
+				} else {
+					var districtsOutOfMapBounds = new Array();
+					
+					for (var pos in Grakon.borderLayers.districts.features)
+						if (Grakon.borderLayers.districts.features[pos].attributes.id_1 == id)
+							districtsOutOfMapBounds.push( Grakon.borderLayers.districts.features[pos] );
+							
+					Grakon.borderLayers.districts.removeFeatures( districtsOutOfMapBounds );
+				}
+			}
+		} else
+			Grakon.borderLayers.districts.removeAllFeatures();
     },
     
     /**
@@ -664,42 +803,56 @@ var Grakon = {
         
         // запоминаем выбранную карту в cookie
         Grakon.map.events.register("changelayer", Grakon.map, Grakon.changeMapHandler );
-        
-        Grakon.addRegionBorders();
-        Grakon.addDistrictBorders();
+    },
+	
+	/**
+     * Создаёт и добавляет слои данных на карту
+     */
+    initDataLayers: function() {        
+		Grakon.initRegionBordersLayer();
+		Grakon.initDistrictBordersLayer();
         Grakon.initElectionCommissionLayers();
     },
     
     /**
      * Создать векторный слой субъектов РФ с выделением цветом при действиях мыши и добавить его на карту
      */
-    addRegionBorders: function() {          
+    initRegionBordersLayer: function() {          
         var regions = new OpenLayers.Layer.Vector("Границы субъектов РФ", {
             projection: new OpenLayers.Projection("EPSG:4326"),
             styleMap: new OpenLayers.StyleMap(Grakon.REGION_STYLES)
         });
 
         // выделять субъект РФ цветом при наведении мыши
-        var highlightCtrl = new OpenLayers.Control.SelectFeature(regions, {
-            hover: true,
-            highlightOnly: true,
-            renderIntent: "temporary",
-            callbacks: {
-                click: Grakon.Utils.clickRegionHandler
-            }
-        });
-        Grakon.map.addControl(highlightCtrl);
-        highlightCtrl.activate();
+        Grakon.Utils.initRegionHighlightControl(regions);
 
         // Добавить слой на карту
         Grakon.map.addLayer(regions);
         regions.setVisibility( Grakon.getLevel() < 3 );
         Grakon.borderLayers.regions = regions;
-
-        // Загрузить данные на слой
+		
+		// Загрузить данные на слой
         OpenLayers.loadURL(Grakon.MAP_URLS.regions, {}, Grakon.Utils, Grakon.Utils.addRegionBorders, function() {
             OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
         });
+    },
+	
+	/**
+	 * Создать векторный слой районов субъектов РФ с выделением цветом при наведении мыши
+	 */
+	initDistrictBordersLayer: function() {            
+        var districts = new OpenLayers.Layer.Vector("Границы районов", {
+            projection: new OpenLayers.Projection("EPSG:4326"),
+            styleMap: new OpenLayers.StyleMap(Grakon.DISTRICT_STYLES)
+        });
+		
+		// выделять субъект РФ цветом при наведении мыши
+        Grakon.Utils.initRegionHighlightControl(regions);
+		
+        // Добавить слой на карту
+		Grakon.map.addLayer(districts);
+        districts.setVisibility( Grakon.getLevel() == 3 );
+        Grakon.borderLayers.districts = districts;
     },
     
     /**
@@ -726,44 +879,6 @@ var Grakon = {
             Grakon.electionCommissionLayers.regions = regionsLayer;
             Grakon.map.addLayer( regionsLayer );
         }
-    },
-    
-    addDistrictBorders: function() {            
-        var districts = new OpenLayers.Layer.Vector("Границы районов", {
-            projection: new OpenLayers.Projection("EPSG:4326"),
-            styleMap: new OpenLayers.StyleMap(Grakon.DISTRICT_STYLES)
-        });
-        // Добавить слой на карту
-        districts.setVisibility( Grakon.getLevel() == 3 );
-        Grakon.borderLayers.districts = districts;
-        
-        // выделять субъект РФ цветом при наведении мыши
-        var highlightCtrl = new OpenLayers.Control.SelectFeature(districts, {
-            hover: true,
-            highlightOnly: true,
-            renderIntent: "temporary",
-            callbacks: {
-                click: Grakon.Utils.clickRegionHandler
-            }
-        });
-        Grakon.map.addControl(highlightCtrl);
-        highlightCtrl.activate();
-
-        // Загрузить данные на слой
-        OpenLayers.loadURL("/static/districts/1s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-            OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-        });
-        OpenLayers.loadURL("/static/districts/16s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-            OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-        });
-        OpenLayers.loadURL("/static/districts/48s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-            OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-        });
-        OpenLayers.loadURL("/static/districts/49s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function() {
-            OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-        });
-        
-        Grakon.map.addLayer(districts);
     },
     
     /**
@@ -923,88 +1038,3 @@ var Grakon = {
             }
     }
 };
-
-
-
-/** 
- * @requires OpenLayers/Marker.js 
- * 
- * Class: OpenLayers.Marker.LabelMarker 
- * 
- * Inherits from: 
- *  - <OpenLayers.Marker>
- */ 
-OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, { 
-
-    /** 
-     * Property: label 
-     * {String} Marker label. 
-     */ 
-    label: "", 
-
-    markerDiv: null,
-                                                 
-    labelOffset: null,
-
-    initialize: function(lonlat, icon, label) { 
-        OpenLayers.Marker.prototype.initialize.apply(this, [lonlat, icon]); 
-
-        this.label = label;
-        this.labelOffset = icon.offset;
-        this.markerDiv = OpenLayers.Util.createDiv();
-        this.markerDiv.appendChild(this.icon.imageDiv); 
-        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset); 
-        var txtDiv = OpenLayers.Util.createDiv(); 
-        txtDiv.className = 'markerLabel'; 
-        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
-        txtDiv.innerHTML = this.label; 
-        this.markerDiv.appendChild(txtDiv); 
-    },
-
-    /** 
-     * Method: destroy 
-     * Nullify references and remove event listeners to prevent circular 
-     * references and memory leaks 
-     */ 
-    destroy: function() { 
-        OpenLayers.Marker.prototype.destroy.apply(this, arguments); 
-        this.markerDiv.innerHTML = ""; 
-        this.markerDiv = null; 
-    },
-                                                 
-    display: function(visible) { 
-        OpenLayers.Marker.prototype.display.apply(this, arguments);
-        if (visible)
-            $(this.markerDiv).show();
-        else
-            $(this.markerDiv).hide();
-    },
-
-    draw: function(px) { 
-        OpenLayers.Util.modifyAlphaImageDiv(this.icon.imageDiv, 
-                                            null, 
-                                            null, 
-                                            this.icon.size, 
-                                            this.icon.url); 
-
-        OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
-        return this.markerDiv; 
-    }, 
-
-    redraw: function(px) { 
-        if ((px != null) && (this.markerDiv != null)) { 
-            OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
-        } 
-    }, 
-
-    moveTo: function (px) { 
-        this.redraw(px); 
-        this.lonlat = this.map.getLonLatFromLayerPx(px); 
-    }, 
-
-    isDrawn: function() { 
-        return false; 
-    }, 
-
-    CLASS_NAME: "OpenLayers.Marker.LabelMarker" 
-});

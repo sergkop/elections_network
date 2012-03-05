@@ -247,7 +247,7 @@ var Grakon = {
         'country': 0,
         'regions': 1,
         'districts': 7,
-        'areas': 13,
+        'areas': 11,
         'max': 15
     }),
     

@@ -68,7 +68,7 @@ def build_structure(url, lst):
             build_structure(sub_url, location['sub'])
 
 def download_structure():
-    data_path = os.path.join(os.path.dirname(__file__), '..', 'data')
+    data_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'data')
     f = open(os.path.join(data_path, 'region_ids.txt'))
     for line in f:
         title, name, region_id = line.split(', ')
@@ -80,6 +80,7 @@ def download_structure():
             url = RESULTS_ROOT_URL % {'name': name, 'region_id': region_id}
             struct = []
             build_structure(url, struct)
+            
             with open(struct_path, 'w') as region_file:
                 region_file.write(json.dumps(struct, indent=4, ensure_ascii=False).encode('utf8'))
 

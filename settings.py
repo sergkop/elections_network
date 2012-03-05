@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'organizations',
     'search',
     'violations',
+    'protocols',
 )
 
 try:

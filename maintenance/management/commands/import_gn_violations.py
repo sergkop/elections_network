@@ -45,7 +45,7 @@ GN_TO_GRAKON = {
 }
 
 class Command(BaseCommand):
-    help = "Export locations data. First parameter is the full path to results file."
+    help = "First argument must be xml file from http://gnhq.info/export/violations.xml"
 
     def handle(self, *args, **options):
         from locations.models import Location

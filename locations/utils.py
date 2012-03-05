@@ -8,6 +8,7 @@ from loginza.models import UserMap
 from grakon.models import Profile
 from grakon.utils import cache_function
 from locations.models import FOREIGN_TERRITORIES, Location
+from protocols.models import Protocol
 from users.models import Role, ROLE_TYPES, WebObserver
 from violations.models import Violation
 
@@ -71,6 +72,8 @@ def get_roles_counters(location):
             .distinct().values_list('user', flat=True))
 
     counters['violations'] = Violation.objects.filter(query).count()
+
+    counters['protocols'] = Protocol.objects.filter(query).count()
 
     if location and location.is_uik():
         cache.set(cache_key, counters, 300)

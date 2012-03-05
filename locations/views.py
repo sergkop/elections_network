@@ -12,6 +12,7 @@ from locations.models import Location
 from locations.utils import get_locations_data, get_roles_counters, get_roles_query, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
+from protocols.models import Protocol
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
 from violations.models import Violation
@@ -64,6 +65,11 @@ class LocationView(TemplateView):
         else:
             violations = []
 
+        if counters.get('protocols', 0) <= 10: # TODO: use [] instead of get
+            protocols = Protocol.objects.filter(query)
+        else:
+            protocols = []
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
@@ -85,6 +91,7 @@ class LocationView(TemplateView):
             'add_commission_member_form': CommissionMemberForm(),
 
             'violations': violations,
+            'protocols': protocols,
         })
 
         # Web observers

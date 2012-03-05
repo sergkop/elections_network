@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load elements %}
+
+{% block title %}
+Протокол -
+{% if current_location.region %}{{ current_location.region }} - {% endif %}
+{% if current_location.tik %}{{ current_location.tik }} - {% endif %}
+{{ current_location }} - Результаты президентских выборов - Гракон
+{% endblock %}
+
+{% block left_column %}
+    <div class="ym-clearfix">
+        <h3 class="column_header column_header_icon"><span class="protocols">Фотографии</span></h3>
+
+        <div class="content_block">
+            <ul>
+                <li><a href="{{ protocol.url }}">Ссылка</a></li>
+            </ul>
+        </div>
+
+        <h3 class="column_header column_header_icon"><span class="">Источник</span></h3>
+
+        <div class="content_block">
+            <ul>
+                <li><a href="{{ protocol.source.get_absolute_url }}">{{ protocol.source }}</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">{{ protocol.location }}</h2>
+
+    <div class="ym-cbox">
+        <div class="static-content">
+            <p>
+                <b>Избирательная комиссия:</b>
+                {% with location=protocol.location %}
+                    {% include "elements/location_path.html" %}
+                {% endwith %}
+            </p>
+
+            <table class="results_table">
+                <tr>
+                    <th>Поля</th>
+                    <th>Протокол</th>
+                    <th>ЦИК</th>
+                </tr>
+                {% for field in fields %}
+                <tr>
+                    <td>{{ field.0 }}</td>
+                    <td>{{ field.1 }}</td>
+                    <td>-</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

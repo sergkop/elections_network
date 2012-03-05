@@ -36,7 +36,7 @@ class Violation(models.Model):
     url = models.URLField(u'Ссылка', blank=True, help_text=u'Ссылка на доказательства')
 
     class Meta:
-        unique_together = ('content_type', 'type', 'violation_id')
+        unique_together = ('content_type', 'object_id', 'violation_id')
 
     @models.permalink
     def get_absolute_url(self):

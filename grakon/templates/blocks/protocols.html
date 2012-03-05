@@ -6,7 +6,7 @@
     <ul>
         {% for protocol in protocols %}
             <li>
-                <a href="{{ protocol.get_absolute_url }}">Протокол</a>
+                <a href="{{ protocol.get_absolute_url }}">Протокол №{{ protocol.id }}</a>
             </li>
         {% endfor %}
     </ul>

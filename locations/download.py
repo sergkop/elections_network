@@ -80,7 +80,7 @@ def download_structure():
             url = RESULTS_ROOT_URL % {'name': name, 'region_id': region_id}
             struct = []
             build_structure(url, struct)
-            
+
             with open(struct_path, 'w') as region_file:
                 region_file.write(json.dumps(struct, indent=4, ensure_ascii=False).encode('utf8'))
 

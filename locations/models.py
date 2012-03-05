@@ -3,7 +3,8 @@ from django.db import models
 
 # Url templates for pages on izbirkom.ru with information about comissions
 RESULTS_ROOT_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show&global=1&vrn=100100031793505&region=%(region_code)d&prver=0&pronetvd=null'
-RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show&global=true&root=%(root)d&tvd=%(tvd)d&vrn=100100031793505&prver=0&pronetvd=null&region=%(region_code)d&sub_region=%(region_code)d&type=0&vibid=%(tvd)d'
+#RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show&global=true&root=%(root)d&tvd=%(tvd)d&vrn=100100031793505&prver=0&pronetvd=null&region=%(region_code)d&sub_region=%(region_code)d&type=0&vibid=%(tvd)d'
+RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/region/%(region_name)s?action=show&root=%(root)d&tvd=%(tvd)d&vrn=100100031793505&region=%(region_code)d&global=true&sub_region=%(region_code)d&prver=0&pronetvd=null&vibid=%(tvd)d&type=226'
 
 #INFO_ROOT_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=0&vrnkomis=0'
 INFO_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=%(vrnorg)d&vrnkomis=%(vrnkomis)d'
@@ -89,7 +90,7 @@ class Location(models.Model):
         # TODO: name, address require escape
         js += '"' + self.name + '","' + self.name + '","' + self.address.replace('"', '') + '",'
         js += str(self.x_coord) + ',' + str(self.y_coord) + ',{ '
-    
+
         if 'voter' in counts:
             js += 'voters:' + str(counts['voter']) + ','
         if 'observer' in counts:

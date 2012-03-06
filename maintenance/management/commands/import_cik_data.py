@@ -52,7 +52,7 @@ class Command(BaseCommand):
 
         locations_processed = Protocol.objects.filter(content_type=content_type, object_id=organization.id) \
                 .values_list('location', flat=True)
-        uiks_count = Location.objects.exclude(tik=None).exclude(id__in=locations_processed).count()
+        uiks_count = Location.objects.exclude(tik=None).count()
         j = len(locations_processed)
         for location in Location.objects.exclude(tik=None).exclude(id__in=locations_processed):
             trs = HtmlXPathSelector(text=read_url(location.results_url())) \

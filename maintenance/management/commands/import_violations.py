@@ -46,18 +46,44 @@ GN_TO_GRAKON = {
     '36': '15',
 }
 
-class Command(BaseCommand):
-    help = "Import violations"
+GOLOS_TO_GRAKON = {
+    '2': '9',
+    '7': '15',
+    '9': '7',
+    '11': '9',
+    '13': '15',
+    '16': '15',
+    '17': '6',
+    '26': '15',
+    '99': '15',
+    '103': '5',
+    '104': '15',
+    '105': '9',
+    '106': '15',
+    '107': '8',
+    '108': '1',
+    '109': '12',
+    '110': '15',
+}
 
+class Command(BaseCommand):
+    help = "Import violations. Pass parameter 'gn' or 'golos'"
+
+    # TODO: 40% of golos violations are not imported
     def handle(self, *args, **options):
         from locations.models import Location
         from organizations.models import Organization
         from violations.models import Violation
 
-        organization = Organization.objects.get(name='nabludatel')
         content_type = ContentType.objects.get_for_model(Organization)
 
-        xml = fromstring(read_url('http://gnhq.info/export/violations.xml', encoding=None))
+        if args[0] == 'gn':
+            organization = Organization.objects.get(name='nabludatel')
+            xml = fromstring(read_url('http://gnhq.info/export/violations.xml', encoding=None))
+        elif args[0] == 'golos':
+            organization = Organization.objects.get(name='golos')
+            xml = fromstring(read_url('http://www.kartanarusheniy.org/export.xml', encoding=None))
+
         for viol_xml in xml:
             data = {}
             for field in viol_xml:
@@ -75,10 +101,14 @@ class Command(BaseCommand):
                         data['region'] = 91
                     elif data['region'] == 59:
                         data['region'] = 90
+                    elif data['region'] == 99:
+                        continue
                 elif field.tag == 'uik':
                     data['uik'] = field.text
                 elif field.tag == 'type':
                     data['type'] = GN_TO_GRAKON[field.text]
+                elif field.tag == 'vtype':
+                    data['type'] = GOLOS_TO_GRAKON[field.text]
 
             # Try to get location
             try:
@@ -87,7 +117,12 @@ class Command(BaseCommand):
                 print "Failed to find location of violation " + str(data['id'])
                 continue
 
-            fields = {'text': data['text'], 'url': '', 'type': data['type'], 'location': location}
+            fields = {'text': data['text'], 'type': data['type'], 'location': location}
+            if args[0] == 'gn':
+                fields['url'] = ''
+            elif args[0] == 'golos':
+                fields['url'] = 'http://www.kartanarusheniy.org/'+str(data['id'])
+
             violation, created = Violation.objects.get_or_create(content_type=content_type, object_id=organization.id,
                     violation_id=data['id'], defaults=fields)
 

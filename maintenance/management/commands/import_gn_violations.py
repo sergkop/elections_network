@@ -5,6 +5,8 @@ from django.core.management.base import BaseCommand
 
 from lxml.etree import fromstring
 
+from grakon.utils import read_url
+
 GN_TO_GRAKON = {
     '1': '2',
     '2': '1',
@@ -45,7 +47,7 @@ GN_TO_GRAKON = {
 }
 
 class Command(BaseCommand):
-    help = "First argument must be xml file from http://gnhq.info/export/violations.xml"
+    help = "Import violations"
 
     def handle(self, *args, **options):
         from locations.models import Location
@@ -55,7 +57,7 @@ class Command(BaseCommand):
         organization = Organization.objects.get(name='nabludatel')
         content_type = ContentType.objects.get_for_model(Organization)
 
-        xml = fromstring(open(args[0], 'r').read())
+        xml = fromstring(read_url('http://gnhq.info/export/violations.xml', encoding=None))
         for viol_xml in xml:
             data = {}
             for field in viol_xml:
@@ -79,7 +81,13 @@ class Command(BaseCommand):
                 print "Failed to find location of violation " + str(data['id'])
                 continue
 
-            Violation.objects.get_or_create(content_type=content_type, object_id=organization.id,
+            violation, created = Violation.objects.get_or_create(content_type=content_type, object_id=organization.id,
                     violation_id=data['id'], defaults={'text': data['text'],
                     'url': '', 'type': data['type'], 'location': location,
             })
+
+            if not created:
+                violation.text = data['text']
+                violation.url = ''
+                violation.type = data['type']
+                violation.save()

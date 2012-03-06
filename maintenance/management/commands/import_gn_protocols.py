@@ -5,8 +5,10 @@ from django.core.management.base import BaseCommand
 
 from lxml.etree import fromstring
 
+from grakon.utils import read_url
+
 class Command(BaseCommand):
-    help = "First argument must be xml file from http://gnhq.info/export/protocols.xml"
+    help = "Import GN prorocols"
 
     def handle(self, *args, **options):
         from locations.models import Location
@@ -16,10 +18,10 @@ class Command(BaseCommand):
         organization = Organization.objects.get(name='nabludatel')
         content_type = ContentType.objects.get_for_model(Organization)
 
-        xml = fromstring(open(args[0], 'r').read())
+        xml = fromstring(read_url('http://gnhq.info/export/protocols.xml', None))
         for protocol_xml in xml:
             data = {}
-            numbers = {}
+            fields = {}
             for field in protocol_xml:
                 if field.tag == 'id':
                     data['id'] = int(field.text)
@@ -47,7 +49,7 @@ class Command(BaseCommand):
                     if p_index<1 or p_index>23:
                         continue
 
-                    numbers[field.tag] = int(field.text)
+                    fields[field.tag] = int(field.text)
 
             # Try to get location
             try:
@@ -59,8 +61,13 @@ class Command(BaseCommand):
             if 'url' not in data:
                 continue # skip protocols without images
 
-            numbers.update({'url': data['url'], 'location': location,
+            fields.update({'url': data['url'], 'location': location,
                     'sign_time': data.get('sign_time'), 'complaints': data.get('complaints')})
 
-            Protocol.objects.get_or_create(content_type=content_type, object_id=organization.id,
-                    protocol_id=data['id'], defaults=numbers)
+            protocol, created = Protocol.objects.get_or_create(content_type=content_type, object_id=organization.id,
+                    protocol_id=data['id'], defaults=fields)
+
+            if not created:
+                for field in fields:
+                    setattr(protocol, field, fields[field])
+                protocol.save()

@@ -72,7 +72,7 @@
             <div class="ym-hlist">
                 <ul>
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                    <!--li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_table %}">Поиск</a></li--> 
+                    <li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_table %}">Поиск</a></li> 
                     <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url how_to_use %}">Акции</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
@@ -114,10 +114,10 @@
             </div> 
             &nbsp; &nbsp; &nbsp; &nbsp;
         {% endif %}
-        <!--div class="main-buttons-map">
+        <div class="main-buttons-map">
             <a href="{% url map %}">Ход выборов на карте</a>
         </div>
-        &nbsp; &nbsp; &nbsp; &nbsp;-->
+        &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-blue">
             <a href="#" id="clip_btn">Видео-ролик</a>
         </div>

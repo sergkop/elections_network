@@ -83,17 +83,23 @@ class LocationView(TemplateView):
             cik_data = {'girinovskiy': '-', 'zyuganov': '-', 'mironov': '-',
                 'prokhorov': '-', 'putin': '-'}
         else:
-            total = cik_protocol.p19+cik_protocol.p20+cik_protocol.p21+cik_protocol.p22+cik_protocol.p23
-            def format_percent(count):
-                return '%2.2f%%' % (100*float(count)/total)
+            total = cik_protocol.p9 + cik_protocol.p10
 
-            cik_data = {
-                'girinovskiy': format_percent(cik_protocol.p19),
-                'zyuganov': format_percent(cik_protocol.p20),
-                'mironov': format_percent(cik_protocol.p21),
-                'prokhorov': format_percent(cik_protocol.p22),
-                'putin': format_percent(cik_protocol.p23),
-            }
+            if total == 0: # data has not been downloaded
+                cik_data = {'girinovskiy': '-', 'zyuganov': '-', 'mironov': '-',
+                        'prokhorov': '-', 'putin': '-', 'invalid': '-'}
+            else:
+                def format_percent(count):
+                    return '%2.2f%%' % (100*float(count)/total)
+
+                cik_data = {
+                    'girinovskiy': format_percent(cik_protocol.p19),
+                    'zyuganov': format_percent(cik_protocol.p20),
+                    'mironov': format_percent(cik_protocol.p21),
+                    'prokhorov': format_percent(cik_protocol.p22),
+                    'putin': format_percent(cik_protocol.p23),
+                    'invalid': format_percent(cik_protocol.p9),
+                }
 
         ctx.update({
             'loc_id': kwargs['loc_id'],

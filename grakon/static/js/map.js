@@ -1,7 +1,7 @@
 /**
  * @requires regions_bbox.js
  */
-document.writeln('<script type="text/javascript" src="/static/js/regions_bbox.js"></script>');
+document.writeln('<script type="text/javascript" src="/static/districts/regions_bbox.js"></script>');
 
 /**
  * Класс для избирательных округов
@@ -462,6 +462,9 @@ var Grakon = {
             Grakon.Utils.removePopups();
             
             this.popup = this.createPopup(this.closeBox);
+            this.popup.addCloseBox(function() {
+                Grakon.map.removePopup( Grakon.map.popups[0] );
+            });
             this.popup.opacity = 0.9;
             Grakon.Utils.updateCommissionZoomIcon(this.popup);
             Grakon.map.addPopup(this.popup);

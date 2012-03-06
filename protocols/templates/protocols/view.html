@@ -4,9 +4,9 @@
 
 {% block title %}
 Протокол -
-{% if current_location.region %}{{ current_location.region }} - {% endif %}
-{% if current_location.tik %}{{ current_location.tik }} - {% endif %}
-{{ current_location }} - Результаты президентских выборов - Гракон
+{% if protocol.location.region %}{{ protocol.location.region }} - {% endif %}
+{% if protocol.location.tik %}{{ protocol.location.tik }} - {% endif %}
+{{ protocol.location }} - Результаты президентских выборов - Гракон
 {% endblock %}
 
 {% block left_column %}
@@ -51,7 +51,7 @@
                 <tr>
                     <td>{{ field.0 }}</td>
                     <td>{{ field.1 }}</td>
-                    <td>-</td>
+                    <td>{{ field.2 }}</td>
                 </tr>
                 {% endfor %}
             </table>

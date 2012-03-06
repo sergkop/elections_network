@@ -4,6 +4,18 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 from locations.models import Location
+from organizations.models import Organization
+
+class ProtocolManager(models.Manager):
+    def cik_protocol(self, location):
+        cik = Organization.objects.get(name='cik')
+        content_type = ContentType.objects.get_for_model(Organization)
+
+        try:
+            return self.get(content_type=content_type,
+                    object_id=cik.id, location=location)
+        except self.model.DoesNotExist:
+            return None
 
 class Protocol(models.Model):
     content_type = models.ForeignKey(ContentType)
@@ -43,6 +55,8 @@ class Protocol(models.Model):
     url = models.URLField(u'Ссылка на фотографию')
 
     verified = models.BooleanField(default=False)
+
+    objects = ProtocolManager()
 
     class Meta:
         unique_together = ('content_type', 'object_id', 'protocol_id')

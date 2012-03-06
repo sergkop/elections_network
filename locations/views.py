@@ -67,23 +67,25 @@ class LocationView(TemplateView):
         else:
             violations = []
 
-        if counters.get('protocols', 0) <= 10: # TODO: use [] instead of get
-            protocols = Protocol.objects.filter(query)
+        cik = Organization.objects.get(name='cik')
+        content_type = ContentType.objects.get_for_model(Organization)
+
+        if counters['protocols'] <= 10:
+            protocols = Protocol.objects.filter(query).exclude(content_type=content_type,
+                    object_id=cik.id)
         else:
             protocols = []
 
-        organization = Organization.objects.get(name='cik')
-        content_type = ContentType.objects.get_for_model(Organization)
-
         try:
             cik_protocol = Protocol.objects.get(content_type=content_type,
-                    object_id=organization.id, location=location)
+                    object_id=cik.id, location=location)
         except Protocol.DoesNotExist:
             cik_data = {'girinovskiy': '-', 'zyuganov': '-', 'mironov': '-',
                 'prokhorov': '-', 'putin': '-'}
         else:
+            total = cik_protocol.p19+cik_protocol.p20+cik_protocol.p21+cik_protocol.p22+cik_protocol.p23
             def format_percent(count):
-                return '%2.2f%%' % (100*float(count)/cik_protocol.p10)
+                return '%2.2f%%' % (100*float(count)/total)
 
             cik_data = {
                 'girinovskiy': format_percent(cik_protocol.p19),

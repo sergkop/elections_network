@@ -29,7 +29,13 @@
                 <th width="10%" class="header-table-shortcut">&nbsp;</th>
             </tr>
             <tr>
-                <td class="black">по данным ЦИК</td>
+                <td class="black">
+                    {% if current_location.is_foreign %}
+                        по данным ЦИК
+                    {% else %}
+                        <a href="{{ current_location.results_url }}" target="_blank">по данным ЦИК</a>
+                    {% endif %}
+                </td>
                 <td>{{ cik_data.girinovskiy }}</td>
                 <td>{{ cik_data.zyuganov }}</td>
                 <td>{{ cik_data.mironov }}</td>

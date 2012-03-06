@@ -1,6 +1,7 @@
 # coding=utf8
 import json
 
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -12,6 +13,7 @@ from locations.models import Location
 from locations.utils import get_locations_data, get_roles_counters, get_roles_query, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
+from organizations.models import Organization
 from protocols.models import Protocol
 from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
@@ -70,6 +72,27 @@ class LocationView(TemplateView):
         else:
             protocols = []
 
+        organization = Organization.objects.get(name='cik')
+        content_type = ContentType.objects.get_for_model(Organization)
+
+        try:
+            cik_protocol = Protocol.objects.get(content_type=content_type,
+                    object_id=organization.id, location=location)
+        except Protocol.DoesNotExist:
+            cik_data = {'girinovskiy': '-', 'zyuganov': '-', 'mironov': '-',
+                'prokhorov': '-', 'putin': '-'}
+        else:
+            def format_percent(count):
+                return '%2.2f%%' % (100*float(count)/cik_protocol.p10)
+
+            cik_data = {
+                'girinovskiy': format_percent(cik_protocol.p19),
+                'zyuganov': format_percent(cik_protocol.p20),
+                'mironov': format_percent(cik_protocol.p21),
+                'prokhorov': format_percent(cik_protocol.p22),
+                'putin': format_percent(cik_protocol.p23),
+            }
+
         ctx.update({
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
@@ -92,6 +115,8 @@ class LocationView(TemplateView):
 
             'violations': violations,
             'protocols': protocols,
+
+            'cik_data': cik_data,
         })
 
         # Web observers

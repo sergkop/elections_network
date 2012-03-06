@@ -55,8 +55,10 @@ class Command(BaseCommand):
         uiks_count = Location.objects.exclude(tik=None).exclude(id__in=locations_processed).count()
         j = len(locations_processed)
         for location in Location.objects.exclude(tik=None).exclude(id__in=locations_processed):
-            trs = list(HtmlXPathSelector(text=read_url(location.results_url())) \
-                    .select("//body//table[3]//tr[4]//td//table[6]//tr"))
+            trs = HtmlXPathSelector(text=read_url(location.results_url())) \
+                    .select("//table[@width='100%' and @cellspacing='1' and @cellpadding='2' and @bgcolor='#ffffff']//tr")
+            #trs = list(HtmlXPathSelector(text=read_url(location.results_url())) \
+            #        .select("//body//table[3]//tr[4]//td//table[6]//tr"))
 
             del trs[18]
             assert len(trs) == 23, "incorrect number of rows"
@@ -72,4 +74,3 @@ class Command(BaseCommand):
 
             print_progress(j, uiks_count)
             j += 1
-

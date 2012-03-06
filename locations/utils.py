@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse
@@ -8,6 +9,7 @@ from loginza.models import UserMap
 from grakon.models import Profile
 from grakon.utils import cache_function
 from locations.models import FOREIGN_TERRITORIES, Location
+from organizations.models import Organization
 from protocols.models import Protocol
 from users.models import Role, ROLE_TYPES, WebObserver
 from violations.models import Violation
@@ -73,7 +75,11 @@ def get_roles_counters(location):
 
     counters['violations'] = Violation.objects.filter(query).count()
 
-    counters['protocols'] = Protocol.objects.filter(query).count()
+    cik = Organization.objects.get(name='cik')
+    content_type = ContentType.objects.get_for_model(Organization)
+
+    counters['protocols'] = Protocol.objects.filter(query).exclude(content_type=content_type,
+            object_id=cik.id).count()
 
     if location and location.is_uik():
         cache.set(cache_key, counters, 300)

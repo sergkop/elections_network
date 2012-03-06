@@ -12,7 +12,7 @@ from locations.models import Location
 # TODO: drop exclude field?
 class Organization(models.Model):
     title = models.CharField(u'Название', max_length=50)
-    name = models.CharField(u'Идентификатор', max_length=30, unique=True)
+    name = models.CharField(u'Идентификатор', max_length=30, unique=True, db_index=True)
     about = HTMLField(u'Описание', default='')
     telephone = models.CharField(u'Телефон', max_length=50, blank=True)
     address = models.CharField(u'Адрес', max_length=200, blank=True)

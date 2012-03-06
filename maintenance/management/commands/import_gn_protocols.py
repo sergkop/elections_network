@@ -28,7 +28,13 @@ class Command(BaseCommand):
                 elif field.tag == 'ncomp':
                     data['complaints'] = int(field.text)
                 elif field.tag == 'region':
-                    data['region'] = int(field.text) # coincides with our projection
+                    data['region'] = int(field.text)
+                    if data['region'] == 75:
+                        data['region'] = 92
+                    elif data['region'] == 41:
+                        data['region'] = 91
+                    elif data['region'] == 59:
+                        data['region'] = 90
                 elif field.tag == 'uik':
                     data['uik'] = field.text
                 elif field.tag == 'updt':

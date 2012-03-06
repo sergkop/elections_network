@@ -68,7 +68,13 @@ class Command(BaseCommand):
                 elif field.tag == 'obscomment':
                     data['text'] = field.text or ''
                 elif field.tag == 'region':
-                    data['region'] = int(field.text) # coincides with our projection
+                    data['region'] = int(field.text)
+                    if data['region'] == 75:
+                        data['region'] = 92
+                    elif data['region'] == 41:
+                        data['region'] = 91
+                    elif data['region'] == 59:
+                        data['region'] = 90
                 elif field.tag == 'uik':
                     data['uik'] = field.text
                 elif field.tag == 'type':
@@ -81,13 +87,11 @@ class Command(BaseCommand):
                 print "Failed to find location of violation " + str(data['id'])
                 continue
 
+            fields = {'text': data['text'], 'url': '', 'type': data['type'], 'location': location}
             violation, created = Violation.objects.get_or_create(content_type=content_type, object_id=organization.id,
-                    violation_id=data['id'], defaults={'text': data['text'],
-                    'url': '', 'type': data['type'], 'location': location,
-            })
+                    violation_id=data['id'], defaults=fields)
 
             if not created:
-                violation.text = data['text']
-                violation.url = ''
-                violation.type = data['type']
-                violation.save()
+                for field in fields:
+                    setattr(violation, field, fields[field])
+                    violation.save()

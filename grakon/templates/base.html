@@ -116,7 +116,7 @@
         {% endif %}-->
         <div class="main-buttons-blue">
             {% if request.user.is_authenticated %}
-                <a href="{% url upload_protocol %}">Выложить протокол</a>
+                <a href="#" id="upload_protocol">Выложить протокол</a>
             {% else %}
                 <a href="#" id="upload_protocol1">Выложить протокол</a>
             {% endif %}
@@ -184,7 +184,7 @@
                 <div>
                     <a href="{% url main %}">Гракон</a> &copy;2012
                     &mdash; Верстка выполнена с помощью <a href="http://www.yaml.de">YAML</a> &nbsp; &nbsp;
-                    
+
                     <a href="http://www.facebook.com/grakonteam" title="Читайте нас в Facebook" target="_blank"><img src="{{ STATIC_URL }}images/facebook.gif" align="texttop"/></a>
                     <a href="http://vk.com/grakonteam" title="Читайте нас во Вконтакте" target="_blank"><img src="{{ STATIC_URL }}images/vkontakte.gif" align="texttop"/></a>
                     <a href="https://twitter.com/#!/grakonteam" title="Читайте нас в Твиттере" target="_blank"><img src="{{ STATIC_URL }}images/twitter.gif" align="texttop"/></a>         
@@ -199,7 +199,7 @@
     <!-- TODO: move it to the top -->
     {% include "dialogs/login.html" %}
     <script type="text/javascript">
-        $("#login_btn, #login_btn1, #report_violation1, #upload_protocol1").click(function(){
+        $("#login_btn, #login_btn1, #report_violation1, #upload_protocol, #upload_protocol1").click(function(){
             login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах:");
         });
     </script>

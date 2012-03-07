@@ -141,6 +141,8 @@ class LocationView(TemplateView):
 
             'protocol_data': protocol_data,
             'cik_data': cik_data,
+
+            'upload_protocol_url': reverse('upload_protocol')+'?loc_id='+str(location.id),
         })
 
         # Web observers

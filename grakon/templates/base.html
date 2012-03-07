@@ -108,18 +108,18 @@
     </nav>
 
     <div class="main-buttons">
-        {% if not request.user.is_authenticated %}
+        <!--{% if not request.user.is_authenticated %}
             <div class="main-buttons-blue">
                 <a href="#" id="login_btn1">Записаться</a>
             </div> 
             &nbsp; &nbsp; &nbsp; &nbsp;
-        {% endif %}
-        <div class="main-buttons-map">
-            <a href="{% url map %}">Ход выборов на карте</a>
-        </div>
-        &nbsp; &nbsp; &nbsp; &nbsp;
+        {% endif %}-->
         <div class="main-buttons-blue">
-            <a href="#" id="clip_btn">Видео-ролик</a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url upload_protocol %}">Выложить протокол</a>
+            {% else %}
+                <a href="#" id="upload_protocol1">Выложить протокол</a>
+            {% endif %}
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-blue">
@@ -128,6 +128,10 @@
             {% else %}
                 <a href="#" id="report_violation1">Сообщить о нарушении</a>
             {% endif %}
+        </div>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <div class="main-buttons-map">
+            <a href="{% url map %}">Ход выборов на карте</a>
         </div>
     </div>
 
@@ -195,7 +199,7 @@
     <!-- TODO: move it to the top -->
     {% include "dialogs/login.html" %}
     <script type="text/javascript">
-        $("#login_btn, #login_btn1, #report_violation1").click(function(){
+        $("#login_btn, #login_btn1, #report_violation1, #upload_protocol1").click(function(){
             login_dialog_init("Войдите в систему, используя логин/email или свой аккаунт на других сервисах:");
         });
     </script>

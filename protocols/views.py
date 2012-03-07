@@ -86,7 +86,7 @@ def upload_protocol(request):
                     settings.URL_PREFIX+protocol.get_absolute_url(),
                     settings.URL_PREFIX+'/'+settings.ADMIN_PREFIX+'/protocols/protocol/'+str(protocol.id)+'/')
 
-            send_mail(u'Выложен новый протокол', message, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
+            send_mail(u'[ПРОТОКОЛ] Выложен новый протокол', message, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
             return redirect(protocol.get_absolute_url())
 
         location = getattr(form, 'location', None)

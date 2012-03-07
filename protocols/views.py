@@ -10,16 +10,15 @@ from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
 
-import cloudfiles
-
 from locations.models import Location
 from protocols.forms import ProtocolForm
 from protocols.models import AttachedFile, Protocol
 
 try:
+    import cloudfiles
     cloudfiles_conn = cloudfiles.get_connection(getattr(settings, 'CLOUDFILES_USERNAME'),
             getattr(settings, 'CLOUDFILES_KEY'))
-except cloudfiles.errors.AuthenticationFailed:
+except:
     cloudfiles_conn = None
 
 class ProtocolView(TemplateView):

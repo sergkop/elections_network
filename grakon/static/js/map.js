@@ -69,7 +69,7 @@ var StatisticsButtonHandlers = new Object({
  * Inherits from: 
  *  - <OpenLayers.Marker>
  */ 
-OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, { 
+OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
 
     /** 
      * Property: label 
@@ -81,19 +81,16 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
                                                  
     labelOffset: null,
 
-    initialize: function(lonlat, icon, label) { 
+    initialize: function(lonlat, icon, label, showLabel) { 
         OpenLayers.Marker.prototype.initialize.apply(this, [lonlat, icon]); 
 
         this.label = label;
-        this.labelOffset = icon.offset;
         this.markerDiv = OpenLayers.Util.createDiv();
         this.markerDiv.appendChild(this.icon.imageDiv); 
-        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset); 
-        var txtDiv = OpenLayers.Util.createDiv(); 
-        txtDiv.className = 'markerLabel'; 
-        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
-        txtDiv.innerHTML = this.label; 
-        this.markerDiv.appendChild(txtDiv); 
+        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset);
+
+        if (showLabel)
+            this.addLabel(label);
     },
 
     /** 
@@ -109,10 +106,14 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
                                                  
     display: function(visible) { 
         OpenLayers.Marker.prototype.display.apply(this, arguments);
-        if (visible)
+        if (visible) {
+            if ($(this.markerDiv).children().length() == 0)
+                this.addLabel();
             $(this.markerDiv).show();
-        else
+        } else {
+            $(this.markerDiv).children().hide();
             $(this.markerDiv).hide();
+        }
     },
 
     draw: function(px) { 
@@ -138,7 +139,17 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
 
     isDrawn: function() { 
         return false; 
-    }, 
+    },
+      
+    /**
+     */
+    addLabel: function() {
+        var txtDiv = OpenLayers.Util.createDiv();
+        txtDiv.className = 'markerLabel';
+        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.icon.offset);
+        txtDiv.innerHTML = this.label;
+        this.markerDiv.appendChild(txtDiv);
+    },
 
     CLASS_NAME: "OpenLayers.Marker.LabelMarker" 
 });
@@ -489,7 +500,7 @@ var Grakon = {
                 iconSize,
                 iconOffset);
                     
-            var marker = new OpenLayers.Marker.LabelMarker(location, feature.data.icon, iconLabel);
+            var marker = new OpenLayers.Marker.LabelMarker(location, feature.data.icon, iconLabel, iconMode != "default");
             marker['ecID'] = ecID;
             marker['data'] = data;
  

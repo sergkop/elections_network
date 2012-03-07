@@ -12,6 +12,6 @@
     // Add counter in the header of the wall tab
     var display_counter = $("<a/>").attr("data-disqus-identifier", "location/{{ current_location.id }}")
             .attr("href", "{{ request.path }}#disqus_thread");
-    $("#tabs > ul li:nth-child(2)").append(display_counter);
+    $("#tabs > ul li:nth-child(1)").append(display_counter);
     display_counter.click(function(){$(this).attr("href", $("#tabs ul li:nth-child(2) a:first").attr("href"))});
 </script>

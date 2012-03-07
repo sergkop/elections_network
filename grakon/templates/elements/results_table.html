@@ -36,24 +36,35 @@
                         <a href="{{ current_location.results_url }}" target="_blank">по данным ЦИК</a>
                     {% endif %}
                 </td>
-                <td>{{ cik_data.girinovskiy }}</td>
-                <td>{{ cik_data.zyuganov }}</td>
-                <td>{{ cik_data.mironov }}</td>
-                <td>{{ cik_data.prokhorov }}</td>
-                <td>{{ cik_data.putin }}</td>
-                <td>{{ cik_data.invalid }}</td>
+                <td>{{ cik_data.girinovskiy|safe }}</td>
+                <td>{{ cik_data.zyuganov|safe }}</td>
+                <td>{{ cik_data.mironov|safe }}</td>
+                <td>{{ cik_data.prokhorov|safe }}</td>
+                <td>{{ cik_data.putin|safe }}</td>
+                <td>{{ cik_data.invalid|safe }}</td>
                 <td rowspan="2" class="header-table-shortcut">
                     <!--a href="" class="button">Подробнее</a-->
                 </td>
             </tr>
             <tr>
-                <td class="black">по протоколам наблюдателей</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
+                <td class="black">
+                    по протоколам наблюдателей
+                    {% if current_location.is_uik %}
+                        {% if verified_protocols %}
+                            ({% for protocol in verified_protocols %}<a href="{{ protocol.get_absolute_url }}">№{{ protocol.id }}</a>{% if not forloop.last %}, {% endif %}{% endfor %})
+                        {% else %}
+                            
+                        {% endif %}
+                    {% else %}
+                        по протоколам наблюдателей
+                    {% endif %}
+                </td>
+                <td>{{ protocol_data.girinovskiy|safe }}</td>
+                <td>{{ protocol_data.zyuganov|safe }}</td>
+                <td>{{ protocol_data.mironov|safe }}</td>
+                <td>{{ protocol_data.prokhorov|safe }}</td>
+                <td>{{ protocol_data.putin|safe }}</td>
+                <td>{{ protocol_data.invalid|safe }}</td>
             </tr>
         </table> 
         </div>

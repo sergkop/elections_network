@@ -67,7 +67,7 @@ class Command(BaseCommand):
             if 'url' not in data:
                 continue # skip protocols without images
 
-            fields.update({'url': data['url'], 'location': location,
+            fields.update({'url': data['url'], 'location': location, 'verified': True,
                     'sign_time': data.get('sign_time'), 'complaints': data.get('complaints')})
 
             protocol, created = Protocol.objects.get_or_create(content_type=content_type, object_id=organization.id,

@@ -11,13 +11,13 @@
 
             {% if current_location.region %}
                 <li>
-                    <a href="{{ current_location.region.get_absolute_url }}">{{ current_location.region }}<i></i><b></b></a> 
+                    <a href="{% url location_wall current_location.region.id %}">{{ current_location.region }}<i></i><b></b></a> 
                 </li>
             {% endif %}
 
             {% if current_location.tik %}
                 <li>
-                    <a href="{{ current_location.tik.get_absolute_url }}">{{ current_location.tik }}<i></i><b></b></a>
+                    <a href="{% url location_wall current_location.tik.id %}">{{ current_location.tik }}<i></i><b></b></a>
                 </li>
             {% endif %}
 

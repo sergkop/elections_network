@@ -3,7 +3,7 @@
 {% load elements %}
 
 {% block title %}
-    Поиск участников - Гракон - гражданский контроль за президентскими выборами
+    Поиск - Гракон - гражданский контроль за президентскими выборами
 {% endblock %}
 
 {% block head %}
@@ -56,6 +56,6 @@
 {% endblock %}
 
 {% block content_header %}
-    <h2 class="location_header">Поиск участников{% if result_count %} ({{ result_count }}){% endif %}</h2>
-    {% tabs "tabs" tab "" "" "Таблица" "user_table" "search/table.html" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
+    <h2 class="location_header">Поиск{% if result_count %} ({{ result_count }}){% endif %}</h2>
+    {% tabs "tabs" tab "" "" "Участники" "user_table" "search/table.html" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
 {% endblock %}

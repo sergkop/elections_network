@@ -19,6 +19,31 @@ from users.forms import CommissionMemberForm, WebObserverForm
 from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
 from violations.models import Violation
 
+def format_percent(count, total):
+    return '%2.2f%%' % (100*float(count)/total)
+
+def results_table_data(protocols):
+    protocols = [protocol for protocol in protocols if protocol.p9+protocol.p10>0]
+
+    if len(protocols) == 0:
+        return {'girinovskiy': '&mdash;', 'zyuganov': '&mdash;', 'mironov': '&mdash;',
+                'prokhorov': '&mdash;', 'putin': '&mdash;', 'invalid': '&mdash;'}
+
+    data = {}
+    for field in ('p9', 'p10', 'p19', 'p20', 'p21', 'p22', 'p23'):
+        data[field] = sum(getattr(protocol, field) for protocol in protocols)
+
+    total = data['p9'] + data['p10']
+
+    return {
+        'girinovskiy': format_percent(data['p19'], total),
+        'zyuganov': format_percent(data['p20'], total),
+        'mironov': format_percent(data['p21'], total),
+        'prokhorov': format_percent(data['p22'], total),
+        'putin': format_percent(data['p23'], total),
+        'invalid': format_percent(data['p9'], total),
+    }
+
 # TODO: don't query lists of roles if it's not needed
 # TODO: mark links previously reported by user
 # TODO: web_observers and supporters tabs are not activated for tiks and lead to crush
@@ -76,30 +101,16 @@ class LocationView(TemplateView):
         else:
             protocols = []
 
+        verified_protocols = filter(lambda protocol: protocol.verified, protocols)
+
         try:
-            cik_protocol = Protocol.objects.get(content_type=content_type,
-                    object_id=cik.id, location=location)
+            cik_protocols = [Protocol.objects.get(content_type=content_type,
+                    object_id=cik.id, location=location)]
         except Protocol.DoesNotExist:
-            cik_data = {'girinovskiy': '-', 'zyuganov': '-', 'mironov': '-',
-                'prokhorov': '-', 'putin': '-'}
-        else:
-            total = cik_protocol.p9 + cik_protocol.p10
+            cik_protocols = []
 
-            if total == 0: # data has not been downloaded
-                cik_data = {'girinovskiy': '-', 'zyuganov': '-', 'mironov': '-',
-                        'prokhorov': '-', 'putin': '-', 'invalid': '-'}
-            else:
-                def format_percent(count):
-                    return '%2.2f%%' % (100*float(count)/total)
-
-                cik_data = {
-                    'girinovskiy': format_percent(cik_protocol.p19),
-                    'zyuganov': format_percent(cik_protocol.p20),
-                    'mironov': format_percent(cik_protocol.p21),
-                    'prokhorov': format_percent(cik_protocol.p22),
-                    'putin': format_percent(cik_protocol.p23),
-                    'invalid': format_percent(cik_protocol.p9),
-                }
+        cik_data = results_table_data(cik_protocols)
+        protocol_data = results_table_data(verified_protocols)
 
         ctx.update({
             'loc_id': kwargs['loc_id'],
@@ -123,7 +134,9 @@ class LocationView(TemplateView):
 
             'violations': violations,
             'protocols': protocols,
+            'verified_protocols': verified_protocols,
 
+            'protocol_data': protocol_data,
             'cik_data': cik_data,
         })
 
@@ -179,7 +192,7 @@ def get_sub_regions(request):
 
 # TODO: restructure it and take only one parameter
 def goto_location(request):
-    tab = request.GET.get('tab', '')
+    tab = request.GET.get('tab', 'wall')
     dialog = request.GET.get('dialog', '')
     for name in ('uik', 'tik', 'region'):
         try:

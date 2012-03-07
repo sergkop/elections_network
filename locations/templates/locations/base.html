@@ -96,9 +96,9 @@
     </h2>
 
     {% if current_location.is_uik %}
-        {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Веб-наблюдатели" "web_observers" "locations/web_observers.html" "Поддержка" "supporters" "locations/supporters.html" %}
+        {% tabs "tabs" view "loc_id" loc_id "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Информация" "location_info" "locations/info.html" "Веб-наблюдатели" "web_observers" "locations/web_observers.html" "Поддержка" "supporters" "locations/supporters.html" %}
     {% else %}
-        {% tabs "tabs" view "loc_id" loc_id "Информация" "location_info" "locations/info.html" "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" %}
+        {% tabs "tabs" view "loc_id" loc_id "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Информация" "location_info" "locations/info.html" %}
     {% endif %}
 
     {% include "services/disqus-counter.html" %}

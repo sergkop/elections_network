@@ -1,5 +1,6 @@
 /**
  * @requires regions_bbox.js
+ * Данный файл создаёт объект GRAKON_REGIONS_BBOX
  */
 document.writeln('<script type="text/javascript" src="/static/districts/regions_bbox.js"></script>');
 
@@ -68,7 +69,7 @@ var StatisticsButtonHandlers = new Object({
  * Inherits from: 
  *  - <OpenLayers.Marker>
  */ 
-OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, { 
+OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
 
     /** 
      * Property: label 
@@ -80,19 +81,16 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
                                                  
     labelOffset: null,
 
-    initialize: function(lonlat, icon, label) { 
+    initialize: function(lonlat, icon, label, showLabel) { 
         OpenLayers.Marker.prototype.initialize.apply(this, [lonlat, icon]); 
 
         this.label = label;
-        this.labelOffset = icon.offset;
         this.markerDiv = OpenLayers.Util.createDiv();
         this.markerDiv.appendChild(this.icon.imageDiv); 
-        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset); 
-        var txtDiv = OpenLayers.Util.createDiv(); 
-        txtDiv.className = 'markerLabel'; 
-        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.labelOffset); 
-        txtDiv.innerHTML = this.label; 
-        this.markerDiv.appendChild(txtDiv); 
+        OpenLayers.Util.modifyDOMElement(this.icon.imageDiv, null, icon.offset);
+
+        if (showLabel)
+            this.addLabel(label);
     },
 
     /** 
@@ -108,10 +106,14 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
                                                  
     display: function(visible) { 
         OpenLayers.Marker.prototype.display.apply(this, arguments);
-        if (visible)
+        if (visible) {
+            if ($(this.markerDiv).children().length() == 0)
+                this.addLabel();
             $(this.markerDiv).show();
-        else
+        } else {
+            $(this.markerDiv).children().hide();
             $(this.markerDiv).hide();
+        }
     },
 
     draw: function(px) { 
@@ -126,9 +128,8 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
     }, 
 
     redraw: function(px) { 
-        if ((px != null) && (this.markerDiv != null)) { 
-            OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px); 
-        } 
+        if ((px != null) && (this.markerDiv != null))
+            OpenLayers.Util.modifyDOMElement(this.markerDiv, null, px);
     }, 
 
     moveTo: function (px) { 
@@ -138,13 +139,26 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
 
     isDrawn: function() { 
         return false; 
-    }, 
+    },
+      
+    /**
+     */
+    addLabel: function() {
+        var txtDiv = OpenLayers.Util.createDiv();
+        txtDiv.className = 'markerLabel';
+        OpenLayers.Util.modifyDOMElement(txtDiv, null, this.icon.offset);
+        txtDiv.innerHTML = this.label;
+        this.markerDiv.appendChild(txtDiv);
+    },
 
     CLASS_NAME: "OpenLayers.Marker.LabelMarker" 
 });
 
 
 
+/**
+ * @requires jquery-latest.js
+ */
 var Grakon = {
     /**
      * Три стиля (начальный, мышь на элементе и элемент выбран) для субъектов РФ
@@ -333,11 +347,14 @@ var Grakon = {
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
                 
-                // прячем слишком близко расположенные метки
-                Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.regions );
-                Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.districts );
-                if (Grakon.map.getLayer() < 14)
+                if (Grakon.map.getZoom() < 14) {
+                    // прячем слишком близко расположенные метки
+                    Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.regions );
+                    Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.districts );
                     Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.areas );
+                } else
+                    // перемещаем метки скрытые другими
+                    Grakon.Utils.moveHiddenMarkers();
 
             } else
                 OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
@@ -373,6 +390,42 @@ var Grakon = {
                 marker.display(!tooClose);
                 if (!tooClose)
                     visible.push(markerPixel);
+            }
+        },
+        
+        /**
+         * Перемещаем метки скрытые другими метками
+         */
+        moveHiddenMarkers: function() {
+            var placed = new Array();
+            var tooClose;
+            var layer;
+            var distance;
+            for (var type in Grakon.electionCommissionLayers) {
+              
+                layer = Grakon.electionCommissionLayers[type];
+                if (layer == null)
+                    continue;
+                
+                for (var i in layer.markers) {
+                    
+                    var marker = layer.markers[i];
+                    marker.display(true);
+                    var markerPixel = Grakon.map.getPixelFromLonLat( marker.lonlat );
+                    
+                    tooClose = false;
+                    for (var j=0; j<placed.length && !tooClose; j++) {
+                        distance = markerPixel.add( -placed[j].x, -placed[j].y );
+                        tooClose = (Math.abs(distance.x) <= 9 && Math.abs(distance.y) <= 32);
+                    }
+                        
+                    if (tooClose) {
+                        var newPixelPosition = Grakon.map.getLayerPxFromLonLat( marker.lonlat ).add(18-distance.x, 0);
+                        marker.redraw( newPixelPosition );
+                    }
+                    
+                    placed.push(markerPixel);
+                }
             }
         },
         
@@ -447,7 +500,7 @@ var Grakon = {
                 iconSize,
                 iconOffset);
                     
-            var marker = new OpenLayers.Marker.LabelMarker(location, feature.data.icon, iconLabel);
+            var marker = new OpenLayers.Marker.LabelMarker(location, feature.data.icon, iconLabel, iconMode != "default");
             marker['ecID'] = ecID;
             marker['data'] = data;
  
@@ -465,7 +518,7 @@ var Grakon = {
             this.popup.addCloseBox(function() {
                 Grakon.map.removePopup( Grakon.map.popups[0] );
             });
-            this.popup.opacity = 0.9;
+            this.popup.opacity = 0.85;
             Grakon.Utils.updateCommissionZoomIcon(this.popup);
             Grakon.map.addPopup(this.popup);
             
@@ -716,35 +769,8 @@ var Grakon = {
             }
         );
 		
-		// загружаем границы районов
-		if (Grakon.getLevel() == 3 && GRAKON_REGIONS_BBOX != null) {
-			var mapBounds = new OpenLayers.Bounds(left, bottom, right, top).toGeometry();
-			var regionBordersFound;
-			for (var id in GRAKON_REGIONS_BBOX) {
-				if (mapBounds.intersects( GRAKON_REGIONS_BBOX[id] )) {
-					regionBordersFound = false;
-					for (var pos in Grakon.borderLayers.districts.features) {
-						if (Grakon.borderLayers.districts.features[pos].attributes.id_1 == id) {
-							regionBordersFound = true;
-							break;
-						}
-					}
-					if (!regionBordersFound)
-						OpenLayers.loadURL("/static/districts/"+id+"s.json", {}, Grakon.Utils, Grakon.Utils.addDistrictBorders, function(xhr) {
-							OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
-						});
-				} else {
-					var districtsOutOfMapBounds = new Array();
-					
-					for (var pos in Grakon.borderLayers.districts.features)
-						if (Grakon.borderLayers.districts.features[pos].attributes.id_1 == id)
-							districtsOutOfMapBounds.push( Grakon.borderLayers.districts.features[pos] );
-							
-					Grakon.borderLayers.districts.removeFeatures( districtsOutOfMapBounds );
-				}
-			}
-		} else
-			Grakon.borderLayers.districts.removeAllFeatures();
+        // загружаем границы районов
+		Grakon.loadDistrictBorders(left, bottom, right, top);
     },
     
     /**
@@ -833,9 +859,14 @@ var Grakon = {
         Grakon.borderLayers.regions = regions;
 		
 		// Загрузить данные на слой
-        OpenLayers.loadURL(Grakon.MAP_URLS.regions, {}, Grakon.Utils, Grakon.Utils.addRegionBorders, function() {
-            OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
-        });
+        OpenLayers.loadURL(
+            Grakon.MAP_URLS.regions,
+            {},
+            Grakon.Utils,
+            Grakon.Utils.addRegionBorders,
+            function() {
+                OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
+            });
     },
 	
 	/**
@@ -890,11 +921,11 @@ var Grakon = {
         $('.olControlPanZoomBar').css('left', '14px');
         
         Grakon.map.addControl(new OpenLayers.Control.Navigation());
+        Grakon.map.addControl(new OpenLayers.Control.KeyboardDefaults());
         Grakon.map.addControl(new OpenLayers.Control.MousePosition());
         
         // Добавить инструмент "ссылка на данный вид карты"
         Grakon.map.addControl(new OpenLayers.Control.Permalink('permalink', "/search/map", {anchor: false}));
-        $(Grakon.map.div).find(".olControlPermalink > a").text("Ссылка на данный вид карты");
         
         // Создать и изменить стиль у переключателя слоёв
         Grakon.layerSwitcher = new OpenLayers.Control.LayerSwitcher();
@@ -1037,5 +1068,52 @@ var Grakon = {
                 $.cookie('MAP_TYPE_INDEX', event.layer.name, {expires: 92, path: '/'});
                 return;
             }
+    },
+    
+    /**
+     * Загружает границы районов для данного вида карты
+     * @param {left}
+     * @param {bottom}
+     * @param {right}
+     * @param {top}
+     */
+    loadDistrictBorders: function(left, bottom, right, top) {
+        if (Grakon.getLevel() == 3 && GRAKON_REGIONS_BBOX != null) {
+
+            var mapBounds = new OpenLayers.Bounds(left, bottom, right, top).toGeometry();
+            var regionBordersFound;
+            
+            for (var id in GRAKON_REGIONS_BBOX) {
+                if (mapBounds.intersects( GRAKON_REGIONS_BBOX[id] )) {
+                  
+                    regionBordersFound = false;  
+                    for (var pos in Grakon.borderLayers.districts.features) {
+                        if (Grakon.borderLayers.districts.features[pos].attributes.id_1 == id) {
+
+                            regionBordersFound = true;
+                            break;
+                        }
+                    }
+                    if (!regionBordersFound)
+                        OpenLayers.loadURL(
+                            "/static/districts/"+id+"s.json",
+                            {},
+                            Grakon.Utils,
+                            Grakon.Utils.addDistrictBorders,
+                            function(xhr) {
+                                OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+                            });
+                } else {
+                    var districtsOutOfMapBounds = new Array();
+                    
+                    for (var pos in Grakon.borderLayers.districts.features)
+                        if (Grakon.borderLayers.districts.features[pos].attributes.id_1 == id)
+                            districtsOutOfMapBounds.push( Grakon.borderLayers.districts.features[pos] );
+                            
+                    Grakon.borderLayers.districts.removeFeatures( districtsOutOfMapBounds );
+                }
+            }
+        } else
+            Grakon.borderLayers.districts.removeAllFeatures();
     }
 };

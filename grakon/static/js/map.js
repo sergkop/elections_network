@@ -107,7 +107,7 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
     display: function(visible) { 
         OpenLayers.Marker.prototype.display.apply(this, arguments);
         if (visible) {
-            if ($(this.markerDiv).children().length() == 0)
+            if ($(this.markerDiv).children().length == 0)
                 this.addLabel();
             $(this.markerDiv).show();
         } else {
@@ -611,6 +611,8 @@ var Grakon = {
          * @param {feature} выбранный регион или район на карте.
          */
         clickRegionHandler: function(feature) {
+            Grakon.Utils.removePopups();
+          
             if (feature != null && feature.geometry != null &&
                 Grakon.map.getZoom() < Grakon.map.getZoomForExtent( feature.geometry.getBounds() ))
                     Grakon.map.zoomToExtent( feature.geometry.getBounds() );

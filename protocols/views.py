@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+from random import randint
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
@@ -56,6 +58,7 @@ def upload_protocol(request):
         if form.is_valid():
             protocol = form.save()
             protocol.source = request.profile
+            protocol.protocol_id = randint(1, 10000)
             protocol.save()
 
             protocols_container = cloudfiles_conn.get_container(settings.CLOUDFILES_CONTAINER)

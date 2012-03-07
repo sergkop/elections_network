@@ -116,7 +116,7 @@
         {% endif %}-->
         <div class="main-buttons-blue">
             {% if request.user.is_authenticated %}
-                <a href="#" id="upload_protocol">Выложить протокол</a>
+                <a href="{% url upload_protocol %}">Выложить протокол</a>
             {% else %}
                 <a href="#" id="upload_protocol1">Выложить протокол</a>
             {% endif %}

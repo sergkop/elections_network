@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load elements uni_form_tags %}
+
+{% block title %}
+Выложить копию протокола - Результаты президентских выборов - Гракон
+{% endblock %}
+
+{% block left_column %}
+{% endblock %}
+
+{% block content_header %}
+    <h2 class="location_header">Выложить копию протокола</h2>
+
+    <div class="ym-cbox static-content">
+        {% uni_form form form.helper %}
+    </div>
+{% endblock %}

@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from django.conf import settings
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -23,6 +24,14 @@ class Protocol(models.Model):
     source = generic.GenericForeignKey('content_type', 'object_id')
 
     protocol_id = models.IntegerField(u'Идентификатор')
+
+    chairman = models.CharField(u'Ф.И.О. председателя комиссии', max_length=150, blank=True)
+    assistant = models.CharField(u'Ф.И.О. заместителя председателя комиссии', max_length=150, blank=True)
+    secretary = models.CharField(u'Ф.И.О. секретаря комиссии', max_length=150, blank=True)
+    number = models.IntegerField(u'Номер экземпляра копии протокола голосования, полученного наблюдателем', blank=True, null=True,
+            help_text=u'Указан вверху первой страницы')
+    sign_time = models.DateTimeField(u'Время подписи', null=True, blank=True, help_text=u'В формате "2011-04-25 14:30"')
+    recieve_time = models.DateTimeField(u'Время выдачи', null=True, blank=True, help_text=u'В формате "2011-04-25 14:30"')
 
     p1 = models.IntegerField(u'1. Число избирателей, включенных в список избирателей на момент окончания голосования')
     p2 = models.IntegerField(u'2. Число избирательных бюллетеней, полученных участковой избирательной комиссией')
@@ -49,10 +58,9 @@ class Protocol(models.Model):
     p23 = models.IntegerField(u'23. Число голосов, поданных за Путина В.В.')
 
     location = models.ForeignKey(Location)
-    complaints = models.IntegerField(u'Число жалоб', null=True, blank=True)
-    sign_time = models.DateTimeField(u'Время подписи', null=True, blank=True)
+    complaints = models.IntegerField(u'Количество нарушений, замеченых наблюдателем', null=True, blank=True)
     time = models.DateTimeField(auto_now=True)
-    url = models.URLField(u'Ссылка на фотографию')
+    url = models.URLField(u'Ссылка на фотографию', blank=True)
 
     verified = models.BooleanField(default=False)
 
@@ -64,3 +72,18 @@ class Protocol(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('protocol_view', (), {'protocol_id': self.id})
+
+# TODO: override delete method and remove files
+class AttachedFile(models.Model):
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    item = generic.GenericForeignKey('content_type', 'object_id')
+
+    internal = models.BooleanField(default=False)
+    url = models.URLField(u'Ссылка') # url or filename for internal files
+
+    def get_absolute_url(self):
+        if self.internal:
+            return settings.CLOUDFILES_URL_PREFIX + self.url
+        else:
+            return self.url

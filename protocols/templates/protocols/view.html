@@ -15,7 +15,10 @@
 
         <div class="content_block">
             <ul>
-                <li><a href="{{ protocol.url }}">Ссылка</a></li>
+                {% if protocol.url %}<li><a href="{{ protocol.url }}" target="_blank">Ссылка</a></li>{% endif %}
+                {% for file in files %}
+                <li><a href="{{ file.get_absolute_url }}" target="_blank">Файл {{ forloop.counter }}</a></li>
+                {% endfor %}
             </ul>
         </div>
 

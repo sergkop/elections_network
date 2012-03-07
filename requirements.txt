@@ -10,3 +10,4 @@ pylibmc
 PIL
 django-simple-captcha
 mysql-python
+python-cloudfiles

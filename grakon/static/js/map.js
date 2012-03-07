@@ -759,7 +759,7 @@ var Grakon = {
         );
 		
         // загружаем границы районов
-		Grakon.loadDistrictBorders();
+		Grakon.loadDistrictBorders(left, bottom, right, top);
     },
     
     /**
@@ -1061,8 +1061,12 @@ var Grakon = {
     
     /**
      * Загружает границы районов для данного вида карты
+     * @param {left}
+     * @param {bottom}
+     * @param {right}
+     * @param {top}
      */
-    loadDistrictBorders: function() {
+    loadDistrictBorders: function(left, bottom, right, top) {
         if (Grakon.getLevel() == 3 && GRAKON_REGIONS_BBOX != null) {
 
             var mapBounds = new OpenLayers.Bounds(left, bottom, right, top).toGeometry();

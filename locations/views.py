@@ -97,11 +97,14 @@ class LocationView(TemplateView):
 
         if counters['protocols'] <= 10:
             protocols = Protocol.objects.filter(query).exclude(content_type=content_type,
-                    object_id=cik.id)
+                    object_id=cik.id).select_related('location')
         else:
             protocols = []
 
-        verified_protocols = filter(lambda protocol: protocol.verified, protocols)
+        if location.is_uik():
+            verified_protocols = filter(lambda protocol: protocol.verified, protocols)
+        else:
+            verified_protocols = []
 
         try:
             cik_protocols = [Protocol.objects.get(content_type=content_type,

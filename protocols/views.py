@@ -64,6 +64,7 @@ def upload_protocol(request):
 
             content_type = ContentType.objects.get_for_model(Protocol)
 
+            """
             for name in ('photo1', 'photo2', 'photo3', 'photo4', 'photo5'):
                 if name in request.FILES:
                     filename = 'protocol_'+str(protocol.id)+'_'+name[5]
@@ -85,7 +86,7 @@ def upload_protocol(request):
                     settings.URL_PREFIX+protocol.get_absolute_url(),
                     settings.URL_PREFIX+'/'+settings.ADMIN_PREFIX+'/protocols/protocol/'+str(protocol.id)+'/')
 
-            send_mail(u'[ПРОТОКОЛ] Выложен новый протокол', message, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
+            send_mail(u'[ПРОТОКОЛ] Выложен новый протокол', message, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])"""
             return redirect(protocol.get_absolute_url())
 
         location = getattr(form, 'location', None)

@@ -49,17 +49,18 @@ class ProtocolForm(forms.ModelForm):
         return self.cleaned_data['uik']
 
     def clean(self):
-        total = sum(self.cleaned_data[field] for field in ('p19', 'p20', 'p21', 'p22', 'p23'))
-        if self.cleaned_data['p10'] != total:
-            raise forms.ValidationError(u'Число голосов в поле 10 не совпадает с суммой полей 9, 19, 20, 21, 22, 23')
+        data = dict(('p'+str(i), self.cleaned_data.get('p'+str(i), 0)) for i in range(1, 24))
 
-        if self.cleaned_data['p7']+self.cleaned_data['p8'] != self.cleaned_data['p9']+self.cleaned_data['p10']:
+        if data['p10'] != data['p19'] + data['p20'] + data['p21'] + data['p22'] + data['p23']:
+            raise forms.ValidationError(u'Число голосов в поле 10 не совпадает с суммой полей 19, 20, 21, 22, 23')
+
+        if data['p7']+data['p8'] != data['p9']+data['p10']:
             raise forms.ValidationError(u'Сумма чисел в полях 7 и 8  не совпадает с суммой полей 9 и 10')
 
-        if self.cleaned_data['p1'] < self.cleaned_data['p3']+self.cleaned_data['p4']+self.cleaned_data['p5']:
+        if data['p1'] < data['p3']+data['p4']+data['p5']:
             raise forms.ValidationError(u'Число в поле 1 должно быть не меньше, чем сумма полей 3, 4, 5')
 
-        if self.cleaned_data['p2']+self.cleaned_data['p18'] < self.cleaned_data['p3']+self.cleaned_data['p4']+self.cleaned_data['p5']+self.cleaned_data['p6']+self.cleaned_data['p17']:
+        if data['p2']+data['p18'] < data['p3']+data['p4']+data['p5']+data['p6']+data['p17']:
             raise forms.ValidationError(u'Число в поле 1 должно быть не меньше, чем сумма полей 3, 4, 5')
 
         return self.cleaned_data

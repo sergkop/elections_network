@@ -28,7 +28,7 @@ class Protocol(models.Model):
     chairman = models.CharField(u'Ф.И.О. председателя комиссии', max_length=150, blank=True)
     assistant = models.CharField(u'Ф.И.О. заместителя председателя комиссии', max_length=150, blank=True)
     secretary = models.CharField(u'Ф.И.О. секретаря комиссии', max_length=150, blank=True)
-    number = models.IntegerField(u'Номер экземпляра копии протокола голосования, полученного наблюдателем', blank=True, null=True,
+    number = models.IntegerField(u'Номер копии протокола, полученного наблюдателем', blank=True, null=True,
             help_text=u'Указан вверху первой страницы')
     sign_time = models.DateTimeField(u'Время подписи', null=True, blank=True, help_text=u'В формате "2011-04-25 14:30"')
     recieve_time = models.DateTimeField(u'Время выдачи', null=True, blank=True, help_text=u'В формате "2011-04-25 14:30"')
@@ -58,7 +58,7 @@ class Protocol(models.Model):
     p23 = models.IntegerField(u'23. Число голосов, поданных за Путина В.В.')
 
     location = models.ForeignKey(Location)
-    complaints = models.IntegerField(u'Количество нарушений, замеченых наблюдателем', null=True, blank=True)
+    complaints = models.IntegerField(u'Количество поступивших жалоб', null=True, blank=True)
     time = models.DateTimeField(auto_now=True)
     url = models.URLField(u'Ссылка на фотографию', blank=True)
 

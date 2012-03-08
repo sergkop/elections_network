@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render_to_response
+from django.template import RequestContext
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 
@@ -14,7 +15,7 @@ from grakon.utils import ajaxize
 from locations.models import Location
 from organizations.models import Organization
 from users.forms import CommissionMemberForm, FeedbackForm, MessageForm, WebObserverForm
-from users.models import Contact, Role, WebObserver
+from users.models import Contact, Role, UnsubscribedUser, WebObserver
 
 class RoleSignupView(View):
     role = '' # 'voter', 'observer'
@@ -326,3 +327,11 @@ def become_web_observer(request):
             return HttpResponse(u'Поля заполнены неверно')
 
     return HttpResponse(u'Ошибка')
+
+def unsubscribe(request):
+    email = request.GET.get('email', '')
+    profiles = list(Profile.objects.filter(user__email=email))
+    for profile in profiles:
+        UnsubscribedUser.objects.get_or_create(user=profile)
+
+    return render_to_response('unsubscribe.html', context_instance=RequestContext(request))

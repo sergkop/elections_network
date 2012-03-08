@@ -124,3 +124,7 @@ class WebObserver(models.Model):
     user = models.ForeignKey(Profile)
     location = models.ForeignKey(Location)
     time = models.DateTimeField(auto_now=True)
+
+class UnsubscribedUser(models.Model):
+    user = models.ForeignKey(Profile, unique=True)
+    time = models.DateTimeField(auto_now=True)

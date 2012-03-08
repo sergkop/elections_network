@@ -22,5 +22,7 @@ urlpatterns = patterns('users.views',
 
     url(r'^feedback/$', 'feedback', name='feedback'),
     url(r'^feedback/thanks/$', TemplateView.as_view(template_name='feedback/thanks.html'), name='feedback_thanks'),
-    url(r'^feedback/fail/$', TemplateView.as_view(template_name='feedback/fail.html'), name='feedback_fail')
+    url(r'^feedback/fail/$', TemplateView.as_view(template_name='feedback/fail.html'), name='feedback_fail'),
+
+    url(r'^unsubscribe$', 'unsubscribe', name='unsubscribe'),
 )

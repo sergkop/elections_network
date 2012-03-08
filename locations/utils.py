@@ -76,10 +76,17 @@ def get_roles_counters(location):
     counters['violations'] = Violation.objects.filter(query).count()
 
     cik = Organization.objects.get(name='cik')
+    grakon = Organization.objects.get(name='grakon')
     content_type = ContentType.objects.get_for_model(Organization)
 
-    counters['protocols'] = Protocol.objects.filter(query).exclude(content_type=content_type,
+    counters['uiks'] = Protocol.objects.filter(query).filter(content_type=content_type,
             object_id=cik.id).count()
+
+    protocol_queryset = Protocol.objects.filter(query).exclude(content_type=content_type,
+            object_id__in=[cik.id, grakon.id])
+
+    counters['protocols'] = protocol_queryset.count()
+    counters['verified_protocols'] = protocol_queryset.filter(verified=True).count()
 
     if location and location.is_uik():
         cache.set(cache_key, counters, 300)

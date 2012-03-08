@@ -54,39 +54,3 @@ class Command(BaseCommand):
             print_progress(j, uiks_count)
             j += 1
 
-        # Generate CIK data for TIKs
-        j = 0
-        tiks_count = Location.objects.exclude(region=None).filter(tik=None).count()
-        for tik in Location.objects.exclude(region=None).filter(tik=None):
-            protocols = list(Protocol.objects.filter(content_type=content_type, object_id=cik.id).filter(location__tik=tik))
-
-            data = {'location': tik, 'verified': True}
-            for i in range(23):
-                data['p'+str(i+1)] = sum(getattr(protocol, 'p'+str(i+1)) for protocol in protocols)
-
-            protocol, created = Protocol.objects.get_or_create(content_type=content_type, object_id=cik.id,
-                    protocol_id=tik.id, defaults=data)
-
-            if not created:
-                for i in range(23):
-                    setattr(protocol, 'p'+str(i+1), data['p'+str(i+1)])
-                protocol.save()
-
-            print_progress(j, tiks_count)
-            j += 1
-
-        # Generate CIK data for regions
-        for region in Location.objects.filter(region=None):
-            protocols = list(Protocol.objects.filter(content_type=content_type, object_id=cik.id).filter(location__region=region))
-
-            data = {'location': region, 'verified': True}
-            for i in range(23):
-                data['p'+str(i+1)] = sum(getattr(protocol, 'p'+str(i+1)) for protocol in protocols)
-
-            protocol, created = Protocol.objects.get_or_create(content_type=content_type, object_id=cik.id,
-                    protocol_id=region.id, defaults=data)
-
-            if not created:
-                for i in range(23):
-                    setattr(protocol, 'p'+str(i+1), data['p'+str(i+1)])
-                protocol.save()

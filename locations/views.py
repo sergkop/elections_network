@@ -93,6 +93,7 @@ class LocationView(TemplateView):
             violations = []
 
         cik = Organization.objects.get(name='cik')
+        grakon = Organization.objects.get(name='grakon')
         content_type = ContentType.objects.get_for_model(Organization)
 
         if counters['protocols'] <= 10:
@@ -104,7 +105,11 @@ class LocationView(TemplateView):
         if location.is_uik():
             verified_protocols = filter(lambda protocol: protocol.verified, protocols)
         else:
-            verified_protocols = []
+            try:
+                verified_protocols = [Protocol.objects.get(content_type=content_type,
+                        object_id=grakon.id, location=location)]
+            except Protocol.DoesNotExist:
+                verified_protocols = []
 
         try:
             cik_protocols = [Protocol.objects.get(content_type=content_type,

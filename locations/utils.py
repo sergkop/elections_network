@@ -80,10 +80,10 @@ def get_roles_counters(location):
     content_type = ContentType.objects.get_for_model(Organization)
 
     counters['uiks'] = Protocol.objects.filter(query).filter(content_type=content_type,
-            object_id=cik.id).count()
+            object_id=cik.id).exclude(tik=None).count()
 
     protocol_queryset = Protocol.objects.filter(query).exclude(content_type=content_type,
-            object_id__in=[cik.id, grakon.id])
+            object_id__in=[cik.id, grakon.id]).exclude(tik=None)
 
     counters['protocols'] = protocol_queryset.count()
     counters['verified_protocols'] = protocol_queryset.filter(verified=True).count()

@@ -14,7 +14,7 @@ class ProtocolForm(forms.ModelForm):
     tik = forms.CharField(label=u'Выберите ТИК', widget=forms.Select(choices=[('', u'Выберите ТИК')]))
     uik = forms.CharField(label=u'Выберите УИК', widget=forms.Select(choices=[('', u'Выберите УИК')]))
 
-    photo1 = forms.FileField(label=u'Фотография', help_text=u'Если суммарный размер закачиваемых файлов составляет <b>несколько мегабайт</b>, может потребоваться предварительная архивация файлов.')
+    photo1 = forms.FileField(label=u'Фотография', help_text=u'Общий размер загружаемых файлов не должен превышать 15 Мб.')
     photo2 = forms.FileField(label=u'Фотография', required=False)
     photo3 = forms.FileField(label=u'Фотография', required=False)
     photo4 = forms.FileField(label=u'Фотография', required=False)

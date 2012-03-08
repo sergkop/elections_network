@@ -83,7 +83,7 @@ def get_roles_counters(location):
             object_id=cik.id).exclude(location__tik=None).count()
 
     protocol_queryset = Protocol.objects.filter(query).exclude(content_type=content_type,
-            object_id__in=[cik.id, grakon.id]).exclude(tik=None)
+            object_id__in=[cik.id, grakon.id]).exclude(location__tik=None)
 
     counters['protocols'] = protocol_queryset.count()
     counters['verified_protocols'] = protocol_queryset.filter(verified=True).count()

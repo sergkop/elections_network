@@ -166,6 +166,7 @@ select {
 }
 
 div#publicElectionsMap {
+    display: block;
 	z-index: 2;
 }
 
@@ -305,14 +306,17 @@ div.olPopupCloseBox {
 }
 
 #mapControlPanel {
-    border: 1px solid red;
+    height: 256px;
 }
 
-#mapControlPanel div {
-    border: 1px solid green;
-    display: inline;
-    width: 25%;
-    height: 128px;
+#mapControlPanel div.column {
+    float: left;
+    text-align: left;
+    margin: 15px;
+}
+
+#mapControlPanel div.column h3 {
+    margin: 10px 0px;
 }
 
 #div_id_captcha img{

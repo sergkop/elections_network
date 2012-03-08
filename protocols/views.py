@@ -19,7 +19,7 @@ from protocols.models import AttachedFile, Protocol
 try:
     cloudfiles_conn = cloudfiles.get_connection(getattr(settings, 'CLOUDFILES_USERNAME'),
             getattr(settings, 'CLOUDFILES_KEY'))
-except cloudfiles.errors.AuthenticationFailed:
+except:
     cloudfiles_conn = None
 
 class ProtocolView(TemplateView):

@@ -39,6 +39,7 @@ urlpatterns = patterns('navigation.views',
 
     url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),	
 	url(r'^tools$', 'static_page', {'name': 'tools', 'template': 'static_pages/tools.html'}, name='tools'),
+	url(r'^todo$', 'static_page', {'name': 'todo', 'template': 'static_pages/todo.html'}, name='tools'),
 
     url(r'^sitemap$', 'sitemap', name='sitemap'),
 )

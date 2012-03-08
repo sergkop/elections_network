@@ -97,10 +97,6 @@
 		list-style-type:disc;
 	}
 
-	ol {
-		list-style-type:decimal;
-	}
-
 	ul ul {
 		list-style-type:circle;
 		margin-top:0;

@@ -74,7 +74,8 @@ class LocationView(TemplateView):
 
         if counters['protocols'] <= 10:
             protocols = Protocol.objects.filter(query).exclude(content_type=content_type,
-                    object_id=cik.id).select_related('location')
+                    object_id=cik.id).exclude(content_type=content_type,
+                    object_id=grakon.id).select_related('location')
         else:
             protocols = []
 

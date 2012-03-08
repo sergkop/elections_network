@@ -38,7 +38,7 @@ class ProtocolForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProtocolForm, self).__init__(*args, **kwargs)
         self.fields['region'].widget.choices = regions_list()
-        for field in ('chairman', 'assistant', 'secretary', 'number', 'sign_time', 'recieve_time', 'complaints'):
+        for field in ('chairman', 'assistant', 'secretary', 'sign_time', 'complaints'):
             self.fields[field].required = True
 
     def clean_uik(self):

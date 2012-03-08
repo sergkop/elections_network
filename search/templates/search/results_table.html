@@ -1,17 +1,17 @@
 <table class="results_table" width="100%">
     <tr>
-        <th class="left" width="20%">Регионы</th>
+        <th class="left" width="20%" style="border-right: 1px solid;">Регионы</th>
         <th width="20%">Зюганов (ЦИК)</th>
-        <th width="20%" class="column_right_border">Зюганов (протоколы)</th>
+        <th width="20%" style="border-right: 1px solid;">Зюганов (протоколы)</th>
         <th width="20%">Прохоров (ЦИК)</th>
-        <th width="20%" class="column_right_border">Прохоров (протоколы)</th>
+        <th width="20%" style="border-right: 1px solid;">Прохоров (протоколы)</th>
         <th width="20%">Путин (ЦИК)</th>
         <th width="20%">Путин (протоколы)</th>
     </tr>
 
     {% for line in lines %}
     <tr>
-        <td class="left">
+        <td class="left" style="border-right: 1px solid;">
             {% if line.location.is_uik %}
                 <a href="{{ line.location.get_absolute_url }}">{{ line.location }}</a>
             {% else %}
@@ -19,9 +19,9 @@
             {% endif %}
         </td>
         <td>{{ line.cik.zyuganov|safe }}</td>
-        <td class="column_right_border">{{ line.observers.zyuganov|safe }}</td>
+        <td style="border-right: 1px solid;">{{ line.observers.zyuganov|safe }}</td>
         <td>{{ line.cik.prokhorov|safe }}</td>
-        <td class="column_right_border">{{ line.observers.prokhorov|safe }}</td>
+        <td style="border-right: 1px solid;">{{ line.observers.prokhorov|safe }}</td>
         <td>{{ line.cik.putin|safe }}</td>
         <td>{{ line.observers.putin|safe }}</td>
     </tr>

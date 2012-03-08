@@ -304,6 +304,17 @@ div.olPopupCloseBox {
     text-align: center;
 }
 
+#mapControlPanel {
+    border: 1px solid red;
+}
+
+#mapControlPanel div {
+    border: 1px solid green;
+    display: inline;
+    width: 25%;
+    height: 128px;
+}
+
 #div_id_captcha img{
 	float: left;
 	margin-right: 5px;

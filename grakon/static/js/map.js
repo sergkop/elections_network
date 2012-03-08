@@ -516,23 +516,6 @@ var Grakon = {
             marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
             marker.events.register("mouseover", feature, Grakon.Utils.markerHover);
             marker.events.register("mouseout", feature, Grakon.Utils.markerHover);
-            
-            for (var j in Grakon.borderLayers.regions.features) {
-                var feature = Grakon.borderLayers.regions.features[j];
-                if (feature.geometry.intersects( new OpenLayers.Geometry.Point(location.lon, location.lat) ) )
-                    feature.attributes.num = (feature.attributes.num == null) ? 1 : feature.attributes.num+1;
-            }
-                
-            for (var j in Grakon.borderLayers.regions.features) {
-                var feature = Grakon.borderLayers.regions.features[j];
-                if (feature.attributes.num == null)
-                    feature.style = null;
-                else if (feature.attributes.num == 1)
-                    feature.style = {fill: true, fillColor: "#00ff00", fillOpacity: 0.25, strokeWidth: 1, strokeColor: "#00ff00", strokeOpacity: 1};
-                else
-                    feature.style = {fill: true, fillColor: "#ff0000", fillOpacity: 0.25, strokeWidth: 1, strokeColor: "#ff0000", strokeOpacity: 1};
-            }
-            Grakon.electionCommissionLayers.regions.redraw();
  
             layer.addMarker(marker);
         },
@@ -880,23 +863,6 @@ var Grakon = {
 
         // выделять субъект РФ цветом при наведении мыши
         Grakon.Utils.initRegionHighlightControl(regions);
-        
-        regions.events.register('featureadded', regions, function(element) {
-            var feature = element.feature;
-            for (var j in Grakon.electionCommissionLayers.regions.markers) {
-                location = new OpenLayers.Geometry.Point(Grakon.electionCommissionLayers.regions.markers[j].lonlat.lon, Grakon.electionCommissionLayers.regions.markers[j].lonlat.lat);
-                if (feature.geometry.intersects( location ) )
-                    feature.attributes.num = (feature.attributes.num == null) ? 1 : feature.attributes.num+1;
-            }
-                
-            if (feature.attributes.num == null)
-                feature.style = null;
-            else if (feature.attributes.num == 1)
-                feature.style = {fill: true, fillColor: "#00ff00", fillOpacity: 0.75, strokeWidth: 1, strokeColor: "#00ff00", strokeOpacity: 1};
-            else
-                feature.style = {fill: true, fillColor: "#ff0000", fillOpacity: 0.75, strokeWidth: 1, strokeColor: "#ff0000", strokeOpacity: 1};
-            this.redraw();
-        });
 
         // Добавить слой на карту
         Grakon.map.addLayer(regions);

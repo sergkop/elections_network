@@ -147,7 +147,7 @@ h3 {margin: 0.3em 0 0;}
 .ym-col3 .ui-tabs .ui-tabs-nav li img {margin-top: 0.2em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.fr {margin-right: 0;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {background-color: #fff; color: #2f8dbc; z-index:1; font-size: 1.5em;}
-.ym-col3 .ui-tabs .ui-tabs-nav li a {color: #333; display: block;  padding:  0 0 0 10px; height: 30px; }
+.ym-col3 .ui-tabs .ui-tabs-nav li a {color: #333; display: block;  padding:  0 0 0 10px; height: 35px; }
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {color: #2f8dbc; font-weight: bold;}
 .ym-col3 .ui-tabs .ui-tabs-nav li a {padding: 5px 10px 0;}
 

@@ -20,7 +20,7 @@ table, tbody td {border: none; margin: 0;}
 .black {color: #000 !important;}
 .blue {color: #2f8dbc !important;}
 .grey {color: #999 !important;}	
-.pseudolink {border-bottom: 1px dotted; cursor: pointer;}
+.pseudolink {border-bottom: 1px dotted; cursor: pointer; text-decoration: none;}
 .ym-hlist {background: none; border-bottom: 1px dotted #a5a5a5; padding-bottom:10px;}
 .ym-hlist ul {margin-left: -1.7em;}
 .ym-hlist ul li a, .ym-hlist ul li strong, .button {background: none; padding-left: 1em; padding-right: 1em; color: #333; font-weight: normal; text-shadow: 0 1px 0 #fff; behavior: url(/static/css/PIE.htc); border-radius: 1em; }
@@ -257,8 +257,11 @@ h3 {margin: 0.3em 0 0;}
 .user_list {list-style-type: none; list-style-position: outside; margin-left: 0; margin-top: 1.5em;}
 	.user_list li {margin-left: 0;}
 	
-.pager {border-top: 1px dotted #aaa5a5; margin-top: 3em; padding: 1.2em 0 1em; text-align:center; font-size: 0.9em; color: #797676;}	
-	.pager a, .pager strong {margin: 0 0.2em; text-decoration: none;}
+.pages {border-top: 1px dotted #aaa5a5; margin-top: 3em; padding: 1.2em 0 1em; text-align:center; font-size: 0.9em; color: #797676;}	
+	.pages a, .pages strong {margin: 0 0.2em; text-decoration: none;}
+	
+.search-filter {border-bottom: 1px dotted #aaa5a5; padding-bottom: 1.5em; padding-right: 60px; line-height: 2em; background: url(/static/images/icon_search_big.gif) right center no-repeat;  }	
+	.search-filter a {white-space: nowrap;}
 	
 
 /* backgrounds */

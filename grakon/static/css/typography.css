@@ -205,14 +205,6 @@
 
 	/*--- Links ----------------------------------------------------------------------------------------- */
 
-	a {
-		color:#1c94c4;
-		background:transparent;
-	}
-
-    a:visited  {
-        color: #003366;
-    }
 
     a.ui-button:visited  {
         color: #1c94c4;

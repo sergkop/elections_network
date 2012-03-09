@@ -1,25 +1,14 @@
 {% load elements %}
 
-<div class="side_block_header side_block_lawyer">Юристы ({{ counters.lawyer }})</div>
+<div class="side_block_header side_block_lawyer">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=lawyer">Юристы ({{ counters.lawyer }})</a>
+    {% else %}
+        Юристы ({{ counters.lawyer }})
+    {% endif %}
+</div>
 
 <div class="content_block">
-    <ul>
-        {% for role in participants.lawyer %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %}
-                <br/>
-                <i>
-                    {% if role.organization %}
-                        {{ role.organization }}
-                    {% else %}
-                        {{ role.data }}
-                    {% endif %}
-                </i>
-            </li>
-        {% endfor %}
-    </ul>
     {% button "circle-plus" "Я &mdash; юрист" "become_lawyer" %}  
 </div>
 

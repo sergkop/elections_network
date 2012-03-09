@@ -19,7 +19,8 @@
             {% endif %}
         </td>
         <td>{{ line.cik.zyuganov|safe }}</td>
-        <td style="border-right: 2px solid #dadada;">{{ line.observers.zyuganov|safe }}</td>
+        <td style="border-right: 2px solid #dadada;">
+            <a href="{% url protocols line.location.id %}">{{ line.observers.zyuganov|safe }}</a></td>
         <td>{{ line.cik.prokhorov|safe }}</td>
         <td style="border-right: 2px solid #dadada;">{{ line.observers.prokhorov|safe }}</td>
         <td>{{ line.cik.putin|safe }}</td>

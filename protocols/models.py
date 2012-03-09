@@ -4,23 +4,36 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
+from grakon.utils import cache_function
 from locations.models import Location
 from organizations.models import Organization
 
-class ProtocolManager(models.Manager):
-    def cik_protocol(self, location):
-        cik = Organization.objects.get(name='cik')
-        content_type = ContentType.objects.get_for_model(Organization)
+@cache_function('cik_and_grakon', 600)
+def cik_and_grakon():
+    return {
+        'cik': Organization.objects.get(name='cik'),
+        'grakon': Organization.objects.get(name='grakon'),
+        'content_type': ContentType.objects.get_for_model(Organization),
+    }
 
-        try:
-            return self.get(content_type=content_type,
-                    object_id=cik.id, location=location)
-        except self.model.DoesNotExist:
-            return None
+class ProtocolManager(models.Manager):
+    def cik_protocols(self):
+        data = cik_and_grakon()
+        return self.filter(content_type=data['content_type'], object_id=data['cik'].id)
+
+    def verified(self):
+        data = cik_and_grakon()
+        return self.exclude(content_type=data['content_type'], object_id=data['cik'].id) \
+                .filter(verified=True)
+
+    def from_users(self):
+        data = cik_and_grakon()
+        return self.exclude(content_type=data['content_type'],
+                object_id__in=[data['cik'].id, data['grakon'].id])
 
 class Protocol(models.Model):
     content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
+    object_id = models.PositiveIntegerField(db_index=True)
     source = generic.GenericForeignKey('content_type', 'object_id')
 
     protocol_id = models.IntegerField(u'Идентификатор')
@@ -62,7 +75,7 @@ class Protocol(models.Model):
     time = models.DateTimeField(auto_now=True)
     url = models.URLField(u'Ссылка на фотографию', blank=True)
 
-    verified = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False, db_index=True)
 
     objects = ProtocolManager()
 

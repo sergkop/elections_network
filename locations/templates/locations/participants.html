@@ -1,0 +1,37 @@
+<div>
+    {% for role_type, role_name in ROLE_CHOICES %}
+        {% if selected_role_type == role_type %}
+            <b>{{ role_name }}</b>
+        {% else %}
+            <a href="{% url participants current_location.id %}?type={{ role_type }}">{{ role_name }}</a>
+        {% endif %}
+        &nbsp;&nbsp;&nbsp;
+    {% endfor %}
+</div>
+
+<hr/>
+
+{% if selected_role_type %}
+    <ul>
+        {% for role in participants %}
+            {% with participant=role.user %}
+                <li>{% include "elements/participant.html" %}
+                    <br/>
+                    <i>
+                        {% if role.organization %}
+                            {{ role.organization }}
+                        {% else %}
+                            {{ role.data }}
+                        {% endif %}
+                    </i>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <ul>
+        {% for participant in users %}
+            <li>{% include "elements/participant.html" %}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

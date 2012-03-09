@@ -35,8 +35,8 @@ class Location(models.Model):
     vrnkomis = models.BigIntegerField(blank=True, null=True)
 
     # Coordinates used in Yandex maps
-    x_coord = models.FloatField(blank=True, null=True)
-    y_coord = models.FloatField(blank=True, null=True)
+    x_coord = models.FloatField(blank=True, null=True, db_index=True)
+    y_coord = models.FloatField(blank=True, null=True, db_index=True)
 
     def level(self):
         if self.region_id is None:

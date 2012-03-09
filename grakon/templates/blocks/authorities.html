@@ -1,18 +1,14 @@
 {% load elements %}
 
-<div class="side_block_header side_block_authority">Представители власти ({{ counters.authority }})</div>
+<div class="side_block_header side_block_authority">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=authority">Представители власти ({{ counters.authority }})</a>
+    {% else %}
+        Представители власти ({{ counters.authority }})
+    {% endif %}
+</div>
 
 <div class="content_block">
-    <ul>
-        {% for role in participants.authority %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %} <br/>
-                <i>{{ role.data }}</i>
-            </li>
-        {% endfor %}
-    </ul>
     {% button "circle-plus" "Я &mdash; представитель власти" "become_authority" "" "center" "Для кандидатов, депутатов, членом городских/районных администрации и других представителей власти" %}
 </div>
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
@@ -9,7 +8,6 @@ from loginza.models import UserMap
 from grakon.models import Profile
 from locations.models import Location
 from locations.utils import get_roles_query, regions_list
-from organizations.models import Organization
 from protocols.models import Protocol
 from protocols.utils import results_table_data
 from search.utils import get_uik_data
@@ -176,10 +174,7 @@ class ResultsTableSearchView(BaseSearchView):
     def get_context_data(self, **kwargs):
         ctx = super(ResultsTableSearchView, self).get_context_data(**kwargs)
 
-        cik = Organization.objects.get(name='cik')
-        grakon = Organization.objects.get(name='grakon')
-        content_type = ContentType.objects.get_for_model(Organization)
-
+        # TODO: use regions_list
         if not self.location:
             sub_regions = Location.objects.filter(region=None).order_by('name')
         elif self.location.is_region():
@@ -189,22 +184,19 @@ class ResultsTableSearchView(BaseSearchView):
         elif self.location.is_uik():
             sub_regions = []
 
-        cik_protocols = Protocol.objects.filter(content_type=content_type, object_id=cik.id) \
-                .filter(location__in=sub_regions)
+        cik_protocols = Protocol.objects.cik_protocols().filter(location__in=sub_regions)
 
         if self.location and self.location.is_tik():
-            observer_protocols = list(Protocol.objects.exclude(content_type=content_type, object_id=cik.id) \
-                    .filter(location__in=sub_regions).filter(verified=True))
+            observer_protocols = list(Protocol.objects.from_users().filter(location__in=sub_regions).filter(verified=True))
         else:
-            observer_protocols = list(Protocol.objects.filter(content_type=content_type, object_id=grakon.id) \
-                    .filter(location__in=sub_regions))
+            observer_protocols = list(Protocol.objects.verified().filter(location__in=sub_regions))
 
         lines = []
         for location in sub_regions:
             lines.append({
                 'location': location,
-                'cik': results_table_data(filter(lambda p: p.location_id==location.id, cik_protocols)),
-                'observers': results_table_data(filter(lambda p: p.location_id==location.id, observer_protocols)),
+                'cik': results_table_data(filter(lambda p: p.location_id==location.id, cik_protocols), False),
+                'observers': results_table_data(filter(lambda p: p.location_id==location.id, observer_protocols), False),
             })
 
         ctx.update({

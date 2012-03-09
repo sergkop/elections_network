@@ -11,7 +11,7 @@ from locations.models import Location
 # TODO: limit name format
 # TODO: drop exclude field?
 class Organization(models.Model):
-    title = models.CharField(u'Название', max_length=50)
+    title = models.CharField(u'Название', max_length=50, db_index=True)
     name = models.CharField(u'Идентификатор', max_length=30, unique=True, db_index=True)
     about = HTMLField(u'Описание', default='')
     telephone = models.CharField(u'Телефон', max_length=50, blank=True)

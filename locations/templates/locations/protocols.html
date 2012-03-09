@@ -1,0 +1,13 @@
+{% load elements %}
+
+<h4>Протоколы</h4>
+
+<ul>
+    {% for protocol in protocols %}
+        <li>
+            <a href="{{ protocol.get_absolute_url }}">Протокол №{{ protocol.id }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% button "" "Выложить протокол" "" "upload_protocol" "center" "В ближайшее время мы начнем собирать протоколы от участников площадки" %}

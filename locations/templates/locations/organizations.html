@@ -1,0 +1,11 @@
+<h4>Организации</h4>
+
+<ul>
+    {% for organization in organizations %}
+        {% if organization.verified %}
+            <li>
+                {% include "elements/organization.html" %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

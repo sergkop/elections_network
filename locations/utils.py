@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models import Q
 from django.http import HttpResponse
@@ -8,30 +7,69 @@ from loginza.models import UserMap
 
 from grakon.models import Profile
 from grakon.utils import cache_function
+from links.models import Link
 from locations.models import FOREIGN_TERRITORIES, Location
-from organizations.models import Organization
+from organizations.models import Organization, OrganizationCoverage
 from protocols.models import Protocol
-from users.models import Role, ROLE_TYPES, WebObserver
+from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
 from violations.models import Violation
 
-@cache_function('regions_list', 1000)
-def regions_list():
-    regions = [('', u'Выбрать субъект РФ'), None, None, None] # reserve places for Moscow, St. Petersburg and foreign countries
-    for location in Location.objects.filter(region=None).only('id', 'name').order_by('name'):
-        if location.name == u'Москва':
-            regions[1] = (location.id, location.name)
-        elif location.name == u'Санкт-Петербург':
-            regions[2] = (location.id, location.name)
-        elif location.name == FOREIGN_TERRITORIES:
-            regions[3] = (location.id, location.name)
-        else:
-            regions.append((location.id, location.name))
+def cache_location_function(key_prefix, timeout, timeout_region=None, timeout_tik=None, timeout_uik=None):
+    """ Takes function of one argument (location with default value None) """
+    def decorator(func):
+        def new_func(location=None):
+            if location:
+                key = key_prefix + '_' + str(location.id)
+            else:
+                key = key_prefix + '_all'
 
-    return regions
+            res = cache.get(key)
+            if res:
+                return res
 
-def get_roles_query(location):
+            res = func(location)
+
+            # Determine timeout
+            if location is None:
+                timeout1 = timeout
+            elif location.is_region():
+                timeout1 = timeout_region or timeout
+            elif location.is_tik():
+                timeout1 = timeout_tik or timeout
+            elif location.is_uik():
+                timeout1 = timeout_uik or timeout
+
+            cache.set(key, res, timeout1)
+            return res
+
+        return new_func
+
+    return decorator
+
+@cache_location_function('regions_list', 1000)
+def regions_list(location=None):
     """ location = None for Russia """
-    voter_count = 0
+    if location is None:
+        regions = [('', u'Выбрать субъект РФ'), None, None, None] # reserve places for Moscow, St. Petersburg and foreign countries
+        for loc_id, name in Location.objects.filter(region=None).order_by('name').values_list('id', 'name'):
+            if name == u'Москва':
+                regions[1] = (loc_id, name)
+            elif name == u'Санкт-Петербург':
+                regions[2] = (loc_id, name)
+            elif name == FOREIGN_TERRITORIES:
+                regions[3] = (loc_id, name)
+            else:
+                regions.append((loc_id, name))
+        return regions
+    elif location.is_region():
+        return list(Location.objects.filter(region=location, tik=None).order_by('name').values_list('id', 'name'))
+    elif location.is_tik():
+        return list(Location.objects.filter(tik=location).order_by('name').values_list('id', 'name'))
+    else:
+        return []
+
+# TODO: introduce query generators for other types of counting
+def get_roles_query(location=None):
     if location is None:
         return Q()
 
@@ -44,16 +82,8 @@ def get_roles_query(location):
     return query
 
 # TODO: count members differently?
-def get_roles_counters(location):
-    if location is None:
-        cache_key = 'roles_counter_all'
-    else:
-        cache_key = 'roles_counter_'+str(location.id)
-
-    res = cache.get(cache_key)
-    if res:
-        return res
-
+@cache_location_function('roles_counter', 300)
+def get_roles_counters(location=None):
     counters = {}
     query = get_roles_query(location)
 
@@ -67,6 +97,7 @@ def get_roles_counters(location):
     for role_type in ROLE_TYPES:
         counters[role_type] = len(filter(lambda r: r[0]==role_type, roles))
 
+    # TODO: do it for location=None only?
     counters['total'] = Profile.objects.exclude(user__email='').exclude(id__in=inactive_ids).filter(user__is_active=True).count()
 
     # TODO: use count here?
@@ -75,23 +106,19 @@ def get_roles_counters(location):
 
     counters['violations'] = Violation.objects.filter(query).count()
 
-    cik = Organization.objects.get(name='cik')
-    grakon = Organization.objects.get(name='grakon')
-    content_type = ContentType.objects.get_for_model(Organization)
+    counters['uiks'] = Protocol.objects.cik_protocols().filter(query).exclude(location__tik=None).count()
 
-    counters['uiks'] = Protocol.objects.filter(query).filter(content_type=content_type,
-            object_id=cik.id).exclude(location__tik=None).count()
-
-    protocol_queryset = Protocol.objects.filter(query).exclude(content_type=content_type,
-            object_id__in=[cik.id, grakon.id]).exclude(location__tik=None)
-
+    protocol_queryset = Protocol.objects.from_users().filter(query).exclude(location__tik=None)
     counters['protocols'] = protocol_queryset.count()
     counters['verified_protocols'] = protocol_queryset.filter(verified=True).count()
 
-    if location and location.is_uik():
-        cache.set(cache_key, counters, 300)
-    else:
-        cache.set(cache_key, counters, 300)
+    counters['commission_members'] = CommissionMember.objects.filter(query).count()
+
+    if location:
+        counters['links'] = Link.objects.filter(location=location).count()
+
+    # TODO: use count instead
+    counters['organizations'] = len(OrganizationCoverage.objects.organizations_at_location(location))
 
     return counters
 

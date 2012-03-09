@@ -61,7 +61,7 @@ class Command(BaseCommand):
             try:
                 location = Location.objects.get(region_code=data['region'], name=data['uik'])
             except Location.DoesNotExist:
-                print "Failed to find location of violation " + str(data['id'])
+                print "Failed to find location of protocol " + str(data['id'])
                 continue
 
             if 'url' not in data:

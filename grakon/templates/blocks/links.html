@@ -1,0 +1,16 @@
+{% load elements %}
+
+<h3 class="column_header column_header_icon"><span class="resources">
+{% if current_location %}
+    <a href="{% url links current_location.id %}">Полезные ресурсы ({{ counters.links }})</a>
+{% else %}
+    Полезные ресурсы ({{ counters.links }})
+{% endif %}
+</span></h3>
+<div class="ym-clearfix">
+    <div class="content_block">
+        <div class="mt15 mb15">
+            {% button "circle-plus" "Добавить ссылку" "add_link" %}
+        </div>
+    </div>
+</div>

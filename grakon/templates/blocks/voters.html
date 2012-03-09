@@ -6,18 +6,15 @@
     .ym-col1 .content_block {padding: 0 1em 1em 2.4em;}
     .ym-col1 .content_block .pseudolink {font-style: italic; font-size: 0.9em;}
 </style>
-<div class="side_block_header side_block_voter">Избиратели ({{ counters.voter }})</div>
+<div class="side_block_header side_block_voter">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=voter">Избиратели ({{ counters.voter }})</a>
+    {% else %}
+        Избиратели ({{ counters.voter }})
+    {% endif %}
+</div>
 
 <div class="content_block">
-    <ul id="voters_ul">
-        {% for role in participants.voter %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %}
-            </li>
-        {% endfor %}
-    </ul>
     {% button "circle-plus" "Я &mdash; избиратель" "become_voter" "" "center" "Для тех, кто будет голосовать на выборах 4 марта" %}
 </div>
 

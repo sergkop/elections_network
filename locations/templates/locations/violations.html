@@ -1,0 +1,7 @@
+<ul>
+    {% for violation in violations %}
+        <li>
+            <a href="{{ violation.get_absolute_url }}">{{ violation.get_type_display }}</a>
+        </li>
+    {% endfor %}
+</ul>

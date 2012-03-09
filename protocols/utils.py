@@ -1,12 +1,13 @@
 def format_percent(count, total):
     return '%2.2f%%' % (100*float(count)/total)
 
-def results_table_data(protocols):
+def results_table_data(protocols, dashes=True):
     protocols = [protocol for protocol in protocols if protocol.p9+protocol.p10>0]
 
     if len(protocols) == 0:
-        return {'girinovskiy': '&mdash;', 'zyuganov': '&mdash;', 'mironov': '&mdash;',
-                'prokhorov': '&mdash;', 'putin': '&mdash;', 'invalid': '&mdash;'}
+        symbol = '&mdash;' if dashes else ''
+        return {'girinovskiy': symbol, 'zyuganov': symbol, 'mironov': symbol,
+                'prokhorov': symbol, 'putin': symbol, 'invalid': symbol}
 
     data = {}
     for field in ('p9', 'p10', 'p19', 'p20', 'p21', 'p22', 'p23'):

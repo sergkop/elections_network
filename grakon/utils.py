@@ -16,7 +16,7 @@ def form_helper(action_name, button_name):
     helper = FormHelper()
     helper.form_action = action_name
     helper.form_method = 'POST'
-    helper.add_input(Submit('', button_name))
+    helper.add_input(Submit('', button_name, css_class='ui-button ui-state-default'))
     return helper
 
 def authenticated_redirect(view_name):
@@ -45,6 +45,7 @@ def cache_function(key, timeout):
 
     return decorator
 
+# TODO: cache html only
 def cache_view(key, timeout, only_anonym=True):
     def decorator(func):
         def new_func(request, *args, **kwargs):

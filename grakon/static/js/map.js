@@ -177,11 +177,26 @@ var Grakon = {
      */
     REGION_STYLES: {
         'default':  new OpenLayers.Style({
-                      'fillColor': '#66cccc',
-                      'fillOpacity': 0.1,
                       'strokeColor': '#66cccc',
                       'strokeOpacity': 0.25,
                       'strokeWidth': 1
+                    }, {
+                        rules: [
+                            new OpenLayers.Rule({
+                                filter: new OpenLayers.Filter.Comparison({
+                                    type: OpenLayers.Filter.Comparison.GREATER_THAN,
+                                    property: "perimeter",
+                                    value: 3000000
+                                }),
+                                symbolizer: {'fillColor': '#00ff00',
+                                             'fillOpacity': 0.25}
+                            }),
+                            new OpenLayers.Rule({
+                                elseFilter: true,
+                                symbolizer: {'fillColor': '#66cccc',
+                                             'fillOpacity': 0.1}
+                            })
+                        ]
                     }),
         'temporary':    new OpenLayers.Style({
                           'fillColor': '#ee9900',
@@ -520,23 +535,6 @@ var Grakon = {
             marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
             marker.events.register("mouseover", feature, Grakon.Utils.markerHover);
             marker.events.register("mouseout", feature, Grakon.Utils.markerHover);
-            
-            for (var j in Grakon.borderLayers.regions.features) {
-                var feature = Grakon.borderLayers.regions.features[j];
-                if (feature.geometry.intersects( new OpenLayers.Geometry.Point(location.lon, location.lat) ) )
-                    feature.attributes.num = (feature.attributes.num == null) ? 1 : feature.attributes.num+1;
-            }
-                
-            for (var j in Grakon.borderLayers.regions.features) {
-                var feature = Grakon.borderLayers.regions.features[j];
-                if (feature.attributes.num == null)
-                    feature.style = null;
-                else if (feature.attributes.num == 1)
-                    feature.style = {fill: true, fillColor: "#00ff00", fillOpacity: 0.25, strokeWidth: 1, strokeColor: "#00ff00", strokeOpacity: 1};
-                else
-                    feature.style = {fill: true, fillColor: "#ff0000", fillOpacity: 0.25, strokeWidth: 1, strokeColor: "#ff0000", strokeOpacity: 1};
-            }
-            Grakon.electionCommissionLayers.regions.redraw();
  
             layer.addMarker(marker);
         },
@@ -548,7 +546,7 @@ var Grakon = {
             this.popup.addCloseBox(function() {
                 Grakon.map.removePopup( Grakon.map.popups[0] );
             });
-            this.popup.opacity = 0.85;
+            this.popup.opacity = 0.9;
             Grakon.Utils.updateCommissionZoomIcon(this.popup);
             Grakon.map.addPopup(this.popup);
             
@@ -566,7 +564,7 @@ var Grakon = {
                 var matches = pattern.exec(this.data.popupContentHTML);
                 
                 if (matches != null) {
-                    var width = (matches[1].length + 5) * 9;
+                    var width = (matches[1].length + 5) * 7;
                     
                     var type = "";
                     if (this.data.icon.url.indexOf("iks") != -1)
@@ -574,7 +572,7 @@ var Grakon = {
                     else if (this.data.icon.url.indexOf("tik") != -1)
                         type = "ТИК: ";
                     
-                    var content = "<center>"+type+matches[1]+"</center>";
+                    var content = "<p class=\"hint\">"+type+matches[1]+"</p>";
                     var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 20), content, null, false);
                     
                     if (Grakon.map.popups != null) {
@@ -582,6 +580,11 @@ var Grakon = {
                             Grakon.map.addPopup(popup);
                         else
                             Grakon.map.popups[0] = popup;
+                        var mousePositionCtrl = Grakon.map.getControlsByClass("OpenLayers.Control.MousePosition")[0];
+                        var xsign = $(popup.groupDiv).css('left') < mousePositionCtrl.lastXy.x-16 ? -1 : +1;
+                        var ysign = $(popup.groupDiv).css('top') < mousePositionCtrl.lastXy.y+16 ? +1 : -1;
+                        var popupPosition = new OpenLayers.Pixel(mousePositionCtrl.lastXy.x+8*xsign, mousePositionCtrl.lastXy.y+8*ysign);
+                        popup.moveTo( popupPosition );
                     }
                 }
                 OpenLayers.Event.stop(evt);
@@ -678,6 +681,9 @@ var Grakon = {
             return OpenLayers.INCHES_PER_UNIT[uom] * OpenLayers.METERS_PER_INCH / metersPerPixel;
         },
 
+        /**
+         * Проверяет, задано ли значение.
+         */
         isSet: function(value) {
             return value != null && value != "" && value != "None";
         },
@@ -860,10 +866,11 @@ var Grakon = {
             baseLayer = Grakon.map.getLayersByName( $.cookie('MAP_TYPE_INDEX') ).pop();
         Grakon.map.setBaseLayer(baseLayer);
         
+        // Добавляем пункты в панель управления карты
         if (document.getElementById("mapLayers") != null) {
             var mapLayers = Grakon.map.getLayersBy('isBaseLayer', true);
             for (var i in mapLayers)
-                document.getElementById("mapLayers").innerHTML += '<p><input type="radio" id="'+mapLayers[i].id+'" name="map"'+(baseLayer==mapLayers[i]?' checked="checked"':'')+' onclick="Grakon.setLayerByIndex('+Grakon.map.getLayerIndex(mapLayers[i])+')" /> <label for="'+mapLayers[i].id+'">'+mapLayers[i].name+'</label></p>';
+                document.getElementById("mapLayers").innerHTML += '<p><input type="radio" id="map_'+mapLayers[i].id+'" name="map"'+(baseLayer==mapLayers[i]?' checked="checked"':'')+' onclick="Grakon.setLayerByIndex('+Grakon.map.getLayerIndex(mapLayers[i])+')" /> <label for="map_'+mapLayers[i].id+'">'+mapLayers[i].name+'</label></p>';
         }
         
         // запоминаем выбранную карту в cookie
@@ -890,23 +897,6 @@ var Grakon = {
 
         // выделять субъект РФ цветом при наведении мыши
         Grakon.Utils.initRegionHighlightControl(regions);
-        
-        regions.events.register('featureadded', regions, function(element) {
-            var feature = element.feature;
-            for (var j in Grakon.electionCommissionLayers.regions.markers) {
-                location = new OpenLayers.Geometry.Point(Grakon.electionCommissionLayers.regions.markers[j].lonlat.lon, Grakon.electionCommissionLayers.regions.markers[j].lonlat.lat);
-                if (feature.geometry.intersects( location ) )
-                    feature.attributes.num = (feature.attributes.num == null) ? 1 : feature.attributes.num+1;
-            }
-                
-            if (feature.attributes.num == null)
-                feature.style = null;
-            else if (feature.attributes.num == 1)
-                feature.style = {fill: true, fillColor: "#00ff00", fillOpacity: 0.75, strokeWidth: 1, strokeColor: "#00ff00", strokeOpacity: 1};
-            else
-                feature.style = {fill: true, fillColor: "#ff0000", fillOpacity: 0.75, strokeWidth: 1, strokeColor: "#ff0000", strokeOpacity: 1};
-            this.redraw();
-        });
 
         // Добавить слой на карту
         Grakon.map.addLayer(regions);
@@ -1120,8 +1110,8 @@ var Grakon = {
         
         for (var n in Grakon.layerSwitcher.baseLayers)
             if (Grakon.layerSwitcher.baseLayers[n].layer == event.layer) {
-                $(document.getElementById(event.layer.id)).attr("checked", "checked").css('border', "1px solid red");
                 $.cookie('MAP_TYPE_INDEX', event.layer.name, {expires: 92, path: '/'});
+                $('input[id="map_'+event.layer.id+'"]').prop("checked", true);
                 return;
             }
     },

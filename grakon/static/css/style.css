@@ -305,6 +305,13 @@ div.olPopupCloseBox {
     text-align: center;
 }
 
+.hint {
+    text-align: center;
+    font-size: 11px;
+    padding: 0;
+    margin: 0;
+}
+
 #mapControlPanel {
     height: 256px;
 }

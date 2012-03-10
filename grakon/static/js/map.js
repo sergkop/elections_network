@@ -413,23 +413,22 @@ var Grakon = {
             
             if (electionCommission.data != null) {
                 var sum = electionCommission.data.p19 + electionCommission.data.p20 + electionCommission.data.p21 + electionCommission.data.p22 + electionCommission.data.p23 + electionCommission.data.p9;
-              
+
                 content += "<p>";
-<<<<<<< HEAD
+
                 content += (electionCommission.data.voter != null) ? "Избирателей: " + electionCommission.data.voter + "<br/>" : "";
                 content += (electionCommission.data.observer != null) ? "Наблюдателей: " + electionCommission.data.observer + "<br/>" : "";
                 content += (electionCommission.data.member != null) ? "Членов комиссии: " + electionCommission.data.member + "<br/>" : "";
                 content += (electionCommission.data.journalist != null) ? "Представителей СМИ: " + electionCommission.data.journalist + "<br/>" : "";
                 content += (electionCommission.data.prosecutor != null) ? "Прокуроров: " + electionCommission.data.prosecutor + "<br/>" : "";
-                content += (electionCommission.data.authoritie != null) ? "Чиновников: " + electionCommission.data.authoritie + "<br/>" : "";
-=======
+                content += (electionCommission.data.authority != null) ? "Чиновников: " + electionCommission.data.authority + "<br/>" : "";
+
                 content += (electionCommission.data.p19 != null) ? "Жириновский: " + electionCommission.data.p19 + " ("+(electionCommission.data.p19*100/sum).toFixed(2)+"%)<br/>" : "";
                 content += (electionCommission.data.p20 != null) ? "Зюганов: " + electionCommission.data.p20 + " ("+(electionCommission.data.p20*100/sum).toFixed(2)+"%)<br/>" : "";
                 content += (electionCommission.data.p21 != null) ? "Миронов: " + electionCommission.data.p21 + " ("+(electionCommission.data.p21*100/sum).toFixed(2)+"%)<br/>" : "";
                 content += (electionCommission.data.p22 != null) ? "Прохоров: " + electionCommission.data.p22 + " ("+(electionCommission.data.p22*100/sum).toFixed(2)+"%)<br/>" : "";
                 content += (electionCommission.data.p23 != null) ? "Путин: " + electionCommission.data.p23 + " ("+(electionCommission.data.p23*100/sum).toFixed(2)+"%)<br/>" : "";
                 content += (electionCommission.data.p9 != null) ? "Недействительных: " + electionCommission.data.p9 + " ("+(electionCommission.data.p9*100/sum).toFixed(2)+"%)<br/>" : "";
->>>>>>> Showing vote results, removing statistics button panel and statistics
                 content += "</p>";
             }
             return content;

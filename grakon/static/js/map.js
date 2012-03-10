@@ -449,12 +449,12 @@ var Grakon = {
             content += '<p class="address">'+electionCommission.address+'</p>';
             if (electionCommission.data != null) {
                 content += "<p>";
-                content += (electionCommission.data.voters != null) ? "Избирателей: " + electionCommission.data.voters + "<br/>" : "";
-                content += (electionCommission.data.observers != null) ? "Наблюдателей: " + electionCommission.data.observers + "<br/>" : "";
-                content += (electionCommission.data.members != null) ? "Членов комиссии: " + electionCommission.data.members + "<br/>" : "";
-                content += (electionCommission.data.journalists != null) ? "Представителей СМИ: " + electionCommission.data.journalists + "<br/>" : "";
-                content += (electionCommission.data.prosecutors != null) ? "Прокуроров: " + electionCommission.data.prosecutors + "<br/>" : "";
-                content += (electionCommission.data.authorities != null) ? "Чиновников: " + electionCommission.data.authorities + "<br/>" : "";
+                content += (electionCommission.data.voter != null) ? "Избирателей: " + electionCommission.data.voter + "<br/>" : "";
+                content += (electionCommission.data.observer != null) ? "Наблюдателей: " + electionCommission.data.observer + "<br/>" : "";
+                content += (electionCommission.data.member != null) ? "Членов комиссии: " + electionCommission.data.member + "<br/>" : "";
+                content += (electionCommission.data.journalist != null) ? "Представителей СМИ: " + electionCommission.data.journalist + "<br/>" : "";
+                content += (electionCommission.data.prosecutor != null) ? "Прокуроров: " + electionCommission.data.prosecutor + "<br/>" : "";
+                content += (electionCommission.data.authoritie != null) ? "Чиновников: " + electionCommission.data.authoritie + "<br/>" : "";
                 content += "</p>";
             }
             return content;

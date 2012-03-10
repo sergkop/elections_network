@@ -1,16 +1,7 @@
-import sys
-
 from django.contrib.contenttypes.models import ContentType
 from django.core.management.base import BaseCommand
 
-def print_progress(i, count):
-    """ Show progress message updating in-place """
-    if i < count-1:
-        sys.stdout.write("\r%(percent)2.3f%%" % {'percent': 100*float(i)/count})
-        sys.stdout.flush()
-    else:
-        sys.stdout.write("\r")
-        sys.stdout.flush()
+from grakon.utils import print_progress
 
 class Command(BaseCommand):
     help = "Recalculate protocols data at levels higher than uik. Argument is 'cik' or 'other'"

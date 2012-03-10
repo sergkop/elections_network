@@ -17,7 +17,7 @@ def cik_and_grakon():
     }
 
 class ProtocolManager(models.Manager):
-    def cik_protocols(self):
+    def from_cik(self):
         data = cik_and_grakon()
         return self.filter(content_type=data['content_type'], object_id=data['cik'].id)
 

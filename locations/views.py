@@ -54,7 +54,7 @@ class BaseLocationView(TemplateView):
         verified_protocols = list(Protocol.objects.verified().filter(location=location))
 
         try:
-            cik_protocols = [Protocol.objects.cik_protocols().get(location=location)]
+            cik_protocols = [Protocol.objects.from_cik().get(location=location)]
         except Protocol.DoesNotExist:
             cik_protocols = []
 

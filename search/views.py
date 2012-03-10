@@ -184,7 +184,7 @@ class ResultsTableSearchView(BaseSearchView):
         elif self.location.is_uik():
             sub_regions = []
 
-        cik_protocols = Protocol.objects.cik_protocols().filter(location__in=sub_regions)
+        cik_protocols = Protocol.objects.from_cik().filter(location__in=sub_regions)
 
         if self.location and self.location.is_tik():
             observer_protocols = list(Protocol.objects.from_users().filter(location__in=sub_regions).filter(verified=True))

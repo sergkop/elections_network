@@ -1,5 +1,3 @@
-import sys
-
 from datetime import datetime
 
 from django.contrib.contenttypes.models import ContentType
@@ -7,16 +5,7 @@ from django.core.management.base import BaseCommand
 
 from scrapy.selector import HtmlXPathSelector
 
-from grakon.utils import read_url
-
-def print_progress(i, count):
-    """ Show progress message updating in-place """
-    if i < count-1:
-        sys.stdout.write("\r%(percent)2.3f%%" % {'percent': 100*float(i)/count})
-        sys.stdout.flush()
-    else:
-        sys.stdout.write("\r")
-        sys.stdout.flush()
+from grakon.utils import print_progress, read_url
 
 class Command(BaseCommand):
     help = "Import election results from cikrf.ru"

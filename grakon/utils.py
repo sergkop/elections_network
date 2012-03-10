@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import cookielib
 from random import choice
+import sys
 import urllib2
 
 from django.core.cache import cache
@@ -113,3 +114,12 @@ def read_url(url, encoding='windows-1251'):
     except urllib2.URLError, e:
         raise e
         return ''
+
+def print_progress(i, count):
+    """ Show progress message updating in-place """
+    if i < count-1:
+        sys.stdout.write("\r%(percent)2.3f%%" % {'percent': 100*float(i)/count})
+        sys.stdout.flush()
+    else:
+        sys.stdout.write("\r")
+        sys.stdout.flush()

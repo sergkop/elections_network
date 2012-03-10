@@ -1,9 +1,10 @@
 # coding=utf8
 from random import choice
-import sys
 
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
+
+from grakon.utils import print_progress
 
 # [(name, username)]
 male_names = (
@@ -91,15 +92,6 @@ links = [
     (u'Митинг 4 февраля', 'http://www.facebook.com/events/212286018856867/'),
     (u'Электронная демократия', 'http://www.facebook.com/groups/ns.fred/'),
 ]
-
-def print_progress(i, count):
-    """ Show progress message updating in-place """
-    if i < count-1:
-        sys.stdout.write("\r%(percent)2.1f%%" % {'percent': 100*float(i)/count})
-        sys.stdout.flush()
-    else:
-        sys.stdout.write("\r")
-        sys.stdout.flush()
 
 class Command(BaseCommand):
     help = "Loads data for testing - users, links, roles, etc."

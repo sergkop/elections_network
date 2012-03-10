@@ -24,43 +24,6 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
 };
 
 
-
-/**
- * Класс с функциями для обработки событий с кнопками статистики
- */
-var StatisticsButtonHandlers = new Object({
-    activate: function(event) {
-        // деактивируем другие кнопки панели
-        var statisticBtnsPanel = Grakon.map.getControlsBy("displayClass", "olControlPanel").pop();
-        for (var pos in statisticBtnsPanel.controls)
-            if (statisticBtnsPanel.controls[pos].displayClass != event.object.displayClass)
-                statisticBtnsPanel.controls[pos].deactivate();
-            
-        Grakon.selectedStatistics = event.object.displayClass;
-
-        Grakon.electionCommissionLayers.regions.clearMarkers();
-        Grakon.electionCommissionLayers.districts.clearMarkers();
-        Grakon.electionCommissionLayers.areas.clearMarkers();
-        Grakon.electionCommissions = new Array();
-        $(".markerLabel").remove();
-        
-        Grakon.loadLocationsData();
-    },
-    deactivate: function(event) {
-        Grakon.electionCommissionLayers.regions.clearMarkers();
-        Grakon.electionCommissionLayers.districts.clearMarkers();
-        Grakon.electionCommissionLayers.areas.clearMarkers();
-        Grakon.electionCommissions = new Array();
-        $(".markerLabel").remove();
-        
-        Grakon.selectedStatistics = null;
-        
-        Grakon.loadLocationsData();
-    }
-});
-
-
-
 /** 
  * @requires OpenLayers/Marker.js 
  * 
@@ -447,14 +410,26 @@ var Grakon = {
             content += '<p class="commissionType">'+type+'</p>';
             content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
             content += '<p class="address">'+electionCommission.address+'</p>';
+            
             if (electionCommission.data != null) {
+                var sum = electionCommission.data.p19 + electionCommission.data.p20 + electionCommission.data.p21 + electionCommission.data.p22 + electionCommission.data.p23 + electionCommission.data.p9;
+              
                 content += "<p>";
+<<<<<<< HEAD
                 content += (electionCommission.data.voter != null) ? "Избирателей: " + electionCommission.data.voter + "<br/>" : "";
                 content += (electionCommission.data.observer != null) ? "Наблюдателей: " + electionCommission.data.observer + "<br/>" : "";
                 content += (electionCommission.data.member != null) ? "Членов комиссии: " + electionCommission.data.member + "<br/>" : "";
                 content += (electionCommission.data.journalist != null) ? "Представителей СМИ: " + electionCommission.data.journalist + "<br/>" : "";
                 content += (electionCommission.data.prosecutor != null) ? "Прокуроров: " + electionCommission.data.prosecutor + "<br/>" : "";
                 content += (electionCommission.data.authoritie != null) ? "Чиновников: " + electionCommission.data.authoritie + "<br/>" : "";
+=======
+                content += (electionCommission.data.p19 != null) ? "Жириновский: " + electionCommission.data.p19 + " ("+(electionCommission.data.p19*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p20 != null) ? "Зюганов: " + electionCommission.data.p20 + " ("+(electionCommission.data.p20*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p21 != null) ? "Миронов: " + electionCommission.data.p21 + " ("+(electionCommission.data.p21*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p22 != null) ? "Прохоров: " + electionCommission.data.p22 + " ("+(electionCommission.data.p22*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p23 != null) ? "Путин: " + electionCommission.data.p23 + " ("+(electionCommission.data.p23*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p9 != null) ? "Недействительных: " + electionCommission.data.p9 + " ("+(electionCommission.data.p9*100/sum).toFixed(2)+"%)<br/>" : "";
+>>>>>>> Showing vote results, removing statistics button panel and statistics
                 content += "</p>";
             }
             return content;
@@ -518,7 +493,7 @@ var Grakon = {
             this.popup.addCloseBox(function() {
                 Grakon.map.removePopup( Grakon.map.popups[0] );
             });
-            this.popup.opacity = 0.85;
+            this.popup.opacity = 0.9;
             Grakon.Utils.updateCommissionZoomIcon(this.popup);
             Grakon.map.addPopup(this.popup);
             
@@ -952,57 +927,6 @@ var Grakon = {
         });
         panel.addControls([fullscreenBtn]);
         Grakon.map.addControl(panel);
-        
-        Grakon.addStatisticsPanel();
-    },
-    
-    addStatisticsPanel: function() {
-        var votersBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество избирателей на участках",
-            displayClass: "voters",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var observersBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество наблюдателей на участках",
-            displayClass: "observers",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var journalistsBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество представителей СМИ на участках",
-            displayClass: "journalists",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var membersBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество членов избирательных комиссий",
-            displayClass: "members",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var authoritiesBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество представителей власти на участках",
-            displayClass: "authorities",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var prosecutorsBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество представителей прокуратуры на участках",
-            displayClass: "prosecutors",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var statisticsPanel = new OpenLayers.Control.Panel();
-        
-        statisticsPanel.addControls([votersBtn, observersBtn, journalistsBtn, membersBtn/*, authoritiesBtn, prosecutorsBtn*/]);
-        Grakon.map.addControl(statisticsPanel);
     },
     
     /**

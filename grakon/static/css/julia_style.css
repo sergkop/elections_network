@@ -91,14 +91,13 @@ h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2
 	h2 {margin-top: 0.5em;}
 	h4 a {text-decoration: none;}
 .column_header {color: #333; font-weight: bold;}
-	.column_header a {color: #333;}
 	.column_black {border-bottom: 1px solid #cbc4ac; box-shadow: 0 1px 1px #f4eedc;}
 	
 
 .side_block_header {font-size: 0.9em; border-top: 1px solid #9cc118; box-shadow: inset 0 1px 0 #bed761;}
 .side_block_header h4 {font-size: 1.1em; margin: 0; border: none; border-radius: 0; color: #000; padding: 0;}
-	.side_block_header a {display: block; color: #000;}
-	.side_block_header h4 span, .side_list a {padding-right: 13px; background: url(/static/images/dotted-arrow.gif) right center no-repeat;}
+	.side_block_header h4 span, .side_list a, .side_block_header a, .column_header a  {padding-right: 13px; background: url(/static/images/dotted-arrow.gif) right center no-repeat; color: #333; text-decoration: none;}
+		.side_list a:hover, .side_block_header a:hover, .column_header a:hover {text-decoration: underline;}
 	.ui-dialog-titlebar {font-weight: normal; font-size: 0.9em;}
 	.ui-dialog-content {font-size: 0.8em;}
 	/*.ui-dialog-content center {text-align:left;}*/
@@ -123,6 +122,8 @@ h4, h2 {margin: 1.5em 0 1em; border-bottom: 1px dotted #ccc; padding-bottom: 0.2
 .support{ background: url(/static/images/icon_support.png) 7px center no-repeat;}
 .web_observers{ background: url(/static/images/icon_web_observers.png) 5px 8px no-repeat;}
 .participants {background: url(/static/images/icon_participants.png) 7px center no-repeat;}
+.icon_info {background: url(/static/images/icon_infographic.gif) center center no-repeat;}
+	.icon_info a {width: 30px;}
 	.column_header_icon {padding: 0 !important;}
 	.column_header_icon .organizations, .column_header_icon .complaints, .column_header_icon .protocols, .column_header_icon .events, .column_header_icon span  {padding: 0.8em 0.5em 0.8em 2em; display: block;} 
 
@@ -144,17 +145,17 @@ h3 {margin: 0.3em 0 0;}
 .ui-widget {font-family: Arial, Helvetica, sans-serif;}
 .ui-tabs {padding: 0; border-radius: 5px 5px 0 0; margin-bottom: 2em;}
 
-.ym-col3 .ui-tabs .ui-tabs-nav li {font-size: 1.1em; font-weight: normal;  margin-right: 5px; line-height:1.6em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li {font-size: 1.1em; font-weight: normal;  margin-right: 5px; line-height:1.6em; padding: 0 0.5em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li img {margin-top: 0.2em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.fr {margin-right: 0;}
-.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {background-color: #fff; color: #2f8dbc; z-index:1; font-size: 1.5em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {background-color: #fff; color: #2f8dbc; z-index:1; font-size: 1.3em;}
 .ym-col3 .ui-tabs .ui-tabs-nav li a {color: #333; display: block;  padding:  0 0 0 10px; height: 35px; }
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {color: #2f8dbc; font-weight: bold;}
-.ym-col3 .ui-tabs .ui-tabs-nav li a {padding: 5px 10px 0;}
+.ym-col3 .ui-tabs .ui-tabs-nav li a {padding: 5px 0 0;}
 
 .ym-col3 .ui-state-default i, .ym-col3 .ui-widget-content .ui-state-default i, .ym-col3 .ui-widget-header .ui-state-default i {position: absolute; top: 0; right: -36px; background: url(/static/images/back_tab_blue.png) 0 0 no-repeat; width: 40px; height: 30px; display: none;}
 .ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected i {height: 32px; display: none;}
-.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 37px; margin-top: -1px; background-color: #fff; line-height: 1.2em; padding: 0 0.5em;}
+.ym-col3 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {height: 37px; margin-top: -1px;  background-color: #fff; line-height: 1.2em;}
 .ui-tabs .ui-tabs-nav {padding: 0;}
 .ui-tabs .ui-tabs-panel {background-color: #fff; margin-top: 0;}
 
@@ -167,7 +168,7 @@ h3 {margin: 0.3em 0 0;}
 .ui-button {border-radius: 1.5em;  behavior: url(/static/css/PIE.htc);}
 .ui-button-green {color: #fff !important;}
 
-.ui-state-default:hover, .ui-widget-content .ui-state-default:hover, .ui-widget-header .ui-state-default:hover, #goto_location:hover, #map_location:hover {background-color: #c9c9c9; background-image: none; color: #333!important;}
+.ui-state-default:hover, .ui-widget-content .ui-state-default:hover, .ui-widget-header .ui-state-default:hover, #goto_location:hover, #map_location:hover {background-color: #c9c9c9; color: #333!important;}
 .disabled-button {background-color: #e2e2e2!important; background-image: none!important; color: #a2a2a2!important; text-shadow: none;}
 	.disabled-button:hover {color: #a2a2a2!important;}
 

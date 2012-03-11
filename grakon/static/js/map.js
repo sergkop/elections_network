@@ -256,14 +256,16 @@ var Grakon = {
     },
     
     /**
-     * Уровень масштабирования карты, с которого показываются ТИКи.
+     * Уровни масштабирования, с которых показывать типы избирательных округов
      */
-    MAP_LEVELS_ZOOM: new Object({
-        'country': 0,
-        'regions': 1,
-        'districts': 7,
-        'areas': 11,
-        'max': 15
+    ELECTION_COMMISSION_SCALES: new Object({
+        'country': 443744272.74185663,
+        'regions': 221872136.37092832,
+        'districts': 3466752.130795755,
+        'areas': 108336.00408736734,
+        'max': 13542.000510920918,
+        'initial': 27734017.04636604,
+        'unhide': 13542.000510920918
     }),
     
     /**
@@ -348,7 +350,7 @@ var Grakon = {
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
                 
-                if (Grakon.map.getZoom() < 14) {
+                if (Grakon.map.getScale() > Grakon.ELECTION_COMMISSION_SCALES.unhide) {
                     // прячем слишком близко расположенные метки
                     Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.regions );
                     Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.districts );
@@ -576,16 +578,16 @@ var Grakon = {
          * @param {level} уровень приближения карты
          * @returns масштаб для заданного уровня приближения на карте
          */
-        getZoomForLevel: function(level) {
-            var zoom;
+        getScaleForLevel: function(level) {
+            var zoomScale;
             switch (level) {
-              case 2: zoom = Grakon.MAP_LEVELS_ZOOM.regions; break;
-              case 3: zoom = Grakon.MAP_LEVELS_ZOOM.districts; break;
-              case 4: zoom = Grakon.MAP_LEVELS_ZOOM.areas; break;
-              case 5: zoom = Grakon.MAP_LEVELS_ZOOM.max; break;
-              default: zoom = 4;
+              case 2: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.regions; break;
+              case 3: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.districts; break;
+              case 4: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.areas; break;
+              case 5: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.max; break;
+              default: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.initial;
             }
-            return zoom;
+            return zoomScale;
         },
         
         /**
@@ -612,7 +614,7 @@ var Grakon = {
             if (popup == null)
                 return;
             var contentHTML = popup.contentHTML;
-            if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
+            if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.max)
                 popup.setContentHTML( contentHTML.replace("zoomIn", "zoomOut") );
             else
                 popup.setContentHTML( contentHTML.replace("zoomOut", "zoomIn") );
@@ -761,11 +763,6 @@ var Grakon = {
         
         // слушаем событие окончания перемещения по карте
         Grakon.map.events.register("moveend", Grakon.map, Grakon.loadLocationsData);
-        
-        // Закрываем попап при плике на карту.
-        Grakon.map.events.register("click", null, function(e){
-            Grakon.removePopups();
-        });
     },
     
     /**
@@ -820,7 +817,7 @@ var Grakon = {
         
         // изменить иконку масштабирования во всплывающем окне
         if (Grakon.map.popups != null && Grakon.map.popups[0] != null && Grakon.map.popups[0].contentDiv != null)
-            if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.max)
+            if (Grakon.map.getScale() > Grakon.ELECTION_COMMISSION_SCALES.max)
                 $(Grakon.map.popups[0].contentDiv).find('a[class="zoomOut"]').removeClass("zoomOut").addClass("zoomIn");
             else
                 $(Grakon.map.popups[0].contentDiv).find('a[class="zoomIn"]').removeClass("zoomIn").addClass("zoomOut");
@@ -996,11 +993,11 @@ var Grakon = {
      */
     getLevel: function() {
         var level = 1;
-        if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas)
+        if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.areas)
             level = 4;
-        else if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts)
+        else if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.districts)
             level = 3;
-        else if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.regions)
+        else if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.regions)
             level = 2
         return level;
     },
@@ -1012,18 +1009,18 @@ var Grakon = {
      * @param {type} тип избирательной комиссии
      */
     zoomOnElectionCommission: function(lon, lat, type) {
-        var nextZoom;
-        var defaultZoom = Grakon.Utils.getZoomForLevel(type);
+        var nextZoomScale;
         
-        if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
-            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel() );
+        if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.max)
+            nextZoomScale = Grakon.Utils.getScaleForLevel( Grakon.getLevel() );
         else if (Grakon.getLevel() >= 4)
-            nextZoom = Grakon.MAP_LEVELS_ZOOM.max;
+            nextZoomScale = Grakon.ELECTION_COMMISSION_SCALES.max;
         else
-            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel()+1 );
+            nextZoomScale = Grakon.Utils.getScaleForLevel( Grakon.getLevel()+1 );
         
         var center = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
-        Grakon.map.setCenter(center, nextZoom);
+        Grakon.map.setCenter(center);
+        Grakon.map.zoomToScale(nextZoomScale);
     },
     
     /**

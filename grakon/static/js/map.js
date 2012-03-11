@@ -19,16 +19,6 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
     this.title = title;
     this.address = address;
     this.data = data;
-    this.data.voter = 500;
-    this.data.observer = 50;
-    this.data.member = 5;
-    this.data.journalist = 1;
-    this.data.p9 = 14;
-    this.data.p19 = 20;
-    this.data.p20 = 50;
-    this.data.p21 = 5;
-    this.data.p22 = 30;
-    this.data.p23 = 300;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
 };

@@ -89,7 +89,7 @@
     </h2>
 
     {% if profile_user == user %}
-        {% tabs "tabs" profile_view "" "" "Профиль" "my_profile" "profiles/view.html" "Редактировать" "edit_profile" "profiles/edit.html" %}
+        {% tabs "tabs" profile_view "" "" "Профиль" "my_profile" "profiles/view.html" "" "Редактировать" "edit_profile" "profiles/edit.html" "" %}
     {% else %}
         <div class="ym-cbox">
             {% include "profiles/view.html" %}

@@ -19,7 +19,7 @@ def button(icon, title, id=None, link='', center='center', tip=''):
 @register.tag(name="tabs")
 def tabs_tag(parser, token):
     args = token.split_contents()
-    if len(args) % 3 != 2:
+    if len(args) % 4 != 1:
         raise template.TemplateSyntaxError("Incorrect number of arguments")
     return TabsNode(*args[1:])
 
@@ -41,10 +41,10 @@ class TabsNode(template.Node):
         args = self.args[4:]
 
         tabs = []
-        num = len(args) / 3
+        num = len(args) / 4
         for i in range(num):
-            url = args[3*i+1]
-            if url[0]!='#' and url[0]!='/':
+            url = args[4*i+1]
+            if url[0] != '/':
                 context_dict = context.dicts[0] # a hack to extract context dict from RequestContext
                 kwargs = {}
                 if param_name in context_dict:
@@ -52,10 +52,11 @@ class TabsNode(template.Node):
                 url = reverse(url, kwargs=kwargs)
 
             tabs.append({
-                'title': args[3*i],
+                'title': args[4*i],
                 'url': url,
-                'path': args[3*i+2],
-                'active': active_url_or_template==args[3*i+1],
+                'path': args[4*i+2],
+                'css_class': args[4*i+3],
+                'active': active_url_or_template==args[4*i+1],
             })
 
         active_tabs = filter(lambda tab: tab['active'], tabs)

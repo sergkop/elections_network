@@ -4,23 +4,36 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
+from grakon.utils import cache_function
 from locations.models import Location
 from organizations.models import Organization
 
-class ProtocolManager(models.Manager):
-    def cik_protocol(self, location):
-        cik = Organization.objects.get(name='cik')
-        content_type = ContentType.objects.get_for_model(Organization)
+@cache_function('cik_and_grakon', 600)
+def cik_and_grakon():
+    return {
+        'cik': Organization.objects.get(name='cik'),
+        'grakon': Organization.objects.get(name='grakon'),
+        'content_type': ContentType.objects.get_for_model(Organization),
+    }
 
-        try:
-            return self.get(content_type=content_type,
-                    object_id=cik.id, location=location)
-        except self.model.DoesNotExist:
-            return None
+class ProtocolManager(models.Manager):
+    def from_cik(self):
+        data = cik_and_grakon()
+        return self.filter(content_type=data['content_type'], object_id=data['cik'].id)
+
+    def verified(self):
+        data = cik_and_grakon()
+        return self.exclude(content_type=data['content_type'], object_id=data['cik'].id) \
+                .filter(verified=True)
+
+    def from_users(self):
+        data = cik_and_grakon()
+        return self.exclude(content_type=data['content_type'],
+                object_id__in=[data['cik'].id, data['grakon'].id])
 
 class Protocol(models.Model):
     content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
+    object_id = models.PositiveIntegerField(db_index=True)
     source = generic.GenericForeignKey('content_type', 'object_id')
 
     protocol_id = models.IntegerField(u'Идентификатор')
@@ -28,7 +41,7 @@ class Protocol(models.Model):
     chairman = models.CharField(u'Ф.И.О. председателя комиссии', max_length=150, blank=True)
     assistant = models.CharField(u'Ф.И.О. заместителя председателя комиссии', max_length=150, blank=True)
     secretary = models.CharField(u'Ф.И.О. секретаря комиссии', max_length=150, blank=True)
-    number = models.IntegerField(u'Номер экземпляра копии протокола голосования, полученного наблюдателем', blank=True, null=True,
+    number = models.IntegerField(u'Номер копии протокола, полученного наблюдателем', blank=True, null=True,
             help_text=u'Указан вверху первой страницы')
     sign_time = models.DateTimeField(u'Время подписи', null=True, blank=True, help_text=u'В формате "2011-04-25 14:30"')
     recieve_time = models.DateTimeField(u'Время выдачи', null=True, blank=True, help_text=u'В формате "2011-04-25 14:30"')
@@ -58,11 +71,11 @@ class Protocol(models.Model):
     p23 = models.IntegerField(u'23. Число голосов, поданных за Путина В.В.')
 
     location = models.ForeignKey(Location)
-    complaints = models.IntegerField(u'Количество нарушений, замеченых наблюдателем', null=True, blank=True)
+    complaints = models.IntegerField(u'Количество поступивших жалоб', null=True, blank=True)
     time = models.DateTimeField(auto_now=True)
     url = models.URLField(u'Ссылка на фотографию', blank=True)
 
-    verified = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False, db_index=True)
 
     objects = ProtocolManager()
 

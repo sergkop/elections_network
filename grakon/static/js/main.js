@@ -5,7 +5,7 @@ $(document).ready(function(){
     $("#goto_location").click(function(){
         var location_id = form_location_id("choose_regions");
         if (location_id != "")
-            window.location.href = "/location/"+location_id;
+            window.location.href = "/location/"+location_id+"/wall";
     });
 
     $("#map_location").click(function(){

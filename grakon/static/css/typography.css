@@ -97,10 +97,6 @@
 		list-style-type:disc;
 	}
 
-	ol {
-		list-style-type:decimal;
-	}
-
 	ul ul {
 		list-style-type:circle;
 		margin-top:0;
@@ -209,14 +205,6 @@
 
 	/*--- Links ----------------------------------------------------------------------------------------- */
 
-	a {
-		color:#1c94c4;
-		background:transparent;
-	}
-
-    a:visited  {
-        color: #003366;
-    }
 
     a.ui-button:visited  {
         color: #1c94c4;

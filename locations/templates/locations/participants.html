@@ -1,0 +1,51 @@
+<div class="search-filter">
+    {% for role_type, role_name in ROLE_CHOICES %}
+        {% if selected_role_type == role_type %}
+            <b>{{ role_name }}</b>
+        {% else %}
+            <a href="{% url participants current_location.id %}?type={{ role_type }}" class="pseudolink">{{ role_name }}</a>
+        {% endif %}
+        &nbsp;&nbsp;&nbsp;
+    {% endfor %}
+</div>
+<!--<div class="ext-search">
+    <input type="text" class="text" value="Поиск среди наблюдателей" onfocus="if (this.value==this.defaultValue) this.value = ''" onblur="if (this.value=='') this.value = this.defaultValue" />
+    <input type="button" class="search-btn" />
+</div>-->
+
+{% if selected_role_type %}
+    <ul class="user_list">
+        {% for role in participants %}
+            {% with participant=role.user %}
+                <li>{% include "elements/participant.html" %}
+                    <br/>
+                    <i>
+                        {% if role.organization %}
+                            {{ role.organization }}
+                        {% else %}
+                            {{ role.data }}
+                        {% endif %}
+                    </i>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <ul>
+        {% for participant in users %}
+            <li>{% include "elements/participant.html" %}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<!--<div class="pages">
+    <a href=""><img src="/static/images/icon_arrow_prev.gif" align="absmiddle" /></a>&nbsp;&nbsp;
+    На страницу
+    <strong>1</strong> |
+    <a href="">2</a> |
+    <a href="">3</a> |
+    <a href="">4</a> |
+    <a href="">5</a> |
+    <a href="">6</a>
+    &nbsp;&nbsp;<a href=""><img src="/static/images/icon_arrow_next.gif" align="absmiddle" /></a>
+
+</div>-->

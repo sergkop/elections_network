@@ -35,8 +35,10 @@ class Location(models.Model):
     vrnkomis = models.BigIntegerField(blank=True, null=True)
 
     # Coordinates used in Yandex maps
-    x_coord = models.FloatField(blank=True, null=True)
-    y_coord = models.FloatField(blank=True, null=True)
+    x_coord = models.FloatField(blank=True, null=True, db_index=True)
+    y_coord = models.FloatField(blank=True, null=True, db_index=True)
+
+    data = models.TextField() # keeps counters for cik data and users
 
     def level(self):
         if self.region_id is None:
@@ -84,22 +86,12 @@ class Location(models.Model):
         else:
             return [int(self.region_id), int(self.tik_id), int(self.id)]
 
-    def map_data(self, counts):
+    def map_data(self):
         """ Return javascript object containing region data """
         js = 'new ElectionCommission(' + str(self.id) + ',' + str(self.level()) + ','
         # TODO: name, address require escape
         js += '"' + self.name + '","' + self.name + '","' + self.address.replace('"', '') + '",'
-        js += str(self.x_coord) + ',' + str(self.y_coord) + ',{ '
-
-        if 'voter' in counts:
-            js += 'voters:' + str(counts['voter']) + ','
-        if 'observer' in counts:
-            js += 'observers:' + str(counts['observer']) + ','
-        if 'member' in counts:
-            js += 'members:' + str(counts['member']) + ','
-        if 'journalist' in counts:
-            js += 'journalists:' + str(counts['journalist']) + ','
-        js = js[:-1] + '})'
+        js += str(self.x_coord) + ',' + str(self.y_coord) + ','+self.data+')'
         return js
 
     def __unicode__(self, full_path=False):
@@ -116,4 +108,4 @@ class Location(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('location_info', (), {'loc_id': str(self.id)})
+        return ('location_wall', (), {'loc_id': str(self.id)})

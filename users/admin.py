@@ -33,8 +33,14 @@ class MessageAdmin(admin.ModelAdmin):
             'to_user__user__email', 'to_user__user__email')
     raw_id_fields = ('from_user', 'to_user')
 
+class UnsubscribedUserAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    search_fields = ('user__user__email', 'user__username')
+    raw_id_fields = ('user',)
+
 admin.site.register(Role, RoleAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(CommissionMember, CommissionMemberAdmin)
 admin.site.register(WebObserver, WebObserverAdmin)
 admin.site.register(Message, MessageAdmin)
+admin.site.register(UnsubscribedUser, UnsubscribedUserAdmin)

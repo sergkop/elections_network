@@ -1,16 +1,14 @@
 {% load elements %}
 
-<h3 class="column_header mt15 column_header_icon"><span class="protocols">Протоколы ({{ counters.protocols }})</span></h3>
+<h3 class="column_header mt15 column_header_icon"><span class="protocols">
+{% if current_location %}
+    <a href="{% url protocols current_location.id %}">Протоколы ({{ counters.protocols }})</a>
+{% else %}
+    Протоколы ({{ counters.protocols }})
+{% endif %}
+</span></h3>
 
 <div class="content_block ym-clearfix mb15">
-    <ul>
-        {% for protocol in protocols %}
-            <li>
-                <a href="{{ protocol.get_absolute_url }}">Протокол №{{ protocol.id }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-
     <div class="mb15 mt15">
         {% button "" "Выложить протокол" "" "upload_protocol" "center" "В ближайшее время мы начнем собирать протоколы от участников площадки" %}
     </div>

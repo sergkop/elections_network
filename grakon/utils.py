@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import cookielib
 from random import choice
+import sys
 import urllib2
 
 from django.core.cache import cache
@@ -16,7 +17,7 @@ def form_helper(action_name, button_name):
     helper = FormHelper()
     helper.form_action = action_name
     helper.form_method = 'POST'
-    helper.add_input(Submit('', button_name))
+    helper.add_input(Submit('', button_name, css_class='ui-button ui-state-default'))
     return helper
 
 def authenticated_redirect(view_name):
@@ -45,6 +46,7 @@ def cache_function(key, timeout):
 
     return decorator
 
+# TODO: cache html only
 def cache_view(key, timeout, only_anonym=True):
     def decorator(func):
         def new_func(request, *args, **kwargs):
@@ -112,3 +114,12 @@ def read_url(url, encoding='windows-1251'):
     except urllib2.URLError, e:
         raise e
         return ''
+
+def print_progress(i, count):
+    """ Show progress message updating in-place """
+    if i < count-1:
+        sys.stdout.write("\r%(percent)2.3f%%" % {'percent': 100*float(i)/count})
+        sys.stdout.flush()
+    else:
+        sys.stdout.write("\r")
+        sys.stdout.flush()

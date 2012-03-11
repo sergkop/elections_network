@@ -81,7 +81,7 @@ class FeedbackForm(forms.Form):
                     'profile', kwargs={'username': self.request.user.username}))
         from_mail = settings.DEFAULT_FROM_EMAIL
         message = render_to_string('feedback/mail.txt', ctx)
-        send_mail(u'Сообщение обратной связи', message, from_mail, [from_mail], fail_silently=False)
+        send_mail(u'[ОБРАТНАЯ СВЯЗЬ]', message, from_mail, [from_mail], fail_silently=False)
 
 class RoleTypeForm(forms.Form):
     type = forms.CharField(widget=forms.Select(choices=[('', u'Все типы участников')]+list(ROLE_CHOICES)))

@@ -13,10 +13,10 @@
 {% endblock %}
 
 {% block left_column %}
-	<div class="videoconf">
+	<!--<div class="videoconf">
     	<h4><a href="/tools">Полезные инструменты для наблюдателей</a></h4>
 
-    </div>
+    </div>-->
     <h3 class="column_header column_header_icon"><span class="participants">Участники (<b>{{ counters.total }}</b>)</span></h3>
 
     <div class="ym-clearfix">
@@ -29,18 +29,9 @@
 
     {% include "blocks/violations.html" %}
 
-    {% include "blocks/supporters.html" %}
-
     {% include "blocks/web_observers.html" %}
 
-    <h3 class="column_header column_header_icon"><span class="side_block_member">Члены комиссии ({{ commission_members_count }})</span></h3>
-    <div class="ym-clearfix">
-        <div class="content_block">
-            <div class="mt15 mb15">
-                {% button "circle-plus" "Добавить члена комиссии" "add_commission_member" %}
-            </div>
-        </div>
-    </div>
+    {% include "blocks/commission_members.html" %}
 
     <script type="text/javascript">
         $("#add_commission_member, #add_commission_member1, #add_commission_member2").click(function(){

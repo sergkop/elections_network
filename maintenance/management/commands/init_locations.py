@@ -1,19 +1,11 @@
 # -*- coding:utf-8 -*-
 import json
 import os.path
-import sys
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-def print_progress(i, count):
-    """ Show progress message updating in-place """
-    if i < count-1:
-        sys.stdout.write("\r%(percent)2.1f%%" % {'percent': 100*float(i)/count})
-        sys.stdout.flush()
-    else:
-        sys.stdout.write("\r")
-        sys.stdout.flush()
+from grakon.utils import print_progress
 
 def data_path(region, type):
     return os.path.join(settings.PROJECT_PATH, 'data', 'regions', '%s-%s.json' % (region, type))

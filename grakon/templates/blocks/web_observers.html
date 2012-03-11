@@ -1,6 +1,12 @@
 {% load elements %}
 
-<h3 class="column_header column_header_icon"><span class="web_observers">Веб-наблюдатели ({{ counters.web_observer }})</span></h3>
+<h3 class="column_header column_header_icon"><span class="web_observers">
+{% if current_location and current_location.is_uik %}
+    <a href="{% url web_observers current_location.id %}">Веб-наблюдатели ({{ counters.web_observer }})</a>
+{% else %}
+    Веб-наблюдатели ({{ counters.web_observer }})
+{% endif %}
+</span></h3>
 
 <div class="ym-clearfix">
     <div class="mb15 mt15">

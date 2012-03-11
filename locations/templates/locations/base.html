@@ -34,32 +34,11 @@
 
     {% include "blocks/violations.html" %}
 
-    {% include "blocks/supporters.html" %}
-
     {% include "blocks/web_observers.html" %}
 
-    <h3 class="column_header column_header_icon"><span class="side_block_member">Члены комиссии ({{ commission_members_count }})</span></h3>
-    <div class="ym-clearfix">
-        <div class="content_block">
-            <div class="mt15 mb15">
-                {% button "circle-plus" "Добавить члена комиссии" "add_commission_member" %}
-            </div>
-        </div>
-    </div>
+    {% include "blocks/commission_members.html" %}
 
-    <h3 class="column_header column_header_icon"><span class="resources">Полезные ресурсы</span></h3>
-    <div class="ym-clearfix">
-        <div class="content_block">
-            <ul id="links_ul" class="side_list">
-                {% for link in links %}
-                    <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
-                {% endfor %}
-            </ul>
-            <div class="mt15 mb15">
-            	{% button "circle-plus" "Добавить ссылку" "add_link" %}
-            </div>
-        </div>
-	</div>
+    {% include "blocks/links.html" %}
 
     {% include "elements/right_panel.html" %}
 
@@ -95,11 +74,7 @@
         {{ current_location }}
     </h2>
 
-    {% if current_location.is_uik %}
-        {% tabs "tabs" view "loc_id" loc_id "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Информация" "location_info" "locations/info.html" "Веб-наблюдатели" "web_observers" "locations/web_observers.html" "Поддержка" "supporters" "locations/supporters.html" %}
-    {% else %}
-        {% tabs "tabs" view "loc_id" loc_id "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Информация" "location_info" "locations/info.html" %}
-    {% endif %}
+    {% tabs "tabs" view "loc_id" loc_id "Сообщения" "location_wall" "services/disqus.html" "Карта" "location_map" "locations/map.html" "Информация" "location_info" "locations/info.html" "Участники" "participants" "locations/participants.html" %}
 
     {% include "services/disqus-counter.html" %}
 

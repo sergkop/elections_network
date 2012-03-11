@@ -1,18 +1,14 @@
 {% load elements %}
 
-<div class="side_block_header side_block_member">Члены избирательной комиссии ({{ counters.member }})</div>
+<div class="side_block_header side_block_member">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=member">Члены избирательной комиссии ({{ counters.member }})</a>
+    {% else %}
+        Члены избирательной комиссии ({{ counters.member }})
+    {% endif %}
+</div>
 
 <div class="content_block">
-    <ul>
-        {% for role in participants.member %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %} <br/>
-                <i>{{ role.data }}</i>
-            </li>
-        {% endfor %}
-    </ul>
     {% button "circle-plus" "Я &mdash; член комиссии" "become_member" "" "center" "Для членов избирательных комиссий" %}
 </div>
 

@@ -1,16 +1,14 @@
 {% load elements %}
-<h3 class="column_header column_header_icon"><span class="organizations">Организации</span></h3>
+<h3 class="column_header column_header_icon"><span class="organizations">
+{% if current_location %}
+    <a href="{% url organizations current_location.id %}">Организации ({{ counters.organizations }})</a>
+{% else %}
+    Организации ({{ counters.organizations }})
+{% endif %}
+</span></h3>
 
-<div class="content_block ym-clearfix">
-    <ul class="side_list">
-        {% for organization in organizations %}
-            {% if organization.verified %}
-                <li>
-                    {% include "elements/organization.html" %}
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+<div class="ym-clearfix">
+    
     <div class="mb15">
         {% button "" "Добавить организацию" "add_organization" %}
     </div>

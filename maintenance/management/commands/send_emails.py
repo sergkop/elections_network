@@ -2,8 +2,9 @@
 from time import sleep
 
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.core.management.base import BaseCommand
+from django.template.loader import render_to_string
 
 MESSAGE1 = u"""Добрый день%s!
 
@@ -140,9 +141,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         from loginza.models import UserMap
-        inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
+        from users.models import UnsubscribedUser
+        inactive_ids = list(UserMap.objects.filter(verified=False).values_list('user', flat=True))
+        unsubscribed = list(UnsubscribedUser.objects.values_list('user', flat=True))
         active_users = User.objects.exclude(email='').filter(is_active=True) \
-                .exclude(id__in=inactive_ids)
+                .exclude(id__in=inactive_ids+unsubscribed)
 
         i = 0
         for user in active_users:
@@ -161,6 +164,13 @@ class Command(BaseCommand):
             title2 = u'2ая акция Гракона: окажем общественное давление на членов УИК'
             title3 = u'3я акция Гракона: организуемся в небольшие группы для эффективного наблюдения на УИКах'
             title4 = u'Четвертая акция Гракона: Поведение избирателя на участке'
-            title = u'5ая акция Гракона: "Как использовать Гракон по максимуму на выборах"'
-            send_mail(title, message, 'admin@grakon.org',
-                    [user.email], fail_silently=False)
+            title5 = u'5ая акция Гракона: "Как использовать Гракон по максимуму на выборах"'
+
+            subject = u'Работа интернет-площадки Гракон после выборов президента'
+
+            text_content = render_to_string('letters/plans.txt', {'email': user.email})
+            html_content = render_to_string('letters/plans.html', {'email': user.email})
+
+            msg = EmailMultiAlternatives(subject, text_content, 'admin@grakon.org', [user.email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()

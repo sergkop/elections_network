@@ -10,13 +10,12 @@ from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
 
-import cloudfiles
-
 from locations.models import Location
 from protocols.forms import ProtocolForm
 from protocols.models import AttachedFile, Protocol
 
 try:
+    import cloudfiles
     cloudfiles_conn = cloudfiles.get_connection(getattr(settings, 'CLOUDFILES_USERNAME'),
             getattr(settings, 'CLOUDFILES_KEY'))
 except:
@@ -36,7 +35,12 @@ class ProtocolView(TemplateView):
             raise Http404(u'Неправильно указан идентификатор протокола')
 
         protocol = get_object_or_404(Protocol.objects.select_related(), id=protocol_id)
-        cik_protocol = Protocol.objects.cik_protocol(protocol.location)
+        
+        try:
+            cik_protocol = Protocol.objects.from_cik().get(location=protocol.location)
+        except Protocol.DoesNotExist:
+            cik_protocol = None
+
         fields = [(Protocol._meta._name_map['p'+str(i)][0].verbose_name, getattr(protocol, 'p'+str(i)), getattr(cik_protocol, 'p'+str(i)) if cik_protocol else '-') \
                 for i in range(1, 24)]
 

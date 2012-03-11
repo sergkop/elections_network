@@ -46,11 +46,11 @@ class RoleManager(models.Manager):
 class Role(models.Model):
     user = models.ForeignKey(Profile, related_name='roles')
     location = models.ForeignKey(Location)
-    type = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    type = models.CharField(max_length=10, choices=ROLE_CHOICES, db_index=True)
 
-    organization = models.ForeignKey(Organization, blank=True, null=True)
+    organization = models.ForeignKey(Organization, blank=True, null=True, db_index=True)
     data = models.CharField(max_length=200, default='', blank=True)
-    verified = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False, db_index=True)
 
     time = models.DateTimeField(auto_now=True)
 
@@ -123,4 +123,8 @@ class WebObserver(models.Model):
 
     user = models.ForeignKey(Profile)
     location = models.ForeignKey(Location)
+    time = models.DateTimeField(auto_now=True)
+
+class UnsubscribedUser(models.Model):
+    user = models.ForeignKey(Profile, unique=True)
     time = models.DateTimeField(auto_now=True)

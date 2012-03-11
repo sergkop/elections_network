@@ -1,25 +1,14 @@
 {% load elements %}
 
-<div class="side_block_header side_block_observer">Наблюдатели ({{ counters.observer }})</div>
+<div class="side_block_header side_block_observer">
+    {% if current_location %}
+        <a href="{% url participants current_location.id %}?type=observer">Наблюдатели ({{ counters.observer }})</a>
+    {% else %}
+        Наблюдатели ({{ counters.observer }})
+    {% endif %}
+</div>
 
 <div class="content_block">
-    <ul>
-        {% for role in participants.observer %}
-            <li>
-                {% with participant=role.user %}
-                    {% include "elements/participant.html" %}
-                {% endwith %}
-                <br/>
-                <i>
-                    {% if role.organization %}
-                        {{ role.organization }}
-                    {% else %}
-                        {{ role.data }}
-                    {% endif %}
-                </i>
-            </li>
-        {% endfor %}
-    </ul>
     {% button "circle-plus" "Я &mdash; наблюдатель" "become_observer" "" "center" "Для тех, кто записался в избиратели на выборах 4 марта" %}
 </div>
 

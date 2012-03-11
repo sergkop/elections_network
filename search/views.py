@@ -8,6 +8,8 @@ from loginza.models import UserMap
 from grakon.models import Profile
 from locations.models import Location
 from locations.utils import get_roles_query, regions_list
+from protocols.models import Protocol
+from protocols.utils import results_table_data
 from search.utils import get_uik_data
 from users.forms import RoleTypeForm
 from users.models import Role, ROLE_CHOICES, ROLE_TYPES
@@ -165,3 +167,41 @@ find_uik = FindUikView.as_view()
 
 def uik_search_data(request):
     return HttpResponse(get_uik_data(request.GET))
+
+class ResultsTableSearchView(BaseSearchView):
+    tab = 'results_table'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ResultsTableSearchView, self).get_context_data(**kwargs)
+
+        # TODO: use regions_list
+        if not self.location:
+            sub_regions = Location.objects.filter(region=None).order_by('name')
+        elif self.location.is_region():
+            sub_regions = Location.objects.filter(region=self.location, tik=None).order_by('name')
+        elif self.location.is_tik():
+            sub_regions = Location.objects.filter(tik=self.location).order_by('name')
+        elif self.location.is_uik():
+            sub_regions = []
+
+        cik_protocols = Protocol.objects.from_cik().filter(location__in=sub_regions)
+
+        if self.location and self.location.is_tik():
+            observer_protocols = list(Protocol.objects.from_users().filter(location__in=sub_regions).filter(verified=True))
+        else:
+            observer_protocols = list(Protocol.objects.verified().filter(location__in=sub_regions))
+
+        lines = []
+        for location in sub_regions:
+            lines.append({
+                'location': location,
+                'cik': results_table_data(filter(lambda p: p.location_id==location.id, cik_protocols), False),
+                'observers': results_table_data(filter(lambda p: p.location_id==location.id, observer_protocols), False),
+            })
+
+        ctx.update({
+            'lines': lines,
+        })
+        return ctx
+
+results_table = ResultsTableSearchView.as_view()

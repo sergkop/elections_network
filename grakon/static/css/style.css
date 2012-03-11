@@ -202,8 +202,33 @@ div.olControlLayerSwitcher div span {
     background-color: #3980a3;
 }
 
+div.olPopup {
+    border-radius: 3px;
+}
+
 div.olPopupContent {
-    font-size: 10pt;
+    font-size: 12px;
+    overflow: visible;
+    padding: 2px;
+    font-family: Arial;
+    color: black;
+}
+
+div.olPopupContent h3 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2f8dbc;
+}
+
+div.olPopupContent .description {
+    margin: 0;
+    padding: 1px 1px 1px 8px;
+}
+
+div.olPopupContent .subtitle {
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
 }
 
 div.olPopupCloseBox {
@@ -250,51 +275,51 @@ div.olPopupCloseBox {
     float: left;
 }
 
-.olControlPanel .votersItemInactive {
+.olControlPanel .voterItemInactive {
     background: transparent url("../images/map/voters_inactive.png") no-repeat left center;
 }
 
-.olControlPanel .votersItemActive {
+.olControlPanel .voterItemActive {
     background: transparent url("../images/map/voters_active.png") no-repeat left center;
 }
 
-.olControlPanel .observersItemInactive {
+.olControlPanel .observerItemInactive {
     background: transparent url("../images/map/observer_inactive.png") no-repeat left center;
 }
 
-.olControlPanel .observersItemActive {
+.olControlPanel .observerItemActive {
     background: transparent url("../images/map/observer_active.png") no-repeat left center;
 }
 
-.olControlPanel .membersItemInactive {
+.olControlPanel .memberItemInactive {
     background: transparent url("../images/map/member_inactive.png") no-repeat left center;
 }
 
-.olControlPanel .membersItemActive {
+.olControlPanel .memberItemActive {
     background: transparent url("../images/map/member_active.png") no-repeat left center;
 }
 
-.olControlPanel .prosecutorsItemInactive {
+.olControlPanel .prosecutorItemInactive {
     background: transparent url("../images/map/prosecutor_inactive.png") no-repeat left center;
 }
 
-.olControlPanel .prosecutorsItemActive {
+.olControlPanel .prosecutorItemActive {
     background: transparent url("../images/map/prosecutor_active.png") no-repeat left center;
 }
 
-.olControlPanel .authoritiesItemInactive {
+.olControlPanel .authorityItemInactive {
     background: transparent url("../images/map/authority_inactive.png") no-repeat left center;
 }
 
-.olControlPanel .authoritiesItemActive {
+.olControlPanel .authorityItemActive {
     background: transparent url("../images/map/authority_active.png") no-repeat left center;
 }
 
-.olControlPanel .journalistsItemInactive {
+.olControlPanel .journalistItemInactive {
     background: transparent url("../images/map/journalist_inactive.png") no-repeat left center;
 }
 
-.olControlPanel .journalistsItemActive {
+.olControlPanel .journalistItemActive {
     background: transparent url("../images/map/journalist_active.png") no-repeat left center;
 }
 
@@ -372,4 +397,6 @@ background: -webkit-linear-gradient(top, #f6f7f3, #e6e8dd);
 background: linear-gradient(top, #f6f7f3, #e6e8dd);
 }
 
-
+.column_right_border {
+    border-right: 1px solid;
+}

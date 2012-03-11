@@ -10,22 +10,26 @@
     <style type="text/css">
         .ym-col2 {width: 0;}
         .ym-col3 {margin-right: 0; padding-right:0;}
-        #choose_regions select {width: 200px;}
-        #role_field select {width: 200px;}
+        #choose_regions select, #role_field select  {width: 200px; font-size: 0.9em}
 		.ym-col1 .ym-clearfix .ui-button {width: 180px;}
-		.ym-col1 .side_block_header h4 {margin: 10px 10px 5px 15px; font-weight: bold;}
+		.ym-col1 .side_block_header {padding: 0.8em 1em 0.5em; font-size: 1.1em;}
 		.ym-col1 .column_header {padding-left: 15px;}
-
+		
+    .ym-col1 .content_block {padding: 0 1em;}
+    .ym-col1 .content_block .pseudolink {font-style: italic; font-size: 0.9em;}
+	#find_uik_dialog {display: none;}
 </style>
 {% endblock %}
 
 {% block left_column %}
     {% include "dialogs/find_uik.html" %}
+    
+    <h3 class="column_header column_header_icon"><span class="web_observers">Фильтр по:</span></h3>
 
     <div class="ym-clearfix">
         <form id="search" method="get" action="">
             <div class="side_block_header">
-                <h4>Местоположение</h4>
+                Местоположение
             </div>
 
             <div class="content_block">
@@ -38,15 +42,15 @@
                 </script>
             </div>
 
-            <div class="side_block_header">
-                <h4>Тип участника</h4>
+            <!--div class="side_block_header">
+                Тип участника
             </div>
 
             <div class="content_block">
                 <div id="role_field" class="center">
                     {{ role_form.type }}
                 </div>
-            </div>
+            </div-->
 
 			<div class="mb15 mt15">
             	{% button "search" "Искать" "search" %}
@@ -57,5 +61,5 @@
 
 {% block content_header %}
     <h2 class="location_header">Поиск{% if result_count %} ({{ result_count }}){% endif %}</h2>
-    {% tabs "tabs" tab "" "" "Участники" "user_table" "search/table.html" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
+    {% tabs "tabs" tab "" "" "Участники" "user_table" "search/table.html" "Результаты выборов" "results_table" "search/results_table.html" "Список" "user_list" "search/list.html" "Карта" "map" "search/map.html" "Найти свой УИК" "find_uik" "search/find_uik.html" %}
 {% endblock %}

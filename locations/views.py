@@ -4,7 +4,7 @@ import json
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
@@ -15,66 +15,32 @@ from organizations.models import OrganizationCoverage
 from links.models import Link
 from organizations.models import Organization
 from protocols.models import Protocol
+from protocols.utils import results_table_data
 from users.forms import CommissionMemberForm, WebObserverForm
-from users.models import CommissionMember, Role, ROLE_TYPES, WebObserver
+from users.models import CommissionMember, Role, ROLE_CHOICES, ROLE_TYPES, WebObserver
 from violations.models import Violation
 
-def format_percent(count, total):
-    return '%2.2f%%' % (100*float(count)/total)
-
-def results_table_data(protocols):
-    protocols = [protocol for protocol in protocols if protocol.p9+protocol.p10>0]
-
-    if len(protocols) == 0:
-        return {'girinovskiy': '&mdash;', 'zyuganov': '&mdash;', 'mironov': '&mdash;',
-                'prokhorov': '&mdash;', 'putin': '&mdash;', 'invalid': '&mdash;'}
-
-    data = {}
-    for field in ('p9', 'p10', 'p19', 'p20', 'p21', 'p22', 'p23'):
-        data[field] = sum(getattr(protocol, field) for protocol in protocols)
-
-    total = data['p9'] + data['p10']
-
-    return {
-        'girinovskiy': format_percent(data['p19'], total),
-        'zyuganov': format_percent(data['p20'], total),
-        'mironov': format_percent(data['p21'], total),
-        'prokhorov': format_percent(data['p22'], total),
-        'putin': format_percent(data['p23'], total),
-        'invalid': format_percent(data['p9'], total),
-    }
-
-# TODO: don't query lists of roles if it's not needed
-# TODO: mark links previously reported by user
-# TODO: web_observers and supporters tabs are not activated for tiks and lead to crush
-class LocationView(TemplateView):
+# TODO: web_observers tab is not activated for tiks and lead to crush
+class BaseLocationView(TemplateView):
     template_name = 'locations/base.html'
 
+    def update_context(self):
+        return {}
+
     def get_context_data(self, **kwargs):
-        ctx = super(LocationView, self).get_context_data(**kwargs)
+        ctx = super(BaseLocationView, self).get_context_data(**kwargs)
 
         loc_id = int(kwargs['loc_id'])
         try:
-            location = Location.objects.select_related().get(id=loc_id)
+            self.location = location = Location.objects.select_related().get(id=loc_id)
         except Location.DoesNotExist:
             raise Http404(u'Избирательный округ не найден')
 
-        query = get_roles_query(location)
-        participants = Role.objects.get_participants(query)
-
-        # Get sub-regions
-        sub_regions = []
-
-        if location.region is None:
-            sub_regions += list(Location.objects.filter(region=location, tik=None).values_list('id', 'name')) #.order_by('name')
-        elif location.tik is None:
-            sub_regions += list(Location.objects.filter(tik=location).values_list('id', 'name')) # .order_by('name')
-
-        # TODO: don't use when sorting will be done in database
-        sub_regions = sorted(sub_regions, None, lambda r: r[1])
+        # TODO: different query generators might be needed for different data types
+        self.location_query = get_roles_query(location)
 
         dialog = self.request.GET.get('dialog', '')
-        if not dialog in ROLE_TYPES and not dialog in ('web_observer'):
+        if not dialog in ROLE_TYPES and not dialog in ('web_observer',):
             dialog = ''
 
         signed_up_in_uik = False
@@ -83,32 +49,12 @@ class LocationView(TemplateView):
             if voter_roles:
                 signed_up_in_uik = voter_roles[0].location.is_uik()
 
-        commission_members = CommissionMember.objects.filter(location=location)
-
         counters = get_roles_counters(location)
 
-        if counters['violations'] <= 10:
-            violations = Violation.objects.filter(query)
-        else:
-            violations = []
-
-        cik = Organization.objects.get(name='cik')
-        content_type = ContentType.objects.get_for_model(Organization)
-
-        if counters['protocols'] <= 10:
-            protocols = Protocol.objects.filter(query).exclude(content_type=content_type,
-                    object_id=cik.id).select_related('location')
-        else:
-            protocols = []
-
-        if location.is_uik():
-            verified_protocols = filter(lambda protocol: protocol.verified, protocols)
-        else:
-            verified_protocols = []
+        verified_protocols = list(Protocol.objects.verified().filter(location=location))
 
         try:
-            cik_protocols = [Protocol.objects.get(content_type=content_type,
-                    object_id=cik.id, location=location)]
+            cik_protocols = [Protocol.objects.from_cik().get(location=location)]
         except Protocol.DoesNotExist:
             cik_protocols = []
 
@@ -119,52 +65,106 @@ class LocationView(TemplateView):
             'loc_id': kwargs['loc_id'],
             'view': kwargs['view'],
             'current_location': location,
-            'participants': participants,
-            'links': list(Link.objects.filter(location=location)),
+
             'locations': regions_list(),
-            'is_voter_here': self.request.user.is_authenticated() and any(self.request.user==voter.user for voter in participants.get('voter', [])),
-            'sub_regions': sub_regions,
+            'sub_regions': regions_list(location),
+
             'dialog': dialog,
             'signed_up_in_uik': signed_up_in_uik,
             'disqus_identifier': 'location/' + str(location.id),
 
             'counters': counters,
-            'organizations': OrganizationCoverage.objects.organizations_at_location(location),
 
-            'commission_members': commission_members,
-            'commission_members_count': len(commission_members),
             'add_commission_member_form': CommissionMemberForm(),
 
-            'violations': violations,
-            'protocols': protocols,
             'verified_protocols': verified_protocols,
-
             'protocol_data': protocol_data,
             'cik_data': cik_data,
         })
 
-        # Web observers
-        web_observers = WebObserver.objects.filter(location=location).select_related('user__user')
+        ctx.update(self.update_context())
+        return ctx
+
+location_view = BaseLocationView.as_view()
+
+class InfoView(BaseLocationView):
+    def update_context(self):
+        return {'commission_members': CommissionMember.objects.filter(location=self.location)}
+
+class ParticipantsView(BaseLocationView):
+    def update_context(self):
+        role_type = self.request.GET.get('type', '')
+        if not role_type in ROLE_TYPES:
+            role_type = ''
+
+        role_queryset = Role.objects.filter(self.location_query)
+        if role_type:
+            role_queryset = role_queryset.filter(type=role_type)
+            roles = role_queryset.order_by('user__username').select_related('user', 'organization')[:100]
+            context = {'participants': roles}
+        else:
+            roles = role_queryset.order_by('user__username').select_related('user', 'organization')[:100]
+            users = sorted(set(role.user for role in roles), key=lambda user: user.username.lower())
+            context = {'users': users}
+
+        context.update({
+            'selected_role_type': role_type,
+            'ROLE_CHOICES': ROLE_CHOICES,
+        })
+        return context
+
+# TODO: mark links previously reported by user
+class LinksView(BaseLocationView):
+    def update_context(self):
+        return {
+            'view': 'locations/links.html',
+            'links': list(Link.objects.filter(location=self.location)),
+        }
+
+class WebObserversView(BaseLocationView):
+    def update_context(self):
+        web_observers = WebObserver.objects.filter(location=self.location).select_related('user__user')
         web_observers_by_time = {}
         for web_observer in web_observers:
             for time in range(web_observer.start_time, web_observer.end_time):
                 web_observers_by_time.setdefault(time, []).append(web_observer)
-
-        web_observers_count = len(set(web_observer.user_id for web_observer in web_observers))
 
         times = []
         for time in range(7, 24):
             times.append({'start_time': time, 'web_observers': web_observers_by_time.get(time, [])})
             times[-1]['end_time'] = time+1 if time<23 else 0
 
-        ctx.update({
+        return {
+            'view': 'locations/web_observers.html',
             'times': times,
-            'web_observers_count': web_observers_count,
             'become_web_observer_form': WebObserverForm(),
-        })
-        return ctx
+        }
 
-location_view = LocationView.as_view()
+class ViolationsView(BaseLocationView):
+    def update_context(self):
+        return {
+            'view': 'locations/violations.html',
+            'violations': Violation.objects.filter(self.location_query)[:100]
+        }
+
+class ProtocolsView(BaseLocationView):
+    def update_context(self):
+        protocols = Protocol.objects.from_users().filter(self.location_query).select_related('location')[:100]
+        return {
+            'view': 'locations/protocols.html',
+            'protocols': protocols,
+        }
+
+class OrganizationsView(BaseLocationView):
+    def update_context(self):
+        organizations = OrganizationCoverage.objects.organizations_at_location(self.location)
+        return {
+            'view': 'locations/organizations.html',
+            'organizations': organizations,
+        }
+
+def location_supporters(request, loc_id):
+    return HttpResponsePermanentRedirect(reverse('location_wall', kwargs={'loc_id': loc_id}))
 
 def get_sub_regions(request):
     if request.is_ajax():

@@ -66,8 +66,9 @@ class Profile(models.Model):
         return count
 
     def __unicode__(self):
-        full_name = u'%s %s' % (self.first_name, self.last_name)
-        return full_name.strip() or self.username
+        if self.show_name and self.first_name and self.last_name:
+            return u'%s %s (%s)' % (self.first_name, self.last_name, self.username)
+        return self.username
 
 def create_profile(sender, **kwargs):
     if kwargs.get('created', False):

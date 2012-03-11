@@ -1,10 +1,10 @@
 import json
 import os.path
-#import re
-import sys
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+
+from grakon.utils import print_progress
 
 #region_name_re = re.compile(r'(\d{1,3}\s)?(.*)')
 #def strip_prefix_number(name):
@@ -17,15 +17,6 @@ def iterate_struct(data, seq):
         yield seq + [sub_region]
         for loc in iterate_struct(sub_data, seq+[sub_region]):
             yield loc
-
-def print_progress(i, count):
-    """ Show progress message updating in-place """
-    if i < count-1:
-        sys.stdout.write("\r%(percent)2.1f%%" % {'percent': 100*float(i)/count})
-        sys.stdout.flush()
-    else:
-        sys.stdout.write("\r")
-        sys.stdout.flush()
 
 default_location_fields = {'postcode': 0, 'tvd': 0, 'root': 0, 'vrnorg': 0, 'vrnkomis': 0,
         'x_coord': 0, 'y_coord': 0}

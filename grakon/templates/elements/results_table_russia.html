@@ -3,7 +3,7 @@
     	<span class="pseudolink" onclick="jQuery('#header-table').slideToggle(); if(jQuery(this).html()=='Скрыть результаты') {jQuery(this).html('Показать результаты');} else {jQuery(this).html('Скрыть результаты');}">Скрыть результаты</span>
     </div>	
     <div id="header-table">
-    	<div style="height: 150px;">
+    	<div style="height: 117px; background-color: #fff;">
         <table width="100%" align="center">
             <tr>
                 <th width="30%" style="text-align:left">Результаты выборов
@@ -42,13 +42,14 @@
             </tr>
             <tr>
                 <td class="black">по протоколам наблюдателей<br />
-                 (по данным сайта <a href="http://nabludatel.org/statistic/web/viol.php" target="_blank">nabludatel.org</a>)</td>
-                <td>6,32%</td>
-                <td>19,24%</td>
-                <td>5,12%</td>
-                <td>18,41%</td>
-                <td>49,33%</td>
-                <td>1,94%</td>
+                    (по {{ counters.verified_protocols }} из {{ counters.uiks }})
+                </td>
+                <td>{{ protocol_data.girinovskiy|safe }}</td>
+                <td>{{ protocol_data.zyuganov|safe }}</td>
+                <td>{{ protocol_data.mironov|safe }}</td>
+                <td>{{ protocol_data.prokhorov|safe }}</td>
+                <td>{{ protocol_data.putin|safe }}</td>
+                <td>{{ protocol_data.invalid|safe }}</td>
             </tr>
         </table> 
         </div>

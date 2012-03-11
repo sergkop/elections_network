@@ -19,17 +19,16 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
     this.title = title;
     this.address = address;
     this.data = data;
-    this.data.voters = 500;
-    this.data.observers = 50;
-    this.data.journalists = 5;
-    this.data.members = 1;
-    this.data.results = new Array(
-        {key: "Жириновский", value: Math.random()*100},
-        {key: "Зюганов", value: Math.random()*100},
-        {key: "Миронов", value: Math.random()*100},
-        {key: "Прохоров", value: Math.random()*100},
-        {key: "Путин", value: Math.random()*100}
-    );
+    this.data.voter = 500;
+    this.data.observer = 50;
+    this.data.member = 5;
+    this.data.journalist = 1;
+    this.data.p9 = 5;
+    this.data.p19 = 10;
+    this.data.p20 = 50;
+    this.data.p21 = 5;
+    this.data.p22 = 30;
+    this.data.p23 = 500;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
 };
@@ -122,6 +121,7 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
                 this.addLabel();
             $(this.markerDiv).children().show();
             $(this.markerDiv).show();
+            $(this.markerDiv).children().show();
         } else {
             $(this.markerDiv).children().hide();
             $(this.markerDiv).hide();
@@ -282,14 +282,16 @@ var Grakon = {
     },
     
     /**
-     * Уровень масштабирования карты, с которого показываются ТИКи.
+     * Уровни масштабирования, с которых показывать типы избирательных округов
      */
-    MAP_LEVELS_ZOOM: new Object({
-        'country': 0,
-        'regions': 1,
-        'districts': 7,
-        'areas': 11,
-        'max': 15
+    ELECTION_COMMISSION_SCALES: new Object({
+        'country': 443744272.74185663,
+        'regions': 221872136.37092832,
+        'districts': 3466752.130795755,
+        'areas': 108336.00408736734,
+        'max': 13542.000510920918,
+        'initial': 27734017.04636604,
+        'unhide': 13542.000510920918
     }),
     
     /**
@@ -375,7 +377,7 @@ var Grakon = {
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.districts );
                 Grakon.Utils.removeOutOfMapBoundsMarkers( Grakon.electionCommissionLayers.areas );
                 
-                if (Grakon.map.getZoom() < 14) {
+                if (Grakon.map.getScale() > Grakon.ELECTION_COMMISSION_SCALES.unhide) {
                     // прячем слишком близко расположенные метки
                     Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.regions );
                     Grakon.Utils.hideCloseMarkers( Grakon.electionCommissionLayers.districts );
@@ -471,21 +473,33 @@ var Grakon = {
             }
             var title = ((electionCommission.level == 4) ? "УИК №" : "") + electionCommission.title;
             
-            var content = '<h3><a href="#" class="zoomIn" onclick="Grakon.zoomOnElectionCommission('+electionCommission.xCoord+', '+electionCommission.yCoord+', '+electionCommission.level+'); return false;" title="Приблизиться">'+title+'</a></h3>';
+            var content = '<div class="description"><h3><a href="#" class="zoomIn" onclick="Grakon.zoomOnElectionCommission('+electionCommission.xCoord+', '+electionCommission.yCoord+', '+electionCommission.level+'); return false;" title="Приблизиться">'+title+'</a></h3>';
             content += '<p class="commissionType">'+type+'</p>';
             content += '<p><a href="/location/'+electionCommission.id+'">Страница комиссии</a></p>';
             content += '<p class="address">'+electionCommission.address+'</p>';
+            
             if (electionCommission.data != null) {
+                var sum = electionCommission.data.p19 + electionCommission.data.p20 + electionCommission.data.p21 + electionCommission.data.p22 + electionCommission.data.p23 + electionCommission.data.p9;
+
                 content += "<p>";
-                content += (electionCommission.data.voters != null) ? "Избирателей: " + electionCommission.data.voters + "<br/>" : "";
-                content += (electionCommission.data.observers != null) ? "Наблюдателей: " + electionCommission.data.observers + "<br/>" : "";
-                content += (electionCommission.data.members != null) ? "Членов комиссии: " + electionCommission.data.members + "<br/>" : "";
-                content += (electionCommission.data.journalists != null) ? "Представителей СМИ: " + electionCommission.data.journalists + "<br/>" : "";
-                content += (electionCommission.data.prosecutors != null) ? "Прокуроров: " + electionCommission.data.prosecutors + "<br/>" : "";
-                content += (electionCommission.data.authorities != null) ? "Чиновников: " + electionCommission.data.authorities + "<br/>" : "";
+                content += (electionCommission.data.p19 != null) ? "Жириновский: " + electionCommission.data.p19 + " ("+(electionCommission.data.p19*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p20 != null) ? "Зюганов: " + electionCommission.data.p20 + " ("+(electionCommission.data.p20*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p21 != null) ? "Миронов: " + electionCommission.data.p21 + " ("+(electionCommission.data.p21*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p22 != null) ? "Прохоров: " + electionCommission.data.p22 + " ("+(electionCommission.data.p22*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p23 != null) ? "Путин: " + electionCommission.data.p23 + " ("+(electionCommission.data.p23*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += (electionCommission.data.p9 != null) ? "Недействительных: " + electionCommission.data.p9 + " ("+(electionCommission.data.p9*100/sum).toFixed(2)+"%)<br/>" : "";
+                content += "</p>";
+                content += "<p>";
+                content += '<p class="subtitle">Зарегистрировано на Граконе:</p>';
+                content += (electionCommission.data.voter != null) ? "Избирателей: " + electionCommission.data.voter + "<br/>" : "";
+                content += (electionCommission.data.observer != null) ? "Наблюдателей: " + electionCommission.data.observer + "<br/>" : "";
+                content += (electionCommission.data.member != null) ? "Членов комиссии: " + electionCommission.data.member + "<br/>" : "";
+                content += (electionCommission.data.journalist != null) ? "Представителей СМИ: " + electionCommission.data.journalist + "<br/>" : "";
+                content += (electionCommission.data.prosecutor != null) ? "Прокуроров: " + electionCommission.data.prosecutor + "<br/>" : "";
+                content += (electionCommission.data.authority != null) ? "Чиновников: " + electionCommission.data.authority + "<br/>" : "";
                 content += "</p>";
             }
-            return content;
+            return content+"</div>";
         },
         
         removePopups: function() {
@@ -543,6 +557,7 @@ var Grakon = {
             Grakon.Utils.removePopups();
             
             this.popup = this.createPopup(this.closeBox);
+            this.popup.setSize(new OpenLayers.Size(256, 256));
             this.popup.addCloseBox(function() {
                 Grakon.map.removePopup( Grakon.map.popups[0] );
             });
@@ -564,7 +579,7 @@ var Grakon = {
                 var matches = pattern.exec(this.data.popupContentHTML);
                 
                 if (matches != null) {
-                    var width = (matches[1].length + 5) * 7;
+                    var width = (matches[1].length + 5) * 8;
                     
                     var type = "";
                     if (this.data.icon.url.indexOf("iks") != -1)
@@ -572,8 +587,8 @@ var Grakon = {
                     else if (this.data.icon.url.indexOf("tik") != -1)
                         type = "ТИК: ";
                     
-                    var content = "<p class=\"hint\">"+type+matches[1]+"</p>";
-                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 20), content, null, false);
+                    var content = "<center>"+type+matches[1]+"</center>";
+                    var popup = new OpenLayers.Popup.Anchored("hint", this.lonlat, new OpenLayers.Size(width, 16), content, null, false);
                     
                     if (Grakon.map.popups != null) {
                         if (Grakon.map.popups[0] == null)
@@ -595,16 +610,16 @@ var Grakon = {
          * @param {level} уровень приближения карты
          * @returns масштаб для заданного уровня приближения на карте
          */
-        getZoomForLevel: function(level) {
-            var zoom;
+        getScaleForLevel: function(level) {
+            var zoomScale;
             switch (level) {
-              case 2: zoom = Grakon.MAP_LEVELS_ZOOM.regions; break;
-              case 3: zoom = Grakon.MAP_LEVELS_ZOOM.districts; break;
-              case 4: zoom = Grakon.MAP_LEVELS_ZOOM.areas; break;
-              case 5: zoom = Grakon.MAP_LEVELS_ZOOM.max; break;
-              default: zoom = 4;
+              case 2: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.regions; break;
+              case 3: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.districts; break;
+              case 4: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.areas; break;
+              case 5: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.max; break;
+              default: zoomScale = Grakon.ELECTION_COMMISSION_SCALES.initial;
             }
-            return zoom;
+            return zoomScale;
         },
         
         /**
@@ -631,7 +646,7 @@ var Grakon = {
             if (popup == null)
                 return;
             var contentHTML = popup.contentHTML;
-            if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
+            if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.max)
                 popup.setContentHTML( contentHTML.replace("zoomIn", "zoomOut") );
             else
                 popup.setContentHTML( contentHTML.replace("zoomOut", "zoomIn") );
@@ -837,7 +852,7 @@ var Grakon = {
         
         // изменить иконку масштабирования во всплывающем окне
         if (Grakon.map.popups != null && Grakon.map.popups[0] != null && Grakon.map.popups[0].contentDiv != null)
-            if (Grakon.map.getZoom() < Grakon.MAP_LEVELS_ZOOM.max)
+            if (Grakon.map.getScale() > Grakon.ELECTION_COMMISSION_SCALES.max)
                 $(Grakon.map.popups[0].contentDiv).find('a[class="zoomOut"]').removeClass("zoomOut").addClass("zoomIn");
             else
                 $(Grakon.map.popups[0].contentDiv).find('a[class="zoomIn"]').removeClass("zoomIn").addClass("zoomOut");
@@ -999,55 +1014,6 @@ var Grakon = {
         Grakon.addStatisticsPanel();
     },
     
-    addStatisticsPanel: function() {
-        var votersBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество избирателей на участках",
-            displayClass: "voters",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var observersBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество наблюдателей на участках",
-            displayClass: "observers",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var journalistsBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество представителей СМИ на участках",
-            displayClass: "journalists",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var membersBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество членов избирательных комиссий",
-            displayClass: "members",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var authoritiesBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество представителей власти на участках",
-            displayClass: "authorities",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var prosecutorsBtn = new OpenLayers.Control.Button({
-            type: OpenLayers.Control.TYPE_TOGGLE,
-            title: "Показать количество представителей прокуратуры на участках",
-            displayClass: "prosecutors",
-            eventListeners: StatisticsButtonHandlers
-        });
-        
-        var statisticsPanel = new OpenLayers.Control.Panel();
-        
-        statisticsPanel.addControls([votersBtn, observersBtn, journalistsBtn, membersBtn/*, authoritiesBtn, prosecutorsBtn*/]);
-        Grakon.map.addControl(statisticsPanel);
-    },
-    
     /**
      * Разворачивает карту на весь экран (или восстанавливает в прежних размерах)
      */
@@ -1069,11 +1035,11 @@ var Grakon = {
      */
     getLevel: function() {
         var level = 1;
-        if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.areas)
+        if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.areas)
             level = 4;
-        else if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.districts)
+        else if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.districts)
             level = 3;
-        else if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.regions)
+        else if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.regions)
             level = 2
         return level;
     },
@@ -1085,18 +1051,18 @@ var Grakon = {
      * @param {type} тип избирательной комиссии
      */
     zoomOnElectionCommission: function(lon, lat, type) {
-        var nextZoom;
-        var defaultZoom = Grakon.Utils.getZoomForLevel(type);
+        var nextZoomScale;
         
-        if (Grakon.map.getZoom() >= Grakon.MAP_LEVELS_ZOOM.max)
-            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel() );
+        if (Grakon.map.getScale() <= Grakon.ELECTION_COMMISSION_SCALES.max)
+            nextZoomScale = Grakon.Utils.getScaleForLevel( Grakon.getLevel() );
         else if (Grakon.getLevel() >= 4)
-            nextZoom = Grakon.MAP_LEVELS_ZOOM.max;
+            nextZoomScale = Grakon.ELECTION_COMMISSION_SCALES.max;
         else
-            nextZoom = Grakon.Utils.getZoomForLevel( Grakon.getLevel()+1 );
+            nextZoomScale = Grakon.Utils.getScaleForLevel( Grakon.getLevel()+1 );
         
         var center = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), Grakon.map.getProjectionObject());
-        Grakon.map.setCenter(center, nextZoom);
+        Grakon.map.setCenter(center);
+        Grakon.map.zoomToScale(nextZoomScale);
     },
     
     /**
@@ -1168,5 +1134,54 @@ var Grakon = {
             return;
         
         Grakon.map.setBaseLayer( Grakon.map.layers[index] );
+    },
+
+    addStatisticsPanel: function() {
+        var votersBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество избирателей зарегистрированных на Граконе",
+            displayClass: "voter",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var observersBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество наблюдателей зарегистрированных на Граконе",
+            displayClass: "observer",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var journalistsBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество представителей СМИ зарегистрированных на Граконе",
+            displayClass: "journalist",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var membersBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество членов избирательных комиссий зарегистрированных на Граконе",
+            displayClass: "member",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var authoritiesBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество представителей власти зарегистрированных на Граконе",
+            displayClass: "authority",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var prosecutorsBtn = new OpenLayers.Control.Button({
+            type: OpenLayers.Control.TYPE_TOGGLE,
+            title: "Показать количество представителей прокуратуры зарегистрированных на Граконе",
+            displayClass: "prosecutor",
+            eventListeners: StatisticsButtonHandlers
+        });
+        
+        var statisticsPanel = new OpenLayers.Control.Panel();
+        
+        statisticsPanel.addControls([votersBtn, observersBtn, journalistsBtn, membersBtn/*, authoritiesBtn, prosecutorsBtn*/]);
+        Grakon.map.addControl(statisticsPanel);
     }
 };

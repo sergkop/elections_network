@@ -72,12 +72,12 @@
             <div class="ym-hlist">
                 <ul>
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
-                    <li><a {% if name == "search" %}class="on"{% endif %}href="{% url user_table %}">Поиск</a></li> 
-                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url how_to_use %}">Акции</a></li>
+                    <li><a {% if template == "search/base.html" %}class="on"{% endif %}href="{% url results_table %}">Поиск</a></li> 
+                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url how_to_use %}">Инструкции</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
                     <li><a {% if template == "static_pages/faq.html" %}class="on"{% endif %} href="{% url faq %}">FAQ</a></li>
-                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url about %}">О проекте</a></li>
+                    <li><a {% if template == "static_pages/about/base.html" %}class="on"{% endif %} href="{% url functionality %}">О проекте</a></li>
                 </ul>
 
                 <!--form class="ym-searchform">
@@ -128,6 +128,10 @@
             {% else %}
                 <a href="#" id="report_violation1">Сообщить о нарушении</a>
             {% endif %}
+        </div>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <div class="main-buttons-blue">
+            <a href="{% url results_table %}">Результаты выборов</a>
         </div>
         &nbsp; &nbsp; &nbsp; &nbsp;
         <div class="main-buttons-map">

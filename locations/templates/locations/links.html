@@ -1,0 +1,7 @@
+<h4>Полезные ресурсы</h4>
+
+<ul id="links_ul">
+    {% for link in links %}
+        <li><a href="{{ link.url }}" target="_blank">{{ link.name }}</a></li>
+    {% endfor %}
+</ul>

@@ -110,6 +110,7 @@ OpenLayers.Marker.LabelMarker = OpenLayers.Class(OpenLayers.Marker, {
             if ($(this.markerDiv).children().length == 0)
                 this.addLabel();
             $(this.markerDiv).show();
+            $(this.markerDiv).children().show();
         } else {
             $(this.markerDiv).children().hide();
             $(this.markerDiv).hide();
@@ -549,7 +550,7 @@ var Grakon = {
                 var matches = pattern.exec(this.data.popupContentHTML);
                 
                 if (matches != null) {
-                    var width = (matches[1].length + 5) * 7;
+                    var width = (matches[1].length + 5) * 8;
                     
                     var type = "";
                     if (this.data.icon.url.indexOf("iks") != -1)
@@ -760,6 +761,11 @@ var Grakon = {
         
         // слушаем событие окончания перемещения по карте
         Grakon.map.events.register("moveend", Grakon.map, Grakon.loadLocationsData);
+        
+        // Закрываем попап при плике на карту.
+        Grakon.map.events.register("click", null, function(e){
+            Grakon.removePopups();
+        });
     },
     
     /**

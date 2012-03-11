@@ -761,11 +761,6 @@ var Grakon = {
         
         // слушаем событие окончания перемещения по карте
         Grakon.map.events.register("moveend", Grakon.map, Grakon.loadLocationsData);
-        
-        // Закрываем попап при плике на карту.
-        Grakon.map.events.register("click", null, function(e){
-            Grakon.removePopups();
-        });
     },
     
     /**

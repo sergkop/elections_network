@@ -9,9 +9,9 @@ RESULTS_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/region/%(re
 #INFO_ROOT_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=0&vrnkomis=0'
 INFO_URL = r'http://www.%(region_name)s.vybory.izbirkom.ru/region/%(region_name)s?action=show_komissia&region=%(region_code)d&sub_region=%(region_code)d&type=100&vrnorg=%(vrnorg)d&vrnkomis=%(vrnkomis)d'
 
-FOREIGN_TERRITORIES = u'Зарубежные территории' # Do not change this name without proper changes in production db and 
-FOREIGN_NAME = 'foreign'
-FOREIGN_CODE = 100
+FOREIGN_TERRITORIES = u'Зарубежные территории' # Do not change this name without proper changes in production db
+FOREIGN_NAME = 'foreign-countries'
+FOREIGN_CODE = 99
 
 class Location(models.Model):
     """ The number of non-null values of parent specifies the level of location """

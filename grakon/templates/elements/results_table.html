@@ -3,7 +3,7 @@
         <span class="pseudolink" onclick="jQuery('#header-table').slideToggle(); if(jQuery(this).html()=='Скрыть результаты') {jQuery(this).html('Показать результаты');} else {jQuery(this).html('Скрыть результаты');}">Скрыть результаты</span>
     </div>
     <div id="header-table">
-        <div style="height: 147px; background-color: #fff;">
+        <div style="height: {% if current_location.is_uik %}107px{% else %}147px{% endif %}; background-color: #fff;">
         <table width="100%" align="center">
             <tr>
                 <th width="30%" style="text-align:left">Результаты выборов
@@ -66,15 +66,17 @@
                 <td>{{ protocol_data.putin|safe }}</td>
                 <td>{{ protocol_data.invalid|safe }}</td>
             </tr>
-            <tr>
-                <td class="black">оценка Гракона</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-            </tr>
+            {% if not current_location.is_uik %}
+                <tr>
+                    <td class="black">оценка Гракона</td>
+                    <td>&mdash;</td>
+                    <td>&mdash;</td>
+                    <td>&mdash;</td>
+                    <td>&mdash;</td>
+                    <td>&mdash;</td>
+                    <td>&mdash;</td>
+                </tr>
+            {% endif %}
         </table> 
         </div>
     </div>

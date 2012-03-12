@@ -73,7 +73,7 @@
                 <ul>
                     <li><a {% if not name and not template %}class="on"{% endif %}href="{% url main %}">Главная</a></li>
                     <li><a {% if template == "search/base.html" %}class="on"{% endif %}href="{% url results_table %}">Поиск</a></li> 
-                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url how_to_use %}">Инструкции</a></li>
+                    <li><a {% if template == "static_pages/campaign/base.html" %}class="on"{% endif %} href="{% url dump %}">Инструкции</a></li>
                     <li><a {% if template == "static_pages/partners.html" %}class="on"{% endif %} href="{% url partners %}">Партнеры</a></li>
                     <li><a {% if template == "static_pages/how_to_help/base.html" %}class="on"{% endif %} href="{% url share %}">Как помочь</a></li>
                     <li><a {% if template == "static_pages/faq.html" %}class="on"{% endif %} href="{% url faq %}">FAQ</a></li>

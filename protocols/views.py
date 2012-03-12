@@ -35,7 +35,7 @@ class ProtocolView(TemplateView):
             raise Http404(u'Неправильно указан идентификатор протокола')
 
         protocol = get_object_or_404(Protocol.objects.select_related(), id=protocol_id)
-        
+
         try:
             cik_protocol = Protocol.objects.from_cik().get(location=protocol.location)
         except Protocol.DoesNotExist:

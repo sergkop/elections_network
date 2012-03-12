@@ -73,7 +73,7 @@ class Protocol(models.Model):
     location = models.ForeignKey(Location)
     complaints = models.IntegerField(u'Количество поступивших жалоб', null=True, blank=True)
     time = models.DateTimeField(auto_now=True)
-    url = models.URLField(u'Ссылка на фотографию', blank=True)
+    url = models.URLField(u'Ссылка на фотографию', blank=True) # TODO: depricate it
 
     verified = models.BooleanField(default=False, db_index=True)
 

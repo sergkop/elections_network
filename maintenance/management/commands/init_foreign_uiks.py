@@ -44,9 +44,7 @@ class Command(BaseCommand):
                     name=uik_no, region_name=FOREIGN_NAME, region_code=FOREIGN_CODE,
                     address=uiks[uik_no]['address'], tvd=uiks[uik_no]['tvd'],
                     root=uiks[uik_no]['root'], data='{}')
-            #location.save()
+            location.save()
 
             i += 1
             print_progress(i, 350)
-
-        print uiks

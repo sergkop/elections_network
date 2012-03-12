@@ -6,7 +6,7 @@
     	<div style="height: 147px; background-color: #fff;">
         <table width="100%" align="center">
             <tr>
-                <th width="30%" style="text-align:left">Результаты выборов
+                <th width="34%" style="text-align:left">Результаты выборов
                     {% if not current_location %}
                         по&nbsp;России:
                     {% endif %}
@@ -20,13 +20,12 @@
                         по&nbsp;УИКу:
                     {% endif %}
                 </th>
-                <th width="10%">Жириновский</th>
-                <th width="10%">Зюганов</th>
+                <th width="13%">Жириновский</th>
+                <th width="9%">Зюганов</th>
                 <th width="10%">Миронов</th>
                 <th width="10%">Прохоров</th>
-                <th width="10%">Путин</th>
-                <th width="10%">Недействительные</th>
-                <th width="10%" class="header-table-shortcut">&nbsp;</th>
+                <th width="9%">Путин</th>
+                <th width="15%">Недействительные</th>
             </tr>
             <tr>
                 <td class="black"><a href="http://www.vybory.izbirkom.ru/region/region/izbirkom?action=show&root=1&tvd=100100031793509&vrn=100100031793505&region=0&global=1&sub_region=0&prver=0&pronetvd=null&vibid=100100031793509&type=226" target="_blank">по данным ЦИК</a></td>
@@ -36,12 +35,9 @@
                 <td>7,98%</td>
                 <td>63,60%</td>
                 <td>1,18%</td>
-                <td rowspan="2" class="header-table-shortcut">
-                    <!--a href="" class="button">Подробнее</a-->
-                </td>
             </tr>
             <tr>
-                <td class="black"><a href="{% url calculation %}">по протоколам наблюдателей</a><br />
+                <td class="black"><a href="{% url calculation %}">по протоколам наблюдателей</a> 
                     (по {{ counters.verified_protocols }} из {{ counters.uiks }})
                 </td>
                 <td>{{ protocol_data.girinovskiy|safe }}</td>
@@ -52,7 +48,7 @@
                 <td>{{ protocol_data.invalid|safe }}</td>
             </tr>
             <tr>
-                <td class="black">оценка Гракона</td>
+                <td class="black">по оценке Гракона</td>
                 <td>&mdash;</td>
                 <td>&mdash;</td>
                 <td>&mdash;</td>

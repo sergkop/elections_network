@@ -6,7 +6,7 @@
         <div style="height: {% if current_location.is_uik %}107px{% else %}147px{% endif %}; background-color: #fff;">
         <table width="100%" align="center">
             <tr>
-                <th width="30%" style="text-align:left">Результаты выборов
+                <th width="34%" style="text-align:left">Результаты выборов
                     {% if not current_location %}
                         по&nbsp;России:
                     {% endif %}
@@ -20,13 +20,13 @@
                         по&nbsp;УИКу:
                     {% endif %}
                 </th>
-                <th width="10%">Жириновский</th>
-                <th width="10%">Зюганов</th>
+                <th width="13%">Жириновский</th>
+                <th width="9%">Зюганов</th>
                 <th width="10%">Миронов</th>
                 <th width="10%">Прохоров</th>
-                <th width="10%">Путин</th>
-                <th width="10%">Недействительные</th>
-                <th width="10%" class="header-table-shortcut">&nbsp;</th>
+                <th width="9%">Путин</th>
+                <th width="15%">Недействительные</th>
+
             </tr>
             <tr>
                 <td class="black">
@@ -42,9 +42,6 @@
                 <td>{{ cik_data.prokhorov|safe }}</td>
                 <td>{{ cik_data.putin|safe }}</td>
                 <td>{{ cik_data.invalid|safe }}</td>
-                <td rowspan="2" class="header-table-shortcut">
-                    <!--a href="" class="button">Подробнее</a-->
-                </td>
             </tr>
             <tr>
                 <td class="black">
@@ -56,7 +53,7 @@
                             
                         {% endif %}
                     {% else %}
-                       <br/> (по {{ counters.verified_protocols }} из {{ counters.uiks }})
+                         (по {{ counters.verified_protocols }} из {{ counters.uiks }})
                     {% endif %}
                 </td>
                 <td>{{ protocol_data.girinovskiy|safe }}</td>
@@ -68,7 +65,7 @@
             </tr>
             {% if not current_location.is_uik %}
                 <tr>
-                    <td class="black">оценка Гракона</td>
+                    <td class="black">по оценке Гракона</td>
                     <td>&mdash;</td>
                     <td>&mdash;</td>
                     <td>&mdash;</td>

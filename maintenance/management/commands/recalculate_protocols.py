@@ -33,15 +33,15 @@ class Command(BaseCommand):
                 data['p'+str(i+1)] = sum(getattr(protocol, 'p'+str(i+1)) for protocol in protocols)
 
             # a fix to renormalize weight of protocols
-            #if args[0] == 'other':
-            #    cik_protocol = Protocol.objects.from_cik().get(location=tik)
-            #    if data['p10'] != 0:
-            #        factor = float(cik_protocol.p10) / data['p10']
-            #        for i in range(23):
-            #            data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
-            #    else:
-            #        for i in range(23):
-            #            data['p'+str(i+1)] = getattr(cik_protocol, 'p'+str(i+1))
+            if args[0] == 'other':
+                cik_protocol = Protocol.objects.from_cik().get(location=tik)
+                if data['p10'] != 0:
+                    factor = float(cik_protocol.p10) / data['p10']
+                    for i in range(23):
+                        data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
+                else:
+                    for i in range(23):
+                        data['p'+str(i+1)] = getattr(cik_protocol, 'p'+str(i+1))
 
             protocol, created = Protocol.objects.get_or_create(content_type=content_type,
                     object_id=organization.id, protocol_id=tik.id, defaults=data)
@@ -54,13 +54,24 @@ class Command(BaseCommand):
             print_progress(j, tiks_count)
             j += 1
 
-        # Generate CIK data for regions
-        for region in Location.objects.filter(region=None):
-            protocols = list(protocol_queryset.filter(location__region=region))
+            # Generate CIK data for regions
+            for region in Location.objects.filter(region=None):
+                protocols = list(protocol_queryset.filter(location__region=region))
 
-            data = {'location': region, 'verified': True}
-            for i in range(23):
-                data['p'+str(i+1)] = sum(getattr(protocol, 'p'+str(i+1)) for protocol in protocols)
+                data = {'location': region, 'verified': True}
+                for i in range(23):
+                    data['p'+str(i+1)] = sum(getattr(protocol, 'p'+str(i+1)) for protocol in protocols)
+
+                # a fix to renormalize weight of protocols
+                if args[0] == 'other':
+                    cik_protocol = Protocol.objects.from_cik().get(location=region)
+                    if data['p10'] != 0:
+                        factor = float(cik_protocol.p10) / data['p10']
+                        for i in range(23):
+                            data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
+                    else:
+                        for i in range(23):
+                            data['p'+str(i+1)] = getattr(cik_protocol, 'p'+str(i+1))
 
             protocol, created = Protocol.objects.get_or_create(content_type=content_type,
                     object_id=organization.id, protocol_id=region.id, defaults=data)

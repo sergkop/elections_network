@@ -18,14 +18,13 @@ from protocols.models import Protocol
 from protocols.utils import results_table_data
 from users.models import CommissionMember, Role
 
-@cache_function('main_page', 300)
+@cache_function('main_page', 120)
 def main_page_context():
     inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
     total_counter = User.objects.exclude(email='').filter(is_active=True) \
             .exclude(id__in=inactive_ids).count()
 
-    cik_protocols_by_location = dict((cp.location_id, count) \
-            for cp, count in Protocol.objects.from_cik().filter(location__region=None) \
+    cik_protocols_by_location = dict(Protocol.objects.from_cik().filter(location__region=None) \
             .values_list('location', 'p10'))
 
     protocols_by_location = dict((p.location_id, p) \

@@ -35,9 +35,13 @@ class Command(BaseCommand):
             # a fix to renormalize weight of protocols
             if args[0] == 'other':
                 cik_protocol = Protocol.objects.from_cik().get(location=tik)
-                factor = float(cik_protocol.p10) / data['p10']
-                for i in range(23):
-                    data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
+                if data['p10'] != 0:
+                    factor = float(cik_protocol.p10) / data['p10']
+                    for i in range(23):
+                        data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
+                else:
+                    for i in range(23):
+                        data['p'+str(i+1)] = getattr(cik_protocol, 'p'+str(i+1))
 
             protocol, created = Protocol.objects.get_or_create(content_type=content_type,
                     object_id=organization.id, protocol_id=tik.id, defaults=data)

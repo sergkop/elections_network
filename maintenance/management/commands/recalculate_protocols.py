@@ -18,7 +18,7 @@ class Command(BaseCommand):
             protocol_queryset = Protocol.objects.from_cik()
             organization = cik
         elif args[0] == 'other':
-            protocol_queryset = Protocol.objects.verified()
+            protocol_queryset = Protocol.objects.from_users().filter(verified=True)
             organization = Organization.objects.get(name='grakon')
 
             cik_protocols_by_location = dict((p.location_id, p) for p in Protocol.objects.from_cik())

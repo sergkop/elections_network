@@ -103,9 +103,13 @@ class Command(BaseCommand):
         data += [location_to_json(location) for location in locations_by_id.itervalues() if location.is_tik()]
         data += [location_to_json(location) for location in locations_by_id.itervalues() if location.is_uik()]
 
+        # TODO: zip file
+        #with open(args[0], 'w') as f:
+        #    f.write(json.dumps(data, ensure_ascii=False).encode('utf8'))
+
         from protocols.views import cloudfiles_conn
 
         protocols_container = cloudfiles_conn.get_container(settings.CLOUDFILES_CONTAINER)
-        file_obj = protocols_container.create_object('dump.json')
-        file_obj.content_type = 'application/json'
+        file_obj = protocols_container.create_object('dump.json.zip')
+        file_obj.content_type = 'application/zip'
         file_obj.write(json.dumps(data, ensure_ascii=False).encode('utf8'), callback=print_progress)

@@ -3,7 +3,7 @@
         <span class="pseudolink" onclick="jQuery('#header-table').slideToggle(); if(jQuery(this).html()=='Скрыть результаты') {jQuery(this).html('Показать результаты');} else {jQuery(this).html('Скрыть результаты');}">Скрыть результаты</span>
     </div>
     <div id="header-table">
-        <div style="height: 117px; background-color: #fff;">
+        <div style="height: 147px; background-color: #fff;">
         <table width="100%" align="center">
             <tr>
                 <th width="30%" style="text-align:left">Результаты выборов
@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td class="black">
-                    по протоколам наблюдателей
+                    <a href="{% url calculation %}">по протоколам наблюдателей</a>
                     {% if current_location.is_uik %}
                         {% if verified_protocols %}
                             ({% for protocol in verified_protocols %}<a href="{{ protocol.get_absolute_url }}">№{{ protocol.id }}</a>{% if not forloop.last %}, {% endif %}{% endfor %})
@@ -56,7 +56,7 @@
                             
                         {% endif %}
                     {% else %}
-                        по протоколам наблюдателей (по {{ counters.verified_protocols }} из {{ counters.uiks }})
+                       <br/> (по {{ counters.verified_protocols }} из {{ counters.uiks }})
                     {% endif %}
                 </td>
                 <td>{{ protocol_data.girinovskiy|safe }}</td>
@@ -65,6 +65,15 @@
                 <td>{{ protocol_data.prokhorov|safe }}</td>
                 <td>{{ protocol_data.putin|safe }}</td>
                 <td>{{ protocol_data.invalid|safe }}</td>
+            </tr>
+            <tr>
+                <td class="black">Оценка Гракона</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
             </tr>
         </table> 
         </div>

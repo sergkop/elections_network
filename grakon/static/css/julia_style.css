@@ -20,6 +20,7 @@ table, tbody td {border: none; margin: 0;}
 .black {color: #000 !important;}
 .blue {color: #2f8dbc !important;}
 .grey {color: #999 !important;}	
+.green {color: #98be2e !important;}	
 .pseudolink {border-bottom: 1px dotted; cursor: pointer; text-decoration: none;}
 .ym-hlist {background: none; border-bottom: 1px dotted #a5a5a5; padding-bottom:10px;}
 .ym-hlist ul {margin-left: -1.7em;}

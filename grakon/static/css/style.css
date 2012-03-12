@@ -357,9 +357,12 @@ div.olPopupCloseBox {
 .addressFields select {display: block;}
 
 .left {text-align: left !important;}
-.results_table th {background-color: #d3d3d3; font-weight: normal; font-size: 1.1em;}
-.results_table th, .results_table td {border: 1px solid #dedede; text-align:center; vertical-align: middle; padding: 0.3em 1em}
-.results_table tr:nth-child(odd) td {background-color: #efefef;}
+.results_table th {font-weight: normal;}
+	.results_table th span {display: block; color: #92ba29; font-weight: bold;} 
+	.results_table td a {text-decoration: none; border-bottom: 1px solid #e6eadf;}
+	.results_table td:hover {background-color: #d9e5b7!important;}
+		.results_table td:hover a {border-color: #0077CA; color: #0077CA;}
+
 
 .web_observers_table {width: 100%;}
 .web_observers_table th, .web_observers_table td {border: 1px solid #e6e8dd; text-align: center; vertical-align: middle; padding: 3px 7px;}

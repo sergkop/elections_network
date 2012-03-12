@@ -37,6 +37,8 @@ urlpatterns = patterns('navigation.views',
 
     tabbed_static_url('faq', 'static_pages/faq/base.html'),
 
+    tabbed_static_url('calculation', 'static_pages/calculation.html'),
+
     tabbed_static_url('kudakomu', 'static_pages/press/base.html'),
 
     url(r'^partners$', 'static_page', {'name': 'partners', 'template': 'static_pages/partners.html'}, name='partners'),	

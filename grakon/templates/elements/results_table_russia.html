@@ -3,7 +3,7 @@
     	<span class="pseudolink" onclick="jQuery('#header-table').slideToggle(); if(jQuery(this).html()=='Скрыть результаты') {jQuery(this).html('Показать результаты');} else {jQuery(this).html('Скрыть результаты');}">Скрыть результаты</span>
     </div>	
     <div id="header-table">
-    	<div style="height: 117px; background-color: #fff;">
+    	<div style="height: 147px; background-color: #fff;">
         <table width="100%" align="center">
             <tr>
                 <th width="30%" style="text-align:left">Результаты выборов
@@ -41,7 +41,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="black">по протоколам наблюдателей<br />
+                <td class="black"><a href="{% url calculation %}">по протоколам наблюдателей</a><br />
                     (по {{ counters.verified_protocols }} из {{ counters.uiks }})
                 </td>
                 <td>{{ protocol_data.girinovskiy|safe }}</td>
@@ -50,6 +50,15 @@
                 <td>{{ protocol_data.prokhorov|safe }}</td>
                 <td>{{ protocol_data.putin|safe }}</td>
                 <td>{{ protocol_data.invalid|safe }}</td>
+            </tr>
+            <tr>
+                <td class="black">оценка Гракона</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
             </tr>
         </table> 
         </div>

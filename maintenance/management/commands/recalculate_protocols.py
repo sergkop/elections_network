@@ -21,6 +21,8 @@ class Command(BaseCommand):
             protocol_queryset = Protocol.objects.verified()
             organization = Organization.objects.get(name='grakon')
 
+            cik_protocols_by_location = dict((p.location_id, p) for p in Protocol.objects.from_cik())
+
         # TODO: take average if there are few protocols from one uik
         # Generate CIK data for TIKs
         j = 0
@@ -34,7 +36,7 @@ class Command(BaseCommand):
 
             # a fix to renormalize weight of protocols
             if args[0] == 'other':
-                cik_protocol = Protocol.objects.from_cik().get(location=tik)
+                cik_protocol = cik_protocols_by_location[tik.id]
                 if data['p10'] != 0:
                     factor = float(cik_protocol.p10) / data['p10']
                     for i in range(23):
@@ -64,7 +66,7 @@ class Command(BaseCommand):
 
                 # a fix to renormalize weight of protocols
                 if args[0] == 'other':
-                    cik_protocol = Protocol.objects.from_cik().get(location=region)
+                    cik_protocol = cik_protocols_by_location[region.id]
                     if data['p10'] != 0:
                         factor = float(cik_protocol.p10) / data['p10']
                         for i in range(23):

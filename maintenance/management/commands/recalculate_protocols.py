@@ -41,9 +41,6 @@ class Command(BaseCommand):
                     factor = float(cik_protocol.p10) / data['p10']
                     for i in range(23):
                         data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
-                else:
-                    for i in range(23):
-                        data['p'+str(i+1)] = getattr(cik_protocol, 'p'+str(i+1))
 
             protocol, created = Protocol.objects.get_or_create(content_type=content_type,
                     object_id=organization.id, protocol_id=tik.id, defaults=data)
@@ -71,9 +68,6 @@ class Command(BaseCommand):
                     factor = float(cik_protocol.p10) / data['p10']
                     for i in range(23):
                         data['p'+str(i+1)] = int(factor*data['p'+str(i+1)])
-                else:
-                    for i in range(23):
-                        data['p'+str(i+1)] = getattr(cik_protocol, 'p'+str(i+1))
 
             protocol, created = Protocol.objects.get_or_create(content_type=content_type,
                     object_id=organization.id, protocol_id=region.id, defaults=data)

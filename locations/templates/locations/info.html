@@ -14,7 +14,7 @@
 </p>
 {% endif %}
 
-{% if not current_location.is_foreign %}
+{% if not current_location.is_foreign or not current_location.is_tik %}
     <p>
         <b>Информация на сайте Центризбиркома:</b>
         <br/>

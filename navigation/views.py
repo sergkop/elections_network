@@ -18,24 +18,25 @@ from protocols.models import Protocol
 from protocols.utils import results_table_data
 from users.models import CommissionMember, Role
 
-@cache_function('main_page', 120)
+@cache_function('main_page', 30)
 def main_page_context():
     inactive_ids = UserMap.objects.filter(verified=False).values_list('user', flat=True)
     total_counter = User.objects.exclude(email='').filter(is_active=True) \
             .exclude(id__in=inactive_ids).count()
 
-    cik_protocols_by_location = dict(Protocol.objects.from_cik().filter(location__region=None) \
-            .values_list('location', 'p10'))
+    cik_protocols_by_location = dict((p.location_id, p) for p in Protocol.objects.from_cik() \
+            .filter(location__region=None))
 
     protocols_by_location = dict((p.location_id, p) \
             for p in Protocol.objects.verified().filter(location__region=None))
 
     results_protocol = Protocol(p9=0, p10=0, p19=0, p20=0, p21=0, p22=0, p23=0)
     for loc_id in cik_protocols_by_location:
-        if loc_id not in protocols_by_location: # TODO: temporary
-            continue
+        if protocols_by_location[loc_id].p10 == 0: # TODO: temporary
+            p = cik_protocols_by_location[loc_id]
+        else:
+            p = protocols_by_location[loc_id]
 
-        p = protocols_by_location.get(loc_id, cik_protocols_by_location[loc_id])
         for field in ('p9', 'p10', 'p19', 'p20', 'p21', 'p22', 'p23'):
             setattr(results_protocol, field, getattr(results_protocol, field)+getattr(p, field))
 

@@ -42,4 +42,3 @@ class Command(BaseCommand):
 
             print_progress(j, uiks_count)
             j += 1
-

@@ -30,11 +30,7 @@
             </tr>
             <tr>
                 <td class="black">
-                    {% if current_location.is_foreign %}
-                        по данным ЦИК
-                    {% else %}
-                        <a href="{{ current_location.results_url }}" target="_blank">по данным ЦИК</a>
-                    {% endif %}
+                    <a href="{{ current_location.results_url }}" target="_blank">по данным ЦИК</a>
                 </td>
                 <td>{{ cik_data.girinovskiy|safe }}</td>
                 <td>{{ cik_data.zyuganov|safe }}</td>

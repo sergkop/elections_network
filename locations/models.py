@@ -70,7 +70,7 @@ class Location(models.Model):
             return RESULTS_ROOT_URL % data
 
     def info_url(self):
-        """ Link to the page with comission information on izbirkom.ru """
+        """ Link to the page with commission information on izbirkom.ru """
         if self.vrnorg is None:
             return ''
 

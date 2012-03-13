@@ -32,6 +32,9 @@ def main_page_context():
 
     results_protocol = Protocol(p9=0, p10=0, p19=0, p20=0, p21=0, p22=0, p23=0)
     for loc_id in cik_protocols_by_location:
+        if loc_id not in protocols_by_location: # TODO: temporary
+            continue
+
         p = protocols_by_location.get(loc_id, cik_protocols_by_location[loc_id])
         for field in ('p9', 'p10', 'p19', 'p20', 'p21', 'p22', 'p23'):
             setattr(results_protocol, field, getattr(results_protocol, field)+getattr(p, field))

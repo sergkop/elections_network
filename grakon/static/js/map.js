@@ -28,7 +28,7 @@ var ElectionCommission = function(id, level, shortTitle, title, address, xCoord,
     this.data.p20 = 50;
     this.data.p21 = 5;
     this.data.p22 = 30;
-    this.data.p23 = 500;
+    this.data.p23 = Math.round(Math.random()*500);
     this.xCoord = xCoord;
     this.yCoord = yCoord;
 };
@@ -184,17 +184,17 @@ var Grakon = {
                         rules: [
                             new OpenLayers.Rule({
                                 filter: new OpenLayers.Filter.Comparison({
-                                    type: OpenLayers.Filter.Comparison.GREATER_THAN,
-                                    property: "perimeter",
-                                    value: 3000000
+                                    type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO,
+                                    property: "color",
+                                    value: null
                                 }),
-                                symbolizer: {'fillColor': '#00ff00',
-                                             'fillOpacity': 0.25}
+                                symbolizer: {'fillColor': "${color}",
+                                             'fillOpacity': "${opacity}"}
                             }),
                             new OpenLayers.Rule({
                                 elseFilter: true,
                                 symbolizer: {'fillColor': '#66cccc',
-                                             'fillOpacity': 0.1}
+                                             'fillOpacity': 0.2}
                             })
                         ]
                     }),
@@ -220,12 +220,27 @@ var Grakon = {
      */
     DISTRICT_STYLES: {
         'default':  new OpenLayers.Style({
-                      'fillColor': '#66cccc',
-                      'fillOpacity': 0.2,
                       'strokeColor': '#000000',
                       'strokeOpacity': 0.75,
                       'strokeWidth': 2,
                       'strokeDashstyle': 'dot'
+                    }, {
+                        rules: [
+                            new OpenLayers.Rule({
+                                filter: new OpenLayers.Filter.Comparison({
+                                    type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO,
+                                    property: "color",
+                                    value: null
+                                }),
+                                symbolizer: {'fillColor': "${color}",
+                                             'fillOpacity': "${opacity}"}
+                            }),
+                            new OpenLayers.Rule({
+                                elseFilter: true,
+                                symbolizer: {'fillColor': '#66cccc',
+                                             'fillOpacity': 0.2}
+                            })
+                        ]
                     }),
         'temporary':    new OpenLayers.Style({
                           'fillColor': '#ee9900',
@@ -370,6 +385,10 @@ var Grakon = {
                             var popupContentHTML = Grakon.Utils.buildElectionCommissionMarkerContent(electionCommissions[id]);
                             Grakon.Utils.addMarker(id, electionCommissions[id].level, location, popupContentHTML, electionCommissions[id].data);
                         }
+                        
+                    // перерисовать слой границ
+                    Grakon.borderLayers.regions.redraw();
+                    Grakon.borderLayers.districts.redraw();
                 }
 
                 // удаляем метки вне карты
@@ -549,8 +568,86 @@ var Grakon = {
             marker.events.register("mousedown", feature, Grakon.Utils.markerClick);
             marker.events.register("mouseover", feature, Grakon.Utils.markerHover);
             marker.events.register("mouseout", feature, Grakon.Utils.markerHover);
+            
+            Grakon.Utils.updateBorderData(ecID, level, location, data);
  
             layer.addMarker(marker);
+        },
+        
+        updateBorderData: function(ecID, level, location, data) {
+            if (level == 2 || level == 3) {
+                // откорретируем положение избирательного округа для того, чтобы он находился на территории своего региона
+                var markerGeometry = null;
+                switch(ecID) {
+                    case "413": markerGeometry = new OpenLayers.Geometry.Point(location.lon, location.lat+25000); break; // Чукотский автономный округ
+                    case "836": markerGeometry = new OpenLayers.Geometry.Point(location.lon, location.lat+25000); break; // Амурская область
+                    case "2277": markerGeometry = new OpenLayers.Geometry.Point(location.lon-70000, location.lat-25000); break; // Московская область
+                    case "2422": markerGeometry = new OpenLayers.Geometry.Point(location.lon+25000, location.lat); break;   // Архангельская область
+                    case "2502": markerGeometry = new OpenLayers.Geometry.Point(location.lon+20000, location.lat); break;   // Ленинградская область
+                    case "2681": markerGeometry = new OpenLayers.Geometry.Point(location.lon-20000, location.lat); break;   // Республика Дагестан
+                    default: markerGeometry = new OpenLayers.Geometry.Point(location.lon, location.lat);
+                }
+                
+                var layer = (level == 3) ? Grakon.borderLayers.districts : Grakon.borderLayers.regions;
+
+                for (var i in layer.features) {
+                    var feature = layer.features[i];
+                    
+                    if (feature.geometry.intersects( markerGeometry )) {
+                        if (feature.attributes.markerIDs == null)
+                            feature.attributes.markerIDs = new Array();
+                        
+                        if (feature.attributes.markerIDs.indexOf(ecID) == -1) {
+                            feature.attributes.markerIDs.push(ecID);
+                            
+                            if (feature.attributes.data == null) {
+                                feature.attributes.data = new Object();
+                                for (var key in data)
+                                    feature.attributes.data[key] = 0;
+                            }
+                            
+                            for (var key in data)
+                                feature.attributes.data[key] += data[key];
+                            
+                            feature.attributes.color = Grakon.Utils.calculateColor(data);
+                            feature.attributes.opacity = 0.5;
+                            
+                            break;
+                        }
+                    }
+                }
+            }
+        },
+        
+        calculateColor: function(data) {
+            var sum = data.p19 + data.p20 + data.p21 + data.p22 + data.p23 + data.p9;
+          
+            var color1 = "#ff0000";
+            var color2 = "#00ff00";
+            
+            var red1 = parseInt(color1.substr(1, 2), 16);
+            var red2 = parseInt(color2.substr(1, 2), 16);
+            var green1 = parseInt(color1.substr(3, 2), 16);
+            var green2 = parseInt(color2.substr(3, 2), 16);
+            var blue1 = parseInt(color1.substr(5, 2), 16);
+            var blue2 = parseInt(color2.substr(5, 2), 16);
+            
+            var factor = data['p23']/sum;
+            
+            var red = red1 + factor * (red2 - red1);
+            var green = green1 + factor * (green2 - green1);
+            var blue = blue1 + factor * (blue2 - blue1);
+            
+            red = Math.round(red).toString(16);
+            green = Math.round(green).toString(16);
+            blue = Math.round(blue).toString(16);
+            
+            red = (red.length <= 1 ? "0" : "") + red;
+            green = (green.length <= 1 ? "0" : "") + green;
+            blue = (blue.length <= 1 ? "0" : "") + blue;
+            
+            var color = "#" + red + green + blue;
+            return color;
         },
         
         markerClick: function (evt) {
@@ -604,6 +701,18 @@ var Grakon = {
                 }
                 OpenLayers.Event.stop(evt);
             }
+        },
+        
+        getZoomForLevel: function(level) {
+            var zoom;
+            switch (level) {
+                case 2: zoom = Grakon.map.getZoomForResolution(Grakon.ELECTION_COMMISSION_SCALES.regions); break;
+                case 3: zoom = Grakon.map.getZoomForResolution(Grakon.ELECTION_COMMISSION_SCALES.districts); break;
+                case 4: zoom = Grakon.map.getZoomForResolution(Grakon.ELECTION_COMMISSION_SCALES.areas); break;
+                case 5: zoom = Grakon.map.getZoomForResolution(Grakon.ELECTION_COMMISSION_SCALES.max); break;
+                default: zoom = Grakon.map.getZoomForResolution(Grakon.ELECTION_COMMISSION_SCALES.initial);
+            }
+            return zoomScale;
         },
 
         /**
@@ -927,6 +1036,45 @@ var Grakon = {
             function() {
                 OpenLayers.Console.error("Ошибка при загрузке границ субъектов РФ");
             });
+            
+        regions.events.register("featureadded", null, function(event) {
+            if (Grakon.electionCommissionLayers.regions == null)
+                return;
+            
+            var markerGeometry = null;
+            var marker = null;
+            
+            for (var i in Grakon.electionCommissionLayers.regions.markers) {
+              
+                marker = Grakon.electionCommissionLayers.regions.markers[i];
+                markerGeometry = new OpenLayers.Geometry.Point(marker.lonlat.lon, marker.lonlat.lat);
+              
+                if (event.feature.geometry.intersects( markerGeometry )) {
+                    if (event.feature.attributes.markerIDs == null)
+                        event.feature.attributes.markerIDs = new Array();
+                    
+                    if (event.feature.attributes.markerIDs.indexOf(marker.ecID) == -1) {
+                        event.feature.attributes.markerIDs.push(marker.ecID);
+                        
+                        if (event.feature.attributes.data == null) {
+                            event.feature.attributes.data = new Object();
+                            for (var key in marker.data)
+                                event.feature.attributes.data[key] = 0;
+                        }
+                        
+                        for (var key in marker.data)
+                            event.feature.attributes.data[key] += marker.data[key];
+                        
+                        event.feature.attributes.color = Grakon.Utils.calculateColor(marker.data);
+                        event.feature.attributes.opacity = 0.5;
+                    }
+                }
+            }
+        });
+        
+        regions.events.register("featuresadded", null, function(event) {
+            event.features[0].layer.redraw();
+        });
     },
 	
 	/**
@@ -945,6 +1093,45 @@ var Grakon = {
 		Grakon.map.addLayer(districts);
         districts.setVisibility( Grakon.getLevel() == 3 );
         Grakon.borderLayers.districts = districts;
+        
+        districts.events.register("featureadded", null, function(event) {
+            if (Grakon.electionCommissionLayers.districts == null)
+                return;
+            
+            var markerGeometry = null;
+            var marker = null;
+            
+            for (var i in Grakon.electionCommissionLayers.districts.markers) {
+              
+                marker = Grakon.electionCommissionLayers.districts.markers[i];
+                markerGeometry = new OpenLayers.Geometry.Point(marker.lonlat.lon, marker.lonlat.lat);
+              
+                if (event.feature.geometry != null && event.feature.geometry.intersects( markerGeometry )) {
+                    if (event.feature.attributes.markerIDs == null)
+                        event.feature.attributes.markerIDs = new Array();
+                    
+                    if (event.feature.attributes.markerIDs.indexOf(marker.ecID) == -1) {
+                        event.feature.attributes.markerIDs.push(marker.ecID);
+                        
+                        if (event.feature.attributes.data == null) {
+                            event.feature.attributes.data = new Object();
+                            for (var key in marker.data)
+                                event.feature.attributes.data[key] = 0;
+                        }
+                        
+                        for (var key in marker.data)
+                            event.feature.attributes.data[key] += marker.data[key];
+                        
+                        event.feature.attributes.color = Grakon.Utils.calculateColor(marker.data);
+                        event.feature.attributes.opacity = 0.5;
+                    }
+                }
+            }
+        });
+        
+        districts.events.register("featuresadded", null, function(event) {
+            event.features[0].layer.redraw();
+        });
     },
     
     /**

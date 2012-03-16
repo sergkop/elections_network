@@ -106,11 +106,12 @@
               var serializedObject = "{";
               for (var key in borders[i].attributes)
                   serializedObject += '"'+key+'": "'+borders[i].attributes[key]+'", ';
-              serializedObject += '"border": "' + borders[i].geometry.toString() + '", "commissions": ['+commissions.join(",")+']}';
+              var bounds = borders[i].geometry.getBounds().toArray();
+              serializedObject += '"border": "' + borders[i].geometry.toString() + '", "x_min": "'+bounds[0]+'", "y_min": "'+bounds[1]+'", "x_max": "'+bounds[2]+'", "y_max": "'+bounds[3]+'", "commissions": ['+commissions.join(",")+']}';
               Grakon.serializedObjects.push(serializedObject);
           }
           window.console.debug("Unlinked commissions left: " + Grakon.electionCommissions.length);
-          if (id < 90)
+          if (id < 2)
               Grakon.fetchBorders(id+1);
           else {
               var count = 0;

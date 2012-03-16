@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="/static/js/OpenLayers.js"></script>
+  <script type="text/javascript" src="/static/districts/regions_bbox.js"></script>
+  <script type="text/javascript">
+    /**
+    * Класс для избирательных округов
+    * 
+    * @param {level}
+    *            уровень избирательного округа (от 1 до 3)
+    * @param {data}
+    *            объект типа {numVoters: 4, numObservers: 6}
+    */
+    var ElectionCommission = function(id, level, shortTitle, title, address, xCoord, yCoord, data) {  
+        this.id = id;
+        this.level = level < 1 ? 1 : level > 4 ? 4 : level;
+        this.shortTitle = shortTitle;
+        this.title = title;
+        this.address = address;
+        this.data = data;
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+    };
+
+    var Grakon = {
+      electionCommissions: null,
+
+      borders: null,
+
+      serializedObjects: null,
+
+      serializeBorders: function() {
+        Grakon.electionCommissions = new Array();
+        Grakon.borders = new Array();
+        Grakon.serializedObjects = new Array();
+        var left = -180;
+        var bottom = 0;
+        var right = 180;
+        var top = 90;
+        OpenLayers.loadURL("/location/locations_data",
+            {'x1': left,
+            'x2': right,
+            'y1': bottom,
+            'y2': top,
+            'level': 3},
+            null,
+            function(request) {
+                if (request.status == 200) {
+                    if (request.responseText.indexOf('electionCommissions') == -1)
+                        return;
+                    eval(request.responseText);
+                    if (electionCommissions)
+                        for (var id in electionCommissions)
+                            Grakon.electionCommissions[id] = electionCommissions[id];
+                    Grakon.fetchBorders(1);
+                    
+                } else
+                    OpenLayers.Console.error("Запрос избирательных комиссий для заданного квадрата вернул статус: " + request.status);
+            },
+            function() {
+                OpenLayers.Console.error("Ошибка при загрузке избирательных комиссий для заданного квадрата.");
+            }
+        );
+      },
+
+      fetchBorders: function(id) {
+          OpenLayers.loadURL(
+              "/static/districts/"+id+"s.json",
+              {},
+              null,
+              function(request) {
+                  if (request.status == 200) {
+                      var geoJSON = new OpenLayers.Format.GeoJSON({
+                          'internalProjection': new OpenLayers.Projection("EPSG:4326"),
+                          'externalProjection': new OpenLayers.Projection("EPSG:4326")
+                      });
+                      Grakon.link( id, geoJSON.read(request.responseText) );
+                  } else
+                      OpenLayers.Console.error("Запрос границ районов субъекта РФ из файла GeoJSON вернул статус: " + request.status);
+              },
+              function(xhr) {
+                  OpenLayers.Console.error("Ошибка при загрузке районов субъекта РФ");
+              });
+      },
+
+      link: function(id, borders) {
+          window.console.debug("Linking " + borders[0].attributes.name_1);          
+          
+          var point;
+          var commissions;
+          for (var i in borders) {
+              commissions = new Array();
+              for (var j=0; j < Grakon.electionCommissions.length; j++) {
+                  if (Grakon.electionCommissions[j] == null || Grakon.electionCommissions[j].level != 3) continue;
+                  point = new OpenLayers.Geometry.Point(Grakon.electionCommissions[j].xCoord, Grakon.electionCommissions[j].yCoord);
+                  for (var k in borders[i].geometry.components)
+                      if (borders[i].geometry.components[k].containsPoint(point)) {
+                          commissions.push(Grakon.electionCommissions[j].id);
+                          Grakon.electionCommissions.splice(j, 1);
+                          j--;
+                          break;
+                      }
+              }
+              var serializedObject = "{";
+              for (var key in borders[i].attributes)
+                  serializedObject += '"'+key+'": "'+borders[i].attributes[key]+'", ';
+              serializedObject += '"border": "' + borders[i].geometry.toString() + '", "commissions": ['+commissions.join(",")+']}';
+              Grakon.serializedObjects.push(serializedObject);
+          }
+          window.console.debug("Unlinked commissions left: " + Grakon.electionCommissions.length);
+          if (id < 90)
+              Grakon.fetchBorders(id+1);
+          else {
+              var count = 0;
+              for (var i in Grakon.electionCommissions)
+                  if (Grakon.electionCommissions[i] != null && Grakon.electionCommissions[i].level == 3)
+                      count++;
+              window.console.log("Unlinked TIKs: " + count);
+              window.console.debug(Grakon.electionCommissions);
+              
+              document.writeln("<h3>[</h3><p>");
+              document.writeln(Grakon.serializedObjects.join(",</p><p>"));
+              document.writeln("</p><h3>]</h3>");
+          }
+      }
+    }
+  </script>
+</head>
+<body>
+  <input type="submit" name="submit" value="serialize borders" onclick="Grakon.serializeBorders()" />
+</body>
+</html>

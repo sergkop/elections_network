@@ -5,6 +5,7 @@ body {width: 100%; height: 100%; background-color: #f3f3f3; font-family: Arial, 
 nav {background: none;}*/
 .ym-wrapper{min-width:1030px; max-width: 1600px; position: relative;}
 a {color: #0077ca;}
+	.ym-col1 a, .ym-col2 a {color: #333;}
 p {margin: 1em 0 1em; font-size: inherit;}
 ul, ul li {margin-bottom: 0.5em; margin-top: 0;}
 	ul ul {margin-bottom: 1.5em;}
@@ -83,7 +84,7 @@ footer .ym-wbox a {text-decoration: none; color: #fff;}
 
 .ym-clearfix {margin-bottom: 15px; border-radius: 0 0 3px 3px;}
 
-.content_block {box-shadow: none; border: none; background: none; margin: 0;}
+.content_block {box-shadow: none; border: none; background: none; margin: 0; padding: 5px 0;}
 
 .column_header  {font-size: 1em; padding: 0.8em  0.5em 0.8em 2em; color: #333; margin:0;  border-radius: 3px 3px 0 0;}
 	.column_header	{text-shadow: 0 1px 0 #d0df96;}

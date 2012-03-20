@@ -20,4 +20,5 @@ urlpatterns = patterns('locations.views',
     url(r'^goto_location$', 'goto_location', name='goto_location'),
 
     url(r'^locations_data$', 'locations_data', name='locations_data'),
+    url(r'^boundaries_data$', 'boundaries_data', name='boundaries_data'),
 )

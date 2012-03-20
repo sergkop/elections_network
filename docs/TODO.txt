@@ -20,14 +20,10 @@
 * 'Add user' button with search (name, profession, location) (?)
 * loginza produces js errors on closing dialogs by Esc
 * show population of the regions and statistics from previous elections
-* Зарубежные территории
 * rss feeds for project news, regional news
 * поиск по сайту
-* Table for members of location comission and ability to fill them for verified users
-* run Fabric script to automate deployment completely
 
 ====== Later ===========
-* Favicon
 * autogenerate username from first and last name
 * notifications about new users in the region
 * limit user's ability to add links (daily limit?)

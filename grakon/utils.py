@@ -46,7 +46,6 @@ def cache_function(key, timeout):
 
     return decorator
 
-# TODO: cache html only
 def cache_view(key, timeout, only_anonym=True):
     def decorator(func):
         def new_func(request, *args, **kwargs):

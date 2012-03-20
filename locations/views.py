@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.views.generic.base import TemplateView
 
 from grakon.utils import authenticated_redirect
-from locations.models import Location
+from locations.models import Boundary, Location
 from locations.utils import get_locations_data, get_roles_counters, get_roles_query, regions_list
 from organizations.models import OrganizationCoverage
 from links.models import Link
@@ -233,3 +233,16 @@ def locations_data(request):
             y_coord__gt=coords['y1'], y_coord__lt=coords['y2'])
 
     return get_locations_data(queryset, level)
+
+def boundaries_data(request):
+    coords = {}
+    for name in ('x1', 'y1', 'x2', 'y2'):
+        try:
+            coords[name] = float(request.GET.get(name, ''))
+        except ValueError:
+            return HttpResponse('"error"')
+
+    boundaries = Boundary.objects.filter(x_min__lte=coords['x2'], x_max__gte=coords['x1'],
+            y_min__lte=coords['y2'], y_max__gte=coords['y1']).values_list('data', flat=True)
+
+    return HttpResponse('['+','.join(boundaries)+']')

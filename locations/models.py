@@ -109,3 +109,10 @@ class Location(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('location_wall', (), {'loc_id': str(self.id)})
+
+class Boundary(models.Model):
+    data = models.TextField()
+    x_min = models.FloatField(db_index=True)
+    x_max = models.FloatField(db_index=True)
+    y_min = models.FloatField(db_index=True)
+    y_max = models.FloatField(db_index=True)

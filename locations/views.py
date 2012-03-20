@@ -243,6 +243,6 @@ def boundaries_data(request):
             return HttpResponse('"error"')
 
     boundaries = Boundary.objects.filter(x_min__lte=coords['x2'], x_max__gte=coords['x1'],
-            y_min__lte=coords['y2'], y_max__gte=coords['y1']).values_list('data', flat=True)
+            y_min__lte=coords['y2'], y_max__gte=coords['y1']).values_list('id', 'data')
 
-    return HttpResponse('['+','.join(boundaries)+']')
+    return HttpResponse('{'+','.join(str(id)+':'+data for id, data in boundaries)+'}')

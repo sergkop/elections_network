@@ -1,13 +1,4 @@
 <div id="submit_complaint_dialog">
-    <p style="margin-top: 0;">Инструмент публикации нарушений находится в разработке и появится в ближайшее время.</p>
-
-    <p>
-        Дополнительно вы можете оставить сообщение о нарушении на сайте
-        <a href="http://www.kartanarusheniy.ru/" target="_blank">Карты нарушений</a>,
-        где также имеется <a href="http://www.kartanarusheniy.ru/pages/claim" target="_blank">подробная информация</a>
-        о процедуре составления и подачи жалоб.
-    </p>
-
     <p>Вы можете пройти процедуру автоматического составления официальной жалобы на сайте
     <a href="http://kuda-komu.net/voting/" target="_blank">Куда? Кому?</a>.</p>
 </div>
@@ -17,9 +8,9 @@
         $("#submit_complaint_dialog").dialog("open");
     }
 
-    $("#submit_complaint_dialog").dialog({width:650, height:250, modal: true, title: "Зафиксировать нарушение",
+    $("#submit_complaint_dialog").dialog({width:650, height:250, modal: true, title: "Составить жалобу",
         buttons: {
-            "Сообщить о нарушении": function(){
+            "Составить жалобу": function(){
                 window.open("http://kuda-komu.net/voting/", "_blank");
             },
             "Отмена": function(){$("#submit_complaint_dialog").dialog("close");}

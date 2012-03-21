@@ -1,0 +1,15 @@
+{% load elements %}
+
+<h3 class="column_header mt15 column_header_icon"><span class="complaints">Жалобы</span></h3>
+
+<div class="content_block ym-clearfix mb15">
+    <div class="mb15 mt15">
+        {% button "" "Подать жалобу" "submit_complaint" "" "center" "" %}
+    </div>
+</div>
+
+{% include "dialogs/submit_complaint.html" %}
+
+<script type="text/javascript">
+    $("#submit_complaint").click(submit_complaint_dialog_init).tipsy();
+</script>

@@ -103,4 +103,4 @@ class WebObserverForm(forms.ModelForm):
 
     class Meta:
         model = WebObserver
-        exclude = ('url', 'location', 'user', 'time')
+        exclude = ('location', 'user', 'time', 'capture_video')

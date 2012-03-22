@@ -10,7 +10,7 @@
 
 <div class="ym-clearfix">
     <div class="mb15 mt15">
-        {% button "circle-plus" "Стать веб-наблюдателем" "become_web_observer" "" "center" "Для тех, кто будет следить за выборами через веб-камеры" %}
+        {% button "circle-plus" "Выложить видео" "become_web_observer" "" "center" "Для тех, кто следил за выборами через веб-камеры" %}
     </div>
 </div>
 
@@ -27,11 +27,11 @@
                 {% if current_location.is_uik %}
                     become_web_observer_dialog_init();
                 {% else %}
-                    change_location_uik_dialog_init("Записаться в веб-наблюдатели",
+                    change_location_uik_dialog_init("Выложить ссылку на видео с веб-камер",
                             "Выберите ваш избирательный округ:", "web_observer");
                 {% endif %}
             {% else %}
-                login_dialog_init("Чтобы записаться в веб-наблюдатели, пожалуйста, войдите в систему");
+                login_dialog_init("Чтобы выложить ссылку на видео с избирательного участка, пожалуйста, войдите в систему");
             {% endif %}
         }).tipsy();
     });

@@ -1,16 +1,19 @@
 {% load elements %}
 <p>
-    Инструкцию о том, как стать веб-наблюдателем можно найти <a href="{% url web_observers_help %}">здесь</a>.
+    <!--Инструкцию о том, как стать веб-наблюдателем можно найти <a href="{% url web_observers_help %}">здесь</a>.
     <br/>
-    После выборов мы позволим публиковать ссылки на видео, сделанные пользователями.
+    После выборов мы позволим публиковать ссылки на видео, сделанные пользователями.-->
+    Здесь вы можете выложить ссылку на захваченное видео с веб-камер.
 </p>
+
+{% button "" "Выложить ссылку на видео" "become_web_observer1" %}
 
 <p>
     <table class="web_observers_table">
         <tr>
             <th style="text-align:left;">Время</th>
             <th>Участник</th>
-            <th>Захват видео</th>
+            <th>Ссылка на видео</th>
         </tr>
         {% for time in times %}
         <tr>
@@ -25,7 +28,7 @@
             </td>
             <td>
                 {% for web_observer in time.web_observers %}
-                    {% if web_observer.capture_video %}+{% endif %}
+                    <a href="{{ web_observer.url }}" target="_blank">Видео</a>
                     <br/>
                 {% endfor %}
             </td>
@@ -33,5 +36,3 @@
         {% endfor %}
     </table>
 </p>
-
-{% button "" "Стать веб-наблюдателем" "become_web_observer1" %}

@@ -76,6 +76,7 @@ class BaseLocationView(TemplateView):
             'counters': counters,
 
             'add_commission_member_form': CommissionMemberForm(),
+            'become_web_observer_form': WebObserverForm(),
 
             'verified_protocols': verified_protocols,
             'protocol_data': protocol_data,
@@ -137,7 +138,6 @@ class WebObserversView(BaseLocationView):
         return {
             'view': 'locations/web_observers.html',
             'times': times,
-            'become_web_observer_form': WebObserverForm(),
         }
 
 class ViolationsView(BaseLocationView):

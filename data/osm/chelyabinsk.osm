@@ -1,0 +1,3871 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-1749' action='modify' visible='true' lat='55.158991483385414' lon='61.41927351244103'>
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='улица Тимирязева' />
+    <tag k='note:location' v='МОУ лицей № 11' />
+    <tag k='phone' v='+7 351 260-11-55' />
+    <tag k='ref' v='2054' />
+  </node>
+  <node id='-1748' action='modify' visible='true' lat='55.2460427402224' lon='61.40024970832643'>
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='улица Пекинская' />
+    <tag k='note:location' v='школа № 73' />
+    <tag k='phone' v='+7 351 7351390' />
+    <tag k='ref' v='718' />
+  </node>
+  <node id='-1747' action='modify' visible='true' lat='55.1799064827479' lon='61.328118019998044'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='70Б' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Челябинский государственный университет, корпус № 2' />
+    <tag k='phone' v='+7 351 7997058' />
+    <tag k='ref' v='566' />
+  </node>
+  <node id='-1746' action='modify' visible='true' lat='55.18589594326627' lon='61.38494873796914'>
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='Школа № 137' />
+    <tag k='phone' v='+7 351 7917475' />
+    <tag k='ref' v='594' />
+  </node>
+  <node id='-1745' action='modify' visible='true' lat='55.132996471876794' lon='61.44494944306106'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица Агалакова' />
+    <tag k='note:location' v='школа № 51' />
+    <tag k='phone' v='+7 351 2516880' />
+    <tag k='ref' v='2024' />
+  </node>
+  <node id='-1744' action='modify' visible='true' lat='55.17222611571379' lon='61.451392335044694'>
+    <tag k='addr:housenumber' v='114' />
+    <tag k='addr:street' v='улица Комарова' />
+    <tag k='note:location' v='Детский дом культуры «Ровесник»' />
+    <tag k='phone' v='+7 351 7735894' />
+    <tag k='ref' v='757' />
+  </node>
+  <node id='-1743' action='modify' visible='true' lat='55.268112299779816' lon='61.39346936765361'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Трудовая' />
+    <tag k='note:location' v='школа-интернат № 13' />
+    <tag k='phone' v='+7 351 7360762' />
+    <tag k='ref' v='668' />
+  </node>
+  <node id='-1742' action='modify' visible='true' lat='55.178463834010195' lon='61.302410140653016'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 151' />
+    <tag k='phone' v='+7 351 7958547' />
+    <tag k='ref' v='574' />
+  </node>
+  <node id='-1741' action='modify' visible='true' lat='55.203460306199354' lon='61.315668468504484'>
+    <tag k='addr:housenumber' v='10В' />
+    <tag k='addr:street' v='улица Солнечная' />
+    <tag k='note:location' v='Школа № 22' />
+    <tag k='phone' v='+7 351 7933972' />
+    <tag k='ref' v='634' />
+  </node>
+  <node id='-1740' action='modify' visible='true' lat='55.135828089181516' lon='61.43567914650674'>
+    <tag k='addr:housenumber' v='19' />
+    <tag k='addr:street' v='улица Агалакова' />
+    <tag k='note:location' v='школа № 113' />
+    <tag k='phone' v='+7 351 2561831' />
+    <tag k='ref' v='1997' />
+  </node>
+  <node id='-1739' action='modify' visible='true' lat='55.166298089928354' lon='61.4633676516902'>
+    <tag k='addr:housenumber' v='23Г' />
+    <tag k='addr:street' v='улица Марченко' />
+    <tag k='note:location' v='школа № 39' />
+    <tag k='phone' v='+7 351 7723884' />
+    <tag k='ref' v='748' />
+  </node>
+  <node id='-1738' action='modify' visible='true' lat='55.14793767228821' lon='61.39201021981936'>
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='улица Курчатова' />
+    <tag k='note:location' v='НОУ СПО «Челябинский кооперативный коммерческий техникум»' />
+    <tag k='phone' v='+7 351 237-72-00' />
+    <tag k='ref' v='2074' />
+  </node>
+  <node id='-1737' action='modify' visible='true' lat='55.18102101480289' lon='61.31207135183207'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 150' />
+    <tag k='phone' v='+7 351 7958542' />
+    <tag k='ref' v='568' />
+  </node>
+  <node id='-1736' action='modify' visible='true' lat='55.24587100386575' lon='61.40093324208615'>
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='улица Пекинская' />
+    <tag k='note:location' v='школа № 73' />
+    <tag k='phone' v='+7 351 7351390' />
+    <tag k='ref' v='721' />
+  </node>
+  <node id='-1735' action='modify' visible='true' lat='55.197755349951734' lon='61.31303668738515'>
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 13' />
+    <tag k='phone' v='+7 351 7428615' />
+    <tag k='ref' v='636' />
+  </node>
+  <node id='-1734' action='modify' visible='true' lat='55.13801964259163' lon='61.45077492676099'>
+    <tag k='addr:housenumber' v='63' />
+    <tag k='addr:street' v='улица Энергетиков' />
+    <tag k='note:location' v='Институт экономики и права имени М.В. Ладошина' />
+    <tag k='phone' v='+7 351 2535412' />
+    <tag k='ref' v='2021' />
+  </node>
+  <node id='-1733' action='modify' visible='true' lat='55.17951889373537' lon='61.4316462754126'>
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Грибоедова' />
+    <tag k='note:location' v='школа № 102' />
+    <tag k='phone' v='+7 351 7721809' />
+    <tag k='ref' v='732' />
+  </node>
+  <node id='-1732' action='modify' visible='true' lat='55.121818877668964' lon='61.36402465461482'>
+    <tag k='addr:housenumber' v='91' />
+    <tag k='addr:street' v='улица Блюхера' />
+    <tag k='note:location' v='(поселок Мебельный) ФГОУ СПО Челябинский энергетический колледж (2-я площадка)' />
+    <tag k='phone' v='+7 351 262-29-80;+7 351 262-33-11' />
+    <tag k='ref' v='2095' />
+  </node>
+  <node id='-1731' action='modify' visible='true' lat='55.187769972845025' lon='61.33990197255436'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='287' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='клуб городской клинической больницы № 3' />
+    <tag k='phone' v='+7 351 7422805' />
+    <tag k='ref' v='561' />
+  </node>
+  <node id='-1730' action='modify' visible='true' lat='55.28853111945738' lon='61.51730142918294'>
+    <tag k='addr:housenumber' v='' />
+    <tag k='addr:street' v='Аэропорт поселок' />
+    <tag k='note:location' v='Дом культуры «Сокол»' />
+    <tag k='phone' v='+7 351 7783211' />
+    <tag k='ref' v='665' />
+  </node>
+  <node id='-1729' action='modify' visible='true' lat='55.180286686745376' lon='61.391155032592245'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='28' />
+    <tag k='addr:street' v='улица Калинина' />
+    <tag k='note:location' v='школа № 5' />
+    <tag k='phone' v='+7 351 7910603' />
+    <tag k='ref' v='544' />
+  </node>
+  <node id='-1728' action='modify' visible='true' lat='55.19764613669486' lon='61.31368323734393'>
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 13' />
+    <tag k='phone' v='+7 351 7428615' />
+    <tag k='ref' v='639' />
+  </node>
+  <node id='-1727' action='modify' visible='true' lat='55.136988562712006' lon='61.42365660136043'>
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='улица Отечественная' />
+    <tag k='note:location' v='профессиональное училище № 2' />
+    <tag k='phone' v='+7 351 2687340' />
+    <tag k='ref' v='2001' />
+  </node>
+  <node id='-1726' action='modify' visible='true' lat='55.10085573640843' lon='61.49276789200308'>
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 146' />
+    <tag k='phone' v='+7 351 2538645' />
+    <tag k='ref' v='2043' />
+  </node>
+  <node id='-1725' action='modify' visible='true' lat='55.170528255847934' lon='61.46803158038386'>
+    <tag k='addr:housenumber' v='144Б' />
+    <tag k='addr:street' v='улица Танкистов' />
+    <tag k='note:location' v='школа № 101' />
+    <tag k='phone' v='+7 351 7735404' />
+    <tag k='ref' v='752' />
+  </node>
+  <node id='-1724' action='modify' visible='true' lat='55.1121965148086' lon='61.339672821483205'>
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='улица Кузнецова' />
+    <tag k='note:location' v='(поселок АМЗ) МОУ средняя общеобразовательная школа № 56' />
+    <tag k='phone' v='+7 351 269-26-97' />
+    <tag k='ref' v='2102' />
+  </node>
+  <node id='-1723' action='modify' visible='true' lat='55.25634702980816' lon='61.40029202103333'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Богдана Хмельницкого' />
+    <tag k='note:location' v='школа № 92' />
+    <tag k='phone' v='+7 351 7354887' />
+    <tag k='ref' v='684' />
+  </node>
+  <node id='-1722' action='modify' visible='true' lat='55.176989979909635' lon='61.366381130675556'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='улица Университетская набережная' />
+    <tag k='note:location' v='школа № 124' />
+    <tag k='phone' v='+7 351 7422376' />
+    <tag k='ref' v='549' />
+  </node>
+  <node id='-1721' action='modify' visible='true' lat='55.19170477930126' lon='61.310185062468065'>
+    <tag k='addr:housenumber' v='23Б' />
+    <tag k='addr:street' v='улица Молдавская' />
+    <tag k='note:location' v='Школа № 95' />
+    <tag k='phone' v='+7 351 7429471' />
+    <tag k='ref' v='632' />
+  </node>
+  <node id='-1720' action='modify' visible='true' lat='55.191868645766746' lon='61.314781571772016'>
+    <tag k='addr:housenumber' v='50А' />
+    <tag k='addr:street' v='улица Солнечная' />
+    <tag k='note:location' v='Школа №12' />
+    <tag k='phone' v='+7 351 7411841' />
+    <tag k='ref' v='628' />
+  </node>
+  <node id='-1719' action='modify' visible='true' lat='55.13271529717917' lon='61.444064320034315'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица Агалакова' />
+    <tag k='note:location' v='школа № 51' />
+    <tag k='phone' v='+7 351 2516880' />
+    <tag k='ref' v='2022' />
+  </node>
+  <node id='-1718' action='modify' visible='true' lat='55.17458295444135' lon='61.46924920549083'>
+    <tag k='addr:housenumber' v='58' />
+    <tag k='addr:street' v='улица Кулибина' />
+    <tag k='note:location' v='школа № 81' />
+    <tag k='phone' v='+7 351 7724466' />
+    <tag k='ref' v='754' />
+  </node>
+  <node id='-1717' action='modify' visible='true' lat='55.10480876479143' lon='61.38658131406197'>
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='Троицкий тракт' />
+    <tag k='note:location' v='(поселок Федоровка) ОАО «ЧПАТО-2»' />
+    <tag k='phone' v='+7 351 262-07-98' />
+    <tag k='ref' v='2107' />
+  </node>
+  <node id='-1716' action='modify' visible='true' lat='55.270945133230846' lon='61.400599084985885'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Сталеваров' />
+    <tag k='note:location' v='общежитие ЗАО «ВММ1»' />
+    <tag k='phone' v='+7 351 7359108' />
+    <tag k='ref' v='670' />
+  </node>
+  <node id='-1715' action='modify' visible='true' lat='55.181611260172026' lon='61.37696664954338'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Дальневосточная' />
+    <tag k='note:location' v='школа № 9' />
+    <tag k='phone' v='+7 351 7916474' />
+    <tag k='ref' v='546' />
+  </node>
+  <node id='-1714' action='modify' visible='true' lat='55.19128433484111' lon='61.319261800524224'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Ворошилова' />
+    <tag k='note:location' v='Челябинский государственный колледж индустрии питания и торговли' />
+    <tag k='phone' v='+7 351 7415271' />
+    <tag k='ref' v='626' />
+  </node>
+  <node id='-1713' action='modify' visible='true' lat='55.19187432280507' lon='61.31545873155691'>
+    <tag k='addr:housenumber' v='50А' />
+    <tag k='addr:street' v='улица Солнечная' />
+    <tag k='note:location' v='Школа №12' />
+    <tag k='phone' v='+7 351 7411841' />
+    <tag k='ref' v='629' />
+  </node>
+  <node id='-1712' action='modify' visible='true' lat='55.14142468117185' lon='61.44498448215627'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Пограничная' />
+    <tag k='note:location' v='профессиональное училище № 20' />
+    <tag k='phone' v='+7 351 2565315' />
+    <tag k='ref' v='2019' />
+  </node>
+  <node id='-1711' action='modify' visible='true' lat='55.12391264648831' lon='61.40396754352703'>
+    <tag k='addr:housenumber' v='37' />
+    <tag k='addr:street' v='улица Стрелковая' />
+    <tag k='note:location' v='(поселок Медведевка) Главный материальный склад Челябинской дирекции материально-технического обеспечения Росжелдорснаб (филиал ОАО РЖД)' />
+    <tag k='phone' v='+7 351 268-58-16' />
+    <tag k='ref' v='2090' />
+  </node>
+  <node id='-1710' action='modify' visible='true' lat='55.2439302036435' lon='61.368623837364694'>
+    <tag k='addr:housenumber' v='53' />
+    <tag k='addr:street' v='шоссе Металлургов' />
+    <tag k='note:location' v='школа № 94' />
+    <tag k='phone' v='+7 351 7210292' />
+    <tag k='ref' v='704' />
+  </node>
+  <node id='-1709' action='modify' visible='true' lat='55.17632534858861' lon='61.348888273971326'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='30А' />
+    <tag k='addr:street' v='улица Университетская набережная' />
+    <tag k='note:location' v='школа № 25' />
+    <tag k='phone' v='+7 351 7422721' />
+    <tag k='ref' v='551' />
+  </node>
+  <node id='-1708' action='modify' visible='true' lat='55.18625166452571' lon='61.374499116711505'>
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='улица Речная' />
+    <tag k='note:location' v='Техникум текстильной и легкой промышленности' />
+    <tag k='phone' v='+7 351 7977641' />
+    <tag k='ref' v='601' />
+  </node>
+  <node id='-1707' action='modify' visible='true' lat='55.12978601607004' lon='61.464850413802246'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица Энергетиков' />
+    <tag k='note:location' v='школа № 75 (филиал)' />
+    <tag k='phone' v='+7 351 2536946' />
+    <tag k='ref' v='2042' />
+  </node>
+  <node id='-1706' action='modify' visible='true' lat='55.1594559628243' lon='61.45205301503077'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='школа № 107' />
+    <tag k='phone' v='+7 351 7752246' />
+    <tag k='ref' v='746' />
+  </node>
+  <node id='-1705' action='modify' visible='true' lat='55.15379900214386' lon='61.418186054364334'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Орджоникидзе' />
+    <tag k='note:location' v='Уральская государственная академия физической культуры' />
+    <tag k='phone' v='+7 351 237-04-88' />
+    <tag k='ref' v='2062' />
+  </node>
+  <node id='-1704' action='modify' visible='true' lat='55.25861314562403' lon='61.38198560162991'>
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='улица Богдана Хмельницкого' />
+    <tag k='note:location' v='филиал школы № 70' />
+    <tag k='phone' v='+7 351 7210887' />
+    <tag k='ref' v='681' />
+  </node>
+  <node id='-1703' action='modify' visible='true' lat='55.18264914366831' lon='61.333998038045216'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Педагогический колледж № 1' />
+    <tag k='phone' v='+7 351 7420209' />
+    <tag k='ref' v='559' />
+  </node>
+  <node id='-1702' action='modify' visible='true' lat='55.19546909156027' lon='61.359100305442716'>
+    <tag k='addr:housenumber' v='8А' />
+    <tag k='addr:street' v='улица Чайковского' />
+    <tag k='note:location' v='Школа № 118' />
+    <tag k='phone' v='+7 351 7411621' />
+    <tag k='ref' v='603' />
+  </node>
+  <node id='-1701' action='modify' visible='true' lat='55.11532509938888' lon='61.4583383876179'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Ереванская' />
+    <tag k='note:location' v='лицей № 77' />
+    <tag k='phone' v='+7 351 2533564' />
+    <tag k='ref' v='2033' />
+  </node>
+  <node id='-1700' action='modify' visible='true' lat='55.19693176617977' lon='61.48034265452506'>
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='улица Мамина' />
+    <tag k='note:location' v='школа № 59' />
+    <tag k='phone' v='+7 351 7737776' />
+    <tag k='ref' v='772' />
+  </node>
+  <node id='-1699' action='modify' visible='true' lat='55.03812057639607' lon='61.37061557620662'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Челябинская' />
+    <tag k='note:location' v='(поселок Новосинеглазово) МАУ ДОД «Детская художественная школа искусств»' />
+    <tag k='phone' v='+7 351 280-02-31' />
+    <tag k='ref' v='2111' />
+  </node>
+  <node id='-1698' action='modify' visible='true' lat='55.14013878502526' lon='61.405431821605134'>
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='улица Ширшова' />
+    <tag k='note:location' v='МАОУ средняя общеобразовательная школа № 15' />
+    <tag k='phone' v='+7 351 237-81-51' />
+    <tag k='ref' v='2070' />
+  </node>
+  <node id='-1697' action='modify' visible='true' lat='55.17589687101671' lon='61.348211184832635'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='30А' />
+    <tag k='addr:street' v='улица Университетская набережная' />
+    <tag k='note:location' v='школа № 25' />
+    <tag k='phone' v='+7 351 7422721' />
+    <tag k='ref' v='553' />
+  </node>
+  <node id='-1696' action='modify' visible='true' lat='55.19755647572987' lon='61.341620583253906'>
+    <tag k='addr:housenumber' v='53' />
+    <tag k='addr:street' v='улица Куйбышева' />
+    <tag k='note:location' v='Гимназия № 93' />
+    <tag k='phone' v='+7 351 7419291' />
+    <tag k='ref' v='617' />
+  </node>
+  <node id='-1695' action='modify' visible='true' lat='55.263847509762805' lon='61.40017510671494'>
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='улица 60-летия Октября' />
+    <tag k='note:location' v='школа № 103' />
+    <tag k='phone' v='+7 351 7356997' />
+    <tag k='ref' v='672' />
+  </node>
+  <node id='-1694' action='modify' visible='true' lat='55.10092154737087' lon='61.48154247691936'>
+    <tag k='addr:housenumber' v='75' />
+    <tag k='addr:street' v='улица Василевского' />
+    <tag k='note:location' v='Челябинский государственный университет, факультет экологии' />
+    <tag k='phone' v='+7 351 2544903' />
+    <tag k='ref' v='2047' />
+  </node>
+  <node id='-1693' action='modify' visible='true' lat='55.183239620142984' lon='61.45280826071998'>
+    <tag k='addr:housenumber' v='46А' />
+    <tag k='addr:street' v='улица Бажова' />
+    <tag k='note:location' v='Естественно-технологический факультет педагогического университета (Место нахождения участковой избирательной комиссии: школа № 120, улица Бажова, 32, +7 351 7722644)' />
+    <tag k='phone' v='+7 351 7720629' />
+    <tag k='ref' v='762' />
+  </node>
+  <node id='-1692' action='modify' visible='true' lat='55.190509870009194' lon='61.48362168739187'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Мамина' />
+    <tag k='note:location' v='школа № 19' />
+    <tag k='phone' v='+7 351 7737948' />
+    <tag k='ref' v='773' />
+  </node>
+  <node id='-1691' action='modify' visible='true' lat='55.12819897709814' lon='61.3665812765046'>
+    <tag k='addr:housenumber' v='69' />
+    <tag k='addr:street' v='улица Блюхера' />
+    <tag k='note:location' v='(поселок Мебельный) ООО «Управляющая компания ЮжУралЗолото группа компаний»' />
+    <tag k='phone' v='+7 351 262-42-12' />
+    <tag k='ref' v='2094' />
+  </node>
+  <node id='-1690' action='modify' visible='true' lat='55.177422838813' lon='61.36710537070851'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='улица Университетская набережная' />
+    <tag k='note:location' v='школа № 124' />
+    <tag k='phone' v='+7 351 7422376' />
+    <tag k='ref' v='550' />
+  </node>
+  <node id='-1689' action='modify' visible='true' lat='55.19846523744967' lon='61.32712016781486'>
+    <tag k='addr:housenumber' v='12А' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Детская школа искусств № 8' />
+    <tag k='phone' v='+7 351 7428776' />
+    <tag k='ref' v='622' />
+  </node>
+  <node id='-1688' action='modify' visible='true' lat='55.244259320744206' lon='61.391985869360234'>
+    <tag k='addr:housenumber' v='7Б' />
+    <tag k='addr:street' v='улица 50-летия ВЛКСМ' />
+    <tag k='note:location' v='лицей № 82' />
+    <tag k='phone' v='+7 351 7216964' />
+    <tag k='ref' v='713' />
+  </node>
+  <node id='-1687' action='modify' visible='true' lat='55.192098098114684' lon='61.326770424526565'>
+    <tag k='addr:housenumber' v='55А' />
+    <tag k='addr:street' v='Комсомольский проспект' />
+    <tag k='note:location' v='Школа № 115 ' />
+    <tag k='phone' v='+7 351 7416491' />
+    <tag k='ref' v='624' />
+  </node>
+  <node id='-1686' action='modify' visible='true' lat='55.12011721866521' lon='61.43435980047659'>
+    <tag k='addr:housenumber' v='56' />
+    <tag k='addr:street' v='улица Гагарина' />
+    <tag k='note:location' v='Челябинский государственный промышленно-гуманитарный техникум имени А.В. Яковлева (2-й корпус)' />
+    <tag k='phone' v='+7 351 2564874' />
+    <tag k='ref' v='2012' />
+  </node>
+  <node id='-1685' action='modify' visible='true' lat='55.12150537763062' lon='61.45594739444387'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица Брестская' />
+    <tag k='note:location' v='школа № 55' />
+    <tag k='phone' v='+7 351 2535502' />
+    <tag k='ref' v='2028' />
+  </node>
+  <node id='-1684' action='modify' visible='true' lat='55.1716748392949' lon='61.46191459321504'>
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='улица Марченко' />
+    <tag k='note:location' v='ЖЭУ7 (Место нахождения участковой избирательной комиссии: школа № 101, улица Танкистов, 144Б, +7 351 7724747)' />
+    <tag k='phone' v='+7 351 7724854' />
+    <tag k='ref' v='753' />
+  </node>
+  <node id='-1683' action='modify' visible='true' lat='55.15910598332486' lon='61.41970919686678'>
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='улица Тимирязева' />
+    <tag k='note:location' v='МОУ лицей № 11' />
+    <tag k='phone' v='+7 351 260-11-44' />
+    <tag k='ref' v='2056' />
+  </node>
+  <node id='-1682' action='modify' visible='true' lat='55.17857624090156' lon='61.3026696243626'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 151' />
+    <tag k='phone' v='+7 351 7958547' />
+    <tag k='ref' v='575' />
+  </node>
+  <node id='-1681' action='modify' visible='true' lat='55.254714029733854' lon='61.38226110696993'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица Мира' />
+    <tag k='note:location' v='гимназия № 96' />
+    <tag k='phone' v='+7 351 7266723' />
+    <tag k='ref' v='692' />
+  </node>
+  <node id='-1680' action='modify' visible='true' lat='55.19178878602876' lon='61.344099999655356'>
+    <tag k='addr:housenumber' v='10А' />
+    <tag k='addr:street' v='улица Пионерская' />
+    <tag k='note:location' v='Гимназия № 26' />
+    <tag k='phone' v='+7 351 7413733' />
+    <tag k='ref' v='613' />
+  </node>
+  <node id='-1679' action='modify' visible='true' lat='55.18662875988571' lon='61.29380998534251'>
+    <tag k='addr:housenumber' v='14А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 41' />
+    <tag k='phone' v='+7 351 7967023;+7 351 7967035' />
+    <tag k='ref' v='648' />
+  </node>
+  <node id='-1678' action='modify' visible='true' lat='55.10104176673675' lon='61.484934568093756'>
+    <tag k='addr:housenumber' v='40' />
+    <tag k='addr:street' v='улица Туруханская' />
+    <tag k='note:location' v='школа № 32 (филиал)' />
+    <tag k='phone' v='+7 351 2555553' />
+    <tag k='ref' v='2048' />
+  </node>
+  <node id='-1677' action='modify' visible='true' lat='55.164856023033295' lon='61.445637925591235'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Савина' />
+    <tag k='note:location' v='школа № 52' />
+    <tag k='phone' v='+7 351 7750480' />
+    <tag k='ref' v='744' />
+  </node>
+  <node id='-1676' action='modify' visible='true' lat='55.25474754217332' lon='61.382835293247865'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица Мира' />
+    <tag k='note:location' v='гимназия № 96' />
+    <tag k='phone' v='+7 351 7266723' />
+    <tag k='ref' v='696' />
+  </node>
+  <node id='-1675' action='modify' visible='true' lat='55.19006778250079' lon='61.39453864211735'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Шенкурская' />
+    <tag k='note:location' v='школа № 109' />
+    <tag k='phone' v='+7 351 7915496' />
+    <tag k='ref' v='529' />
+  </node>
+  <node id='-1674' action='modify' visible='true' lat='55.197771251658864' lon='61.34701797080412'>
+    <tag k='addr:housenumber' v='39' />
+    <tag k='addr:street' v='улица Куйбышева' />
+    <tag k='note:location' v='Школа № 89' />
+    <tag k='phone' v='+7 351 7411679' />
+    <tag k='ref' v='615' />
+  </node>
+  <node id='-1673' action='modify' visible='true' lat='55.197575542881225' lon='61.34702096873993'>
+    <tag k='addr:housenumber' v='39' />
+    <tag k='addr:street' v='улица Куйбышева' />
+    <tag k='note:location' v='Школа № 89' />
+    <tag k='phone' v='+7 351 7411679' />
+    <tag k='ref' v='614' />
+  </node>
+  <node id='-1672' action='modify' visible='true' lat='55.119817260030246' lon='61.46689654330362'>
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='улица Батумская' />
+    <tag k='note:location' v='школа № 47' />
+    <tag k='phone' v='+7 351 2533509' />
+    <tag k='ref' v='2037' />
+  </node>
+  <node id='-1671' action='modify' visible='true' lat='55.17400103841141' lon='61.428389463976096'>
+    <tag k='addr:housenumber' v='79' />
+    <tag k='addr:street' v='улица Кудрявцева' />
+    <tag k='note:location' v='школа № 62' />
+    <tag k='phone' v='+7 351 7759362' />
+    <tag k='ref' v='728' />
+  </node>
+  <node id='-1670' action='modify' visible='true' lat='55.130339409146075' lon='61.374044946481085'>
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='улица Рылеева' />
+    <tag k='note:location' v='(поселок Некрасово) ОАО «Челябинскгоргаз»' />
+    <tag k='phone' v='+7 351 232-16-15. ' />
+    <tag k='ref' v='2089' />
+  </node>
+  <node id='-1669' action='modify' visible='true' lat='55.24538959140273' lon='61.373947254840296'>
+    <tag k='addr:housenumber' v='47' />
+    <tag k='addr:street' v='шоссе Металлургов' />
+    <tag k='note:location' v='Челябинский государственный колледж индустрии питания и торговли' />
+    <tag k='phone' v='+7 351 7218377' />
+    <tag k='ref' v='702' />
+  </node>
+  <node id='-1668' action='modify' visible='true' lat='55.180687586866554' lon='61.311870575319425'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 150' />
+    <tag k='phone' v='+7 351 7958542' />
+    <tag k='ref' v='569' />
+  </node>
+  <node id='-1667' action='modify' visible='true' lat='55.18689107128666' lon='61.27859861346343'>
+    <tag k='addr:housenumber' v='3Б' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='Филиал лицея № 35' />
+    <tag k='phone' v='+7 351 7940907;+7 351 7940905' />
+    <tag k='ref' v='659' />
+  </node>
+  <node id='-1666' action='modify' visible='true' lat='55.13158142977296' lon='61.4386543994816'>
+    <tag k='addr:housenumber' v='94' />
+    <tag k='addr:street' v='улица Дзержинского' />
+    <tag k='note:location' v='школа № 60' />
+    <tag k='phone' v='+7 351 2565201' />
+    <tag k='ref' v='2025' />
+  </node>
+  <node id='-1665' action='modify' visible='true' lat='55.17399616152665' lon='61.42908262089238'>
+    <tag k='addr:housenumber' v='79' />
+    <tag k='addr:street' v='улица Кудрявцева' />
+    <tag k='note:location' v='школа № 62' />
+    <tag k='phone' v='+7 351 7759362' />
+    <tag k='ref' v='729' />
+  </node>
+  <node id='-1664' action='modify' visible='true' lat='55.15305002087286' lon='61.415310433353575'>
+    <tag k='addr:housenumber' v='155' />
+    <tag k='addr:street' v='улица Свободы' />
+    <tag k='note:location' v='Дом студентов Уральского социально-экономического института Академии труда и социальных отношений' />
+    <tag k='phone' v='+7 351 237-05-33' />
+    <tag k='ref' v='2061' />
+  </node>
+  <node id='-1663' action='modify' visible='true' lat='55.26526063979615' lon='61.389398638130984'>
+    <tag k='addr:housenumber' v='26' />
+    <tag k='addr:street' v='улица 60-летия Октября' />
+    <tag k='note:location' v='школа № 141' />
+    <tag k='phone' v='+7 351 7362668' />
+    <tag k='ref' v='675' />
+  </node>
+  <node id='-1662' action='modify' visible='true' lat='55.18747632764057' lon='61.40374228463699'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='162В' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='Челябинский государственный университет, корпус № 3' />
+    <tag k='phone' v='+7 351 7997023' />
+    <tag k='ref' v='531' />
+  </node>
+  <node id='-1661' action='modify' visible='true' lat='55.18286088864827' lon='61.32861818029367'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='62В' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='школа № 78' />
+    <tag k='phone' v='+7 351 7418714' />
+    <tag k='ref' v='565' />
+  </node>
+  <node id='-1660' action='modify' visible='true' lat='55.23885567826537' lon='61.39396616774198'>
+    <tag k='addr:housenumber' v='18А' />
+    <tag k='addr:street' v='улица 32-ой Годовщины Октября' />
+    <tag k='note:location' v='школа № 71' />
+    <tag k='phone' v='+7 351 7215409' />
+    <tag k='ref' v='722' />
+  </node>
+  <node id='-1659' action='modify' visible='true' lat='55.195876090670936' lon='61.35999449892233'>
+    <tag k='addr:housenumber' v='8А' />
+    <tag k='addr:street' v='улица Чайковского' />
+    <tag k='note:location' v='Школа № 118' />
+    <tag k='phone' v='+7 351 7411621' />
+    <tag k='ref' v='606' />
+  </node>
+  <node id='-1658' action='modify' visible='true' lat='55.140018249883106' lon='61.446468960488446'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Пограничная' />
+    <tag k='note:location' v='школа № 75' />
+    <tag k='phone' v='+7 351 2563775' />
+    <tag k='ref' v='2018' />
+  </node>
+  <node id='-1657' action='modify' visible='true' lat='55.175455948215394' lon='61.4847901947823'>
+    <tag k='addr:housenumber' v='26А' />
+    <tag k='addr:street' v='улица Хохрякова' />
+    <tag k='note:location' v='школа № 84' />
+    <tag k='phone' v='+7 351 7723929' />
+    <tag k='ref' v='779' />
+  </node>
+  <node id='-1656' action='modify' visible='true' lat='55.1203582302678' lon='61.39937690936912'>
+    <tag k='addr:housenumber' v='10А' />
+    <tag k='addr:street' v='улица Карабанова' />
+    <tag k='note:location' v='(поселок Локомотивный) Филиал МОУ средняя общеобразовательная школа № 53' />
+    <tag k='phone' v='+7 351 268-54-54' />
+    <tag k='ref' v='2091' />
+  </node>
+  <node id='-1655' action='modify' visible='true' lat='55.18180693038471' lon='61.41568005239191'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='49А' />
+    <tag k='addr:street' v='улица Российская' />
+    <tag k='note:location' v='школа № 50' />
+    <tag k='phone' v='+7 351 2668545' />
+    <tag k='ref' v='528' />
+  </node>
+  <node id='-1654' action='modify' visible='true' lat='55.28672705554262' lon='61.38457629712777'>
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='улица Лазурная' />
+    <tag k='note:location' v='Челябинская общеобразовательная школа закрытого типа' />
+    <tag k='phone' v='+7 351 7360787' />
+    <tag k='ref' v='667' />
+  </node>
+  <node id='-1653' action='modify' visible='true' lat='55.18571687324188' lon='61.38582654008358'>
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='Школа № 137' />
+    <tag k='phone' v='+7 351 7917475' />
+    <tag k='ref' v='596' />
+  </node>
+  <node id='-1652' action='modify' visible='true' lat='55.12008529633053' lon='61.46774896641667'>
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='улица Батумская' />
+    <tag k='note:location' v='школа № 47' />
+    <tag k='phone' v='+7 351 2533509' />
+    <tag k='ref' v='2038' />
+  </node>
+  <node id='-1651' action='modify' visible='true' lat='55.18233755577147' lon='61.45018636506022'>
+    <tag k='addr:housenumber' v='48' />
+    <tag k='addr:street' v='улица Бажова' />
+    <tag k='note:location' v='Естественно-технологический факультет педагогического университета (Место нахождения участковой избирательной комиссии: Естественно-технологический факультет педагогического университета, улица Бажова, 46А, тел. 7720629)' />
+    <tag k='phone' v='+7 351 7720544' />
+    <tag k='ref' v='761' />
+  </node>
+  <node id='-1650' action='modify' visible='true' lat='55.1399854069952' lon='61.40609436101845'>
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='улица Ширшова' />
+    <tag k='note:location' v='МАОУ средняя общеобразовательная школа № 15' />
+    <tag k='phone' v='+7 351 237-81-51' />
+    <tag k='ref' v='2071' />
+  </node>
+  <node id='-1649' action='modify' visible='true' lat='55.18160305289217' lon='61.40379671843976'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='школа № 6' />
+    <tag k='phone' v='+7 351 7918531' />
+    <tag k='ref' v='533' />
+  </node>
+  <node id='-1648' action='modify' visible='true' lat='55.247709393194434' lon='61.39226005884432'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица 50-летия ВЛКСМ' />
+    <tag k='note:location' v='юридический техникум' />
+    <tag k='phone' v='+7 351 7216634' />
+    <tag k='ref' v='715' />
+  </node>
+  <node id='-1647' action='modify' visible='true' lat='55.18598324133516' lon='61.3858249993135'>
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='Школа № 137' />
+    <tag k='phone' v='+7 351 7917475' />
+    <tag k='ref' v='597' />
+  </node>
+  <node id='-1646' action='modify' visible='true' lat='55.186680699588095' lon='61.374476978638974'>
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='улица Речная' />
+    <tag k='note:location' v='Техникум текстильной и легкой промышленности' />
+    <tag k='phone' v='+7 351 7977641' />
+    <tag k='ref' v='599' />
+  </node>
+  <node id='-1645' action='modify' visible='true' lat='55.14350128839356' lon='61.43150234917873'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Пограничная' />
+    <tag k='note:location' v='школа № 99' />
+    <tag k='phone' v='+7 351 2515794' />
+    <tag k='ref' v='1993' />
+  </node>
+  <node id='-1644' action='modify' visible='true' lat='55.140178476373386' lon='61.39440473113508'>
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица Доватора' />
+    <tag k='note:location' v='МУ дополнительного образования Дворец детского творчества' />
+    <tag k='phone' v='+7 351 237-80-11' />
+    <tag k='ref' v='2083' />
+  </node>
+  <node id='-1643' action='modify' visible='true' lat='55.25607522573635' lon='61.382406370783244'>
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='Театральный переулок' />
+    <tag k='note:location' v='школа № 61' />
+    <tag k='phone' v='+7 351 7212384' />
+    <tag k='ref' v='691' />
+  </node>
+  <node id='-1642' action='modify' visible='true' lat='55.17640582625938' lon='61.342255450347906'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='103Б' />
+    <tag k='addr:street' v='улица Братьев Кашириных' />
+    <tag k='note:location' v='школа № 104' />
+    <tag k='phone' v='+7 351 7930311' />
+    <tag k='ref' v='556' />
+  </node>
+  <node id='-1641' action='modify' visible='true' lat='55.18734340960507' lon='61.39055736703989'>
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='переулок Островского' />
+    <tag k='note:location' v='Клуб ЧЭРЗ' />
+    <tag k='phone' v='+7 351 7914237' />
+    <tag k='ref' v='593' />
+  </node>
+  <node id='-1640' action='modify' visible='true' lat='55.11353829508786' lon='61.4527268466079'>
+    <tag k='addr:housenumber' v='83' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='ДК ОАО «ЧТПЗ»' />
+    <tag k='phone' v='+7 351 2544481' />
+    <tag k='ref' v='2029' />
+  </node>
+  <node id='-1639' action='modify' visible='true' lat='55.180180708419286' lon='61.46851841769885'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Октябрьская' />
+    <tag k='note:location' v='школа № 155' />
+    <tag k='phone' v='+7 351 7730676' />
+    <tag k='ref' v='765' />
+  </node>
+  <node id='-1638' action='modify' visible='true' lat='55.15731600713213' lon='61.404301314034974'>
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='площадь Революции' />
+    <tag k='note:location' v='Филиал ОАО «МРСК» - «Челябэнерго»' />
+    <tag k='phone' v='+7 351 267-88-06' />
+    <tag k='ref' v='2058' />
+  </node>
+  <node id='-1637' action='modify' visible='true' lat='55.24348605025881' lon='61.3805571314349'>
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='улица Черкасская' />
+    <tag k='note:location' v='ГУДОД «Дом юношеского технического творчества Челябинской области»' />
+    <tag k='phone' v='+7 351 7214282' />
+    <tag k='ref' v='711' />
+  </node>
+  <node id='-1636' action='modify' visible='true' lat='55.184493781348564' lon='61.43707862090984'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='113А' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='школа № 21' />
+    <tag k='phone' v='+7 351 7720928' />
+    <tag k='ref' v='518' />
+  </node>
+  <node id='-1635' action='modify' visible='true' lat='55.20344622146143' lon='61.31498349262877'>
+    <tag k='addr:housenumber' v='10В' />
+    <tag k='addr:street' v='улица Солнечная' />
+    <tag k='note:location' v='Школа № 22' />
+    <tag k='phone' v='+7 351 7933972' />
+    <tag k='ref' v='633' />
+  </node>
+  <node id='-1634' action='modify' visible='true' lat='55.197127754406324' lon='61.30210415660212'>
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 3' />
+    <tag k='phone' v='+7 351 7427629;+7 351 7427643' />
+    <tag k='ref' v='640' />
+  </node>
+  <node id='-1633' action='modify' visible='true' lat='55.11110022467631' lon='61.46645428010824'>
+    <tag k='addr:housenumber' v='77А' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 46' />
+    <tag k='phone' v='+7 351 2532336' />
+    <tag k='ref' v='2031' />
+  </node>
+  <node id='-1632' action='modify' visible='true' lat='55.14355001601878' lon='61.384327616516984'>
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='улица Блюхера' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 110' />
+    <tag k='phone' v='+7 351 232-07-84' />
+    <tag k='ref' v='2084' />
+  </node>
+  <node id='-1631' action='modify' visible='true' lat='55.25615099488519' lon='61.390234013923'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Жукова' />
+    <tag k='note:location' v='школа № 91' />
+    <tag k='phone' v='+7 351 7211457' />
+    <tag k='ref' v='690' />
+  </node>
+  <node id='-1630' action='modify' visible='true' lat='55.17633114943927' lon='61.33781633662344'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='61А' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='школа № 87' />
+    <tag k='phone' v='+7 351 7419608' />
+    <tag k='ref' v='558' />
+  </node>
+  <node id='-1629' action='modify' visible='true' lat='55.17817854796592' lon='61.28632368405381'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 154' />
+    <tag k='phone' v='+7 351 7955644' />
+    <tag k='ref' v='582' />
+  </node>
+  <node id='-1628' action='modify' visible='true' lat='55.129714901713434' lon='61.423386631087695'>
+    <tag k='addr:housenumber' v='140Б' />
+    <tag k='addr:street' v='улица Барбюса' />
+    <tag k='note:location' v='гимназия № 76' />
+    <tag k='phone' v='+7 351 2571843' />
+    <tag k='ref' v='2004' />
+  </node>
+  <node id='-1627' action='modify' visible='true' lat='55.164723706625395' lon='61.440896023785896'>
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='улица Горького' />
+    <tag k='note:location' v='школа № 18' />
+    <tag k='phone' v='+7 351 7754968' />
+    <tag k='ref' v='726' />
+  </node>
+  <node id='-1626' action='modify' visible='true' lat='55.126954237318195' lon='61.38674752223061'>
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='улица Марата' />
+    <tag k='note:location' v='(поселок им. Урицкого) ГОУ СПО (ссуз) «Челябинский техникум торговли и художественных промыслов»' />
+    <tag k='phone' v='+7 351 232-96-02' />
+    <tag k='ref' v='2087' />
+  </node>
+  <node id='-1625' action='modify' visible='true' lat='55.23577087226757' lon='61.39967831876057'>
+    <tag k='addr:housenumber' v='63' />
+    <tag k='addr:street' v='улица 26-ти Бакинских комиссаров' />
+    <tag k='note:location' v='школа № 57' />
+    <tag k='phone' v='+7 351 7215423' />
+    <tag k='ref' v='724' />
+  </node>
+  <node id='-1624' action='modify' visible='true' lat='55.176442578153804' lon='61.3482808011924'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='30А' />
+    <tag k='addr:street' v='улица Университетская набережная' />
+    <tag k='note:location' v='школа № 25' />
+    <tag k='phone' v='+7 351 7422721' />
+    <tag k='ref' v='554' />
+  </node>
+  <node id='-1623' action='modify' visible='true' lat='55.21723669724856' lon='61.29603969078595'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='ул. Генерала Мартынова' />
+    <tag k='phone' v='+7 351 2674800' />
+    <tag k='ref' v='2253' />
+  </node>
+  <node id='-1622' action='modify' visible='true' lat='55.10928653160532' lon='61.47435322168644'>
+    <tag k='addr:housenumber' v='63' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='ДК ЗАО «ЧЗМК»' />
+    <tag k='phone' v='+7 351 7347258' />
+    <tag k='ref' v='2044' />
+  </node>
+  <node id='-1621' action='modify' visible='true' lat='55.17507959971092' lon='61.4845180785671'>
+    <tag k='addr:housenumber' v='26А' />
+    <tag k='addr:street' v='улица Хохрякова' />
+    <tag k='note:location' v='школа № 84' />
+    <tag k='phone' v='+7 351 7723929' />
+    <tag k='ref' v='777' />
+  </node>
+  <node id='-1620' action='modify' visible='true' lat='55.11365847279407' lon='61.38754214097864'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='Троицкий тракт' />
+    <tag k='note:location' v='(поселок Локомотивный) Красный уголок ОАО «Металл-база»' />
+    <tag k='phone' v='+7 351 262-39-86' />
+    <tag k='ref' v='2093' />
+  </node>
+  <node id='-1619' action='modify' visible='true' lat='55.040238165200016' lon='61.37451783537894'>
+    <tag k='FIXME' v='у школы 145 адрес Челябинская 17. кирова 4 адреса нет' />
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='(поселок Новосинеглазово) МОУ средняя общеобразовательная школа № 145' />
+    <tag k='phone' v='+7 351 280-04-02' />
+    <tag k='ref' v='2112' />
+  </node>
+  <node id='-1618' action='modify' visible='true' lat='55.178190480462135' lon='61.398699531813044'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='44' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='гимназия № 23' />
+    <tag k='phone' v='+7 351 7916874' />
+    <tag k='ref' v='539' />
+  </node>
+  <node id='-1617' action='modify' visible='true' lat='55.186938717357606' lon='61.293391976825546'>
+    <tag k='addr:housenumber' v='14А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 41' />
+    <tag k='phone' v='+7 351 7967035' />
+    <tag k='ref' v='647' />
+  </node>
+  <node id='-1616' action='modify' visible='true' lat='55.25259751918179' lon='61.396602597942284'>
+    <tag k='addr:housenumber' v='72А' />
+    <tag k='addr:street' v='улица Дегтярева' />
+    <tag k='note:location' v='детская школа искусств № 5' />
+    <tag k='phone' v='+7 351 7356647 ' />
+    <tag k='ref' v='686' />
+  </node>
+  <node id='-1615' action='modify' visible='true' lat='55.1284090104255' lon='61.44052591142044'>
+    <tag k='addr:housenumber' v='83А' />
+    <tag k='addr:street' v='улица Дзержинского' />
+    <tag k='note:location' v='гимназия № 100' />
+    <tag k='phone' v='+7 351 2562361' />
+    <tag k='ref' v='2027' />
+  </node>
+  <node id='-1614' action='modify' visible='true' lat='55.179522139255575' lon='61.432319614854364'>
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Грибоедова' />
+    <tag k='note:location' v='школа № 102' />
+    <tag k='phone' v='+7 351 7721809' />
+    <tag k='ref' v='733' />
+  </node>
+  <node id='-1613' action='modify' visible='true' lat='55.15140450610822' lon='61.39719874811026'>
+    <tag k='addr:housenumber' v='88' />
+    <tag k='addr:street' v='улица Елькина' />
+    <tag k='note:location' v='МАОУ гимназия № 80' />
+    <tag k='phone' v='+7 351 237-83-55' />
+    <tag k='ref' v='2075' />
+  </node>
+  <node id='-1612' action='modify' visible='true' lat='55.18172181679392' lon='61.42174991195816'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='улица Кудрявцева' />
+    <tag k='note:location' v='школа № 135' />
+    <tag k='phone' v='+7 351 7726832' />
+    <tag k='ref' v='522' />
+  </node>
+  <node id='-1611' action='modify' visible='true' lat='55.191265143444056' lon='61.353859158095226'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Красного Урала' />
+    <tag k='note:location' v='Школа № 45' />
+    <tag k='phone' v='+7 351 7411885' />
+    <tag k='ref' v='608' />
+  </node>
+  <node id='-1610' action='modify' visible='true' lat='55.24821395682141' lon='61.37706609263447'>
+    <tag k='addr:housenumber' v='70Б' />
+    <tag k='addr:street' v='шоссе Металлургов' />
+    <tag k='note:location' v='ДК «Строитель»' />
+    <tag k='phone' v='+7 351 7213709' />
+    <tag k='ref' v='700' />
+  </node>
+  <node id='-1609' action='modify' visible='true' lat='55.19719492234817' lon='61.363773083992335'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Чайковского' />
+    <tag k='note:location' v='Челябинский дорожно-строительный техникум' />
+    <tag k='phone' v='+7 351 7373087' />
+    <tag k='ref' v='602' />
+  </node>
+  <node id='-1608' action='modify' visible='true' lat='55.135690176993606' lon='61.43635263662448'>
+    <tag k='addr:housenumber' v='19' />
+    <tag k='addr:street' v='улица Агалакова' />
+    <tag k='note:location' v='школа № 113' />
+    <tag k='phone' v='+7 351 2561831' />
+    <tag k='ref' v='1998' />
+  </node>
+  <node id='-1607' action='modify' visible='true' lat='55.18023718600519' lon='61.430783874676344'>
+    <tag k='addr:housenumber' v='55А' />
+    <tag k='addr:street' v='улица Артиллерийская' />
+    <tag k='note:location' v='школа № 136' />
+    <tag k='phone' v='+7 351 7721801' />
+    <tag k='ref' v='734' />
+  </node>
+  <node id='-1606' action='modify' visible='true' lat='55.14368515057276' lon='61.384564217889896'>
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='улица Блюхера' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 110' />
+    <tag k='phone' v='+7 351 232-07-84' />
+    <tag k='ref' v='2082' />
+  </node>
+  <node id='-1605' action='modify' visible='true' lat='55.18068552883214' lon='61.31112610204422'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 150' />
+    <tag k='phone' v='+7 351 7958542' />
+    <tag k='ref' v='570' />
+  </node>
+  <node id='-1604' action='modify' visible='true' lat='55.24016020559105' lon='61.373117741151844'>
+    <tag k='addr:housenumber' v='11Б' />
+    <tag k='addr:street' v='улица Комаровского' />
+    <tag k='note:location' v='школа № 42' />
+    <tag k='phone' v='+7 351 7218477' />
+    <tag k='ref' v='707' />
+  </node>
+  <node id='-1603' action='modify' visible='true' lat='55.19547049501756' lon='61.35995447656329'>
+    <tag k='addr:housenumber' v='8А' />
+    <tag k='addr:street' v='улица Чайковского' />
+    <tag k='note:location' v='Школа № 118' />
+    <tag k='phone' v='+7 351 7411621' />
+    <tag k='ref' v='604' />
+  </node>
+  <node id='-1602' action='modify' visible='true' lat='55.138147159843996' lon='61.42743883346543'>
+    <tag k='addr:housenumber' v='70А' />
+    <tag k='addr:street' v='улица Вагнера' />
+    <tag k='note:location' v='школа № 68' />
+    <tag k='phone' v='+7 351 2567042' />
+    <tag k='ref' v='1995' />
+  </node>
+  <node id='-1601' action='modify' visible='true' lat='55.12930599478391' lon='61.42900279263698'>
+    <tag k='addr:housenumber' v='65А' />
+    <tag k='addr:street' v='улица Барбюса' />
+    <tag k='note:location' v='Центр психолого-педагогической реабилитации и коррекции' />
+    <tag k='phone' v='+7 351 2573190' />
+    <tag k='ref' v='2008' />
+  </node>
+  <node id='-1600' action='modify' visible='true' lat='55.190971825547635' lon='61.48331859209054'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Мамина' />
+    <tag k='note:location' v='школа № 19' />
+    <tag k='phone' v='+7 351 7737948' />
+    <tag k='ref' v='775' />
+  </node>
+  <node id='-1599' action='modify' visible='true' lat='55.1168610988376' lon='61.38108718518282'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Короленко' />
+    <tag k='note:location' v='(поселок Мебельный) МОУ средняя общеобразовательная школа № 43' />
+    <tag k='phone' v='+7 351 262-35-98' />
+    <tag k='ref' v='2096' />
+  </node>
+  <node id='-1598' action='modify' visible='true' lat='55.176157779311154' lon='61.4044730416016'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13Б' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='филиал лицея № 97' />
+    <tag k='phone' v='+7 351 7914213' />
+    <tag k='ref' v='536' />
+  </node>
+  <node id='-1597' action='modify' visible='true' lat='55.19795903855256' lon='61.34161529217499'>
+    <tag k='addr:housenumber' v='53' />
+    <tag k='addr:street' v='улица Куйбышева' />
+    <tag k='note:location' v='Гимназия № 93' />
+    <tag k='phone' v='+7 351 7419291' />
+    <tag k='ref' v='618' />
+  </node>
+  <node id='-1596' action='modify' visible='true' lat='55.19179087291319' lon='61.35315092012731'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Красного Урала' />
+    <tag k='note:location' v='Школа № 45' />
+    <tag k='phone' v='+7 351 7411885' />
+    <tag k='ref' v='609' />
+  </node>
+  <node id='-1595' action='modify' visible='true' lat='55.12988485549962' lon='61.420561042977'>
+    <tag k='addr:housenumber' v='90' />
+    <tag k='addr:street' v='улица Вагнера' />
+    <tag k='note:location' v='школа № 128' />
+    <tag k='phone' v='+7 351 2572055' />
+    <tag k='ref' v='2002' />
+  </node>
+  <node id='-1594' action='modify' visible='true' lat='55.180357880724266' lon='61.46866120446536'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Октябрьская' />
+    <tag k='note:location' v='школа № 155' />
+    <tag k='phone' v='+7 351 7734912' />
+    <tag k='ref' v='766' />
+  </node>
+  <node id='-1593' action='modify' visible='true' lat='55.144272584653024' lon='61.388054413885904'>
+    <tag k='addr:housenumber' v='38' />
+    <tag k='addr:street' v='улица Доватора' />
+    <tag k='note:location' v='ФГОУ СПО Челябинский колледж промышленной автоматики' />
+    <tag k='phone' v='+7 351 232-06-16' />
+    <tag k='ref' v='2079' />
+  </node>
+  <node id='-1592' action='modify' visible='true' lat='55.25861126520542' lon='61.38268071653919'>
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='улица Богдана Хмельницкого' />
+    <tag k='note:location' v='филиал школы № 70' />
+    <tag k='phone' v='+7 351 7210887' />
+    <tag k='ref' v='682' />
+  </node>
+  <node id='-1591' action='modify' visible='true' lat='55.17523251874181' lon='61.40389265754716'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='99' />
+    <tag k='addr:street' v='улица Береговая' />
+    <tag k='note:location' v='школа № 7' />
+    <tag k='phone' v='+7 351 2662819' />
+    <tag k='ref' v='538' />
+  </node>
+  <node id='-1590' action='modify' visible='true' lat='55.17337094973184' lon='61.29708053918624'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='25А' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 129' />
+    <tag k='phone' v='+7 351 7954172' />
+    <tag k='ref' v='585' />
+  </node>
+  <node id='-1589' action='modify' visible='true' lat='55.11704270405121' lon='61.43300066440586'>
+    <tag k='addr:housenumber' v='126' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 65' />
+    <tag k='phone' v='+7 351 2564924' />
+    <tag k='ref' v='2011' />
+  </node>
+  <node id='-1588' action='modify' visible='true' lat='55.16681273017905' lon='61.449285530674466'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Салютная' />
+    <tag k='note:location' v='школа № 38 (Место нахождения участковой избирательной комиссии: Центр социального обслуживания, улица Первой Пятилетки, 21, +7 351 7755226)' />
+    <tag k='phone' v='+7 351 7728933' />
+    <tag k='ref' v='739' />
+  </node>
+  <node id='-1587' action='modify' visible='true' lat='55.135536627550714' lon='61.400785608107746'>
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='улица Федорова' />
+    <tag k='note:location' v='(поселок им. Урицкого) МОУ средняя общеобразовательная школа № 17' />
+    <tag k='phone' v='+7 351 237-54-89' />
+    <tag k='ref' v='2086' />
+  </node>
+  <node id='-1586' action='modify' visible='true' lat='55.15599539354887' lon='61.413065258438074'>
+    <tag k='addr:housenumber' v='82' />
+    <tag k='addr:street' v='улица Свободы' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 121' />
+    <tag k='phone' v='+7 351 263-29-75' />
+    <tag k='ref' v='2060' />
+  </node>
+  <node id='-1585' action='modify' visible='true' lat='55.178140209738636' lon='61.302841697875415'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 151' />
+    <tag k='phone' v='+7 351 7958547' />
+    <tag k='ref' v='572' />
+  </node>
+  <node id='-1584' action='modify' visible='true' lat='55.188441675355364' lon='61.29785652948077'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 4' />
+    <tag k='phone' v='+7 351 7967046' />
+    <tag k='ref' v='645' />
+  </node>
+  <node id='-1583' action='modify' visible='true' lat='55.14339525629741' lon='61.43784477943198'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Коммунаров' />
+    <tag k='note:location' v='лицей № 37' />
+    <tag k='phone' v='+7 351 2562646' />
+    <tag k='ref' v='1987' />
+  </node>
+  <node id='-1582' action='modify' visible='true' lat='55.17175098444449' lon='61.449888989033845'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Салютная' />
+    <tag k='note:location' v='школа № 38' />
+    <tag k='phone' v='+7 351 7728933' />
+    <tag k='ref' v='741' />
+  </node>
+  <node id='-1581' action='modify' visible='true' lat='55.14776442753018' lon='61.41465233906042'>
+    <tag k='addr:housenumber' v='100А' />
+    <tag k='addr:street' v='улица Свободы' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 58' />
+    <tag k='phone' v='+7 351 237-04-21' />
+    <tag k='ref' v='2067' />
+  </node>
+  <node id='-1580' action='modify' visible='true' lat='55.18188660031469' lon='61.40377245606794'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='школа № 6' />
+    <tag k='phone' v='+7 351 7913603' />
+    <tag k='ref' v='534' />
+  </node>
+  <node id='-1579' action='modify' visible='true' lat='55.24757172492113' lon='61.39141653703525'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица 50-летия ВЛКСМ' />
+    <tag k='note:location' v='юридический техникум' />
+    <tag k='phone' v='+7 351 7216634' />
+    <tag k='ref' v='714' />
+  </node>
+  <node id='-1578' action='modify' visible='true' lat='55.237154669386754' lon='61.30601079579889'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:suburb' v='11-й городок' />
+    <tag k='note:location' v='школа № 28' />
+    <tag k='phone' v='+7 351 7375255' />
+    <tag k='ref' v='2257' />
+  </node>
+  <node id='-1577' action='modify' visible='true' lat='55.10918949159748' lon='61.47476134854773'>
+    <tag k='addr:housenumber' v='63' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='ДК ЗАО «ЧЗМК»' />
+    <tag k='phone' v='+7 351 7347258' />
+    <tag k='ref' v='2045' />
+  </node>
+  <node id='-1576' action='modify' visible='true' lat='55.18906275792462' lon='61.47024831186307'>
+    <tag k='addr:housenumber' v='41' />
+    <tag k='addr:street' v='улица Комарова' />
+    <tag k='note:location' v='Профессиональное училище № 112' />
+    <tag k='phone' v='+7 351 7721844' />
+    <tag k='ref' v='770' />
+  </node>
+  <node id='-1575' action='modify' visible='true' lat='55.1159871057877' lon='61.35331955585909'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Кузнецова' />
+    <tag k='note:location' v='(поселок АМЗ) МОУ средняя общеобразовательная школа № 105' />
+    <tag k='phone' v='+7 351 269-76-18' />
+    <tag k='ref' v='2099' />
+  </node>
+  <node id='-1574' action='modify' visible='true' lat='55.17726296113612' lon='61.39588252344817'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='58' />
+    <tag k='addr:street' v='улица Работниц' />
+    <tag k='note:location' v='филиал Всесоюзного заочного финансово-экономического института' />
+    <tag k='phone' v='+7 351 7914803' />
+    <tag k='ref' v='540' />
+  </node>
+  <node id='-1573' action='modify' visible='true' lat='55.25633913462658' lon='61.39983546515013'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Богдана Хмельницкого' />
+    <tag k='note:location' v='школа № 92' />
+    <tag k='phone' v='+7 351 7354887' />
+    <tag k='ref' v='685' />
+  </node>
+  <node id='-1572' action='modify' visible='true' lat='55.19021489741387' lon='61.28489372562402'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Чичерина' />
+    <tag k='note:location' v='Школа № 152' />
+    <tag k='phone' v='+7 351 7969528' />
+    <tag k='ref' v='658' />
+  </node>
+  <node id='-1571' action='modify' visible='true' lat='55.11332940511974' lon='61.46912592667639'>
+    <tag k='addr:housenumber' v='31' />
+    <tag k='addr:street' v='улица Машиностроителей' />
+    <tag k='note:location' v='Челябинский государственный промышленно Гуманитарный техникум имени А.В. Яковлева' />
+    <tag k='phone' v='+7 351 2528941' />
+    <tag k='ref' v='2032' />
+  </node>
+  <node id='-1570' action='modify' visible='true' lat='55.11570123967616' lon='61.458578156685384'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Ереванская' />
+    <tag k='note:location' v='лицей № 77' />
+    <tag k='phone' v='+7 351 2533564' />
+    <tag k='ref' v='2034' />
+  </node>
+  <node id='-1569' action='modify' visible='true' lat='55.19074138787212' lon='61.48342229877347'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Мамина' />
+    <tag k='note:location' v='школа № 19' />
+    <tag k='phone' v='+7 351 7737948' />
+    <tag k='ref' v='774' />
+  </node>
+  <node id='-1568' action='modify' visible='true' lat='55.1511915907332' lon='61.39720634698177'>
+    <tag k='addr:housenumber' v='88' />
+    <tag k='addr:street' v='улица Елькина' />
+    <tag k='note:location' v='МАОУ гимназия № 80' />
+    <tag k='phone' v='+7 351 237-83-55' />
+    <tag k='ref' v='2076' />
+  </node>
+  <node id='-1567' action='modify' visible='true' lat='55.23510602900024' lon='61.40876284468594'>
+    <tag k='addr:housenumber' v='107А' />
+    <tag k='addr:street' v='улица 26-ти Бакинских комиссаров' />
+    <tag k='note:location' v='школа № 140' />
+    <tag k='phone' v='+7 351 7215582' />
+    <tag k='ref' v='664' />
+  </node>
+  <node id='-1566' action='modify' visible='true' lat='55.17592810144391' lon='61.342252160139104'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='103Б' />
+    <tag k='addr:street' v='улица Братьев Кашириных' />
+    <tag k='note:location' v='школа № 104' />
+    <tag k='phone' v='+7 351 7930311' />
+    <tag k='ref' v='555' />
+  </node>
+  <node id='-1565' action='modify' visible='true' lat='55.18848901177491' lon='61.296844939319044'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 4 ' />
+    <tag k='phone' v='+7 351 7967046' />
+    <tag k='ref' v='643' />
+  </node>
+  <node id='-1564' action='modify' visible='true' lat='55.12034635152112' lon='61.434001346166525'>
+    <tag k='addr:housenumber' v='56' />
+    <tag k='addr:street' v='улица Гагарина' />
+    <tag k='note:location' v='Челябинский государственный промышленно-гуманитарный техникум имени А.В. Яковлева (2-й корпус)' />
+    <tag k='phone' v='+7 351 2564961' />
+    <tag k='ref' v='2013' />
+  </node>
+  <node id='-1563' action='modify' visible='true' lat='55.106749218410364' lon='61.485609311063676'>
+    <tag k='addr:housenumber' v='27' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 32' />
+    <tag k='phone' v='+7 351 2538594' />
+    <tag k='ref' v='2046' />
+  </node>
+  <node id='-1562' action='modify' visible='true' lat='55.1644832452642' lon='61.54812741236875'>
+    <tag k='FIXME' v='неизвестно где искать' />
+    <tag k='addr:housenumber' v='' />
+    <tag k='addr:street' v='пос. Чурилово' />
+    <tag k='note:location' v='Передвижная механизированная станция № 42' />
+    <tag k='phone' v='+7 351 2684160' />
+    <tag k='ref' v='783' />
+  </node>
+  <node id='-1561' action='modify' visible='true' lat='55.04244594923407' lon='61.439049904608034'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Дорожная' />
+    <tag k='note:location' v='(поселок Исаково) Филиал МОУ средняя общеобразовательная школа № 145' />
+    <tag k='phone' v='+7 351 236-15-86' />
+    <tag k='ref' v='2114' />
+  </node>
+  <node id='-1560' action='modify' visible='true' lat='55.25087365537566' lon='61.382572978661536'>
+    <tag k='addr:housenumber' v='26' />
+    <tag k='addr:street' v='улица Краснооктябрьская' />
+    <tag k='note:location' v='общежитие металлургического колледжа' />
+    <tag k='phone' v='+7 351 7217364' />
+    <tag k='ref' v='698' />
+  </node>
+  <node id='-1559' action='modify' visible='true' lat='55.18135736649713' lon='61.42199151830683'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='улица Кудрявцева' />
+    <tag k='note:location' v='школа № 135' />
+    <tag k='phone' v='+7 351 7726832' />
+    <tag k='ref' v='521' />
+  </node>
+  <node id='-1558' action='modify' visible='true' lat='55.18106426913566' lon='61.31111578345291'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 150' />
+    <tag k='phone' v='+7 351 7958542' />
+    <tag k='ref' v='571' />
+  </node>
+  <node id='-1557' action='modify' visible='true' lat='55.20388065179323' lon='61.315658367202914'>
+    <tag k='addr:housenumber' v='10В' />
+    <tag k='addr:street' v='улица Солнечная' />
+    <tag k='note:location' v='Школа № 22' />
+    <tag k='phone' v='+7 351 7933972' />
+    <tag k='ref' v='635' />
+  </node>
+  <node id='-1556' action='modify' visible='true' lat='55.14617898584529' lon='61.430787797394345'>
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица Тухачевского' />
+    <tag k='note:location' v='школа № 85' />
+    <tag k='phone' v='+7 351 2512606' />
+    <tag k='ref' v='1991' />
+  </node>
+  <node id='-1555' action='modify' visible='true' lat='55.17527434854638' lon='61.46614753899979'>
+    <tag k='addr:housenumber' v='60' />
+    <tag k='addr:street' v='улица Кулибина' />
+    <tag k='note:location' v='Центр детско-юношеский' />
+    <tag k='phone' v='+7 351 7724544' />
+    <tag k='ref' v='755' />
+  </node>
+  <node id='-1554' action='modify' visible='true' lat='55.14004833241498' lon='61.39459062458052'>
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица Доватора' />
+    <tag k='note:location' v='(поселок им. Урицкого МУ дополнительного образования Дворец детского творчества' />
+    <tag k='phone' v='+7 351 237-80-11' />
+    <tag k='ref' v='2085' />
+  </node>
+  <node id='-1553' action='modify' visible='true' lat='55.26542895454272' lon='61.38989429013115'>
+    <tag k='addr:housenumber' v='26' />
+    <tag k='addr:street' v='улица 60-летия Октября' />
+    <tag k='note:location' v='школа № 141' />
+    <tag k='phone' v='+7 351 7362668' />
+    <tag k='ref' v='676' />
+  </node>
+  <node id='-1552' action='modify' visible='true' lat='55.18584152383031' lon='61.42180626785781'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='144' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='Музей истории трудовой славы ОАО «ЧЭМК»' />
+    <tag k='phone' v='+7 351 7729220' />
+    <tag k='ref' v='523' />
+  </node>
+  <node id='-1551' action='modify' visible='true' lat='55.18308803926144' lon='61.334668737141435'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Педагогический колледж № 1' />
+    <tag k='phone' v='+7 351 7420209' />
+    <tag k='ref' v='560' />
+  </node>
+  <node id='-1550' action='modify' visible='true' lat='55.1369890427565' lon='61.43353046347595'>
+    <tag k='addr:housenumber' v='28' />
+    <tag k='addr:street' v='улица Коммунаров' />
+    <tag k='note:location' v='детско-юношеский центр' />
+    <tag k='phone' v='+7 351 2562333' />
+    <tag k='ref' v='1996' />
+  </node>
+  <node id='-1549' action='modify' visible='true' lat='55.17161299505721' lon='61.44921539022139'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Салютная' />
+    <tag k='note:location' v='школа № 38' />
+    <tag k='phone' v='+7 351 7728933' />
+    <tag k='ref' v='740' />
+  </node>
+  <node id='-1548' action='modify' visible='true' lat='55.14287444817784' lon='61.41150760476022'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Овчинникова' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 53' />
+    <tag k='phone' v='+7 351 268-75-30' />
+    <tag k='ref' v='2066' />
+  </node>
+  <node id='-1547' action='modify' visible='true' lat='55.25244870460048' lon='61.38592785273971'>
+    <tag k='addr:housenumber' v='27' />
+    <tag k='addr:street' v='улица Липецкая' />
+    <tag k='note:location' v='«Центр лечебной педагогики»' />
+    <tag k='phone' v='+7 351 7210210' />
+    <tag k='ref' v='695' />
+  </node>
+  <node id='-1546' action='modify' visible='true' lat='55.17590509069483' lon='61.337142301954415'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='61А' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='школа № 87' />
+    <tag k='phone' v='+7 351 7419608' />
+    <tag k='ref' v='557' />
+  </node>
+  <node id='-1545' action='modify' visible='true' lat='55.18818318547531' lon='61.29728940406073'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 4 ' />
+    <tag k='phone' v='+7 351 7967046' />
+    <tag k='ref' v='644' />
+  </node>
+  <node id='-1544' action='modify' visible='true' lat='55.125804725370394' lon='61.42157345264771'>
+    <tag k='addr:housenumber' v='90' />
+    <tag k='addr:street' v='улица Гончаренко' />
+    <tag k='note:location' v='школа-интернат № 15' />
+    <tag k='phone' v='+7 351 2682314' />
+    <tag k='ref' v='2005' />
+  </node>
+  <node id='-1543' action='modify' visible='true' lat='55.17932934528292' lon='61.45494510038835'>
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='улица Котина' />
+    <tag k='note:location' v='школа № 86' />
+    <tag k='phone' v='+7 351 7722311' />
+    <tag k='ref' v='760' />
+  </node>
+  <node id='-1542' action='modify' visible='true' lat='55.143545892495176' lon='61.41091839373355'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Овчинникова' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 53' />
+    <tag k='phone' v='+7 351 268-75-30' />
+    <tag k='ref' v='2068' />
+  </node>
+  <node id='-1541' action='modify' visible='true' lat='55.242392175422346' lon='61.38342536941764'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица 50-летия ВЛКСМ' />
+    <tag k='note:location' v='ДЦ «Импульс»' />
+    <tag k='phone' v='+7 351 7210373' />
+    <tag k='ref' v='710' />
+  </node>
+  <node id='-1540' action='modify' visible='true' lat='55.18501218387511' lon='61.43747306534239'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='113А' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='школа № 21' />
+    <tag k='phone' v='+7 351 7721244' />
+    <tag k='ref' v='519' />
+  </node>
+  <node id='-1539' action='modify' visible='true' lat='55.23759367592148' lon='61.3066476829529'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:suburb' v='11-й Городок' />
+    <tag k='note:location' v='Школа № 28' />
+    <tag k='phone' v='+7 351 7375255' />
+    <tag k='ref' v='650' />
+  </node>
+  <node id='-1538' action='modify' visible='true' lat='55.251944955715786' lon='61.36974914475407'>
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='улица Сурикова' />
+    <tag k='note:location' v='филиал Уральского государственного колледжа № 100' />
+    <tag k='phone' v='+7 351 7212473' />
+    <tag k='ref' v='693' />
+  </node>
+  <node id='-1537' action='modify' visible='true' lat='55.1138239925031' lon='61.452907288900946'>
+    <tag k='addr:housenumber' v='83' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='ДК ОАО «ЧТПЗ»' />
+    <tag k='phone' v='+7 351 2544481' />
+    <tag k='ref' v='2030' />
+  </node>
+  <node id='-1536' action='modify' visible='true' lat='55.166258961804076' lon='61.46393088821277'>
+    <tag k='addr:housenumber' v='23Г' />
+    <tag k='addr:street' v='улица Марченко' />
+    <tag k='note:location' v='школа № 39' />
+    <tag k='phone' v='+7 351 7723884' />
+    <tag k='ref' v='749' />
+  </node>
+  <node id='-1535' action='modify' visible='true' lat='55.11392219664786' lon='61.35392679820435'>
+    <tag k='addr:housenumber' v='30' />
+    <tag k='addr:street' v='улица Столбовая' />
+    <tag k='note:location' v='(поселок АМЗ) МС(К)ОУ для обучающихся, воспитанников с ограниченными возможностями здоровья специальное (коррекционное) общеобразовательная школа VIII вида № 83' />
+    <tag k='phone' v='+7 351 269-72-93' />
+    <tag k='ref' v='2100' />
+  </node>
+  <node id='-1534' action='modify' visible='true' lat='55.19157945330828' lon='61.41299172101545'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='23' />
+    <tag k='addr:street' v='улица Российская' />
+    <tag k='note:location' v='Энергетический колледж' />
+    <tag k='phone' v='+7 351 2641288' />
+    <tag k='ref' v='525' />
+  </node>
+  <node id='-1533' action='modify' visible='true' lat='55.19159415866997' lon='61.344107695845615'>
+    <tag k='addr:housenumber' v='10А' />
+    <tag k='addr:street' v='улица Пионерская' />
+    <tag k='note:location' v='Гимназия № 26' />
+    <tag k='phone' v='+7 351 7413733' />
+    <tag k='ref' v='612' />
+  </node>
+  <node id='-1532' action='modify' visible='true' lat='55.23892883974672' lon='61.376018287526016'>
+    <tag k='addr:housenumber' v='7Б' />
+    <tag k='addr:street' v='улица Комаровского' />
+    <tag k='note:location' v='школа № 74' />
+    <tag k='phone' v='+7 351 7218434' />
+    <tag k='ref' v='709' />
+  </node>
+  <node id='-1531' action='modify' visible='true' lat='55.12890578400135' lon='61.42853131972447'>
+    <tag k='addr:housenumber' v='65А' />
+    <tag k='addr:street' v='улица Барбюса' />
+    <tag k='note:location' v='Центр психолого-педагогической реабилитации и коррекции' />
+    <tag k='phone' v='+7 351 2576190' />
+    <tag k='ref' v='2007' />
+  </node>
+  <node id='-1530' action='modify' visible='true' lat='55.13259727032508' lon='61.44472116603551'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица Агалакова' />
+    <tag k='note:location' v='школа № 51' />
+    <tag k='phone' v='+7 351 2516880' />
+    <tag k='ref' v='2023' />
+  </node>
+  <node id='-1529' action='modify' visible='true' lat='55.16625548377793' lon='61.46438093493889'>
+    <tag k='addr:housenumber' v='23Г' />
+    <tag k='addr:street' v='улица Марченко' />
+    <tag k='note:location' v='школа № 39' />
+    <tag k='phone' v='+7 351 7723884' />
+    <tag k='ref' v='750' />
+  </node>
+  <node id='-1528' action='modify' visible='true' lat='55.15523500481793' lon='61.39840810292611'>
+    <tag k='addr:housenumber' v='78' />
+    <tag k='addr:street' v='улица Елькина' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 98' />
+    <tag k='phone' v='+7 351 264-51-41' />
+    <tag k='ref' v='2072' />
+  </node>
+  <node id='-1527' action='modify' visible='true' lat='55.1782513654491' lon='61.30309080663577'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица 250-летия Челябинска' />
+    <tag k='note:location' v='школа № 151' />
+    <tag k='phone' v='+7 351 7958547' />
+    <tag k='ref' v='573' />
+  </node>
+  <node id='-1526' action='modify' visible='true' lat='55.26263032979693' lon='61.38293834950599'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица 60-летия Октября' />
+    <tag k='note:location' v='школа № 70' />
+    <tag k='phone' v='+7 351 7363052' />
+    <tag k='ref' v='677' />
+  </node>
+  <node id='-1525' action='modify' visible='true' lat='55.187194143628446' lon='61.27817649480382'>
+    <tag k='addr:housenumber' v='3Б' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='Филиал лицея № 35' />
+    <tag k='phone' v='+7 351 7940907;+7 351 7940905' />
+    <tag k='ref' v='661' />
+  </node>
+  <node id='-1524' action='modify' visible='true' lat='55.18570335386661' lon='61.38495112346549'>
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='Школа № 137' />
+    <tag k='phone' v='+7 351 7917475' />
+    <tag k='ref' v='595' />
+  </node>
+  <node id='-1523' action='modify' visible='true' lat='55.12983779861493' lon='61.4212365963541'>
+    <tag k='addr:housenumber' v='90' />
+    <tag k='addr:street' v='улица Вагнера' />
+    <tag k='note:location' v='школа № 128' />
+    <tag k='phone' v='+7 351 2572055' />
+    <tag k='ref' v='2003' />
+  </node>
+  <node id='-1522' action='modify' visible='true' lat='55.17644627355393' lon='61.44122917958841'>
+    <tag k='addr:housenumber' v='48' />
+    <tag k='addr:street' v='улица Котина' />
+    <tag k='note:location' v='Центр детского творчества' />
+    <tag k='phone' v='+7 351 7728744' />
+    <tag k='ref' v='737' />
+  </node>
+  <node id='-1521' action='modify' visible='true' lat='55.071740881899714' lon='61.396549433166335'>
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='переулок Дачный' />
+    <tag k='note:location' v='(поселок Смолино) Филиал МОУ средняя общеобразовательная школа № 145' />
+    <tag k='phone' v='+7 351 269-43-06' />
+    <tag k='ref' v='2113' />
+  </node>
+  <node id='-1520' action='modify' visible='true' lat='55.18219207719609' lon='61.403757259889886'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='школа № 6' />
+    <tag k='phone' v='+7 351 7913603' />
+    <tag k='ref' v='535' />
+  </node>
+  <node id='-1519' action='modify' visible='true' lat='55.17589890743715' lon='61.34889326485068'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='30А' />
+    <tag k='addr:street' v='улица Университетская набережная' />
+    <tag k='note:location' v='школа № 25' />
+    <tag k='phone' v='+7 351 7422721' />
+    <tag k='ref' v='552' />
+  </node>
+  <node id='-1518' action='modify' visible='true' lat='55.197789209677005' lon='61.3283576986081'>
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='Улица Молодогвардейцев' />
+    <tag k='note:location' v='Лицей № 35' />
+    <tag k='phone' v='+7 351 7921869' />
+    <tag k='ref' v='620' />
+  </node>
+  <node id='-1517' action='modify' visible='true' lat='55.12303320695876' lon='61.428661237790436'>
+    <tag k='addr:housenumber' v='79Б' />
+    <tag k='addr:street' v='улица Барбюса' />
+    <tag k='note:location' v='школа № 130 (главный корпус)' />
+    <tag k='phone' v='+7 351 2574062' />
+    <tag k='ref' v='2009' />
+  </node>
+  <node id='-1516' action='modify' visible='true' lat='55.16330800193225' lon='61.45794671591577'>
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='улица Марченко' />
+    <tag k='note:location' v='Машиностроительный комплекс ЮУрГТК' />
+    <tag k='phone' v='+7 351 7750122' />
+    <tag k='ref' v='747' />
+  </node>
+  <node id='-1515' action='modify' visible='true' lat='55.10514916227387' lon='61.35499440312787'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Зои Космодемьянской' />
+    <tag k='note:location' v='(поселок станции Шершни) Филиал МОУ средняя общеобразовательная школа № 131' />
+    <tag k='phone' v='+7 351 730-71-21' />
+    <tag k='ref' v='2104' />
+  </node>
+  <node id='-1514' action='modify' visible='true' lat='55.26811946551265' lon='61.39401058826786'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Трудовая' />
+    <tag k='note:location' v='школа-интернат № 13' />
+    <tag k='phone' v='+7 351 7360762' />
+    <tag k='ref' v='669' />
+  </node>
+  <node id='-1513' action='modify' visible='true' lat='55.18368452796571' lon='61.39511778537409'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='167' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='Художественное училище' />
+    <tag k='phone' v='+7 351 7901034' />
+    <tag k='ref' v='541' />
+  </node>
+  <node id='-1512' action='modify' visible='true' lat='55.181627861955576' lon='61.37777287851071'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Дальневосточная' />
+    <tag k='note:location' v='школа № 9' />
+    <tag k='phone' v='+7 351 7911283' />
+    <tag k='ref' v='545' />
+  </node>
+  <node id='-1511' action='modify' visible='true' lat='55.198219557048404' lon='61.32836649634522'>
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Лицей № 35' />
+    <tag k='phone' v='+7 351 7921869' />
+    <tag k='ref' v='621' />
+  </node>
+  <node id='-1510' action='modify' visible='true' lat='55.1595004755515' lon='61.45144788833577'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='школа № 107' />
+    <tag k='phone' v='+7 351 7752247' />
+    <tag k='ref' v='745' />
+  </node>
+  <node id='-1509' action='modify' visible='true' lat='55.04042831789374' lon='61.3722142707975'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='(поселок Новосинеглазово) ГОУ НПО профессиональное училище № 79' />
+    <tag k='phone' v='+7 351 280-02-31' />
+    <tag k='ref' v='2110' />
+  </node>
+  <node id='-1508' action='modify' visible='true' lat='55.182597808632565' lon='61.299930070799256'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='24А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='школа № 36' />
+    <tag k='phone' v='+7 351 7969774' />
+    <tag k='ref' v='576' />
+  </node>
+  <node id='-1507' action='modify' visible='true' lat='55.187325180522876' lon='61.2784414722986'>
+    <tag k='addr:housenumber' v='3Б' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='Филиал лицея № 35' />
+    <tag k='phone' v='+7 351 7940907;+7 351 7940905' />
+    <tag k='ref' v='662' />
+  </node>
+  <node id='-1506' action='modify' visible='true' lat='55.14590273873802' lon='61.42989966878946'>
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица Тухачевского' />
+    <tag k='note:location' v='школа № 85' />
+    <tag k='phone' v='+7 351 2560705' />
+    <tag k='ref' v='1990' />
+  </node>
+  <node id='-1505' action='modify' visible='true' lat='55.175106924421556' lon='61.48411333409168'>
+    <tag k='addr:housenumber' v='26А' />
+    <tag k='addr:street' v='улица Хохрякова' />
+    <tag k='note:location' v='школа № 84' />
+    <tag k='phone' v='+7 351 7723929' />
+    <tag k='ref' v='776' />
+  </node>
+  <node id='-1504' action='modify' visible='true' lat='55.15504761468327' lon='61.39842968079734'>
+    <tag k='addr:housenumber' v='78' />
+    <tag k='addr:street' v='улица Елькина' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 98' />
+    <tag k='phone' v='+7 351 237-84-54' />
+    <tag k='ref' v='2073' />
+  </node>
+  <node id='-1503' action='modify' visible='true' lat='55.17655274806789' lon='61.4044421767999'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13Б' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='филиал лицея № 97' />
+    <tag k='phone' v='+7 351 7914213' />
+    <tag k='ref' v='537' />
+  </node>
+  <node id='-1502' action='modify' visible='true' lat='55.24761772896565' lon='61.36787317550946'>
+    <tag k='addr:housenumber' v='96А' />
+    <tag k='addr:street' v='улица Мира' />
+    <tag k='note:location' v='Уральский государственный колледж № 100' />
+    <tag k='phone' v='+7 351 7218247' />
+    <tag k='ref' v='701' />
+  </node>
+  <node id='-1501' action='modify' visible='true' lat='55.192301835628015' lon='61.3267670389704'>
+    <tag k='addr:housenumber' v='55А' />
+    <tag k='addr:street' v='Комсомольский проспект' />
+    <tag k='note:location' v='Школа № 115' />
+    <tag k='phone' v='+7 351 7416491' />
+    <tag k='ref' v='625' />
+  </node>
+  <node id='-1500' action='modify' visible='true' lat='55.13321817158954' lon='61.444432543735246'>
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='улица Агалакова' />
+    <tag k='note:location' v='школа № 51' />
+    <tag k='phone' v='+7 351 2516880' />
+    <tag k='ref' v='1999' />
+  </node>
+  <node id='-1499' action='modify' visible='true' lat='55.17522349269507' lon='61.484708624540545'>
+    <tag k='addr:housenumber' v='26А' />
+    <tag k='addr:street' v='улица Хохрякова' />
+    <tag k='note:location' v='школа № 84' />
+    <tag k='phone' v='+7 351 7723929' />
+    <tag k='ref' v='778' />
+  </node>
+  <node id='-1498' action='modify' visible='true' lat='55.120466586985756' lon='61.398595587660786'>
+    <tag k='addr:housenumber' v='10А' />
+    <tag k='addr:street' v='улица Карабанова' />
+    <tag k='note:location' v='(поселок Локомотивный) Филиал МОУ средняя общеобразовательная школа № 53' />
+    <tag k='phone' v='+7 351 269-41-09' />
+    <tag k='ref' v='2092' />
+  </node>
+  <node id='-1497' action='modify' visible='true' lat='55.18327232872173' lon='61.433237182171446'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='79' />
+    <tag k='addr:street' v='улица Горького' />
+    <tag k='note:location' v='Педагогический колледж № 2' />
+    <tag k='phone' v='+7 351 7734444' />
+    <tag k='ref' v='520' />
+  </node>
+  <node id='-1496' action='modify' visible='true' lat='55.238800016930945' lon='61.37541568036969'>
+    <tag k='addr:housenumber' v='7Б' />
+    <tag k='addr:street' v='улица Комаровского' />
+    <tag k='note:location' v='школа № 74' />
+    <tag k='phone' v='+7 351 7218434' />
+    <tag k='ref' v='708' />
+  </node>
+  <node id='-1495' action='modify' visible='true' lat='55.19128199975378' lon='61.30950352472733'>
+    <tag k='addr:housenumber' v='23Б' />
+    <tag k='addr:street' v='улица Молдавская' />
+    <tag k='note:location' v='Школа № 95' />
+    <tag k='phone' v='+7 351 7429471' />
+    <tag k='ref' v='630' />
+  </node>
+  <node id='-1494' action='modify' visible='true' lat='55.14312230350271' lon='61.43129129984761'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Пограничная' />
+    <tag k='note:location' v='школа № 99' />
+    <tag k='phone' v='+7 351 2515794' />
+    <tag k='ref' v='1992' />
+  </node>
+  <node id='-1493' action='modify' visible='true' lat='55.12943993018801' lon='61.46551176047823'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица Энергетиков' />
+    <tag k='note:location' v='школа № 75 (филиал)' />
+    <tag k='phone' v='+7 351 2536846' />
+    <tag k='ref' v='2041' />
+  </node>
+  <node id='-1492' action='modify' visible='true' lat='55.16461254092488' lon='61.44560435499721'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Савина' />
+    <tag k='note:location' v='школа № 52' />
+    <tag k='phone' v='+7 351 7750480' />
+    <tag k='ref' v='743' />
+  </node>
+  <node id='-1491' action='modify' visible='true' lat='55.10526486548514' lon='61.35547312525299'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Зои Космодемьянской' />
+    <tag k='note:location' v='(поселок станции Шершни) Филиал МОУ средняя общеобразовательная школа № 131' />
+    <tag k='phone' v='+7 351 262-02-49' />
+    <tag k='ref' v='2105' />
+  </node>
+  <node id='-1490' action='modify' visible='true' lat='55.26385999492448' lon='61.39959231413666'>
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='улица 60-летия Октября' />
+    <tag k='note:location' v='школа № 103' />
+    <tag k='phone' v='+7 351 7356997' />
+    <tag k='ref' v='671' />
+  </node>
+  <node id='-1489' action='modify' visible='true' lat='55.190579550257354' lon='61.39495877109184'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Шенкурская' />
+    <tag k='note:location' v='школа № 109' />
+    <tag k='phone' v='+7 351 7915496' />
+    <tag k='ref' v='530' />
+  </node>
+  <node id='-1488' action='modify' visible='true' lat='55.18701725461738' lon='61.278867525814114'>
+    <tag k='addr:housenumber' v='3Б' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='Филиал лицея № 35' />
+    <tag k='phone' v='+7 351 7940907;+7 351 7940905' />
+    <tag k='ref' v='660' />
+  </node>
+  <node id='-1487' action='modify' visible='true' lat='55.18646618263442' lon='61.37448804767523'>
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='улица Речная' />
+    <tag k='note:location' v='Техникум текстильной и легкой промышленности' />
+    <tag k='phone' v='+7 351 7977641' />
+    <tag k='ref' v='598' />
+  </node>
+  <node id='-1486' action='modify' visible='true' lat='55.14863352335552' lon='61.43823885808753'>
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='улица Харлова' />
+    <tag k='note:location' v='межшкольный учебный комбинат' />
+    <tag k='phone' v='+7 351 2569740' />
+    <tag k='ref' v='1988' />
+  </node>
+  <node id='-1485' action='modify' visible='true' lat='55.16725982730198' lon='61.532188632198356'>
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='улица 2 Эльтонская' />
+    <tag k='note:location' v='школа № 116' />
+    <tag k='phone' v='+7 351 7751220' />
+    <tag k='ref' v='782' />
+  </node>
+  <node id='-1484' action='modify' visible='true' lat='55.15057980201154' lon='61.41867434230472'>
+    <tag k='addr:housenumber' v='101' />
+    <tag k='addr:street' v='улица Красноармейская' />
+    <tag k='note:location' v='Красный уголок эксплуатационного локомотивного депо Челябинск структурного подразделения дирекции тяги филиала ОАО «РЖД»' />
+    <tag k='phone' v='+7 351 268-77-65;+7 351 268-29-14' />
+    <tag k='ref' v='2065' />
+  </node>
+  <node id='-1483' action='modify' visible='true' lat='55.2443984562081' lon='61.39139948274911'>
+    <tag k='addr:housenumber' v='7Б' />
+    <tag k='addr:street' v='улица 50-летия ВЛКСМ' />
+    <tag k='note:location' v='лицей № 82' />
+    <tag k='phone' v='+7 351 7216964' />
+    <tag k='ref' v='712' />
+  </node>
+  <node id='-1482' action='modify' visible='true' lat='55.18972134862305' lon='61.449446119327256'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='60' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='профилакторий ОАО «ЧЭМК»' />
+    <tag k='phone' v='+7 351 7721922' />
+    <tag k='ref' v='516' />
+  </node>
+  <node id='-1481' action='modify' visible='true' lat='55.1971994079725' lon='61.31369149784895'>
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 13' />
+    <tag k='phone' v='+7 351 7428615' />
+    <tag k='ref' v='638' />
+  </node>
+  <node id='-1480' action='modify' visible='true' lat='55.14387687543957' lon='61.438140726011866'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Коммунаров' />
+    <tag k='note:location' v='лицей № 37' />
+    <tag k='phone' v='+7 351 2562646' />
+    <tag k='ref' v='1989' />
+  </node>
+  <node id='-1479' action='modify' visible='true' lat='55.171151560670744' lon='61.43801586782773'>
+    <tag k='addr:housenumber' v='35' />
+    <tag k='addr:street' v='улица Грибоедова' />
+    <tag k='note:location' v='школа № 106' />
+    <tag k='phone' v='+7 351 7728020' />
+    <tag k='ref' v='727' />
+  </node>
+  <node id='-1478' action='modify' visible='true' lat='55.15579541859271' lon='61.412695757415705'>
+    <tag k='addr:housenumber' v='82' />
+    <tag k='addr:street' v='улица Свободы' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 121' />
+    <tag k='phone' v='+7 351 263-29-75' />
+    <tag k='ref' v='2059' />
+  </node>
+  <node id='-1477' action='modify' visible='true' lat='55.25817045249871' lon='61.405762115070964'>
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Ярослава Гашека' />
+    <tag k='note:location' v='ДК ОАО «ЧМК»' />
+    <tag k='phone' v='+7 351 7253413' />
+    <tag k='ref' v='683' />
+  </node>
+  <node id='-1476' action='modify' visible='true' lat='55.177874587845146' lon='61.28673155630949'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 154' />
+    <tag k='phone' v='+7 351 7955644' />
+    <tag k='ref' v='580' />
+  </node>
+  <node id='-1475' action='modify' visible='true' lat='55.18745652165806' lon='61.403074065330166'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='162В' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='Челябинский государственный университет, корпус № 3' />
+    <tag k='phone' v='+7 351 7997023' />
+    <tag k='ref' v='532' />
+  </node>
+  <node id='-1474' action='modify' visible='true' lat='55.19033884103745' lon='61.358527070084996'>
+    <tag k='addr:housenumber' v='20А' />
+    <tag k='addr:street' v='улица Чайковского' />
+    <tag k='note:location' v='Челябинский дорожно-строительный техникум' />
+    <tag k='phone' v='+7 351 7937598' />
+    <tag k='ref' v='600' />
+  </node>
+  <node id='-1473' action='modify' visible='true' lat='55.1891537032196' lon='61.46992831768826'>
+    <tag k='addr:housenumber' v='41' />
+    <tag k='addr:street' v='улица Комарова' />
+    <tag k='note:location' v='Профессиональное училище № 112' />
+    <tag k='phone' v='+7 351 7721854' />
+    <tag k='ref' v='769' />
+  </node>
+  <node id='-1472' action='modify' visible='true' lat='55.036138628277214' lon='61.372787501093086'>
+    <tag k='addr:housenumber' v='17' />
+    <tag k='addr:street' v='улица Лермонтова' />
+    <tag k='note:location' v='(поселок Новосинеглазово) МОУ средняя общеобразовательная школа № 144' />
+    <tag k='phone' v='+7 351 280-02-41' />
+    <tag k='ref' v='2108' />
+  </node>
+  <node id='-1471' action='modify' visible='true' lat='55.258821458512905' lon='61.39359746633631'>
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='улица Богдана Хмельницкого' />
+    <tag k='note:location' v='Металлургический колледж' />
+    <tag k='phone' v='+7 351 7357312' />
+    <tag k='ref' v='680' />
+  </node>
+  <node id='-1470' action='modify' visible='true' lat='55.173768344602365' lon='61.297148878975904'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='25А' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 129' />
+    <tag k='phone' v='+7 351 7954172' />
+    <tag k='ref' v='587' />
+  </node>
+  <node id='-1469' action='modify' visible='true' lat='55.23537726134101' lon='61.35907486192713'>
+    <tag k='addr:housenumber' v='2А' />
+    <tag k='addr:street' v='улица Рабоче-Крестьянская' />
+    <tag k='note:location' v='Филиал школы № 28' />
+    <tag k='phone' v='+7 351 7214866' />
+    <tag k='ref' v='651' />
+  </node>
+  <node id='-1468' action='modify' visible='true' lat='55.11713214547585' lon='61.424698322752214'>
+    <tag k='addr:housenumber' v='136' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 130 (филиал)' />
+    <tag k='phone' v='+7 351 2565353' />
+    <tag k='ref' v='2016' />
+  </node>
+  <node id='-1467' action='modify' visible='true' lat='55.176048565417496' lon='61.437520212657695'>
+    <tag k='addr:housenumber' v='47Б' />
+    <tag k='addr:street' v='улица Горького' />
+    <tag k='note:location' v='вечерняя сменная школа № 17' />
+    <tag k='phone' v='+7 351 7728347' />
+    <tag k='ref' v='730' />
+  </node>
+  <node id='-1466' action='modify' visible='true' lat='55.1431682894063' lon='61.39064107247126'>
+    <tag k='addr:housenumber' v='34' />
+    <tag k='addr:street' v='улица Доватора' />
+    <tag k='note:location' v='МУ дополнительного образования Дворец детского творчества' />
+    <tag k='phone' v='+7 351 237-24-98' />
+    <tag k='ref' v='2080' />
+  </node>
+  <node id='-1465' action='modify' visible='true' lat='55.24584150181479' lon='61.40026172118011'>
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='улица Пекинская' />
+    <tag k='note:location' v='школа № 73' />
+    <tag k='phone' v='+7 351 7351390' />
+    <tag k='ref' v='717' />
+  </node>
+  <node id='-1464' action='modify' visible='true' lat='55.191842470003806' lon='61.4125183157272'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='23' />
+    <tag k='addr:street' v='улица Российская' />
+    <tag k='note:location' v='Энергетический колледж' />
+    <tag k='phone' v='+7 351 2641288' />
+    <tag k='ref' v='526' />
+  </node>
+  <node id='-1463' action='modify' visible='true' lat='55.189902513191285' lon='61.285322797155025'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Чичерина' />
+    <tag k='note:location' v='Школа № 152' />
+    <tag k='phone' v='+7 351 7969528' />
+    <tag k='ref' v='656' />
+  </node>
+  <node id='-1462' action='modify' visible='true' lat='55.24767067964218' lon='61.394668394963915'>
+    <tag k='addr:housenumber' v='47' />
+    <tag k='addr:street' v='улица Жукова' />
+    <tag k='note:location' v='школа № 24' />
+    <tag k='phone' v='+7 351 7351642' />
+    <tag k='ref' v='716' />
+  </node>
+  <node id='-1461' action='modify' visible='true' lat='55.123633224297' lon='61.514432096636085'>
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Уральская' />
+    <tag k='note:location' v='школа № 108' />
+    <tag k='phone' v='+7 351 2539189' />
+    <tag k='ref' v='2049' />
+  </node>
+  <node id='-1460' action='modify' visible='true' lat='55.17544559596458' lon='61.44896934862839'>
+    <tag k='addr:housenumber' v='104' />
+    <tag k='addr:street' v='улица Героев Танкограда' />
+    <tag k='note:location' v='школа № 112' />
+    <tag k='phone' v='+7 351 7728711' />
+    <tag k='ref' v='758' />
+  </node>
+  <node id='-1459' action='modify' visible='true' lat='55.15190226124895' lon='61.409323464094186'>
+    <tag k='addr:housenumber' v='56' />
+    <tag k='addr:street' v='улица Цвиллинга' />
+    <tag k='note:location' v='Челябинский институт путей сообщения' />
+    <tag k='phone' v='+7 351 237-49-54' />
+    <tag k='ref' v='2063' />
+  </node>
+  <node id='-1458' action='modify' visible='true' lat='55.18264681298173' lon='61.29892291316804'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='24А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='школа № 36' />
+    <tag k='phone' v='+7 351 7969774' />
+    <tag k='ref' v='578' />
+  </node>
+  <node id='-1457' action='modify' visible='true' lat='55.197792830147876' lon='61.327683822859235'>
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Лицей № 35' />
+    <tag k='phone' v='+7 351 7921869' />
+    <tag k='ref' v='619' />
+  </node>
+  <node id='-1456' action='modify' visible='true' lat='55.260610712102896' lon='61.40015579522986'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Коммунистическая' />
+    <tag k='note:location' v='МУДОУ Центр Детского Творчества' />
+    <tag k='phone' v='+7 351 7357740' />
+    <tag k='ref' v='679' />
+  </node>
+  <node id='-1455' action='modify' visible='true' lat='55.12308259412401' lon='61.42969489029451'>
+    <tag k='addr:housenumber' v='79Б' />
+    <tag k='addr:street' v='улица Барбюса' />
+    <tag k='note:location' v='школа № 130 (главный корпус)' />
+    <tag k='phone' v='+7 351 2573784' />
+    <tag k='ref' v='2010' />
+  </node>
+  <node id='-1454' action='modify' visible='true' lat='55.16711339206661' lon='61.5316675894519'>
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='улица Эльтонская 2-я' />
+    <tag k='note:location' v='школа № 116' />
+    <tag k='phone' v='+7 351 7751220' />
+    <tag k='ref' v='780' />
+  </node>
+  <node id='-1453' action='modify' visible='true' lat='55.17067512195948' lon='61.46750873219962'>
+    <tag k='addr:housenumber' v='144Б' />
+    <tag k='addr:street' v='улица Танкистов' />
+    <tag k='note:location' v='школа № 101' />
+    <tag k='phone' v='+7 351 7735404' />
+    <tag k='ref' v='751' />
+  </node>
+  <node id='-1452' action='modify' visible='true' lat='55.084116313414974' lon='61.337766318669246'>
+    <tag k='addr:housenumber' v='10А' />
+    <tag k='addr:street' v='улица Капитанская' />
+    <tag k='note:location' v='(поселок Федоровка) МУ ДК «Бригантина»' />
+    <tag k='phone' v='+7 351 734-88-28' />
+    <tag k='ref' v='2106' />
+  </node>
+  <node id='-1451' action='modify' visible='true' lat='55.182344098953436' lon='61.299350111998635'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='24А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='школа № 36' />
+    <tag k='phone' v='+7 351 7969774' />
+    <tag k='ref' v='577' />
+  </node>
+  <node id='-1450' action='modify' visible='true' lat='55.24603085000557' lon='61.40084557225815'>
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='улица Пекинская' />
+    <tag k='note:location' v='школа № 73' />
+    <tag k='phone' v='+7 351 7351390' />
+    <tag k='ref' v='720' />
+  </node>
+  <node id='-1449' action='modify' visible='true' lat='55.197137592161496' lon='61.302787789364494'>
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 3 ' />
+    <tag k='phone' v='+7 351 7427629;+7 351 7427643' />
+    <tag k='ref' v='641' />
+  </node>
+  <node id='-1448' action='modify' visible='true' lat='55.1958665718278' lon='61.35907010826851'>
+    <tag k='addr:housenumber' v='8А' />
+    <tag k='addr:street' v='улица Чайковского' />
+    <tag k='note:location' v='Школа № 118' />
+    <tag k='phone' v='+7 351 7411621' />
+    <tag k='ref' v='605' />
+  </node>
+  <node id='-1447' action='modify' visible='true' lat='55.12928994747971' lon='61.42404639882608'>
+    <tag k='addr:housenumber' v='140Б' />
+    <tag k='addr:street' v='улица Барбюса' />
+    <tag k='note:location' v='гимназия № 76' />
+    <tag k='phone' v='+7 351 2571843' />
+    <tag k='ref' v='2006' />
+  </node>
+  <node id='-1446' action='modify' visible='true' lat='55.17998086221121' lon='61.46834580283016'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Октябрьская' />
+    <tag k='note:location' v='школа № 155' />
+    <tag k='phone' v='+7 351 7734912' />
+    <tag k='ref' v='764' />
+  </node>
+  <node id='-1445' action='modify' visible='true' lat='55.147356066082224' lon='61.39344925974974'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Курчатова' />
+    <tag k='note:location' v='ФГОУ СПО «Челябинский колледж информатики, информационных технологий и экономики»' />
+    <tag k='phone' v='+7 351 237-59-94' />
+    <tag k='ref' v='2078' />
+  </node>
+  <node id='-1444' action='modify' visible='true' lat='55.17970081176061' lon='61.3911977215572'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='28' />
+    <tag k='addr:street' v='улица Калинина' />
+    <tag k='note:location' v='школа № 5' />
+    <tag k='phone' v='+7 351 7910603' />
+    <tag k='ref' v='542' />
+  </node>
+  <node id='-1443' action='modify' visible='true' lat='55.18978133121479' lon='61.28505871576382'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Чичерина' />
+    <tag k='note:location' v='Школа № 152' />
+    <tag k='phone' v='+7 351 7969528' />
+    <tag k='ref' v='655' />
+  </node>
+  <node id='-1442' action='modify' visible='true' lat='55.186997678365856' lon='61.39058493923552'>
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='переулок Островского' />
+    <tag k='note:location' v='Клуб ЧЭРЗ' />
+    <tag k='phone' v='+7 351 7914237' />
+    <tag k='ref' v='592' />
+  </node>
+  <node id='-1441' action='modify' visible='true' lat='55.11711523335677' lon='61.42427484335091'>
+    <tag k='addr:housenumber' v='136' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 130 (филиал)' />
+    <tag k='phone' v='+7 351 2565353' />
+    <tag k='ref' v='2015' />
+  </node>
+  <node id='-1440' action='modify' visible='true' lat='55.17260332808938' lon='61.45818821221345'>
+    <tag k='addr:housenumber' v='20А' />
+    <tag k='addr:street' v='улица Шуменская' />
+    <tag k='note:location' v='Центр детского творчества «Гармония» (Место нахождения участковой избирательной комиссии: детский Дом культуры «Ровесник», улица Комарова, 114, +7 351 7735894)' />
+    <tag k='phone' v='+7 351 7728033' />
+    <tag k='ref' v='756' />
+  </node>
+  <node id='-1439' action='modify' visible='true' lat='55.244002368842025' lon='61.36921084810399'>
+    <tag k='addr:housenumber' v='53' />
+    <tag k='addr:street' v='Шоссе Металлургов' />
+    <tag k='note:location' v='школа № 94' />
+    <tag k='phone' v='+7 351 7210292' />
+    <tag k='ref' v='705' />
+  </node>
+  <node id='-1438' action='modify' visible='true' lat='55.18102203037422' lon='61.29883621846381'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='27Б' />
+    <tag k='addr:street' v='улица Чичерина' />
+    <tag k='note:location' v='лицей № 97' />
+    <tag k='phone' v='+7 351 7957871' />
+    <tag k='ref' v='579' />
+  </node>
+  <node id='-1437' action='modify' visible='true' lat='55.18635803708877' lon='61.44499101300484'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='23' />
+    <tag k='addr:street' v='улица Героев Танкограда' />
+    <tag k='note:location' v='Центр развития творчества детей и юношества' />
+    <tag k='phone' v='+7 351 7720938' />
+    <tag k='ref' v='517' />
+  </node>
+  <node id='-1436' action='modify' visible='true' lat='55.19124763736876' lon='61.35315824254375'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Красного Урала' />
+    <tag k='note:location' v='Школа № 45' />
+    <tag k='phone' v='+7 351 7411885' />
+    <tag k='ref' v='607' />
+  </node>
+  <node id='-1435' action='modify' visible='true' lat='55.17919202483529' lon='61.4543269387709'>
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='улица Котина' />
+    <tag k='note:location' v='школа № 86' />
+    <tag k='phone' v='+7 351 7722311' />
+    <tag k='ref' v='759' />
+  </node>
+  <node id='-1434' action='modify' visible='true' lat='55.25585270268329' lon='61.39023853483934'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Жукова' />
+    <tag k='note:location' v='школа № 91' />
+    <tag k='phone' v='+7 351 7211457' />
+    <tag k='ref' v='689' />
+  </node>
+  <node id='-1433' action='modify' visible='true' lat='55.188223984425804' lon='61.311784314213696'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='303 ' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='отдел приема-выдачи документов и информации в Калининском районе Росреестра по Челябинской области (Место нахождения участковой избирательной комиссии: школа № 123, улица Молодогвардейцев, 56Б)' />
+    <tag k='phone' v='+7 351 7422983' />
+    <tag k='ref' v='562' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-1432' action='modify' visible='true' lat='55.23700180363142' lon='61.30560878805676'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='11-й Городок' />
+    <tag k='note:location' v='Школа № 28' />
+    <tag k='phone' v='+7 351 7375255' />
+    <tag k='ref' v='654' />
+  </node>
+  <node id='-1431' action='modify' visible='true' lat='55.11709832123054' lon='61.4238513639496'>
+    <tag k='addr:housenumber' v='136' />
+    <tag k='addr:street' v='улица Новороссийская' />
+    <tag k='note:location' v='школа № 130 (филиал)' />
+    <tag k='phone' v='+7 351 2565353' />
+    <tag k='ref' v='2014' />
+  </node>
+  <node id='-1430' action='modify' visible='true' lat='55.175340937019335' lon='61.448627432781386'>
+    <tag k='addr:housenumber' v='104' />
+    <tag k='addr:street' v='улица Героев Танкограда' />
+    <tag k='note:location' v='школа № 112' />
+    <tag k='phone' v='+7 351 7728437' />
+    <tag k='ref' v='738' />
+  </node>
+  <node id='-1429' action='modify' visible='true' lat='55.11630982340073' lon='61.3536428958892'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Кузнецова' />
+    <tag k='note:location' v='(поселок АМЗ) МОУ средняя общеобразовательная школа № 105' />
+    <tag k='phone' v='+7 351 269-76-18' />
+    <tag k='ref' v='2098' />
+  </node>
+  <node id='-1428' action='modify' visible='true' lat='55.18034026731767' lon='61.32880225869028'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='70Б' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='Челябинский государственный университет, корпус № 2' />
+    <tag k='phone' v='+7 351 7997058' />
+    <tag k='ref' v='567' />
+  </node>
+  <node id='-1427' action='modify' visible='true' lat='55.19127763566487' lon='61.31018384412743'>
+    <tag k='addr:housenumber' v='23Б' />
+    <tag k='addr:street' v='улица Молдавская' />
+    <tag k='note:location' v='Школа № 95' />
+    <tag k='phone' v='+7 351 7429471' />
+    <tag k='ref' v='631' />
+  </node>
+  <node id='-1426' action='modify' visible='true' lat='55.11907669410131' lon='61.455698848259956'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Масленникова' />
+    <tag k='note:location' v='Челябинский техникум промышленности и городского хозяйства' />
+    <tag k='phone' v='+7 351 2545988' />
+    <tag k='ref' v='2035' />
+  </node>
+  <node id='-1425' action='modify' visible='true' lat='55.19685571129404' lon='61.47998288625098'>
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='улица Мамина' />
+    <tag k='note:location' v='школа № 59' />
+    <tag k='phone' v='+7 351 7739029' />
+    <tag k='ref' v='771' />
+  </node>
+  <node id='-1424' action='modify' visible='true' lat='55.140864315243824' lon='61.40015457628747'>
+    <tag k='addr:housenumber' v='8А' />
+    <tag k='addr:street' v='улица Цеховая' />
+    <tag k='note:location' v='Филиал МАОУ средняя общеобразовательная школа № 15' />
+    <tag k='phone' v='+7 351 237-29-16' />
+    <tag k='ref' v='2081' />
+  </node>
+  <node id='-1423' action='modify' visible='true' lat='55.177999100446144' lon='61.28700383222698'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 154' />
+    <tag k='phone' v='+7 351 7955644' />
+    <tag k='ref' v='581' />
+  </node>
+  <node id='-1422' action='modify' visible='true' lat='55.260609804480154' lon='61.39981164110293'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Коммунистическая' />
+    <tag k='note:location' v='МУДОУ Центр Детского Творчества' />
+    <tag k='phone' v='+7 351 7357740' />
+    <tag k='ref' v='678' />
+  </node>
+  <node id='-1421' action='modify' visible='true' lat='55.197201261482995' lon='61.31299633512896'>
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 13' />
+    <tag k='phone' v='+7 351 7428615' />
+    <tag k='ref' v='637' />
+  </node>
+  <node id='-1420' action='modify' visible='true' lat='55.118283937253494' lon='61.51444421102238'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Трубосварочная 1-я' />
+    <tag k='note:location' v='Челябинский техникум промышленности и городского хозяйства' />
+    <tag k='phone' v='+7 351 2539400' />
+    <tag k='ref' v='2051' />
+  </node>
+  <node id='-1419' action='modify' visible='true' lat='55.1525799186428' lon='61.408575042319555'>
+    <tag k='addr:housenumber' v='54' />
+    <tag k='addr:street' v='улица Цвиллинга' />
+    <tag k='note:location' v='Дорожный центр культуры ЮУЖД – филиал ОАО «РЖД»' />
+    <tag k='phone' v='+7 351 263-57-62' />
+    <tag k='ref' v='2064' />
+  </node>
+  <node id='-1418' action='modify' visible='true' lat='55.178292072596115' lon='61.28661039063935'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 154' />
+    <tag k='phone' v='+7 351 7955644' />
+    <tag k='ref' v='583' />
+  </node>
+  <node id='-1417' action='modify' visible='true' lat='55.248430142518274' lon='61.405455311170215'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Хлебозаводская' />
+    <tag k='note:location' v='школа № 33' />
+    <tag k='phone' v='+7 351 7350591' />
+    <tag k='ref' v='719' />
+  </node>
+  <node id='-1416' action='modify' visible='true' lat='55.17334257117542' lon='61.297411946215114'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='25А' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 129' />
+    <tag k='phone' v='+7 351 7954172' />
+    <tag k='ref' v='584' />
+  </node>
+  <node id='-1415' action='modify' visible='true' lat='55.23547238282336' lon='61.35948606273034'>
+    <tag k='addr:housenumber' v='2А' />
+    <tag k='addr:street' v='улица Рабоче-Крестьянская' />
+    <tag k='note:location' v='Филиал школы № 28' />
+    <tag k='phone' v='+7 351 7214866' />
+    <tag k='ref' v='652' />
+  </node>
+  <node id='-1414' action='modify' visible='true' lat='55.237506506317246' lon='61.305352712879355'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:suburb' v='11-й городок' />
+    <tag k='note:location' v='Школа № 28' />
+    <tag k='phone' v='+7 351 7375255' />
+    <tag k='ref' v='663' />
+  </node>
+  <node id='-1413' action='modify' visible='true' lat='55.122118631355626' lon='61.470067906683646'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Батумская' />
+    <tag k='note:location' v='общежитие ОАО «Электромашина»' />
+    <tag k='phone' v='+7 351 2552120' />
+    <tag k='ref' v='2036' />
+  </node>
+  <node id='-1412' action='modify' visible='true' lat='55.17854619657369' lon='61.43851049663197'>
+    <tag k='addr:housenumber' v='38' />
+    <tag k='addr:street' v='улица Горького' />
+    <tag k='note:location' v='Дворец учащейся молодежи «Смена»' />
+    <tag k='phone' v='+7 351 7741684' />
+    <tag k='ref' v='736' />
+  </node>
+  <node id='-1411' action='modify' visible='true' lat='55.147484077674925' lon='61.393148328952'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Курчатова' />
+    <tag k='note:location' v='ФГОУ СПО «Челябинский колледж информатики, информационных технологий и экономики»' />
+    <tag k='phone' v='+7 351 237-86-37;+7 351 237-58-11' />
+    <tag k='ref' v='2077' />
+  </node>
+  <node id='-1410' action='modify' visible='true' lat='55.25069602372745' lon='61.36916777395982'>
+    <tag k='addr:housenumber' v='67А' />
+    <tag k='addr:street' v='улица Мира' />
+    <tag k='note:location' v='ГПТУ № 37' />
+    <tag k='phone' v='+7 351 7212365' />
+    <tag k='ref' v='699' />
+  </node>
+  <node id='-1409' action='modify' visible='true' lat='55.18127331315375' lon='61.41584319831732'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='49А' />
+    <tag k='addr:street' v='улица Российская' />
+    <tag k='note:location' v='школа № 50' />
+    <tag k='phone' v='+7 351 2668545' />
+    <tag k='ref' v='527' />
+  </node>
+  <node id='-1408' action='modify' visible='true' lat='55.18723631479363' lon='61.294205385314726'>
+    <tag k='addr:housenumber' v='14А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 41' />
+    <tag k='phone' v='+7 351 7967023;+7 351 7967035' />
+    <tag k='ref' v='646' />
+  </node>
+  <node id='-1407' action='modify' visible='true' lat='55.197572492474656' lon='61.30279730724763'>
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Захаренко' />
+    <tag k='note:location' v='Школа № 3 ' />
+    <tag k='phone' v='+7 351 7427629' />
+    <tag k='ref' v='642' />
+  </node>
+  <node id='-1406' action='modify' visible='true' lat='55.13776874448424' lon='61.42720283154157'>
+    <tag k='addr:housenumber' v='70А' />
+    <tag k='addr:street' v='улица Вагнера' />
+    <tag k='note:location' v='школа № 68' />
+    <tag k='phone' v='+7 351 2567042' />
+    <tag k='ref' v='2000' />
+  </node>
+  <node id='-1405' action='modify' visible='true' lat='55.160141542251374' lon='61.44016001288573'>
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='школа № 48' />
+    <tag k='phone' v='+7 351 7755888' />
+    <tag k='ref' v='725' />
+  </node>
+  <node id='-1404' action='modify' visible='true' lat='55.03824949536559' lon='61.37105453613106'>
+    <tag k='addr:housenumber' v='7 ' />
+    <tag k='addr:street' v='улица Челябинская' />
+    <tag k='note:location' v='(поселок Новосинеглазово) МАУ ДОД «Детская художественная школа искусств»' />
+    <tag k='phone' v='+7 351 280-02-41' />
+    <tag k='ref' v='2109' />
+  </node>
+  <node id='-1403' action='modify' visible='true' lat='55.25189312452979' lon='61.3888240854552'>
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='улица Электростальская' />
+    <tag k='note:location' v='детский ДК «Данко»' />
+    <tag k='phone' v='+7 351 7219432' />
+    <tag k='ref' v='697' />
+  </node>
+  <node id='-1402' action='modify' visible='true' lat='55.173749581070595' lon='61.29748750133877'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='25А' />
+    <tag k='addr:street' v='улица Салавата Юлаева' />
+    <tag k='note:location' v='школа № 129' />
+    <tag k='phone' v='+7 351 7954172' />
+    <tag k='ref' v='586' />
+  </node>
+  <node id='-1401' action='modify' visible='true' lat='55.179980017135335' lon='61.39117139592606'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='28' />
+    <tag k='addr:street' v='улица Калинина' />
+    <tag k='note:location' v='школа № 5' />
+    <tag k='phone' v='+7 351 7910603' />
+    <tag k='ref' v='543' />
+  </node>
+  <node id='-1400' action='modify' visible='true' lat='55.19008959747408' lon='61.28462002378749'>
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='улица Чичерина' />
+    <tag k='note:location' v='Школа № 152' />
+    <tag k='phone' v='+7 351 7969528' />
+    <tag k='ref' v='657' />
+  </node>
+  <node id='-1399' action='modify' visible='true' lat='55.137957952612574' lon='61.42732083250349'>
+    <tag k='addr:housenumber' v='70А' />
+    <tag k='addr:street' v='улица Вагнера' />
+    <tag k='note:location' v='школа № 68' />
+    <tag k='phone' v='+7 351 2567042' />
+    <tag k='ref' v='1994' />
+  </node>
+  <node id='-1398' action='modify' visible='true' lat='55.159797930616854' lon='61.41371047768123'>
+    <tag k='addr:housenumber' v='41А' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='МУП Архитектурно-планировочный центр «Дом архитектора»' />
+    <tag k='phone' v='+7 351 264-36-05' />
+    <tag k='ref' v='2055' />
+  </node>
+  <node id='-1397' action='modify' visible='true' lat='55.25881999207855' lon='61.39455755891866'>
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='улица Богдана Хмельницкого' />
+    <tag k='note:location' v='Металлургический колледж' />
+    <tag k='phone' v='+7 351 7357312' />
+    <tag k='ref' v='687' />
+  </node>
+  <node id='-1396' action='modify' visible='true' lat='55.18283978192658' lon='61.36121084284243'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='48' />
+    <tag k='addr:street' v='улица Коммунальная' />
+    <tag k='note:location' v='Челябинская православная гимназия' />
+    <tag k='phone' v='+7 351 7962915;+7 351 7962862' />
+    <tag k='ref' v='547' />
+  </node>
+  <node id='-1395' action='modify' visible='true' lat='55.19189435955926' lon='61.32677381008273'>
+    <tag k='addr:housenumber' v='55А' />
+    <tag k='addr:street' v='Комсомольский проспект' />
+    <tag k='note:location' v='Школа № 115' />
+    <tag k='phone' v='+7 351 7416491' />
+    <tag k='ref' v='623' />
+  </node>
+  <node id='-1394' action='modify' visible='true' lat='55.12608428945964' lon='61.47504286102346'>
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Энергетиков' />
+    <tag k='note:location' v='профессиональный лицей № 83' />
+    <tag k='phone' v='+7 351 2535713' />
+    <tag k='ref' v='2039' />
+  </node>
+  <node id='-1393' action='modify' visible='true' lat='55.17817695264818' lon='61.42842827337117'>
+    <tag k='addr:housenumber' v='100' />
+    <tag k='addr:street' v='улица Артиллерийская' />
+    <tag k='note:location' v='Технологический колледж' />
+    <tag k='phone' v='+7 351 7734206' />
+    <tag k='ref' v='731' />
+  </node>
+  <node id='-1392' action='modify' visible='true' lat='55.116580990463746' lon='61.380612767558894'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Короленко' />
+    <tag k='note:location' v='(поселок Маяковского) МОУ средняя общеобразовательная школа № 43' />
+    <tag k='phone' v='+7 351 262-06-69' />
+    <tag k='ref' v='2097' />
+  </node>
+  <node id='-1391' action='modify' visible='true' lat='55.266267846182295' lon='61.39750709928393'>
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='улица Дегтярева' />
+    <tag k='note:location' v='лицей № 88' />
+    <tag k='phone' v='+7 351 7352261' />
+    <tag k='ref' v='674' />
+  </node>
+  <node id='-1390' action='modify' visible='true' lat='55.18120686690236' lon='61.349467104929545'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Двинская' />
+    <tag k='note:location' v='школа № 54' />
+    <tag k='phone' v='+7 351 7311151' />
+    <tag k='ref' v='548' />
+  </node>
+  <node id='-1389' action='modify' visible='true' lat='55.19796695947475' lon='61.34701497286831'>
+    <tag k='addr:housenumber' v='39' />
+    <tag k='addr:street' v='улица Куйбышева' />
+    <tag k='note:location' v='Школа № 89' />
+    <tag k='phone' v='+7 351 7411679' />
+    <tag k='ref' v='616' />
+  </node>
+  <node id='-1388' action='modify' visible='true' lat='55.239098306363644' lon='61.393279528750114'>
+    <tag k='addr:housenumber' v='18А' />
+    <tag k='addr:street' v='улица 32-ой Годовщины Октября' />
+    <tag k='note:location' v='школа № 71' />
+    <tag k='phone' v='+7 351 7215409' />
+    <tag k='ref' v='723' />
+  </node>
+  <node id='-1387' action='modify' visible='true' lat='55.141297785541354' lon='61.4456988591668'>
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Пограничная' />
+    <tag k='note:location' v='профессиональное училище № 20' />
+    <tag k='phone' v='+7 351 2565315' />
+    <tag k='ref' v='2020' />
+  </node>
+  <node id='-1386' action='modify' visible='true' lat='55.185562762563414' lon='61.4582743342722'>
+    <tag k='addr:housenumber' v='32' />
+    <tag k='addr:street' v='улица Бажова' />
+    <tag k='note:location' v='школа № 120' />
+    <tag k='phone' v='+7 351 7722644' />
+    <tag k='ref' v='763' />
+  </node>
+  <node id='-1385' action='modify' visible='true' lat='55.14753910587337' lon='61.41432999205171'>
+    <tag k='addr:housenumber' v='100А' />
+    <tag k='addr:street' v='улица Свободы' />
+    <tag k='note:location' v='МОУ средняя общеобразовательная школа № 58' />
+    <tag k='phone' v='+7 351 237-04-21' />
+    <tag k='ref' v='2069' />
+  </node>
+  <node id='-1384' action='modify' visible='true' lat='55.13631596090836' lon='61.37944542013266'>
+    <tag k='addr:housenumber' v='5А' />
+    <tag k='addr:street' v='улица Учебная' />
+    <tag k='note:location' v='(поселок им. Некрасово) МОУ лицей № 142' />
+    <tag k='phone' v='+7 351 232-96-61' />
+    <tag k='ref' v='2088' />
+  </node>
+  <node id='-1383' action='modify' visible='true' lat='55.186467348404896' lon='61.44425987206789'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='23' />
+    <tag k='addr:street' v='улица Героев Танкограда' />
+    <tag k='note:location' v='Центр развития творчества детей и юношества' />
+    <tag k='phone' v='+7 351 7720938' />
+    <tag k='ref' v='2252' />
+  </node>
+  <node id='-1382' action='modify' visible='true' lat='55.19180152602626' lon='61.35384813395928'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Красного Урала' />
+    <tag k='note:location' v='Школа № 45' />
+    <tag k='phone' v='+7 351 7411885' />
+    <tag k='ref' v='610' />
+  </node>
+  <node id='-1381' action='modify' visible='true' lat='55.265888024479125' lon='61.3974933700388'>
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='улица Дегтярева' />
+    <tag k='note:location' v='лицей № 88' />
+    <tag k='phone' v='+7 351 7352261' />
+    <tag k='ref' v='673' />
+  </node>
+  <node id='-1380' action='modify' visible='true' lat='55.12808922801541' lon='61.47170082002248'>
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='улица Кронштадтская' />
+    <tag k='note:location' v='Челябинский профессионально-педагогический колледж' />
+    <tag k='phone' v='+7 351 2536734' />
+    <tag k='ref' v='2040' />
+  </node>
+  <node id='-1379' action='modify' visible='true' lat='55.16656750883477' lon='61.44923349307916'>
+    <tag k='addr:housenumber' v='21' />
+    <tag k='addr:street' v='улица Первой Пятилетки' />
+    <tag k='note:location' v='Центр социального обслуживания' />
+    <tag k='phone' v='+7 351 7755226' />
+    <tag k='ref' v='742' />
+  </node>
+  <node id='-1378' action='modify' visible='true' lat='55.18032495717443' lon='61.43667973878342'>
+    <tag k='addr:housenumber' v='54' />
+    <tag k='addr:street' v='улица Горького' />
+    <tag k='note:location' v='Колледж культуры' />
+    <tag k='phone' v='+7 351 7721644' />
+    <tag k='ref' v='735' />
+  </node>
+  <node id='-1377' action='modify' visible='true' lat='55.11227937292386' lon='61.340270866590245'>
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='улица Кузнецова' />
+    <tag k='note:location' v='(поселок АМЗ) МОУ средняя общеобразовательная школа № 56' />
+    <tag k='phone' v='+7 351 269-26-99' />
+    <tag k='ref' v='2101' />
+  </node>
+  <node id='-1376' action='modify' visible='true' lat='55.18120627142919' lon='61.3484707096337'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Двинская' />
+    <tag k='note:location' v='школа № 54' />
+    <tag k='phone' v='+7 351 7311151' />
+    <tag k='ref' v='2256' />
+  </node>
+  <node id='-1375' action='modify' visible='true' lat='55.185997689587005' lon='61.32867429842114'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='56Б' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='школа № 123' />
+    <tag k='phone' v='+7 351 7422834' />
+    <tag k='ref' v='563' />
+  </node>
+  <node id='-1374' action='modify' visible='true' lat='55.31209857564276' lon='61.356507993880165'>
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='улица Санаторная' />
+    <tag k='note:location' v='(поселок Каштак) филиал школы № 94' />
+    <tag k='phone' v='+7 351 7704342' />
+    <tag k='ref' v='2224' />
+  </node>
+  <node id='-1373' action='modify' visible='true' lat='55.1914533429349' lon='61.32011177432626'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Ворошилова' />
+    <tag k='note:location' v='Челябинский государственный колледж индустрии питания и торговли' />
+    <tag k='phone' v='+7 351 7415271' />
+    <tag k='ref' v='627' />
+  </node>
+  <node id='-1372' action='modify' visible='true' lat='55.127953923573635' lon='61.43990302876694'>
+    <tag k='addr:housenumber' v='83А' />
+    <tag k='addr:street' v='улица Дзержинского' />
+    <tag k='note:location' v='гимназия № 100' />
+    <tag k='phone' v='+7 351 2562361' />
+    <tag k='ref' v='2026' />
+  </node>
+  <node id='-1371' action='modify' visible='true' lat='55.142854163671565' lon='61.44460300868267'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица Гагарина' />
+    <tag k='note:location' v='Южно-Уральский государственный технический колледж «Политехнический комплекс»' />
+    <tag k='phone' v='+7 351 2562414' />
+    <tag k='ref' v='2017' />
+  </node>
+  <node id='-1370' action='modify' visible='true' lat='55.16717969548453' lon='61.531883728484765'>
+    <tag k='addr:housenumber' v='16А' />
+    <tag k='addr:street' v='улица Эльтонская 2-я' />
+    <tag k='note:location' v='школа № 116' />
+    <tag k='phone' v='+7 351 7751219' />
+    <tag k='ref' v='781' />
+  </node>
+  <node id='-1369' action='modify' visible='true' lat='55.10626584634337' lon='61.335409709057686'>
+    <tag k='addr:housenumber' v='19А' />
+    <tag k='addr:street' v='улица Трактовая' />
+    <tag k='note:location' v='(поселок АМЗ) комитет территориального общественного самоуправления «поселок АМЗ-2»' />
+    <tag k='phone' v='+7 351 269-13-96' />
+    <tag k='ref' v='2103' />
+  </node>
+  <node id='-1368' action='modify' visible='true' lat='55.18637606500563' lon='61.32866636420438'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='56Б' />
+    <tag k='addr:street' v='улица Молодогвардейцев' />
+    <tag k='note:location' v='школа № 123' />
+    <tag k='phone' v='+7 351 7422983' />
+    <tag k='ref' v='564' />
+  </node>
+  <node id='-1367' action='modify' visible='true' lat='55.2400618333815' lon='61.37240129210031'>
+    <tag k='addr:housenumber' v='11Б' />
+    <tag k='addr:street' v='улица Комаровского' />
+    <tag k='note:location' v='школа № 42' />
+    <tag k='phone' v='+7 351 7218477' />
+    <tag k='ref' v='706' />
+  </node>
+  <node id='-1366' action='modify' visible='true' lat='55.23703662485899' lon='61.30523160066433'>
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='11-й Городок' />
+    <tag k='note:location' v='Школа № 28' />
+    <tag k='phone' v='+7 351 7375255' />
+    <tag k='ref' v='653' />
+  </node>
+  <node id='-1365' action='modify' visible='true' lat='55.18688588676969' lon='61.29440116187593'>
+    <tag k='addr:housenumber' v='14А' />
+    <tag k='addr:street' v='улица 40-летия Победы' />
+    <tag k='note:location' v='Школа № 41' />
+    <tag k='phone' v='+7 351 7967035' />
+    <tag k='ref' v='649' />
+  </node>
+  <node id='-1364' action='modify' visible='true' lat='55.12129062852545' lon='61.507193476717106'>
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='Копейское шоссе' />
+    <tag k='note:location' v='спортивный комплекс «Торпедо»' />
+    <tag k='phone' v='+7 351 2539526' />
+    <tag k='ref' v='2050' />
+  </node>
+  <node id='-1363' action='modify' visible='true' lat='55.17453457526388' lon='61.46940039109918'>
+    <tag k='addr:housenumber' v='58' />
+    <tag k='addr:street' v='улица Кулибина' />
+    <tag k='note:location' v='школа № 81' />
+    <tag k='phone' v='+7 351 7724455' />
+    <tag k='ref' v='767' />
+  </node>
+  <node id='-1362' action='modify' visible='true' lat='55.25250914398492' lon='61.39205416263124'>
+    <tag k='addr:housenumber' v='27' />
+    <tag k='addr:street' v='улица Жукова' />
+    <tag k='note:location' v='школа-интернат № 10' />
+    <tag k='phone' v='+7 351 7356457' />
+    <tag k='ref' v='688' />
+  </node>
+  <node id='-1361' action='modify' visible='true' lat='55.173110330357076' lon='61.392595131330616'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='64' />
+    <tag k='addr:street' v='улица Каслинская' />
+    <tag k='note:location' v='ОАО «Торговый центр»' />
+    <tag k='phone' v='+7 351 2646600' />
+    <tag k='ref' v='2255' />
+  </node>
+  <node id='-1360' action='modify' visible='true' lat='55.185895865356976' lon='61.42301403539625'>
+    <tag k='addr:city' v='Челябинск' />
+    <tag k='addr:housenumber' v='144' />
+    <tag k='addr:street' v='проспект Победы' />
+    <tag k='note:location' v='Спортивный клуб «Атлант»' />
+    <tag k='phone' v='+7 351 7729128' />
+    <tag k='ref' v='524' />
+  </node>
+  <node id='-1359' action='modify' visible='true' lat='55.191399530360236' lon='61.344115392035874'>
+    <tag k='addr:housenumber' v='10А' />
+    <tag k='addr:street' v='улица Пионерская' />
+    <tag k='note:location' v='Гимназия № 26' />
+    <tag k='phone' v='+7 351 7413733' />
+    <tag k='ref' v='611' />
+  </node>
+  <node id='-1358' action='modify' visible='true' lat='55.123698474483255' lon='61.51397592944468'>
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Уральская' />
+    <tag k='note:location' v='школа № 108' />
+    <tag k='phone' v='+7 351 2539098' />
+    <tag k='ref' v='2052' />
+  </node>
+  <node id='-1357' action='modify' visible='true' lat='55.182270907038095' lon='61.465848058118034'>
+    <tag k='addr:housenumber' v='30' />
+    <tag k='addr:street' v='улица Октябрьская' />
+    <tag k='note:location' v='школа № 119' />
+    <tag k='phone' v='+7 351 7729598' />
+    <tag k='ref' v='768' />
+  </node>
+  <node id='-1352' action='modify' visible='true' lat='56.074954884848715' lon='60.749437001324985'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='Нечая' />
+    <tag k='note:location' v='Школа 135' />
+    <tag k='phone' v='+7 35146 71284' />
+    <tag k='phone:election_day' v='+7 35146 71369' />
+    <tag k='ref' v='1272' />
+  </node>
+  <node id='-1350' action='modify' visible='true' lat='56.08172723697486' lon='60.745283505199616'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='улица Комсомольская' />
+    <tag k='note:location' v='ЦДО' />
+    <tag k='phone' v='+7 35146 34322' />
+    <tag k='ref' v='1273' />
+  </node>
+  <node id='-1348' action='modify' visible='true' lat='56.08690462287889' lon='60.741279942779734'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='улица 40 лет Октября' />
+    <tag k='note:location' v='ЮУрГУ' />
+    <tag k='phone' v='+7 35146 32659' />
+    <tag k='ref' v='1274' />
+  </node>
+  <node id='-1346' action='modify' visible='true' lat='56.090998162217346' lon='60.736453828040865'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица 40 лет Октября' />
+    <tag k='note:location' v='ДЮСШ по гандболу' />
+    <tag k='phone' v='+7 35146 32167' />
+    <tag k='ref' v='1275' />
+  </node>
+  <node id='-1344' action='modify' visible='true' lat='56.08348708749875' lon='60.73346730503822'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='улица Свердлова' />
+    <tag k='note:location' v='Школа 125' />
+    <tag k='phone' v='+7 35146 32905' />
+    <tag k='ref' v='1276' />
+  </node>
+  <node id='-1342' action='modify' visible='true' lat='56.09034038916925' lon='60.72631963817362'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='54' />
+    <tag k='addr:street' v='улица Васильева' />
+    <tag k='note:location' v='Школа 126' />
+    <tag k='phone' v='+7 35146 32188' />
+    <tag k='ref' v='1277' />
+  </node>
+  <node id='-1340' action='modify' visible='true' lat='56.08942663811412' lon='60.72648342464567'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='35' />
+    <tag k='addr:street' v='улица Васильева' />
+    <tag k='note:location' v='Клуб Юбилейный' />
+    <tag k='phone' v='+7 35146 37292' />
+    <tag k='ref' v='1278' />
+  </node>
+  <node id='-1338' action='modify' visible='true' lat='56.08695059059162' lon='60.72612234992315'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='50' />
+    <tag k='addr:street' v='улица Ленина' />
+    <tag k='note:location' v='Гимназия 127' />
+    <tag k='phone' v='+7 35146 37877' />
+    <tag k='ref' v='1279' />
+  </node>
+  <node id='-1336' action='modify' visible='true' lat='56.08656884201743' lon='60.73265773257154'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='улица Свердлова' />
+    <tag k='note:location' v='ДК Октябрь' />
+    <tag k='phone' v='+7 35146 38246' />
+    <tag k='ref' v='1280' />
+  </node>
+  <node id='-1334' action='modify' visible='true' lat='56.08272834319685' lon='60.72057306421875'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='39' />
+    <tag k='addr:street' v='улица Дзержинского' />
+    <tag k='note:location' v='клуб Синара' />
+    <tag k='phone' v='+7 35146 32787' />
+    <tag k='ref' v='1281' />
+  </node>
+  <node id='-1332' action='modify' visible='true' lat='56.08117909041114' lon='60.725982351488824'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='25' />
+    <tag k='addr:street' v='улица Дзержинского' />
+    <tag k='note:location' v='Школа 121' />
+    <tag k='phone' v='+7 35146 31449' />
+    <tag k='ref' v='1282' />
+  </node>
+  <node id='-1330' action='modify' visible='true' lat='56.080160365283014' lon='60.74450266668613'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='улица Забабахина' />
+    <tag k='note:location' v='Снежинский политехникум' />
+    <tag k='phone' v='+7 35146 39788' />
+    <tag k='ref' v='1283' />
+  </node>
+  <node id='-1328' action='modify' visible='true' lat='56.08071863546536' lon='60.74775649661803'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='улица Комсомольская' />
+    <tag k='note:location' v='Школа 122' />
+    <tag k='phone' v='+7 35146 24601' />
+    <tag k='ref' v='1284' />
+  </node>
+  <node id='-1326' action='modify' visible='true' lat='56.08091370556548' lon='60.751124555796274'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='улица Комсомольская' />
+    <tag k='note:location' v='Снежинский политехникум' />
+    <tag k='phone' v='+7 35146 22571' />
+    <tag k='phone:election_day' v='+7 35146 22671' />
+    <tag k='ref' v='1285' />
+  </node>
+  <node id='-1324' action='modify' visible='true' lat='56.079639323498014' lon='60.75896789466699'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='улица Мира' />
+    <tag k='note:location' v='Школа 117' />
+    <tag k='phone' v='+7 35146 23787' />
+    <tag k='ref' v='1286' />
+  </node>
+  <node id='-1322' action='modify' visible='true' lat='56.07518080822368' lon='60.752545702408696'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='улица Мира' />
+    <tag k='note:location' v='Библиотека' />
+    <tag k='phone' v='+735146 72033' />
+    <tag k='ref' v='1287' />
+  </node>
+  <node id='-1320' action='modify' visible='true' lat='56.08061248544617' lon='60.75262064206116'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='улица Комсомольская' />
+    <tag k='note:location' v='СФТИ' />
+    <tag k='phone' v='+7 35146 32849' />
+    <tag k='ref' v='1288' />
+  </node>
+  <node id='-1318' action='modify' visible='true' lat='56.070126081614355' lon='60.77162728028288'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='улица Строителей' />
+    <tag k='note:location' v='клуб Дружба' />
+    <tag k='phone' v='+7 35146 37191' />
+    <tag k='ref' v='1289' />
+  </node>
+  <node id='-1316' action='modify' visible='true' lat='55.9867405593668' lon='60.708923663631566'>
+    <tag k='addr:city' v='Снежинск' />
+    <tag k='addr:housenumber' v='2А' />
+    <tag k='addr:street' v='улица Кирова' />
+    <tag k='note:location' v='клуб Химик' />
+    <tag k='phone' v='+7 35146 21396' />
+    <tag k='ref' v='1290' />
+  </node>
+  <node id='-1314' action='modify' visible='true' lat='56.01152114253734' lon='60.78017036544178'>
+    <tag k='addr:city' v='Ближний Береговой' />
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='улица Центральная' />
+    <tag k='note:location' v='Клуб' />
+    <tag k='phone' v='+7 35146 23098' />
+    <tag k='ref' v='1291' />
+  </node>
+  <node id='-1312' action='modify' visible='true' lat='55.157739568976' lon='61.37334038860495'>
+    <tag k='addr:housenumber' v='54' />
+    <tag k='addr:street' v='улица Сони Кривой' />
+    <tag k='note:location' v='школа № 138' />
+    <tag k='phone' v='+7 351 2653707' />
+    <tag k='ref' v='816' />
+  </node>
+  <node id='-1310' action='modify' visible='true' lat='55.154580198190075' lon='61.38823783656998'>
+    <tag k='addr:housenumber' v='84А' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='школа № 147' />
+    <tag k='phone' v='+7 351 2325834' />
+    <tag k='ref' v='807' />
+  </node>
+  <node id='-1308' action='modify' visible='true' lat='55.16634057276279' lon='61.38197800955396'>
+    <tag k='addr:housenumber' v='39' />
+    <tag k='addr:street' v='улица Энгельса' />
+    <tag k='note:location' v='Челябинский областной реабилитационный культурно-спортивный центр регионального отделения Всероссийского общества слепых' />
+    <tag k='phone' v='+7 351 2646461' />
+    <tag k='ref' v='794' />
+  </node>
+  <node id='-1306' action='modify' visible='true' lat='55.1723922919516' lon='61.42194851248887'>
+    <tag k='addr:housenumber' v='61' />
+    <tag k='addr:street' v='улица 3-го Интернационала' />
+    <tag k='note:location' v='школа № 8' />
+    <tag k='phone' v='+7 351 2644073' />
+    <tag k='ref' v='785' />
+  </node>
+  <node id='-1304' action='modify' visible='true' lat='55.16582204101648' lon='61.29960495349002'>
+    <tag k='addr:housenumber' v='5А' />
+    <tag k='addr:street' v='улица Академика Макеева' />
+    <tag k='note:location' v='школа № 148 (филиал)' />
+    <tag k='phone' v='+7 351 2811478' />
+    <tag k='ref' v='825' />
+  </node>
+  <node id='-1302' action='modify' visible='true' lat='55.14537015491829' lon='61.37678343065933'>
+    <tag k='addr:housenumber' v='7/1' />
+    <tag k='addr:street' v='улица Образцова' />
+    <tag k='note:correction' v='Номер дома 7/1, а не 7' />
+    <tag k='note:location' v='НОП «Челябинский учебный центр “Тео-практ” (административное здание)' />
+    <tag k='phone' v='+7 351 2320300' />
+    <tag k='ref' v='820' />
+  </node>
+  <node id='-1300' action='modify' visible='true' lat='55.14887218568735' lon='61.38120470924484'>
+    <tag k='addr:housenumber' v='103' />
+    <tag k='addr:street' v='улица Энгельса' />
+    <tag k='note:location' v='общежитие № 4 Челябинского государственного педагогического университета' />
+    <tag k='phone' v='+7 351 2320753' />
+    <tag k='ref' v='811' />
+  </node>
+  <node id='-1298' action='modify' visible='true' lat='55.15918502385844' lon='61.374698590977644'>
+    <tag k='addr:housenumber' v='79' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='ПК ГПИ «Институт Челябинскгражданпроект»' />
+    <tag k='phone' v='+7 351 2654756' />
+    <tag k='ref' v='814' />
+  </node>
+  <node id='-1296' action='modify' visible='true' lat='55.154595000727284' lon='61.38742212466474'>
+    <tag k='addr:housenumber' v='84А' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='школа № 147' />
+    <tag k='phone' v='+7 351 2325834' />
+    <tag k='ref' v='805' />
+  </node>
+  <node id='-1294' action='modify' visible='true' lat='55.16887624546085' lon='61.346350128407586'>
+    <tag k='addr:housenumber' v='26' />
+    <tag k='addr:suburb' v='поселок Мелькомбинат 2 участок 1' />
+    <tag k='note:location' v='школа № 30 (филиал)' />
+    <tag k='phone' v='+7 351 7420557' />
+    <tag k='ref' v='800' />
+  </node>
+  <node id='-1292' action='modify' visible='true' lat='55.16414164927191' lon='61.4147592554203'>
+    <tag k='addr:housenumber' v='93' />
+    <tag k='addr:street' v='улица Красноармейская' />
+    <tag k='note:correction' v='Номер дома 93, а не 93А' />
+    <tag k='note:location' v='начальная школа № 90' />
+    <tag k='phone' v='+7 351 2661954' />
+    <tag k='ref' v='791' />
+  </node>
+  <node id='-1290' action='modify' visible='true' lat='55.15016657859981' lon='61.30742146886913'>
+    <tag k='addr:housenumber' v='3А' />
+    <tag k='addr:street' v='улица Центральная' />
+    <tag k='note:location' v='административное здание' />
+    <tag k='phone' v='+7 351 2326515' />
+    <tag k='ref' v='818' />
+  </node>
+  <node id='-1288' action='modify' visible='true' lat='55.15270864037486' lon='61.377168560781435'>
+    <tag k='addr:housenumber' v='15Б' />
+    <tag k='addr:street' v='улица Энтузиастов' />
+    <tag k='note:location' v='школа № 153' />
+    <tag k='phone' v='+7 351 2324278' />
+    <tag k='ref' v='809' />
+  </node>
+  <node id='-1286' action='modify' visible='true' lat='55.15945354330506' lon='61.387836088578936'>
+    <tag k='addr:housenumber' v='69' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='Челябинский государственный педагогический университет' />
+    <tag k='phone' v='+7 351 2396321' />
+    <tag k='ref' v='804' />
+  </node>
+  <node id='-1284' action='modify' visible='true' lat='55.16446471743899' lon='61.3848282305614'>
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='улица Володарского' />
+    <tag k='note:location' v='лицей № 31' />
+    <tag k='phone' v='+7 351 2635107' />
+    <tag k='ref' v='795' />
+  </node>
+  <node id='-1282' action='modify' visible='true' lat='55.161970003749715' lon='61.377757315511204'>
+    <tag k='addr:housenumber' v='133' />
+    <tag k='addr:street' v='улица Коммуны' />
+    <tag k='note:location' v='Челябинская областная детская библиотека имени В. Маяковского' />
+    <tag k='phone' v='+7 351 2653000' />
+    <tag k='ref' v='798' />
+  </node>
+  <node id='-1280' action='modify' visible='true' lat='55.16241972527331' lon='61.42254299541396'>
+    <tag k='addr:housenumber' v='113' />
+    <tag k='addr:street' v='улица 3-го Интернационала' />
+    <tag k='note:location' v='гимназия № 63' />
+    <tag k='phone' v='+7 351 2649177' />
+    <tag k='ref' v='789' />
+  </node>
+  <node id='-1278' action='modify' visible='true' lat='55.17236504150432' lon='61.4211402436732'>
+    <tag k='addr:housenumber' v='61' />
+    <tag k='addr:street' v='улица 3-го Интернационала' />
+    <tag k='note:location' v='школа № 8' />
+    <tag k='phone' v='+7 351 2644073' />
+    <tag k='ref' v='784' />
+  </node>
+  <node id='-1276' action='modify' visible='true' lat='55.13555933486958' lon='61.366520786074084'>
+    <tag k='FIXME' v='Уточнить расположение и номер дома' />
+    <tag k='addr:housenumber' v='70/2' />
+    <tag k='addr:street' v='улица Воровского' />
+    <tag k='note:location' v='Челябинский областной клинический терапевтический госпиталь для ветеранов войны' />
+    <tag k='phone' v='+7 351 2327953' />
+    <tag k='phone:election_day' v='+7 351 2328136' />
+    <tag k='ref' v='828' />
+  </node>
+  <node id='-1274' action='modify' visible='true' lat='55.16608753882502' lon='61.29960095966905'>
+    <tag k='addr:housenumber' v='5А' />
+    <tag k='addr:street' v='улица Академика Макеева' />
+    <tag k='note:location' v='школа № 148 (филиал)' />
+    <tag k='phone' v='+7 351 2811478' />
+    <tag k='ref' v='824' />
+  </node>
+  <node id='-1272' action='modify' visible='true' lat='55.15702696618438' lon='61.37174968548073'>
+    <tag k='addr:housenumber' v='79' />
+    <tag k='addr:street' v='улица Сони Кривой' />
+    <tag k='note:location' v='общежитие № 3 Южно-Уральского государственного университета' />
+    <tag k='phone' v='+7 351 2679363' />
+    <tag k='ref' v='815' />
+  </node>
+  <node id='-1270' action='modify' visible='true' lat='55.15925880200091' lon='61.39291170111988'>
+    <tag k='addr:housenumber' v='38' />
+    <tag k='addr:street' v='улица Красная' />
+    <tag k='note:location' v='Челябинская государственная агроинженерная академия' />
+    <tag k='phone' v='+7 351 2632254' />
+    <tag k='ref' v='802' />
+  </node>
+  <node id='-1268' action='modify' visible='true' lat='55.16714830575295' lon='61.39719554112822'>
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='улица Елькина' />
+    <tag k='note:location' v='гимназия № 10' />
+    <tag k='phone' v='+7 351 2630962' />
+    <tag k='ref' v='793' />
+  </node>
+  <node id='-1266' action='modify' visible='true' lat='55.16786369110087' lon='61.41268753375232'>
+    <tag k='addr:housenumber' v='88' />
+    <tag k='addr:street' v='улица Красноармейская' />
+    <tag k='note:location' v='Государственное образовательное учреждение дополнительного профессионального образования «Челябинский институт переподготовки и повышения квалификации работников образования» (ГОУ ДПО ЧИППКРО)' />
+    <tag k='phone' v='+7 351 2617014' />
+    <tag k='ref' v='788' />
+  </node>
+  <node id='-1264' action='modify' visible='true' lat='55.13625381535873' lon='61.37145771747468'>
+    <tag k='FIXME' v='Уточнить в каком здании' />
+    <tag k='addr:housenumber' v='70' />
+    <tag k='addr:street' v='улица Воровского' />
+    <tag k='phone' v='+7 351 2328238' />
+    <tag k='ref' v='827' />
+  </node>
+  <node id='-1262' action='modify' visible='true' lat='55.14772655876585' lon='61.36740423929707'>
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Худякова' />
+    <tag k='note:location' v='прогимназия № 133' />
+    <tag k='phone' v='+7 351 2628998' />
+    <tag k='ref' v='819' />
+  </node>
+  <node id='-1260' action='modify' visible='true' lat='55.14024471297498' lon='61.374223141612276'>
+    <tag k='addr:housenumber' v='64' />
+    <tag k='addr:street' v='улица Воровского' />
+    <tag k='note:location' v='Челябинская государственная медицинская академия' />
+    <tag k='phone' v='+7 351 2611447' />
+    <tag k='ref' v='822' />
+  </node>
+  <node id='-1258' action='modify' visible='true' lat='55.15319068266255' lon='61.37716594765567'>
+    <tag k='addr:housenumber' v='15Б' />
+    <tag k='addr:street' v='улица Энтузиастов' />
+    <tag k='note:location' v='школа № 153' />
+    <tag k='phone' v='+7 351 2324278' />
+    <tag k='ref' v='813' />
+  </node>
+  <node id='-1256' action='modify' visible='true' lat='55.15519356909125' lon='61.38230042508708'>
+    <tag k='addr:housenumber' v='79' />
+    <tag k='addr:street' v='улица Энгельса' />
+    <tag k='note:location' v='Челябинский автотранспортный техникум' />
+    <tag k='phone' v='+7 351 2324939' />
+    <tag k='ref' v='808' />
+  </node>
+  <node id='-1254' action='modify' visible='true' lat='55.161267027040864' lon='61.366467221915634'>
+    <tag k='addr:housenumber' v='147' />
+    <tag k='addr:street' v='улица Коммуны' />
+    <tag k='note:location' v='общежитие № 5 Южно–Уральского государственного университета' />
+    <tag k='phone' v='+7 351 2679947' />
+    <tag k='ref' v='799' />
+  </node>
+  <node id='-1252' action='modify' visible='true' lat='55.17284200412604' lon='61.42195846855479'>
+    <tag k='addr:housenumber' v='61' />
+    <tag k='addr:street' v='улица 3-го Интернационала' />
+    <tag k='note:location' v='школа № 8' />
+    <tag k='phone' v='+7 351 2644073' />
+    <tag k='ref' v='786' />
+  </node>
+  <node id='-1250' action='modify' visible='true' lat='55.16556147218297' lon='61.299617169965416'>
+    <tag k='addr:housenumber' v='5А' />
+    <tag k='addr:street' v='улица Академика Макеева' />
+    <tag k='note:location' v='школа № 148 (филиал)' />
+    <tag k='phone' v='+7 351 2811478' />
+    <tag k='ref' v='2258' />
+  </node>
+  <node id='-1248' action='modify' visible='true' lat='55.15120589006002' lon='61.37076627703258'>
+    <tag k='addr:housenumber' v='13А' />
+    <tag k='addr:street' v='улица Смирных' />
+    <tag k='note:location' v='детская библиотека № 8' />
+    <tag k='phone' v='+7 351 2322056' />
+    <tag k='ref' v='817' />
+  </node>
+  <node id='-1246' action='modify' visible='true' lat='55.15293658204186' lon='61.377162311018154'>
+    <tag k='addr:housenumber' v='15Б' />
+    <tag k='addr:street' v='улица Энтузиастов' />
+    <tag k='note:location' v='школа № 153' />
+    <tag k='phone' v='+7 351 2324278' />
+    <tag k='ref' v='812' />
+  </node>
+  <node id='-1244' action='modify' visible='true' lat='55.15867790055236' lon='61.392986668028655'>
+    <tag k='addr:housenumber' v='38' />
+    <tag k='addr:street' v='улица Красная' />
+    <tag k='note:location' v='Челябинская государственная агроинженерная академия' />
+    <tag k='phone' v='+7 351 2632254' />
+    <tag k='ref' v='803' />
+  </node>
+  <node id='-1242' action='modify' visible='true' lat='55.15445587651037' lon='61.38784211434048'>
+    <tag k='addr:housenumber' v='84А' />
+    <tag k='addr:street' v='Свердловский проспект' />
+    <tag k='note:location' v='школа № 147' />
+    <tag k='phone' v='+7 351 2325834' />
+    <tag k='ref' v='806' />
+  </node>
+  <node id='-1240' action='modify' visible='true' lat='55.163631075685224' lon='61.385249793644086'>
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='улица Володарского' />
+    <tag k='note:location' v='школа № 30' />
+    <tag k='phone' v='+7 351 2652523' />
+    <tag k='ref' v='797' />
+  </node>
+  <node id='-1238' action='modify' visible='true' lat='55.16434864783574' lon='61.41272019339515'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:housenumber' v='140' />
+    <tag k='addr:street' v='улица Красноармейская' />
+    <tag k='note:location' v='Дворец культуры имени 50-летия Октября регионального отделения Всероссийского общества глухих' />
+    <tag k='phone' v='+7 351 2633092' />
+    <tag k='ref' v='792' />
+  </node>
+  <node id='-1236' action='modify' visible='true' lat='55.06652423922243' lon='61.265251748446445'>
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='улица Пионерская' />
+    <tag k='note:location' v='Дом культуры МУП ПОВВ (микрорайон Сосновка)' />
+    <tag k='phone' v='+7 351 7307949' />
+    <tag k='ref' v='823' />
+  </node>
+  <node id='-1234' action='modify' visible='true' lat='55.1498670850947' lon='61.384491602624585'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:housenumber' v='36А' />
+    <tag k='addr:street' v='улица Воровского' />
+    <tag k='note:location' v='ГУДОД «Областной центр дополнительного образования детей»' />
+    <tag k='phone' v='+7 351 2320495' />
+    <tag k='ref' v='810' />
+  </node>
+  <node id='-1232' action='modify' visible='true' lat='55.15994688287137' lon='61.366285738756815'>
+    <tag k='addr:housenumber' v='80' />
+    <tag k='addr:street' v='проспект Ленина' />
+    <tag k='note:location' v='общежитие № 7 Южно-Уральского государственного университета' />
+    <tag k='phone' v='+7 351 2679476' />
+    <tag k='ref' v='801' />
+  </node>
+  <node id='-1230' action='modify' visible='true' lat='55.16473589800434' lon='61.384823287361016'>
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='улица Володарского' />
+    <tag k='note:location' v='лицей № 31' />
+    <tag k='phone' v='+7 351 2635107' />
+    <tag k='ref' v='796' />
+  </node>
+  <node id='-1228' action='modify' visible='true' lat='55.16222287211319' lon='61.42244134392203'>
+    <tag k='addr:housenumber' v='113' />
+    <tag k='addr:street' v='улица 3-го Интернационала' />
+    <tag k='note:location' v='гимназия  № 63' />
+    <tag k='phone' v='+7 351 2649177' />
+    <tag k='ref' v='787' />
+  </node>
+  <node id='-1226' action='modify' visible='true' lat='55.16262230265566' lon='61.422443673996646'>
+    <tag k='addr:housenumber' v='113' />
+    <tag k='addr:street' v='улица 3-го Интернационала' />
+    <tag k='note:location' v='гимназия № 63' />
+    <tag k='phone' v='+7 351 2649177' />
+    <tag k='ref' v='790' />
+  </node>
+  <node id='-1224' action='modify' visible='true' lat='55.15461563417321' lon='61.39212724077812'>
+    <tag k='FIXME' v='Уточнить в какой части здания' />
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='улица Воровского' />
+    <tag k='note:location' v='городская клиническая больница № 1' />
+    <tag k='phone' v='+7 351 2326706' />
+    <tag k='ref' v='826' />
+  </node>
+  <node id='-1222' action='modify' visible='true' lat='55.13355469769327' lon='61.369397736999844'>
+    <tag k='addr:housenumber' v='42' />
+    <tag k='addr:street' v='улица Блюхера' />
+    <tag k='note:location' v='Челябинский областной клинический онкологический диспансер' />
+    <tag k='ref' v='2251' />
+  </node>
+  <node id='-1220' action='modify' visible='true' lat='55.14088769764956' lon='61.37423677362244'>
+    <tag k='addr:housenumber' v='64' />
+    <tag k='addr:street' v='улица Воровского' />
+    <tag k='note:location' v='Челябинская государственная медицинская академия' />
+    <tag k='phone' v='+7 351 2607755' />
+    <tag k='ref' v='821' />
+  </node>
+  <relation id='-1756' visible='true'>
+    <member type='node' ref='-1258' role='' />
+    <member type='node' ref='-1310' role='' />
+    <member type='node' ref='-1260' role='' />
+    <member type='node' ref='-1252' role='' />
+    <member type='node' ref='-1284' role='' />
+    <member type='node' ref='-1286' role='' />
+    <member type='node' ref='-1262' role='' />
+    <member type='node' ref='-1296' role='' />
+    <member type='node' ref='-1264' role='' />
+    <member type='node' ref='-1276' role='' />
+    <member type='node' ref='-1238' role='' />
+    <member type='node' ref='-1268' role='' />
+    <member type='node' ref='-1312' role='' />
+    <member type='node' ref='-1270' role='' />
+    <member type='node' ref='-1248' role='' />
+    <member type='node' ref='-1300' role='' />
+    <member type='node' ref='-1250' role='' />
+    <member type='node' ref='-1226' role='' />
+    <member type='node' ref='-1254' role='' />
+    <member type='node' ref='-1298' role='' />
+    <member type='node' ref='-1256' role='' />
+    <member type='node' ref='-1236' role='' />
+    <member type='node' ref='-1288' role='' />
+    <member type='node' ref='-1228' role='' />
+    <member type='node' ref='-1230' role='' />
+    <member type='node' ref='-1240' role='' />
+    <member type='node' ref='-1302' role='' />
+    <member type='node' ref='-1242' role='' />
+    <member type='node' ref='-1220' role='' />
+    <member type='node' ref='-1222' role='' />
+    <member type='node' ref='-1278' role='' />
+    <member type='node' ref='-1306' role='' />
+    <member type='node' ref='-1308' role='' />
+    <member type='node' ref='-1244' role='' />
+    <member type='node' ref='-1290' role='' />
+    <member type='node' ref='-1246' role='' />
+    <member type='node' ref='-1224' role='' />
+    <member type='node' ref='-1292' role='' />
+    <member type='node' ref='-1294' role='' />
+    <member type='node' ref='-1272' role='' />
+    <member type='node' ref='-1232' role='' />
+    <member type='node' ref='-1274' role='' />
+    <member type='node' ref='-1234' role='' />
+    <member type='node' ref='-1304' role='' />
+    <member type='node' ref='-1266' role='' />
+    <member type='node' ref='-1280' role='' />
+    <member type='node' ref='-1282' role='' />
+    <tag k='name' v='УИКи Центрального района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1755' visible='true'>
+    <member type='node' ref='-1679' role='' />
+    <member type='node' ref='-1414' role='' />
+    <member type='node' ref='-1448' role='' />
+    <member type='node' ref='-1487' role='' />
+    <member type='node' ref='-1524' role='' />
+    <member type='node' ref='-1481' role='' />
+    <member type='node' ref='-1518' role='' />
+    <member type='node' ref='-1557' role='' />
+    <member type='node' ref='-1596' role='' />
+    <member type='node' ref='-1720' role='' />
+    <member type='node' ref='-1365' role='' />
+    <member type='node' ref='-1407' role='' />
+    <member type='node' ref='-1442' role='' />
+    <member type='node' ref='-1400' role='' />
+    <member type='node' ref='-1436' role='' />
+    <member type='node' ref='-1474' role='' />
+    <member type='node' ref='-1511' role='' />
+    <member type='node' ref='-1634' role='' />
+    <member type='node' ref='-1673' role='' />
+    <member type='node' ref='-1713' role='' />
+    <member type='node' ref='-1359' role='' />
+    <member type='node' ref='-1432' role='' />
+    <member type='node' ref='-1469' role='' />
+    <member type='node' ref='-1507' role='' />
+    <member type='node' ref='-1545' role='' />
+    <member type='node' ref='-1667' role='' />
+    <member type='node' ref='-1708' role='' />
+    <member type='node' ref='-1746' role='' />
+    <member type='node' ref='-1395' role='' />
+    <member type='node' ref='-1741' role='' />
+    <member type='node' ref='-1389' role='' />
+    <member type='node' ref='-1427' role='' />
+    <member type='node' ref='-1463' role='' />
+    <member type='node' ref='-1584' role='' />
+    <member type='node' ref='-1623' role='' />
+    <member type='node' ref='-1659' role='' />
+    <member type='node' ref='-1702' role='' />
+    <member type='node' ref='-1653' role='' />
+    <member type='node' ref='-1696' role='' />
+    <member type='node' ref='-1735' role='' />
+    <member type='node' ref='-1382' role='' />
+    <member type='node' ref='-1501' role='' />
+    <member type='node' ref='-1539' role='' />
+    <member type='node' ref='-1578' role='' />
+    <member type='node' ref='-1617' role='' />
+    <member type='node' ref='-1572' role='' />
+    <member type='node' ref='-1611' role='' />
+    <member type='node' ref='-1647' role='' />
+    <member type='node' ref='-1689' role='' />
+    <member type='node' ref='-1421' role='' />
+    <member type='node' ref='-1457' role='' />
+    <member type='node' ref='-1495' role='' />
+    <member type='node' ref='-1533' role='' />
+    <member type='node' ref='-1373' role='' />
+    <member type='node' ref='-1415' role='' />
+    <member type='node' ref='-1449' role='' />
+    <member type='node' ref='-1488' role='' />
+    <member type='node' ref='-1609' role='' />
+    <member type='node' ref='-1646' role='' />
+    <member type='node' ref='-1687' role='' />
+    <member type='node' ref='-1728' role='' />
+    <member type='node' ref='-1680' role='' />
+    <member type='node' ref='-1721' role='' />
+    <member type='node' ref='-1366' role='' />
+    <member type='node' ref='-1408' role='' />
+    <member type='node' ref='-1525' role='' />
+    <member type='node' ref='-1565' role='' />
+    <member type='node' ref='-1603' role='' />
+    <member type='node' ref='-1641' role='' />
+    <member type='node' ref='-1597' role='' />
+    <member type='node' ref='-1635' role='' />
+    <member type='node' ref='-1674' role='' />
+    <member type='node' ref='-1714' role='' />
+    <member type='node' ref='-1443' role='' />
+    <tag k='name' v='УИКи Курчатовсокго района' />
+    <tag k='type`' v='collection' />
+  </relation>
+  <relation id='-1754' visible='true'>
+    <member type='node' ref='-1725' role='' />
+    <member type='node' ref='-1492' role='' />
+    <member type='node' ref='-1569' role='' />
+    <member type='node' ref='-1562' role='' />
+    <member type='node' ref='-1639' role='' />
+    <member type='node' ref='-1412' role='' />
+    <member type='node' ref='-1485' role='' />
+    <member type='node' ref='-1479' role='' />
+    <member type='node' ref='-1555' role='' />
+    <member type='node' ref='-1718' role='' />
+    <member type='node' ref='-1405' role='' />
+    <member type='node' ref='-1510' role='' />
+    <member type='node' ref='-1588' role='' />
+    <member type='node' ref='-1357' role='' />
+    <member type='node' ref='-1435' role='' />
+    <member type='node' ref='-1430' role='' />
+    <member type='node' ref='-1505' role='' />
+    <member type='node' ref='-1665' role='' />
+    <member type='node' ref='-1744' role='' />
+    <member type='node' ref='-1739' role='' />
+    <member type='node' ref='-1425' role='' />
+    <member type='node' ref='-1582' role='' />
+    <member type='node' ref='-1657' role='' />
+    <member type='node' ref='-1651' role='' />
+    <member type='node' ref='-1733' role='' />
+    <member type='node' ref='-1499' role='' />
+    <member type='node' ref='-1576' role='' />
+    <member type='node' ref='-1453' role='' />
+    <member type='node' ref='-1529' role='' />
+    <member type='node' ref='-1692' role='' />
+    <member type='node' ref='-1378' role='' />
+    <member type='node' ref='-1370' role='' />
+    <member type='node' ref='-1446' role='' />
+    <member type='node' ref='-1607' role='' />
+    <member type='node' ref='-1684' role='' />
+    <member type='node' ref='-1677' role='' />
+    <member type='node' ref='-1363' role='' />
+    <member type='node' ref='-1522' role='' />
+    <member type='node' ref='-1600' role='' />
+    <member type='node' ref='-1594' role='' />
+    <member type='node' ref='-1671' role='' />
+    <member type='node' ref='-1440' role='' />
+    <member type='node' ref='-1516' role='' />
+    <member type='node' ref='-1627' role='' />
+    <member type='node' ref='-1706' role='' />
+    <member type='node' ref='-1473' role='' />
+    <member type='node' ref='-1549' role='' />
+    <member type='node' ref='-1543' role='' />
+    <member type='node' ref='-1621' role='' />
+    <member type='node' ref='-1393' role='' />
+    <member type='node' ref='-1467' role='' />
+    <member type='node' ref='-1460' role='' />
+    <member type='node' ref='-1536' role='' />
+    <member type='node' ref='-1700' role='' />
+    <member type='node' ref='-1386' role='' />
+    <member type='node' ref='-1379' role='' />
+    <member type='node' ref='-1454' role='' />
+    <member type='node' ref='-1614' role='' />
+    <member type='node' ref='-1693' role='' />
+    <tag k='name' v='УИКи Тракторозаводского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1753' visible='true'>
+    <member type='node' ref='-1743' role='' />
+    <member type='node' ref='-1663' role='' />
+    <member type='node' ref='-1669' role='' />
+    <member type='node' ref='-1592' role='' />
+    <member type='node' ref='-1434' role='' />
+    <member type='node' ref='-1748' role='' />
+    <member type='node' ref='-1362' role='' />
+    <member type='node' ref='-1676' role='' />
+    <member type='node' ref='-1514' role='' />
+    <member type='node' ref='-1439' role='' />
+    <member type='node' ref='-1723' role='' />
+    <member type='node' ref='-1643' role='' />
+    <member type='node' ref='-1483' role='' />
+    <member type='node' ref='-1410' role='' />
+    <member type='node' ref='-1417' role='' />
+    <member type='node' ref='-1730' role='' />
+    <member type='node' ref='-1567' role='' />
+    <member type='node' ref='-1490' role='' />
+    <member type='node' ref='-1496' role='' />
+    <member type='node' ref='-1422' role='' />
+    <member type='node' ref='-1648' role='' />
+    <member type='node' ref='-1573' role='' />
+    <member type='node' ref='-1579' role='' />
+    <member type='node' ref='-1502' role='' />
+    <member type='node' ref='-1736' role='' />
+    <member type='node' ref='-1654' role='' />
+    <member type='node' ref='-1391' role='' />
+    <member type='node' ref='-1704' role='' />
+    <member type='node' ref='-1541' role='' />
+    <member type='node' ref='-1465' role='' />
+    <member type='node' ref='-1471' role='' />
+    <member type='node' ref='-1397' role='' />
+    <member type='node' ref='-1625' role='' />
+    <member type='node' ref='-1547' role='' />
+    <member type='node' ref='-1553' role='' />
+    <member type='node' ref='-1477' role='' />
+    <member type='node' ref='-1710' role='' />
+    <member type='node' ref='-1631' role='' />
+    <member type='node' ref='-1637' role='' />
+    <member type='node' ref='-1560' role='' />
+    <member type='node' ref='-1403' role='' />
+    <member type='node' ref='-1716' role='' />
+    <member type='node' ref='-1604' role='' />
+    <member type='node' ref='-1526' role='' />
+    <member type='node' ref='-1367' role='' />
+    <member type='node' ref='-1681' role='' />
+    <member type='node' ref='-1688' role='' />
+    <member type='node' ref='-1610' role='' />
+    <member type='node' ref='-1450' role='' />
+    <member type='node' ref='-1374' role='' />
+    <member type='node' ref='-1381' role='' />
+    <member type='node' ref='-1695' role='' />
+    <member type='node' ref='-1532' role='' />
+    <member type='node' ref='-1456' role='' />
+    <member type='node' ref='-1462' role='' />
+    <member type='node' ref='-1388' role='' />
+    <member type='node' ref='-1616' role='' />
+    <member type='node' ref='-1538' role='' />
+    <member type='node' ref='-1660' role='' />
+    <tag k='name' v='УИКи Металлургического района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1752' visible='true'>
+    <member type='node' ref='-1664' role='' />
+    <member type='node' ref='-1587' role='' />
+    <member type='node' ref='-1593' role='' />
+    <member type='node' ref='-1515' role='' />
+    <member type='node' ref='-1749' role='' />
+    <member type='node' ref='-1670' role='' />
+    <member type='node' ref='-1561' role='' />
+    <member type='node' ref='-1484' role='' />
+    <member type='node' ref='-1717' role='' />
+    <member type='node' ref='-1638' role='' />
+    <member type='node' ref='-1644' role='' />
+    <member type='node' ref='-1568' role='' />
+    <member type='node' ref='-1411' role='' />
+    <member type='node' ref='-1724' role='' />
+    <member type='node' ref='-1732' role='' />
+    <member type='node' ref='-1650' role='' />
+    <member type='node' ref='-1491' role='' />
+    <member type='node' ref='-1419' role='' />
+    <member type='node' ref='-1424' role='' />
+    <member type='node' ref='-1738' role='' />
+    <member type='node' ref='-1575' role='' />
+    <member type='node' ref='-1498' role='' />
+    <member type='node' ref='-1620' role='' />
+    <member type='node' ref='-1542' role='' />
+    <member type='node' ref='-1385' role='' />
+    <member type='node' ref='-1699' role='' />
+    <member type='node' ref='-1705' role='' />
+    <member type='node' ref='-1626' role='' />
+    <member type='node' ref='-1466' role='' />
+    <member type='node' ref='-1392' role='' />
+    <member type='node' ref='-1398' role='' />
+    <member type='node' ref='-1711' role='' />
+    <member type='node' ref='-1548' role='' />
+    <member type='node' ref='-1472' role='' />
+    <member type='node' ref='-1478' role='' />
+    <member type='node' ref='-1404' role='' />
+    <member type='node' ref='-1632' role='' />
+    <member type='node' ref='-1554' role='' />
+    <member type='node' ref='-1445' role='' />
+    <member type='node' ref='-1369' role='' />
+    <member type='node' ref='-1599' role='' />
+    <member type='node' ref='-1521' role='' />
+    <member type='node' ref='-1528' role='' />
+    <member type='node' ref='-1452' role='' />
+    <member type='node' ref='-1683' role='' />
+    <member type='node' ref='-1606' role='' />
+    <member type='node' ref='-1613' role='' />
+    <member type='node' ref='-1535' role='' />
+    <member type='node' ref='-1377' role='' />
+    <member type='node' ref='-1691' role='' />
+    <member type='node' ref='-1698' role='' />
+    <member type='node' ref='-1619' role='' />
+    <member type='node' ref='-1459' role='' />
+    <member type='node' ref='-1384' role='' />
+    <member type='node' ref='-1504' role='' />
+    <member type='node' ref='-1429' role='' />
+    <member type='node' ref='-1656' role='' />
+    <member type='node' ref='-1581' role='' />
+    <member type='node' ref='-1586' role='' />
+    <member type='node' ref='-1509' role='' />
+    <tag k='name' v='УИКи Советского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1751' visible='true'>
+    <member type='node' ref='-1447' role='' />
+    <member type='node' ref='-1486' role='' />
+    <member type='node' ref='-1523' role='' />
+    <member type='node' ref='-1563' role='' />
+    <member type='node' ref='-1685' role='' />
+    <member type='node' ref='-1726' role='' />
+    <member type='node' ref='-1371' role='' />
+    <member type='node' ref='-1413' role='' />
+    <member type='node' ref='-1364' role='' />
+    <member type='node' ref='-1406' role='' />
+    <member type='node' ref='-1441' role='' />
+    <member type='node' ref='-1480' role='' />
+    <member type='node' ref='-1601' role='' />
+    <member type='node' ref='-1640' role='' />
+    <member type='node' ref='-1678' role='' />
+    <member type='node' ref='-1719' role='' />
+    <member type='node' ref='-1672' role='' />
+    <member type='node' ref='-1712' role='' />
+    <member type='node' ref='-1358' role='' />
+    <member type='node' ref='-1399' role='' />
+    <member type='node' ref='-1517' role='' />
+    <member type='node' ref='-1556' role='' />
+    <member type='node' ref='-1595' role='' />
+    <member type='node' ref='-1633' role='' />
+    <member type='node' ref='-1707' role='' />
+    <member type='node' ref='-1745' role='' />
+    <member type='node' ref='-1394' role='' />
+    <member type='node' ref='-1431' role='' />
+    <member type='node' ref='-1550' role='' />
+    <member type='node' ref='-1589' role='' />
+    <member type='node' ref='-1628' role='' />
+    <member type='node' ref='-1666' role='' />
+    <member type='node' ref='-1622' role='' />
+    <member type='node' ref='-1658' role='' />
+    <member type='node' ref='-1701' role='' />
+    <member type='node' ref='-1740' role='' />
+    <member type='node' ref='-1468' role='' />
+    <member type='node' ref='-1506' role='' />
+    <member type='node' ref='-1544' role='' />
+    <member type='node' ref='-1583' role='' />
+    <member type='node' ref='-1537' role='' />
+    <member type='node' ref='-1577' role='' />
+    <member type='node' ref='-1615' role='' />
+    <member type='node' ref='-1652' role='' />
+    <member type='node' ref='-1387' role='' />
+    <member type='node' ref='-1426' role='' />
+    <member type='node' ref='-1461' role='' />
+    <member type='node' ref='-1500' role='' />
+    <member type='node' ref='-1455' role='' />
+    <member type='node' ref='-1494' role='' />
+    <member type='node' ref='-1531' role='' />
+    <member type='node' ref='-1571' role='' />
+    <member type='node' ref='-1694' role='' />
+    <member type='node' ref='-1734' role='' />
+    <member type='node' ref='-1380' role='' />
+    <member type='node' ref='-1420' role='' />
+    <member type='node' ref='-1645' role='' />
+    <member type='node' ref='-1686' role='' />
+    <member type='node' ref='-1727' role='' />
+    <member type='node' ref='-1372' role='' />
+    <member type='node' ref='-1493' role='' />
+    <member type='node' ref='-1530' role='' />
+    <member type='node' ref='-1570' role='' />
+    <member type='node' ref='-1608' role='' />
+    <member type='node' ref='-1564' role='' />
+    <member type='node' ref='-1602' role='' />
+    <tag k='name' v='УИКи Ленинского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1750' visible='true'>
+    <member type='node' ref='-1519' role='' />
+    <member type='node' ref='-1558' role='' />
+    <member type='node' ref='-1512' role='' />
+    <member type='node' ref='-1551' role='' />
+    <member type='node' ref='-1590' role='' />
+    <member type='node' ref='-1629' role='' />
+    <member type='node' ref='-1360' role='' />
+    <member type='node' ref='-1401' role='' />
+    <member type='node' ref='-1437' role='' />
+    <member type='node' ref='-1475' role='' />
+    <member type='node' ref='-1546' role='' />
+    <member type='node' ref='-1585' role='' />
+    <member type='node' ref='-1624' role='' />
+    <member type='node' ref='-1661' role='' />
+    <member type='node' ref='-1396' role='' />
+    <member type='node' ref='-1433' role='' />
+    <member type='node' ref='-1470' role='' />
+    <member type='node' ref='-1508' role='' />
+    <member type='node' ref='-1464' role='' />
+    <member type='node' ref='-1503' role='' />
+    <member type='node' ref='-1540' role='' />
+    <member type='node' ref='-1580' role='' />
+    <member type='node' ref='-1703' role='' />
+    <member type='node' ref='-1742' role='' />
+    <member type='node' ref='-1390' role='' />
+    <member type='node' ref='-1428' role='' />
+    <member type='node' ref='-1383' role='' />
+    <member type='node' ref='-1423' role='' />
+    <member type='node' ref='-1458' role='' />
+    <member type='node' ref='-1497' role='' />
+    <member type='node' ref='-1618' role='' />
+    <member type='node' ref='-1655' role='' />
+    <member type='node' ref='-1697' role='' />
+    <member type='node' ref='-1737' role='' />
+    <member type='node' ref='-1690' role='' />
+    <member type='node' ref='-1731' role='' />
+    <member type='node' ref='-1376' role='' />
+    <member type='node' ref='-1418' role='' />
+    <member type='node' ref='-1534' role='' />
+    <member type='node' ref='-1574' role='' />
+    <member type='node' ref='-1612' role='' />
+    <member type='node' ref='-1649' role='' />
+    <member type='node' ref='-1489' role='' />
+    <member type='node' ref='-1527' role='' />
+    <member type='node' ref='-1566' role='' />
+    <member type='node' ref='-1605' role='' />
+    <member type='node' ref='-1729' role='' />
+    <member type='node' ref='-1375' role='' />
+    <member type='node' ref='-1416' role='' />
+    <member type='node' ref='-1451' role='' />
+    <member type='node' ref='-1409' role='' />
+    <member type='node' ref='-1444' role='' />
+    <member type='node' ref='-1482' role='' />
+    <member type='node' ref='-1520' role='' />
+    <member type='node' ref='-1642' role='' />
+    <member type='node' ref='-1682' role='' />
+    <member type='node' ref='-1722' role='' />
+    <member type='node' ref='-1368' role='' />
+    <member type='node' ref='-1715' role='' />
+    <member type='node' ref='-1361' role='' />
+    <member type='node' ref='-1402' role='' />
+    <member type='node' ref='-1438' role='' />
+    <member type='node' ref='-1559' role='' />
+    <member type='node' ref='-1598' role='' />
+    <member type='node' ref='-1636' role='' />
+    <member type='node' ref='-1675' role='' />
+    <member type='node' ref='-1630' role='' />
+    <member type='node' ref='-1668' role='' />
+    <member type='node' ref='-1709' role='' />
+    <member type='node' ref='-1747' role='' />
+    <member type='node' ref='-1476' role='' />
+    <member type='node' ref='-1513' role='' />
+    <member type='node' ref='-1552' role='' />
+    <member type='node' ref='-1591' role='' />
+    <member type='node' ref='-1662' role='' />
+    <tag k='name' v='УИКи Калининского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1356' action='modify' visible='true'>
+    <member type='node' ref='-1340' role='' />
+    <member type='node' ref='-1324' role='' />
+    <member type='node' ref='-1342' role='' />
+    <member type='node' ref='-1326' role='' />
+    <member type='node' ref='-1332' role='' />
+    <member type='node' ref='-1328' role='' />
+    <member type='node' ref='-1322' role='' />
+    <member type='node' ref='-1336' role='' />
+    <member type='node' ref='-1314' role='' />
+    <member type='node' ref='-1316' role='' />
+    <member type='node' ref='-1338' role='' />
+    <member type='node' ref='-1344' role='' />
+    <member type='node' ref='-1318' role='' />
+    <member type='node' ref='-1352' role='' />
+    <member type='node' ref='-1334' role='' />
+    <member type='node' ref='-1348' role='' />
+    <member type='node' ref='-1350' role='' />
+    <member type='node' ref='-1346' role='' />
+    <member type='node' ref='-1320' role='' />
+    <member type='node' ref='-1330' role='' />
+    <tag k='name' v='УИКи Снежинского городского округа' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-1354' visible='true'>
+    <member type='node' ref='-1258' role='' />
+    <member type='node' ref='-1310' role='' />
+    <member type='node' ref='-1260' role='' />
+    <member type='node' ref='-1252' role='' />
+    <member type='node' ref='-1284' role='' />
+    <member type='node' ref='-1286' role='' />
+    <member type='node' ref='-1262' role='' />
+    <member type='node' ref='-1296' role='' />
+    <member type='node' ref='-1264' role='' />
+    <member type='node' ref='-1276' role='' />
+    <member type='node' ref='-1238' role='' />
+    <member type='node' ref='-1268' role='' />
+    <member type='node' ref='-1312' role='' />
+    <member type='node' ref='-1270' role='' />
+    <member type='node' ref='-1248' role='' />
+    <member type='node' ref='-1300' role='' />
+    <member type='node' ref='-1250' role='' />
+    <member type='node' ref='-1226' role='' />
+    <member type='node' ref='-1254' role='' />
+    <member type='node' ref='-1298' role='' />
+    <member type='node' ref='-1256' role='' />
+    <member type='node' ref='-1236' role='' />
+    <member type='node' ref='-1288' role='' />
+    <member type='node' ref='-1228' role='' />
+    <member type='node' ref='-1230' role='' />
+    <member type='node' ref='-1240' role='' />
+    <member type='node' ref='-1302' role='' />
+    <member type='node' ref='-1242' role='' />
+    <member type='node' ref='-1220' role='' />
+    <member type='node' ref='-1222' role='' />
+    <member type='node' ref='-1278' role='' />
+    <member type='node' ref='-1306' role='' />
+    <member type='node' ref='-1308' role='' />
+    <member type='node' ref='-1244' role='' />
+    <member type='node' ref='-1290' role='' />
+    <member type='node' ref='-1246' role='' />
+    <member type='node' ref='-1224' role='' />
+    <member type='node' ref='-1292' role='' />
+    <member type='node' ref='-1294' role='' />
+    <member type='node' ref='-1272' role='' />
+    <member type='node' ref='-1232' role='' />
+    <member type='node' ref='-1274' role='' />
+    <member type='node' ref='-1234' role='' />
+    <member type='node' ref='-1304' role='' />
+    <member type='node' ref='-1266' role='' />
+    <member type='node' ref='-1280' role='' />
+    <member type='node' ref='-1282' role='' />
+    <tag k='name' v='УИКи Центрального района' />
+    <tag k='type' v='collection' />
+  </relation>
+</osm>

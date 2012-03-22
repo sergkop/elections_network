@@ -1,0 +1,3225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-6587' action='modify' visible='true' lat='47.22477483998559' lon='39.69678354690926'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='ул. Красноармейская' />
+    <tag k='note:location' v='Средняя школа № 78' />
+    <tag k='phone' v='+7 863 2826041' />
+    <tag k='ref' v='1654' />
+  </node>
+  <node id='-6585' action='modify' visible='true' lat='47.2179689074802' lon='39.71048565793936'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='49' />
+    <tag k='addr:street' v='ул. Московская' />
+    <tag k='note:location' v='СПТУ № 20' />
+    <tag k='phone' v='+7 863 2624737' />
+    <tag k='ref' v='1643' />
+  </node>
+  <node id='-6583' action='modify' visible='true' lat='47.22274455585818' lon='39.70610442596352'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='39' />
+    <tag k='addr:street' v='пр. Буденновский' />
+    <tag k='note:location' v='Архитектурная академия' />
+    <tag k='phone' v='+7 863 2390932' />
+    <tag k='ref' v='1649' />
+  </node>
+  <node id='-6581' action='modify' visible='true' lat='47.23233100390607' lon='39.67835379420552'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='27Г' />
+    <tag k='addr:street' v='пер. Гайдара' />
+    <tag k='note:correction' v='Дом 27Г, а не 27' />
+    <tag k='note:location' v='Средняя школа № 70' />
+    <tag k='phone' v='+7 863 2327755' />
+    <tag k='ref' v='1660' />
+  </node>
+  <node id='-6579' action='modify' visible='true' lat='47.23084363432975' lon='39.69259053532889'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='93' />
+    <tag k='addr:street' v='пер. Доломановский' />
+    <tag k='note:location' v='Камбинат благоустройства' />
+    <tag k='phone' v='+7 863 2679272;+7 863 2679272' />
+    <tag k='ref' v='1656' />
+  </node>
+  <node id='-6577' action='modify' visible='true' lat='47.22274996808927' lon='39.712764701139896'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='48' />
+    <tag k='addr:street' v='пер. Семашко' />
+    <tag k='note:location' v='ДК «Энергетик' />
+    <tag k='phone' v='+7 863 2385605' />
+    <tag k='ref' v='1641' />
+  </node>
+  <node id='-6575' action='modify' visible='true' lat='47.21691828171775' lon='39.71540334133981'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='48' />
+    <tag k='addr:street' v='ул. Тургеневская' />
+    <tag k='note:location' v='ДК «Профтехобразования»' />
+    <tag k='phone' v='+7 863 2407002' />
+    <tag k='ref' v='1644' />
+  </node>
+  <node id='-6573' action='modify' visible='true' lat='47.23937083625291' lon='39.68847448918692'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='41' />
+    <tag k='addr:street' v='ул. Мечникова' />
+    <tag k='note:location' v='Деревообрабатывающий камб.' />
+    <tag k='phone' v='+7 863 2345755' />
+    <tag k='ref' v='1662' />
+  </node>
+  <node id='-6571' action='modify' visible='true' lat='47.215180336192866' lon='39.70407926652662'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='ул. Обороны' />
+    <tag k='note:location' v='Трест «Спецотделгражданй»' />
+    <tag k='phone' v='+7 863 2679736' />
+    <tag k='ref' v='1647' />
+  </node>
+  <node id='-6569' action='modify' visible='true' lat='47.22027414462999' lon='39.716043137058996'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='85' />
+    <tag k='addr:street' v='ул. Серафимовича' />
+    <tag k='note:location' v='Средня школа № 39' />
+    <tag k='phone' v='+7 863 2402161' />
+    <tag k='ref' v='1642' />
+  </node>
+  <node id='-6567' action='modify' visible='true' lat='47.21474044043297' lon='39.705764037180735'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='ул. Тургеневская' />
+    <tag k='note:location' v='Прогимназия № 36' />
+    <tag k='phone' v='+7 863 2678130' />
+    <tag k='ref' v='1646' />
+  </node>
+  <node id='-6565' action='modify' visible='true' lat='47.24114191223857' lon='39.67772361360251'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='19А' />
+    <tag k='addr:street' v='ул. Мечникова' />
+    <tag k='note:correction' v='Дом 19А, а не 17' />
+    <tag k='note:location' v='Средняя школа № 57' />
+    <tag k='phone' v='+7 863 2347022' />
+    <tag k='ref' v='1663' />
+  </node>
+  <node id='-6563' action='modify' visible='true' lat='47.24358703137829' lon='39.67213030531151'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='40' />
+    <tag k='addr:street' v='пер. Саратовский' />
+    <tag k='note:location' v='Завод «АГАТ»' />
+    <tag k='phone' v='+7 863 2342738' />
+    <tag k='ref' v='1664' />
+  </node>
+  <node id='-6561' action='modify' visible='true' lat='47.22282087424611' lon='39.69724763740155'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='30' />
+    <tag k='addr:street' v='ул. М.Горького' />
+    <tag k='note:location' v='Строительный колледж' />
+    <tag k='phone' v='+7 863 2674724' />
+    <tag k='ref' v='1652' />
+  </node>
+  <node id='-6559' action='modify' visible='true' lat='47.21778079883362' lon='39.70404375232353'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='25' />
+    <tag k='addr:street' v='ул. Серафимовича' />
+    <tag k='phone' v='+7 863 2625971' />
+    <tag k='ref' v='1648' />
+  </node>
+  <node id='-6557' action='modify' visible='true' lat='47.21971578240186' lon='39.70475501358914'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='ул. Б.Садовая' />
+    <tag k='note:location' v='Педагогический университет' />
+    <tag k='phone' v='+7 863 2441299' />
+    <tag k='ref' v='1650' />
+  </node>
+  <node id='-6555' action='modify' visible='true' lat='47.23216675719477' lon='39.67780549479165'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='27Г' />
+    <tag k='addr:street' v='пер. Гайдара' />
+    <tag k='note:correction' v='Дом 27Г, а не 27' />
+    <tag k='note:location' v='Средняя школа № 70' />
+    <tag k='phone' v='+7 863 2326568' />
+    <tag k='ref' v='1659' />
+  </node>
+  <node id='-6553' action='modify' visible='true' lat='47.225996951920195' lon='39.700199598661904'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='ул. Красноармейская' />
+    <tag k='note:location' v='Радиотехникум' />
+    <tag k='phone' v='+7 863 2671248' />
+    <tag k='ref' v='1653' />
+  </node>
+  <node id='-6551' action='modify' visible='true' lat='47.22555688277538' lon='39.7079037615616'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='115' />
+    <tag k='addr:street' v='ул. М.Горького' />
+    <tag k='note:location' v='Гимназия № 36' />
+    <tag k='phone' v='+7 863 2826154' />
+    <tag k='ref' v='1640' />
+  </node>
+  <node id='-6549' action='modify' visible='true' lat='47.2264808988907' lon='39.678883737477044'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='ул. Варфоломеева' />
+    <tag k='note:correction' v='Дом 1А, а не 14' />
+    <tag k='note:location' v='Средняя школа № 72' />
+    <tag k='phone' v='+7 863 2673981' />
+    <tag k='ref' v='1657' />
+  </node>
+  <node id='-6547' action='modify' visible='true' lat='47.22488027950964' lon='39.69730926931618'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='ул. Красноармейская' />
+    <tag k='note:location' v='средняя школа № 78' />
+    <tag k='note:uik_location' v='пер. Гвардейский, фев. 51, тел. +7 863 2826041' />
+    <tag k='phone' v='' />
+    <tag k='ref' v='1655' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-6545' action='modify' visible='true' lat='47.24103744339251' lon='39.676894032091326'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='19А' />
+    <tag k='addr:street' v='ул. Мечникова' />
+    <tag k='note:correction' v='Дом 19А, а не 17' />
+    <tag k='note:location' v='Средняя школа № 57' />
+    <tag k='phone' v='+7 863 2325911' />
+    <tag k='ref' v='1661' />
+  </node>
+  <node id='-6543' action='modify' visible='true' lat='47.22635324692187' lon='39.67946668622153'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1А' />
+    <tag k='addr:street' v='ул. Варфоломеева' />
+    <tag k='note:correction' v='Дом 1А, а не 14' />
+    <tag k='note:location' v='Средняя школа № 78' />
+    <tag k='phone' v='+7 863 2673981' />
+    <tag k='ref' v='1658' />
+  </node>
+  <node id='-6541' action='modify' visible='true' lat='47.21447205307168' lon='39.71261164081085'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='пер. Соборный' />
+    <tag k='note:location' v='Гимназия № 35' />
+    <tag k='phone' v='+7 863 2409396' />
+    <tag k='ref' v='1645' />
+  </node>
+  <node id='-6539' action='modify' visible='true' lat='47.22167197801492' lon='39.701196297091464'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='65' />
+    <tag k='addr:street' v='пер. Халтуринский' />
+    <tag k='note:location' v='Муниципальная столовая № 1' />
+    <tag k='phone' v='+7 863 2674979' />
+    <tag k='ref' v='1651' />
+  </node>
+  <node id='-6537' action='modify' visible='true' lat='47.24924742594008' lon='39.699999139778505'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='83А' />
+    <tag k='addr:street' v='пр. Ленина' />
+    <tag k='note:location' v='здание школы №69' />
+    <tag k='phone' v='+7 863 2450872' />
+    <tag k='ref' v='1683' />
+  </node>
+  <node id='-6535' action='modify' visible='true' lat='47.2385895129171' lon='39.696332211003394'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='61' />
+    <tag k='addr:street' v='ул. Мечникова' />
+    <tag k='note:location' v='здание гимназии №52' />
+    <tag k='phone' v='+7 863 2322384' />
+    <tag k='ref' v='1679' />
+  </node>
+  <node id='-6533' action='modify' visible='true' lat='47.261600840372004' lon='39.64632694428075'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9/4' />
+    <tag k='addr:street' v='ул. Кривоноса' />
+    <tag k='note:location' v='здание лицея №27' />
+    <tag k='phone' v='+7 863 2775181' />
+    <tag k='ref' v='1712' />
+  </node>
+  <node id='-6531' action='modify' visible='true' lat='47.2498594901673' lon='39.695012822171954'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='61' />
+    <tag k='addr:street' v='пр. Ленина' />
+    <tag k='note:location' v='помещение ОТОС №5' />
+    <tag k='phone' v='+7 863 2459656' />
+    <tag k='ref' v='1685' />
+  </node>
+  <node id='-6529' action='modify' visible='true' lat='47.25885263791805' lon='39.6500685025083'>
+    <tag k='FIXME' v='Уточнить номер дома' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='114' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='здание лицея №7' />
+    <tag k='phone' v='+7 863 2771226' />
+    <tag k='ref' v='2512' />
+  </node>
+  <node id='-6527' action='modify' visible='true' lat='47.23855558632151' lon='39.70073762314261'>
+    <tag k='FIXME' v='Подтвердить расположение и уточнить номер дома' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='100' />
+    <tag k='addr:street' v='пр. Буденновский' />
+    <tag k='note:location' v='Совет ветеранов района' />
+    <tag k='phone' v='+7 863 2327969' />
+    <tag k='ref' v='1677' />
+  </node>
+  <node id='-6525' action='modify' visible='true' lat='47.251234364871586' lon='39.68607256284798'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='42А' />
+    <tag k='addr:street' v='пр. Ленина' />
+    <tag k='note:location' v='помещение ОТОС №6' />
+    <tag k='phone' v='+7 863 2459633' />
+    <tag k='ref' v='1686' />
+  </node>
+  <node id='-6523' action='modify' visible='true' lat='47.23537089487544' lon='39.70741354875324'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='132' />
+    <tag k='addr:street' v='пер. Семашко' />
+    <tag k='note:location' v='здание колледжа искусств' />
+    <tag k='phone' v='+7 863 2341292' />
+    <tag k='ref' v='1674' />
+  </node>
+  <node id='-6521' action='modify' visible='true' lat='47.26154720539738' lon='39.6842002591091'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='ул. Вавилова' />
+    <tag k='note:location' v='здание музыкальной школы' />
+    <tag k='note:uik_location' v='ул. Дачная, 8, здание школы-интерната' />
+    <tag k='phone:uik' v='+7 863 2774573;+7 863 2772969' />
+    <tag k='ref' v='1698' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-6519' action='modify' visible='true' lat='47.2374740691036' lon='39.71308300909793'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='пл. Гагарина' />
+    <tag k='note:location' v='здание университета' />
+    <tag k='phone' v='+7 863 2738300' />
+    <tag k='ref' v='1675' />
+  </node>
+  <node id='-6517' action='modify' visible='true' lat='47.269255631627715' lon='39.685510806989925'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='58' />
+    <tag k='addr:street' v='ул. Вавилова' />
+    <tag k='note:location' v='здание ОАО АТП3' />
+    <tag k='phone' v='+7 863 2198443' />
+    <tag k='ref' v='1699' />
+  </node>
+  <node id='-6515' action='modify' visible='true' lat='47.23775500013929' lon='39.697491781847546'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='130' />
+    <tag k='addr:street' v='ул. Мечникова' />
+    <tag k='note:location' v='здание ф-ла института кооперации' />
+    <tag k='phone' v='+7 863 2321963' />
+    <tag k='ref' v='1673' />
+  </node>
+  <node id='-6513' action='modify' visible='true' lat='47.2331469084218' lon='39.705802342361366'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='88' />
+    <tag k='addr:street' v='пер. Соборный' />
+    <tag k='note:location' v='здание школы №50' />
+    <tag k='phone' v='+7 863 2329685' />
+    <tag k='ref' v='1670' />
+  </node>
+  <node id='-6511' action='modify' visible='true' lat='47.23409468361817' lon='39.69494364175275'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='155' />
+    <tag k='addr:street' v='пер. Халтуринский' />
+    <tag k='note:location' v='здание общежития' />
+    <tag k='phone' v='+7 863 2326677' />
+    <tag k='ref' v='1672' />
+  </node>
+  <node id='-6509' action='modify' visible='true' lat='47.23714230430898' lon='39.71142815097531'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='пл. Гагарина' />
+    <tag k='note:location' v='здание университета' />
+    <tag k='phone' v='+7 863 2738458' />
+    <tag k='ref' v='1676' />
+  </node>
+  <node id='-6507' action='modify' visible='true' lat='47.2463259421652' lon='39.712180138968165'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='17/2' />
+    <tag k='addr:street' v='пр. Нагибина' />
+    <tag k='note:location' v='здание музыкального лицея' />
+    <tag k='phone' v='+7 863 2430597' />
+    <tag k='ref' v='1681' />
+  </node>
+  <node id='-6505' action='modify' visible='true' lat='47.25222265768698' lon='39.70989512236172'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='5А' />
+    <tag k='addr:street' v='ул. Погодина' />
+    <tag k='note:location' v='здание гимназии №25' />
+    <tag k='phone' v='+7 863 2451895' />
+    <tag k='ref' v='1688' />
+  </node>
+  <node id='-6503' action='modify' visible='true' lat='47.22776748608598' lon='39.70530666284677'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='64' />
+    <tag k='addr:street' v='пр. Буденновский' />
+    <tag k='note:location' v='здание школы №43' />
+    <tag k='phone' v='+7 863 2322559' />
+    <tag k='ref' v='1666' />
+  </node>
+  <node id='-6501' action='modify' visible='true' lat='47.25602117856897' lon='39.64849327558261'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='118/2' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='здание школы №110' />
+    <tag k='phone' v='+7 863 2781841' />
+    <tag k='ref' v='1710' />
+  </node>
+  <node id='-6499' action='modify' visible='true' lat='47.25085709384028' lon='39.698010416926294'>
+    <tag k='FIXME' v='Уточнить: в главном корпусе или в общежитии' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='пл. Народного Ополчения' />
+    <tag k='note:location' v='здание общежития №2 РГУПС' />
+    <tag k='phone' v='+7 863 2451301' />
+    <tag k='ref' v='1693' />
+  </node>
+  <node id='-6497' action='modify' visible='true' lat='47.28192675791093' lon='39.69439659722965'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4/1Б' />
+    <tag k='addr:street' v='ул. Неклиновская' />
+    <tag k='note:location' v='здание теплокоммунэнерго' />
+    <tag k='phone' v='+7 863 2476706' />
+    <tag k='ref' v='1689' />
+  </node>
+  <node id='-6495' action='modify' visible='true' lat='47.24254138740164' lon='39.70455656779639'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='ул. Лениногорская' />
+    <tag k='note:location' v='здание МУ УСЗН' />
+    <tag k='phone' v='+7 863 2329643' />
+    <tag k='ref' v='1678' />
+  </node>
+  <node id='-6493' action='modify' visible='true' lat='47.22767509559341' lon='39.70485164911182'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='64' />
+    <tag k='addr:street' v='пр. Буденновский' />
+    <tag k='note:location' v='здание школы №43' />
+    <tag k='phone' v='+7 863 2340078' />
+    <tag k='ref' v='1667' />
+  </node>
+  <node id='-6491' action='modify' visible='true' lat='47.26475280746727' lon='39.65434909051861'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='30' />
+    <tag k='addr:street' v='ул. Тимошенко' />
+    <tag k='note:location' v='здание гимназии №46' />
+    <tag k='phone' v='+7 863 2771799' />
+    <tag k='ref' v='1707' />
+  </node>
+  <node id='-6489' action='modify' visible='true' lat='47.261464481743864' lon='39.646911565114635'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9/4' />
+    <tag k='addr:street' v='ул. Кривоноса' />
+    <tag k='note:location' v='здание лицея №27' />
+    <tag k='phone' v='+7 863 2775181' />
+    <tag k='ref' v='1492' />
+  </node>
+  <node id='-6487' action='modify' visible='true' lat='47.247870418998225' lon='39.67231807847362'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='ул. Зоологическая' />
+    <tag k='note:location' v='здание музея зоопарка' />
+    <tag k='phone' v='+7 863 2342086' />
+    <tag k='ref' v='1684' />
+  </node>
+  <node id='-6485' action='modify' visible='true' lat='47.260612459446804' lon='39.69732538253224'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул. 2-ой Пятилетки' />
+    <tag k='note:location' v='здание школы №10' />
+    <tag k='phone' v='+7 863 2446940' />
+    <tag k='ref' v='1694' />
+  </node>
+  <node id='-6483' action='modify' visible='true' lat='47.231258185220035' lon='39.70779763802997'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='163/72' />
+    <tag k='addr:street' v='ул. Малюгиной' />
+    <tag k='note:location' v='здание МОУ ДОД «ЦДОД»' />
+    <tag k='phone' v='+7 863 2323747' />
+    <tag k='ref' v='1669' />
+  </node>
+  <node id='-6481' action='modify' visible='true' lat='47.267041276754426' lon='39.65921119036647'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='139/6' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='здание эконом. лицея' />
+    <tag k='phone' v='+7 863 2780649' />
+    <tag k='ref' v='1704' />
+  </node>
+  <node id='-6479' action='modify' visible='true' lat='47.26830981152512' lon='39.667035202196935'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='пер. Авиамоторный' />
+    <tag k='phone' v='+7 863 2777061' />
+    <tag k='ref' v='1700' />
+  </node>
+  <node id='-6477' action='modify' visible='true' lat='47.26418435080161' lon='39.6541547581267'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='30' />
+    <tag k='addr:street' v='ул. Тимошенко' />
+    <tag k='note:location' v='здание гимназии №46' />
+    <tag k='phone' v='+7 863 2781905' />
+    <tag k='ref' v='1708' />
+  </node>
+  <node id='-6475' action='modify' visible='true' lat='47.26087473368537' lon='39.69783831356464'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул. 2-ой Пятилетки' />
+    <tag k='note:location' v='здание школы №10' />
+    <tag k='phone' v='+7 863 2447484' />
+    <tag k='ref' v='1696' />
+  </node>
+  <node id='-6473' action='modify' visible='true' lat='47.23452970857893' lon='39.69774164486719'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='153' />
+    <tag k='addr:street' v='пер. Островского' />
+    <tag k='note:location' v='здание лицея №10' />
+    <tag k='phone' v='+7 863 2325870' />
+    <tag k='ref' v='1671' />
+  </node>
+  <node id='-6471' action='modify' visible='true' lat='47.2660764867939' lon='39.65619116118854'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='ул. Тимошенко' />
+    <tag k='note:location' v='здание ОТОС №11' />
+    <tag k='phone' v='+7 863 2771448;+7 863 2776873' />
+    <tag k='ref' v='1706' />
+  </node>
+  <node id='-6469' action='modify' visible='true' lat='47.26126628879442' lon='39.67353133412512'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='пер. Госпитальный' />
+    <tag k='note:location' v='здание школы №68' />
+    <tag k='phone' v='+7 863 2774572' />
+    <tag k='ref' v='1701' />
+  </node>
+  <node id='-6467' action='modify' visible='true' lat='47.24215319385568' lon='39.69552963350928'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='Фрунзе' />
+    <tag k='note:location' v='здание школы №32' />
+    <tag k='phone' v='+7 863 2326896' />
+    <tag k='ref' v='1680' />
+  </node>
+  <node id='-6465' action='modify' visible='true' lat='47.261200684245644' lon='39.64620085559772'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9/4' />
+    <tag k='addr:street' v='ул. Кривоноса' />
+    <tag k='note:location' v='здание лицея №27' />
+    <tag k='phone' v='+7 863 2775181' />
+    <tag k='ref' v='1711' />
+  </node>
+  <node id='-6463' action='modify' visible='true' lat='47.258916075778075' lon='39.64964989680949'>
+    <tag k='FIXME' v='Уточнить номер дома' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='114' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='здание лицея №7' />
+    <tag k='phone' v='+7 863 2770088' />
+    <tag k='ref' v='1709' />
+  </node>
+  <node id='-6461' action='modify' visible='true' lat='47.25541035650727' lon='39.690339516792704'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='31' />
+    <tag k='addr:street' v='ул. Кропоткина' />
+    <tag k='note:location' v='здание школы №79' />
+    <tag k='phone' v='+7 863 2452622;+7 863 2456737' />
+    <tag k='ref' v='1690' />
+  </node>
+  <node id='-6459' action='modify' visible='true' lat='47.23091932214613' lon='39.70625537279948'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='163/72' />
+    <tag k='addr:street' v='ул. Малюгиной' />
+    <tag k='note:location' v='здание МОУ ДОД «ЦДОД»' />
+    <tag k='phone' v='+7 863 2326755' />
+    <tag k='ref' v='1668' />
+  </node>
+  <node id='-6457' action='modify' visible='true' lat='47.26974884002537' lon='39.68569375885247'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='58' />
+    <tag k='addr:street' v='ул. Вавилова' />
+    <tag k='note:location' v='здание ОАО АТП3' />
+    <tag k='phone' v='+7 863 2732309;+7 863 2198441' />
+    <tag k='ref' v='1697' />
+  </node>
+  <node id='-6455' action='modify' visible='true' lat='47.250079708749475' lon='39.70292985887818'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='44' />
+    <tag k='addr:street' v='пр. Ленина' />
+    <tag k='note:location' v='здание общежитие №1 РГУПС' />
+    <tag k='phone' v='+7 863 2726258' />
+    <tag k='ref' v='1691' />
+  </node>
+  <node id='-6453' action='modify' visible='true' lat='47.26661693178433' lon='39.659769897698666'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='139/6' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='здание эконом. лицея' />
+    <tag k='phone' v='+7 863 2783407' />
+    <tag k='ref' v='1703' />
+  </node>
+  <node id='-6451' action='modify' visible='true' lat='47.25556794301614' lon='39.68970165982115'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='31' />
+    <tag k='addr:street' v='ул. Кропоткина' />
+    <tag k='note:location' v='здание школы №79' />
+    <tag k='phone' v='+7 863 2456737;+7 863 2452622' />
+    <tag k='ref' v='1687' />
+  </node>
+  <node id='-6449' action='modify' visible='true' lat='47.267282715976016' lon='39.6674406346631'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='пер. Авиамоторный' />
+    <tag k='note:location' v='здание клуба «Антей»' />
+    <tag k='phone' v='+7 863 2777016' />
+    <tag k='ref' v='1702' />
+  </node>
+  <node id='-6447' action='modify' visible='true' lat='47.26331415240103' lon='39.662645828395235'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='137' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='Совет ветеранов микрорайона «Военвед»' />
+    <tag k='phone' v='+7 863 2782496' />
+    <tag k='ref' v='1705' />
+  </node>
+  <node id='-6445' action='modify' visible='true' lat='47.25410055941449' lon='39.69663279490908'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='пер. Педагогический' />
+    <tag k='note:location' v='здание МОУ МУК района' />
+    <tag k='phone' v='+7 863 2454256' />
+    <tag k='ref' v='1692' />
+  </node>
+  <node id='-6443' action='modify' visible='true' lat='47.24922789056082' lon='39.700594334955824'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='83А' />
+    <tag k='addr:street' v='пр. Ленина' />
+    <tag k='note:location' v='здание школы №69' />
+    <tag k='phone' v='+7 863 2450872' />
+    <tag k='ref' v='1682' />
+  </node>
+  <node id='-6441' action='modify' visible='true' lat='47.256493724115636' lon='39.64864991357564'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='118/2' />
+    <tag k='addr:street' v='ул. Таганрогская' />
+    <tag k='note:location' v='здание школы №110' />
+    <tag k='phone' v='+7 863 2468993' />
+    <tag k='ref' v='2490' />
+  </node>
+  <node id='-6439' action='modify' visible='true' lat='47.26082135612046' lon='39.69720066733656'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул. 2-ой Пятилетки' />
+    <tag k='note:location' v='здание школы №10' />
+    <tag k='phone' v='+7 863 2446940' />
+    <tag k='ref' v='1695' />
+  </node>
+  <node id='-6437' action='modify' visible='true' lat='47.235107866345174' lon='39.72496936965973'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='233' />
+    <tag k='addr:street' v='ул.Малюгиной' />
+    <tag k='note:location' v='здание Агросоюз Юг Руси' />
+    <tag k='phone' v='+7 863 2923955' />
+    <tag k='ref' v='1627' />
+  </node>
+  <node id='-6435' action='modify' visible='true' lat='47.22637257184919' lon='39.71412234080207'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='108' />
+    <tag k='addr:street' v='ул.Максима Горького' />
+    <tag k='note:location' v='здание школы №49' />
+    <tag k='phone' v='+7 863 2425774' />
+    <tag k='ref' v='1614' />
+  </node>
+  <node id='-6433' action='modify' visible='true' lat='47.240035979438886' lon='39.73204344030947'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='201' />
+    <tag k='addr:street' v='ул.Текучева' />
+    <tag k='note:location' v='здание института ЮФУ' />
+    <tag k='phone' v='+7 863 2690923' />
+    <tag k='ref' v='1634' />
+  </node>
+  <node id='-6431' action='modify' visible='true' lat='47.22830058030975' lon='39.740396390221534'>
+    <tag k='FIXME' v='Подтвердить расположение и уточнить адрес' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='131' />
+    <tag k='addr:street' v='ул.Суворова' />
+    <tag k='note:location' v='здание РГМУ' />
+    <tag k='phone' v='+7 863 2014391' />
+    <tag k='ref' v='1630' />
+  </node>
+  <node id='-6429' action='modify' visible='true' lat='47.219078573803834' lon='39.72917464051332'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='ул.Седова' />
+    <tag k='note:location' v='здание Морской колледж' />
+    <tag k='phone' v='+7 863 2631078' />
+    <tag k='ref' v='1620' />
+  </node>
+  <node id='-6427' action='modify' visible='true' lat='47.235266851347184' lon='39.732274970577905'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='139' />
+    <tag k='addr:street' v='пер.Крепостной' />
+    <tag k='note:location' v='здание школы №4' />
+    <tag k='phone' v='+7 863 2644531' />
+    <tag k='ref' v='1633' />
+  </node>
+  <node id='-6425' action='modify' visible='true' lat='47.22317993313702' lon='39.73534406008024'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='26' />
+    <tag k='addr:street' v='пер.Журавлева' />
+    <tag k='note:location' v='здание школы №2' />
+    <tag k='phone' v='+7 863 2631510' />
+    <tag k='ref' v='1621' />
+  </node>
+  <node id='-6423' action='modify' visible='true' lat='47.228125244561' lon='39.720039476360014'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='58' />
+    <tag k='addr:street' v='пр.Соколова' />
+    <tag k='note:location' v='ФГУ центр стандартизации' />
+    <tag k='phone' v='+7 863 2994734' />
+    <tag k='ref' v='1615' />
+  </node>
+  <node id='-6421' action='modify' visible='true' lat='47.22472307179372' lon='39.728572294236095'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='105' />
+    <tag k='addr:street' v='ул.Большая Садовая' />
+    <tag k='note:location' v='здание ЮФУ' />
+    <tag k='phone' v='+7 863 3051950' />
+    <tag k='ref' v='1625' />
+  </node>
+  <node id='-6419' action='modify' visible='true' lat='47.222473025039235' lon='39.725485404703704'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='126' />
+    <tag k='addr:street' v='ул.Социалистическая' />
+    <tag k='note:location' v='здание лицея Сократ' />
+    <tag k='phone' v='+7 863 2900814' />
+    <tag k='ref' v='1624' />
+  </node>
+  <node id='-6417' action='modify' visible='true' lat='47.21748751964075' lon='39.72190904382594'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='2/2' />
+    <tag k='addr:street' v='пр.Ворошиловский' />
+    <tag k='note:location' v='здание ПромстройНИИпроект' />
+    <tag k='phone' v='+7 863 2401362' />
+    <tag k='ref' v='1611' />
+  </node>
+  <node id='-6415' action='modify' visible='true' lat='47.23165323310459' lon='39.71654928937072'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='161' />
+    <tag k='addr:street' v='ул.Лермонтовская' />
+    <tag k='note:location' v='здание Министерство труда' />
+    <tag k='note:uik_location' v='пр.Соколова, 78, здание Промзернопроект' />
+    <tag k='phone:uik' v='+7 863 2341792' />
+    <tag k='ref' v='1616' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-6413' action='modify' visible='true' lat='47.22621206645094' lon='39.721573519114585'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='128' />
+    <tag k='addr:street' v='ул.Пушкинская' />
+    <tag k='note:location' v='здание общежития СКАГС' />
+    <tag k='phone' v='+7 863 2638712' />
+    <tag k='ref' v='1619' />
+  </node>
+  <node id='-6411' action='modify' visible='true' lat='47.225716341865834' lon='39.73864253679993'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='195' />
+    <tag k='addr:street' v='ул.Социалистическая' />
+    <tag k='note:location' v='здание гимназии №5' />
+    <tag k='phone' v='+7 863 2633579' />
+    <tag k='ref' v='1635' />
+  </node>
+  <node id='-6409' action='modify' visible='true' lat='47.233773195488595' lon='39.71992814184955'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='212' />
+    <tag k='addr:street' v='ул.Малюгиной' />
+    <tag k='note:location' v='здание школы №53' />
+    <tag k='phone' v='+7 863 2649366' />
+    <tag k='ref' v='1623' />
+  </node>
+  <node id='-6407' action='modify' visible='true' lat='47.23129190025463' lon='39.72951982506184'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='232' />
+    <tag k='addr:street' v='ул.Красноармейская' />
+    <tag k='note:location' v='здание РУПК' />
+    <tag k='phone' v='+7 863 2640043' />
+    <tag k='ref' v='1626' />
+  </node>
+  <node id='-6405' action='modify' visible='true' lat='47.22295617142716' lon='39.71804243502492'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='69' />
+    <tag k='addr:street' v='ул.Большая Садовая' />
+    <tag k='note:location' v='здание РГЭУ' />
+    <tag k='phone' v='+7 863 2370260' />
+    <tag k='ref' v='1613' />
+  </node>
+  <node id='-6403' action='modify' visible='true' lat='47.21941153073614' lon='39.71961419150052'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='29' />
+    <tag k='addr:street' v='пр.Ворошиловский' />
+    <tag k='note:location' v='здание гимназии №45' />
+    <tag k='phone' v='+7 863 2401388' />
+    <tag k='ref' v='1618' />
+  </node>
+  <node id='-6401' action='modify' visible='true' lat='47.22865823585848' lon='39.733448907908496'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='190' />
+    <tag k='addr:street' v='ул.Пушкинская' />
+    <tag k='note:location' v='здание школы №80' />
+    <tag k='phone' v='+7 863 2646985' />
+    <tag k='ref' v='1631' />
+  </node>
+  <node id='-6399' action='modify' visible='true' lat='47.23374267951747' lon='39.715539216171116'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='259' />
+    <tag k='addr:street' v='ул.Варфоломеева' />
+    <tag k='note:location' v='здание Пенсионный фонд' />
+    <tag k='phone' v='+7 863 2904156' />
+    <tag k='ref' v='1617' />
+  </node>
+  <node id='-6397' action='modify' visible='true' lat='47.228602922931834' lon='39.724437309288234'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='166' />
+    <tag k='addr:street' v='ул.Максима Горького' />
+    <tag k='note:location' v='здание РГЭУ РИНХ' />
+    <tag k='phone' v='+7 863 2665788' />
+    <tag k='ref' v='1622' />
+  </node>
+  <node id='-6395' action='modify' visible='true' lat='47.22284718775491' lon='39.74278376532224'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='157' />
+    <tag k='addr:street' v='ул.Красных Зорь' />
+    <tag k='note:location' v='здание вечерней школы №13' />
+    <tag k='phone' v='+7 863 2633472' />
+    <tag k='ref' v='1628' />
+  </node>
+  <node id='-6393' action='modify' visible='true' lat='47.226078966952194' lon='39.73828991694684'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='170' />
+    <tag k='addr:street' v='ул.Большая Садовая' />
+    <tag k='note:location' v='здание филармонии' />
+    <tag k='phone' v='+7 863 2631541' />
+    <tag k='ref' v='1629' />
+  </node>
+  <node id='-6391' action='modify' visible='true' lat='47.23476653209009' lon='39.73138621333626'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='229' />
+    <tag k='addr:street' v='ул.Лермонтовская' />
+    <tag k='note:location' v='здание РХО Армия спасения' />
+    <tag k='phone' v='+7 863 2649526' />
+    <tag k='ref' v='1632' />
+  </node>
+  <node id='-6389' action='modify' visible='true' lat='47.22731631709164' lon='39.62010805217609'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='25/3' />
+    <tag k='addr:street' v='ул. 339 Стрелковой Дивизии' />
+    <tag k='note:location' v='здание гимназии № 117' />
+    <tag k='phone' v='+7 863 2254698' />
+    <tag k='ref' v='1738' />
+  </node>
+  <node id='-6387' action='modify' visible='true' lat='47.232781921943754' lon='39.602036923563546'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='30/95' />
+    <tag k='addr:street' v='улица Маршала Жукова' />
+    <tag k='phone' v='+7 863 2475287' />
+    <tag k='ref' v='1665' />
+  </node>
+  <node id='-6385' action='modify' visible='true' lat='47.2270485244174' lon='39.63515909227894'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='137А' />
+    <tag k='addr:street' v='ул. Петрозаводская' />
+    <tag k='note:location' v='здание школы № 37' />
+    <tag k='phone' v='+7 863 2221053' />
+    <tag k='ref' v='2492' />
+  </node>
+  <node id='-6383' action='modify' visible='true' lat='47.22761475719834' lon='39.62011359856182'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='25/3' />
+    <tag k='addr:street' v='ул. 339 Стрелковой Дивизии' />
+    <tag k='note:location' v='здание гимназии № 117' />
+    <tag k='phone' v='+7 863 2254121' />
+    <tag k='ref' v='2618' />
+  </node>
+  <node id='-6381' action='modify' visible='true' lat='47.225473010533086' lon='39.624628667783476'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='ул. 339 Стрелковой дивизии' />
+    <tag k='note:location' v='здание МУ СЗН' />
+    <tag k='phone' v='+7 863 2254345' />
+    <tag k='ref' v='1754' />
+  </node>
+  <node id='-6379' action='modify' visible='true' lat='47.20506484413114' lon='39.61795037679064'>
+    <tag k='FIXME' v='Подтвердить расположение (в школе или таки в общежитии?)' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='94' />
+    <tag k='addr:street' v='ул. 2 Краснодарская' />
+    <tag k='note:location' v='здание общежития №2' />
+    <tag k='phone' v='+7 863 2241234' />
+    <tag k='ref' v='1720' />
+  </node>
+  <node id='-6377' action='modify' visible='true' lat='47.20945324190273' lon='39.618934443139'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='42/4' />
+    <tag k='addr:street' v='пр. Коммунистический' />
+    <tag k='note:location' v='здание школы № 60' />
+    <tag k='phone' v='+7 863 2246404' />
+    <tag k='ref' v='1728' />
+  </node>
+  <node id='-6375' action='modify' visible='true' lat='47.214890008821506' lon='39.635522720419445'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='178/24' />
+    <tag k='addr:street' v='ул. Сладкова' />
+    <tag k='note:location' v='здание общежития ЮФУ' />
+    <tag k='phone' v='+7 863 2226857' />
+    <tag k='ref' v='2617' />
+  </node>
+  <node id='-6373' action='modify' visible='true' lat='47.22935857486781' lon='39.63206501918786'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул. Содружества' />
+    <tag k='note:location' v='здание школы № 58' />
+    <tag k='phone' v='+7 863 2435666' />
+    <tag k='ref' v='2475' />
+  </node>
+  <node id='-6371' action='modify' visible='true' lat='47.22746621974877' lon='39.62036796341177'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='25/3' />
+    <tag k='addr:street' v='ул. 339 Стрелковой Дивизии' />
+    <tag k='note:location' v='здание гимназии №117' />
+    <tag k='phone' v='+7 863 2253479' />
+    <tag k='ref' v='1753' />
+  </node>
+  <node id='-6369' action='modify' visible='true' lat='47.22803416647' lon='39.62309999166889'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='21/3' />
+    <tag k='addr:street' v='ул. 339 Стрелковой дивизии' />
+    <tag k='note:location' v='здание школы № 112' />
+    <tag k='phone' v='+7 863 2254708' />
+    <tag k='ref' v='2545' />
+  </node>
+  <node id='-6367' action='modify' visible='true' lat='47.195914547007455' lon='39.611164026485646'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='24а' />
+    <tag k='addr:street' v='пер. Красноярский' />
+    <tag k='note:location' v='здание правления х. Семерники' />
+    <tag k='phone' v='+7 863 2421506' />
+    <tag k='ref' v='1756' />
+  </node>
+  <node id='-6365' action='modify' visible='true' lat='47.21772897576948' lon='39.584933448513'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='17/1' />
+    <tag k='addr:street' v='ул. Пескова' />
+    <tag k='note:location' v='здание общежития' />
+    <tag k='phone' v='+7 863 2037578' />
+    <tag k='ref' v='1757' />
+  </node>
+  <node id='-6363' action='modify' visible='true' lat='47.22594779996125' lon='39.56474726374488'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18А' />
+    <tag k='addr:street' v='ул. Совхозная' />
+    <tag k='note:location' v='здание школы № 88' />
+    <tag k='phone' v='+7 863 2474683' />
+    <tag k='ref' v='2544' />
+  </node>
+  <node id='-6361' action='modify' visible='true' lat='47.22687962116476' lon='39.63568605228863'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='137А' />
+    <tag k='addr:street' v='ул. Петрозаводская' />
+    <tag k='note:location' v='здание школы № 73' />
+    <tag k='phone' v='+7 863 2696994' />
+    <tag k='ref' v='1742' />
+  </node>
+  <node id='-6359' action='modify' visible='true' lat='47.22787395226581' lon='39.62284645899838'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='21/3' />
+    <tag k='addr:street' v='ул. 339 Стрелковой Дивизии' />
+    <tag k='note:location' v='здание школы № 112' />
+    <tag k='phone' v='+7 863 2250491' />
+    <tag k='ref' v='2546' />
+  </node>
+  <node id='-6357' action='modify' visible='true' lat='47.23521977568028' lon='39.63408161322142'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='ул. Калининградская' />
+    <tag k='note:location' v='здание школы № 15' />
+    <tag k='phone' v='+7 863 2227016' />
+    <tag k='ref' v='1745' />
+  </node>
+  <node id='-6355' action='modify' visible='true' lat='47.23546141146022' lon='39.63457605182105'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='ул. Калининградская' />
+    <tag k='note:location' v='здание школы № 15' />
+    <tag k='phone' v='+7 863 2664420' />
+    <tag k='ref' v='2491' />
+  </node>
+  <node id='-6353' action='modify' visible='true' lat='47.22670830041635' lon='39.6348786078818'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='137А' />
+    <tag k='addr:street' v='ул. Петрозаводская' />
+    <tag k='note:location' v='здание школы № 73' />
+    <tag k='phone' v='+7 863 2696994' />
+    <tag k='ref' v='1743' />
+  </node>
+  <node id='-6351' action='modify' visible='true' lat='47.20262232267492' lon='39.620988737593166'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='149/1' />
+    <tag k='addr:street' v='ул. 2 Краснодарская' />
+    <tag k='note:location' v='здание общежития № 2' />
+    <tag k='phone' v='+7 863 2244017' />
+    <tag k='ref' v='1718' />
+  </node>
+  <node id='-6349' action='modify' visible='true' lat='47.204586228584205' lon='39.618168220997475'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='94' />
+    <tag k='addr:street' v='ул. 2 Краснодарская' />
+    <tag k='note:location' v='здание школы № 87' />
+    <tag k='phone' v='+7 863 2241234' />
+    <tag k='ref' v='1719' />
+  </node>
+  <node id='-6347' action='modify' visible='true' lat='47.2098477781772' lon='39.61891767336129'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='42/4' />
+    <tag k='addr:street' v='пр. Коммунистический' />
+    <tag k='note:location' v='здание школы № 60' />
+    <tag k='phone' v='+7 863 2246404' />
+    <tag k='ref' v='1727' />
+  </node>
+  <node id='-6345' action='modify' visible='true' lat='47.22819753519354' lon='39.622846101265544'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='21/3' />
+    <tag k='addr:street' v='ул. 339 Стрелковой Дивизии' />
+    <tag k='note:location' v='здание гимназии № 112' />
+    <tag k='phone' v='+7 863 2474681' />
+    <tag k='ref' v='1760' />
+  </node>
+  <node id='-6343' action='modify' visible='true' lat='47.20513170977825' lon='39.6264805738953'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='84/2' />
+    <tag k='addr:street' v='ул. 2 Краснодарская' />
+    <tag k='note:location' v='здание школы № 61' />
+    <tag k='phone' v='+7 863 2221232' />
+    <tag k='ref' v='1722' />
+  </node>
+  <node id='-6341' action='modify' visible='true' lat='47.2128982418101' lon='39.614586271596615'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='36' />
+    <tag k='addr:street' v='ул. Малиновского' />
+    <tag k='note:location' v='здание дома детского творчества' />
+    <tag k='phone' v='+7 863 2433572' />
+    <tag k='ref' v='2477' />
+  </node>
+  <node id='-6339' action='modify' visible='true' lat='47.21150843851406' lon='39.622798576534564'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='227' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание техникума легкой промышленности' />
+    <tag k='phone' v='+7 863 2247244' />
+    <tag k='ref' v='1729' />
+  </node>
+  <node id='-6337' action='modify' visible='true' lat='47.20607509855489' lon='39.63977472379965'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='68А' />
+    <tag k='addr:street' v='ул.2 Краснодарская' />
+    <tag k='note:location' v='здание школы № 37' />
+    <tag k='phone' v='+7 863 2220902' />
+    <tag k='ref' v='1725' />
+  </node>
+  <node id='-6335' action='modify' visible='true' lat='47.2149146388282' lon='39.63886350154907'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='85' />
+    <tag k='addr:street' v='ул. Сладкова' />
+    <tag k='note:location' v='эдание торгово-экономического колледжа' />
+    <tag k='phone' v='+7 863 2220722' />
+    <tag k='ref' v='1737' />
+  </node>
+  <node id='-6333' action='modify' visible='true' lat='47.22947903518808' lon='39.632698365408885'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул. Содружества' />
+    <tag k='note:location' v='здание школы № 58' />
+    <tag k='phone' v='+7 863 2435506' />
+    <tag k='ref' v='1748' />
+  </node>
+  <node id='-6331' action='modify' visible='true' lat='47.213676908232976' lon='39.61454312381329'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='36' />
+    <tag k='addr:street' v='ул. Малиновского' />
+    <tag k='note:location' v='здание дома детского творчества' />
+    <tag k='phone' v='+7 863 2433500' />
+    <tag k='ref' v='1735' />
+  </node>
+  <node id='-6329' action='modify' visible='true' lat='47.228751494504124' lon='39.62362338503218'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='56/4' />
+    <tag k='addr:street' v='ул. Еременко' />
+    <tag k='note:location' v='здание лицея № 103' />
+    <tag k='phone' v='+7 863 2254148' />
+    <tag k='ref' v='1749' />
+  </node>
+  <node id='-6327' action='modify' visible='true' lat='47.23329342547769' lon='39.61527090455279'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='87' />
+    <tag k='addr:street' v='ул. Еременко' />
+    <tag k='note:location' v='здание общежития' />
+    <tag k='phone' v='+7 863 2254253' />
+    <tag k='ref' v='1755' />
+  </node>
+  <node id='-6325' action='modify' visible='true' lat='47.20494460068801' lon='39.626488367815114'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='84/2' />
+    <tag k='addr:street' v='ул. 2 Краснодарская' />
+    <tag k='note:location' v='здание школы № 61' />
+    <tag k='phone' v='+7 863 2222234' />
+    <tag k='ref' v='2476' />
+  </node>
+  <node id='-6323' action='modify' visible='true' lat='47.21183326769815' lon='39.64178027691075'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='195' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание школы № 92' />
+    <tag k='phone' v='+7 863 2225859' />
+    <tag k='ref' v='1733' />
+  </node>
+  <node id='-6321' action='modify' visible='true' lat='47.21134763811853' lon='39.64143571327824'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='195' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание школы № 92' />
+    <tag k='phone' v='+7 863 2225859' />
+    <tag k='ref' v='1732' />
+  </node>
+  <node id='-6319' action='modify' visible='true' lat='47.21489266917876' lon='39.64073585555762'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='ул. Быковского' />
+    <tag k='note:location' v='здание школы № 95' />
+    <tag k='phone' v='+7 863 2476333' />
+    <tag k='ref' v='1739' />
+  </node>
+  <node id='-6317' action='modify' visible='true' lat='47.215292997459066' lon='39.640766526269836'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='5' />
+    <tag k='addr:street' v='ул. Быковского' />
+    <tag k='note:location' v='здание школы № 95' />
+    <tag k='phone' v='+7 863 2476803' />
+    <tag k='ref' v='1740' />
+  </node>
+  <node id='-6315' action='modify' visible='true' lat='47.20534678458129' lon='39.626468730927535'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='84/2' />
+    <tag k='addr:street' v='ул. 2 Краснодарская' />
+    <tag k='note:location' v='здание школы № 61' />
+    <tag k='phone' v='+7 863 2221232' />
+    <tag k='ref' v='1721' />
+  </node>
+  <node id='-6313' action='modify' visible='true' lat='47.20087506353579' lon='39.61819131814319'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='ул.Каширская' />
+    <tag k='note:location' v='здание школы № 86' />
+    <tag k='phone' v='+7 863 2929967' />
+    <tag k='ref' v='1715' />
+  </node>
+  <node id='-6311' action='modify' visible='true' lat='47.22889755920678' lon='39.62426538493445'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='56/4' />
+    <tag k='addr:street' v='ул. Еременко' />
+    <tag k='note:location' v='здание лицея № 103' />
+    <tag k='phone' v='+7 863 2254148' />
+    <tag k='ref' v='1750' />
+  </node>
+  <node id='-6309' action='modify' visible='true' lat='47.206456232322466' lon='39.63959550370108'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='68' />
+    <tag k='addr:street' v='ул. 2-я Краснодарская' />
+    <tag k='note:location' v='здание школы № 37' />
+    <tag k='phone' v='+7 863 2220902' />
+    <tag k='ref' v='1724' />
+  </node>
+  <node id='-6307' action='modify' visible='true' lat='47.20048445837872' lon='39.61820248285943'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='ул. Каширская' />
+    <tag k='note:location' v='здание школы № 86' />
+    <tag k='phone' v='+7 863 2929967' />
+    <tag k='ref' v='1717' />
+  </node>
+  <node id='-6305' action='modify' visible='true' lat='47.23042552775217' lon='39.61750223119119'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='60/5' />
+    <tag k='addr:street' v='ул. Еременко' />
+    <tag k='note:location' v='здание подросткового клуба «Эдельвейс»' />
+    <tag k='phone' v='+7 863 2254238' />
+    <tag k='ref' v='1752' />
+  </node>
+  <node id='-6303' action='modify' visible='true' lat='47.23333007452535' lon='39.615017452301075'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='87' />
+    <tag k='addr:street' v='Еременко' />
+    <tag k='phone' v='+7 863 2254253' />
+    <tag k='ref' v='1755' />
+  </node>
+  <node id='-6301' action='modify' visible='true' lat='47.211485511110546' lon='39.621826940943194'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='227' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание техникума легкой промышленности' />
+    <tag k='phone' v='+7 863 2247244' />
+    <tag k='ref' v='1730' />
+  </node>
+  <node id='-6299' action='modify' visible='true' lat='47.221854135032586' lon='39.63124832010221'>
+    <tag k='FIXME' v='Уточнить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:street' v='Зорге-Благодатная' />
+    <tag k='note:location' v='здание кафе' />
+    <tag k='phone' v='+7 863 2476916' />
+    <tag k='ref' v='1741' />
+  </node>
+  <node id='-6297' action='modify' visible='true' lat='47.23511105663553' lon='39.63422225001385'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='ул. Калининградская' />
+    <tag k='note:location' v='здание школы № 15' />
+    <tag k='phone' v='+7 863 2220967' />
+    <tag k='ref' v='1744' />
+  </node>
+  <node id='-6295' action='modify' visible='true' lat='47.23533371442554' lon='39.634674828394346'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='ул. Калининградская' />
+    <tag k='note:location' v='здание школы № 15' />
+    <tag k='phone' v='+7 863 2664420' />
+    <tag k='ref' v='1746' />
+  </node>
+  <node id='-6293' action='modify' visible='true' lat='47.228999284174435' lon='39.62361622238453'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='56/4' />
+    <tag k='addr:street' v='ул. Еременко' />
+    <tag k='note:location' v='здание лицея № 103' />
+    <tag k='phone' v='+7 863 2664031' />
+    <tag k='ref' v='1751' />
+  </node>
+  <node id='-6291' action='modify' visible='true' lat='47.20427017324853' lon='39.632279673040124'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='80/13' />
+    <tag k='addr:street' v='ул. 2-я Краснодарская' />
+    <tag k='note:location' v='здание подросткового клуба «Огонек»' />
+    <tag k='phone' v='+7 863 2242593' />
+    <tag k='ref' v='1723' />
+  </node>
+  <node id='-6289' action='modify' visible='true' lat='47.21176295371306' lon='39.64107064547834'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='195' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание школы № 92' />
+    <tag k='phone' v='+7 863 2240001' />
+    <tag k='ref' v='1734' />
+  </node>
+  <node id='-6287' action='modify' visible='true' lat='47.20827088825366' lon='39.64381685948299'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='пр. Коммунистический' />
+    <tag k='note:location' v='здание экономического колледжа' />
+    <tag k='phone' v='+7 863 2221800' />
+    <tag k='ref' v='1726' />
+  </node>
+  <node id='-6285' action='modify' visible='true' lat='47.2139283898858' lon='39.62743957795514'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='200/1' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание ВНИИГРИуголь' />
+    <tag k='phone' v='+7 863 2434767' />
+    <tag k='ref' v='1736' />
+  </node>
+  <node id='-6283' action='modify' visible='true' lat='47.200675816811845' lon='39.61819523773273'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='20' />
+    <tag k='addr:street' v='ул.Каширская' />
+    <tag k='note:location' v='здание школы № 86' />
+    <tag k='phone' v='+7 863 2929967' />
+    <tag k='ref' v='1716' />
+  </node>
+  <node id='-6281' action='modify' visible='true' lat='47.21095532185399' lon='39.626760128468234'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='221/1' />
+    <tag k='addr:street' v='пр. Стачки' />
+    <tag k='note:location' v='здание школы № 31' />
+    <tag k='phone' v='+7 863 2226900' />
+    <tag k='ref' v='1731' />
+  </node>
+  <node id='-6279' action='modify' visible='true' lat='47.22960338003934' lon='39.63205754769908'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул. Содружества' />
+    <tag k='note:location' v='здание школы № 58' />
+    <tag k='phone' v='+7 863 2435506' />
+    <tag k='ref' v='1747' />
+  </node>
+  <node id='-6277' action='modify' visible='true' lat='47.230721091242444' lon='39.774727924768335'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='57' />
+    <tag k='addr:street' v='ул. Комсомольская' />
+    <tag k='note:location' v='здание гимназии № 12' />
+    <tag k='phone' v='+7 863 2532133' />
+    <tag k='ref' v='1468' />
+  </node>
+  <node id='-6275' action='modify' visible='true' lat='47.22916494747569' lon='39.755947063484896'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='30 к1' />
+    <tag k='addr:street' v='ул. Советская' />
+    <tag k='note:location' v='здание МОУ СОШ № 1' />
+    <tag k='phone' v='+7 863 2539711' />
+    <tag k='ref' v='1463' />
+  </node>
+  <node id='-6273' action='modify' visible='true' lat='47.23084388296968' lon='39.804495344139866'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='28' />
+    <tag k='addr:street' v='ул. М.Расковой' />
+    <tag k='note:location' v='здание МОУ СОШ № 7' />
+    <tag k='phone' v='+7 863 2579629' />
+    <tag k='ref' v='1472' />
+  </node>
+  <node id='-6271' action='modify' visible='true' lat='47.22941062627536' lon='39.76314576117034'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1' />
+    <tag k='addr:street' v='площадь Свободы' />
+    <tag k='note:location' v='здание МОУ лицей № 13' />
+    <tag k='phone' v='+7 863 2531755' />
+    <tag k='ref' v='1452' />
+  </node>
+  <node id='-6269' action='modify' visible='true' lat='47.233447003912836' lon='39.76339750691498'>
+    <tag k='FIXME' v='Уточнить номер дома. Веряотно, не 2 к5, а 2/5' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='2 к5' />
+    <tag k='addr:street' v='ул. 24-я линия' />
+    <tag k='note:location' v='здание Ростовского электроколледжа' />
+    <tag k='phone' v='+7 863 2533725' />
+    <tag k='ref' v='1451' />
+  </node>
+  <node id='-6267' action='modify' visible='true' lat='47.22682406022531' lon='39.75037101424875'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='67' />
+    <tag k='addr:street' v='ул. Виталия Закруткина' />
+    <tag k='note:location' v='здание Обл.центра техтворчества' />
+    <tag k='phone' v='+7 863 2535477' />
+    <tag k='ref' v='1445' />
+  </node>
+  <node id='-6265' action='modify' visible='true' lat='47.24131686016837' lon='39.815117516492975'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='65 к12' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МДОУ  № 75' />
+    <tag k='phone' v='+7 863 2575147' />
+    <tag k='ref' v='1482' />
+  </node>
+  <node id='-6263' action='modify' visible='true' lat='47.23863102989748' lon='39.80823995392743'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43 кБ' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ Прогимназии  № 280' />
+    <tag k='phone' v='+7 863 2579824' />
+    <tag k='ref' v='1479' />
+  </node>
+  <node id='-6261' action='modify' visible='true' lat='47.239095079479014' lon='39.76765017425858'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='ул.Буйнакская' />
+    <tag k='note:location' v='здание МОУ СОШ № 8' />
+    <tag k='phone' v='+7 863 2518829' />
+    <tag k='ref' v='1457' />
+  </node>
+  <node id='-6259' action='modify' visible='true' lat='47.24142952801529' lon='39.82784615361822'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='87 к4' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ № 106' />
+    <tag k='phone' v='+7 863 2571343' />
+    <tag k='ref' v='1475' />
+  </node>
+  <node id='-6257' action='modify' visible='true' lat='47.23736607942617' lon='39.81371450957626'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='63' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ № 94' />
+    <tag k='phone' v='+7 863 2573868' />
+    <tag k='ref' v='1480' />
+  </node>
+  <node id='-6255' action='modify' visible='true' lat='47.241159028330436' lon='39.833641672550506'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='95' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание ГПУ ГОУ ПУ № 13' />
+    <tag k='phone' v='+7 863 2579250' />
+    <tag k='ref' v='1443' />
+  </node>
+  <node id='-6253' action='modify' visible='true' lat='47.22734165260504' lon='39.788916550541316'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='ул. Герцена' />
+    <tag k='note:location' v='здание Ростовской школы служ. собаководства' />
+    <tag k='phone' v='+7 863 2572475' />
+    <tag k='ref' v='1473' />
+  </node>
+  <node id='-6251' action='modify' visible='true' lat='47.231555764965314' lon='39.769862553553295'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='ул. 31-я линия' />
+    <tag k='note:location' v='здание Гидрометтехникума' />
+    <tag k='phone' v='+7 863 2512473' />
+    <tag k='ref' v='1453' />
+  </node>
+  <node id='-6249' action='modify' visible='true' lat='47.238017897643005' lon='39.76248210871634'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='95' />
+    <tag k='addr:street' v='ул. Ченцова' />
+    <tag k='note:location' v='здание Ассоц. «Прогресс» ООО «ИРБИС»' />
+    <tag k='phone' v='+7 863 2955402' />
+    <tag k='ref' v='1456' />
+  </node>
+  <node id='-6247' action='modify' visible='true' lat='47.23105727679882' lon='39.78170272980539'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='86' />
+    <tag k='addr:street' v='ул.Сарьяна' />
+    <tag k='note:location' v='здание Детской школы искусств ' />
+    <tag k='phone' v='+7 863 2539860' />
+    <tag k='ref' v='1469' />
+  </node>
+  <node id='-6245' action='modify' visible='true' lat='47.23177427610941' lon='39.74096412861761'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='48' />
+    <tag k='addr:street' v='просп.Театральный' />
+    <tag k='note:location' v='здание МОУ СОШ № 22' />
+    <tag k='phone' v='+7 863 2666448;+7 863 2645633' />
+    <tag k='ref' v='1438' />
+  </node>
+  <node id='-6243' action='modify' visible='true' lat='47.24136885085954' lon='39.83397155194481'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='95' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание ГПУ ГОУ ПУ № 13' />
+    <tag k='phone' v='+7 863 2692799' />
+    <tag k='ref' v='1485' />
+  </node>
+  <node id='-6241' action='modify' visible='true' lat='47.252591983605164' lon='39.83806315369356'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='ул. Аксайская' />
+    <tag k='note:location' v='здание филиала МОУ СОШ № 81' />
+    <tag k='phone' v='+7 863 2579268' />
+    <tag k='ref' v='1486' />
+  </node>
+  <node id='-6239' action='modify' visible='true' lat='47.23727638139667' lon='39.83113257703723'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='13' />
+    <tag k='addr:street' v='ул. Краеведческая' />
+    <tag k='note:location' v='здание спортивного клуба  «Легион»' />
+    <tag k='phone' v='+7 863 2692798' />
+    <tag k='ref' v='1487' />
+  </node>
+  <node id='-6237' action='modify' visible='true' lat='47.223018863682064' lon='39.76164377288542'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='42' />
+    <tag k='addr:street' v='ул. Листопадова' />
+    <tag k='note:location' v='здание МОУ СОШ № 26' />
+    <tag k='phone' v='+7 863 2517676' />
+    <tag k='ref' v='1464' />
+  </node>
+  <node id='-6235' action='modify' visible='true' lat='47.230046255992846' lon='39.74909040153626'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='ул. Верхненольная' />
+    <tag k='note:location' v='здание МОУ Естнаучный лицей № 11' />
+    <tag k='phone' v='+7 863 2239686' />
+    <tag k='ref' v='1440' />
+  </node>
+  <node id='-6233' action='modify' visible='true' lat='47.23639436686901' lon='39.80435770693185'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='27А' />
+    <tag k='addr:street' v='просп.40-летия Победы' />
+    <tag k='note:location' v='здание МОУ ДОД Детмузшколы  №8' />
+    <tag k='phone' v='+7 863 2576719' />
+    <tag k='ref' v='1478' />
+  </node>
+  <node id='-6231' action='modify' visible='true' lat='47.22740243530908' lon='39.76531316712411'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='ул. Мясникова' />
+    <tag k='note:location' v='здание Рост.колледжа культуры' />
+    <tag k='phone' v='+7 863 2513640' />
+    <tag k='ref' v='1465' />
+  </node>
+  <node id='-6229' action='modify' visible='true' lat='47.24139804721902' lon='39.82863832795382'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='87 к4' />
+    <tag k='addr:street' v='просп.  40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ № 106' />
+    <tag k='phone' v='+7 863 2574015' />
+    <tag k='ref' v='1467' />
+  </node>
+  <node id='-6227' action='modify' visible='true' lat='47.236932130438795' lon='39.75388223534965'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='64/69' />
+    <tag k='addr:street' v='ул. 14-я линия' />
+    <tag k='note:location' v='здание ГОУ Санатор. школы' />
+    <tag k='phone' v='+7 863 2955402' />
+    <tag k='ref' v='1446' />
+  </node>
+  <node id='-6225' action='modify' visible='true' lat='47.23832523471938' lon='39.832597446635'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='312' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание общежития' />
+    <tag k='phone' v='+7 863 2692797' />
+    <tag k='ref' v='1488' />
+  </node>
+  <node id='-6223' action='modify' visible='true' lat='47.230803140272464' lon='39.741446807529414'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='46' />
+    <tag k='addr:street' v='просп. Театральный' />
+    <tag k='note:location' v='здание Ростфилиала ФГОУ «Мгавт»' />
+    <tag k='phone' v='+7 863 2236909' />
+    <tag k='ref' v='1439' />
+  </node>
+  <node id='-6221' action='modify' visible='true' lat='47.22404905048678' lon='39.75316317618994'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='54' />
+    <tag k='addr:street' v='ул. 1-я линия' />
+    <tag k='note:location' v='здание РПЛ-РУЦ «Спектр»' />
+    <tag k='phone' v='+7 863 3002801' />
+    <tag k='ref' v='1444' />
+  </node>
+  <node id='-6219' action='modify' visible='true' lat='47.23086517205277' lon='39.775464318741754'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='57' />
+    <tag k='addr:street' v='ул. Комсомольская' />
+    <tag k='note:location' v=' здание гимназии № 12' />
+    <tag k='phone' v='+7 863 2539970' />
+    <tag k='ref' v='1470' />
+  </node>
+  <node id='-6217' action='modify' visible='true' lat='47.230811298898466' lon='39.80538327900739'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='28' />
+    <tag k='addr:street' v='ул.  М.Расковой' />
+    <tag k='note:location' v='здание МОУ СОШ № 7' />
+    <tag k='phone' v='+7 863 2919504' />
+    <tag k='ref' v='1471' />
+  </node>
+  <node id='-6215' action='modify' visible='true' lat='47.238169840092596' lon='39.82034782340028'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='73' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ № 81' />
+    <tag k='phone' v='+7 863 2575796' />
+    <tag k='ref' v='1484' />
+  </node>
+  <node id='-6213' action='modify' visible='true' lat='47.23071751787233' lon='39.75467498509946'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='34' />
+    <tag k='addr:street' v='ул. 1-я майская' />
+    <tag k='note:location' v='здание МОУ ДОД Центр внешк. работ' />
+    <tag k='phone' v='+7 863 2535011' />
+    <tag k='ref' v='1449' />
+  </node>
+  <node id='-6211' action='modify' visible='true' lat='47.229464151240784' lon='39.811105577189096'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='184' />
+    <tag k='addr:street' v='ул. Солидарности' />
+    <tag k='note:location' v='здание правл.станицы «Александровская»' />
+    <tag k='phone' v='+7 863 2579266' />
+    <tag k='ref' v='1474' />
+  </node>
+  <node id='-6209' action='modify' visible='true' lat='47.22648402280826' lon='39.74872568574362'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:street' v='парк им. Вити Черевичкина' />
+    <tag k='note:location' v='здание спорткомплекса «Экспресс»' />
+    <tag k='phone' v='+7 863 2595271' />
+    <tag k='ref' v='1442' />
+  </node>
+  <node id='-6207' action='modify' visible='true' lat='47.24233486418452' lon='39.777670787605544'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='49' />
+    <tag k='addr:street' v='ул. Горсоветская' />
+    <tag k='note:location' v='здание ЗАО «Ренат-Транс»' />
+    <tag k='phone' v='+7 863 2515200' />
+    <tag k='ref' v='1462' />
+  </node>
+  <node id='-6205' action='modify' visible='true' lat='47.23747972194762' lon='39.81458922397756'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='63' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ  № 94' />
+    <tag k='phone' v='+7 863 2579253' />
+    <tag k='ref' v='1481' />
+  </node>
+  <node id='-6203' action='modify' visible='true' lat='47.238564083609184' lon='39.82025097734586'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='73' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ № 81' />
+    <tag k='phone' v='+7 863 2579264' />
+    <tag k='ref' v='1483' />
+  </node>
+  <node id='-6201' action='modify' visible='true' lat='47.229864122716265' lon='39.82706068407999'>
+    <tag k='FIXME' v='Уточнить в какаом здании' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='note:location' v='здание станции вокзала «Кизитеринка»' />
+    <tag k='phone' v='+7 863 2594900' />
+    <tag k='ref' v='1477' />
+  </node>
+  <node id='-6199' action='modify' visible='true' lat='47.23532553919216' lon='39.75461889442943'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='50' />
+    <tag k='addr:street' v='ул. 14-я линия' />
+    <tag k='note:location' v='здание ОАО «Элта+»' />
+    <tag k='phone' v='+7 863 2551338' />
+    <tag k='ref' v='1448' />
+  </node>
+  <node id='-6197' action='modify' visible='true' lat='47.23761564856895' lon='39.76500703173895'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='55' />
+    <tag k='addr:street' v='ул. 28-я линия' />
+    <tag k='note:location' v='здание МЛПУЗ Гор. поликлиники № 2' />
+    <tag k='phone' v='+7 863 2831310' />
+    <tag k='ref' v='1450' />
+  </node>
+  <node id='-6195' action='modify' visible='true' lat='47.2315877395632' lon='39.74967482120032'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='15' />
+    <tag k='addr:street' v='ул. Верхненольная' />
+    <tag k='phone' v='+7 863 2516500' />
+    <tag k='ref' v='1441' />
+  </node>
+  <node id='-6193' action='modify' visible='true' lat='47.23891476882067' lon='39.825890208684655'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='81' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МУ «УСЗН Пролетарск. р-а»' />
+    <tag k='phone' v='+7 863 2574236;+7 863 2573623' />
+    <tag k='ref' v='1476' />
+  </node>
+  <node id='-6191' action='modify' visible='true' lat='47.22559328334557' lon='39.767494433842074'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул. 23-я линия' />
+    <tag k='note:location' v='здание ГПУ ГОУ ПУ № 12' />
+    <tag k='phone' v='+7 863 2517691' />
+    <tag k='ref' v='1466' />
+  </node>
+  <node id='-6189' action='modify' visible='true' lat='47.2376193365744' lon='39.82793093359787'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='306' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание ГУСОН РО «Ростовский №2 ДИПИ»' />
+    <tag k='phone' v='+7 863 2573419' />
+    <tag k='ref' v='1458' />
+  </node>
+  <node id='-6187' action='modify' visible='true' lat='47.243935625893734' lon='39.77282639366525'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='34' />
+    <tag k='addr:street' v='ул. Коммунаров' />
+    <tag k='note:location' v='здание МОУ СОШ № 17' />
+    <tag k='phone' v='+7 863 2512644' />
+    <tag k='ref' v='1459' />
+  </node>
+  <node id='-6185' action='modify' visible='true' lat='47.23910599757305' lon='39.81488699761124'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='65 к5' />
+    <tag k='addr:street' v='просп. 40-летия Победы' />
+    <tag k='note:location' v='здание МОУ СОШ № 94' />
+    <tag k='phone' v='+7 863 2576720' />
+    <tag k='ref' v='1489' />
+  </node>
+  <node id='-6183' action='modify' visible='true' lat='47.24419454242976' lon='39.77328458980997'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='34' />
+    <tag k='addr:street' v='ул. Коммунаров' />
+    <tag k='note:location' v='здание МОУ СОШ № 17' />
+    <tag k='phone' v='+7 863 2517488' />
+    <tag k='ref' v='1461' />
+  </node>
+  <node id='-6181' action='modify' visible='true' lat='47.24672812905622' lon='39.779591191571086'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='ул. Дзержинского' />
+    <tag k='note:location' v='здание ГОУ СПО РО «Донской педколледж»' />
+    <tag k='phone' v='+7 863 2519877' />
+    <tag k='ref' v='1460' />
+  </node>
+  <node id='-6179' action='modify' visible='true' lat='47.201269176845976' lon='39.663553880219006'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='91' />
+    <tag k='addr:street' v='ул.1-я Круговая' />
+    <tag k='note:location' v='опорный пункт полиции' />
+    <tag k='phone' v='+7 863 2477257' />
+    <tag k='ref' v='1598' />
+  </node>
+  <node id='-6177' action='modify' visible='true' lat='47.21552028125648' lon='39.67793360965331'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул.Верещагина' />
+    <tag k='note:location' v='здание МОУ ДОД ДДТ' />
+    <tag k='phone' v='+7 863 2626949' />
+    <tag k='ref' v='1593' />
+  </node>
+  <node id='-6175' action='modify' visible='true' lat='47.21763876119271' lon='39.68592296767354'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул.Саши Чебанова' />
+    <tag k='note:location' v='здание ПУ15' />
+    <tag k='phone' v='+7 863 2696170' />
+    <tag k='ref' v='1582' />
+  </node>
+  <node id='-6173' action='modify' visible='true' lat='47.22807851479357' lon='39.655428659327065'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='23А' />
+    <tag k='addr:street' v='ул.Лесопарковая' />
+    <tag k='note:location' v='ООО «ССМП Росгидромонтаж»' />
+    <tag k='phone' v='+7 863 2225950' />
+    <tag k='ref' v='1587' />
+  </node>
+  <node id='-6171' action='modify' visible='true' lat='47.222474035339076' lon='39.67144909712364'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='128' />
+    <tag k='addr:street' v='ул.Минераловодская' />
+    <tag k='note:location' v='опорный пункт полиции' />
+    <tag k='phone' v='+7 863 2366698' />
+    <tag k='ref' v='1585' />
+  </node>
+  <node id='-6169' action='modify' visible='true' lat='47.21840984978028' lon='39.66783988025135'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='32' />
+    <tag k='addr:street' v='ул.Балакирева' />
+    <tag k='note:location' v='Классический лицей №1' />
+    <tag k='phone' v='+7 863 2223256' />
+    <tag k='ref' v='1590' />
+  </node>
+  <node id='-6167' action='modify' visible='true' lat='47.20458306540374' lon='39.67743881142122'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='166' />
+    <tag k='addr:street' v='ул.Портовая' />
+    <tag k='note:location' v='здание библиотеки' />
+    <tag k='phone' v='+7 863 2449226' />
+    <tag k='ref' v='1491' />
+  </node>
+  <node id='-6165' action='modify' visible='true' lat='47.2197578427053' lon='39.685272132367324'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='2А' />
+    <tag k='addr:street' v='ул.Гусева' />
+    <tag k='note:correction' v='Дом 2А, а не 2' />
+    <tag k='note:location' v='здание дома культуры' />
+    <tag k='phone' v='+7 863 2382342' />
+    <tag k='ref' v='1584' />
+  </node>
+  <node id='-6163' action='modify' visible='true' lat='47.1915534672652' lon='39.63657732616934'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='541' />
+    <tag k='addr:street' v='ул.Портовая' />
+    <tag k='note:location' v='здание МАОУ СОШ № 77' />
+    <tag k='phone' v='+7 863 2420866' />
+    <tag k='ref' v='1607' />
+  </node>
+  <node id='-6161' action='modify' visible='true' lat='47.21366689420217' lon='39.657016912111956'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул.Крупской' />
+    <tag k='note:location' v='здание МАОУ ДРГ' />
+    <tag k='phone' v='+7 863 2223223' />
+    <tag k='ref' v='1589' />
+  </node>
+  <node id='-6159' action='modify' visible='true' lat='47.20192144797132' lon='39.6685787810555'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='238' />
+    <tag k='addr:street' v='ул. Портовая' />
+    <tag k='note:location' v='здание кафе' />
+    <tag k='note:uik_location' v='ул. Матросова, 35, здание ООО «Рассвет»' />
+    <tag k='phone:uik' v='+7 863 2477260' />
+    <tag k='ref' v='1605' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-6157' action='modify' visible='true' lat='47.20737518431999' lon='39.66841241593852'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='19' />
+    <tag k='addr:street' v='ул.Кулагина' />
+    <tag k='note:location' v='библиотека им. Шолохова' />
+    <tag k='phone' v='+7 863 2449792' />
+    <tag k='ref' v='1600' />
+  </node>
+  <node id='-6155' action='modify' visible='true' lat='47.23346054779824' lon='39.64130299064024'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='126' />
+    <tag k='addr:street' v='ул.Мадояна' />
+    <tag k='note:location' v='почтовое отделение № 41' />
+    <tag k='phone' v='+7 863 2220971' />
+    <tag k='ref' v='1588' />
+  </node>
+  <node id='-6153' action='modify' visible='true' lat='47.20413284538364' lon='39.68923698454329'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='95' />
+    <tag k='addr:street' v='ул.Амбулаторная' />
+    <tag k='note:location' v='опорный пункт полиции' />
+    <tag k='phone' v='+7 863 2393572' />
+    <tag k='ref' v='1603' />
+  </node>
+  <node id='-6151' action='modify' visible='true' lat='47.22296386210652' lon='39.66658155320002'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='ул.Некрасовская' />
+    <tag k='note:location' v='здание МОУ СОШ № 64' />
+    <tag k='phone' v='+7 863 2226756' />
+    <tag k='ref' v='1586' />
+  </node>
+  <node id='-6149' action='modify' visible='true' lat='47.20750247159043' lon='39.6860587215064'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='82' />
+    <tag k='addr:street' v='ул.Портовая' />
+    <tag k='note:location' v='Юридичкская гимназия' />
+    <tag k='phone' v='+7 863 2409441' />
+    <tag k='ref' v='1602' />
+  </node>
+  <node id='-6147' action='modify' visible='true' lat='47.21424545145363' lon='39.664661365601305'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='23' />
+    <tag k='addr:street' v='Рабочая площадь' />
+    <tag k='note:location' v='здание кафе' />
+    <tag k='note:uik_location' v='Рабочая площадь, 6, опорный пункт полиции' />
+    <tag k='phone:uik' v='+7 863 2382099' />
+    <tag k='ref' v='1591' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-6145' action='modify' visible='true' lat='47.213688012797185' lon='39.65630521008801'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул.Крупской' />
+    <tag k='note:location' v='здание МАОУ ДРГ' />
+    <tag k='phone' v='+7 863 2668246' />
+    <tag k='ref' v='1596' />
+  </node>
+  <node id='-6143' action='modify' visible='true' lat='47.21804434422617' lon='39.66779405709861'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='32' />
+    <tag k='addr:street' v='ул.Балакирева' />
+    <tag k='note:location' v='Классический лицей № 1' />
+    <tag k='phone' v='+7 863 2223234' />
+    <tag k='ref' v='1592' />
+  </node>
+  <node id='-6141' action='modify' visible='true' lat='47.21367696786685' lon='39.65668588783856'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='43' />
+    <tag k='addr:street' v='ул.Крупской' />
+    <tag k='note:location' v='здание МАОУ ДРГ' />
+    <tag k='phone' v='+7 863 2223223' />
+    <tag k='ref' v='1595' />
+  </node>
+  <node id='-6139' action='modify' visible='true' lat='47.215136380051625' lon='39.682690047173885'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='45' />
+    <tag k='addr:street' v='ул.Профсоюзная' />
+    <tag k='note:location' v='библиотека им. Лихачева' />
+    <tag k='phone' v='+7 863 2626039' />
+    <tag k='ref' v='1594' />
+  </node>
+  <node id='-6137' action='modify' visible='true' lat='47.21036583105132' lon='39.67031448805549'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='ул.Литвинова' />
+    <tag k='note:location' v='здание Южэнергосетьпроект' />
+    <tag k='phone' v='+7 863 2229228' />
+    <tag k='ref' v='1597' />
+  </node>
+  <node id='-6135' action='modify' visible='true' lat='47.19533836462312' lon='39.65695788646963'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='136' />
+    <tag k='addr:street' v='ул.Войкова' />
+    <tag k='note:location' v='здание ОАО «Изрем»' />
+    <tag k='phone' v='+7 863 2224870' />
+    <tag k='ref' v='1606' />
+  </node>
+  <node id='-6133' action='modify' visible='true' lat='47.196044330873285' lon='39.62656299400845'>
+    <tag k='FIXME' v='Уточнить расположение и номер дома' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='30' />
+    <tag k='addr:street' v='ул.Пржевальского' />
+    <tag k='note:location' v='Казачья гимназия им. Бакланова' />
+    <tag k='phone' v='+7 863 2110283' />
+    <tag k='ref' v='1608' />
+  </node>
+  <node id='-6131' action='modify' visible='true' lat='47.167999878285485' lon='39.549691578261886'>
+    <tag k='FIXME' v='Уточнить расположение и номер дома' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='62А' />
+    <tag k='addr:street' v='хут.Кумженский' />
+    <tag k='note:location' v='Ремонтные мастерские' />
+    <tag k='phone' v='+7 863 2477254' />
+    <tag k='ref' v='2527' />
+  </node>
+  <node id='-6129' action='modify' visible='true' lat='47.20431846090915' lon='39.68318179905545'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='14' />
+    <tag k='addr:street' v='ул.Деревянко' />
+    <tag k='note:location' v='МОУ СОШ № 66' />
+    <tag k='phone' v='+7 863 2407051' />
+    <tag k='ref' v='1604' />
+  </node>
+  <node id='-6127' action='modify' visible='true' lat='47.21688068509586' lon='39.68222541795053'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='пр. Ставского' />
+    <tag k='note:location' v='здание МОУ СОШ №83' />
+    <tag k='phone' v='+7 863 2409180' />
+    <tag k='ref' v='1583' />
+  </node>
+  <node id='-6125' action='modify' visible='true' lat='47.20641813405602' lon='39.67031367386711'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='78' />
+    <tag k='addr:street' v='ул.2-я Володарская' />
+    <tag k='note:location' v='здание МОУ СОШ 67' />
+    <tag k='phone' v='+7 863 2489684' />
+    <tag k='ref' v='1599' />
+  </node>
+  <node id='-6123' action='modify' visible='true' lat='47.206597789207834' lon='39.67085368961999'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='78' />
+    <tag k='addr:street' v='ул. 2-я Володарская' />
+    <tag k='note:location' v='здание МОУ СОШ № 67' />
+    <tag k='phone' v='+7 863 2449205' />
+    <tag k='ref' v='1490' />
+  </node>
+  <node id='-6121' action='modify' visible='true' lat='47.207777087088814' lon='39.686857249122426'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='82' />
+    <tag k='addr:street' v='ул. Портовая' />
+    <tag k='note:location' v='здание Юридической гимназии' />
+    <tag k='note:uik_location' v='ул. Загорская, 17, здание ФГУП «ЮЖ АГП», тел. +7 863 2406139' />
+    <tag k='phone' v='' />
+    <tag k='ref' v='1601' />
+    <tag k='uik' v='no' />
+  </node>
+  <node id='-6119' action='modify' visible='true' lat='47.21345896303171' lon='39.68770510436003'>
+    <tag k='FIXME' v='Уточнить в какой части «Гиганта»' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='29/22' />
+    <tag k='addr:street' v='ул.Профсоюзная' />
+    <tag k='note:location' v='опорный пункт полиции' />
+    <tag k='phone' v='+7 863 2626262' />
+    <tag k='ref' v='1581' />
+  </node>
+  <node id='-6117' action='modify' visible='true' lat='47.191426452129015' lon='39.63609350127718'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='541' />
+    <tag k='addr:street' v='ул. Портовая' />
+    <tag k='note:location' v='здание МАОУ СОШ № 77' />
+    <tag k='phone' v='+7 863 2421090' />
+    <tag k='ref' v='2570' />
+  </node>
+  <node id='-6115' action='modify' visible='true' lat='47.189007611894034' lon='39.62989290642214'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='128' />
+    <tag k='addr:street' v='ул.Всесоюзная' />
+    <tag k='note:location' v='ООО им. Мирошниченко' />
+    <tag k='phone' v='+7 863 2420855' />
+    <tag k='ref' v='1609' />
+  </node>
+  <node id='-6113' action='modify' visible='true' lat='47.24862578931194' lon='39.71661530032096'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='105/3' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание СДК ОАО «Роствертол»' />
+    <tag k='phone' v='+7 863 2430539' />
+    <tag k='ref' v='1330' />
+  </node>
+  <node id='-6111' action='modify' visible='true' lat='47.28920024940223' lon='39.6985099624431'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №102' />
+    <tag k='phone' v='+7 863 2352111' />
+    <tag k='ref' v='1357' />
+  </node>
+  <node id='-6109' action='modify' visible='true' lat='47.29261691513496' lon='39.700226521615456'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='15/4' />
+    <tag k='addr:street' v='ул. Добровольского' />
+    <tag k='note:location' v='здание детского садика №317' />
+    <tag k='phone' v='+7 863 2352367' />
+    <tag k='ref' v='1358' />
+  </node>
+  <node id='-6107' action='modify' visible='true' lat='47.299333764521606' lon='39.7193336647859'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='50/1' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание школы №99' />
+    <tag k='phone' v='+7 863 2764551' />
+    <tag k='ref' v='1375' />
+  </node>
+  <node id='-6105' action='modify' visible='true' lat='47.29056202605609' lon='39.690139305637786'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №100' />
+    <tag k='phone' v='+7 863 2744092' />
+    <tag k='ref' v='1759' />
+  </node>
+  <node id='-6103' action='modify' visible='true' lat='47.29822337249402' lon='39.70741120083688'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='26/1' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание школы №98' />
+    <tag k='phone' v='+7 863 2745334' />
+    <tag k='ref' v='1363' />
+  </node>
+  <node id='-6101' action='modify' visible='true' lat='47.25380247290641' lon='39.7140982275022'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='29' />
+    <tag k='addr:street' v='просп. Михаила Нагибина' />
+    <tag k='note:location' v='здание клуба «Орлёнок»' />
+    <tag k='phone' v='+7 863 2451394' />
+    <tag k='ref' v='1334' />
+  </node>
+  <node id='-6099' action='modify' visible='true' lat='47.26223147360315' lon='39.715254614151114'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='22/1' />
+    <tag k='addr:street' v='пер. Оренбургский' />
+    <tag k='note:location' v='здание поликлиники №3' />
+    <tag k='phone' v='+7 863 2740112' />
+    <tag k='ref' v='1339' />
+  </node>
+  <node id='-6097' action='modify' visible='true' lat='47.28089977663165' lon='39.71199290148701'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6/2' />
+    <tag k='addr:street' v='ул. Волкова' />
+    <tag k='note:location' v='здание школы №96' />
+    <tag k='phone' v='+7 863 2334004' />
+    <tag k='ref' v='1342' />
+  </node>
+  <node id='-6095' action='modify' visible='true' lat='47.25510940095306' lon='39.710904923307325'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='24А' />
+    <tag k='addr:street' v='ул. Ларина' />
+    <tag k='note:location' v='здание школы №56' />
+    <tag k='phone' v='+7 863 2453993' />
+    <tag k='ref' v='1333' />
+  </node>
+  <node id='-6093' action='modify' visible='true' lat='47.25022266823612' lon='39.733750168610094'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='92/1' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание школы №5' />
+    <tag k='phone' v='+7 863 2930196' />
+    <tag k='ref' v='1324' />
+  </node>
+  <node id='-6091' action='modify' visible='true' lat='47.25034310724539' lon='39.72359332365503'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='64/2' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание гимназии №34' />
+    <tag k='phone' v='+7 863 2430949' />
+    <tag k='ref' v='1329' />
+  </node>
+  <node id='-6089' action='modify' visible='true' lat='47.290593821135495' lon='39.68949103370447'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №100' />
+    <tag k='phone' v='+7 863 2335777' />
+    <tag k='ref' v='1360' />
+  </node>
+  <node id='-6087' action='modify' visible='true' lat='47.28500860385892' lon='39.716668182950066'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6/1' />
+    <tag k='addr:street' v='просп. Космонавтов' />
+    <tag k='note:location' v='здание поликлиники №16' />
+    <tag k='phone' v='+7 863 2352411' />
+    <tag k='ref' v='2548' />
+  </node>
+  <node id='-6085' action='modify' visible='true' lat='47.248057460722265' lon='39.75492791777371'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='245' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание Областного экологического центра' />
+    <tag k='phone' v='+7 863 2804696' />
+    <tag k='ref' v='1320' />
+  </node>
+  <node id='-6083' action='modify' visible='true' lat='47.26944270242258' lon='39.71680604308463'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='82' />
+    <tag k='addr:street' v='ул. Фурмановская' />
+    <tag k='note:location' v='здание школы №82' />
+    <tag k='phone' v='+7 863 2741997' />
+    <tag k='ref' v='1340' />
+  </node>
+  <node id='-6081' action='modify' visible='true' lat='47.29925902351638' lon='39.718669369546426'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='50/1' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание школы №99' />
+    <tag k='phone' v='+7 863 2761277' />
+    <tag k='ref' v='1372' />
+  </node>
+  <node id='-6079' action='modify' visible='true' lat='47.291494984309146' lon='39.70937747529492'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='28/3' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №30' />
+    <tag k='phone' v='+7 863 2741832' />
+    <tag k='ref' v='1353' />
+  </node>
+  <node id='-6077' action='modify' visible='true' lat='47.28666938246882' lon='39.70795707009292'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='7/3' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №118' />
+    <tag k='phone' v='+7 863 2310848' />
+    <tag k='ref' v='1349' />
+  </node>
+  <node id='-6075' action='modify' visible='true' lat='47.28608966660127' lon='39.71032582227949'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9/5' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №104' />
+    <tag k='phone' v='+7 863 2357845' />
+    <tag k='ref' v='1347' />
+  </node>
+  <node id='-6073' action='modify' visible='true' lat='47.280575666819296' lon='39.710855567989576'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6/3' />
+    <tag k='addr:street' v='ул. Волкова' />
+    <tag k='note:location' v='здание школы №65' />
+    <tag k='phone' v='+7 863 2740926' />
+    <tag k='ref' v='1345' />
+  </node>
+  <node id='-6071' action='modify' visible='true' lat='47.29201631241309' lon='39.71646043577084'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18/2' />
+    <tag k='addr:street' v='просп. Космонавтов' />
+    <tag k='note:location' v='нежилое помещение' />
+    <tag k='phone' v='+7 863 2764022' />
+    <tag k='ref' v='1368' />
+  </node>
+  <node id='-6069' action='modify' visible='true' lat='47.2889746635438' lon='39.69855474359838'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №102' />
+    <tag k='phone' v='+7 863 2745654' />
+    <tag k='ref' v='1359' />
+  </node>
+  <node id='-6067' action='modify' visible='true' lat='47.29141876883733' lon='39.70875589394967'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='28/3' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №30' />
+    <tag k='phone' v='+7 863 2339988' />
+    <tag k='ref' v='1354' />
+  </node>
+  <node id='-6065' action='modify' visible='true' lat='47.248359914245775' lon='39.71660094081191'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='105/3' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание СДК «Роствертол»' />
+    <tag k='phone' v='+7 863 2430519' />
+    <tag k='ref' v='2541' />
+  </node>
+  <node id='-6063' action='modify' visible='true' lat='47.24556765225296' lon='39.71894409885675'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='пер. Обуховский' />
+    <tag k='note:location' v='здание общежития РНИИРС' />
+    <tag k='phone' v='+7 863 2430975' />
+    <tag k='ref' v='1327' />
+  </node>
+  <node id='-6061' action='modify' visible='true' lat='47.25836991609812' lon='39.71627413391721'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='просп. Михаила Нагибина' />
+    <tag k='note:location' v='здание школы №90' />
+    <tag k='phone' v='+7 863 2458296' />
+    <tag k='ref' v='1337' />
+  </node>
+  <node id='-6059' action='modify' visible='true' lat='47.300840451220004' lon='39.726761915663054'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='66/2' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание ЖЭУ12' />
+    <tag k='phone' v='+7 863 2761228' />
+    <tag k='ref' v='1373' />
+  </node>
+  <node id='-6057' action='modify' visible='true' lat='47.30004135193181' lon='39.72495875333296'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='24/1' />
+    <tag k='addr:street' v='ул. Беляева' />
+    <tag k='note:location' v='здание подросткового клуба «Риф»' />
+    <tag k='phone' v='+7 863 2760223' />
+    <tag k='ref' v='1374' />
+  </node>
+  <node id='-6055' action='modify' visible='true' lat='47.269691416892435' lon='39.71667970397565'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='82' />
+    <tag k='addr:street' v='ул. Фурмановская' />
+    <tag k='note:location' v='здание школы №82' />
+    <tag k='phone' v='+7 863 2334884' />
+    <tag k='ref' v='1341' />
+  </node>
+  <node id='-6053' action='modify' visible='true' lat='47.29256219525441' lon='39.71469661997376'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='24' />
+    <tag k='addr:street' v='просп. Космонавтов' />
+    <tag k='note:location' v='нежилое помещение' />
+    <tag k='phone' v='+7 863 2745805' />
+    <tag k='ref' v='2547' />
+  </node>
+  <node id='-6051' action='modify' visible='true' lat='47.302263422241424' lon='39.73798749304865'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='86/1' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание института сервиса и туризма' />
+    <tag k='phone' v='+7 863 2760463' />
+    <tag k='ref' v='2489' />
+  </node>
+  <node id='-6049' action='modify' visible='true' lat='47.28583251326431' lon='39.70288298125581'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3/2' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание ЖЭУ18' />
+    <tag k='phone' v='+7 863 2334668' />
+    <tag k='ref' v='1352' />
+  </node>
+  <node id='-6047' action='modify' visible='true' lat='47.29242595860254' lon='39.70820155248814'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12/3' />
+    <tag k='addr:street' v='просп. Королева' />
+    <tag k='note:location' v='здание школы №6' />
+    <tag k='phone' v='+7 863 2474872' />
+    <tag k='ref' v='1355' />
+  </node>
+  <node id='-6045' action='modify' visible='true' lat='47.29822716867507' lon='39.713246247902944'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='36' />
+    <tag k='addr:street' v='просп. Космонавтов' />
+    <tag k='note:location' v='здание Центра детского творчества' />
+    <tag k='phone' v='+7 863 2358211' />
+    <tag k='ref' v='1370' />
+  </node>
+  <node id='-6043' action='modify' visible='true' lat='47.29736242316308' lon='39.708278269399074'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='15/4' />
+    <tag k='addr:street' v='просп. Королева' />
+    <tag k='note:location' v='здание школы №107' />
+    <tag k='phone' v='+7 863 2359188' />
+    <tag k='ref' v='1365' />
+  </node>
+  <node id='-6041' action='modify' visible='true' lat='47.2981503953317' lon='39.70673392276905'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='26/1' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание школы №98' />
+    <tag k='phone' v='+7 863 2338014' />
+    <tag k='ref' v='1364' />
+  </node>
+  <node id='-6039' action='modify' visible='true' lat='47.28538470524846' lon='39.71098962678746'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='5/6' />
+    <tag k='addr:street' v='ул. Волкова' />
+    <tag k='note:location' v='здание гимназии №76' />
+    <tag k='phone' v='+7 863 2333104' />
+    <tag k='ref' v='1346' />
+  </node>
+  <node id='-6037' action='modify' visible='true' lat='47.25874581929713' lon='39.71647131497033'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='33' />
+    <tag k='addr:street' v='просп. Михаила Нагибина' />
+    <tag k='note:location' v='здание школы №90' />
+    <tag k='phone' v='+7 863 2453493' />
+    <tag k='ref' v='1336' />
+  </node>
+  <node id='-6035' action='modify' visible='true' lat='47.281062523305586' lon='39.703538910232254'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3/1' />
+    <tag k='addr:street' v='ул. Борко ' />
+    <tag k='note:location' v='здание ДМШ им. С.С.Прокофьева' />
+    <tag k='phone' v='+7 863 2331187' />
+    <tag k='ref' v='1350' />
+  </node>
+  <node id='-6033' action='modify' visible='true' lat='47.29831636600481' lon='39.71801242515281'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='25/3' />
+    <tag k='addr:street' v='просп. Королева' />
+    <tag k='note:location' v='здание школы №101' />
+    <tag k='phone' v='+7 863 2761862' />
+    <tag k='ref' v='1371' />
+  </node>
+  <node id='-6031' action='modify' visible='true' lat='47.24812906257496' lon='39.72964593108509'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='125/1' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание школы №93' />
+    <tag k='phone' v='+7 863 2930219' />
+    <tag k='ref' v='1328' />
+  </node>
+  <node id='-6029' action='modify' visible='true' lat='47.28629215835991' lon='39.71841288176431'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='41А' />
+    <tag k='addr:street' v='ул. Волкова' />
+    <tag k='note:location' v='здание детской поликлиники №17' />
+    <tag k='phone' v='+7 863 2476528' />
+    <tag k='ref' v='1367' />
+  </node>
+  <node id='-6027' action='modify' visible='true' lat='47.28915450848954' lon='39.69916162167426'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №102' />
+    <tag k='phone' v='+7 863 2336451' />
+    <tag k='ref' v='1380' />
+  </node>
+  <node id='-6025' action='modify' visible='true' lat='47.248656270545574' lon='39.747029007539744'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='217/219' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание школы №3' />
+    <tag k='phone' v='+7 863 2520869' />
+    <tag k='ref' v='1321' />
+  </node>
+  <node id='-6023' action='modify' visible='true' lat='47.29236452477938' lon='39.707569571374165'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12/3' />
+    <tag k='addr:street' v='просп.  Королева' />
+    <tag k='note:location' v='здание школы №6' />
+    <tag k='phone' v='+7 863 2336561' />
+    <tag k='ref' v='1356' />
+  </node>
+  <node id='-6021' action='modify' visible='true' lat='47.286023420027256' lon='39.70971997913333'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9/5' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №104' />
+    <tag k='phone' v='+7 863 2745670' />
+    <tag k='ref' v='1348' />
+  </node>
+  <node id='-6019' action='modify' visible='true' lat='47.29050274254285' lon='39.69075871244338'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6' />
+    <tag k='addr:street' v='бул. Комарова' />
+    <tag k='note:location' v='здание школы №100' />
+    <tag k='phone' v='+7 863 2352592' />
+    <tag k='ref' v='1361' />
+  </node>
+  <node id='-6017' action='modify' visible='true' lat='47.283084779304986' lon='39.71865999052065'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='ул. Волкова' />
+    <tag k='note:location' v='здание КТОС №12' />
+    <tag k='phone' v='+7 863 2740155' />
+    <tag k='ref' v='1366' />
+  </node>
+  <node id='-6015' action='modify' visible='true' lat='47.29729207482728' lon='39.70766530708057'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='15/4' />
+    <tag k='addr:street' v='просп. Королева' />
+    <tag k='note:location' v='здание школы №107' />
+    <tag k='phone' v='+7 863 2352359' />
+    <tag k='ref' v='1362' />
+  </node>
+  <node id='-6013' action='modify' visible='true' lat='47.28094682069679' lon='39.71077162146087'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='6/3' />
+    <tag k='addr:street' v='ул. Волкова' />
+    <tag k='note:location' v='здание школы №65' />
+    <tag k='phone' v='+7 863 2745427' />
+    <tag k='ref' v='1343' />
+  </node>
+  <node id='-6011' action='modify' visible='true' lat='47.249460158285686' lon='39.73299987008073'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='92' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание Донского педагогического колледжа' />
+    <tag k='phone' v='+7 863 2938698' />
+    <tag k='ref' v='1325' />
+  </node>
+  <node id='-6009' action='modify' visible='true' lat='47.297880322474015' lon='39.7332035971869'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='пер. Закарпатский' />
+    <tag k='note:location' v='здание детского санатория «Ромашка»' />
+    <tag k='phone' v='+7 863 2764181' />
+    <tag k='ref' v='1377' />
+  </node>
+  <node id='-6007' action='modify' visible='true' lat='47.26327339147604' lon='39.71421987647811'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='26/55' />
+    <tag k='addr:street' v='пер. Оренбургский' />
+    <tag k='note:location' v='здание ОАО «Тоник»' />
+    <tag k='phone' v='+7 863 2436821' />
+    <tag k='ref' v='1338' />
+  </node>
+  <node id='-6005' action='modify' visible='true' lat='47.30187142715288' lon='39.73416237650464'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='78/1' />
+    <tag k='addr:street' v='ул. Орбитальная' />
+    <tag k='note:location' v='здание детского садика №314' />
+    <tag k='phone' v='+7 863 2762410' />
+    <tag k='ref' v='1376' />
+  </node>
+  <node id='-6003' action='modify' visible='true' lat='47.284036963527974' lon='39.70324576348498'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='ул. Пацаева' />
+    <tag k='note:location' v='здание детского садика №288' />
+    <tag k='phone' v='+7 863 2359424' />
+    <tag k='ref' v='1351' />
+  </node>
+  <node id='-6001' action='modify' visible='true' lat='47.29825293064095' lon='39.71739962230392'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='25/3' />
+    <tag k='addr:street' v='просп. Королева' />
+    <tag k='note:location' v='здание школы №101' />
+    <tag k='phone' v='+7 863 2338196' />
+    <tag k='ref' v='1369' />
+  </node>
+  <node id='-5999' action='modify' visible='true' lat='47.24752512588578' lon='39.72090722755818'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='113/4' />
+    <tag k='addr:street' v='просп. Ленина' />
+    <tag k='note:location' v='здание поликлиники №5' />
+    <tag k='phone' v='+7 863 2303459' />
+    <tag k='ref' v='1326' />
+  </node>
+  <node id='-5997' action='modify' visible='true' lat='47.27408363428306' lon='39.74181769673584'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='107' />
+    <tag k='addr:street' v='ул.Казахская' />
+    <tag k='note:location' v='здание МУ УМФЦ' />
+    <tag k='phone' v='+7 863 2472097' />
+    <tag k='ref' v='1403' />
+  </node>
+  <node id='-5995' action='modify' visible='true' lat='47.2555476121812' lon='39.771506985157075'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='100' />
+    <tag k='addr:street' v='ул.Металлургическая' />
+    <tag k='note:location' v='здание МОУ СОШ № 75' />
+    <tag k='phone' v='+7 863 2528189;+7 863 2529383' />
+    <tag k='ref' v='1423' />
+  </node>
+  <node id='-5993' action='modify' visible='true' lat='47.2973495714099' lon='39.74606794681256'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='8' />
+    <tag k='addr:street' v='ул.Миронова' />
+    <tag k='note:location' v='здание филиала МЛПУЗ Поликлиника №4' />
+    <tag k='phone' v='+7 863 2472043' />
+    <tag k='ref' v='1406' />
+  </node>
+  <node id='-5991' action='modify' visible='true' lat='47.29701783753537' lon='39.74731329982564'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12Г' />
+    <tag k='addr:street' v='ул.Миронова' />
+    <tag k='note:location' v='здание МОУ ДОД ДЮСШ № 6' />
+    <tag k='phone' v='+7 863 2314243' />
+    <tag k='ref' v='1386' />
+  </node>
+  <node id='-5989' action='modify' visible='true' lat='47.28551541286381' lon='39.76373526918583'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='ул.Ректорская' />
+    <tag k='note:location' v='здание МОУ СОШ № 10' />
+    <tag k='phone' v='+7 863 2195695' />
+    <tag k='ref' v='1419' />
+  </node>
+  <node id='-5987' action='modify' visible='true' lat='47.25069779034294' lon='39.77837082717266'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул.Полторацкого' />
+    <tag k='phone' v='+7 863 2238625' />
+    <tag k='ref' v='1428' />
+  </node>
+  <node id='-5985' action='modify' visible='true' lat='47.25576302891407' lon='39.78793000005528'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4/82' />
+    <tag k='addr:street' v='Урожайная улица' />
+    <tag k='note:location' v='здание подросткового клуба «Огонек»' />
+    <tag k='phone' v='+7 863 2476528' />
+    <tag k='ref' v='1421' />
+  </node>
+  <node id='-5983' action='modify' visible='true' lat='47.24613211393236' lon='39.76699653418472'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='9' />
+    <tag k='addr:street' v='пр.Мира' />
+    <tag k='note:location' v='здание Авиационного колледжа ДГТУ' />
+    <tag k='phone' v='+7 863 2523450' />
+    <tag k='ref' v='1431' />
+  </node>
+  <node id='-5981' action='modify' visible='true' lat='47.291217244446734' lon='39.777598475078925'>
+    <tag k='FIXME' v='Уточнить расположение и номер дома' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='31А' />
+    <tag k='addr:street' v='ул.Орская' />
+    <tag k='note:location' v='здание ТЦ «Меркурий»' />
+    <tag k='phone' v='+7 863 2233983' />
+    <tag k='ref' v='1420' />
+  </node>
+  <node id='-5979' action='modify' visible='true' lat='47.265567211666' lon='39.78553065487182'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='ул.Мелитопольская' />
+    <tag k='note:location' v='здание МОУ гимназия № 19' />
+    <tag k='phone' v='+7 863 2739392' />
+    <tag k='ref' v='1418' />
+  </node>
+  <node id='-5977' action='modify' visible='true' lat='47.27305424566562' lon='39.739498765405415'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='89/4' />
+    <tag k='addr:street' v='ул.Казахская' />
+    <tag k='note:location' v='здание МОУ СОШ № 97' />
+    <tag k='phone' v='+7 863 2523707' />
+    <tag k='ref' v='1402' />
+  </node>
+  <node id='-5975' action='modify' visible='true' lat='47.28099554648136' lon='39.76152460127234'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='108' />
+    <tag k='addr:street' v='ул.Вятская' />
+    <tag k='note:location' v='здание МДОУ детский сад №301' />
+    <tag k='phone' v='+7 863 2233988' />
+    <tag k='ref' v='1392' />
+  </node>
+  <node id='-5973' action='modify' visible='true' lat='47.28732930111838' lon='39.739093388732606'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='27' />
+    <tag k='addr:street' v='ул.Вятская' />
+    <tag k='note:location' v='здание МОУ СОШ № 16' />
+    <tag k='phone' v='+7 863 2331655' />
+    <tag k='ref' v='1396' />
+  </node>
+  <node id='-5971' action='modify' visible='true' lat='47.27557431436613' lon='39.74114605197119'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='пер.Обский' />
+    <tag k='note:correction' v='Дом 7, а не 7/2' />
+    <tag k='note:location' v='здание МОУ СОШ № 24' />
+    <tag k='phone' v='+7 863 2544070' />
+    <tag k='ref' v='1397' />
+  </node>
+  <node id='-5969' action='modify' visible='true' lat='47.274893885463655' lon='39.75064609398684'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='41' />
+    <tag k='addr:street' v='ул.Киргизская' />
+    <tag k='note:location' v='здание МОУ СОШ № 84' />
+    <tag k='phone' v='+7 863 2528390' />
+    <tag k='ref' v='1398' />
+  </node>
+  <node id='-5967' action='modify' visible='true' lat='47.26868466272884' lon='39.78980360696535'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='95' />
+    <tag k='addr:street' v='ул.Глинки' />
+    <tag k='note:location' v='здание МОУ СОШ № 23' />
+    <tag k='phone' v='+7 863 2551795' />
+    <tag k='ref' v='1414' />
+  </node>
+  <node id='-5965' action='modify' visible='true' lat='47.285988601419426' lon='39.758852282661564'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='116' />
+    <tag k='addr:street' v='пер.Днепровский' />
+    <tag k='note:location' v='здание ФГОУ ВПО ЮФУ' />
+    <tag k='phone' v='+7 863 2507701' />
+    <tag k='ref' v='1390' />
+  </node>
+  <node id='-5963' action='modify' visible='true' lat='47.295897007137825' lon='39.73986471794094'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='ул.Лелюшенко' />
+    <tag k='note:location' v='здание МОУ гимназия № 111' />
+    <tag k='phone' v='+7 863 2720613' />
+    <tag k='ref' v='1385' />
+  </node>
+  <node id='-5961' action='modify' visible='true' lat='47.2835022110093' lon='39.80121515024497'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='44' />
+    <tag k='addr:street' v='ул.Днепропетровская' />
+    <tag k='note:location' v='здание МУ УМФЦ' />
+    <tag k='phone' v='+7 863 2932552' />
+    <tag k='ref' v='1407' />
+  </node>
+  <node id='-5959' action='modify' visible='true' lat='47.26707261284226' lon='39.78926787175649'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='1/79' />
+    <tag k='addr:street' v='ул.Брестская' />
+    <tag k='phone' v='+7 863 2525689' />
+    <tag k='ref' v='1416' />
+  </node>
+  <node id='-5957' action='modify' visible='true' lat='47.25770900152815' lon='39.805403647494515'>
+    <tag k='FIXME' v='Подтвердить расположение и уточнить адрес' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='272' />
+    <tag k='addr:street' v='пр.Шолохова' />
+    <tag k='note:location' v='здание ДК Авиаработников' />
+    <tag k='phone' v='+7 863 2767885' />
+    <tag k='ref' v='1433' />
+  </node>
+  <node id='-5955' action='modify' visible='true' lat='47.250492926795594' lon='39.76810639739838'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='64/112' />
+    <tag k='addr:street' v='ул.Селиванова' />
+    <tag k='note:location' v='здание ГУ УПФ РФ' />
+    <tag k='phone' v='+7 863 2000286' />
+    <tag k='ref' v='1429' />
+  </node>
+  <node id='-5953' action='modify' visible='true' lat='47.26500624679965' lon='39.785763219838955'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='22' />
+    <tag k='addr:street' v='ул.Мелитопольская' />
+    <tag k='note:location' v='здание МОУ гимназия № 19' />
+    <tag k='phone' v='+7 863 2739393' />
+    <tag k='ref' v='1415' />
+  </node>
+  <node id='-5951' action='modify' visible='true' lat='47.259468528808874' lon='39.772634121445726'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4' />
+    <tag k='addr:street' v='ул.Студенческая' />
+    <tag k='note:location' v='здание учебного корпуса ДГТУ' />
+    <tag k='phone' v='+7 863 2526608' />
+    <tag k='ref' v='1422' />
+  </node>
+  <node id='-5949' action='modify' visible='true' lat='47.28097644677868' lon='39.80858304722794'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='4/1' />
+    <tag k='addr:street' v='ул.Туполева' />
+    <tag k='phone' v='+7 863 2932611' />
+    <tag k='ref' v='1409' />
+  </node>
+  <node id='-5947' action='modify' visible='true' lat='47.254841017439254' lon='39.766290147916116'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='ул.Сержантова' />
+    <tag k='note:location' v='здание Детской музыкальной школы' />
+    <tag k='phone' v='+7 863 2547933' />
+    <tag k='ref' v='1424' />
+  </node>
+  <node id='-5945' action='modify' visible='true' lat='47.28172511817335' lon='39.7546878683356'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='26' />
+    <tag k='addr:street' v='ул.Украинская' />
+    <tag k='note:location' v='здание МОУ СОШ № 91' />
+    <tag k='phone' v='+7 863 2520468' />
+    <tag k='ref' v='1394' />
+  </node>
+  <node id='-5943' action='modify' visible='true' lat='47.30645095043648' lon='39.784296948209814'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='99' />
+    <tag k='addr:street' v='ул.Фасадная' />
+    <tag k='note:location' v='ООО ТД «Жемчужина»' />
+    <tag k='phone' v='+7 863 2375281' />
+    <tag k='ref' v='1436' />
+  </node>
+  <node id='-5941' action='modify' visible='true' lat='47.275764992436336' lon='39.74035471013391'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='пер.Обский' />
+    <tag k='note:correction' v='Дом 7, а не 7/2' />
+    <tag k='note:location' v='здание МОУ СОШ № 24' />
+    <tag k='phone' v='+7 863 2522809' />
+    <tag k='ref' v='1400' />
+  </node>
+  <node id='-5939' action='modify' visible='true' lat='47.27450061391285' lon='39.779027401012634'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='19' />
+    <tag k='addr:street' v='ул.Волжская' />
+    <tag k='note:location' v='здание МДОУ детский сад' />
+    <tag k='phone' v='+7 863 2545611' />
+    <tag k='ref' v='1413' />
+  </node>
+  <node id='-5937' action='modify' visible='true' lat='47.271742705529206' lon='39.792498220034844'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='14' />
+    <tag k='addr:street' v='ул.Днепропетровская' />
+    <tag k='note:correction' v='Дом 14, а не 12' />
+    <tag k='note:location' v='здание МОУ СОШ № 44' />
+    <tag k='phone' v='+7 863 2832094' />
+    <tag k='ref' v='1425' />
+  </node>
+  <node id='-5935' action='modify' visible='true' lat='47.28670249328861' lon='39.75348975609329'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='131' />
+    <tag k='addr:street' v='пер.Днепровский' />
+    <tag k='note:location' v='здание МОУ СОШ № 109' />
+    <tag k='phone' v='+7 863 2523405' />
+    <tag k='ref' v='1391' />
+  </node>
+  <node id='-5933' action='modify' visible='true' lat='47.274396141868024' lon='39.75864673036245'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='ул.Киргизская' />
+    <tag k='note:location' v='здание МУ УСЗН центр обслуживания пенсионеров' />
+    <tag k='phone' v='+7 863 2724922' />
+    <tag k='ref' v='1405' />
+  </node>
+  <node id='-5931' action='modify' visible='true' lat='47.255732589992824' lon='39.772456255898646'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='100' />
+    <tag k='addr:street' v='ул.Металлургическая' />
+    <tag k='note:location' v='здание МОУ лицей № 20' />
+    <tag k='phone' v='+7 863 2521896' />
+    <tag k='ref' v='1426' />
+  </node>
+  <node id='-5929' action='modify' visible='true' lat='47.27972610846181' lon='39.763880175608925'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='112Б' />
+    <tag k='addr:street' v='ул.Вятская' />
+    <tag k='note:location' v='здание Детской музыкальной школы' />
+    <tag k='phone' v='+7 863 2233965' />
+    <tag k='ref' v='1427' />
+  </node>
+  <node id='-5927' action='modify' visible='true' lat='47.27195968744315' lon='39.79200471389754'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='14' />
+    <tag k='addr:street' v='ул.Днепропетровская' />
+    <tag k='note:location' v='здание МОУ СОШ № 44' />
+    <tag k='phone' v='+7 863 2522609' />
+    <tag k='ref' v='1411' />
+  </node>
+  <node id='-5925' action='modify' visible='true' lat='47.29561089012259' lon='39.739396827118426'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='7' />
+    <tag k='addr:street' v='ул.Лелюшенко' />
+    <tag k='note:location' v='здание МОУ гимназия № 111' />
+    <tag k='phone' v='+7 863 2720013' />
+    <tag k='ref' v='1384' />
+  </node>
+  <node id='-5923' action='modify' visible='true' lat='47.26911784442774' lon='39.75221748528126'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='16' />
+    <tag k='addr:street' v='пер.Беломорский' />
+    <tag k='note:location' v='здание МОУ ДОУ №299' />
+    <tag k='phone' v='+7 863 2472089' />
+    <tag k='ref' v='1404' />
+  </node>
+  <node id='-5921' action='modify' visible='true' lat='47.28817883426883' lon='39.74265477514256'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='18' />
+    <tag k='addr:street' v='ул.Штахановского' />
+    <tag k='note:location' v='здание МОУ СОШ № 18' />
+    <tag k='phone' v='+7 863 2527213' />
+    <tag k='ref' v='1387' />
+  </node>
+  <node id='-5919' action='modify' visible='true' lat='47.263379688818404' lon='39.77647868003258'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='2' />
+    <tag k='addr:street' v='ул.Курчатова' />
+    <tag k='phone' v='+7 863 2529035' />
+    <tag k='ref' v='1417' />
+  </node>
+  <node id='-5917' action='modify' visible='true' lat='47.269608716917546' lon='39.81061906329365'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='47' />
+    <tag k='addr:street' v='ул.З. Космодемьянской' />
+    <tag k='note:location' v='здание МОУ Прогимназия № 239' />
+    <tag k='phone' v='+7 863 2554827' />
+    <tag k='ref' v='1412' />
+  </node>
+  <node id='-5915' action='modify' visible='true' lat='47.281472822957376' lon='39.80735877200564'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='8/2' />
+    <tag k='addr:street' v='ул.Туполева' />
+    <tag k='phone' v='+7 863 2932639' />
+    <tag k='ref' v='1408' />
+  </node>
+  <node id='-5913' action='modify' visible='true' lat='47.284411791995154' lon='39.74685087382138'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='122' />
+    <tag k='addr:street' v='пер.Обский' />
+    <tag k='note:location' v='здание МОУ детский сад №261' />
+    <tag k='phone' v='+7 863 2527977' />
+    <tag k='ref' v='1388' />
+  </node>
+  <node id='-5911' action='modify' visible='true' lat='47.24555973375794' lon='39.76796037931285'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='10' />
+    <tag k='addr:street' v='пр.Мира' />
+    <tag k='note:location' v='здание МОУ СОШ № 21' />
+    <tag k='phone' v='+7 863 2540744' />
+    <tag k='ref' v='1432' />
+  </node>
+  <node id='-5909' action='modify' visible='true' lat='47.26466749967247' lon='39.816783907757205'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='294/3' />
+    <tag k='addr:street' v='пр.Шолохова' />
+    <tag k='note:location' v='здание МОУ ДОД ЦРТДиЮ' />
+    <tag k='phone' v='+7 863 2554831' />
+    <tag k='ref' v='1435' />
+  </node>
+  <node id='-5907' action='modify' visible='true' lat='47.274336799578066' lon='39.758265651548086'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='12' />
+    <tag k='addr:street' v='ул.Киргизская' />
+    <tag k='note:location' v='здание МУ УСЗН центр обслуживания пенсионеров' />
+    <tag k='phone' v='+7 863 2542088' />
+    <tag k='ref' v='1399' />
+  </node>
+  <node id='-5905' action='modify' visible='true' lat='47.28745307095716' lon='39.738581500085054'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='27' />
+    <tag k='addr:street' v='ул.Вятская' />
+    <tag k='note:location' v='здание МОУ СОШ № 16' />
+    <tag k='phone' v='+7 863 2332022' />
+    <tag k='ref' v='1393' />
+  </node>
+  <node id='-5903' action='modify' visible='true' lat='47.27655286216831' lon='39.739000445737375'>
+    <tag k='FIXME' v='Подтвердить расположение' />
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='80/1' />
+    <tag k='addr:street' v='ул.Казахская' />
+    <tag k='phone' v='+7 863 2472076' />
+    <tag k='ref' v='1401' />
+  </node>
+  <node id='-5901' action='modify' visible='true' lat='47.28551887220995' lon='39.7628467755439'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='11' />
+    <tag k='addr:street' v='ул.Ректорская' />
+    <tag k='note:location' v='здание МОУ СОШ № 10' />
+    <tag k='phone' v='+7 863 2187795;+7 863 2195695' />
+    <tag k='ref' v='1410' />
+  </node>
+  <node id='-5899' action='modify' visible='true' lat='47.29435335689858' lon='39.73741644270233'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3/4' />
+    <tag k='addr:street' v='ул. Лелюшенко' />
+    <tag k='note:location' v='здание МОУ СОШ № 105' />
+    <tag k='phone' v='+7 863 2720142' />
+    <tag k='ref' v='1382' />
+  </node>
+  <node id='-5897' action='modify' visible='true' lat='47.294716486871536' lon='39.73757708950157'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3/4' />
+    <tag k='addr:street' v='ул. Лелюшенко' />
+    <tag k='note:location' v='здание МОУ СОШ № 105' />
+    <tag k='phone' v='+7 863 2475136' />
+    <tag k='ref' v='1383' />
+  </node>
+  <node id='-5895' action='modify' visible='true' lat='47.286469179958004' lon='39.75479498991389'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='131' />
+    <tag k='addr:street' v='пер.Днепровский' />
+    <tag k='note:location' v='здание МОУ СОШ № 109' />
+    <tag k='phone' v='+7 863 2528458' />
+    <tag k='ref' v='1389' />
+  </node>
+  <node id='-5893' action='modify' visible='true' lat='47.24974916638053' lon='39.763401036756576'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='3' />
+    <tag k='addr:street' v='пр.Сельмаш' />
+    <tag k='note:location' v='здание ДК ООО «Ростсельмаш»' />
+    <tag k='phone' v='+7 863 2545870' />
+    <tag k='ref' v='1430' />
+  </node>
+  <node id='-5891' action='modify' visible='true' lat='47.25523431264425' lon='39.79837147541126'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='262' />
+    <tag k='addr:street' v='пр.Шолохова' />
+    <tag k='note:location' v='здание СКУТЦ Гражданской авиации' />
+    <tag k='phone' v='+7 863 2524169' />
+    <tag k='ref' v='1434' />
+  </node>
+  <node id='-5889' action='modify' visible='true' lat='47.28182085268805' lon='39.757037522898266'>
+    <tag k='addr:city' v='Ростов-на-Дону' />
+    <tag k='addr:housenumber' v='103/18' />
+    <tag k='addr:street' v='пер.Днепровский' />
+    <tag k='note:location' v='здание МОУ детский клуб «Орленок»' />
+    <tag k='phone' v='+7 863 2234559' />
+    <tag k='ref' v='1395' />
+  </node>
+  <relation id='-6603' action='modify' visible='true'>
+    <member type='node' ref='-6247' role='' />
+    <member type='node' ref='-6265' role='' />
+    <member type='node' ref='-6277' role='' />
+    <member type='node' ref='-6195' role='' />
+    <member type='node' ref='-6181' role='' />
+    <member type='node' ref='-6207' role='' />
+    <member type='node' ref='-6225' role='' />
+    <member type='node' ref='-6219' role='' />
+    <member type='node' ref='-6237' role='' />
+    <member type='node' ref='-6231' role='' />
+    <member type='node' ref='-6259' role='' />
+    <member type='node' ref='-6245' role='' />
+    <member type='node' ref='-6271' role='' />
+    <member type='node' ref='-6193' role='' />
+    <member type='node' ref='-6187' role='' />
+    <member type='node' ref='-6205' role='' />
+    <member type='node' ref='-6199' role='' />
+    <member type='node' ref='-6217' role='' />
+    <member type='node' ref='-6243' role='' />
+    <member type='node' ref='-6229' role='' />
+    <member type='node' ref='-6257' role='' />
+    <member type='node' ref='-6251' role='' />
+    <member type='node' ref='-6269' role='' />
+    <member type='node' ref='-6263' role='' />
+    <member type='node' ref='-6185' role='' />
+    <member type='node' ref='-6211' role='' />
+    <member type='node' ref='-6197' role='' />
+    <member type='node' ref='-6223' role='' />
+    <member type='node' ref='-6241' role='' />
+    <member type='node' ref='-6235' role='' />
+    <member type='node' ref='-6249' role='' />
+    <member type='node' ref='-6275' role='' />
+    <member type='node' ref='-6261' role='' />
+    <member type='node' ref='-6191' role='' />
+    <member type='node' ref='-6209' role='' />
+    <member type='node' ref='-6203' role='' />
+    <member type='node' ref='-6221' role='' />
+    <member type='node' ref='-6215' role='' />
+    <member type='node' ref='-6233' role='' />
+    <member type='node' ref='-6255' role='' />
+    <member type='node' ref='-6273' role='' />
+    <member type='node' ref='-6267' role='' />
+    <member type='node' ref='-6189' role='' />
+    <member type='node' ref='-6183' role='' />
+    <member type='node' ref='-6201' role='' />
+    <member type='node' ref='-6227' role='' />
+    <member type='node' ref='-6213' role='' />
+    <member type='node' ref='-6239' role='' />
+    <member type='node' ref='-6253' role='' />
+    <tag k='name' v='УИКи Пролетарского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6601' visible='true'>
+    <member type='node' ref='-6541' role='' />
+    <member type='node' ref='-6553' role='' />
+    <member type='node' ref='-6569' role='' />
+    <member type='node' ref='-6581' role='' />
+    <member type='node' ref='-6547' role='' />
+    <member type='node' ref='-6559' role='' />
+    <member type='node' ref='-6575' role='' />
+    <member type='node' ref='-6587' role='' />
+    <member type='node' ref='-6545' role='' />
+    <member type='node' ref='-6539' role='' />
+    <member type='node' ref='-6557' role='' />
+    <member type='node' ref='-6551' role='' />
+    <member type='node' ref='-6573' role='' />
+    <member type='node' ref='-6567' role='' />
+    <member type='node' ref='-6585' role='' />
+    <member type='node' ref='-6563' role='' />
+    <member type='node' ref='-6549' role='' />
+    <member type='node' ref='-6579' role='' />
+    <member type='node' ref='-6565' role='' />
+    <member type='node' ref='-6543' role='' />
+    <member type='node' ref='-6561' role='' />
+    <member type='node' ref='-6555' role='' />
+    <member type='node' ref='-6577' role='' />
+    <member type='node' ref='-6571' role='' />
+    <member type='node' ref='-6583' role='' />
+    <tag k='name' v='УИКи Ленинского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6599' visible='true'>
+    <member type='node' ref='-6523' role='' />
+    <member type='node' ref='-6535' role='' />
+    <member type='node' ref='-6445' role='' />
+    <member type='node' ref='-6439' role='' />
+    <member type='node' ref='-6457' role='' />
+    <member type='node' ref='-6483' role='' />
+    <member type='node' ref='-6469' role='' />
+    <member type='node' ref='-6495' role='' />
+    <member type='node' ref='-6509' role='' />
+    <member type='node' ref='-6503' role='' />
+    <member type='node' ref='-6521' role='' />
+    <member type='node' ref='-6533' role='' />
+    <member type='node' ref='-6451' role='' />
+    <member type='node' ref='-6463' role='' />
+    <member type='node' ref='-6481' role='' />
+    <member type='node' ref='-6475' role='' />
+    <member type='node' ref='-6493' role='' />
+    <member type='node' ref='-6487' role='' />
+    <member type='node' ref='-6515' role='' />
+    <member type='node' ref='-6501' role='' />
+    <member type='node' ref='-6527' role='' />
+    <member type='node' ref='-6449' role='' />
+    <member type='node' ref='-6443' role='' />
+    <member type='node' ref='-6461' role='' />
+    <member type='node' ref='-6455' role='' />
+    <member type='node' ref='-6473' role='' />
+    <member type='node' ref='-6499' role='' />
+    <member type='node' ref='-6485' role='' />
+    <member type='node' ref='-6513' role='' />
+    <member type='node' ref='-6507' role='' />
+    <member type='node' ref='-6525' role='' />
+    <member type='node' ref='-6519' role='' />
+    <member type='node' ref='-6537' role='' />
+    <member type='node' ref='-6441' role='' />
+    <member type='node' ref='-6467' role='' />
+    <member type='node' ref='-6453' role='' />
+    <member type='node' ref='-6479' role='' />
+    <member type='node' ref='-6497' role='' />
+    <member type='node' ref='-6491' role='' />
+    <member type='node' ref='-6505' role='' />
+    <member type='node' ref='-6531' role='' />
+    <member type='node' ref='-6517' role='' />
+    <member type='node' ref='-6447' role='' />
+    <member type='node' ref='-6465' role='' />
+    <member type='node' ref='-6459' role='' />
+    <member type='node' ref='-6477' role='' />
+    <member type='node' ref='-6471' role='' />
+    <member type='node' ref='-6489' role='' />
+    <member type='node' ref='-6511' role='' />
+    <member type='node' ref='-6529' role='' />
+    <tag k='name' v='УИКи Октябрьского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6597' visible='true'>
+    <member type='node' ref='-6399' role='' />
+    <member type='node' ref='-6417' role='' />
+    <member type='node' ref='-6411' role='' />
+    <member type='node' ref='-6429' role='' />
+    <member type='node' ref='-6423' role='' />
+    <member type='node' ref='-6397' role='' />
+    <member type='node' ref='-6391' role='' />
+    <member type='node' ref='-6409' role='' />
+    <member type='node' ref='-6435' role='' />
+    <member type='node' ref='-6421' role='' />
+    <member type='node' ref='-6437' role='' />
+    <member type='node' ref='-6403' role='' />
+    <member type='node' ref='-6415' role='' />
+    <member type='node' ref='-6433' role='' />
+    <member type='node' ref='-6427' role='' />
+    <member type='node' ref='-6401' role='' />
+    <member type='node' ref='-6395' role='' />
+    <member type='node' ref='-6413' role='' />
+    <member type='node' ref='-6407' role='' />
+    <member type='node' ref='-6425' role='' />
+    <member type='node' ref='-6393' role='' />
+    <member type='node' ref='-6419' role='' />
+    <member type='node' ref='-6405' role='' />
+    <member type='node' ref='-6431' role='' />
+    <tag k='name' v='УИКи Кировского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6595' visible='true'>
+    <member type='node' ref='-6291' role='' />
+    <member type='node' ref='-6303' role='' />
+    <member type='node' ref='-6319' role='' />
+    <member type='node' ref='-6337' role='' />
+    <member type='node' ref='-6331' role='' />
+    <member type='node' ref='-6349' role='' />
+    <member type='node' ref='-6343' role='' />
+    <member type='node' ref='-6385' role='' />
+    <member type='node' ref='-6361' role='' />
+    <member type='node' ref='-6379' role='' />
+    <member type='node' ref='-6289' role='' />
+    <member type='node' ref='-6283' role='' />
+    <member type='node' ref='-6301' role='' />
+    <member type='node' ref='-6295' role='' />
+    <member type='node' ref='-6317' role='' />
+    <member type='node' ref='-6311' role='' />
+    <member type='node' ref='-6329' role='' />
+    <member type='node' ref='-6355' role='' />
+    <member type='node' ref='-6341' role='' />
+    <member type='node' ref='-6367' role='' />
+    <member type='node' ref='-6377' role='' />
+    <member type='node' ref='-6389' role='' />
+    <member type='node' ref='-6281' role='' />
+    <member type='node' ref='-6307' role='' />
+    <member type='node' ref='-6293' role='' />
+    <member type='node' ref='-6323' role='' />
+    <member type='node' ref='-6309' role='' />
+    <member type='node' ref='-6335' role='' />
+    <member type='node' ref='-6353' role='' />
+    <member type='node' ref='-6347' role='' />
+    <member type='node' ref='-6365' role='' />
+    <member type='node' ref='-6383' role='' />
+    <member type='node' ref='-6359' role='' />
+    <member type='node' ref='-6287' role='' />
+    <member type='node' ref='-6305' role='' />
+    <member type='node' ref='-6299' role='' />
+    <member type='node' ref='-6321' role='' />
+    <member type='node' ref='-6315' role='' />
+    <member type='node' ref='-6333' role='' />
+    <member type='node' ref='-6327' role='' />
+    <member type='node' ref='-6345' role='' />
+    <member type='node' ref='-6371' role='' />
+    <member type='node' ref='-6381' role='' />
+    <member type='node' ref='-6357' role='' />
+    <member type='node' ref='-6375' role='' />
+    <member type='node' ref='-6285' role='' />
+    <member type='node' ref='-6279' role='' />
+    <member type='node' ref='-6297' role='' />
+    <member type='node' ref='-6313' role='' />
+    <member type='node' ref='-6339' role='' />
+    <member type='node' ref='-6325' role='' />
+    <member type='node' ref='-6351' role='' />
+    <member type='node' ref='-6369' role='' />
+    <member type='node' ref='-6387' role='' />
+    <member type='node' ref='-6363' role='' />
+    <member type='node' ref='-6373' role='' />
+    <tag k='name' v='УИКи Советского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6593' visible='true'>
+    <member type='node' ref='-6141' role='' />
+    <member type='node' ref='-6135' role='' />
+    <member type='node' ref='-6153' role='' />
+    <member type='node' ref='-6179' role='' />
+    <member type='node' ref='-6165' role='' />
+    <member type='node' ref='-6121' role='' />
+    <member type='node' ref='-6147' role='' />
+    <member type='node' ref='-6133' role='' />
+    <member type='node' ref='-6159' role='' />
+    <member type='node' ref='-6177' role='' />
+    <member type='node' ref='-6171' role='' />
+    <member type='node' ref='-6127' role='' />
+    <member type='node' ref='-6145' role='' />
+    <member type='node' ref='-6139' role='' />
+    <member type='node' ref='-6157' role='' />
+    <member type='node' ref='-6151' role='' />
+    <member type='node' ref='-6169' role='' />
+    <member type='node' ref='-6115' role='' />
+    <member type='node' ref='-6125' role='' />
+    <member type='node' ref='-6119' role='' />
+    <member type='node' ref='-6137' role='' />
+    <member type='node' ref='-6163' role='' />
+    <member type='node' ref='-6149' role='' />
+    <member type='node' ref='-6175' role='' />
+    <member type='node' ref='-6131' role='' />
+    <member type='node' ref='-6117' role='' />
+    <member type='node' ref='-6143' role='' />
+    <member type='node' ref='-6161' role='' />
+    <member type='node' ref='-6155' role='' />
+    <member type='node' ref='-6173' role='' />
+    <member type='node' ref='-6167' role='' />
+    <member type='node' ref='-6129' role='' />
+    <member type='node' ref='-6123' role='' />
+    <tag k='name' v='УИКи Железнодорожного района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6591' visible='true'>
+    <member type='node' ref='-6003' role='' />
+    <member type='node' ref='-6015' role='' />
+    <member type='node' ref='-6033' role='' />
+    <member type='node' ref='-6027' role='' />
+    <member type='node' ref='-6045' role='' />
+    <member type='node' ref='-6039' role='' />
+    <member type='node' ref='-6061' role='' />
+    <member type='node' ref='-6055' role='' />
+    <member type='node' ref='-6073' role='' />
+    <member type='node' ref='-6099' role='' />
+    <member type='node' ref='-6085' role='' />
+    <member type='node' ref='-6111' role='' />
+    <member type='node' ref='-6001' role='' />
+    <member type='node' ref='-6013' role='' />
+    <member type='node' ref='-6007' role='' />
+    <member type='node' ref='-6025' role='' />
+    <member type='node' ref='-6051' role='' />
+    <member type='node' ref='-6037' role='' />
+    <member type='node' ref='-6067' role='' />
+    <member type='node' ref='-6053' role='' />
+    <member type='node' ref='-6079' role='' />
+    <member type='node' ref='-6097' role='' />
+    <member type='node' ref='-6091' role='' />
+    <member type='node' ref='-6109' role='' />
+    <member type='node' ref='-6103' role='' />
+    <member type='node' ref='-6019' role='' />
+    <member type='node' ref='-6005' role='' />
+    <member type='node' ref='-6031' role='' />
+    <member type='node' ref='-6049' role='' />
+    <member type='node' ref='-6043' role='' />
+    <member type='node' ref='-6065' role='' />
+    <member type='node' ref='-6059' role='' />
+    <member type='node' ref='-6077' role='' />
+    <member type='node' ref='-6071' role='' />
+    <member type='node' ref='-6089' role='' />
+    <member type='node' ref='-6101' role='' />
+    <member type='node' ref='-5999' role='' />
+    <member type='node' ref='-6017' role='' />
+    <member type='node' ref='-6011' role='' />
+    <member type='node' ref='-6029' role='' />
+    <member type='node' ref='-6023' role='' />
+    <member type='node' ref='-6041' role='' />
+    <member type='node' ref='-6057' role='' />
+    <member type='node' ref='-6083' role='' />
+    <member type='node' ref='-6069' role='' />
+    <member type='node' ref='-6095' role='' />
+    <member type='node' ref='-6113' role='' />
+    <member type='node' ref='-6107' role='' />
+    <member type='node' ref='-6009' role='' />
+    <member type='node' ref='-6035' role='' />
+    <member type='node' ref='-6021' role='' />
+    <member type='node' ref='-6047' role='' />
+    <member type='node' ref='-6063' role='' />
+    <member type='node' ref='-6081' role='' />
+    <member type='node' ref='-6075' role='' />
+    <member type='node' ref='-6093' role='' />
+    <member type='node' ref='-6087' role='' />
+    <member type='node' ref='-6105' role='' />
+    <tag k='name' v='УИКи Ворошиловского района' />
+    <tag k='type' v='collection' />
+  </relation>
+  <relation id='-6589' visible='true'>
+    <member type='node' ref='-5989' role='' />
+    <member type='node' ref='-5891' role='' />
+    <member type='node' ref='-5903' role='' />
+    <member type='node' ref='-5921' role='' />
+    <member type='node' ref='-5915' role='' />
+    <member type='node' ref='-5937' role='' />
+    <member type='node' ref='-5931' role='' />
+    <member type='node' ref='-5949' role='' />
+    <member type='node' ref='-5943' role='' />
+    <member type='node' ref='-5961' role='' />
+    <member type='node' ref='-5987' role='' />
+    <member type='node' ref='-5973' role='' />
+    <member type='node' ref='-5995' role='' />
+    <member type='node' ref='-5889' role='' />
+    <member type='node' ref='-5901' role='' />
+    <member type='node' ref='-5895' role='' />
+    <member type='node' ref='-5913' role='' />
+    <member type='node' ref='-5929' role='' />
+    <member type='node' ref='-5955' role='' />
+    <member type='node' ref='-5941' role='' />
+    <member type='node' ref='-5967' role='' />
+    <member type='node' ref='-5985' role='' />
+    <member type='node' ref='-5979' role='' />
+    <member type='node' ref='-5993' role='' />
+    <member type='node' ref='-5907' role='' />
+    <member type='node' ref='-5893' role='' />
+    <member type='node' ref='-5919' role='' />
+    <member type='node' ref='-5935' role='' />
+    <member type='node' ref='-5953' role='' />
+    <member type='node' ref='-5947' role='' />
+    <member type='node' ref='-5965' role='' />
+    <member type='node' ref='-5959' role='' />
+    <member type='node' ref='-5977' role='' />
+    <member type='node' ref='-5905' role='' />
+    <member type='node' ref='-5899' role='' />
+    <member type='node' ref='-5917' role='' />
+    <member type='node' ref='-5911' role='' />
+    <member type='node' ref='-5933' role='' />
+    <member type='node' ref='-5927' role='' />
+    <member type='node' ref='-5945' role='' />
+    <member type='node' ref='-5971' role='' />
+    <member type='node' ref='-5957' role='' />
+    <member type='node' ref='-5983' role='' />
+    <member type='node' ref='-5997' role='' />
+    <member type='node' ref='-5991' role='' />
+    <member type='node' ref='-5897' role='' />
+    <member type='node' ref='-5923' role='' />
+    <member type='node' ref='-5909' role='' />
+    <member type='node' ref='-5939' role='' />
+    <member type='node' ref='-5925' role='' />
+    <member type='node' ref='-5951' role='' />
+    <member type='node' ref='-5969' role='' />
+    <member type='node' ref='-5963' role='' />
+    <member type='node' ref='-5981' role='' />
+    <member type='node' ref='-5975' role='' />
+    <tag k='name' v='УИКи Первомайского района' />
+    <tag k='type' v='collection' />
+  </relation>
+</osm>

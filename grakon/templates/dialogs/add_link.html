@@ -1,6 +1,6 @@
 {% if user.is_authenticated %}
     <div id="add_link_dialog">
-        <center>
+        <div class="center">
             <form id="add_link_form" class="dialog_form" method="post" action="{% url add_link %}">
                 {% csrf_token %}
                 <table>
@@ -18,7 +18,7 @@
                 </table>
                 <input type="hidden" name="location" value="" />
             </form>
-        </center>
+        </div>
     </div>
 {% endif %}
 
@@ -51,7 +51,9 @@
             // Add link on pressing Enter
             $("#add_link_form input").keypress(function(e){
                 if(e.which == 13){
+                    e.preventDefault();
                     $("#add_link_dialog").dialog("option", "buttons")["Добавить"]();
+                    return false;
                 }
             });
 

@@ -166,10 +166,11 @@ class Command(BaseCommand):
             title4 = u'Четвертая акция Гракона: Поведение избирателя на участке'
             title5 = u'5ая акция Гракона: "Как использовать Гракон по максимуму на выборах"'
 
-            subject = u'Работа интернет-площадки Гракон после выборов президента'
+            #subject = u'Работа интернет-площадки Гракон после выборов президента'
+            subject = u'Новое направление развития Гракона'
 
-            text_content = render_to_string('letters/plans.txt', {'email': user.email})
-            html_content = render_to_string('letters/plans.html', {'email': user.email})
+            text_content = render_to_string('letters/final.txt', {'email': user.email})
+            html_content = render_to_string('letters/final.html', {'email': user.email})
 
             msg = EmailMultiAlternatives(subject, text_content, 'admin@grakon.org', [user.email])
             msg.attach_alternative(html_content, "text/html")

@@ -21,9 +21,9 @@ class CommissionMemberAdmin(admin.ModelAdmin):
     raw_id_fields = ('location', 'user')
 
 class WebObserverAdmin(admin.ModelAdmin):
-    list_display = ('start_time', 'end_time', 'capture_video', 'location', 'user')
+    list_display = ('start_time', 'end_time', 'capture_video', 'location', 'user', 'url')
     ordering = ('start_time', 'location')
-    search_fields = ('start_time', 'location__name')
+    search_fields = ('start_time', 'location__name', 'user__username')
     raw_id_fields = ('location', 'user')
 
 class MessageAdmin(admin.ModelAdmin):

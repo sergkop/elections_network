@@ -22,7 +22,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#become_web_observer, #become_web_observer1").click(function(){
+        $("#become_web_observer, #become_web_observer1, #become_web_observer2").click(function(){
             {% if user.is_authenticated %}
                 {% if current_location.is_uik %}
                     become_web_observer_dialog_init();

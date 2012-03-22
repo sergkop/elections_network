@@ -157,7 +157,7 @@ class Command(BaseCommand):
 
             message = MESSAGE #% name
 
-            sleep(0.15)
+            sleep(0.07)
             i += 1
             print i
             title1 = u'Акция Гракона "Собери команду на своем УИКе"'
